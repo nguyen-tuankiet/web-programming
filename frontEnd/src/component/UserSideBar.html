@@ -2,10 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>User SideBar</title>
     <link rel="stylesheet" href="../styles/style-component/UserSideBar.css">
+    <link rel="stylesheet" href="../../resource/fontawesome/css/all.css">
 </head>
 <body>
+<div id="side_bar" class="container  col">
+    <div class=" infor row mid_align  ">
+        <div class="profile_avatar">
+            <img src="../../resource/image/medium (1).png" height="500" width="500"/>
+        </div>
+        <div class="name">
+            <span>Jackie Chan</span>
+        </div>
+
+    </div>
+
+    <div class="rec_horizontal"></div>
+
+    <div class="item edit_profile  col">
+        <div class="wrap">
+            <div>
+                <i class="fa-solid fa-user-large"></i>
+                <span>My Account</span>
+            </div>
+            <i class="fa-solid fa-caret-down"></i>
+        </div>
+
+        <div class="menu_sub_item">
+            <ul>
+                <li class="sub_items " >
+                    <i class="fa-solid fa-address-card"></i>
+                    <a href="#">Profile</a>
+                </li>
+
+                <li class="sub_items" >
+                    <i class="fa-regular fa-credit-card"></i>
+                    <a href="#">Payment</a>
+                </li>
+
+                <li class="sub_items" >
+                    <i class="fa-solid fa-location-dot"></i>
+                    <a href="#">Address</a>
+                </li>
+
+                <li class="sub_items" >
+                    <i class="fa-solid fa-key"></i>
+                    <a href="#">Password</a>
+                </li>
+
+                <li class="sub_items" >
+                    <i class="fa-regular fa-bell"></i>
+                    <a href="#">Notification</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="item order">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>Order</span>
+    </div>
+</div>
+
+
+<script src="../styles/style-component/UserSidebar.js"></script>
 
 </body>
 </html>
