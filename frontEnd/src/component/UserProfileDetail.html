@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Detail</title>
+    <link rel="stylesheet" href="../styles/style-component/UserProfileDetail.css">
+    <link rel="stylesheet" href="../../resource/fontawesome/css/all.css">
+</head>
+<body>
+
+
+<div id="header" class=" col mid_align">
+    <div class="header_container mid_align  col">
+        <span class="title f22 ">My profile</span>
+        <span class="description">Manage profile information to keep your account secure </span>
+    </div>
+</div>
+
+
+<div id="body">
+    <div class="body_container row">
+
+        <div   class="info_left">
+
+            <div class="form_infor row mid_align">
+                <div class="avatar">
+                    <img src="../../resource/image/medium (1).png" height="500" width="500"/>
+                </div>
+
+                <div class="base_infor col">
+                    <span class=name_title>Full name :</span>
+                    <input type="text" class="name" placeholder="Full Name" value="Jackie Chan">
+
+                    <span class=name_title>Display name :</span>
+                    <input type="text" class="name" placeholder="Display name" value="Jacky">
+
+                </div>
+
+
+            </div>
+
+            <div class="personal_infor">
+                <div class="gender row ">
+                   <div class="gender_title">
+                       <span>Gender :</span>
+                   </div>
+
+                    <div class="gender_radio mid_align">
+                        <label>
+                            <input type="radio" name="gender" value="male" checked>
+                            Male
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female">
+                            Female
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="other">
+                            Other
+                        </label>
+                    </div>
+                </div>
+
+                <div class="birth row">
+                   <div class="birth_title">
+                        <span>Date Of Birth: </span>
+                   </div>
+
+                    <div class="birth_form mid_align">
+                        <div class="col">
+                            <select  id="day">
+                                <option value="" disabled selected>Day</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <select  id="month">
+                                <option value="" disabled selected>Month</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <select  id="year">
+                                <option value="" disabled selected>Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+
+        <div class="info_right">
+
+            <!-- Contact infor -->
+            <div class="contact col ">
+                <span>Contact Information</span>
+
+                <div class="contact_item row mid_align">
+                    <i class="fa-solid fa-phone"></i>
+                    <span class="item_text">0399989979 </span>
+                    <button type="button" class="update_btn">Update</button>
+                </div>
+
+                <div class="contact_item row mid_align">
+                    <i class="fa-regular fa-envelope"></i>
+                    <span class="item_text ">qhung.fw@gmail.com </span>
+                    <button type="button" class="update_btn">Update</button>
+                </div>
+
+
+            </div>
+
+
+                <!-- Social Link-->
+            <div class="contact social col ">
+                <span>Social Link</span>
+
+                <div class="contact_item row mid_align">
+                    <img src="../../resource/image/facebook.svg" alt="">
+                    <span class="item_text mid_align">Facebook </span>
+                    <button type="button" class="update_btn">Connect</button>
+                </div>
+
+                <div class="contact_item row mid_align">
+                    <img src="../../resource/image/google.svg" alt="">
+                    <span class="item_text ">Google</span>
+                    <button type="button" class="update_btn">Delete</button>
+                </div>
+
+                <div class="contact_item row mid_align">
+                    <img src="../../resource/image/Zalo.png" alt="">
+                    <span class="item_text ">Zalo</span>
+                    <button type="button" class="update_btn">Delete</button>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<script src="../styles/style-component/UserDetail.js"></script>
+
+</body>
+</html>
