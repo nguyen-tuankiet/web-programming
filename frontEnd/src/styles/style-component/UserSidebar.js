@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const myAccount = document.querySelector(".edit_profile ");
-    const subMenu = document.querySelector(".menu_sub_item");
-    const subItem  = document.querySelectorAll(".sub_items");
 
+
+    const myAccount = document.querySelector(".edit_profile");
+    const subMenu = document.querySelector(".menu_sub_item");
+    const subItem = document.querySelectorAll(".sub_items");
+    const mainContent = document.getElementById('main_content');
 
 
     myAccount.addEventListener("click", () => {
+
         if (subMenu.classList.contains('open')) {
             subMenu.classList.remove('open');
         } else {
@@ -17,8 +20,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         item.addEventListener("click", (event) => {
             event.stopPropagation();
-            subItem.forEach((item) => {item.classList.remove('selected');})
+            subItem.forEach((item) => {
+                item.classList.remove('selected');
+            })
             item.classList.add('selected');
+
+            console.log(item);
+
+            const link = item.querySelector('.item_link[data-src]');
+            if (link) {
+                const dataSrc = link.getAttribute('data-src'); // Lấy giá trị data-src
+                event.preventDefault();
+                window.parent.postMessage({ type: 'openUserProfile', src: dataSrc }, '*');
+            }
+
+
+
+
 
         })
 
