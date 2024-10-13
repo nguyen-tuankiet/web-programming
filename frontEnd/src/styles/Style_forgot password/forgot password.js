@@ -79,7 +79,7 @@ function goBackToOTP() {
 }
 
 function goBackToHome() {
-    alert("Quay lại trang chủ");  // Hoặc điều hướng đến trang chủ
+    window.location.href = '../../pages/auth/auth.html';
 }
 
 // Hàm đếm ngược thời gian cho OTP
