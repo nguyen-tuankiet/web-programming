@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đặt lại mật khẩu</title>
+  <link rel="stylesheet" href="../Style_forgot%20password/forgot%20password.css">
+  <script src="../Style_forgot%20password/forgot%20password.js"></script>
   <link rel="stylesheet" href="../../styles/Style_forgot password/forgot password.css">
   <script src="../../styles/Style_forgot password/forgot password.js"></script>
 
@@ -20,16 +22,10 @@
       <span class="back-arrow" onclick="goBackToHome()">&#8592;</span> <!-- Mũi tên quay lại -->
       <h2>Đặt lại mật khẩu</h2>
     </div>
-    <div class="infield">
-      <input
-              type="email"
-              id="emailInput"
-              placeholder=" "
-              name="email"
-              required
-      />
-      <label for="emailInput">Nhập lại email</label>
-    </div>
+    <input 
+            type="email" 
+            id="emailInput" 
+            placeholder="Nhập email/Số Điện Thoại" required>
     <div id="errorMessage" class="error-message">Email không hợp lệ</div>
     <button onclick="validateEmail()">Tiếp theo</button>
   </div>
