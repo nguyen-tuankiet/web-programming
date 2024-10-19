@@ -235,6 +235,15 @@ body{
     padding-top: 20px;
 }
 
+.social .update_btn{
+    margin-left: auto;
+    border: 1px solid #0974E5;
+    color: #0974E5;
+    border-radius: 5px;
+    background-color: transparent;
+    padding:0px 10px;
+    height: 25px;
+}
 .contact_item img{
     width: 25px;
     height: 25px;
