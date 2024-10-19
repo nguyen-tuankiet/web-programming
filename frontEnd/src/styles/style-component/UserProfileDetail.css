@@ -148,9 +148,7 @@ body{
 
 
 .personal_infor{
-    height: 70%;
     width: 100%;
-    min-height: 200px;
     padding-top: 10px;
 }
 
@@ -179,6 +177,21 @@ body{
 .birth_form label{
     color: #797979;
     font-size: 14px;
+}
+
+
+.bottom{
+    padding: 25px 0;
+    justify-content: center;
+}
+
+.bottom .save_btn{
+    height: 30px;
+    width: 60px;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 5px;
+    background-color: rgba(145, 253, 145, 0.68);
+    cursor: pointer;
 }
 
 
@@ -228,6 +241,7 @@ body{
     background-color: transparent;
     padding:0px 10px;
     height: 25px;
+    cursor: pointer;
 }
 
 
