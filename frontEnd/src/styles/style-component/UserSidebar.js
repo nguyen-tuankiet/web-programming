@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const link = item.querySelector('.item_link[data-src]');
             if (link) {
-                const dataSrc = link.getAttribute('data-src'); // Lấy giá trị data-src
+                const dataSrc = link.getAttribute('data-src'); //    Lấy giá trị tu data-src
                 event.preventDefault();
                 window.parent.postMessage({ type: 'openUserProfile', src: dataSrc }, '*');
             }
