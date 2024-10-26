@@ -1,0 +1,123 @@
+/* Đặt lại thuộc tính chung */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SamsungOne', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Phong cách cho các slide */
+.slide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+/* Phần chứa các chấm chỉ thị */
+.indicator {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Phong cách và hoạt ảnh cho chấm tiến trình */
+.progress-loader {
+    position: relative;
+    width: 100px;
+    background: rgba(255, 255, 255, 0.2);
+    height: 5px;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 5px;
+    border-radius: 7px;
+    background: rgb(144, 75, 246);
+    animation: loading 3s linear infinite;
+}
+
+@keyframes loading {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+/* Khối văn bản */
+.text-section1 {
+    margin-top: 32px;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 48px 0;
+}
+
+.text-section1 h2 {
+    font-size: 38px;
+}
+
+.text-section1 p {
+    font-size: 18px;
+}
+
+/* Phần chứa sản phẩm */
+.showcase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Phong cách thẻ sản phẩm */
+.product {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    width: calc(50% - 10px);
+    margin-bottom: 10px;
+}
+
+.product.large {
+    width: 100%;
+}
+
+.product:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-name {
+    font-size: 1.2em;
+    color: #333;
+    padding: 10px 0;
+}
+
+.img-wrap img {
+    width: 100%;
+    height: auto;
+}
+
+.cta-button {
+    background-color: #007aff;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.cta-button:hover {
+    background-color: #005bb5;
+}
