@@ -1,0 +1,132 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Helvetica Neue, Helvetica, Arial, serif;
+}
+html{
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*Reuse*/
+.mid_align{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.rec_horizontal{
+    width: 70%;
+    height: 1px;
+    background-color: #cfcfcf;
+}
+
+.rec_vertical{
+    height: 70%;
+    width: 1px;
+    background-color: #cfcfcf;
+    margin:  0 10px;
+    min-height: 20px;
+}
+
+
+
+
+
+i{
+    color: #616060;
+}
+
+a{
+    text-decoration: none;
+    color: #000000;
+}
+
+
+.f12{
+    font-size: 12px;
+}
+
+
+.f16{
+    font-size: 16px;
+}
+.f18{
+    font-size: 18px;
+}
+
+.f22{
+    font-size: 22px;
+
+}
+
+.bold{
+    font-weight: 500;
+}
+
+
+
+/*Header*/
+
+#header{
+    width: 100%;
+    height: 75px;
+    background-color: #e1fbb2;
+}
+
+
+#banner{
+    width: 100%;
+    min-height: 350px;
+    height: 30%;
+    padding: 0 50px;
+    background-color: #89a3c5;
+}
+
+
+
+
+
+
+
+
+
+
+#body  {
+    width: 100%;
+    height: 100vh;
+    background-color: #cfcfcf;
+    padding: 0 50px;
+}
+
+
+#sidebar{
+    width: 20%;
+    height: 100%;
+    background-color: #976363;
+}
+
+
+
+#list_product{
+    width: 80%;
+    background-color: #71c580;
+    height: 100%;
+}
+#top_product{
+
+}
