@@ -11,12 +11,13 @@ body {
 header {
     justify-content: center;
     width: 100%;
+    height: 100%;
     position: fixed;
-    z-index: 1000;
-    margin: 20px 20px;
     display: flex;
     align-items: center;
 }
+
+
 
 .logo {
     font-size: 20px;
@@ -53,7 +54,8 @@ body > header > nav > ul > li > a{
     padding: 10px 15px;
     color: #333;
     text-decoration: none;
-    transition: color 0.3s, background-color 0.3s;
+    transition: color 0.3s, background-color 0.3s, border-radius 0.3s;
+    border-radius: 20px;
 }
 
 .navbar ul li.active a {
@@ -69,15 +71,19 @@ body > header > nav > ul > li > a{
     font-weight: bold;
 }
 
+.navbar ul li:hover > a {
+    color: white;
+    background-color: black;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
 .navbar ul li:hover .submenu {
     display: flex;
 }
 
 .navbar ul li:hover .submenu {
     display: flex;
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-30%);
 }
 
 .submenu {
@@ -97,6 +103,14 @@ body > header > nav > ul > li > a{
     gap: 20px;
     justify-content: space-around;
 }
+
+.navbar ul li:hover .submenu {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-35%, 0);
+}
+
 
 .submenu-column {
     display: flex;
@@ -194,7 +208,7 @@ body > header > nav > ul > li > a{
 }
 
 .submenu-man-hinh {
-    width: 150px;
+    width: 180px;
 }
 
 .submenu-ho-tro {
