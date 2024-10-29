@@ -5,43 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slideshow Example</title>
     <link rel="stylesheet" href="../styles/style-topRefrigerator/topRefrigerator.css">
+    <script src="../styles/style-topRefrigerator/topRefrigerator.js"></script>
+
 </head>
 <body>
 
-<!-- Slideshow Container -->
-<div class="slideshow-container">
+<!-- Slideshow Container 1 -->
+<div class="slideshow-container" id="slideshow1">
     <!-- Slide 1 -->
-    <div class="slide show">
+    <div class="slide">
         <img src="../../resource/image/img_slideshow/1.jpg" height="480" width="1080" alt="Image 1">
-        <div class="text">Caption for Slide 1</div>
+        <div class="text1">
+            <h1>Bespoke<br>Đẹp đi đừng đợi!</h1>
+            <p>Thiết kế bếp đẹp với tủ lạnh Bespoke</p>
+        </div>
     </div>
     <!-- Slide 2 -->
     <div class="slide">
-        <img src="../../resource/image/img_slideshow/2.jpg" height="640" width="1440" alt="Image 2">
-        <div class="text">Caption for Slide 2</div>
+        <img src="../../resource/image/img_slideshow/2.jpg" height="480" width="1080" alt="Image 2">
+        <div class="text2">
+            <h1>Tủ lạnh số 1 Thế giới</h1>
+            <p>Chuyên gia tươi ngon - Dẫn đầu thiết kế - Tiên phong AI</p>
+        </div>
     </div>
     <!-- Slide 3 -->
     <div class="slide">
         <img src="../../resource/image/img_slideshow/3.jpg" height="480" width="1080" alt="Image 3">
-        <div class="text">Caption for Slide 3</div>
+        <div class="text3">
+            <h1>Tủ lạnh Bespoke với<br>quầy Minibar sành điệu</h1>
+            <p>Thiết kế bếp đẹp với tủ lạnh Bespoke</p>
+        </div>
     </div>
-    <!-- Mũi tên điều hướng -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <!-- Navigation Arrows -->
+    <a class="prev" onclick="plusSlides(-1, 0)">❮</a>
+    <a class="next" onclick="plusSlides(1, 0)">❯</a>
 </div>
 
-<!-- Dot Indicators -->
-<div class="indicator">
-    <div class="progress-loader"><div class="progress"></div></div>
-    <div class="progress-loader"><div class="progress"></div></div>
-    <div class="progress-loader"><div class="progress"></div></div>
+<!-- Dot Indicators for Slideshow 1 -->
+<div class="indicator" id="indicator1">
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
 </div>
 
 <!-- Text Block 1 -->
 <div class="text-section1">
     <h2>Bespoke - Làm chủ phong cách với kỷ nguyên tủ lạnh mới</h2>
     <p>
-        Không còn nhàm chán với những chiếc tủ lạnh “tất cả như một”, Samsung Bespoke mang đến cho bạn đa dạng gam màu thời thượng, đẹp mọi không gian bếp. Đã có hơn 3 triệu chiếc tủ lạnh Samsung Bespoke được bán ra trên toàn thế giới, bạn đã sẵn sàng khởi tạo xu hướng màu sắc ngay hôm nay? Đẹp đi đừng đợi!
+        Không còn nhàm chán với những chiếc tủ lạnh “tất cả như một”, Samsung Bespoke mang đến cho bạn đa dạng gam màu
+        thời thượng, đẹp mọi không gian bếp. Đã có hơn 3 triệu chiếc tủ lạnh Samsung Bespoke được bán ra trên toàn thế
+        giới, bạn đã sẵn sàng khởi tạo xu hướng màu sắc ngay hôm nay? Đẹp đi đừng đợi!
     </p>
 </div>
 
@@ -100,13 +119,79 @@
 </div>
 
 <!-- Text Block 2 -->
-<div class="text-section">
+<div class="text-section2">
     <h2>Đẹp từ thiết kế, sáng bừng không gian</h2>
     <p>
-        Không còn nhàm chán với những chiếc tủ lạnh “tất cả như một”, Samsung Bespoke mang đến cho bạn đa dạng gam màu thời thượng, đẹp mọi không gian bếp. Đã có hơn 3 triệu chiếc tủ lạnh Samsung Bespoke được bán ra trên toàn thế giới, bạn đã sẵn sàng khởi tạo xu hướng màu sắc ngay hôm nay? Đẹp đi đừng đợi!
+        Không còn nhàm chán với những chiếc tủ lạnh “tất cả như một”, Samsung Bespoke mang đến cho bạn đa dạng gam màu
+        thời thượng, đẹp mọi không gian bếp. Đã có hơn 3 triệu chiếc tủ lạnh Samsung Bespoke được bán ra trên toàn thế
+        giới, bạn đã sẵn sàng khởi tạo xu hướng màu sắc ngay hôm nay? Đẹp đi đừng đợi!
     </p>
 </div>
+<!-- Slideshow Container 2 -->
+<div class="slideshow-container" id="slideshow2">
+    <div class="slide">
+        <img src="../../resource/image/img_slideshow/slide1.jpg" alt="slide1" height="500" width="1200"/>
+    </div>
+    <div class="slide">
+        <img src="../../resource/image/img_slideshow/slide2.jpg" alt="slide2" height="500" width="1200"/>
+    </div>
+    <div class="slide">
+        <img src="../../resource/image/img_slideshow/slide3.jpg" alt="slide3" height="500" width="1200"/>
+    </div>
+    <div class="slide">
+        <img src="../../resource/image/img_slideshow/slide4.jpg" alt="slide4" height="500" width="1200"/>
+    </div>
+    <div class="slide">
+        <img src="../../resource/image/img_slideshow/slide5.jpg" alt="slide5" height="500" width="1200"/>
+    </div>
+    <!-- Navigation Arrows -->
+    <a class="prev" onclick="plusSlides(-1, 1)">❮</a>
+    <a class="next" onclick="plusSlides(1, 1)">❯</a>
+</div>
 
-<script src="../styles/style-topRefrigerator/topRefrigerator.js"></script>
+<!-- Dot Indicators for Slideshow 2 -->
+<div class="indicator" id="indicator2">
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
+    <div class="progress-loader">
+        <div class="progress"></div>
+    </div>
+</div>
+
+<!-- Feature benefit -->
+<div class="feature-benefit">
+    <div class="feature-benefit__text">
+        <h2>Ngăn đông mềm linh hoạt 4 chế độ Optimal Fresh+</h2>
+        <h3>Linh hoạt chuyển đổi 4 chế độ theo nhu cầu</h3>
+        <p>Với 4 chế độ làm lạnh linh hoạt giúp bạn dễ dàng chuyển đổi theo từng nhu cầu bảo quản:
+            "Làm mát" (cho thực phẩm dùng hằng ngày như sữa, thịt nguội…);
+            "Thịt & Cá";
+            "Đông mềm" (lưu trữ thực phẩm dài ngày hơn);
+            "Làm lạnh nhanh" cho đồ uống.
+        </p>
+        <ul>
+            <li>*Chế độ “Làm mát”: Thanh kéo ở “Min”, nhiệt độ 3°C.</li>
+            <li>*Chế độ “Thịt & Cá”: Thanh kéo ở “Max”, nhiệt độ 3°C.</li>
+            <li>*Chế độ “Đông mềm”: Thanh kéo ở “Max”, nhiệt độ 1°C.</li>
+            <li>*Chế độ “Làm lạnh nhanh”: Thanh kéo ở “Max”, nhấn “Power Cool”.</li>
+        </ul>
+    </div>
+    <div class="feature-benefit__video">
+        <video autoplay muted loop playsinline preload="auto">
+            <source src="//images.samsung.com/is/content/samsung/assets/vn/refrigerators/top-mount-freezer/optimal-fresh-plus/20231013/Che-do-lam-lanh_720x720.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
 </body>
 </html>
