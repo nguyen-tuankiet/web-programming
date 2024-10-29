@@ -60,9 +60,8 @@ body {
     padding: 10px 200px;
     font-size: 18px;
 }
-/* Product Showcase Section */
 .product-showcase {
-    padding: 2rem 0;
+    padding: 20px 0;
     text-align: center;
 }
 
@@ -74,7 +73,7 @@ body {
 }
 
 .product-item {
-    width: 200px; /* Adjust width as needed */
+    width: 250px;
     text-align: center;
 }
 
