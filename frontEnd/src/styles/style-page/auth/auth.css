@@ -14,11 +14,25 @@
 
 body {
     height: 100vh;
-    background: #f6f5f7;
+    background: linear-gradient( 95.2deg, rgba(173,252,234,1) 26.8%, rgba(192,229,246,1) 64% );
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
     display: grid;
     place-content: center;
     font-family: "Poppins", sans-serif;
     color: #0b1c2f;
+
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .container {
