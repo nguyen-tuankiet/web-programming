@@ -35,9 +35,10 @@ body{
 
 
 .rec_horizontal{
-    width: 70%;
+    width: 100%;
     height: 1px;
     background-color: #cfcfcf;
+    margin-top: 20px;
 }
 
 .rec_vertical{
@@ -175,7 +176,7 @@ a{
     justify-content: center;
     font-size: 22px;
     font-weight: bold;
-    padding-top:10px ;
+    padding-top: 20px ;
 
 
 }
@@ -197,47 +198,38 @@ a{
 
 
 #sidebar{
-    padding: 20px 30px;
+    padding: 20px 50px;
 
 
 }
-.section_type .title{
+.section_item .title{
     padding: 5px 10px ;
     font-size: 16px;
     font-weight: 500;
 
 }
+.section_item{
+    padding-top:20px;
+}
 
-.section_type .item{
+.section_item .item{
     padding: 5px 0;
 }
-.section_type .item input{
+.section_item .item input {
     margin-right: 10px;
 
 }
 
+
+
 input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    appearance: none; /* Loại bỏ style mặc định của checkbox */
     border: 2px solid #007BFF; /* Đường viền */
-    border-radius: 100px; /* Góc bo tròn, bỏ nếu muốn góc vuông */
+    border-radius: 10px; /* Góc bo tròn */
     cursor: pointer;
     margin-right: 8px;
+    display: inline-block;
 
-
-    /* Style khi checkbox được chọn */
-    input[type="checkbox"]:checked {
-        background-color: #007BFF;
-        border: 2px solid #007BFF;
-    }
-
-    /* Tạo dấu check khi chọn */
-    input[type="checkbox"]:checked::after {
-        content: '✔';
-        color: white;
-        font-size: 14px;
-        display: block;
-        text-align: center;
-    }
 }
+
