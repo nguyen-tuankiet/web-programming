@@ -85,16 +85,18 @@ a{
 
 body{
     background-color: #d0f5ff;
+    height: 100%;
+
 }
 
 
 
 
 #body {
-    /*height: 100%;*/
-    /*width: 100%;*/
-    height: 550px;
-    width: 300px;
+    height: 100%;
+    width: 100%;
+    /*height: 550px;*/
+    /*width: 300px;*/
     background-color: #ffffff;
     border-radius: 15px;
     padding: 20px;
@@ -102,7 +104,8 @@ body{
 
 
 .wrap_img{
-    height: 30%;
+    height: 35%;
+    cursor: pointer;
     /*background-color: #f7f7f7;*/
 }
 
@@ -198,8 +201,8 @@ body{
 
 
 #description .list_descriptions {
-    list-style-type: none; /* Loại bỏ dấu chấm mặc định */
-    padding-left: 0; /* Loại bỏ padding mặc định của ul */
+    list-style-type: none;
+    padding-left: 10px;
 }
 
 
@@ -215,7 +218,10 @@ body{
 
 
 
+.operation{
+    padding-top: 10px;
 
+}
 
 .operation button{
     width: 100%;
