@@ -194,6 +194,50 @@ a{
 
 
 /*Side Bar*/
-.section_type{
-    padding: 20px;
+
+
+#sidebar{
+    padding: 20px 30px;
+
+
+}
+.section_type .title{
+    padding: 5px 10px ;
+    font-size: 16px;
+    font-weight: 500;
+
+}
+
+.section_type .item{
+    padding: 5px 0;
+}
+.section_type .item input{
+    margin-right: 10px;
+
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    appearance: none; /* Loại bỏ style mặc định của checkbox */
+    border: 2px solid #007BFF; /* Đường viền */
+    border-radius: 100px; /* Góc bo tròn, bỏ nếu muốn góc vuông */
+    cursor: pointer;
+    margin-right: 8px;
+
+
+    /* Style khi checkbox được chọn */
+    input[type="checkbox"]:checked {
+        background-color: #007BFF;
+        border: 2px solid #007BFF;
+    }
+
+    /* Tạo dấu check khi chọn */
+    input[type="checkbox"]:checked::after {
+        content: '✔';
+        color: white;
+        font-size: 14px;
+        display: block;
+        text-align: center;
+    }
 }
