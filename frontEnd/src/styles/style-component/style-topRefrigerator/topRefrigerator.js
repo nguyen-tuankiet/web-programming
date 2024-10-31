@@ -1,45 +1,40 @@
-let slideIndices = [0, 0]; // Chỉ số slide cho mỗi slideshow
+let slideIndices = [0, 0]; // Indices for each slideshow
 let slideIntervals = [];
 
-// Hiển thị slide đầu tiên khi trang tải cho từng slideshow
+// Start auto slide for each slideshow when the page loads
 document.addEventListener("DOMContentLoaded", function () {
-    startAutoSlide(0); // Khởi động auto slide cho Slideshow 1
-    startAutoSlide(1); // Khởi động auto slide cho Slideshow 2
+    startAutoSlide(0);
+    startAutoSlide(1);
 });
 
-// Hàm hiển thị slide cho từng slideshow
+// Show the current slide for each slideshow
 function showSlides(slideIndex, slideshowIndex) {
     let slideshow = document.getElementsByClassName("slideshow-container")[slideshowIndex];
     let slides = slideshow.getElementsByClassName("slide");
     let dots = document.getElementById(`indicator${slideshowIndex + 1}`).getElementsByClassName("progress");
 
-    // Kiểm tra và lặp lại nếu vượt qua số lượng slide
-    if (slideIndex >= slides.length) { slideIndices[slideshowIndex] = 0; }
-    if (slideIndex < 0) { slideIndices[slideshowIndex] = slides.length - 1; }
+    // Wrap around the slides
+    slideIndices[slideshowIndex] = (slideIndex >= slides.length) ? 0 : (slideIndex < 0 ? slides.length - 1 : slideIndex);
 
-    // Ẩn tất cả slide và đặt lại hoạt ảnh của các chấm trong slideshow cụ thể
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-        dots[i].style.animation = "none"; // Dừng hoạt ảnh
-    }
+    // Hide all slides and reset dot animations
+    Array.from(slides).forEach(slide => slide.style.display = "none");
+    Array.from(dots).forEach(dot => dot.style.animation = "none");
 
-    // Hiển thị slide hiện tại và khởi động lại hoạt ảnh cho chấm tương ứng
+    // Show current slide and start animation for the corresponding dot
     slides[slideIndices[slideshowIndex]].style.display = "block";
-    dots[slideIndices[slideshowIndex]].style.animation = "loading 3s linear infinite"; // Khởi động lại hoạt ảnh
+    dots[slideIndices[slideshowIndex]].style.animation = "loading 3s linear infinite";
 }
 
-// Hàm tự động chuyển slide và chấm mỗi 3 giây cho từng slideshow
+// Auto slide function, changes slide every 3 seconds
 function startAutoSlide(slideshowIndex) {
-    slideIntervals[slideshowIndex] = setInterval(function() {
-        slideIndices[slideshowIndex]++;
-        showSlides(slideIndices[slideshowIndex], slideshowIndex);
+    slideIntervals[slideshowIndex] = setInterval(() => {
+        showSlides(++slideIndices[slideshowIndex], slideshowIndex);
     }, 3000);
 }
 
-// Hàm chuyển slide khi nhấn nút cho từng slideshow
+// Change slide when arrow is clicked
 function plusSlides(n, slideshowIndex) {
-    clearInterval(slideIntervals[slideshowIndex]); // Dừng auto slide khi nhấn nút
-    slideIndices[slideshowIndex] += n;
-    showSlides(slideIndices[slideshowIndex], slideshowIndex);
-    startAutoSlide(slideshowIndex); // Khởi động lại auto slide
+    clearInterval(slideIntervals[slideshowIndex]); // Pause auto slide when navigating manually
+    showSlides(slideIndices[slideshowIndex] += n, slideshowIndex);
+    startAutoSlide(slideshowIndex); // Restart auto slide
 }
