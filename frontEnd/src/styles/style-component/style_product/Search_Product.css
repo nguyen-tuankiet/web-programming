@@ -214,6 +214,18 @@ a{
 
 .section_item .item{
     padding: 5px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+
+.section_item label{
+    font-size: 12px;
+    font-weight: 400;
+
+
 }
 .section_item .item input {
     margin-right: 10px;
