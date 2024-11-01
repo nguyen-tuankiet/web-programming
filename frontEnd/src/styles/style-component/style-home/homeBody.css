@@ -73,7 +73,7 @@ body {
     background-color: #333;
 }
 
-/* Responsive Design Adjustments */
+
 @media (max-width: 768px) {
     .banner-content h2 {
         font-size: 1.8rem;
@@ -96,4 +96,74 @@ body {
         width: 100%;
         max-width: 200px;
     }
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px 0;
+    background-color: transparent;
+    font-size: 1.2rem;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0;
+}
+
+.navbar a:hover {
+    color: #007aff;
+    cursor: pointer;
+}
+
+
+.content {
+    text-align: center;
+    margin-top: 40px;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    display: none;
+}
+
+.image-container img.active {
+    display: block;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding-top: 500px;
+    border-radius: 8px;
+}
+
+.link {
+    display: inline-block;
+    margin: 10px 5px;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+.link:hover {
+    background-color: black;
+    color: white;
 }
