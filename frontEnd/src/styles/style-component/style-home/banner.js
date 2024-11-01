@@ -14,35 +14,44 @@ function showSlide(index) {
     if (index >= slides.length) slideIndex = 0;
     if (index < 0) slideIndex = slides.length - 1;
 
-
     for (let i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
-        progressBars[i].style.animation = "none";
+        progressBars[i].style.animation = "none"; // Stop all animations
+        progressBars[i].style.width = "0"; // Reset width to 0 when slide changes
     }
 
     slides[slideIndex].style.display = "flex";
 
-
-    if (slideIndex === 0) {
-        progressBars[slideIndex].style.animation = "loading 3s linear infinite";
-    } else {
-        progressBars[slideIndex].style.animation = "loading 3s linear infinite";
-    }
+    // Start the progress animation for the active slide
+    progressBars[slideIndex].style.animation = "loading 3s linear forwards"; // Change to forwards
 }
-
 function startAutoSlide() {
     slideInterval = setInterval(function () {
         slideIndex++;
         showSlide(slideIndex);
-        document.getElementById("pausePlayBtn").textContent = "⏸️";
     }, 3000);
     isPlaying = true;
+    updateProgressBars(); // Start progress animation when resuming
+    document.getElementById("pausePlayBtn").innerHTML = '<i class="fas fa-pause"></i>'; // Update icon to pause
 }
 
 function stopAutoSlide() {
     clearInterval(slideInterval);
-    document.getElementById("pausePlayBtn").textContent = "▶️";
+    document.getElementById("pausePlayBtn").innerHTML = '<i class="fas fa-play"></i>'; // Change icon to play
     isPlaying = false;
+
+    // Keep the progress width at its current state
+    const progressBars = document.querySelectorAll(".progress-loader .progress");
+    for (let i = 0; i < progressBars.length; i++) {
+        progressBars[i].style.animation = "none"; // Stop the animation
+        // Optionally, keep the current width by not resetting it
+    }
+}
+
+
+function updateProgressBars() {
+    const progressBars = document.querySelectorAll(".progress-loader .progress");
+    progressBars[slideIndex].style.animation = "loading 3s linear forwards"; // Resume animation
 }
 
 document.getElementById("pausePlayBtn").addEventListener("click", function () {
@@ -72,4 +81,31 @@ document.querySelector(".prev-btn").addEventListener("click", function () {
 });
 document.querySelector(".next-btn").addEventListener("click", function () {
     changeSlide(1);
+});
+const progressLoaders = document.querySelectorAll('.progress-loader');
+
+progressLoaders.forEach((loader, index) => {
+    const title = loader.getAttribute('data-title');
+
+    const tooltip = document.createElement('div');
+    tooltip.className = 'tooltip';
+    tooltip.textContent = title;
+    loader.appendChild(tooltip);
+
+    loader.addEventListener('mouseover', function(event) {
+        tooltip.style.display = 'block';
+        tooltip.style.left = `${event.offsetX}px`;
+        tooltip.style.top = `-30px`;
+    });
+
+    loader.addEventListener('mouseout', function() {
+        tooltip.style.display = 'none';
+    });
+
+    loader.addEventListener('click', function() {
+        stopAutoSlide();
+        slideIndex = index;
+        showSlide(slideIndex);
+        startAutoSlide();
+    });
 });
