@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Carousel</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Container styling */
+    .carousel-container {
+      max-width: 500px;
+      margin: 50px auto;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Image styling */
+    .carousel-image {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Thumbnails styling */
+    .thumbnails {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      margin: 0 5px;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .thumbnail.active {
+      opacity: 1;
+      border: 2px solid #000;
+    }
+
+    /* Navigation arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .nav-arrow.left {
+      left: -20px;
+    }
+
+    .nav-arrow.right {
+      right: -20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Carousel Container -->
+<div class="carousel-container">
+  <!-- Main Image Display -->
+  <img id="mainImage" src="image1.jpg" alt="Carousel Image" class="carousel-image">
+
+  <!-- Navigation Arrows -->
+  <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
+  <div class="nav-arrow right" onclick="nextImage()">&#10095;</div>
+
+  <!-- Thumbnails -->
+  <div class="thumbnails">
+    <img src="image1.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="showImage(0)">
+    <img src="image2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
+    <img src="image3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
+    <img src="image4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
+    <img src="image5.jpg" alt="Thumbnail 5" class="thumbnail" onclick="showImage(4)">
+  </div>
+</div>
+
+<!-- JavaScript for Carousel Functionality -->
+<script>
+  const images = ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg"];
+  let currentIndex = 0;
+
+  function showImage(index) {
+    const mainImage = document.getElementById('mainImage');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+
+    // Update the main image
+    mainImage.src = images[index];
+    currentIndex = index;
+
+    // Update active thumbnail
+    thumbnails.forEach((thumbnail, i) => {
+      if (i === index) {
+        thumbnail.classList.add('active');
+      } else {
+        thumbnail.classList.remove('active');
+      }
+    });
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage(currentIndex);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(currentIndex);
+  }
+</script>
+</body>
+</html>
