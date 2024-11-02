@@ -90,3 +90,31 @@ h1 {
 body > div.specification > div > div > p{
     font-weight: bold;
 }
+
+#toggle-specs-btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+#toggle-specs-btn:hover {
+    background-color: #bbbbbb;
+}
+#toggle-specs-btn-bottom {
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 20px auto;
+}
+#toggle-specs-btn-bottom:hover{
+    background-color: #bbbbbb;
+}
