@@ -12,7 +12,7 @@ html{
 body{
     width: 100%;
     height: 100%;
-    overflow: scroll;
+
 }
 
 
@@ -88,8 +88,10 @@ a{
 
 /*Wrap*/
 .wrap{
-    width: 700px;
-    height: 200px;
+    /*width: 700px;*/
+    /*height: 200px;*/
+    width: 100%;
+    height: 100%;
     padding: 0 10px;
     background-color: rgba(206, 239, 244, 0.38);
     border-radius: 10px;
