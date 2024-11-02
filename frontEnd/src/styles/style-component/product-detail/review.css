@@ -15,6 +15,8 @@ body {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
+    border-bottom: 1px solid #ddd;
+
 }
 
 .rating-summary {
@@ -104,7 +106,7 @@ body {
     background-color: #ffedcc;
 }
 .detailed-rating-section {
-
+    border-bottom: 1px solid #ddd;
     margin-top: 20px;
     padding: 20px;
     background-color: #fff;
@@ -216,4 +218,138 @@ body > div.filter-section > h2{
 
 .filter-section button:hover {
     background-color: #0056b3;
+}
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 65%;
+    margin-bottom: 10px;
+    font-size: 14px;
+    padding-left: 50px;
+    padding-top: 40px;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.review-header p {
+    margin-bottom: 15px;
+}
+
+.sort-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sort-section span {
+    color: #0073e6;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sort-section select {
+    padding: 5px;
+    font-size: 14px;
+}
+.review-container {
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    padding-left: 40px;
+}
+
+.review-container h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.review-item {
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+
+}
+.review {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.review-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.star-rating {
+    color: orange;
+}
+
+.review-item p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+
+.review-footer {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.review-footer button {
+    background-color: transparent;
+    border: none;
+    color: #0073e6;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.brand-response {
+    background-color: #F1F1F1;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.response-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+.response-content p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 5px 0;
+}
+
+.response-content ul {
+    margin: 5px 0;
+    padding-left: 15px;
+}
+
+.response-content a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.image{
+    display: flex;
+    gap: 5px;
+}
+body > div.review-container > div > div.image > img {
+    width: 30%;
+    height: 50%;
 }
