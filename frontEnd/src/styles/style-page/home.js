@@ -1,4 +1,6 @@
 const menuItems = document.querySelectorAll('.navbar ul li');
+const userLoginIcon = document.querySelector('.user-login');
+const userPopup = document.querySelector('.user-popup');
 
 menuItems.forEach(item => {
     let timeout;
@@ -46,4 +48,20 @@ $(document).ready(() => {
 })
 
 
+userLoginIcon.addEventListener('mouseenter', () => {
+    userPopup.style.display = 'block';
+});
 
+userLoginIcon.addEventListener('mouseleave', () => {
+    setTimeout(() => {
+        userPopup.style.display = 'none';
+    }, 200);
+});
+
+userPopup.addEventListener('mouseenter', () => {
+    userPopup.style.display = 'block';
+});
+
+userPopup.addEventListener('mouseleave', () => {
+    userPopup.style.display = 'none';
+});
