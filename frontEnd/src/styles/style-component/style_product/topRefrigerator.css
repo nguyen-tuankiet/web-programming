@@ -526,3 +526,18 @@ footer {
 .footer-bottom p {
     margin: 5px 0;
 }
+#banner {
+    width: 100%;
+    min-height: 620px;
+    height: 25%;
+    padding: 0;
+    background-color: #ffffff;
+    z-index: 1;
+
+}
+
+iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+}
