@@ -6,6 +6,8 @@
     <title>Header Menu with Submenu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../styles/style-page/Home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -13,14 +15,14 @@
 <div id="header">
 
 
-    <div class="logo">SAMSUNG</div>
+    <div class="logo nav_item" data-src="../component/home/homeBody.html">SAMSUNG</div>
     <nav class="navbar">
         <ul>
             <li class="active">
                 <a href="#">Tủ Lạnh</a>
                 <div class="submenu submenu-tu-lanh">
                     <div class="submenu-column">
-                        <a class="nav_item" href="#">Tất cả Tủ Lạnh</a>
+                        <a  class="nav_item" data-src="../component/product_component/Search_Refrigerator.html" href="#">Tất cả Tủ Lạnh</a>
                         <a href="#">Tủ Lạnh BESPOKE <span class="highlight">HẤP DẪN</span></a>
                         <a href="#">Tủ Lạnh Multidoor</a>
                         <a href="#">Tủ Lạnh Family Hub</a>
@@ -36,7 +38,7 @@
                 <a href="#">Máy Giặt</a>
                 <div class="submenu submenu-may-giat">
                     <div class="submenu-column">
-                        <a class="nav_item" href="#">Tất cả Máy Giặt</a>
+                        <a class="nav_item" data-src="../component/product_component/Search_WashingMachine.html" href="#">Tất cả Máy Giặt</a>
                         <a href="#">Tiết kiệm sống xanh với BESPOKE AI</a>
                         <a href="#">Máy giặt thông minh Bespoke AI <span class="new">MỚI</span></a>
                         <a href="#">Máy giặt cửa trên Ecobubble<span class="highlight">HẤP DẪN</span></a>
@@ -55,7 +57,7 @@
                 <a href="#">Máy Hút Bụi</a>
                 <div class="submenu submenu-hut-bui">
                     <div class="submenu-column">
-                        <a class="nav_item" href="#">Tất cả Máy Hút Bụi</a>
+                        <a class="nav_item"  data-src="../component/product_component/Search_VacuumCleaner.html"  href="#">Tất cả Máy Hút Bụi</a>
                         <a href="#">Máy Hút Bụi Không Dây</a>
                         <a href="#">Robot Hút Bụi <span class="new">MỚI</span></a>
                         <a href="#">Máy Hút Bụi Dạng Hộp</a>
@@ -68,7 +70,7 @@
                 <a href="#">Thiết Bị Nhà Bếp</a>
                 <div class="submenu submenu-nha-bep">
                     <div class="submenu-column">
-                        <a class="nav_item" href="#">Tất cả Thiết Bị Nhà Bếp <span class="new">MỚI</span></a>
+                        <a class="nav_item"  data-src="../component/product_component/Search_KitchenEquipment.html"  href="#">Tất cả Thiết Bị Nhà Bếp <span class="new">MỚI</span></a>
                         <a href="#">Lò Vi Sóng <span class="new">MỚI</span></a>
                         <a href="#">Lò Nướng <span class="new">MỚI</span></a>
                         <a href="#">Bếp Từ <span class="new">MỚI</span></a>
@@ -82,23 +84,17 @@
                 <a href="#">Máy Lọc Không Khí</a>
                 <div class="submenu submenu-may-loc">
                     <div class="submenu-column">
-                        <a class="nav_item" href="#">Máy Lọc Không Khí</a>
+                        <a class="nav_item" data-src="../component/product_component/Search_AirPurifier.html"  href="#">Máy Lọc Không Khí</a>
                         <a href="#">Bộ Sưu Tập Máy Lọc Không Khí</a>
                     </div>
-<!--                    <div class="submenu-column">-->
-<!--                        <h3>Điều Hòa Không Khí</h3>-->
-<!--                        <a href="#">Tất cả Máy Điều Hòa</a>-->
-<!--                        <a href="#">Điều Hòa Treo Tường</a>-->
-<!--                        <a href="#">Điều Hòa Cục Bộ Thương Mại</a>-->
-<!--                        <a href="#">Khám phá Điều hòa WindFree</a>-->
-<!--                    </div>-->
+
                 </div>
             </li>
             <li>
                 <a href="#">Điều Hòa Không Khí</a>
                 <div class="submenu submenu-dieu-hoa">
                     <div class="submenu-column">
-                        <a href="#">Tất cả Máy Điều Hòa</a>
+                        <a  class="nav_item" data-src="../component/product_component/Search_AirConditioner.html"  href="#">Tất cả Máy Điều Hòa</a>
                         <a href="#">Điều Hòa Treo Tường</a>
                         <a href="#">Điều Hòa Cục Bộ Thương Mại</a>
                         <a href="#">Khám phá Điều hòa WindFree</a>
@@ -109,7 +105,7 @@
                 <a href="#">Màn hình hiển thị</a>
                 <div class="submenu submenu-man-hinh">
                     <div class="submenu-column">
-                        <a href="#">Màn Hình Gaming</a>
+                        <a  class="nav_item" data-src="../component/product_component/Search_Monitor.html"  href="#">Màn Hình Gaming</a>
                         <a href="#">Màn Hình Đồ Họa</a>
                     </div>
                 </div>
@@ -142,6 +138,7 @@
 <div id="body">
 
     <iframe src="../component/home/homeBody.html" frameborder="0"></iframe>
+<!--    <iframe src="../component/product_component/Search_WashingMachine.html" frameborder="0"></iframe>-->
 </div>
 
 <script src="../styles/style-page/home.js"></script>
