@@ -95,7 +95,7 @@ body {
 
 .indicator {
     position: absolute;
-    bottom: 68px;
+    bottom: 50px;
     left: 0;
     right: 0;
     display: flex;
