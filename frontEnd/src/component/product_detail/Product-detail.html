@@ -5,18 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
     <link rel="stylesheet" href="../../styles/style-component/style_product/Product-detail.css">
+    <script src="../../styles/style-component/style_product/Product-detail.js"></script>
 </head>
 <body>
 
 <div class="container">
     <div class="section">
-        <iframe src="Product-detail-item.html" frameborder="0" class="iframe"></iframe>
+        <iframe src="Product-detail-item.html" class="iframe"></iframe>
     </div>
     <div class="section">
-        <iframe src="Product-buying-tool.html" frameborder="0" class="iframe"></iframe>
+        <iframe src="Product-buying-tool.html" class="iframe"></iframe>
     </div>
-    <
+</div>
+<div class="summary__list">
+    <div class="summary__item">
+        <img src="../../../resource/image/img-detail/icon1.jpg" alt="Icon 1" class="summary__icon">
+        <p class="summary__text">Ngăn đông mềm linh hoạt Optimal Fresh+</p>
+    </div>
+    <div class="summary__divider"></div>
+    <div class="summary__item">
+        <img src="../../../resource/image/img-detail/icon2.jpg" alt="Icon 2" class="summary__icon">
+        <p class="summary__text">+20L dung tích với SpaceMax™</p>
+    </div>
+    <div class="summary__divider"></div>
+    <div class="summary__item">
+        <img src="../../../resource/image/img-detail/icon3.jpg" alt="Icon 3" class="summary__icon">
+        <p class="summary__text">Hệ thống lọc than hoạt tính</p>
+    </div>
+</div>
+<div class="Section-Pt">
+    <img src="../../../resource/image/img-detail/section1.jpg" alt="Section1">
+</div>
+<div class="text1">
+    <h2>Thiết kế phẳng hiện đại, hoàn hảo mọi gian bếp</h2>
+    <p>Nâng tầm không gian bếp với thiết kế thời thượng từ tủ lạnh Samsung thế hệ mới. Thiết kế phẳng giảm thiểu chi
+        tiết đem lại sự tao nhã sang trọng, cùng chất liệu cao cấp bền đẹp theo thời gian.</p>
+</div>
+<div class="carousel-container">
+    <!-- Main Image Display -->
+    <div class="carousel-slide">
+        <button class="carousel-button left" onclick="prevSlide()">❮</button>
+        <img id="carousel-image" src="../../../resource/image/img-detail/carousel1.jpg" alt="Carousel Image"
+             class="carousel-image">
+        <button class="carousel-button right" onclick="nextSlide()">❯</button>
+    </div>
+    <!-- Carousel Navigation Dots -->
+    <div class="carousel-dots">
+        <span class="dot active" onclick="showSlide(0)"></span>
+        <span class="dot" onclick="showSlide(1)"></span>
+        <span class="dot" onclick="showSlide(2)"></span>
+    </div>
 </div>
 
+<!-- Feature benefit -->
+<div class="feature-benefit">
+    <div class="feature-benefit__text">
+        <h2>Ngăn đông mềm linh hoạt 4 chế độ Optimal Fresh+</h2>
+        <h3>Linh hoạt chuyển đổi 4 chế độ theo nhu cầu</h3>
+        <p>Với 4 chế độ làm lạnh linh hoạt giúp bạn dễ dàng chuyển đổi theo từng nhu cầu bảo quản:
+            "Làm mát" (cho thực phẩm dùng hằng ngày như sữa, thịt nguội…);
+            "Thịt & Cá";
+            "Đông mềm" (lưu trữ thực phẩm dài ngày hơn);
+            "Làm lạnh nhanh" cho đồ uống.
+        </p>
+        <ul>
+            <li>*Chế độ “Làm mát”: Thanh kéo ở “Min”, nhiệt độ 3°C.</li>
+            <li>*Chế độ “Thịt & Cá”: Thanh kéo ở “Max”, nhiệt độ 3°C.</li>
+            <li>*Chế độ “Đông mềm”: Thanh kéo ở “Max”, nhiệt độ 1°C.</li>
+            <li>*Chế độ “Làm lạnh nhanh”: Thanh kéo ở “Max”, nhấn “Power Cool”.</li>
+        </ul>
+    </div>
+    <div class="feature-benefit__video">
+        <video autoplay muted loop playsinline preload="auto">
+            <source src="//images.samsung.com/is/content/samsung/assets/vn/refrigerators/top-mount-freezer/optimal-fresh-plus/20231013/Che-do-lam-lanh_720x720.mp4"
+                    type="video/mp4">
+        </video>
+    </div>
+</div>
 </body>
 </html>
