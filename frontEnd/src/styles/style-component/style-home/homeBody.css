@@ -30,7 +30,7 @@ body {
 }
 
 .body p {
-    padding: 10px 20px;
+    padding: 30px 40px;
     font-size: 1rem;
 }
 
@@ -75,31 +75,6 @@ body {
 
 .buy-button:hover {
     background-color: #333;
-}
-
-
-@media (max-width: 768px) {
-    .banner-content h2 {
-        font-size: 1.8rem;
-    }
-
-    .banner-content p {
-        font-size: 1rem;
-    }
-
-    .body h2 {
-        font-size: 2rem;
-    }
-
-    .body p {
-        padding: 10px;
-        font-size: 0.9rem;
-    }
-
-    .product-item {
-        width: 100%;
-        max-width: 200px;
-    }
 }
 
 .navbar {
@@ -184,6 +159,6 @@ body {
 
 iframe {
     width: 100%;
-    height: 1000px;
+    height: 600px;
     border: none;
 }
