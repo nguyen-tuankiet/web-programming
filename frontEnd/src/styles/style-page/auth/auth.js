@@ -23,5 +23,5 @@ togglePasswords.forEach((togglePassword) => {
 
 document.getElementById("signInButton").addEventListener("click", function(event) {
     event.preventDefault();
-    window.location.href = "../../../pages/Home.html";
+    window.location.href = "../../../frontEnd/src/pages/Home.html";
 });
