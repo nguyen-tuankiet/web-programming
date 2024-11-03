@@ -1,0 +1,49 @@
+/* Reset cơ bản */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 20px;
+}
+/* Feature-benefit */
+.feature-benefit {
+    display: flex;
+    align-items: stretch;
+    max-width: 1200px;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.feature-benefit__text ul {
+    list-style-type: none;
+    padding: 0;
+    color: #555;
+}
+
+.feature-benefit__text li {
+    margin: 5px 0;
+}
+
+.feature-benefit__text, .feature-benefit__img {
+    width: 50%;
+}
+
+.feature-benefit__text {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-benefit__img video {
+    width: 100%;
+    border-radius: 8px;
+}
