@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
-    <link rel="stylesheet" href="../../styles/style-component/style_product/Product-detail.css">
-    <script src="../../styles/style-component/style_product/Product-detail.js"></script>
+    <link rel="stylesheet" href="../../styles/style-component/product-detail/Product-detail.css">
+
 </head>
 <body>
 
 <div class="container">
-    <div class="section">
+    <div class="section1">
         <iframe src="Product-detail-item.html" class="iframe"></iframe>
     </div>
-    <div class="section">
+    <div class="section1">
         <iframe src="Product-buying-tool.html" class="iframe"></iframe>
     </div>
 </div>
@@ -82,5 +82,251 @@
         </video>
     </div>
 </div>
+
+<div class="specification-container">
+
+    <!--    <div class="specification">-->
+    <!--        <iframe src="product-specifications.html" class="iframe" onload="resizeIframe(this)"></iframe>-->
+    <!--    </div>-->
+    <!--    <button class="show-more-btn" onclick="toggleSpecification()">Xem thêm</button>-->
+
+    <h1>Thông số kỹ thuật</h1>
+    <div class="specs">
+        <div class="spec-item">
+            <p>Dung tích tổng (Liter)</p>
+            <h2>285 ℓ</h2>
+        </div>
+        <div class="spec-item">
+            <p>Chiều rộng (mm)</p>
+            <h2>595 mm</h2>
+        </div>
+        <div class="spec-item">
+            <p>Chiều cao thực tế có bản lề (mm)</p>
+            <h2>1580 mm</h2>
+        </div>
+        <div class="spec-item">
+            <p>Chiều sâu với tay cầm cửa (mm)</p>
+            <h2>663 mm</h2>
+        </div>
+        <div class="spec-item">
+            <p>Khối lượng thực (kg)</p>
+            <h2>56.5 kg</h2>
+        </div>
+        <div class="spec-item">
+            <p>Công nghệ làm lạnh</p>
+            <h2>All Around Cooling</h2>
+        </div>
+    </div>
+    <button id="toggle-specs-btn">Xem thêm</button>
+
+</div>
+<div id="specification-section" class="specification" style="display: none;">
+
+    <div class="section">
+        <h2>Capacity</h2>
+        <div class="section-item">
+            <p>Dung tích tổng (Liter</p>
+            <span>285 ℓ</span>
+        </div>
+    </div>
+    <div class="section">
+        <h2>Đặc điểm kỹ thuật</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Chiều rộng (mm)</p>
+                <span>595 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Chiều cao thực có bản lề (mm)</p>
+                <span>1580 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Chiều cao thực không có bản lề (mm)</p>
+                <span>1560 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Chiều sâu với tay cầm cửa (mm)</p>
+                <span>663 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Chiều sâu không có tay cầm cửa (mm)</p>
+                <span>663 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Chiều sâu không có cửa (mm)</p>
+                <span>590 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Chiều ngang nguyên kiện (mm)</p>
+                <span>629 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Chiều cao nguyên kiện (mm)</p>
+                <span>1665 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Độ sâu nguyên kiện (mm)</p>
+                <span>704 mm</span>
+            </div>
+            <div class="spec-item">
+                <p>Khối lượng thực (kg)</p>
+                <span>56.5 kg</span>
+            </div>
+            <div class="spec-item">
+                <p>Khối lượng nguyên kiện (kg)</p>
+                <span>60.5 kg</span>
+            </div>
+            <div class="spec-item">
+                <p>20/40/40H (Container)</p>
+                <span>37 / 78 / 78</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Tính năng làm lạnh</h2>
+        <div class="section-item">
+            <p>Công nghệ làm lạnh</p>
+            <span>All Around Cooling</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Đặc điểm ngăn lạnh</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Bộ lọc khử mùi</p>
+                <span>Yes</span>
+            </div>
+            <div class="spec-item">
+                <p>Spill Proof</p>
+                <span>Yes</span>
+            </div>
+            <div class="spec-item">
+                <p>Spill Proof</p>
+                <span>Yes</span>
+            </div>
+            <div class="spec-item">
+                <p>Đèn LED bên trong</p>
+                <span>LED</span>
+            </div>
+            <div class="spec-item">
+                <p>Ngăn chứa rau củ quả</p>
+                <span>1 EA</span>
+            </div>
+            <div class="spec-item">
+                <p>Số lượng kệ</p>
+                <span>3 EA</span>
+            </div>
+            <div class="spec-item">
+                <p>Số lượng khay chứa</p>
+                <span>2 EA</span>
+            </div>
+            <div class="spec-item">
+                <p>Ngăn đông mềm Optimal Fresh+</p>
+                <span>Yes</span>
+            </div>
+            <div class="spec-item">
+                <p>Chất liệu khay kệ</p>
+                <span>Tempered Glass</span>
+            </div>
+            <div class="spec-item">
+                <p>Làm lạnh nhanh Power Cool</p>
+                <span>Yes</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Đặc điểm ngăn đông</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Số lượng kệ</p>
+                <span>1 EA</span>
+            </div>
+            <div class="spec-item">
+                <p>Icemaker</p>
+                <span>Ice Tray (Include Case)</span>
+            </div>
+            <div class="spec-item">
+                <p>Ngăn chứa</p>
+                <span>1 EA</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Tính năng chung</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Chất làm lạnh</p>
+                <span>R600a</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Đặc điểm ngoại thất</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Hiển thị</p>
+                <span>Internal (Ice Blue)</span>
+            </div>
+            <div class="spec-item">
+                <p>Màu sắc</p>
+                <span>Đen Starry</span>
+            </div>
+            <div class="spec-item">
+                <p>Loại tay cầm</p>
+                <span>Recess</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Công suất</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Climate Class</p>
+                <span>SN,N,ST,T</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Năng lượng</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Energy Star Rating</p>
+                <span>5 Star</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Category</h2>
+        <div class="section-content specs-grid">
+            <div class="spec-item">
+                <p>Refrigerator Type</p>
+                <span>BMF</span>
+            </div>
+        </div>
+    </div>
+    <button id="toggle-specs-btn-bottom">Ẩn tất cả các đặc tả</button>
+</div>
+
+
+<div>
+    <div class="review">
+        <iframe src="review.html" class="iframe"></iframe>
+    </div>
+</div>
+
+<footer>
+    <div class = "footer">
+        <iframe src="../home/footer.html" class="iframe"></iframe>
+    </div>
+</footer>
 </body>
+<script src="../../styles/style-component/product-detail/Product-detail.js"></script>
 </html>

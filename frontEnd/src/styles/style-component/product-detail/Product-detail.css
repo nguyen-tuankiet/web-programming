@@ -98,7 +98,7 @@ body {
     margin: 5px 0;
 }
 
-.feature-benefit__text, .feature-benefit__img {
+.feature-benefit__text, .feature-benefit__video {
     width: 50%;
 }
 
@@ -109,7 +109,7 @@ body {
     justify-content: center;
 }
 
-.feature-benefit__img video {
+.feature-benefit__video video {
     width: 100%;
     border-radius: 8px;
 }
@@ -265,14 +265,14 @@ body > div.container > div:nth-child(2) > iframe{
 }
 
 /* Khối văn bản */
-.text1, .text2{
+.text1 {
     text-align: center;
     background-color: #ffffff;
     padding: 40px;
     margin: auto;
     max-width: 1200px;
 }
-.text1, .text2 p {
+.text1 p {
     padding-top: 15px;
     font-size: 12px;
     color: #4E4E52;
