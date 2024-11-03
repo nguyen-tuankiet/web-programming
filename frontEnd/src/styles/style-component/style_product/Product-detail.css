@@ -18,20 +18,27 @@ body {
     background-color: white;
 }
 
-/* Các section bên trong container */
 .section {
-    width: 100%;
-    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-top: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    gap: 10px;
 }
-
-/* Định dạng cho iframe trong các section */
+.section1{
+    display: grid;
+    margin-top: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    gap: 10px;
+}
 .iframe {
-    width: 100%;
-    height: 75vh; /* Chiều cao 75% viewport */
+    width: 80%;
+    height: 75vh;
     border: none;
 }
 
-/* Danh sách summary items */
 .summary__list {
     display: flex;
     align-items: center;
@@ -133,6 +140,15 @@ body {
     width: 100%;
     height: 100%;
 }
+body > div.container > div:nth-child(1) > iframe{
+    width: 550px;
+    height: 547px;
+}
+body > div.container > div:nth-child(2) > iframe{
+    width: 610px;
+    height: 547px;
+}
+
 
 /* Định dạng cho iframe trong các section */
 .iframe {
@@ -328,6 +344,8 @@ body {
 .specification{
     background-color: #F7F7F7;
     padding: 10px 40px;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .section h2 {
@@ -385,4 +403,7 @@ body > div.specification > div > div > p{
 }
 #toggle-specs-btn-bottom:hover{
     background-color: #bbbbbb;
+}
+.footer .iframe{
+    height: 600px;
 }
