@@ -5,6 +5,16 @@
     box-sizing: border-box;
     font-family: Helvetica Neue, Helvetica, Arial, serif;
 }
+html{
+    height: 100%;
+    width: 100%;
+}
+body{
+    height: 100%;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
 
 /*Reuse*/
 
@@ -44,7 +54,7 @@ i{
 }
 #body{
     width: 100%;
-    height: 600px;
+    height: 100%;
     justify-content: center;
 }
 
@@ -78,7 +88,7 @@ i{
     width: 75%;
     height: 100%;
     margin-left: 5px;
-    border: 1px solid   #F5F5F5;
+
 }
 
 
