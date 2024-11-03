@@ -186,12 +186,13 @@ body{
 }
 
 .bottom .save_btn{
-    height: 30px;
-    width: 60px;
+    height: 40px;
+    width: 150px;
     border: 1px solid rgba(128, 128, 128, 0.25);
     border-radius: 5px;
-    background-color: rgba(145, 253, 145, 0.68);
+    background-color: #0181FE;
     cursor: pointer;
+    color: white;
 }
 
 
