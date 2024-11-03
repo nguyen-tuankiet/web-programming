@@ -357,7 +357,7 @@ li {
     margin: 5px 0;
 }
 
-.feature-benefit__text, .feature-benefit__video {
+.feature-benefit__text, .feature-benefit__img {
     width: 50%;
 }
 
@@ -368,7 +368,7 @@ li {
     justify-content: center;
 }
 
-.feature-benefit__video video {
+.feature-benefit__img video {
     width: 100%;
     border-radius: 8px;
 }
