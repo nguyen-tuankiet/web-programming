@@ -5,14 +5,14 @@
     font-family: Helvetica Neue, Helvetica, Arial, serif;
 }
 html{
-    overflow: hidden;
+
     width: 100%;
     height: 100%;
 }
 body{
     width: 100%;
     height: 100%;
-    overflow: scroll;
+
 }
 
 
@@ -94,5 +94,50 @@ a{
 #header{
     width:100% ;
     height: 70px;
-    background-color: #f88e8e;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+#header .logo {
+    height: 100%;
+    width: 300px;
+}
+#header .logo img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#header .menu{
+    height: 100%;
+    margin-left: auto;
+    font-size: 30px;
+}
+
+#header .menu i{
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+#header .menu i:hover{
+    color: #3461E9;
+}
+
+#header .menu .avatar{
+    height: 100%;
+    width: 70px;
+    border-radius: 50%;
+    padding: 10px;
+    margin-right: 20px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.avatar img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+
+
 }
