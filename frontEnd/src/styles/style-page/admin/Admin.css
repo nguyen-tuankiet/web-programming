@@ -141,3 +141,50 @@ a{
 
 
 }
+
+
+/*Body*/
+#body {
+    width: 100%;
+    min-height: 90vh;
+}
+
+
+#body #sidebar{
+    width: 15%;
+    padding:10px ;
+    /*background-color: #cfcfcf;*/
+    border-right: 1px solid #cfcfcf;
+}
+
+#sidebar .menu_item{
+    height: 40px;
+    align-items: center;
+    display: flex;
+    padding: 0 25px;
+    font-size: 18px;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: 0.4s;
+
+}
+#sidebar .menu_item:hover{
+    background-color: #e3e3e3;
+    scale: 1.01;
+}
+
+#sidebar .menu_item:hover a, #sidebar .menu_item:hover i{
+    color:#3461E9 ;
+}
+
+#sidebar .menu_item a{
+    padding-left: 15px;
+    color: #122144;
+}
+
+#sidebar .menu_item i{
+    font-size: 18px;
+    width: 20px;
+    height: 20px;
+    color: #122144;
+}
