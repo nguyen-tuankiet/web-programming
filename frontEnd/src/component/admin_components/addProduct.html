@@ -67,5 +67,41 @@
     </form>
 </div>
 
+<div class="media-section">
+    <div class="media-header">
+        <h2>Media</h2>
+        <a href="#" class="add-media-url">Thêm media từ URL</a>
+    </div>
+
+    <div class="media-upload-box">
+        <div class="upload-icon">
+            <!-- Biểu tượng SVG của Tệp và Hộp -->
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- SVG mẫu minh họa; thay thế bằng nội dung SVG thực -->
+                <path d="M5 3H19V5H5V3ZM3 7H21V9H3V7ZM8 11H16V13H8V11ZM10 15H14V17H10V15Z" fill="#C4C4C4"/>
+            </svg>
+        </div>
+        <p>Kéo và thả tệp của bạn vào đây</p>
+        <span>hoặc</span>
+        <button class="browse-files">Duyệt tệp</button>
+    </div>
+</div>
+<div class="options-section">
+    <h2>Biến thể</h2>
+    <div id="optionsContainer" class="options-container">
+        <!-- Initial option group -->
+        <div class="option-group">
+            <select class="option-select">
+                <option value="size">Kích thước</option>
+                <option value="color">Màu sắc</option>
+                <option value="material">Chất liệu</option>
+                <option value="style">Kiểu dáng</option>
+                <option value="title">Tiêu đề</option>
+            </select>
+            <input type="text" class="option-input" placeholder="Nhập các thẻ">
+        </div>
+    </div>
+    <button class="add-option-button" onclick="addOptionGroup()">+ Thêm một lựa chọn khác</button>
+</div>
 </body>
 </html>
