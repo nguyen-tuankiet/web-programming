@@ -37,124 +37,6 @@ li {
     padding: 20px;
 }
 
-/* Phong cách cho các slide */
-.slide {
-    display: none;
-    height: 480px;
-}
-
-.slideshow-container {
-    position: relative;
-    overflow: hidden;
-    margin: auto;
-    max-width: 100%;
-    padding-top: 20px;
-    border-radius: 20px;
-}
-
-.slide img {
-    height: 480px;
-    width: 1200px;
-}
-
-/* Styling cho nút prev (bên trái) */
-.prev {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 50%;
-    left: 40px;
-    transform: translateY(-50%);
-    font-size: 24px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-/* Styling cho nút next (bên phải) */
-.next {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 24px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-/* Chỉ thị và hoạt ảnh chấm tiến trình */
-#indicator1, #indicator2 {
-    position: absolute;
-    top: 95%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    z-index: 10;
-}
-
-.pause-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 10px;
-    height: 10px;
-    color: #656565;
-    font-size: 20px;
-    cursor: pointer;
-    margin-left: 5px;
-    transition: background-color 0.3s;
-    opacity: 0.5;
-}
-
-.pause-button:hover {
-    background-color: rgba(136, 131, 131, 0.73);
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    opacity: 0.3;
-}
-
-.progress-loader {
-    position: relative;
-    width: 100px;
-    background: rgba(255, 255, 255, 0.2);
-    height: 5px;
-    border-radius: 7px;
-    overflow: hidden;
-}
-
-.progress {
-    width: 0;
-    height: 5px;
-    border-radius: 7px;
-    background: rgb(144, 75, 246);
-    animation: loading 3s linear infinite;
-}
-
-@keyframes loading {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-
 /* Khối văn bản */
 .text-section1, .text-section2, .text1 {
     text-align: center;
@@ -164,6 +46,19 @@ li {
     max-width: 1200px;
 }
 
+.text-section3 {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 5px 20px;
+    margin: auto;
+    max-width: 1200px;
+}
+.text-section3 img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
 .text1 {
     position: absolute;
     top: 50%;
@@ -540,4 +435,9 @@ iframe {
     width: 100%;
     height: 600px;
     border: none;
+}
+
+.slideshow2 {
+    width: 100%;
+    height: 680px;
 }
