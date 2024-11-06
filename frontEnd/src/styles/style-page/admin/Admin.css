@@ -99,7 +99,7 @@ a{
 
 #header .logo {
     height: 100%;
-    width: 300px;
+    width: 200px;
 }
 #header .logo img{
     object-fit: contain;
@@ -150,6 +150,8 @@ a{
 }
 
 
+
+/*Sidebar*/
 #body #sidebar{
     width: 15%;
     padding:10px ;
@@ -162,7 +164,7 @@ a{
     align-items: center;
     display: flex;
     padding: 0 25px;
-    font-size: 18px;
+    font-size: 14px;
     border-radius: 5px;
     margin: 5px 0;
     transition: 0.4s;
@@ -188,3 +190,43 @@ a{
     height: 20px;
     color: #122144;
 }
+
+/*Content*/
+
+#content{
+    width: 85%;
+    height: 100%;
+}
+
+
+#content iframe{
+    width: 100%;
+    height: 100%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
