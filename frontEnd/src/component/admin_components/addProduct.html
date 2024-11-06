@@ -20,88 +20,136 @@
         </div>
     </div>
 </div>
+<div class="main-container">
+    <div class="left-column">
+        <div class="product-information">
+            <h2>Thông tin sản phẩm</h2>
+            <form>
+                <div class="form-group">
+                    <label for="productName">Tên</label>
+                    <input type="text" id="productName" placeholder="Tủ lạnh, máy giặt, ect.">
+                </div>
 
-<div class="product-information">
-    <h2>Thông tin sản phẩm</h2>
-    <form>
-        <div class="form-group">
-            <label for="productName">Tên</label>
-            <input type="text" id="productName" placeholder="Tủ lạnh, máy giặt, ect.">
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label for="sku">Mã SKU</label>
+                        <input type="text" id="sku" placeholder="Ví dụ: 348121032">
+                    </div>
+                    <div class="form-group half-width">
+                        <label for="weight">Khối lượng</label>
+                        <div class="weight-input">
+                            <input type="number" id="weight" placeholder="0.0">
+                            <select>
+                                <option value="kg">kg</option>
+                                <option value="g">g</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Mô tả (Tùy chọn)</label>
+
+                    <div class="toolbar">
+                        <button type="button" class="toolbar-btn"><b>B</b></button>
+                        <button type="button" class="toolbar-btn"><i>I</i></button>
+                        <button type="button" class="toolbar-btn"><u>U</u></button>
+                        <button type="button" class="toolbar-btn">S</button>
+                        <button type="button" class="toolbar-btn">&#128279;</button>
+                        <button type="button" class="toolbar-btn">&#128247;</button>
+                        <button type="button" class="toolbar-btn">"</button>
+                        <button type="button" class="toolbar-btn">&#60;&#47;&#62;</button>
+                        <button type="button" class="toolbar-btn">&#8226;&#8226;&#8226;</button>
+                    </div>
+
+                    <textarea id="description" placeholder="Nhập mô tả của bạn..."></textarea>
+                </div>
+
+            </form>
         </div>
 
-        <div class="form-row">
-            <div class="form-group half-width">
-                <label for="sku">Mã SKU</label>
-                <input type="text" id="sku" placeholder="Ví dụ: 348121032">
+        <div class="media-section">
+            <div class="media-header">
+                <h2>Media</h2>
+                <a href="#" class="add-media-url">Thêm media từ URL</a>
             </div>
-            <div class="form-group half-width">
-                <label for="weight">Khối lượng</label>
-                <div class="weight-input">
-                    <input type="number" id="weight" placeholder="0.0">
-                    <select>
-                        <option value="kg">kg</option>
-                        <option value="g">g</option>
+
+            <div class="media-upload-box">
+                <div class="upload-icon">
+                    <img src="../../../resource/image/screenshot-1730907930298-removebg-preview.png" height="170"
+                         width="130"/>
+                </div>
+                <p>Kéo và thả tệp của bạn vào đây</p>
+                <span>hoặc</span>
+                <button class="browse-files">Duyệt tệp</button>
+            </div>
+        </div>
+
+        <div class="options-section">
+            <h2>Biến thể</h2>
+            <div id="optionsContainer" class="options-container">
+                <div class="option-group">
+                    <select class="option-select">
+                        <option value="size">Kích thước</option>
+                        <option value="color">Màu sắc</option>
+                        <option value="material">Chất liệu</option>
+                        <option value="style">Kiểu dáng</option>
+                        <option value="title">Tiêu đề</option>
                     </select>
+                    <input type="text" class="option-input" placeholder="Nhập các thẻ">
+                    <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
                 </div>
             </div>
+            <button class="add-option-button" onclick="addOptionGroup()">+ Thêm một lựa chọn khác</button>
         </div>
-
-        <div class="form-group">
-            <label for="description">Mô tả (Tùy chọn)</label>
-
-            <div class="toolbar">
-                <button type="button" class="toolbar-btn"><b>B</b></button>
-                <button type="button" class="toolbar-btn"><i>I</i></button>
-                <button type="button" class="toolbar-btn"><u>U</u></button>
-                <button type="button" class="toolbar-btn">S</button>
-                <button type="button" class="toolbar-btn">&#128279;</button> <!-- Link icon -->
-                <button type="button" class="toolbar-btn">&#128247;</button> <!-- Image icon -->
-                <button type="button" class="toolbar-btn">"</button> <!-- Quote icon -->
-                <button type="button" class="toolbar-btn">&#60;&#47;&#62;</button> <!-- Code icon -->
-                <button type="button" class="toolbar-btn">&#8226;&#8226;&#8226;</button> <!-- New icon for lists or options -->
-            </div>
-
-            <textarea id="description" placeholder="Nhập mô tả của bạn..."></textarea>
-        </div>
-
-    </form>
-</div>
-
-<div class="media-section">
-    <div class="media-header">
-        <h2>Media</h2>
-        <a href="#" class="add-media-url">Thêm media từ URL</a>
     </div>
 
-    <div class="media-upload-box">
-        <div class="upload-icon">
-            <!-- Biểu tượng SVG của Tệp và Hộp -->
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- SVG mẫu minh họa; thay thế bằng nội dung SVG thực -->
-                <path d="M5 3H19V5H5V3ZM3 7H21V9H3V7ZM8 11H16V13H8V11ZM10 15H14V17H10V15Z" fill="#C4C4C4"/>
-            </svg>
-        </div>
-        <p>Kéo và thả tệp của bạn vào đây</p>
-        <span>hoặc</span>
-        <button class="browse-files">Duyệt tệp</button>
-    </div>
-</div>
-<div class="options-section">
-    <h2>Biến thể</h2>
-    <div id="optionsContainer" class="options-container">
-        <!-- Initial option group -->
-        <div class="option-group">
-            <select class="option-select">
-                <option value="size">Kích thước</option>
-                <option value="color">Màu sắc</option>
-                <option value="material">Chất liệu</option>
-                <option value="style">Kiểu dáng</option>
-                <option value="title">Tiêu đề</option>
+
+    <div class="right-column">
+        <div class="section pricing-section">
+            <h2>Giá cả</h2>
+            <label for="price">Giá</label>
+            <input type="number" id="price" placeholder="0.00">
+            <select>
+                <option value="USD">USD</option>
+                <option value="VND">VND</option>
             </select>
-            <input type="text" class="option-input" placeholder="Nhập các thẻ">
+
+            <div class="toggle-button">
+                <label for="availability">Tình trạng hàng</label>
+                <input type="checkbox" id="availability" checked>
+            </div>
+        </div>
+
+
+        <div class="section organization-section">
+            <h2>Tổ chức</h2>
+            <label for="vendor">Nhà cung cấp</label>
+            <input type="text" id="vendor" placeholder="eg. Nike">
+
+            <label for="category">Danh mục</label>
+            <select id="category">
+                <option value="clothing">Tủ Lạnh</option>
+                <option value="electronics">Máy Giặt</option>
+                <option value="electronics">Máy Điều Hòa</option>
+                <option value="electronics">Máy Lạnh</option>
+            </select>
+
+            <label for="collections">Bộ sưu tập</label>
+            <select id="collections">
+                <option value="winter">Nhà bếp</option>
+                <option value="summer">Phòng khách</option>
+                <option value="summer">Phòng ngủ</option>
+                <option value="summer">Khác</option>
+            </select>
+
+
+            <label for="tags">Thẻ</label>
+            <input type="text" id="tags" placeholder="Enter tags here">
         </div>
     </div>
-    <button class="add-option-button" onclick="addOptionGroup()">+ Thêm một lựa chọn khác</button>
+
 </div>
 </body>
+<script src="../../styles/style-component/style-admin/addProduct.js"></script>
 </html>
