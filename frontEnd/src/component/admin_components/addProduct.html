@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../styles/style-component/style-admin/addProduct.css">
+</head>
+<body>
+
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col-sm mb-2 mb-sm-0">
+            <nav aria-label="breadcrumb" _mstaria-label="157144">
+                <ol class="breadcrumb breadcrumb-no-gutter">
+                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Sản Phẩm</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Thêm sản phẩm</li>
+                </ol>
+            </nav>
+            <h1 class="page-header-title">Thêm sản phẩm</h1>
+        </div>
+    </div>
+</div>
+
+<div class="product-information">
+    <h2>Thông tin sản phẩm</h2>
+    <form>
+        <div class="form-group">
+            <label for="productName">Tên</label>
+            <input type="text" id="productName" placeholder="Tủ lạnh, máy giặt, ect.">
+        </div>
+
+        <div class="form-row">
+            <div class="form-group half-width">
+                <label for="sku">Mã SKU</label>
+                <input type="text" id="sku" placeholder="Ví dụ: 348121032">
+            </div>
+            <div class="form-group half-width">
+                <label for="weight">Khối lượng</label>
+                <div class="weight-input">
+                    <input type="number" id="weight" placeholder="0.0">
+                    <select>
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Mô tả (Tùy chọn)</label>
+
+            <div class="toolbar">
+                <button type="button" class="toolbar-btn"><b>B</b></button>
+                <button type="button" class="toolbar-btn"><i>I</i></button>
+                <button type="button" class="toolbar-btn"><u>U</u></button>
+                <button type="button" class="toolbar-btn">S</button>
+                <button type="button" class="toolbar-btn">&#128279;</button> <!-- Link icon -->
+                <button type="button" class="toolbar-btn">&#128247;</button> <!-- Image icon -->
+                <button type="button" class="toolbar-btn">"</button> <!-- Quote icon -->
+                <button type="button" class="toolbar-btn">&#60;&#47;&#62;</button> <!-- Code icon -->
+                <button type="button" class="toolbar-btn">&#8226;&#8226;&#8226;</button> <!-- New icon for lists or options -->
+            </div>
+
+            <textarea id="description" placeholder="Nhập mô tả của bạn..."></textarea>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
