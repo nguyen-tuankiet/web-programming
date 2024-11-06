@@ -98,6 +98,7 @@ a{
 }
 
 #header .logo {
+    padding-top: 15px;
     height: 100%;
     width: 200px;
 }
