@@ -1,0 +1,161 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Helvetica Neue, Helvetica, Arial, serif;
+}
+
+.page-header {
+    padding: 10px;
+}
+
+.page-header .breadcrumb {
+    display: flex;
+    margin-bottom: 0.5rem;
+    gap: 5px;
+    font-size: 14px;
+    color: #6c757d;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.breadcrumb .breadcrumb-item {
+    color: #8c98a4;
+}
+
+.breadcrumb .breadcrumb-item.active {
+    color: #1e2022;
+}
+
+.breadcrumb .breadcrumb-link {
+    color: #8c98a4;
+    text-decoration: none;
+}
+
+.page-header-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e2022;
+    margin-top: 0.5rem;
+}
+
+a {
+    text-decoration: none;
+}
+.breadcrumb .breadcrumb-item:not(:first-child)::before {
+    content: "/";
+    margin-right: 5px;
+    color: #8c98a4;
+}
+.product-information {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.product-information h2 {
+    font-size: 18px;
+    color: #1e2022;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #6c757d;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.product-information input[type="text"],
+.product-information input[type="number"],
+.product-information textarea,
+.product-information select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.product-information textarea {
+    resize: vertical;
+    height: 300px;
+}
+
+.product-information .weight-input {
+    display: flex;
+    gap: 5px;
+}
+
+.product-information .weight-input input[type="number"] {
+    flex: 1;
+}
+
+.product-information .weight-input select {
+    width: 60px;
+}
+
+.product-information input::placeholder,
+.product-information textarea::placeholder {
+    color: #adb5bd;
+}
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px 6px 0 0;
+}
+
+.toolbar-btn {
+    font-size: 16px;
+    color: #6c757d;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toolbar-btn:hover {
+    color: #495057;
+}
+
+.product-information textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.product-information input::placeholder,
+.product-information textarea::placeholder {
+    color: #adb5bd;
+}
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+}
