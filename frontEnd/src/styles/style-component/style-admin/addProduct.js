@@ -35,3 +35,49 @@ function removeOptionGroup(button) {
     const optionGroup = button.parentElement;
     document.getElementById('optionsContainer').removeChild(optionGroup);
 }
+
+
+document.getElementById('fileInput').addEventListener('change', function (event) {
+    const files = Array.from(event.target.files); // Tạo một mảng từ các tệp đã chọn
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const uploadIcon = document.getElementById('uploadIcon');
+    const dragDropText = document.getElementById('dragDropText');
+
+
+    uploadIcon.style.display = 'none';
+    dragDropText.style.display = 'none';
+
+
+    let currentImages = Array.from(imagePreviewContainer.getElementsByTagName('img'));
+    let totalImages = currentImages.length + files.length;
+
+
+    if (totalImages > 3) {
+        files.splice(3 - currentImages.length);
+    }
+
+
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            imagePreviewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    });
+
+
+    const moreImagesDiv = document.querySelector('.more-images');
+    if (moreImagesDiv) {
+        moreImagesDiv.remove();
+    }
+
+
+    if (totalImages > 3) {
+        const moreImagesDiv = document.createElement('div');
+        moreImagesDiv.className = 'more-images';
+        moreImagesDiv.innerText = `+${totalImages - 3}`;
+        imagePreviewContainer.appendChild(moreImagesDiv);
+    }
+});
