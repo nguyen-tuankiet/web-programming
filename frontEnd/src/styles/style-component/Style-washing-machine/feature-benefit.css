@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+/* Văn bản */
+p {
+    font-size: 16px;
+    color: #4E4E52;
+}
+
+h2 {
+    font-size: 48px;
+}
+
+h3 {
+    font-size: 30px;
+    margin: 40px 0 30px;
+}
+
+/* Feature Benefits */
+.feature-benefit1, .feature-benefit2 {
+    display: flex;
+    align-items: center; /* Thẳng hàng dọc cho các phần tử bên trong */
+    background-color: white;
+    border-radius: 8px;
+    width: 50%;
+    min-width: 1200px;
+}
+
+.feature-benefit1__text, .feature-benefit2__text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 20px;
+    width: 50%;
+    height: 100%;
+}
+
+.feature-benefit1__img, .feature-benefit2__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 50%;
+    height: 100%;
+}
