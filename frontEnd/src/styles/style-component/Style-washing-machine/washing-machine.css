@@ -6,7 +6,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    color: #333;
 }
 
 .hero-section {
@@ -18,12 +17,13 @@ body {
 .background .background-image {
     width: 100%;
     height: auto;
+    max-width: 95%;
 }
 
 .content {
     position: absolute;
     top: 50%;
-    left: 50%;
+    right: 5%;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
@@ -52,18 +52,96 @@ body {
 .description {
     text-align: center;
     padding: 50px 20px;
-    background-color: #f4f4f4;
+    background-color: white;
 }
 
 .description h2 {
-    font-size: 1.8em;
+    font-size: 3em;
     margin-bottom: 20px;
 }
 
 .description p {
     font-size: 1.1em;
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 90%;
     margin: 0 auto;
     color: #666;
 }
+
+.summary__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.summary__item {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    height: 200px;
+    width: 200px;
+}
+
+.summary__icon {
+    width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.st1 {
+    text-align: center;
+}
+.st1 img {
+    width: 80%;
+}
+
+/*Tab-list-Showcase*/
+
+.tab-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tabs {
+    display: flex;
+    cursor: pointer;
+    border-bottom: 2px solid #d6d4d4;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+.tab:hover {
+    background-color:  #ededed;
+}
+
+.tab.active {
+    background-color: #ededed;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    padding: 15px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+iframe {
+    width: 100%;
+    height: 720px;
+    border: none;
+}
+
