@@ -119,7 +119,7 @@ a {
 .toolbar {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     padding: 10px;
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
@@ -410,4 +410,41 @@ textarea:focus {
 .save button:hover{
     cursor: pointer;
     background-color: #e0f0ff;
+}
+.image-preview-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.image-preview-container img {
+    width: 130px;
+    height: 170px;
+    object-fit: cover;
+    box-shadow: 0 1px 3px rgba(0, 0, 0.9, 0.7);
+    border-radius: 5px;
+}
+
+.image-preview-container .more-images {
+    width: 150px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+}
+
+.product-information input[type="text"]:focus,
+.product-information input[type="number"]:focus,
+.product-information textarea:focus,
+.section input[type="number"]:focus,
+.section input[type="text"]:focus,
+.section select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+    outline: none;
 }
