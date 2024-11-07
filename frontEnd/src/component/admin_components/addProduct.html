@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../../styles/style-component/style-admin/addProduct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -51,15 +52,15 @@
                     <label for="description">Mô tả (Tùy chọn)</label>
 
                     <div class="toolbar">
-                        <button type="button" class="toolbar-btn"><b>B</b></button>
-                        <button type="button" class="toolbar-btn"><i>I</i></button>
-                        <button type="button" class="toolbar-btn"><u>U</u></button>
-                        <button type="button" class="toolbar-btn">S</button>
-                        <button type="button" class="toolbar-btn">&#128279;</button>
-                        <button type="button" class="toolbar-btn">&#128247;</button>
-                        <button type="button" class="toolbar-btn">"</button>
-                        <button type="button" class="toolbar-btn">&#60;&#47;&#62;</button>
-                        <button type="button" class="toolbar-btn">&#8226;&#8226;&#8226;</button>
+                        <button type="button" class="toolbar-btn"><i class="fas fa-bold"></i></button> <!-- Bold -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-italic"></i></button> <!-- Italic -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-underline"></i></button> <!-- Underline -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-strikethrough"></i></button> <!-- Strike -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-link"></i></button> <!-- Link -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-image"></i></button> <!-- Image -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-quote-right"></i></button> <!-- Blockquote -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-code"></i></button> <!-- Code -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-list-ul"></i></button>
                     </div>
 
                     <textarea id="description" placeholder="Nhập mô tả của bạn..."></textarea>
@@ -71,19 +72,23 @@
         <div class="media-section">
             <div class="media-header">
                 <h2>Media</h2>
-                <a href="#" class="add-media-url">Thêm media từ URL</a>
+                <a href="#" class="add-media-url" onclick="document.getElementById('fileInput').click();">Thêm media từ URL</a>
             </div>
 
             <div class="media-upload-box">
-                <div class="upload-icon">
-                    <img src="../../../resource/image/screenshot-1730907930298-removebg-preview.png" height="170"
-                         width="130"/>
+                <div class="upload-icon" id="uploadIcon">
+                    <img id="previewImage" src="../../../resource/image/screenshot-1730907930298-removebg-preview.png" height="170" width="130" alt="Preview Image" />
                 </div>
-                <p>Kéo và thả tệp của bạn vào đây</p>
+                <div id="imagePreviewContainer" class="image-preview-container"></div>
+                <p id="dragDropText">Kéo và thả tệp của bạn vào đây</p>
                 <span>hoặc</span>
-                <button class="browse-files">Duyệt tệp</button>
+                <input type="file" id="fileInput" style="display: none;" multiple />
+                <button class="browse-files" onclick="document.getElementById('fileInput').click();">Duyệt tệp</button>
             </div>
         </div>
+
+
+
 
         <div class="options-section">
             <h2>Biến thể</h2>
