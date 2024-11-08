@@ -145,3 +145,12 @@ iframe {
     border: none;
 }
 
+.feature-benefit-iframe {
+    width: 100%;
+    height: 1900px;
+}
+
+.feature-column-iframe {
+    width: 100%;
+    height: 500px;
+}
