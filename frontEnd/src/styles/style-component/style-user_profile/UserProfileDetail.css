@@ -243,6 +243,7 @@ body{
     padding:0px 10px;
     height: 25px;
     cursor: pointer;
+    width: 80px;
 }
 
 
@@ -259,6 +260,7 @@ body{
     background-color: transparent;
     padding:0px 10px;
     height: 25px;
+    width: 80px;
 }
 .contact_item img{
     width: 25px;
