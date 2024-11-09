@@ -137,14 +137,14 @@ a{
     font-size: 10px ;
     font-weight: 400;
 
-}
-.description .status span{
-    padding: 2px 10px;
-    border: 1px solid #cfcfcf;
-    background-color: #0ce7ff;
-    border-radius: 10px;
-    color: #454545;
-}
+}.description .status span{
+     padding: 2px 10px;
+     border: 1px solid #cfcfcf;
+     background-color: #EFF8F1;
+     border-radius: 5px;
+     color: #007B55;
+ }
+
 
 
 
