@@ -88,14 +88,16 @@ i{
 
 #body iframe{
     width: 90%;
-    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.3);
+    height: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #cfcfcf;
+    border-radius: 10px;
     margin: 15px;
-    height: auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 
 #body iframe:hover {
-    transform: scale(1.05); /* Phóng to iframe khi di chuột vào */
-    box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.5); /* Thay đổi box-shadow khi hover */
+    transform: scale(1.03); /* Phóng to iframe khi di chuột vào */
+    /*box-shadow: 6px 6px 10px 0px rgba(0, 0, 0, 0.5); !* Thay đổi box-shadow khi hover *!*/
 }
