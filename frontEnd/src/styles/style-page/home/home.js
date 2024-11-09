@@ -40,7 +40,9 @@ $(document).ready(() => {
 
     Array.from(nav_items).forEach(nav_item => {
         // console.log($(nav_item).attr('data-src'));
-        nav_item.addEventListener('click', () => {
+        nav_item.addEventListener('click', (event) => {
+            event.preventDefault();
+            console.log(nav_item);
            content.attr('src', $(nav_item).attr('data-src'));
         })
     })
