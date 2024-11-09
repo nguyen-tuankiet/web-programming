@@ -42,10 +42,11 @@ i{
 /**/
 
 #side_bar{
-    width: 250px;
+    width: 100%;
     height: 750px;
     background: #F5F5F5;
     align-items: center;
+
 
 }
 
@@ -70,40 +71,50 @@ i{
     border-radius: 100%;
 }
 
+
+.rec_horizontal{
+    margin-bottom: 10px;
+}
+
+
+
 .edit_profile span , .order span , .sub_items a  {
     margin-left: 10px;
 }
 
 .item  {
-    padding: 15px 20px 0px 25px ;
+    padding: 10px 20px;
     width: 100%;
+    min-height: 40px;
     font-weight: 400;
     cursor: pointer;
     color: #323232;
-}
-
-
-.wrap{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-
-.edit_profile{
-    justify-content: space-between;
+.item  span{
+    margin-left: 10px;
 }
+
+.wrap_item{
+    width: 100%;
+}
+
 
 .menu_sub_item {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
+    transition: max-height 0.75s ease-in-out;
 }
 
 .wrap{
     padding-bottom: 5px;
 }
 
-.menu_sub_item.open {
+.open {
+
     max-height: 500px;
 }
 
@@ -111,6 +122,7 @@ i{
 
 
 .menu_sub_item .sub_items {
+    margin-left: 30px;
     padding: 10px 10px 10px 20px; ;
     cursor: pointer;
     list-style-type: none;
@@ -137,17 +149,10 @@ i{
 }
 
 
-.sub_items .selected {
+.selected {
     background-color:  #d5d2d2;
     border-radius: 10px;
 
-}
-
-
-
-
-.order {
-    padding-top: 10px;
 }
 
 
