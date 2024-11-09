@@ -150,7 +150,23 @@ body > div.container{
     font-size: 12px;
     color: #999;
 }
+.fa-trash-alt:before, .fa-trash-can:before {
+    content: "\f2ed";
+    color: red;
+}
 
+.fa-file-pdf:before {
+    content: "\f1c1";
+    color: red;
+}
+.fa-file-excel:before {
+    content: "\f1c3";
+    color: green;
+}
+.fa-file-csv:before {
+    content: "\f6dd";
+    color: #bab0b0;
+}
 .export-option {
     padding: 8px 12px;
     width: 100%;
