@@ -67,3 +67,21 @@ document.addEventListener('click', function () {
         menu.style.display = 'none';
     });
 });
+
+// filter
+document.querySelector('.status-select').addEventListener('change', function () {
+    const selectedStatus = this.value;
+    const rows = document.querySelectorAll('tbody tr');
+
+    rows.forEach(row => {
+        const statusElement = row.querySelector('.order-status-shipped') || row.querySelector('.order-status-in-progress') || row.querySelector('.status-paid');
+        const statusText = statusElement ? statusElement.textContent.trim() : '';
+
+        if (selectedStatus === "Mặc Định" || statusText === selectedStatus) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+});
+
