@@ -7,12 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main_content');
 
 
+    console.log(subItem);
     myAccount.addEventListener("click", () => {
 
         if (subMenu.classList.contains('open')) {
             subMenu.classList.remove('open');
+
         } else {
+            Array.from(subItem)[0].classList.add('selected');
             subMenu.classList.add('open');
+            console.log(Array.from(subItem)[0])
+
         }
     })
 
@@ -21,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener("click", (event) => {
             event.stopPropagation();
             subItem.forEach((item) => {
-                item.classList.remove('selected');
+                // item.classList.remove('selected');
             })
             item.classList.add('selected');
 
@@ -31,11 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (link) {
                 const dataSrc = link.getAttribute('data-src'); //    Lấy giá trị tu data-src
                 event.preventDefault();
-                window.parent.postMessage({ type: 'openUserProfile', src: dataSrc }, '*');
+                window.parent.postMessage({type: 'openUserProfile', src: dataSrc}, '*');
             }
-
-
-
 
 
         })
