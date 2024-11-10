@@ -140,7 +140,6 @@ body {
     width: 80%;
 }
 
-/*Payment*/
 .card {
     background-color: #f8f9fa;
     border: 1px solid #e0e0e0;
@@ -179,7 +178,7 @@ body {
     padding: 30px;
 }
 
-/* Payment Method Card */
+
 .payment-method {
     display: flex;
     justify-content: space-between;
@@ -217,7 +216,7 @@ body {
     color: #777;
 }
 
-/* Payment Actions */
+
 .payment-actions {
     display: flex;
     align-items: center;
@@ -247,4 +246,91 @@ body {
 .edit-btn:hover,
 .delete-btn:hover {
     color: #007bff;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 12px 8px;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+.table th {
+    color: #4a5568;
+    font-weight: 600;
+}
+
+.table tbody tr td {
+    color: #2d3748;
+}
+
+.table .text-end {
+    text-align: right;
+}
+
+
+.label {
+    color: #718096;
+    font-weight: 500;
+}
+
+body > div:nth-child(3) > div.card-header > button{
+    color: #4b5675;
+    border: 1px solid #dbdfe9;
+    background-color: #fff;
+}
+body > div:nth-child(4) > div.card-header > button{
+    color: #4b5675;
+    border: 1px solid #dbdfe9;
+    background-color: #fff;
+}
+body > div:nth-child(4) > div.card-table.scrollable-x > table > thead{
+    border-bottom: 1px solid #e0e0e0;
+}
+.value {
+    color: #2d3748;
+}
+
+
+.scrollable-x {
+    overflow-x: auto;
+}
+
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.badge-warning {
+    color: #d69e2e;
+    background-color: #fefcbf;
+    border: 1px solid #ecc94b;
+}
+
+.badge-success {
+    color: #38a169;
+    background-color: #c6f6d5;
+    border: 1px solid #48bb78;
+}
+
+.badge-danger {
+    color: #e53e3e;
+    background-color: #fed7d7;
+    border: 1px solid #f56565;
+}
+
+
+.card-footer {
+    text-align: center;
+    padding: 12px;
+    border-top: 1px solid #e2e8f0;
 }
