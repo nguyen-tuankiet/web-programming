@@ -119,8 +119,9 @@ a{
 .description .title{
     display: flex;
     text-align: left;
-    font-size: 22px ;
+    font-size: 18px ;
 }
+
 .description .color{
     width: 100%;
     display: flex;
@@ -134,7 +135,7 @@ a{
     width: 100%;
     display: flex;
     text-align: left;
-    font-size: 10px ;
+    font-size: 14px ;
     font-weight: 400;
 
 }.description .status span{
