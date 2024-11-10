@@ -164,6 +164,10 @@ i {
     text-align: center;
 }
 
+#status_detail .status_date{
+    font-size: 10px;
+    color: #666666;
+}
 
 #status_detail .line{
     margin-top: 25px;
@@ -212,16 +216,42 @@ i {
 }
 
 
+/*Customer*/
+#customer{
+
+}
+#customer .content{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#customer .content .content_item{
+    font-size: 14px;
+    padding: 5px;
+}
+
+
+#customer .content .content_item i{
+    margin-right: 10px;
+}
 
 
 
+.section_right{
+    margin-right: 90px;
+}
 
+.section_right .title{
+    font-size: 14px;
+    color: #000000;
+}
 
-
-
-
-
-
+.section_right .content{
+    padding-left: 20px;
+    font-size: 14px;
+    color: #000000;
+}
 
 
 
