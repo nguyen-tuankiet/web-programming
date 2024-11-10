@@ -1,77 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Admin</title>
+    <title>Quản trị</title>
     <link rel="stylesheet" href="../styles/style-page/admin/Admin.css">
     <link rel="stylesheet" href="../../resource/fontawesome/css/all.css">
-    <script src="../styles/style-page/admin/Admin.js"></script>
+
 </head>
 <body>
-<div class="wrap  col">
+<div class="wrap col">
     <div id="header" class="row">
         <div class="logo">
-            <img src="../../resource/image/samsung_logo.svg"  alt=""/>
+            <img src="../../resource/image/samsung_logo.svg" alt=""/>
         </div>
-
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm...">
+            <button type="submit"><i class="fa-solid fa-search"></i></button>
+        </div>
         <div class="menu row mid_align">
             <i class="fa-regular fa-bell"></i>
             <i class="fa-regular fa-envelope"></i>
             <div class="avatar">
-                <img src="../../resource/image/avatar.jpg" alt="" height="1024" width="1024"/></div>
+                <img src="../../resource/image/avatar.jpg" alt="" height="1024" width="1024"/>
+            </div>
         </div>
     </div>
-
-
 
     <div id="body" class="row">
         <div id="sidebar" class="col">
             <div class="menu_item row">
                 <i class="fa-solid fa-chart-line"></i>
-                <a href="#" onclick="loadPage('Dashboard.html')">Tổng Quan</a>
-            </div>
-
-
-            <div class="menu_item row">
-                <i class="fa-brands fa-product-hunt"></i>
-                <a  href="#" onclick="loadPage('listProduct.html')">Sản Phẩm</a>
+                <a href="#" onclick="loadPage('Dashboard.html')">Dashboard</a>
             </div>
 
             <div class="menu_item row">
-                <i class="fa-solid fa-plus"></i>
-                <a href="#" onclick="loadPage('addProduct.html')">Thêm Sản Phẩm</a>
+                <i class="fa-solid fa-user"></i>
+                <span>User Profile</span>
+                <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                <div class="submenu col">
+                    <a href="#" onclick="loadPage('profile.html')">Profile</a>
+                    <a href="#" onclick="loadPage('profile.html')">Connections</a>
+                </div>
             </div>
 
+            <div class="menu_item row">
+                <i class="fa-solid fa-id-badge"></i>
+                <span>Account</span>
+                <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                <div class="submenu col">
+                    <a href="#" onclick="loadPage('billing.html')">Billing</a>
+                    <a href="#" onclick="loadPage('settings.html')">Settings</a>
+                </div>
+            </div>
 
             <div class="menu_item row">
                 <i class="fa-solid fa-cart-shopping"></i>
-                <a  href="#" onclick="loadPage('orders.html')">Quản Lý Đơn Hàng</a>
+                <span>E-commerce</span>
+                <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                <div class="submenu col">
+                    <span>Products</span>
+                    <div class="submenu col">
+                        <a href="#" onclick="loadPage('products.html')">Products</a>
+                        <a href="#" onclick="loadPage('addProduct.html')">Add Product</a>
+                    </div>
+                    <a href="#" onclick="loadPage('orders.html')">Orders</a>
+                    <a href="#" onclick="loadPage('customers.html')">Customers</a>
+                </div>
             </div>
-
-
-            <div class="menu_item row">
-                <i class="fa-brands fa-rocketchat"></i>
-                <a  href="#">Tin Nhắn</a>
-            </div>
-
-
-            <div class="menu_item row">
-                <i class="fa-solid fa-chart-column"></i>
-                <a  href="#" onclick="loadPage('billing.html')">Hóa Đơn </a>
-            </div>
-
-
-
-
-
         </div>
+
+
         <div id="content">
             <iframe src="../component/admin_components/Dashboard.html" frameborder="0"></iframe>
         </div>
-
-
     </div>
 </div>
-
 </body>
+<script src="../styles/style-page/admin/Admin.js"></script>
 </html>
