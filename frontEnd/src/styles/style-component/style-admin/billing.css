@@ -1,0 +1,249 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+    color: #333;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.billing-card {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 4px  rgba(0, 0, 0, 0.1);
+    border: 1px solid #f1f1f4;
+    max-width: 780px;
+    width: 100%;
+}
+
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-info-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plan-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.badge {
+    background-color: #eafff1;
+    color: #17c653;
+    padding: 4px 8px;
+    border: 1px solid #17c653;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.plan-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn-cancel {
+    background-color: #fff;
+    color: #4b5675;
+    border: 1px solid #dbdfe9;
+}
+
+.btn-upgrade {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+.plan-details {
+    display: flex;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+.detail-item {
+    text-align: center;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 20%;
+}
+
+.detail-amount {
+    font-size: 17px;
+    font-weight: 500;
+    color: #071437;
+    display: block;
+}
+
+.detail-label {
+    font-size: 13px;
+    color: #4b5675;
+}
+
+
+.usage-section {
+    margin-top: 20px;
+}
+
+.usage-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.progress-bar {
+    background-color: #ddd;
+    height: 5px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.progress-fill {
+    background-color: #007bff;
+    height: 100%;
+    width: 80%;
+}
+
+/*Payment*/
+.card {
+    background-color: #fff;
+    border: 1px solid #f1f1f4;
+    border-radius: 8px;
+    max-width: 820px;
+    box-shadow: 0 3px 4px  rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    width: 100%;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-add {
+    justify-items: flex-end;
+    color: #4b5675;
+    border:1px solid #dbdfe9;
+    background-color: #fff;
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+}
+
+/* Payment Method Card */
+.payment-method {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
+
+.payment-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 40px;
+}
+
+.payment-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+}
+
+.payment-desc {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Payment Actions */
+.payment-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.primary-badge {
+    background-color: #e0f5e9;
+    color: #28a745;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.icons {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    color: #007bff;
+}
