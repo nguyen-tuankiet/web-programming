@@ -1,7 +1,7 @@
 body{
     padding: 20px;
     font-family: Helvetica Neue, Helvetica, Arial, serif;
-    background: #F1F5F9;
+    background: #FFFFFF;
 }
 
 .row{
@@ -11,9 +11,11 @@ body{
 }
 
 body > div.container{
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    border-radius: 5px;
+
 }
 
 .header-container {
