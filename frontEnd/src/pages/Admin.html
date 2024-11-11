@@ -5,7 +5,6 @@
     <title>Quản trị</title>
     <link rel="stylesheet" href="../styles/style-page/admin/Admin.css">
     <link rel="stylesheet" href="../../resource/fontawesome/css/all.css">
-
 </head>
 <body>
 <div class="wrap col">
@@ -27,48 +26,53 @@
     </div>
 
     <div id="body" class="row">
-        <div id="sidebar" class="col">
-            <div class="menu_item row">
-                <i class="fa-solid fa-chart-line"></i>
-                <a href="#" onclick="loadPage('Dashboard.html')">Dashboard</a>
-            </div>
+        <nav id="sidebar" class="col">
+            <ul>
+                <li class="menu_item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <a href="#" onclick="loadPage('Dashboard.html')">Dashboard</a>
+                </li>
 
-            <div class="menu_item row">
-                <i class="fa-solid fa-user"></i>
-                <span>User Profile</span>
-                <i class="fa-solid fa-chevron-down toggle-arrow"></i>
-                <div class="submenu col">
-                    <a href="#" onclick="loadPage('profile.html')">Profile</a>
-                    <a href="#" onclick="loadPage('profile.html')">Connections</a>
-                </div>
-            </div>
+                <li class="menu_item">
+                    <i class="fa-solid fa-user"></i>
+                    <span>User Profile</span>
+                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="loadPage('profile.html')">Profile</a></li>
+                        <li><a href="#" onclick="loadPage('profile.html')">Connections</a></li>
+                    </ul>
+                </li>
 
-            <div class="menu_item row">
-                <i class="fa-solid fa-id-badge"></i>
-                <span>Account</span>
-                <i class="fa-solid fa-chevron-down toggle-arrow"></i>
-                <div class="submenu col">
-                    <a href="#" onclick="loadPage('billing.html')">Billing</a>
-                    <a href="#" onclick="loadPage('settings.html')">Settings</a>
-                </div>
-            </div>
+                <li class="menu_item">
+                    <i class="fa-solid fa-id-badge"></i>
+                    <span>Account</span>
+                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="loadPage('billing.html')">Billing</a></li>
+                        <li><a href="#" onclick="loadPage('settings.html')">Settings</a></li>
+                    </ul>
+                </li>
 
-            <div class="menu_item row">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>E-commerce</span>
-                <i class="fa-solid fa-chevron-down toggle-arrow"></i>
-                <div class="submenu col">
-                    <span>Products</span>
-                    <div class="submenu col">
-                        <a href="#" onclick="loadPage('products.html')">Products</a>
-                        <a href="#" onclick="loadPage('addProduct.html')">Add Product</a>
-                    </div>
-                    <a href="#" onclick="loadPage('orders.html')">Orders</a>
-                    <a href="#" onclick="loadPage('customers.html')">Customers</a>
-                </div>
-            </div>
-        </div>
-
+                <li class="menu_item">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>E-commerce</span>
+                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    <ul class="submenu">
+                        <li><a href="#" onclick="loadPage('overview.html')">Overview</a></li>
+                        <li>
+                            <span>Products</span>
+                            <ul class="submenu">
+                                <li><a href="#" onclick="loadPage('products.html')">Products</a></li>
+                                <li><a href="#" onclick="loadPage('productDetails.html')">Product Details</a></li>
+                                <li><a href="#" onclick="loadPage('addProduct.html')">Add Product</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#" onclick="loadPage('orders.html')">Orders</a></li>
+                        <li><a href="#" onclick="loadPage('customers.html')">Customers</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
         <div id="content">
             <iframe src="../component/admin_components/Dashboard.html" frameborder="0"></iframe>

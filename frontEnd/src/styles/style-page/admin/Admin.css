@@ -70,7 +70,6 @@ a {
     padding: 0 20px;
 }
 
-
 #header .logo {
     height: 100%;
     width: 200px;
@@ -84,7 +83,6 @@ a {
     height: 100%;
     cursor: pointer;
 }
-
 
 .search-bar {
     display: flex;
@@ -145,7 +143,7 @@ a {
     border-radius: 50%;
 }
 
-
+/* Body and Sidebar */
 #body {
     width: 100%;
     min-height: 90vh;
@@ -160,8 +158,11 @@ a {
     padding-bottom: 20px;
 }
 
+#sidebar ul {
+    list-style-type: none;
+}
+
 .menu_item {
-    display: flex;
     align-items: center;
     padding: 10px 20px;
     color: #4b5563;
@@ -176,6 +177,15 @@ a {
     color: #2563eb;
 }
 
+.menu_item i {
+    margin-right: 10px;
+    color: #9ca3af;
+}
+
+.menu_item:hover i {
+    color: #2563eb;
+}
+
 .menu_item .toggle-arrow {
     margin-left: auto;
     transition: transform 0.3s;
@@ -186,28 +196,10 @@ a {
     transform: rotate(180deg);
 }
 
-.menu_item i {
-    margin-right: 10px;
-    color: #9ca3af;
-}
-
-.menu_item:hover i {
-    color: #2563eb;
-}
-
-.menu_item .badge {
-    background-color: #3b82f6;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 8px;
-    font-size: 12px;
-    margin-left: 5px;
-}
-
 .submenu {
     display: none;
     flex-direction: column;
-    padding-left: 40px;
+    padding-left: 30px;
     margin-top: 5px;
 }
 
@@ -215,8 +207,11 @@ a {
     display: flex;
 }
 
-.submenu a {
+.submenu li {
     padding: 5px 0;
+}
+
+.submenu a {
     color: #4b5563;
     text-decoration: none;
     transition: color 0.3s;
@@ -241,3 +236,4 @@ a {
     height: 100%;
     border: none;
 }
+
