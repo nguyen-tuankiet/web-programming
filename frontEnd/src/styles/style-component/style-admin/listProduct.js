@@ -52,3 +52,20 @@ function sortTable(columnIndex) {
     tableBody.innerHTML = "";
     sortedRows.forEach(row => tableBody.appendChild(row));
 }
+
+// function  dropdown
+
+function toggleDropdown(button) {
+    const dropdownContent = button.nextElementSibling;
+    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+}
+
+// Đóng dropdown khi nhấn ra ngoài
+window.onclick = function(event) {
+    if (!event.target.matches('.dropdown button') && !event.target.closest('.dropdown')) {
+        const dropdowns = document.querySelectorAll(".dropdown-content");
+        dropdowns.forEach(dropdown => {
+            dropdown.style.display = "none";
+        });
+    }
+}

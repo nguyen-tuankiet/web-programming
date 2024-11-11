@@ -131,6 +131,7 @@ body {
     align-items: center; /* Align image and text vertically centered */
     text-align: left;
     height: 104px;
+    margin-top: 20px;
 }
 
 .product img {
@@ -236,4 +237,55 @@ td .checkbox {
 
 td .checkbox input {
     cursor: pointer;
+}
+
+/* Styling cho dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown button {
+    display: flex;
+    align-items: center;
+    color: #7f7f7f;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.dropdown button svg {
+    margin-left: 4px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 120px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content .icon {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #7f7f7f;
+    cursor: pointer;
+}
+
+.dropdown-content .icon svg {
+    margin-right: 8px;
+}
+
+.dropdown-content .icon:hover {
+    background-color: #f1f1f1;
 }
