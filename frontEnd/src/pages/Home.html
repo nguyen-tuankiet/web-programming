@@ -116,7 +116,7 @@
         </ul>
         <!-- User Login Icon and Popup -->
         <div class="icons">
-            <a href="#" class="icon"><i class="fas fa-search"></i></a>
+            <a href="#" class="icon" id="search-icon"><i class="fas fa-search"></i></a>
             <a  class="nav_item" data-src="../component/cart/Cart.html" href="#" class="icon"><i class="fas fa-shopping-cart"></i></a>
             <div class="icon user-login" target="_top">
                 <i class="fas fa-user"></i>
@@ -125,6 +125,15 @@
                     <a  class="nav_item" data-src="UserProfile.html"  href="">Trang của tôi</a>
                     <a href="#">Đơn Hàng</a>
                 </div>
+            </div>
+        </div>
+
+        <div id="search-overlay" class="overlay">
+            <div class="search-container">
+                <iframe src="../component/home/search.html" frameborder="0" id="search-iframe"></iframe>
+                <button id="close-search-overlay" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         </div>
 
