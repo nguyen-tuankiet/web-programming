@@ -67,3 +67,11 @@ userPopup.addEventListener('mouseenter', () => {
 userPopup.addEventListener('mouseleave', () => {
     userPopup.style.display = 'none';
 });
+// JavaScript xử lý sự kiện
+document.getElementById("search-icon").addEventListener("click", function() {
+    document.getElementById("search-overlay").style.display = "flex";
+});
+
+document.getElementById("close-search-overlay").addEventListener("click", function() {
+    document.getElementById("search-overlay").style.display = "none";
+});
