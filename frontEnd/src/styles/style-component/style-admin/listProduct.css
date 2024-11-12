@@ -55,6 +55,8 @@ body {
 
 .row {
     display: flex;
+    align-items: center;
+    justify-content: space-between; /* Tạo khoảng cách giữa các phần tử */
     gap: 10px;
     margin-bottom: 15px;
 }
@@ -62,6 +64,8 @@ body {
 .entries-dropdown, .search-bar {
     width: 50%;
 }
+
+
 
 .entries-dropdown {
     display: flex;
@@ -185,6 +189,7 @@ body {
     height: 20px;
     color: #a0a0a0;
     cursor: pointer;
+    stroke-width: 1;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -194,15 +199,15 @@ body {
 }
 
 .view-icon svg {
-    color: #99eefb;
+    /*color: #99eefb;*/
 }
 
 .edit-icon svg {
-    color: #FFEB55;
+    /*color: #FFEB55;*/
 }
 
 .delete-icon svg {
-    color: #FF0000;
+    /*color: #FF0000;*/
 }
 
 .pagination {
@@ -226,9 +231,13 @@ body {
 }
 
 .page-number.active {
+    font-weight: bold;
     background-color: #007bff;
     color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
+
 
 td .checkbox {
     margin-left: 15px;
@@ -267,7 +276,8 @@ td .checkbox input {
     top: 100%;
     left: 0;
     background-color: #fff;
-    min-width: 120px;
+    min-width: 111px;
+    border-radius: 8px;
     border: 1px solid #ddd;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
