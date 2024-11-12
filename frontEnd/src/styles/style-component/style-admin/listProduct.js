@@ -61,7 +61,7 @@ function toggleDropdown(button) {
 }
 
 // Đóng dropdown khi nhấn ra ngoài
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (!event.target.matches('.dropdown button') && !event.target.closest('.dropdown')) {
         const dropdowns = document.querySelectorAll(".dropdown-content");
         dropdowns.forEach(dropdown => {
@@ -69,3 +69,63 @@ window.onclick = function(event) {
         });
     }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const pageButtons = document.querySelectorAll(".page-number");
+    const prevButton = document.querySelector(".prev-btn");
+    const nextButton = document.querySelector(".next-btn");
+
+    const page1Products = document.getElementById("product-table-body");
+    const page2Products = document.getElementById("product-table-body-page2");
+
+    let currentPage = 1;
+
+    function showPage(page) {
+        // Hiển thị đúng các sản phẩm của trang
+        if (page === 1) {
+            page1Products.style.display = "table-row-group";
+            page2Products.style.display = "none";
+        } else if (page === 2) {
+            page1Products.style.display = "none";
+            page2Products.style.display = "table-row-group";
+        }
+
+        // Cập nhật nút phân trang
+        updatePaginationButtons(page);
+        currentPage = page;
+    }
+
+    function updatePaginationButtons(page) {
+        // Loại bỏ lớp active khỏi tất cả nút
+        pageButtons.forEach(btn => btn.classList.remove("active"));
+
+        // Thêm lớp active vào nút của trang hiện tại
+        document.querySelector(`.page-number:nth-child(${page + 1})`).classList.add("active");
+
+        // Cập nhật trạng thái vô hiệu hóa của nút Trước và Tiếp Theo
+        prevButton.disabled = page === 1;
+        nextButton.disabled = page === pageButtons.length;
+    }
+
+    // Xử lý sự kiện khi người dùng nhấp vào các nút số trang
+    pageButtons.forEach((button, index) => {
+        button.addEventListener("click", () => showPage(index + 1));
+    });
+
+    // Xử lý sự kiện khi người dùng nhấp vào nút Trước
+    prevButton.addEventListener("click", () => {
+        if (currentPage > 1) {
+            showPage(currentPage - 1);
+        }
+    });
+
+    // Xử lý sự kiện khi người dùng nhấp vào nút Tiếp Theo
+    nextButton.addEventListener("click", () => {
+        if (currentPage < pageButtons.length) {
+            showPage(currentPage + 1);
+        }
+    });
+
+    // Khởi động trang đầu tiên
+    showPage(1);
+});
