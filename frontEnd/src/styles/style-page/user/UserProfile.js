@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        else if (event.data.type === 'openOrderDetail') {
+        else if (event.data.type === 'openOrderHistory') {
             console.log(event.data.src)
 
             iframe.src = event.data.src;
