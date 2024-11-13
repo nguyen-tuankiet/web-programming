@@ -4,13 +4,13 @@ $(document).ready(function () {
     viewDetail.on('click', function () {
         const data = $(this).data('src')
         const message = {
-            type: 'openOrderDetail',
+            type: 'openOrderHistory',
             src: data
         };
 
-        console.log(message)
+        // console.log(message)
         // console.log(data)
-        window.parent.postMessage(message , 'http://localhost:63342/web-programming/frontEnd/src/pages/UserProfile.html');
+        window.parent.postMessage(message , '*');
         console.log("Da goi data")
 
 
