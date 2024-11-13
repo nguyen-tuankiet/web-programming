@@ -13,4 +13,7 @@ $(document).ready(function(){
         btn.remove()
         wrap_price.css('padding-top', '40px');
     });
+
+
+
 });
