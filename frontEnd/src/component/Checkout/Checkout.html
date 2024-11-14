@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../../styles/style-component/style-checkout/Checkout.css">
     <link rel="stylesheet" href="../../styles/style-component/sytle-cart/CartItem.css">
     <link rel="stylesheet" href="../../../resource/fontawesome/css/all.css">
+    <script src="../../styles/style-component/style-checkout/Checkout.js"></script>
 </head>
 <body>
 
-<div id="header" class="mid_align">
+<div id="header" class="mid_align row">
+    <div class="nav">
+        <i id="back" class="fa-solid fa-arrow-left" data-src="../component/cart/Cart.html" ></i>
+    </div>
     <span>Thanh toán đơn hàng</span>
 </div>
 
@@ -156,7 +161,7 @@
                 </div>
 
 
-                <button type="submit" class="pay">Thanh Toán</button>
+                <button type="submit" id="pay" data-src="../component/user_order/OrderSuccess.html">Thanh Toán</button>
 
                 <div class="term_condition">
                 <span>Bằng cách gửi đơn đặt hàng,
