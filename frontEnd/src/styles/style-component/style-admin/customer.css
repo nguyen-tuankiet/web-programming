@@ -9,7 +9,45 @@ body {
 
 .header-title {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.add-customer {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.import,
+.export,
+.more-options {
+    color: #6a5af9;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.search-bar input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 .table-container table {
