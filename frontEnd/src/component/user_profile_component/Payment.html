@@ -9,12 +9,14 @@
 <body>
     <div id="header" class="mid_align row">
         <span class="title">Quản lý thanh toán</span>
-        <div class="add_btn mid_align">
+
+
+        <div class="add_btn mid_align" onclick="openIframe()">
             <i class="fa-solid fa-plus"></i>
             <a href="#">Thêm</a>
         </div>
-    </div>
 
+    </div>
 
     <div id="body" class="mid_align">
         <iframe src="CardComponent.html" frameborder="0"></iframe>
@@ -23,5 +25,15 @@
         <iframe src="CardComponent.html" frameborder="0"></iframe>
     </div>
 
+
+    <div id="add-card-overlay">
+        <div class="add-card-container">
+            <iframe src="../user_profile_component/AddCard.html" id="add-card-iframe"></iframe>
+            <button class="close-btn" onclick="closeAddCardOverlay()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    <script src="../../styles/style-component/style-user_profile/AddCard.js"></script>
 </body>
 </html>
