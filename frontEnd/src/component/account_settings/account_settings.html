@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Fixed Navbar with Notifications and Connected Accounts</title>
+    <title>Account Settings with Notifications and Connected Accounts</title>
     <link rel="stylesheet" href="../../styles/style-component/account_settings/account_settings.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
             Password
         </a>
         <a href="#notifications">
-            <i class="fas fa-bell"> </i>
+            <i class="fas fa-bell"></i>
             Notifications
         </a>
         <a href="#connected-accounts">
@@ -28,6 +28,185 @@
             <i class="fab fa-instagram"></i>
             Social Accounts
         </a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="slideshow-container">
+        <!-- Notifications Section -->
+        <div class="content notifications" id="notifications">
+            <div class="card-header">
+                <h3>Notifications</h3>
+            </div>
+            <div class="alert">
+                We need permission from your browser to show notifications. <a href="#" class="alert-link">Request
+                permission</a>
+            </div>
+
+            <form>
+                <div class="table-responsive">
+                    <table class="table table-thead-bordered table-nowrap table-align-middle">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Type</th>
+                            <th class="text-center">
+                                <div class="mb-1">
+                                    <img class="avatar avatar-xs"
+                                         src="../../../resource/image/icon-user-settings/oc-email-at.svg"
+                                         alt="Email Icon">
+                                </div>
+                                Email
+                            </th>
+                            <th class="text-center">
+                                <div class="mb-1">
+                                    <img class="avatar avatar-xs"
+                                         src="../../../resource/image/icon-user-settings/oc-globe.svg"
+                                         alt="Browser Icon">
+                                </div>
+                                Browser
+                            </th>
+                            <th class="text-center">
+                                <div class="mb-1">
+                                    <img class="avatar avatar-xs"
+                                         src="../../../resource/image/icon-user-settings/oc-phone.svg" alt="App Icon">
+                                </div>
+                                App
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>New for you</td>
+                            <td class="text-center"><input type="checkbox"></td>
+                            <td class="text-center"><input type="checkbox"></td>
+                            <td class="text-center"><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>Account activity</td>
+                            <td class="text-center"><input type="checkbox"></td>
+                            <td class="text-center"><input type="checkbox"></td>
+                            <td class="text-center"><input type="checkbox"></td>
+                        </tr>
+                        <tr>
+                            <td>A new browser used to sign in</td>
+                            <td class="text-center"><input type="checkbox" checked></td>
+                            <td class="text-center"><input type="checkbox" checked></td>
+                            <td class="text-center"><input type="checkbox" checked></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="actions">
+                    <label>When should we send you notifications?</label>
+                    <select class="form-select">
+                        <option>Always</option>
+                        <option>Only on weekdays</option>
+                    </select>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Connected Accounts Section -->
+        <div class="content connected-accounts" id="connected-accounts">
+            <h3>Connected Accounts</h3>
+            <div class="account-info">
+                <span class="account-icon">📅</span> Google - Calendar and contacts
+                <label class="toggle-switch"><input type="checkbox"><span></span></label>
+            </div>
+            <div class="account-info">
+                <span class="account-icon">📁</span> Spec - Project management
+                <label class="toggle-switch"><input type="checkbox"><span></span></label>
+            </div>
+            <div class="account-info">
+                <span class="account-icon">💬</span> Slack - Communication
+                <label class="toggle-switch"><input type="checkbox" checked><span></span></label>
+            </div>
+            <div class="account-info">
+                <span class="account-icon">📧</span> Mailchimp - Email marketing service
+                <label class="toggle-switch"><input type="checkbox" checked><span></span></label>
+            </div>
+        </div>
+        <!-- Social Accounts Section -->
+        <div class="content social-accounts" id="social-accounts">
+            <h3>Social Accounts</h3>
+            <p>Integrated features from these accounts make it easier to connect with friends and share updates.</p>
+
+            <div class="account-info">
+                <div class="account-details">
+                    <i class="fab fa-twitter account-icon"></i>
+                    <div>
+                        <strong>Twitter</strong>
+                        <p><a href="https://www.twitter.com/htmlstream">www.twitter.com/htmlstream</a></p>
+                    </div>
+                </div>
+                <button class="btn btn-disconnect">Disconnect</button>
+            </div>
+
+            <div class="account-info">
+                <div class="account-details">
+                    <i class="fab fa-facebook account-icon"></i>
+                    <div>
+                        <strong>Facebook</strong>
+                        <p><a href="https://www.facebook.com/htmlstream">www.facebook.com/htmlstream</a></p>
+                    </div>
+                </div>
+                <button class="btn btn-disconnect">Disconnect</button>
+            </div>
+
+            <div class="account-info">
+                <div class="account-details">
+                    <i class="fab fa-slack account-icon"></i>
+                    <div>
+                        <strong>Slack</strong>
+                        <p>Not connected</p>
+                    </div>
+                </div>
+                <button class="btn btn-connect">Connect</button>
+            </div>
+
+            <div class="account-info">
+                <div class="account-details">
+                    <i class="fab fa-linkedin account-icon"></i>
+                    <div>
+                        <strong>LinkedIn</strong>
+                        <p><a href="https://www.linkedin.com/htmlstream">www.linkedin.com/htmlstream</a></p>
+                    </div>
+                </div>
+                <button class="btn btn-disconnect">Disconnect</button>
+            </div>
+
+            <div class="account-info">
+                <div class="account-details">
+                    <i class="fab fa-google account-icon"></i>
+                    <div>
+                        <strong>Google</strong>
+                        <p>Not connected</p>
+                    </div>
+                </div>
+                <button class="btn btn-connect">Connect</button>
+            </div>
+        </div>
+
+        <!-- Delete Accounts-->
+        <div class="content delete-account" id="delete-account">
+            <h3>Delete your account</h3>
+            <p>When you delete your account, you lose access to all services, and we permanently delete your personal
+                data. You can cancel the deletion for 14 days.</p>
+
+            <div class="delete-confirmation">
+                <label>
+                    <input type="checkbox">
+                    Confirm that I want to delete my account.
+                </label>
+            </div>
+
+            <div class="delete-actions">
+                <button class="btn learn-more">Learn more</button>
+                <button class="btn delete">Delete</button>
+            </div>
+        </div>
+
     </div>
 </div>
 
