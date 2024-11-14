@@ -4,17 +4,14 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f3f4f6;
 }
 .card-form {
-    background-color: white;
     width: 400px;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .card-form h2 {
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 40px;
 }
 .card-form label {
@@ -53,10 +50,13 @@ body {
 }
 .card-form .checkbox-group {
     display: flex;
-    align-items: center;
     font-size: 14px;
     margin: 10px 0;
     color: #6c757d;
+    gap: 10px;
+}
+body > div > div.checkbox-group > label{
+    padding-top: 7px;
 }
 .card-form .button-group {
     display: flex;
@@ -69,18 +69,19 @@ body {
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
+    border: 1px solid rgba(231,234,243,.7);
 }
 .save-btn {
-    background-color: #007bff;
+    background-color: #377dff;
     color: white;
 }
 .save-btn:hover {
-    background-color: #0056b3;
+    background-color: #377dff;
 }
 .close-btn {
-    background-color: #f1f1f1;
-    color: #333;
+    background-color: #fff;
+
 }
 .close-btn:hover {
-    background-color: #dcdcdc;
+   color: #377dff;
 }
