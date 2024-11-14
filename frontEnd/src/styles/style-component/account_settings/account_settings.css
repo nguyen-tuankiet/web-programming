@@ -1,0 +1,51 @@
+/* Navbar styling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f9;
+    margin: 0;
+}
+.container {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+}
+.navbar {
+    background-color: #fff;
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+.navbar a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+.navbar a:hover {
+    color: #007bff;
+}
+.icon {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.fas {
+    padding-right: 10px;
+    width: 26px;
+    height: 26px;
+}
+
+.fab {
+    padding-right: 10px;
+    width: 30px;
+}
