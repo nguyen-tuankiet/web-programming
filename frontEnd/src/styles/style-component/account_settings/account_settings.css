@@ -1,4 +1,4 @@
-/* Navbar styling */
+/* General Styling for Container and Content */
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -8,11 +8,23 @@ body {
     background-color: #f4f4f9;
     margin: 0;
 }
+
 .container {
     display: flex;
     gap: 20px;
     width: 80%;
 }
+
+.content {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    width: calc(100% - 260px);
+    margin-left: 240px;
+}
+
+/* Navbar Styling */
 .navbar {
     background-color: #fff;
     width: 200px;
@@ -23,6 +35,7 @@ body {
     top: 20px;
     left: 20px;
 }
+
 .navbar a {
     text-decoration: none;
     color: #333;
@@ -31,21 +44,290 @@ body {
     padding: 10px 0;
     font-size: 14px;
 }
+
 .navbar a:hover {
     color: #007bff;
 }
-.icon {
-    margin-right: 8px;
-    font-size: 16px;
-}
 
-.fas {
+.fas, .fab {
     padding-right: 10px;
     width: 26px;
     height: 26px;
 }
 
-.fab {
-    padding-right: 10px;
+/* Notifications Section Styling */
+.notifications .card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.notifications {
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.alert {
+    background-color: #f5f5f5;
+    color: #8c98a4;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    margin: 10px 0;
+}
+
+.alert-link {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(231, 234, 243, 0.7);
+}
+
+.table tbody td {
+    padding: 0.75rem;
+    border-top: 1px solid rgba(231, 234, 243, 0.7);
+}
+
+.text-center {
+    width: 20%;
+}
+
+.mb-1 img {
+    height: 35px;
+    width: 35px;
+    color: #8c98a4;
+}
+
+/* Form Select and Actions Section */
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    gap: 10px;
+}
+
+.actions label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.actions .form-select {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.actions button.btn-primary {
+    font-size: 1rem;
+    border-radius: 0.25rem;
+}
+
+/* Button Styling */
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover, .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Connected Accounts Section */
+.connected-accounts h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.account-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-top: 1px solid #e7eaf3;
+}
+
+.account-info:first-of-type {
+    border-top: none;
+}
+
+.account-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-switch span {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + span {
+    transform: translateX(20px);
+    background-color: #007bff;
+}
+
+/* Social Accounts Section in Slideshow Container */
+.social-accounts {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.social-accounts h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.social-accounts p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.social-accounts .account-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-top: 1px solid #e7eaf3;
+}
+
+.social-accounts .account-info:first-of-type {
+    border-top: none;
+}
+
+.social-accounts .account-details {
+    display: flex;
+    align-items: center;
+}
+
+.social-accounts .account-icon {
     width: 30px;
+    height: 30px;
+    margin-right: 0.75rem;
+    color: #677788;
+}
+
+.social-accounts .account-details strong {
+    font-size: 1rem;
+    color: #333;
+}
+
+.social-accounts .account-details p {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Delete Account Section Styling */
+.delete-account {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.delete-account h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.delete-account p {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.delete-confirmation label {
+    font-size: 0.9rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.delete-confirmation input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Actions for Delete and Learn More Buttons */
+.delete-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+
+.delete-actions .btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+.delete-actions .learn-more {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.delete-actions .learn-more:hover {
+    background-color: #e2e6ea;
+}
+
+.delete-actions .delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-actions .delete:hover {
+    background-color: #d32f2f;
 }
