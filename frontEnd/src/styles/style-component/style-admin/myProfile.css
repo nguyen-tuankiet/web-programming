@@ -72,7 +72,7 @@ body {
     position: absolute;
     bottom: 0;
     right: 0;
-    background: #FFFFFF;
+    background: #D9D9DB;
     color: black;
     border: none;
     border-radius: 50%;
@@ -155,4 +155,94 @@ body {
 .profile-container .details a {
     text-decoration: none;
     color: #007bff;
+}
+
+.container {
+    padding-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 .375rem .75rem rgba(140, 152, 164, .075);
+    background-color: #ffffff;
+    padding: 20px;
+    flex: 1;
+}
+.row{
+    padding-top: 10px;
+    gap: 10px;
+    display: grid;
+}
+.card-header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.card-body h5 {
+    font-size: 14px;
+    color: #333;
+
+}
+
+.card-body p {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.qr-code {
+    max-width: 150px;
+    margin: 20px 0;
+}
+
+.social-icons i {
+    font-size: 24px;
+    margin: 0 5px;
+    color: #555;
+}
+
+.copy-url {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-url input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80%;
+    margin-right: 10px;
+}
+
+.copy-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.size-6 {
+    width: 24px;
+    height: 24px;
+}
+.social-icons i {
+    font-size: 24px;
+    margin: 0 5px;
+    color: #555;
+}
+
+.social-icons svg {
+    width: 24px;
+    height: 24px;
+    margin: 0 5px;
+    fill: #555;
 }
