@@ -51,10 +51,142 @@ body {
 }
 
 .fas, .fab {
-    padding-right: 10px;
     width: 26px;
     height: 10px;
     color: #4E4E52;
+}
+
+/* Profile Cover Section */
+.content.profile-cover {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+/* Header Section */
+.profile-cover-header {
+    position: relative;
+    background-color: #e4eaf2;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    height: 120px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 10px;
+}
+
+.profile-cover-header-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.profile-cover-upload-header-btn {
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.profile-cover-upload-header-btn i {
+    margin-right: 6px;
+}
+
+/* Profile Photo Section */
+.profile-photo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+    padding: 20px 0;
+}
+
+.profile-photo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: visible;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.profile-photo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-photo-edit-btn {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.profile-photo-edit-btn .fas {
+    color: #fff;
+    font-size: 15px;
+}
+
+.profile-photo-edit-btn i {
+    font-size: 18px;
+}
+
+.profile-photo-edit-btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* Visibility Settings */
+.profile-photo-visibility {
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profile-photo-visibility label {
+    font-size: 14px;
+    color: #7f7f7f;
+    margin-bottom: 8px;
+}
+
+.profile-photo-visibility-select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    text-align: center;
+    color: #7f7f7f;
 }
 
 /* Notifications Section Styling */
@@ -121,7 +253,6 @@ body {
 .avatar-xs {
     width: 27px;
     height: 27px;
-    object-fit: cover;
 }
 
 /* Form Select and Actions Section */
@@ -154,16 +285,16 @@ body {
 
 /* Button Styling */
 .btn {
-    background-color: #007bff;
-    color: white;
+    background-color: #fff;
+    color: #6c757d;
     padding: 10px;
-    border: none;
+    border: .0625rem solid rgba(231, 234, 243, .7);
     border-radius: 4px;
     cursor: pointer;
 }
 
 .btn:hover, .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: rgba(212, 216, 220, 0.93);
 }
 
 /* Password */
@@ -275,8 +406,8 @@ body {
 }
 .account-info {
     display: flex;
-    align-items: center; /* Căn giữa icon và văn bản theo chiều dọc */
-    justify-content: space-between; /* Đảm bảo toggle-switch nằm ở bên phải */
+    align-items: center;
+    justify-content: space-between;
     padding: 16px 0;
     border-top: 1px solid #e7eaf3;
 }
@@ -286,28 +417,28 @@ body {
 }
 
 .account-info img {
-    width: 24px; /* Kích thước icon */
-    height: 24px; /* Kích thước icon */
-    margin-right: 10px; /* Khoảng cách giữa icon và văn bản */
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }
 
 .account-details {
     display: flex;
-    flex-direction: column; /* Sắp xếp h4 và p theo chiều dọc */
-    align-items: flex-start; /* Căn văn bản sát lề trái */
-    flex: 1; /* Đẩy phần toggle-switch ra xa */
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
 }
 
 .account-details h4 {
     margin: 0;
-    font-size: 16px; /* Kích thước tiêu đề */
+    font-size: 16px;
     font-weight: bold;
     color: #333;
 }
 
 .account-details p {
     margin: 0;
-    font-size: 14px; /* Kích thước mô tả */
+    font-size: 14px;
     color: #707070;
 }
 
@@ -377,28 +508,46 @@ body {
     border-top: none;
 }
 
-.social-accounts .account-details {
-    display: flex;
-    align-items: center;
+.social-accounts .account-icon {
+    color: #677788;
+    font-size: 30px;
+    padding-right: 20px;
 }
 
-.social-accounts .account-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 12px;
-    color: #677788;
+.social-accounts .account-details {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    gap: 4px;
 }
 
 .social-accounts .account-details strong {
     font-size: 16px;
+    font-weight: bold;
     color: #333;
+    margin: 0;
 }
 
 .social-accounts .account-details p {
-    color: #6c757d;
     font-size: 14px;
+    color: #6c757d;
     margin: 0;
 }
+
+.social-accounts .btn.btn-connect {
+    margin-left: auto;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.social-accounts .btn.btn-connect:hover {
+    background-color: #0056b3;
+}
+
 
 /* Delete Account Section Styling */
 .delete-account {
