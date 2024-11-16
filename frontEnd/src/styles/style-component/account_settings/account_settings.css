@@ -12,16 +12,17 @@ body {
 .container {
     display: flex;
     gap: 20px;
-    width: 80%;
+    width: 1280px;
 }
 
 .content {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    width: calc(100% - 260px);
+    padding: 24px;
+    width: 1000px;
     margin-left: 240px;
+    margin-top: 10px;
 }
 
 /* Navbar Styling */
@@ -52,26 +53,27 @@ body {
 .fas, .fab {
     padding-right: 10px;
     width: 26px;
-    height: 26px;
+    height: 10px;
+    color: #4E4E52;
 }
 
 /* Notifications Section Styling */
 .notifications .card-header h3 {
-    font-size: 1.25rem;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 .notifications {
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
+    margin-bottom: 27px;
+    margin-top: 27px;
 }
 
 .alert {
     background-color: #f5f5f5;
     color: #8c98a4;
-    padding: 1rem;
-    border-radius: 0.375rem;
+    padding: 18px;
+    border-radius: 6px;
     margin: 10px 0;
 }
 
@@ -84,24 +86,24 @@ body {
 .table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 .table thead th {
     background-color: #f8f9fa;
     font-weight: 600;
     text-align: left;
-    padding: 0.75rem;
+    padding: 12px;
     border-bottom: 1px solid rgba(231, 234, 243, 0.7);
 }
 
 .table tbody td {
-    padding: 0.75rem;
+    padding: 12px;
     border-top: 1px solid rgba(231, 234, 243, 0.7);
 }
 
 .text-center {
-    width: 20%;
+    width: 200px;
 }
 
 .mb-1 img {
@@ -110,33 +112,44 @@ body {
     color: #8c98a4;
 }
 
+.avatar {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar-xs {
+    width: 27px;
+    height: 27px;
+    object-fit: cover;
+}
+
 /* Form Select and Actions Section */
 .actions {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 1rem;
+    margin-top: 16px;
     gap: 10px;
 }
 
 .actions label {
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 500;
     margin-right: 10px;
 }
 
 .actions .form-select {
-    width: 100%;
-    max-width: 200px;
-    padding: 0.5rem;
-    font-size: 1rem;
+    width: 200px;
+    padding: 8px;
+    font-size: 16px;
     border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border-radius: 4px;
 }
 
 .actions button.btn-primary {
-    font-size: 1rem;
-    border-radius: 0.25rem;
+    font-size: 16px;
+    border-radius: 4px;
 }
 
 /* Button Styling */
@@ -153,18 +166,118 @@ body {
     background-color: #0056b3;
 }
 
+/* Password */
+.password .mid_align {
+    display: flex;
+}
+
+.password .col {
+    display: flex;
+    flex-direction: column;
+}
+
+.password #header {
+    width: 100%;
+    min-height: 55px;
+    font-size: 22px;
+    display: flex;
+}
+
+.password #body {
+    width: 90%;
+}
+
+.password .title {
+    font-size: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 960px;
+    background-color: #f5f5f5;
+    color: #8c98a4;
+    border-radius: 6px;
+}
+
+.password .form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.password .item {
+    display: flex;
+    align-items: center;
+    color: #707070;
+    padding-bottom: 20px;
+}
+
+.password .item span {
+    flex: 0 0 30%;
+    text-align: left;
+}
+
+.password .input {
+    flex: 1;
+    position: relative;
+}
+
+.password .item input {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 0 35px 0 10px;
+    border-radius: 5px;
+}
+
+.password .toggle_pass {
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    transform: translateY(-50%);
+    color: #616060;
+    cursor: pointer;
+}
+
+.password .password-requirements {
+    width: 400px;
+    color: #707070;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: left;
+    opacity: 0.7;
+}
+
+.password .save_btn {
+    width: 70px;
+    height: 40px;
+    margin-top: 20px;
+    align-self: flex-end;
+    border-radius: 5px;
+    border: none;
+    background-color: #0181FE;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.password .asterisk {
+    color: red;
+    font-size: 18px;
+}
+
 /* Connected Accounts Section */
 .connected-accounts h3 {
-    font-size: 1.25rem;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 .account-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 16px 0;
     border-top: 1px solid #e7eaf3;
 }
 
@@ -173,8 +286,8 @@ body {
 }
 
 .account-icon {
-    font-size: 1.5rem;
-    margin-right: 0.5rem;
+    font-size: 24px;
+    margin-right: 8px;
 }
 
 /* Toggle Switch */
@@ -211,30 +324,30 @@ body {
 /* Social Accounts Section in Slideshow Container */
 .social-accounts {
     background-color: #fff;
-    padding: 1.5rem;
+    padding: 24px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
+    margin-bottom: 24px;
+    margin-top: 24px;
 }
 
 .social-accounts h3 {
-    font-size: 1.25rem;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
 }
 
 .social-accounts p {
     color: #6c757d;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
+    margin-bottom: 16px;
+    font-size: 14px;
 }
 
 .social-accounts .account-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 16px 0;
     border-top: 1px solid #e7eaf3;
 }
 
@@ -250,49 +363,49 @@ body {
 .social-accounts .account-icon {
     width: 30px;
     height: 30px;
-    margin-right: 0.75rem;
+    margin-right: 12px;
     color: #677788;
 }
 
 .social-accounts .account-details strong {
-    font-size: 1rem;
+    font-size: 16px;
     color: #333;
 }
 
 .social-accounts .account-details p {
     color: #6c757d;
-    font-size: 0.85rem;
+    font-size: 14px;
     margin: 0;
 }
 
 /* Delete Account Section Styling */
 .delete-account {
     background-color: #fff;
-    padding: 1.5rem;
+    padding: 24px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
+    margin-bottom: 24px;
+    margin-top: 24px;
 }
 
 .delete-account h3 {
-    font-size: 1.25rem;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
 }
 
 .delete-account p {
     color: #6c757d;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
+    margin-bottom: 16px;
+    font-size: 14px;
 }
 
 .delete-confirmation label {
-    font-size: 0.9rem;
+    font-size: 14px;
     color: #333;
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 
 .delete-confirmation input[type="checkbox"] {
@@ -308,7 +421,7 @@ body {
 
 .delete-actions .btn {
     padding: 10px 15px;
-    font-size: 0.9rem;
+    font-size: 14px;
     border-radius: 4px;
     cursor: pointer;
     border: none;
