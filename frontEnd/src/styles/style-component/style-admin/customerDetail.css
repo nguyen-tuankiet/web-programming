@@ -1,0 +1,162 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    /*background: #fff;*/
+    border-radius: 8px;
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.actions .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn.edit {
+    background: white;
+    border: 1px solid #007BFF;
+    color: #007BFF;
+}
+
+.btn.delete {
+    background: #bbbbbb;
+    color: black;
+}
+
+/* Main Content */
+.content {
+    display: flex;
+    gap: 20px;
+}
+
+/* Left Panel */
+.left-panel {
+    width: 30%;
+}
+
+.profile-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px #00000026;
+}
+.info{
+    text-align: center;
+}
+body > div > div.content > div.right-panel > div.orders > p{
+    text-align: center;
+    padding-bottom: 20px;
+    color: #246CE8;
+}
+.profile-card img.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-card a {
+    color: #246CE8;
+    text-decoration: none;
+}
+
+.profile-card a:hover {
+    text-decoration: underline;
+}
+
+.profile-card hr {
+    margin: 20px 0;
+}
+
+/* Right Panel */
+.right-panel {
+    width: 70%;
+}
+
+.notes textarea {
+    width: 97.5%;
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px #00000026;
+}
+
+/* Orders */
+.orders{
+    box-shadow: 0 1px 3px #00000026;
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+body > div > div.content > div.right-panel > div.orders > h4{
+    display: inline-block;
+    padding-left: 20px;
+    font-size: 20px;
+}
+.orders table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders table th,
+.orders table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.orders table th {
+    background: #f4f4f9;
+    font-weight: bold;
+}
+
+.orders table a {
+    color: #246CE8;
+    text-decoration: none;
+}
+
+/* Addresses */
+.addresses{
+    box-shadow: 0 1px 3px #00000026;
+    background: #FFFFFF;
+    border-radius: 2px;
+    padding: 10px;
+}
+.addresses h4{
+    font-size: 20px;
+    padding-left: 10px;
+}
+.addresses button.new-address {
+    background: #246CE8;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
