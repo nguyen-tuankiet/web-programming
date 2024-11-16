@@ -37,6 +37,33 @@
 
     <!-- Main Content -->
     <div class="slideshow-container">
+        <!-- Profile Cover Section -->
+        <div class="content profile-cover" id="ProfileCover">
+            <div class="profile-cover-header">
+                <img src="header-image.jpg" alt="Header Cover" class="profile-cover-header-image">
+                <button class="profile-cover-upload-header-btn">
+                    <i class="fas fa-camera"></i> Upload header
+                </button>
+            </div>
+            <div class="profile-photo-container">
+                <div class="profile-photo">
+                    <img src="../../../resource/image/medium (1).png" alt="Profile Photo" class="profile-photo-img">
+                    <button class="profile-photo-edit-btn">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                </div>
+                <div class="profile-photo-visibility">
+                    <label for="profile-photo-visibility-select">Who can see your profile photo?</label>
+                    <select id="profile-photo-visibility-select" class="profile-photo-visibility-select">
+                        <option value="anyone">Anyone</option>
+                        <option value="friends">Friends</option>
+                        <option value="only-me">Only me</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Password Section -->
         <div class="content password" id="Password">
             <div id="header" class="mid_align">
@@ -133,21 +160,39 @@
                         <tbody>
                         <tr>
                             <td>New for you</td>
-                            <td class="text-center"><input type="checkbox"></td>
-                            <td class="text-center"><input type="checkbox"></td>
-                            <td class="text-center"><input type="checkbox"></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox">
+                            </label></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox">
+                            </label></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox">
+                            </label></td>
                         </tr>
                         <tr>
                             <td>Account activity</td>
-                            <td class="text-center"><input type="checkbox"></td>
-                            <td class="text-center"><input type="checkbox"></td>
-                            <td class="text-center"><input type="checkbox"></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox">
+                            </label></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox">
+                            </label></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox">
+                            </label></td>
                         </tr>
                         <tr>
                             <td>A new browser used to sign in</td>
-                            <td class="text-center"><input type="checkbox" checked></td>
-                            <td class="text-center"><input type="checkbox" checked></td>
-                            <td class="text-center"><input type="checkbox" checked></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox" checked>
+                            </label></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox" checked>
+                            </label></td>
+                            <td class="text-center"><label>
+                                <input type="checkbox" checked>
+                            </label></td>
                         </tr>
                         </tbody>
                     </table>
@@ -155,10 +200,12 @@
 
                 <div class="actions">
                     <label>When should we send you notifications?</label>
-                    <select class="form-select">
-                        <option>Always</option>
-                        <option>Only on weekdays</option>
-                    </select>
+                    <label>
+                        <select class="form-select">
+                            <option>Always</option>
+                            <option>Only on weekdays</option>
+                        </select>
+                    </label>
                     <button class="btn btn-primary">Save changes</button>
                 </div>
             </form>
@@ -168,7 +215,8 @@
         <div class="content connected-accounts" id="connected-accounts">
             <h3>Connected Accounts</h3>
             <div class="account-info">
-                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/google-icon.svg" alt="Google Icon">
+                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/google-icon.svg"
+                     alt="Google Icon">
                 <div class="account-details">
                     <h4>Google</h4>
                     <p>Calendar and contacts</p>
@@ -204,7 +252,8 @@
             </div>
 
             <div class="account-info">
-                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/mailchimp-icon.svg" alt="Mailchimp Icon">
+                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/mailchimp-icon.svg"
+                     alt="Mailchimp Icon">
                 <div class="account-details">
                     <h4>Mailchimp</h4>
                     <p>Email marketing service</p>
