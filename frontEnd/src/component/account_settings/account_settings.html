@@ -28,10 +28,66 @@
             <i class="fab fa-instagram"></i>
             Social Accounts
         </a>
+        <a href="#delete-account">
+            <i class="fas fa-trash-alt"></i>
+            Delete-account
+        </a>
     </div>
 
     <!-- Main Content -->
     <div class="slideshow-container">
+        <!-- Password Section -->
+        <div class="content password" id="Password">
+            <div id="header" class="mid_align">
+                <span>Password</span>
+            </div>
+
+            <div id="body" class="mid_align col">
+                <div class="title mid_align">
+                    <span>Change Password</span>
+                </div>
+
+                <form class="form" action="">
+                    <label class="item">
+                        <span>Current Password<span class="asterisk">*</span></span>
+                        <div class="input">
+                            <input id="current_pass" type="password" required>
+                            <i class="toggle_pass fa-regular fa-eye"></i>
+                        </div>
+                    </label>
+
+                    <label class="item">
+                        <span>New Password<span class="asterisk">*</span></span>
+                        <div class="input">
+                            <input id="new_pass" type="password" required>
+                            <i class="toggle_pass fa-regular fa-eye"></i>
+                        </div>
+                    </label>
+
+                    <label class="item">
+                        <span>Confirm Password<span class="asterisk">*</span></span>
+                        <div class="input">
+                            <input id="confirm_pass" type="password" required>
+                            <i class="toggle_pass fa-regular fa-eye"></i>
+                        </div>
+                    </label>
+
+                    <div class="password-requirements">
+                        <strong>Password Requirements:</strong>
+                        <p>Ensure the following criteria are met:</p>
+                        <ul>
+                            <li>At least 8 characters—longer is better</li>
+                            <li>At least one lowercase character</li>
+                            <li>At least one uppercase character</li>
+                            <li>At least one number, symbol, or whitespace</li>
+                        </ul>
+                    </div>
+
+                    <button class="save_btn" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+
         <!-- Notifications Section -->
         <div class="content notifications" id="notifications">
             <div class="card-header">
@@ -111,20 +167,57 @@
         <div class="content connected-accounts" id="connected-accounts">
             <h3>Connected Accounts</h3>
             <div class="account-info">
-                <span class="account-icon">📅</span> Google - Calendar and contacts
-                <label class="toggle-switch"><input type="checkbox"><span></span></label>
+                <div class="flex-shrink-0">
+                    <img class="avatar avatar-xs" src="../../../resource/image/icon-user-settings/google-icon.svg"
+                         alt="Google Icon">
+                </div>
+                <div>
+                    Google - Calendar and contacts
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
+            </div>
+
+            <div class="account-info">
+                <div>
+                    <img class="avatar-xs" src="../../../resource/image/icon-user-settings/spec-icon.svg"
+                         alt="Spec Icon">
+                </div>
+                <div>
+                    Spec - Project management
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
             </div>
             <div class="account-info">
-                <span class="account-icon">📁</span> Spec - Project management
-                <label class="toggle-switch"><input type="checkbox"><span></span></label>
+                <div>
+                    <img class="avatar-xs" src="../../../resource/image/icon-user-settings/slack-icon.svg"
+                         alt="Slack Icon">
+                </div>
+                <div>
+                    Slack - Communication
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
             </div>
             <div class="account-info">
-                <span class="account-icon">💬</span> Slack - Communication
-                <label class="toggle-switch"><input type="checkbox" checked><span></span></label>
-            </div>
-            <div class="account-info">
-                <span class="account-icon">📧</span> Mailchimp - Email marketing service
-                <label class="toggle-switch"><input type="checkbox" checked><span></span></label>
+                <div>
+                    <img class="avatar-xs" src="../../../resource/image/icon-user-settings/mailchimp-icon.svg"
+                         alt="Mailchimp Icon">
+                </div>
+                <div>
+                    Mailchimp - Email marketing service
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox">
+                    <span></span>
+                </label>
             </div>
         </div>
         <!-- Social Accounts Section -->
