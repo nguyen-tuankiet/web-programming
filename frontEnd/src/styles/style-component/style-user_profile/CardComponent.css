@@ -83,6 +83,7 @@ i{
     padding : 10px 5px;
 }
 
+
 .infor .card_holder{
     text-align: left;
     padding : 0px 30px;
@@ -146,6 +147,16 @@ i{
     color: #3461E9;
 }
 
+
+#footer #default{
+    padding: 3px 5px;
+    width: 100px;
+    color: #ffffff;
+    background-color: #92B5CD;
+    border-radius: 5px;
+    margin-left: 10px;
+
+}
 
 
 
