@@ -267,16 +267,16 @@ body {
 }
 
 /* Connected Accounts Section */
+
 .connected-accounts h3 {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 16px;
 }
-
 .account-info {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: center; /* Căn giữa icon và văn bản theo chiều dọc */
+    justify-content: space-between; /* Đảm bảo toggle-switch nằm ở bên phải */
     padding: 16px 0;
     border-top: 1px solid #e7eaf3;
 }
@@ -285,10 +285,32 @@ body {
     border-top: none;
 }
 
-.account-icon {
-    font-size: 24px;
-    margin-right: 8px;
+.account-info img {
+    width: 24px; /* Kích thước icon */
+    height: 24px; /* Kích thước icon */
+    margin-right: 10px; /* Khoảng cách giữa icon và văn bản */
 }
+
+.account-details {
+    display: flex;
+    flex-direction: column; /* Sắp xếp h4 và p theo chiều dọc */
+    align-items: flex-start; /* Căn văn bản sát lề trái */
+    flex: 1; /* Đẩy phần toggle-switch ra xa */
+}
+
+.account-details h4 {
+    margin: 0;
+    font-size: 16px; /* Kích thước tiêu đề */
+    font-weight: bold;
+    color: #333;
+}
+
+.account-details p {
+    margin: 0;
+    font-size: 14px; /* Kích thước mô tả */
+    color: #707070;
+}
+
 
 /* Toggle Switch */
 .toggle-switch {
