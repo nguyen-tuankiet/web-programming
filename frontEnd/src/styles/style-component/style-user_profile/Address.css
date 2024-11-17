@@ -110,7 +110,24 @@ i{
 
 }
 
+.icon{
+    width: 80px;
+    height: 80px;
+    font-size: 35px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #cfcfcf;
+}
+.icon>i{
+
+}
+
+
 .infor{
+    padding-left: 10px;
     width: 75%;
     height: 100%;
 

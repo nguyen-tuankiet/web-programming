@@ -24,52 +24,62 @@
             </div>
         </div>
     </div>
-
     <div id="body" class="row">
         <nav id="sidebar" class="col">
             <ul>
+                <!-- Dashboard -->
                 <li class="menu_item">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <a href="#" onclick="loadPage('Dashboard.html')">Dashboard</a>
+                    <i class="fa-solid fa-house"></i>
+                    <a href="#" onclick="loadPage('dashboard')">Dashboard</a>
                 </li>
 
+                <!-- Profile -->
                 <li class="menu_item">
                     <i class="fa-solid fa-user"></i>
-                    <span>User Profile</span>
-                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
-                    <ul class="submenu">
-                        <li><a href="#" onclick="loadPage('profile.html')">Profile</a></li>
-                        <li><a href="#" onclick="loadPage('profile.html')">Connections</a></li>
-                    </ul>
+                    <a href="#" onclick="loadPage('my_profile')">Profile</a>
                 </li>
 
+                <!-- Products -->
                 <li class="menu_item">
-                    <i class="fa-solid fa-id-badge"></i>
-                    <span>Account</span>
+                    <i class="fa-solid fa-box"></i>
+                    <span>Products</span>
                     <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+
                     <ul class="submenu">
-                        <li><a href="#" onclick="loadPage('billing.html')">Billing</a></li>
-                        <li><a href="#" onclick="loadPage('settings.html')">Settings</a></li>
+                        <li><a href="#" onclick="loadPage('list_products')">Products</a></li>
+                        <li><a href="#" onclick="loadPage('product_details')">Product Details</a></li>
+                        <li><a href="#" onclick="loadPage('add_product')">Add Product</a></li>
                     </ul>
                 </li>
 
+                <!-- Order -->
                 <li class="menu_item">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span>E-commerce</span>
+                    <span>Order</span>
                     <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+
                     <ul class="submenu">
-                        <li><a href="#" onclick="loadPage('overview.html')">Overview</a></li>
-                        <li>
-                            <span>Products</span>
-                            <ul class="submenu">
-                                <li><a href="#" onclick="loadPage('products.html')">Products</a></li>
-                                <li><a href="#" onclick="loadPage('productDetails.html')">Product Details</a></li>
-                                <li><a href="#" onclick="loadPage('addProduct.html')">Add Product</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" onclick="loadPage('orders.html')">Orders</a></li>
-                        <li><a href="#" onclick="loadPage('customers.html')">Customers</a></li>
+                        <li><a href="#" onclick="loadPage('orders')">Orders</a></li>
+                        <li><a href="#" onclick="loadPage('order_detail')">Order Details</a></li>
                     </ul>
+                </li>
+
+                <!-- Customer -->
+                <li class="menu_item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Customer</span>
+                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+
+                    <ul class="submenu">
+                        <li><a href="#" onclick="loadPage('customers')">Customers</a></li>
+                        <li><a href="#" onclick="loadPage('customers_detail')">Customer Details</a></li>
+                    </ul>
+                </li>
+
+                <!-- Setting -->
+                <li class="menu_item">
+                    <i class="fa-solid fa-gear"></i>
+                    <a href="#" onclick="loadPage('setting')">Setting</a>
                 </li>
             </ul>
         </nav>
