@@ -12,7 +12,13 @@ body {
 .container {
     display: flex;
     gap: 20px;
-    width: 1280px;
+    width: 100%;
+
+}
+
+.slideshow-container{
+    width: 80%;
+    margin-left: 50px;
 }
 
 .content {
@@ -20,7 +26,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 24px;
-    width: 1000px;
+    width: 80%;
     margin-left: 240px;
     margin-top: 10px;
 }
@@ -108,7 +114,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -50px;
+    margin-top: -70px;
     padding: 20px 0;
 }
 
@@ -404,6 +410,7 @@ body {
     font-weight: 500;
     margin-bottom: 16px;
 }
+
 .account-info {
     display: flex;
     align-items: center;
