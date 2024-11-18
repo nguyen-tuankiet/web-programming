@@ -279,7 +279,7 @@ a {
 
 #content {
     flex: 1;
-    padding: 20px;
+    padding: 10px;
     background-color: #f9fafb;
 }
 
@@ -289,11 +289,10 @@ a {
     border: none;
 }
 
-/* Iframe Styling */
 #content iframe {
     width: 100%;
     height: 100%;
-    overflow: auto; /* Bật cuộn trong iframe */
+    overflow: hidden;
 }
 
 #content iframe::-webkit-scrollbar {
