@@ -15,22 +15,22 @@ body {
 .body {
     align-items: center;
     text-align: center;
-
+    padding-top: 10px;
 }
 
 .body-image img {
-    max-width: 100%;
+    max-width: 80%;
     border-radius: 10px;
 }
 
 .body h2 {
-    font-size: 2.5rem;
+    font-size: 30px;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .body p {
-    padding: 30px 40px;
+    padding: 30px 125px;
     font-size: 1rem;
 }
 
@@ -55,6 +55,11 @@ body {
 .product-item img {
     width: 100%;
     border-radius: 8px;
+    transition: transform 0.3s;
+
+}
+.product-item img:hover{
+    transform: scale(1.05);
 }
 
 .product-item h3 {
@@ -76,7 +81,6 @@ body {
 .buy-button:hover {
     background-color: #333;
 }
-
 .navbar {
     display: flex;
     justify-content: center;
@@ -84,13 +88,15 @@ body {
     padding: 20px 0;
     background-color: transparent;
     font-size: 1.2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .navbar a {
     color: black;
     text-decoration: none;
-    font-weight: 500;
-    padding: 0;
+    font-weight: 600;
+    padding-top: 10px;
 }
 
 .navbar a:hover {
@@ -98,15 +104,14 @@ body {
     cursor: pointer;
 }
 
-
 .content {
     text-align: center;
-    margin-top: 40px;
     padding: 0 20px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
+
 .image-container {
     position: relative;
 }
@@ -114,11 +119,16 @@ body {
 .image-container img {
     width: 100%;
     display: none;
+    border-radius: 10px;
+
 }
 
 .image-container img.active {
     display: block;
 }
+
+
+
 
 .text-overlay {
     position: absolute;
@@ -129,6 +139,96 @@ body {
     text-align: center;
     padding-top: 500px;
     border-radius: 8px;
+}
+
+.container1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 1270px;
+    margin: auto;
+    padding: 20px;
+    grid-template-areas:
+        "item1 item2 item3"
+        "item4 item5 item6";
+}
+
+.feature-item:nth-child(1) {
+    grid-area: item1;
+}
+
+.feature-item:nth-child(2) {
+    grid-area: item2;
+}
+
+.feature-item:nth-child(3) {
+    grid-area: item3;
+}
+
+.feature-item:nth-child(4) {
+    grid-area: item4;
+}
+
+.feature-item:nth-child(5) {
+    grid-area: item5;
+}
+
+.feature-item:nth-child(6) {
+    grid-area: item6;
+}
+
+.feature-item {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-item:hover {
+    transform: scale(1.05);
+}
+
+.feature-item img, .feature-item video {
+    width: 100%;
+    height: auto;
+}
+
+.feature-content {
+    padding: 15px;
+}
+
+.feature-content h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.feature-text {
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: #555;
+}
+
+.feature-disclaimer {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .container1 {
+        margin-top: 50px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "item1"
+            "item2"
+            "item3"
+            "item4"
+            "item5"
+            "item6";
+    }
 }
 
 .link {
