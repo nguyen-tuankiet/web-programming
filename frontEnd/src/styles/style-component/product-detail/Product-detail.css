@@ -31,13 +31,12 @@ body {
     display: grid;
     margin-top: 20px;
     padding: 15px 0;
-    border-bottom: 1px solid #ddd;
     gap: 10px;
 }
 
 .iframe {
     width: 80%;
-    height: 75vh;
+    height: 90vh;
     border: none;
 }
 
@@ -51,7 +50,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px; /* Khoảng cách giữa các item */
+    gap: 20px;
 }
 
 /* Từng item trong summary list */
@@ -156,7 +155,7 @@ body > div.container > div:nth-child(1) > iframe {
 
 body > div.container > div:nth-child(2) > iframe {
     width: 610px;
-    height: 547px;
+    height: 580px;
 }
 
 
@@ -187,6 +186,10 @@ body > div.container > div:nth-child(2) > iframe {
     width: 100px; /* Kích thước icon có thể điều chỉnh */
     height: auto;
     margin-bottom: 10px;
+}
+
+.summary__text {
+    width: 180px;
 }
 
 /* Đường phân cách giữa các summary items */
