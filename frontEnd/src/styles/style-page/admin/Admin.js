@@ -1,7 +1,7 @@
 const routes = {
     dashboard: '../component/admin_components/Dashboard.html',
     my_profile: '../component/admin_components/myProfile.html',
-    product_details: '../component/product_detail/Product-detail.html',
+    product_details: '../component/product_detail/Product-detail-admin.html',
     list_products: '../component/admin_components/listProduct.html',
     add_product: '../component/admin_components/addProduct.html',
     orders: '../component/admin_components/orders.html',

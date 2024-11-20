@@ -42,7 +42,7 @@ body {
 
 .iframe-large {
     width: 100%;
-    height: 3200px;
+    height: 2650px;
     border: none;
 }
 
@@ -51,6 +51,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    background-color: white;
 }
 
 /* Từng item trong summary list */
@@ -192,6 +193,10 @@ body > div.container > div:nth-child(2) > iframe {
     width: 180px;
 }
 
+.img8 {
+    display: flex;
+    justify-content: center;
+}
 /* Đường phân cách giữa các summary items */
 .summary__divider {
     width: 1px;
