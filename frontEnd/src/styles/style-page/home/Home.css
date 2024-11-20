@@ -226,8 +226,9 @@ body > #header > nav > ul > li > a {
 
 #body{
     width: 100%;
-    height: 90%;
+    height: 95%;
     background-color: white;
+    padding-top: 10px;
 }
 
 
@@ -251,7 +252,7 @@ body > #header > nav > ul > li > a {
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 10px;
-    width: 150px;
+    width: 165px;
     z-index: 10;
     transform: translate(50%, 0px);
 
@@ -267,7 +268,7 @@ body > #header > nav > ul > li > a {
 
 .user-popup a:hover {
     background-color: #f0f0f0;
-    font-weight: bold;
+
 }
 .overlay {
     position: fixed;
@@ -346,3 +347,18 @@ body > #header > nav > ul > li > a {
 #close-search-overlay i {
     font-size: 30px;
 }
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
