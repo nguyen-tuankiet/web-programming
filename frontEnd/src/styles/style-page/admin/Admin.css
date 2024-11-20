@@ -280,7 +280,7 @@ a {
 #content {
     flex: 1;
     padding: 10px;
-    background-color: #f9fafb;
+    background-color: white;
 }
 
 #content iframe {

@@ -26,18 +26,24 @@ h2 {
 
 h3 {
     font-size: 30px;
-    margin: 40px 0 30px;
+    margin: 20px 0 30px;
 }
 
 /* Feature Benefits */
-.feature-benefit1, .feature-benefit2, .feature-benefit3, .two-column {
+.feature-benefit1, .feature-benefit3, .two-column {
     display: flex;
     align-items: stretch;
     background-color: white;
     border-radius: 8px;
 }
 
-.feature-benefit1__text, .feature-benefit2__text, .feature-benefit3__text {
+.feature-benefit2 {
+    width: 1000px;
+    display: flex;
+
+}
+
+.feature-benefit1__text,  .feature-benefit3__text {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,11 +51,23 @@ h3 {
     width: 50%;
 }
 
-.feature-benefit1__img, .feature-benefit2__img, .feature-benefit3__img {
+.feature-benefit2__text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.feature-benefit1__img, .feature-benefit3__img {
     display: flex;
     align-items: center;
     justify-content: flex-end;
     padding: 20px;
+    width: 50%;
+}
+.feature-benefit2__img{
+    align-items: center;
+    justify-content: flex-end;
     width: 50%;
 }
 
@@ -92,10 +110,15 @@ h3 {
 }
 
 .note {
-    margin-top: 60px;
+    margin-top: 45px;
     font-size: 12px;
 }
 
 .imgFeature1 {
     border-radius: 20px;
+    width: 595px;
+}
+.imgFeature2{
+    border-radius: 20px;
+    width: 600px;
 }
