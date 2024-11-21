@@ -114,9 +114,9 @@ a{
     display: flex;
     justify-content: space-evenly;
     height: 120px;
-    border: 1px solid #cfcfcf;
+    /*border: 1px solid #cfcfcf;*/
     border-radius: 10px;
-    box-shadow: 1px 0 30px 0px #cfcfcf;
+    /*box-shadow: 1px 0 30px 0px #cfcfcf;*/
 }
 
 .report_item {
