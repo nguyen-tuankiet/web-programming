@@ -174,7 +174,7 @@ body > #header > nav > ul > li > a {
 }
 
 .icons a {
-    color: #555;
+    color: #000000;
     font-size: 18px;
     text-decoration: none;
     padding: 5px;
@@ -188,6 +188,7 @@ body > #header > nav > ul > li > a {
     display: flex;
     align-items: center;
     font-size: 14px;
+    padding: 5px;
 }
 
 .user-login span {
