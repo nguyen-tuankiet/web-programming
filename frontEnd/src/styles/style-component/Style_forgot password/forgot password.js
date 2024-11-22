@@ -63,7 +63,9 @@ function submitPassword() {
         errorMessage.style.display = "block";
     } else {
         errorMessage.style.display = "none";
-        alert("Mật khẩu đã được đặt lại thành công!");
+        // alert("Mật khẩu đã được đặt lại thành công!");
+        // Chuyển hướng đến trang confirm.html
+        window.location.href = '../../../src/component/user_profile_component/confirm_change_pass.html';
     }
 }
 
@@ -71,6 +73,7 @@ function submitPassword() {
 function goBackToReset() {
     document.getElementById("otpBox").style.display = "none";
     document.getElementById("resetBox").style.display = "block";
+
 }
 
 function goBackToOTP() {
@@ -79,7 +82,8 @@ function goBackToOTP() {
 }
 
 function goBackToHome() {
-    window.location.href = '../../../pages/auth.html';
+    window.location.href = '../../pages/auth.html';
+    document.querySelector('.back-arrow').addEventListener('click', goBackToHome);
 }
 
 // Hàm đếm ngược thời gian cho OTP

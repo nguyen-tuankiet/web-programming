@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Account Settings with Notifications and Connected Accounts</title>
+    <title>Cài Đặt Tài Khoản với Thông Báo và Tài Khoản Kết Nối</title>
     <link rel="stylesheet" href="../../styles/style-component/account_settings/account_settings.css">
     <script src="../../styles/style-component/account_settings/account_settings.js"></script>
 </head>
@@ -15,23 +15,23 @@
     <div class="navbar">
         <a href="#Password">
             <i class="fas fa-key"></i>
-            Password
+            Mật khẩu
         </a>
         <a href="#notifications">
             <i class="fas fa-bell"></i>
-            Notifications
+            Thông báo
         </a>
         <a href="#connected-accounts">
             <i class="fas fa-sitemap"></i>
-            Connected Accounts
+            Tài khoản kết nối
         </a>
         <a href="#social-accounts">
             <i class="fab fa-instagram"></i>
-            Social Accounts
+            Tài khoản mạng xã hội
         </a>
         <a href="#delete-account">
             <i class="fas fa-trash-alt"></i>
-            Delete-account
+            Xóa tài khoản
         </a>
     </div>
 
@@ -40,45 +40,44 @@
         <!-- Profile Cover Section -->
         <div class="content profile-cover" id="ProfileCover">
             <div class="profile-cover-header">
-                <img src="../../../resource/image/icon-user-settings/img2.jpg" alt="Header Cover"
+                <img src="../../../resource/image/icon-user-settings/img2.jpg" alt="Ảnh bìa"
                      class="profile-cover-header-image">
                 <button class="profile-cover-upload-header-btn">
-                    <i class="fas fa-camera"></i> Upload header
+                    <i class="fas fa-camera"></i> Tải lên ảnh bìa
                 </button>
             </div>
             <div class="profile-photo-container">
                 <div class="profile-photo">
-                    <img src="../../../resource/image/medium%20(1).png" alt="Profile Photo" class="profile-photo-img">
+                    <img src="../../../resource/image/medium%20(1).png" alt="Ảnh đại diện" class="profile-photo-img">
                     <button class="profile-photo-edit-btn">
                         <i class="fas fa-pencil-alt"></i>
                     </button>
                 </div>
                 <div class="profile-photo-visibility">
-                    <label for="profile-photo-visibility-select">Who can see your profile photo?</label>
+                    <label for="profile-photo-visibility-select">Ai có thể xem ảnh đại diện của bạn?</label>
                     <select id="profile-photo-visibility-select" class="profile-photo-visibility-select">
-                        <option value="anyone">Anyone</option>
-                        <option value="friends">Friends</option>
-                        <option value="only-me">Only me</option>
+                        <option value="anyone">Mọi người</option>
+                        <option value="friends">Bạn bè</option>
+                        <option value="only-me">Chỉ mình tôi</option>
                     </select>
                 </div>
             </div>
         </div>
 
-
         <!-- Password Section -->
         <div class="content password" id="Password">
             <div id="header" class="mid_align">
-                <span>Password</span>
+                <span>Mật khẩu</span>
             </div>
 
             <div id="body" class="mid_align col">
                 <div class="title mid_align">
-                    <span>Change Password</span>
+                    <span>Đổi mật khẩu</span>
                 </div>
 
                 <form class="form" action="">
                     <label class="item">
-                        <span>Current Password<span class="asterisk">*</span></span>
+                        <span>Mật khẩu hiện tại<span class="asterisk">*</span></span>
                         <div class="input">
                             <input id="current_pass" type="password" required>
                             <i class="toggle_pass fa-regular fa-eye"></i>
@@ -86,7 +85,7 @@
                     </label>
 
                     <label class="item">
-                        <span>New Password<span class="asterisk">*</span></span>
+                        <span>Mật khẩu mới<span class="asterisk">*</span></span>
                         <div class="input">
                             <input id="new_pass" type="password" required>
                             <i class="toggle_pass fa-regular fa-eye"></i>
@@ -94,7 +93,7 @@
                     </label>
 
                     <label class="item">
-                        <span>Confirm Password<span class="asterisk">*</span></span>
+                        <span>Nhập lại mật khẩu<span class="asterisk">*</span></span>
                         <div class="input">
                             <input id="confirm_pass" type="password" required>
                             <i class="toggle_pass fa-regular fa-eye"></i>
@@ -102,17 +101,17 @@
                     </label>
 
                     <div class="password-requirements">
-                        <strong>Password Requirements:</strong>
-                        <p>Ensure the following criteria are met:</p>
+                        <strong>Yêu cầu mật khẩu:</strong>
+                        <p>Đảm bảo các tiêu chí sau:</p>
                         <ul>
-                            <li>At least 8 characters—longer is better</li>
-                            <li>At least one lowercase character</li>
-                            <li>At least one uppercase character</li>
-                            <li>At least one number, symbol, or whitespace</li>
+                            <li>Ít nhất 8 ký tự—càng dài càng tốt</li>
+                            <li>Ít nhất một ký tự viết thường</li>
+                            <li>Ít nhất một ký tự viết hoa</li>
+                            <li>Ít nhất một số, ký hiệu hoặc khoảng trắng</li>
                         </ul>
                     </div>
 
-                    <button class="save_btn" type="submit">Save</button>
+                    <button class="save_btn" type="submit">Lưu</button>
                 </form>
             </div>
         </div>
@@ -120,11 +119,10 @@
         <!-- Notifications Section -->
         <div class="content notifications" id="notifications">
             <div class="card-header">
-                <h3>Notifications</h3>
+                <h3>Thông báo</h3>
             </div>
             <div class="alert">
-                We need permission from your browser to show notifications. <a href="#" class="alert-link">Request
-                permission</a>
+                Chúng tôi cần quyền từ trình duyệt của bạn để hiển thị thông báo. <a href="#" class="alert-link">Yêu cầu quyền</a>
             </div>
 
             <form>
@@ -132,12 +130,12 @@
                     <table class="table table-thead-bordered table-nowrap table-align-middle">
                         <thead class="thead-light">
                         <tr>
-                            <th>Type</th>
+                            <th>Loại</th>
                             <th class="text-center">
                                 <div class="mb-1">
                                     <img class="avatar avatar-xs"
                                          src="../../../resource/image/icon-user-settings/oc-email-at.svg"
-                                         alt="Email Icon">
+                                         alt="Biểu tượng Email">
                                 </div>
                                 Email
                             </th>
@@ -145,22 +143,22 @@
                                 <div class="mb-1">
                                     <img class="avatar avatar-xs"
                                          src="../../../resource/image/icon-user-settings/oc-globe.svg"
-                                         alt="Browser Icon">
+                                         alt="Biểu tượng Trình duyệt">
                                 </div>
-                                Browser
+                                Trình duyệt
                             </th>
                             <th class="text-center">
                                 <div class="mb-1">
                                     <img class="avatar avatar-xs"
-                                         src="../../../resource/image/icon-user-settings/oc-phone.svg" alt="App Icon">
+                                         src="../../../resource/image/icon-user-settings/oc-phone.svg" alt="Biểu tượng Ứng dụng">
                                 </div>
-                                App
+                                Ứng dụng
                             </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>New for you</td>
+                            <td>Mới dành cho bạn</td>
                             <td class="text-center"><label>
                                 <input type="checkbox">
                             </label></td>
@@ -172,7 +170,7 @@
                             </label></td>
                         </tr>
                         <tr>
-                            <td>Account activity</td>
+                            <td>Hoạt động tài khoản</td>
                             <td class="text-center"><label>
                                 <input type="checkbox">
                             </label></td>
@@ -184,7 +182,7 @@
                             </label></td>
                         </tr>
                         <tr>
-                            <td>A new browser used to sign in</td>
+                            <td>Trình duyệt mới được sử dụng để đăng nhập</td>
                             <td class="text-center"><label>
                                 <input type="checkbox" checked>
                             </label></td>
@@ -200,27 +198,27 @@
                 </div>
 
                 <div class="actions">
-                    <label>When should we send you notifications?</label>
+                    <label>Khi nào chúng tôi nên gửi thông báo cho bạn?</label>
                     <label>
                         <select class="form-select">
-                            <option>Always</option>
-                            <option>Only on weekdays</option>
+                            <option>Luôn luôn</option>
+                            <option>Chỉ trong ngày làm việc</option>
                         </select>
                     </label>
-                    <button class="btn btn-primary">Save changes</button>
+                    <button class="btn btn-primary">Lưu thay đổi</button>
                 </div>
             </form>
         </div>
 
         <!-- Connected Accounts Section -->
         <div class="content connected-accounts" id="connected-accounts">
-            <h3>Connected Accounts</h3>
+            <h3>Tài khoản kết nối</h3>
             <div class="account-info">
                 <img class="avatar-xs" src="../../../resource/image/icon-user-settings/google-icon.svg"
-                     alt="Google Icon">
+                     alt="Biểu tượng Google">
                 <div class="account-details">
                     <h4>Google</h4>
-                    <p>Calendar and contacts</p>
+                    <p>Lịch và danh bạ</p>
                 </div>
                 <label class="toggle-switch">
                     <input type="checkbox">
@@ -229,10 +227,10 @@
             </div>
 
             <div class="account-info">
-                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/spec-icon.svg" alt="Spec Icon">
+                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/spec-icon.svg" alt="Biểu tượng Spec">
                 <div class="account-details">
                     <h4>Spec</h4>
-                    <p>Project management</p>
+                    <p>Quản lý dự án</p>
                 </div>
                 <label class="toggle-switch">
                     <input type="checkbox">
@@ -241,10 +239,10 @@
             </div>
 
             <div class="account-info">
-                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/slack-icon.svg" alt="Slack Icon">
+                <img class="avatar-xs" src="../../../resource/image/icon-user-settings/slack-icon.svg" alt="Biểu tượng Slack">
                 <div class="account-details">
                     <h4>Slack</h4>
-                    <p>Communication</p>
+                    <p>Liên lạc</p>
                 </div>
                 <label class="toggle-switch">
                     <input type="checkbox">
@@ -254,10 +252,10 @@
 
             <div class="account-info">
                 <img class="avatar-xs" src="../../../resource/image/icon-user-settings/mailchimp-icon.svg"
-                     alt="Mailchimp Icon">
+                     alt="Biểu tượng Mailchimp">
                 <div class="account-details">
                     <h4>Mailchimp</h4>
-                    <p>Email marketing service</p>
+                    <p>Dịch vụ tiếp thị email</p>
                 </div>
                 <label class="toggle-switch">
                     <input type="checkbox">
@@ -268,18 +266,18 @@
         </div>
         <!-- Social Accounts Section -->
         <div class="content social-accounts" id="social-accounts">
-            <h3>Social Accounts</h3>
-            <p>Integrated features from these accounts make it easier to connect with friends and share updates.</p>
+            <h3>Tài khoản mạng xã hội</h3>
+            <p>Các tính năng tích hợp từ các tài khoản này giúp bạn dễ dàng kết nối với bạn bè và chia sẻ cập nhật.</p>
 
             <div class="account-info">
                 <div class="account-details">
                     <i class="fab fa-twitter account-icon"></i>
                     <div>
                         <strong>Twitter</strong>
-                        <p>Not connected</p>
+                        <p>Chưa kết nối</p>
                     </div>
                 </div>
-                <button class="btn btn-connect">Connect</button>
+                <button class="btn btn-connect">Kết nối</button>
             </div>
 
             <div class="account-info">
@@ -287,10 +285,10 @@
                     <i class="fab fa-facebook account-icon"></i>
                     <div>
                         <strong>Facebook</strong>
-                        <p>Not connected</p>
+                        <p>Chưa kết nối</p>
                     </div>
                 </div>
-                <button class="btn btn-connect">Connect</button>
+                <button class="btn btn-connect">Kết nối</button>
             </div>
 
             <div class="account-info">
@@ -298,10 +296,10 @@
                     <i class="fab fa-slack account-icon"></i>
                     <div>
                         <strong>Slack</strong>
-                        <p>Not connected</p>
+                        <p>Chưa kết nối</p>
                     </div>
                 </div>
-                <button class="btn btn-connect">Connect</button>
+                <button class="btn btn-connect">Kết nối</button>
             </div>
 
             <div class="account-info">
@@ -309,10 +307,10 @@
                     <i class="fab fa-linkedin account-icon"></i>
                     <div>
                         <strong>LinkedIn</strong>
-                        <p>Not connected</p>
+                        <p>Chưa kết nối</p>
                     </div>
                 </div>
-                <button class="btn btn-connect">Connect</button>
+                <button class="btn btn-connect">Kết nối</button>
             </div>
 
             <div class="account-info">
@@ -320,29 +318,28 @@
                     <i class="fab fa-google account-icon"></i>
                     <div>
                         <strong>Google</strong>
-                        <p>Not connected</p>
+                        <p>Chưa kết nối</p>
                     </div>
                 </div>
-                <button class="btn btn-connect">Connect</button>
+                <button class="btn btn-connect">Kết nối</button>
             </div>
         </div>
 
         <!-- Delete Accounts-->
         <div class="content delete-account" id="delete-account">
-            <h3>Delete your account</h3>
-            <p>When you delete your account, you lose access to all services, and we permanently delete your personal
-                data. You can cancel the deletion for 14 days.</p>
+            <h3>Xóa tài khoản của bạn</h3>
+            <p>Khi bạn xóa tài khoản, bạn sẽ mất quyền truy cập vào tất cả dịch vụ và chúng tôi sẽ xóa vĩnh viễn dữ liệu cá nhân của bạn. Bạn có thể hủy việc xóa trong 14 ngày.</p>
 
             <div class="delete-confirmation">
                 <label>
                     <input type="checkbox">
-                    Confirm that I want to delete my account.
+                    Xác nhận rằng tôi muốn xóa tài khoản của mình.
                 </label>
             </div>
 
             <div class="delete-actions">
-                <button class="btn learn-more">Learn more</button>
-                <button class="btn delete">Delete</button>
+                <button class="btn learn-more">Tìm hiểu thêm</button>
+                <button class="btn delete">Xóa</button>
             </div>
         </div>
 
