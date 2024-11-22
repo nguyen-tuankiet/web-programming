@@ -13,7 +13,6 @@ body {
     background-color: #f7f7f7;
 }
 
-/* Confirmation Container */
 .confirmation-container {
     width: 300px;
     height: 400px;
@@ -24,14 +23,13 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
-
 }
 
-/* Title and Text */
 .confirmation-container h1 {
     font-size: 26px;
     color: rgb(51, 51, 51);
-    margin-bottom: 20%;    position: relative;
+    margin-bottom: 20%;
+    position: relative;
     z-index: 1;
 }
 
@@ -44,7 +42,6 @@ body {
     padding-top: 20%;
 }
 
-/* Checkmark Circle */
 .checkmark-circle {
     width: 80px;
     height: 80px;
@@ -58,17 +55,14 @@ body {
     overflow: visible;
     animation: circle-pulse 2s infinite ease-in-out;
     z-index: 1;
-
 }
 
-/* Dấu tích */
 .checkmark {
     font-size: 40px;
     color: #ffffff;
     animation: checkmark-pulse 2s infinite ease-in-out;
 }
 
-/* Sunshine Effect */
 .sunshine {
     position: absolute;
     top: -20px;
@@ -81,7 +75,6 @@ body {
     z-index: -1;
 }
 
-/* Retry Button */
 #retryButton {
     width: calc(100% - 20px);
     padding: 10px;
@@ -102,7 +95,6 @@ body {
     background-color: #5ef165;
 }
 
-/* Animation cho dấu tích */
 @keyframes checkmark-pulse {
     0% {
         transform: scale(1);
@@ -115,7 +107,6 @@ body {
     }
 }
 
-/* Animation cho ánh sáng tỏa ra */
 @keyframes sunshines {
     0% {
         transform: scale(1);
@@ -127,7 +118,6 @@ body {
     }
 }
 
-/* Animation cho vòng tròn */
 @keyframes circle-pulse {
     0% {
         transform: scale(1);
@@ -143,7 +133,6 @@ body {
     }
 }
 
-/* Background Decoration Shapes */
 .shape {
     position: absolute;
     opacity: 0.4;
@@ -169,7 +158,6 @@ body {
     clip-path: polygon(25% 0%, 75% 0%, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0% 75%, 0% 25%, 25% 25%);
 }
 
-/* Size Variants */
 .small {
     width: 5px;
     height: 5px;
@@ -185,7 +173,6 @@ body {
     height: 12px;
 }
 
-/* Floating animation */
 @keyframes float {
     0% {
         transform: translateY(0);
