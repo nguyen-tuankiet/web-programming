@@ -29,21 +29,21 @@
             <ul>
                 <!-- Bảng điều khiển -->
                 <li class="menu_item">
-                    <i class="fa-solid fa-house"></i>
-                    <a href="#" onclick="loadPage('dashboard')">Quản lý</a>
+                   <div class="wrap_menu_item">
+                       <i class="fa-solid fa-house"></i>
+                       <a href="#" onclick="loadPage('dashboard')">Tổng quan</a>
+                   </div>
                 </li>
 
-                <!-- Hồ sơ -->
-                <li class="menu_item">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="#" onclick="loadPage('my_profile')">Hồ sơ</a>
-                </li>
+
 
                 <!-- Sản phẩm -->
                 <li class="menu_item">
-                    <i class="fa-solid fa-box"></i>
-                    <span>Sản phẩm</span>
-                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-box"></i>
+                        <span>Sản phẩm</span>
+                        <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    </div>
 
                     <ul class="submenu">
                         <li><a href="#" onclick="loadPage('list_products')">Danh sách sản phẩm</a></li>
@@ -54,9 +54,11 @@
 
                 <!-- Đơn hàng -->
                 <li class="menu_item">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span>Đơn hàng</span>
-                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Đơn hàng</span>
+                        <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    </div>
 
                     <ul class="submenu">
                         <li><a href="#" onclick="loadPage('orders')">Danh sách đơn hàng</a></li>
@@ -66,21 +68,39 @@
 
                 <!-- Khách hàng -->
                 <li class="menu_item">
-                    <i class="fa-solid fa-users"></i>
-                    <span>Khách hàng</span>
-                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Khách hàng</span>
+                        <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                    </div>
 
                     <ul class="submenu">
                         <li><a href="#" onclick="loadPage('customers')">Danh sách khách hàng</a></li>
-                        <li><a href="#" onclick="loadPage('customers_detail')">Chi tiết khách hàng</a></li>
+<!--                        <li><a href="#" onclick="loadPage('customers_detail')">Chi tiết khách hàng</a></li>-->
                     </ul>
                 </li>
 
+
+
+                <!-- Hồ sơ -->
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-user"></i>
+                        <a href="#" onclick="loadPage('my_profile')">Hồ sơ</a>
+                    </div>
+                </li>
+
+
                 <!-- Cài đặt -->
                 <li class="menu_item">
-                    <i class="fa-solid fa-gear"></i>
-                    <a href="#" onclick="loadPage('setting')">Cài đặt</a>
+                   <div class="wrap_menu_item">
+                       <i class="fa-solid fa-gear"></i>
+                       <a href="#" onclick="loadPage('setting')">Cài đặt</a>
+                   </div>
                 </li>
+
+
+
             </ul>
         </nav>
 
