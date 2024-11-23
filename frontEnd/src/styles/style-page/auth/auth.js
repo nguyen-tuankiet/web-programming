@@ -14,38 +14,54 @@ loginButton.addEventListener("click", () => {
 // Hiển thị/Ẩn mật khẩu
 togglePasswords.forEach((togglePassword) => {
     togglePassword.addEventListener("click", function () {
-        const passwordInput = document.querySelector(this.getAttribute('data-toggle'));
+        const passwordInput = document.querySelector(
+            this.getAttribute("data-toggle")
+        );
 
-        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        const type =
+            passwordInput.getAttribute("type") === "password" ? "text" : "password";
         passwordInput.setAttribute("type", type);
 
         this.classList.toggle("fa-eye-slash");
     });
 });
 
+window.onload = () => {
+    localStorage.setItem("isLoggedIn", false);
+    localStorage.setItem("userEmail", "");
+};
+
 // Xử lý logic đăng nhập
-const signInForm = document.querySelector('.sign-in-container form');
-signInForm.addEventListener('submit', (e) => {
+const signInForm = document.querySelector(".sign-in-container form");
+signInForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = document.querySelector('#email').value.trim();
-    const password = document.querySelector('#password').value.trim();
+    const email = document.querySelector("#email").value.trim();
+    const password = document.querySelector("#password").value.trim();
 
     // Giả lập tài khoản
     const accounts = {
-        'admin@gmail.com': { password: 'admin123', role: 'admin', redirect: '../../../frontEnd/src/pages/Admin.html' },
-        'user@gmail.com': { password: 'user123', role: 'user', redirect: '../../../frontEnd/src/pages/Home.html' },
+        "admin@gmail.com": {
+            password: "admin123",
+            role: "admin",
+            redirect: "../../../frontEnd/src/pages/Admin.html",
+        },
+        "user@gmail.com": {
+            password: "user123",
+            role: "user",
+            redirect: "../../../frontEnd/src/pages/Home.html",
+        },
     };
 
     // Kiểm tra tài khoản
     if (accounts[email] && accounts[email].password === password) {
         // Lưu trạng thái đăng nhập
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', email);
-        localStorage.setItem('userRole', accounts[email].role);
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userEmail", email);
+        localStorage.setItem("userRole", accounts[email].role);
 
         // Chuyển hướng
         window.location.href = accounts[email].redirect;
     } else {
-        alert('Email hoặc mật khẩu không đúng!');
+        alert("Email hoặc mật khẩu không đúng!");
     }
 });
