@@ -67,7 +67,7 @@ body > #header > nav > ul > li > a{
     color: #333;
     text-decoration: none;
     transition: color 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .navbar ul li.active a {
