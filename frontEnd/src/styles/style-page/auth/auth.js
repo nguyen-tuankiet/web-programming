@@ -27,9 +27,12 @@ togglePasswords.forEach((togglePassword) => {
 });
 
 window.onload = () => {
-    localStorage.setItem("isLoggedIn", false);
-    localStorage.setItem("userEmail", "");
+    if (!localStorage.getItem("isLoggedIn")) {
+        localStorage.setItem("isLoggedIn", false);
+        localStorage.setItem("userEmail", "");
+    }
 };
+
 
 // Xử lý logic đăng nhập
 const signInForm = document.querySelector(".sign-in-container form");
