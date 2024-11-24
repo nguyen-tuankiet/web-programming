@@ -134,7 +134,10 @@ body {
     color: #dc3545;
     font-weight: bold;
 }
-
+tr:hover{
+    cursor: pointer;
+    background-color: #F1F5F9;
+}
 button {
     border: none;
     background: none; /
