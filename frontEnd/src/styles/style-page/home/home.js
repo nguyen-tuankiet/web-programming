@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
             loginLink.textContent = "Đăng nhập/Đăng ký";
             window.location.reload();
             alert("Bạn đã đăng xuất!");
-            // window.location.href = "/web-programming/frontEnd/src/pages/auth.html";
+            window.location.href = "/web-programming/frontEnd/src/pages/auth.html";
 
         });
     } else {
