@@ -28,8 +28,8 @@ togglePasswords.forEach((togglePassword) => {
 
 window.onload = () => {
     if (!localStorage.getItem("isLoggedIn")) {
-        localStorage.setItem("isLoggedIn", false);
-        localStorage.setItem("userEmail", "");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userEmail");
     }
 };
 
