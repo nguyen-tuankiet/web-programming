@@ -10,6 +10,9 @@ const routes = {
     customers_detail: '../component/admin_components/customerDetail.html',
     setting: '../component/admin_components/account_settings.html',
 };
+const userPopup = document.querySelector(".user-popup");
+const avatar = document.querySelector(".avatar");
+
 
 function loadPage(pageKey) {
     const pagePath = routes[pageKey];
@@ -23,27 +26,32 @@ function loadPage(pageKey) {
 
 document.querySelectorAll('.menu_item').forEach(item => {
     item.addEventListener('click', (event) => {
-        // Đóng tất cả các submenu khác, nhưng giữ menu chính đang chọn
+        // Ngăn chặn các sự kiện không mong muốn
+        event.stopPropagation();
+
+        // Xử lý các menu khác: tắt trạng thái active và đóng submenu
         document.querySelectorAll('.menu_item').forEach(otherItem => {
-            const otherSubmenu = otherItem.querySelector('.submenu');
-            if (otherSubmenu && otherSubmenu !== item.querySelector('.submenu')) {
-                otherSubmenu.style.display = 'none';
-                otherItem.classList.remove('active'); // Bỏ highlight menu khác
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+                const otherSubmenu = otherItem.querySelector('.submenu');
+                if (otherSubmenu) {
+                    otherSubmenu.style.display = 'none';
+                }
             }
         });
 
-        // Xử lý submenu của mục đang được click
+        // Toggle trạng thái của menu hiện tại
         const submenu = item.querySelector('.submenu');
         if (submenu) {
             const isOpen = submenu.style.display === 'flex';
-            submenu.style.display = isOpen ? 'none' : 'flex'; // Chuyển trạng thái hiển thị submenu
-            item.classList.toggle('active', !isOpen); // Highlight menu chính
+            submenu.style.display = isOpen ? 'none' : 'flex'; // Mở/đóng submenu
+            item.classList.toggle('active', !isOpen);
         } else {
-            // Nếu không có submenu, chỉ tô màu menu chính
+            // Nếu không có submenu, chỉ cần tô màu active
             document.querySelectorAll('.menu_item').forEach(otherItem => {
-                otherItem.classList.remove('active'); // Bỏ highlight tất cả các mục
+                otherItem.classList.remove('active');
             });
-            item.classList.add('active'); // Highlight menu hiện tại
+            item.classList.add('active');
         }
     });
 });
@@ -51,15 +59,36 @@ document.querySelectorAll('.menu_item').forEach(item => {
 // Xử lý sự kiện click vào submenu
 document.querySelectorAll('.submenu a').forEach(submenuItem => {
     submenuItem.addEventListener('click', (event) => {
-        // Ngăn sự kiện click đóng menu chính
+        // Ngăn sự kiện click làm đóng menu chính
         event.stopPropagation();
 
-        // Xóa highlight của tất cả các submenu
+        // Loại bỏ active của tất cả các submenu
         document.querySelectorAll('.submenu a').forEach(link => {
             link.classList.remove('active');
         });
 
-        // Highlight submenu được chọn
+        // Gán trạng thái active cho mục được chọn
         submenuItem.classList.add('active');
     });
+});
+
+
+
+
+avatar.addEventListener("mouseenter", () => {
+    userPopup.style.display = "block";
+});
+
+avatar.addEventListener("mouseleave", () => {
+    setTimeout(() => {
+        userPopup.style.display = "none";
+    }, 200);
+});
+
+userPopup.addEventListener("mouseenter", () => {
+    userPopup.style.display = "block";
+});
+
+userPopup.addEventListener("mouseleave", () => {
+    userPopup.style.display = "none";
 });

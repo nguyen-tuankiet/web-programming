@@ -52,14 +52,14 @@ signInForm.addEventListener("submit", (e) => {
         },
     };
 
-    // Kiểm tra tài khoản
+
     if (accounts[email] && accounts[email].password === password) {
         // Lưu trạng thái đăng nhập
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userEmail", email);
         localStorage.setItem("userRole", accounts[email].role);
 
-        // Chuyển hướng
+
         window.location.href = accounts[email].redirect;
     } else {
         alert("Email hoặc mật khẩu không đúng!");
