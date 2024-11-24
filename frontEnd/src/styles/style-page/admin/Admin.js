@@ -43,6 +43,16 @@ document.querySelectorAll('.menu_item').forEach(item => {
         // Toggle trạng thái của menu hiện tại
         const submenu = item.querySelector('.submenu');
         if (submenu) {
+
+            const submenuItems = submenu.querySelectorAll('.submenu_item');
+            // Duyệt qua từng phần tử và kiểm tra class `active`
+            submenuItems.forEach((submenuItem) => {
+                console.log(submenuItem);
+                if (submenuItem.classList.contains('active')) {
+                    submenuItem.classList.remove('active');
+                }
+            });
+
             const isOpen = submenu.style.display === 'flex';
             submenu.style.display = isOpen ? 'none' : 'flex'; // Mở/đóng submenu
             item.classList.toggle('active', !isOpen);
@@ -56,14 +66,23 @@ document.querySelectorAll('.menu_item').forEach(item => {
     });
 });
 
+
+
+
+
+
+
+
+
+
 // Xử lý sự kiện click vào submenu
-document.querySelectorAll('.submenu a').forEach(submenuItem => {
+document.querySelectorAll('.submenu li').forEach(submenuItem => {
     submenuItem.addEventListener('click', (event) => {
         // Ngăn sự kiện click làm đóng menu chính
         event.stopPropagation();
 
         // Loại bỏ active của tất cả các submenu
-        document.querySelectorAll('.submenu a').forEach(link => {
+        document.querySelectorAll('.submenu li').forEach(link => {
             link.classList.remove('active');
         });
 
@@ -71,6 +90,8 @@ document.querySelectorAll('.submenu a').forEach(submenuItem => {
         submenuItem.classList.add('active');
     });
 });
+
+
 
 
 
