@@ -19,3 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//Toggle-switch
+document.addEventListener("DOMContentLoaded", () => {
+    // Lấy tất cả các phần tử switch
+    const switchElements = document.querySelectorAll(".switch");
+
+    // Lặp qua từng phần tử và gắn sự kiện click
+    switchElements.forEach(switchElement => {
+        switchElement.addEventListener("click", () => {
+            // Toggle lớp active cho phần tử được nhấn
+            switchElement.classList.toggle("active");
+        });
+    });
+});
