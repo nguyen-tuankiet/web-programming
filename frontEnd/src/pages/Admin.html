@@ -19,8 +19,17 @@
         <div class="menu row mid_align">
             <i class="fa-regular fa-bell"></i>
             <i class="fa-regular fa-envelope"></i>
-            <div class="avatar">
+            <div class="avatar" id="avatar">
                 <img src="../../resource/image/avatar.jpg" alt="Avatar" height="1024" width="1024"/>
+                <div class="user-popup">
+                    <a
+                            class="nav_item"
+                            href="#" onclick="loadPage('my_profile')"
+                            id="my-page-link"
+                    >Trang của tôi</a
+                    >
+                    <a href="../pages/auth.html" id="login-link">Đăng xuất</a>
+                </div>
             </div>
         </div>
     </div>
@@ -31,7 +40,7 @@
                 <li class="menu_item">
                    <div class="wrap_menu_item">
                        <i class="fa-solid fa-house"></i>
-                       <a href="#" onclick="loadPage('dashboard')">Tổng quan</a>
+                       <span><a href="#" onclick="loadPage('dashboard')">Tổng quan</a></span>
                    </div>
                 </li>
 
@@ -70,14 +79,14 @@
                 <li class="menu_item">
                     <div class="wrap_menu_item">
                         <i class="fa-solid fa-users"></i>
-                        <span>Khách hàng</span>
-                        <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                        <span><a href="#" onclick="loadPage('customers')">Khách hàng</a></span>
+<!--                        <i class="fa-solid fa-chevron-down toggle-arrow"></i>-->
                     </div>
 
-                    <ul class="submenu">
-                        <li><a href="#" onclick="loadPage('customers')">Danh sách khách hàng</a></li>
-<!--                        <li><a href="#" onclick="loadPage('customers_detail')">Chi tiết khách hàng</a></li>-->
-                    </ul>
+<!--                    <ul class="submenu">-->
+<!--                        <li><a href="#" onclick="loadPage('customers')">Danh sách khách hàng</a></li>-->
+<!--&lt;!&ndash;                        <li><a href="#" onclick="loadPage('customers_detail')">Chi tiết khách hàng</a></li>&ndash;&gt;-->
+<!--                    </ul>-->
                 </li>
 
 
@@ -86,7 +95,7 @@
                 <li class="menu_item">
                     <div class="wrap_menu_item">
                         <i class="fa-solid fa-user"></i>
-                        <a href="#" onclick="loadPage('my_profile')">Hồ sơ</a>
+                       <span><a href="#" onclick="loadPage('my_profile')">Hồ sơ</a>  </span>
                     </div>
                 </li>
 
@@ -95,7 +104,7 @@
                 <li class="menu_item">
                    <div class="wrap_menu_item">
                        <i class="fa-solid fa-gear"></i>
-                       <a href="#" onclick="loadPage('setting')">Cài đặt</a>
+                       <span> <a href="#" onclick="loadPage('setting')">Cài đặt</a></span>
                    </div>
                 </li>
 
