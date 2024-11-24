@@ -236,6 +236,7 @@ body {
 
 .table tbody td {
     padding: 12px;
+    width: 200px;
     border-top: 1px solid rgba(231, 234, 243, 0.7);
 }
 
@@ -447,9 +448,6 @@ body {
     font-size: 14px;
     color: #707070;
 }
-
-
-/* Toggle Switch */
 .toggle-switch {
     position: relative;
     width: 40px;
@@ -460,11 +458,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.toggle-switch input[type="checkbox"] {
-    display: none;
-}
-
-.toggle-switch span {
+.slider {
     position: absolute;
     top: 1px;
     left: 1px;
@@ -475,9 +469,51 @@ body {
     transition: transform 0.3s;
 }
 
-.toggle-switch input[type="checkbox"]:checked + span {
+/* Optional: If slider needs to move */
+.slider.active {
     transform: translateX(20px);
-    background-color: #007bff;
+}
+
+/* Variables for styling */
+.switch {
+    --button-width: 2.5em;
+    --button-height: 1.5em;
+    --toggle-diameter: 1.3em;
+    --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
+    --toggle-shadow-offset: 5px;
+    --toggle-wider: 2em;
+    --color-grey: #cccccc;
+    --color-green: #4296f4;
+
+    display: inline-block;
+    width: var(--button-width);
+    height: var(--button-height);
+    background-color: var(--color-grey);
+    border-radius: calc(var(--button-height) / 2);
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+}
+
+.slider {
+    width: var(--toggle-diameter);
+    height: var(--toggle-diameter);
+    background-color: #fff;
+    border-radius: calc(var(--toggle-diameter) / 2);
+    position: absolute;
+    top: var(--button-toggle-offset);
+    left: var(--button-toggle-offset);
+    box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
+    transition: 0.3s all ease-in-out;
+}
+
+.switch.active {
+    background-color: var(--color-green);
+}
+
+.switch.active .slider {
+    transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
+    box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, 0.1);
 }
 
 /* Social Accounts Section in Slideshow Container */
