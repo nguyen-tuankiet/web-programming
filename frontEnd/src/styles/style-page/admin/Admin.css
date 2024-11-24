@@ -210,17 +210,24 @@ a {
     gap: 15px;
 }
 
-.menu_item:hover {
+ .menu_item:hover {
     background-color: #f3f4f6;
-    color: #2563eb;
+    color: #267cff;
 }
 
+
+.menu_item:hover .submenu li {
+    background-color: transparent; /* Không thay đổi nền của submenu */
+    color: #4b5563; /* Giữ nguyên màu chữ của submenu */
+}
 
 
 /*.menu_item a:hover {*/
 /*    background-color: #f3f4f6;*/
 /*    color: #2563eb;*/
 /*}*/
+
+
 .menu_item .wrap_menu_item{
     display: flex;
 }
@@ -264,15 +271,16 @@ a {
 .submenu {
     display: none;
     flex-direction: column;
-    padding-left: 35px; /* Đẩy submenu vào trong một chút */
+    padding-left: 25px; /* Đẩy submenu vào trong một chút */
     margin-top: 5px;
 }
 .menu_item.active .submenu {
     display: flex;
+    color: #4b5563;
 }
 
 .submenu li {
-    padding: 10px 3px;
+    padding: 10px;
     font-size: 13px;
 }
 
@@ -285,12 +293,11 @@ a {
     font-weight: 400;
 }
 
-.submenu a:hover {
+.menu_item>.submenu>li:hover {
     color: #2563eb;
-    /*background-color: #f9fafb;*/
-    background-color: #f1f1f1;
+    background-color: #e1e1e1;
     border-radius: 3px;
-    padding: 10px;
+
 }
 
 .menu_item.active {
@@ -301,15 +308,14 @@ a {
 .menu_item.active i {
     color: #2563eb;
 }
-.menu_item.active span a {
+.menu_item.active span  {
     color: #2563eb;
 }
 
-.submenu a.active {
+.submenu li.active {
     /*background-color: #e5e7eb; !* Màu xanh đậm hơn *!*/
     color: #2563eb;
     border-radius: 5px;
-    padding: 10px ;
 }
 
 
