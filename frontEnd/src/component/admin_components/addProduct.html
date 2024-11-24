@@ -11,12 +11,12 @@
 <div class="page-header">
     <div class="row align-items-center">
         <div class="col-sm mb-2 mb-sm-0">
-            <nav aria-label="breadcrumb" _mstaria-label="157144">
-                <ol class="breadcrumb breadcrumb-no-gutter">
-                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Sản Phẩm</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Thêm sản phẩm</li>
-                </ol>
-            </nav>
+<!--            <nav aria-label="breadcrumb" _mstaria-label="157144">-->
+<!--                <ol class="breadcrumb breadcrumb-no-gutter">-->
+<!--                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Sản Phẩm</a></li>-->
+<!--                    <li class="breadcrumb-item active" aria-current="page">Thêm sản phẩm</li>-->
+<!--                </ol>-->
+<!--            </nav>-->
             <h1 class="page-header-title">Thêm sản phẩm</h1>
         </div>
     </div>
@@ -37,13 +37,10 @@
                         <input type="text" id="sku" placeholder="Ví dụ: 348121032">
                     </div>
                     <div class="form-group half-width">
-                        <label for="weight">Khối lượng</label>
+                        <label for="weight">Danh mục</label>
                         <div class="weight-input">
-                            <input type="number" id="weight" placeholder="0.0">
-                            <select>
-                                <option value="kg">kg</option>
-                                <option value="g">g</option>
-                            </select>
+                            <input type="text" id="weight" placeholder="Tủ lạnh">
+
                         </div>
                     </div>
                 </div>
@@ -71,8 +68,7 @@
 
         <div class="media-section">
             <div class="media-header">
-                <h2>Media</h2>
-                <a href="#" class="add-media-url" onclick="document.getElementById('fileInput').click();">Thêm media từ URL</a>
+                <h2>Hình ảnh</h2>
             </div>
 
             <div class="media-upload-box">
@@ -83,7 +79,7 @@
                 <p id="dragDropText">Kéo và thả tệp của bạn vào đây</p>
                 <span>hoặc</span>
                 <input type="file" id="fileInput" style="display: none;" multiple />
-                <button class="browse-files" onclick="document.getElementById('fileInput').click();">Duyệt tệp</button>
+                <button class="browse-files" onclick="document.getElementById('fileInput').click();">Tải ảnh lên</button>
             </div>
         </div>
 
@@ -101,44 +97,74 @@
                         <option value="style">Kiểu dáng</option>
                         <option value="title">Tiêu đề</option>
                     </select>
-                    <input type="text" class="option-input" placeholder="Nhập các thẻ">
+<!--                    <input type="text" class="option-input" placeholder="Nhập các thẻ">-->
+                    <select class="option-select">
+                        <option value="size">Kích thước</option>
+                        <option value="color">Màu sắc</option>
+                        <option value="material">Chất liệu</option>
+                        <option value="style">Kiểu dáng</option>
+                        <option value="title">Tiêu đề</option>
+                    </select>
+
                     <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
                 </div>
             </div>
             <button class="add-option-button" onclick="addOptionGroup()">+ Thêm một lựa chọn khác</button>
         </div>
+
+
     </div>
 
 
     <div class="right-column">
         <div class="section pricing-section">
-            <h2>Giá cả</h2>
+            <h2>Chiếc khấu</h2>
             <label for="price">Giá</label>
-            <input type="number" id="price" placeholder="0.00">
-            <select>
-                <option value="USD">USD</option>
-                <option value="VND">VND</option>
-            </select>
+            <input type="text" id="price" placeholder="0.00">
 
-            <div class="toggle-button">
-                <label for="availability">Tình trạng hàng</label>
-                <input type="checkbox" id="availability" checked>
-            </div>
+            <label for="price">Số lượng</label>
+            <input type="text" id="total" placeholder="0">
+
         </div>
 
+
+        <div class="section">
+            <h2>Thuộc tính</h2>
+            <div id="attribute" class="options-container">
+                <div class="option-group">
+                    <select class="option-select">
+                        <option value="size">Kích thước</option>
+                        <option value="color">Màu sắc</option>
+                        <option value="material">Chất liệu</option>
+                        <option value="style">Kiểu dáng</option>
+                        <option value="title">Tiêu đề</option>
+                    </select>
+                    <select class="option-select">
+                        <option value="size">Kích thước</option>
+                        <option value="color">Màu sắc</option>
+                        <option value="material">Chất liệu</option>
+                        <option value="style">Kiểu dáng</option>
+                        <option value="title">Tiêu đề</option>
+                    </select>
+<!--                    <input type="text" class="option-input" placeholder="Nhập các thẻ">-->
+<!--                    <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>-->
+                </div>
+            </div>
+            <button class="add-option-button" onclick="addOptionGroup()">+ Thêm một lựa chọn khác</button>
+        </div>
 
         <div class="section organization-section">
             <h2>Tổ chức</h2>
             <label for="vendor">Nhà cung cấp</label>
             <input type="text" id="vendor" placeholder="eg. Nike">
 
-            <label for="category">Danh mục</label>
-            <select id="category">
-                <option value="clothing">Tủ Lạnh</option>
-                <option value="electronics">Máy Giặt</option>
-                <option value="electronics">Máy Điều Hòa</option>
-                <option value="electronics">Máy Lạnh</option>
-            </select>
+<!--            <label for="category">Danh mục</label>-->
+<!--            <select id="category">-->
+<!--                <option value="clothing">Tủ Lạnh</option>-->
+<!--                <option value="electronics">Máy Giặt</option>-->
+<!--                <option value="electronics">Máy Điều Hòa</option>-->
+<!--                <option value="electronics">Máy Lạnh</option>-->
+<!--            </select>-->
 
             <label for="collections">Bộ sưu tập</label>
             <select id="collections">

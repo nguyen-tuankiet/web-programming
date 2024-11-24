@@ -304,6 +304,10 @@ td {
     border-bottom: 1px solid #e9ecef;
 
 }
+tr:hover{
+    cursor: pointer;
+    background-color: #F1F5F9;
+}
 .order-id {
     color: #5E53CE;
     text-decoration: none;

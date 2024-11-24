@@ -85,3 +85,13 @@ document.querySelector('.status-select').addEventListener('change', function () 
     });
 });
 
+// Lấy tất cả các hàng
+document.querySelectorAll('.order-row').forEach(row => {
+    row.addEventListener('click', function (e) {
+        const url = this.getAttribute('data-url');
+        if (url) {
+            window.location.href = url;
+        }
+    });
+});
+
