@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isLoggedIn) {
             alert("Bạn cần đăng nhập trước!");
         } else {
-            iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
+            iframe.src = "/web-programming/frontEnd/src/component/user_order/UserOrder.html";
             history.pushState({ page: "user-orders" }, "Đơn Hàng", "/user-orders");
         }
     });
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loginLink.textContent = "Đăng nhập/Đăng ký";
         loginLink.addEventListener("click", (event) => {
             event.preventDefault();
-            window.location.href = "../../../frontEnd/src/pages/auth.html";
+            window.location.href = "/web-programming/frontEnd/src/pages/auth.html";
         });
     }
 });
