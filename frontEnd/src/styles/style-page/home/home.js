@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
         history.pushState({ page: "home" }, "Trang chủ", "/home");
     });
 
-    document.getElementById("cart-link").addEventListener("click", (event) => {
-        event.preventDefault();
-        iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
-        history.pushState({ page: "home" }, "Trang chủ", "/home");
-    });
+    // document.getElementById("cart-link").addEventListener("click", (event) => {
+    //     event.preventDefault();
+    //     iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
+    //     history.pushState({ page: "home" }, "Trang chủ", "/home");
+    // });
 // Lấy tất cả các mục submenu
     const submenuLinks = document.querySelectorAll(".submenu a");
 
@@ -116,13 +116,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Xử lý nút "Đơn hàng"
-    document.getElementById("orders-link").addEventListener("click", (event) => {
+    document.getElementById("cart-link").addEventListener("click", (event) => {
         event.preventDefault();
         if (!isLoggedIn) {
             alert("Bạn cần đăng nhập trước!");
         } else {
-            iframe.src = "/web-programming/frontEnd/src/component/user_order/UserOrder.html";
-            history.pushState({ page: "user-orders" }, "Đơn Hàng", "/user-orders");
+            iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
+            history.pushState({ page: "user-orders" }, "Giỏ Hàng", "/card");
         }
     });
 
