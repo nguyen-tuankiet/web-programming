@@ -245,13 +245,13 @@ a {
 
 
 
-/*.menu_item:hover i {*/
-/*    color: #2563eb;*/
-/*}*/
+.menu_item:hover i {
+    color: #2563eb;
+}
 
-/*.menu_item:hover a {*/
-/*    color: #2563eb;*/
-/*}*/
+.menu_item:hover a {
+    color: #2563eb;
+}
 
 
 .menu_item .toggle-arrow {

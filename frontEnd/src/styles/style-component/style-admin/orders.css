@@ -11,10 +11,10 @@ body{
 }
 
 body > div.container{
-    background-color: #f8f9fa;
-    border: 1px solid #e0e0e0;
+    /*background-color: #f8f9fa;*/
+    border: 1px solid #EEF0F7;
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    border-radius: 5px;
+    border-radius: 10px;
 
 }
 
@@ -36,14 +36,13 @@ body > div.container{
     border: 1px solid #ced4da;
 }
 .search-input {
-    width: 100%;
-    max-width: 200px;
+    width: 150px;
     margin-right: 18px;
 }
 
 .status-select {
     width: 200px;
-    margin-right: 820px;
+    margin-right: 700px;
 }
 .add-order-btn {
     background-color: #0DCAF0;
@@ -237,7 +236,7 @@ body > div.container{
     top: 100%;
     left: 0;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #EEF0F7;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 180px;
     z-index: 1;
