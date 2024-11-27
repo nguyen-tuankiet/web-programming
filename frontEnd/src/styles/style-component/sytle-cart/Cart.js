@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         const message ={
             type:'navigate',
-            data: pay.attr('data-src')
+            url: pay.attr('data-src')
         }
 
         console.log(message);
