@@ -4,7 +4,7 @@ $(document).ready(function () {
     btn.on('click', function(){
         const message ={
             type: "navigate",
-            data: btn.attr('data-src')
+            url: btn.attr('data-src')
         }
         window.parent.postMessage(message, '*');
     })
