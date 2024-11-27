@@ -4,8 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const userPopup = document.querySelector(".user-popup");
     const iframe = document.querySelector("#body iframe");
 
+
+
     // Kiểm tra trạng thái đăng nhập
     const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+
+
 
     // Hiệu ứng hover cho menu
     menuItems.forEach((item) => {
@@ -77,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+
     userLoginIcon.addEventListener("mouseenter", () => {
         userPopup.style.display = "block";
     });
@@ -122,9 +128,17 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Bạn cần đăng nhập trước!");
         } else {
             iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
-            history.pushState({ page: "user-orders" }, "Giỏ Hàng", "/card");
+            history.pushState({ page: "user-orders" }, "Giỏ Hàng", "/cart");
         }
     });
+
+    window.addEventListener("message", (event ) => {
+        if (event.data.type === "navigate") {
+            iframe.src = event.data.url;
+            history.pushState({page:"checkout"}, "Thanh toan", "/cart/payment");
+        }
+    })
+
 
 
     // Xử lý trạng thái đăng nhập
