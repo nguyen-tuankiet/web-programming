@@ -146,7 +146,7 @@ body {
 /* Các section bên trong container */
 .section {
     width: 100%;
-    height: 100%;
+    height: 90%;
 }
 
 body > div.container > div:nth-child(1) > iframe {
@@ -156,9 +156,11 @@ body > div.container > div:nth-child(1) > iframe {
 
 body > div.container > div:nth-child(2) > iframe {
     width: 610px;
-    height: 580px;
+    height: 530px;
 }
-
+body > div.container > a:nth-child(4) > button{
+    margin-bottom: 40px;
+}
 
 /* Định dạng cho iframe trong các section */
 .iframe {
@@ -450,4 +452,22 @@ body > div.specification > div > div > p {
 .feature-benefit4__text p {
      color: #4E4E52;
     margin-bottom: 30px;
+}
+.btn-add-to-cart {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-add-to-cart:hover {
+    background-color: #0056b3;
 }

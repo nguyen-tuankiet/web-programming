@@ -85,6 +85,42 @@ function removeOptionGroup(button) {
                 }
 
                 imagePreviewContainer.appendChild(wrapper);
+
+
+                wrapper.classList.add('image-wrapper');
+
+                img.src = e.target.result;
+                img.classList.add('preview-image');
+
+                const overlay = document.createElement('div');
+                overlay.classList.add('image-overlay');
+
+                // Icon View
+                const viewIcon = document.createElement('span');
+                viewIcon.className = 'icon view-icon fas fa-eye';
+                viewIcon.onclick = function () {
+                    showPreview(
+                        [...Array.from(imagePreviewContainer.getElementsByTagName('img')).map(img => img.src)],
+                        currentImages.length
+                    );
+                };
+
+                // Icon Delete
+                const deleteIcon = document.createElement('span');
+                deleteIcon.className = 'icon delete-icon fas fa-trash';
+                deleteIcon.onclick = function () {
+                    const confirmation = confirm('Bạn có chắc chắn muốn xóa hình ảnh này?');
+                    if (confirmation) {
+                        wrapper.remove();
+                    }
+                };
+
+                overlay.appendChild(viewIcon);
+                overlay.appendChild(deleteIcon);
+                wrapper.appendChild(img);
+                wrapper.appendChild(overlay);
+
+                imagePreviewContainer.appendChild(wrapper);
             };
             reader.readAsDataURL(file);
         });
