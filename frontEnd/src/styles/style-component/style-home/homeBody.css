@@ -85,31 +85,67 @@ body {
     display: flex;
     justify-content: center;
     gap: 30px;
-    padding: 20px 0;
+    padding: 60px 217px;
     background-color: transparent;
     font-size: 1.2rem;
-    position: relative;
     z-index: 10;
+    position: absolute;
+    transition: color 0.3s ease-in-out;
 }
 
+
+/*.navbar a {*/
+/*    color: black;*/
+/*    text-decoration: none;*/
+/*    font-weight: 600;*/
+/*    padding-top: 10px;*/
+/*}*/
+
+.navbar a:hover {
+   padding: 10px;
+    /*background-color: #D5CEC8;*/
+    cursor: pointer;
+    /*border-radius: 20px;*/
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.75);
+}
 .navbar a {
+    position: relative;
     color: black;
     text-decoration: none;
     font-weight: 600;
-    padding-top: 10px;
+    padding: 10px;
+    transition: color 0.3s ease;
 }
 
-.navbar a:hover {
-    color: #007aff;
-    cursor: pointer;
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease-in-out;
 }
 
+.navbar a:hover::after {
+    width: 100%;
+}
+.navbar.light a {
+    color: black; /* Màu chữ khi trạng thái sáng (image1, image2) */
+}
+
+.navbar.dark a {
+    color: white; /* Màu chữ khi trạng thái tối (image3, image4) */
+}
 .content {
     text-align: center;
     padding: 0 20px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+
 }
 
 .image-container {
@@ -118,6 +154,7 @@ body {
 
 .image-container img {
     width: 100%;
+
     display: none;
     border-radius: 10px;
 
@@ -135,12 +172,27 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
     text-align: center;
     padding-top: 500px;
     border-radius: 8px;
+    color: black;
+    transition: color 0.3s ease-in-out;
+}
+.text-overlay .link {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
 }
 
+.text-overlay .link:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: black;
+}
 .container1 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
