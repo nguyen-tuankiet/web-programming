@@ -32,3 +32,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+//Basic-information
+document.addEventListener('DOMContentLoaded', function() {
+    const selectedOption = document.getElementById('selected-option');
+    const optionsContainer = document.getElementById('options-container');
+
+    // Hiển thị và ẩn danh sách tùy chọn khi click vào selected-option
+    selectedOption.addEventListener('click', () => {
+        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Khi chọn một tùy chọn
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function() {
+            // Cập nhật selected option với cờ và tên quốc gia đã chọn
+            const selectedFlag = this.querySelector('.flag-icon').src;
+            const selectedText = this.textContent.trim();
+            selectedOption.innerHTML = `<img src="${selectedFlag}" alt="Flag Icon" class="flag-icon"> ${selectedText}`;
+
+            // Ẩn danh sách tùy chọn sau khi chọn
+            optionsContainer.style.display = 'none';
+        });
+    });
+
+    // Ẩn danh sách tùy chọn nếu click ra ngoài dropdown
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('#custom-select') && !event.target.closest('.location-select-container')) {
+            optionsContainer.style.display = 'none';
+        }
+    });
+});
