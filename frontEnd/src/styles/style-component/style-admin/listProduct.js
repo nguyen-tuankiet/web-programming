@@ -129,3 +129,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Khởi động trang đầu tiên
     showPage(1);
 });
+
+document.addEventListener('click', function (e) {
+    const row = e.target.closest('.product-row');
+    if (row) {
+        console.log('Row clicked!');
+        const url = row.getAttribute('data-url');
+        if (url) {
+            window.location.href = url;
+        }
+    }
+});
