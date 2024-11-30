@@ -299,3 +299,7 @@ td .checkbox input {
 .dropdown-content .icon:hover {
     background-color: #f1f1f1;
 }
+tr:hover{
+    cursor: pointer;
+    background-color: #F1F5F9;
+}
