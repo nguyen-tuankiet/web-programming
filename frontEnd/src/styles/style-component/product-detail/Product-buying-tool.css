@@ -88,6 +88,13 @@ body {
     background-color: #f0f8ff;
 }
 
+.price{
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+    color: red;
+}
+
 /*.btn-add-to-cart {*/
 /*    display: inline-block;*/
 /*    margin-top: 20px;*/

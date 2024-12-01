@@ -5,6 +5,7 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../../styles/style-component/style_product/TopProduct.css">
+    <link rel="stylesheet" href="../../../resource/fontawesome/css/all.css">
 
 </head>
 <body>
@@ -70,10 +71,13 @@
 
 
     <div class="operation col">
-        <button id="buy_now"><a href="#">Mua ngay</a></button>
-        <button id="add_to_cart"> Thêm vào giỏ hàng</button>
+        <button id="buy_now"><a href="">Mua ngay</a></button>
+        <button class="btn add">Thêm vào giỏ hàng</button>
     </div>
-
+    <div id="cart-notification" class="notification hidden">
+        <i class="fa fa-check-circle"></i>
+        <span>Thêm vào giỏ hàng thành công</span>
+    </div>
 
 
 </div>
