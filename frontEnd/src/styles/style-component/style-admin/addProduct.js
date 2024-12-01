@@ -1,25 +1,31 @@
+// Hàm thêm nhóm tùy chọn mới vào container cụ thể
+function addOptionGroup(containerId) {
+    // Tạo các phần tử mới
     const optionGroup = document.createElement('div');
     const select = document.createElement('select');
-    const input = document.createElement('input');
+    const secondSelect = document.createElement('select');
     const removeButton = document.createElement('button');
 
-
-
-function addOptionGroup() {
+    // Thêm class và nội dung cho các phần tử
     optionGroup.classList.add('option-group');
 
     select.classList.add('option-select');
     select.innerHTML = `
-            <option value="size">Kích thước</option>
-            <option value="color">Màu sắc</option>
-            <option value="material">Chất liệu</option>
-            <option value="style">Kiểu dáng</option>
-            <option value="title">Tiêu đề</option>
-        `;
+        <option value="size">Kích thước</option>
+        <option value="color">Màu sắc</option>
+        <option value="material">Chất liệu</option>
+        <option value="style">Kiểu dáng</option>
+        <option value="title">Tiêu đề</option>
+    `;
 
-    input.type = 'text';
-    input.classList.add('option-input');
-    input.placeholder = 'Nhập các thẻ';
+    secondSelect.classList.add('option-select');
+    secondSelect.innerHTML = `
+        <option value="size">Kích thước</option>
+        <option value="color">Màu sắc</option>
+        <option value="material">Chất liệu</option>
+        <option value="style">Kiểu dáng</option>
+        <option value="title">Tiêu đề</option>
+    `;
 
     removeButton.classList.add('remove-option-button');
     removeButton.innerHTML = '×';
@@ -27,19 +33,26 @@ function addOptionGroup() {
         removeOptionGroup(removeButton);
     };
 
+    // Thêm các phần tử con vào nhóm tùy chọn
     optionGroup.appendChild(select);
-    optionGroup.appendChild(input);
+    optionGroup.appendChild(secondSelect);
     optionGroup.appendChild(removeButton);
 
-    document.getElementById('optionsContainer').appendChild(optionGroup);
+    // Lấy container cần thao tác và thêm nhóm tùy chọn
+    const container = document.getElementById(containerId);
+    container.appendChild(optionGroup);
 }
 
+// Hàm xóa nhóm tùy chọn
 function removeOptionGroup(button) {
-    const optionGroup = button.parentElement;
-    document.getElementById('optionsContainer').removeChild(optionGroup);
+    const optionGroup = button.parentElement; // Lấy nhóm tùy chọn
+    const container = optionGroup.parentElement; // Xác định container hiện tại
+    container.removeChild(optionGroup); // Xóa nhóm tùy chọn khỏi container
 }
 
-    document.getElementById('fileInput').addEventListener('change', function (event) {
+
+
+document.getElementById('fileInput').addEventListener('change', function (event) {
         const files = Array.from(event.target.files); 
         const imagePreviewContainer = document.getElementById('imagePreviewContainer');
         const uploadIcon = document.getElementById('uploadIcon');

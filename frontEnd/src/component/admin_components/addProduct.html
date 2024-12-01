@@ -12,12 +12,6 @@
 <div class="page-header">
     <div class="row align-items-center">
         <div class="col-sm mb-2 mb-sm-0">
-<!--            <nav aria-label="breadcrumb" _mstaria-label="157144">-->
-<!--                <ol class="breadcrumb breadcrumb-no-gutter">-->
-<!--                    <li class="breadcrumb-item"><a class="breadcrumb-link" href="#">Sản Phẩm</a></li>-->
-<!--                    <li class="breadcrumb-item active" aria-current="page">Thêm sản phẩm</li>-->
-<!--                </ol>-->
-<!--            </nav>-->
             <h1 class="page-header-title">Thêm sản phẩm</h1>
         </div>
     </div>
@@ -88,7 +82,7 @@
 
 
 
-        <div class="options-section">
+        <div id="optionsContainer1" class="options-section">
             <h2>Biến thể</h2>
             <div id="optionsContainer" class="options-container">
                 <div class="option-group">
@@ -99,7 +93,6 @@
                         <option value="style">Kiểu dáng</option>
                         <option value="title">Tiêu đề</option>
                     </select>
-<!--                    <input type="text" class="option-input" placeholder="Nhập các thẻ">-->
                     <select class="option-select">
                         <option value="size">Kích thước</option>
                         <option value="color">Màu sắc</option>
@@ -111,7 +104,7 @@
                     <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
                 </div>
             </div>
-            <button class="add-option-button" onclick="addOptionGroup()">+ Thêm một lựa chọn khác</button>
+            <button class="add-option-button" onclick="addOptionGroup('optionsContainer')">+ Thêm biến thể</button>
         </div>
 
 
@@ -132,7 +125,7 @@
 
         <div class="section">
             <h2>Thuộc tính</h2>
-            <div id="attribute" class="options-container">
+            <div id="optionsContainer2" class="options-container">
                 <div class="option-group">
                     <select class="option-select">
                         <option value="size">Kích thước</option>
@@ -148,25 +141,18 @@
                         <option value="style">Kiểu dáng</option>
                         <option value="title">Tiêu đề</option>
                     </select>
-<!--                    <input type="text" class="option-input" placeholder="Nhập các thẻ">-->
-<!--                    <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>-->
+                    <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
                 </div>
             </div>
-            <button class="add-option-button" onclick="addOptionGroup()">+ Thêm một lựa chọn khác</button>
+            <button class="add-option-button" onclick="addOptionGroup('optionsContainer2')">+ Thêm thuộc tính</button>
         </div>
+
 
         <div class="section organization-section">
             <h2>Tổ chức</h2>
             <label for="vendor">Nhà cung cấp</label>
             <input type="text" id="vendor" placeholder="eg. Nike">
 
-<!--            <label for="category">Danh mục</label>-->
-<!--            <select id="category">-->
-<!--                <option value="clothing">Tủ Lạnh</option>-->
-<!--                <option value="electronics">Máy Giặt</option>-->
-<!--                <option value="electronics">Máy Điều Hòa</option>-->
-<!--                <option value="electronics">Máy Lạnh</option>-->
-<!--            </select>-->
 
             <label for="collections">Bộ sưu tập</label>
             <select id="collections">
