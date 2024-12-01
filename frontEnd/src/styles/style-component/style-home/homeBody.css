@@ -168,24 +168,25 @@ body {
 
 
 .text-overlay {
+    display: flex;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     padding-top: 500px;
-    border-radius: 8px;
+    border-radius: 15px;
     color: black;
     transition: color 0.3s ease-in-out;
 }
 .text-overlay .link {
     display: inline-block;
     margin: 10px;
-    padding: 10px 20px;
+    padding: 15px 20px;
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 25px;
     transition: background-color 0.3s ease;
 }
 

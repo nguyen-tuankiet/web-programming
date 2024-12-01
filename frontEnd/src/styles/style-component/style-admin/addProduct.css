@@ -213,7 +213,6 @@ textarea:focus {
 .media-upload-box span {
     display: block;
     color: #6c757d;
-    margin: 10px 0;
 }
 
 .browse-files {
@@ -251,7 +250,7 @@ textarea:focus {
     display: flex;
     align-items: center;
     gap: 10px;
-
+    position: relative;
 }
 .option-select {
     width: 345px;
@@ -283,8 +282,13 @@ textarea:focus {
     font-size: 20px;
     cursor: pointer;
     position: absolute;
-    left: 755px;
+    right: -14px;
+    top: 44%;
+    transform: translateY(-50%);
+
 }
+
+
 
 .main-container {
     display: flex;

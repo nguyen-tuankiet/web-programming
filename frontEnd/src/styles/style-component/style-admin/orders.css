@@ -12,10 +12,38 @@ body{
 
 body > div.container{
     /*background-color: #f8f9fa;*/
-    border: 1px solid #EEF0F7;
+    border: 1px solid #e5e7eb;
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
     border-radius: 10px;
 
+}
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    max-width: 300px;
+    margin: 10px;
+}
+
+.search-bar input[type="text"] {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+.search-bar input[type="text"]::placeholder {
+    color: #888;
+}
+
+.search-bar svg, .action-buttons svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
 }
 
 .header-container {
