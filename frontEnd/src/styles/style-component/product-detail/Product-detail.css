@@ -6,13 +6,13 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .container {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 cột bằng nhau */
-    gap: 20px; /* Khoảng cách giữa các cột */
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     max-width: 1200px;
     margin: 0 auto; /* Căn giữa container */
     background-color: white;
@@ -304,7 +304,7 @@ body > div.container > a:nth-child(4) > button{
 }
 
 .review .iframe {
-    height: 2200px;
+    height: 2550px;
 }
 
 .specification-container.expanded {

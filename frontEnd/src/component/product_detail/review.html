@@ -5,8 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đánh giá sản phẩm</title>
     <link rel="stylesheet" href="../../styles/style-component/product-detail/review.css">
+    <script src="../../styles/style-component/product-detail/review.js"></script>
 </head>
 <body>
+
+<div class="write-review-section">
+    <h2>Viết đánh giá của bạn</h2>
+    <form id="review-form">
+        <div class="input-group">
+            <label for="rating-value">Đánh giá:</label>
+            <div id="user-rating" class="stars">
+                <span data-value="1">☆</span>
+                <span data-value="2">☆</span>
+                <span data-value="3">☆</span>
+                <span data-value="4">☆</span>
+                <span data-value="5">☆</span>
+            </div>
+            <input type="hidden" id="rating-value" name="rating" value="0">
+        </div>
+
+        <div class="input-group">
+            <label for="review-text">Viết đánh giá:</label>
+            <textarea id="review-text" name="review" rows="4" placeholder="Chia sẻ suy nghĩ của bạn" required></textarea>
+        </div>
+        <div class="custom-file-upload">
+            <label for="review-photo" class="file-label">+ Chọn hình ảnh</label>
+            <input type="file" id="review-photo" name="photo" accept="image/*" multiple>
+        </div>
+        <div id="photo-preview" class="photo-preview"></div>
+
+
+        <button type="submit">Gửi đánh giá</button>
+    </form>
+</div>
+
+
 <div class="rating-section">
     <div class="rating-details">
         <h1>Đánh giá</h1>
