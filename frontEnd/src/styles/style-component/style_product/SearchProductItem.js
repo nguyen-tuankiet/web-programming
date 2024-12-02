@@ -15,10 +15,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const buyNowButton = document.getElementById("buy-now-btn");
+// document.getElementById('buy-now-btn').addEventListener('click', function () {
+//     const mainIframe = window.top.document.querySelector('#body iframe');
+//     if (mainIframe) {
+//         mainIframe.src = '/web-programming/frontEnd/src/component/Checkout/checkout.html';
+//     }
+// });
 
-    buyNowButton.addEventListener("click", function () {
-        window.location.href = "../../../component/Checkout/Checkout.html";
-    });
+document.getElementById('name').addEventListener('click', function () {
+    const mainIframe = window.top.document.querySelector('#body iframe');
+    if (mainIframe) {
+        mainIframe.src = '/web-programming/frontEnd/src/component/product_detail/Product-detail.html';
+    }
+});
+
+
+const isLoggedIn = localStorage.getItem("isLoggedIn");
+document.getElementById("buy-now-btn").addEventListener("click", (event) => {
+    const mainIframe = window.top.document.querySelector('#body iframe');
+    event.preventDefault();
+    if (!isLoggedIn) {
+        alert("Bạn cần đăng nhập trước!");
+    } else {
+        mainIframe.src = '/web-programming/frontEnd/src/component/Checkout/checkout.html';
+        history.pushState({ page: "user-checkout" }, "Thanh toán", "/checkout");
+    }
 });

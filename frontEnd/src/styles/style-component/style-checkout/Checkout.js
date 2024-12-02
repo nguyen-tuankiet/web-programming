@@ -1,14 +1,4 @@
 $(document).ready(function () {
-    const back = $('#back')
-    back.on('click', function () {
-        const message = {
-            type: 'navigate',
-            data: back.attr('data-src'),
-        }
-        window.parent.postMessage(message, '*');
-    })
-
-
     const pay = $('#pay')
     pay.on('click', function () {
         const message = {
@@ -19,3 +9,16 @@ $(document).ready(function () {
         window.parent.postMessage(message, '*');
     })
 })
+document.addEventListener('DOMContentLoaded', () => {
+    const backButton = document.getElementById('back');
+
+    const targetURL = backButton.getAttribute('data-src');
+
+    backButton.addEventListener('click', () => {
+        if (targetURL) {
+            window.location.href = targetURL;
+        } else {
+            window.history.back();
+        }
+    });
+});
