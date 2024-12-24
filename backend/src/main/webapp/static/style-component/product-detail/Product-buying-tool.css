@@ -1,0 +1,116 @@
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: white;
+}
+
+.container {
+    width: 590px;
+    margin: 0 auto;
+}
+
+.product-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-rating {
+    color: #f39c12;
+    font-size: 1em;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.product-rating span {
+    font-size: 0.9em;
+    color: #555;
+}
+
+.product-features {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.product-features ul {
+    padding-left: 20px;
+}
+
+.product-features li {
+    margin-bottom: 8px;
+}
+
+.option-title {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.color-options, .capacity-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.color-option.selected, .capacity-option.selected {
+    border-color: #007bff;
+    background-color: #f0f8ff; /* Nền sáng hơn cho phần tử được chọn */
+}
+
+.color-option.black {
+    background-color: #000;
+}
+
+.color-option.silver {
+    background-color: #bbb;
+}
+
+.capacity-option {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.capacity-option.selected {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+}
+
+.price{
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 20px;
+    color: red;
+}
+
+/*.btn-add-to-cart {*/
+/*    display: inline-block;*/
+/*    margin-top: 20px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    font-size: 16px;*/
+/*    font-family: Arial, sans-serif;*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 20px;*/
+/*    cursor: pointer;*/
+/*    text-align: center;*/
+/*    text-decoration: none;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*.btn-add-to-cart:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/

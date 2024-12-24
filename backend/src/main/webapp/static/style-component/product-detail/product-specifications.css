@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica Neue, Helvetica, Arial, serif;
+}
+
+body {
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.container {
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 40px;
+}
+
+.specs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
+    padding: 20px;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.spec-item p {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+
+.spec-item h2 {
+    font-size: 18px;
+    color: #000;
+}
+.specification{
+    background-color: #F7F7F7;
+    padding: 10px 40px;
+}
+
+
+.section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-top: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    gap: 10px;
+}
+
+.section h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.section-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+}
+
+.section-item, .spec-item {
+    padding: 5px 0;
+}
+
+.section-item p, .spec-item p {
+    font-size: 14px;
+    color: #333;
+}
+
+.section-item span, .spec-item span {
+    font-size: 14px;
+    color: #000;
+}
+body > div.specification > div > div > p{
+    font-weight: bold;
+}
+
+#toggle-specs-btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+#toggle-specs-btn:hover {
+    background-color: #bbbbbb;
+}
+#toggle-specs-btn-bottom {
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 20px auto;
+}
+#toggle-specs-btn-bottom:hover{
+    background-color: #bbbbbb;
+}
