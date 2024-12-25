@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="vi">
+<%--
+  Created by IntelliJ IDEA.
+  User: mr.hung
+  Date: 12/25/24
+  Time: 00:06
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Header Menu with Submenu</title>
-    <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../styles/style-page/home/Home.css"/>
+    <title>Header</title>
+    <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/home/Home.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
-<body>
-<div id="header">
+
+
+<div id="main_header">
+
+
     <div class="logo nav_item" id="logo" data-src="../component/home/homeBody.html">
-        <img class="logo" src="../../resource/image/logo_web.png"/>
+        <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png"/>
     </div>
+
+
     <nav class="navbar">
         <ul>
             <li class="active">
@@ -100,7 +107,8 @@
                                 class="nav_item"
                                 data-src="/web-programming/frontEnd/src/component/product_component/Search_KitchenEquipment.html"
                                 href="#"
-                        >Tất cả Thiết Bị Nhà Bếp <span class="new">MỚI</span></a>
+                        >Tất cả Thiết Bị Nhà Bếp <span class="new">MỚI</span></a
+                        >
                         <a href="#">Lò Vi Sóng <span class="new">MỚI</span></a>
                         <a href="#">Lò Nướng </a>
                         <a href="#">Bếp Từ </a>
@@ -159,8 +167,8 @@
             <a href="#" class="icon" id="search-icon"><i class="fas fa-search"></i>
             </a>
 
-            <a class="nav_item"
-               href="#" class="icon" id="cart-link"><i class="fas fa-shopping-cart"></i>
+            <a class="nav_item icon"
+               href="#" id="cart-link"><i class="fas fa-shopping-cart"></i>
             </a>
 
             <div class="icon user-login" target="_top">
@@ -172,24 +180,14 @@
             </div>
         </div>
 
-        <div id="search-overlay" class="overlay">
+        <div id="search-overlay" class="layer">
             <div class="search-container">
-                <iframe
-                        src="../component/home/search.html"
-                        frameborder="0"
-                        id="search-iframe"
-                ></iframe>
+<%--                <jsp:include page="search.jsp"/>--%>
                 <button id="close-search-overlay" class="close-btn">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
         </div>
     </nav>
-</div>
-<div id="body">
-    <iframe src="../component/home/homeBody.html" frameborder="0"></iframe>
-</div>
 
-<script src="../styles/style-page/home/home.js"></script>
-</body>
-</html>
+</div>
