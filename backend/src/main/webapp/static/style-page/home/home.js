@@ -42,44 +42,47 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Xử lý sự kiện chuyển đổi iframe
-    document.getElementById("logo").addEventListener("click", (event) => {
-        event.preventDefault();
-        iframe.src = "/web-programming/frontEnd/src/component/home/homeBody.html";
-        history.pushState({ page: "home" }, "Trang chủ", "/home");
-    });
 
-    // document.getElementById("cart-link").addEventListener("click", (event) => {
-    //     event.preventDefault();
-    //     iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
-    //     history.pushState({ page: "home" }, "Trang chủ", "/home");
-    // });
-// Lấy tất cả các mục submenu
-    const submenuLinks = document.querySelectorAll(".submenu a");
 
-    submenuLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            const pageSrc = link.getAttribute("data-src");
-            if (pageSrc) {
-                iframe.src = pageSrc;
-                history.pushState(
-                    { page: pageSrc },
-                    link.textContent.trim(),
-                    pageSrc
-                );
-            } else {
-                console.error("Không tìm thấy `data-src` cho mục submenu!");
-            }
-        });
-    });
-
-    window.addEventListener("popstate", (event) => {
-        if (event.state && event.state.page) {
-            iframe.src = event.state.page;
-        }
-    });
+//
+//     // Xử lý sự kiện chuyển đổi iframe
+//     document.getElementById("logo").addEventListener("click", (event) => {
+//         event.preventDefault();
+//         iframe.src = "/web-programming/frontEnd/src/component/home/homeBody.html";
+//         history.pushState({ page: "home" }, "Trang chủ", "/home");
+//     });
+//
+//     // document.getElementById("cart-link").addEventListener("click", (event) => {
+//     //     event.preventDefault();
+//     //     iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
+//     //     history.pushState({ page: "home" }, "Trang chủ", "/home");
+//     // });
+// // Lấy tất cả các mục submenu
+//     const submenuLinks = document.querySelectorAll(".submenu a");
+//
+//     submenuLinks.forEach((link) => {
+//         link.addEventListener("click", (event) => {
+//             event.preventDefault();
+//
+//             const pageSrc = link.getAttribute("data-src");
+//             if (pageSrc) {
+//                 iframe.src = pageSrc;
+//                 history.pushState(
+//                     { page: pageSrc },
+//                     link.textContent.trim(),
+//                     pageSrc
+//                 );
+//             } else {
+//                 console.error("Không tìm thấy `data-src` cho mục submenu!");
+//             }
+//         });
+//     });
+//
+//     window.addEventListener("popstate", (event) => {
+//         if (event.state && event.state.page) {
+//             iframe.src = event.state.page;
+//         }
+//     });
 
 
 
