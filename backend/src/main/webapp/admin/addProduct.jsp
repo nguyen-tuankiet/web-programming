@@ -90,9 +90,12 @@
                 <div id="imagePreviewContainer" class="image-preview-container"></div>
                 <p id="dragDropText">Kéo và thả tệp của bạn vào đây</p>
                 <span>hoặc</span>
-                <input type="file" id="fileInput" style="display: none;" multiple/>
-                <button class="browse-files" onclick="document.getElementById('fileInput').click();">Tải ảnh lên
-                </button>
+                <form action="${pageContext.request.contextPath}/uploadImage" method="post" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="file" style="display: none;" multiple/>
+                    <button class="browse-files" onclick="document.getElementById('fileInput').click();">Tải ảnh lên</button>
+                </form>
+
+
             </div>
         </div>
 
