@@ -4,16 +4,16 @@ package com.example.backend.model;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Review {
-    int id;
-    int userId;
-    int productId;
-    int rating;
+    Integer id;
+    Integer userId;
+    Integer productId;
+    Integer rating;
     String description;
 
-    public Review(@ColumnName("id") int id,
-                  @ColumnName("userId") int userId,
-                  @ColumnName("productId") int productId,
-                  @ColumnName("rating") int rating,
+    public Review(@ColumnName("id") Integer id,
+                  @ColumnName("userId") Integer userId,
+                  @ColumnName("productId") Integer productId,
+                  @ColumnName("rating") Integer rating,
                   @ColumnName("description") String description) {
         this.id = id;
         this.userId = userId;
