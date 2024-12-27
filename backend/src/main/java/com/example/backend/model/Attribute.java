@@ -4,11 +4,11 @@ package com.example.backend.model;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Attribute {
-    int id;
+    Integer id;
     String categoryId;
     String name;
 
-    public Attribute(@ColumnName("id") int id,
+    public Attribute(@ColumnName("id") Integer id,
                      @ColumnName("categoryId") String categoryId,
                      @ColumnName("name") String name) {
         this.id = id;

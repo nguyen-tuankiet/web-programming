@@ -3,13 +3,13 @@ package com.example.backend.model;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class OptionVariantValue {
-    int id ;
-    int optionId;
-    int variantValueId;
+    Integer id ;
+    Integer optionId;
+    Integer variantValueId;
 
-    public OptionVariantValue(@ColumnName("id") int id,
-                              @ColumnName("optionId") int optionId,
-                              @ColumnName("variantValueId") int variantValueId) {
+    public OptionVariantValue(@ColumnName("id") Integer id,
+                              @ColumnName("optionId") Integer optionId,
+                              @ColumnName("variantValueId") Integer variantValueId) {
         this.id = id;
         this.optionId = optionId;
         this.variantValueId = variantValueId;

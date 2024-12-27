@@ -13,7 +13,7 @@ public class User {
     String email;
     String phone;
     String password;
-    int avatarId;
+    Integer avatarId;
 
 
     public User(@ColumnName("id") String id,
@@ -24,7 +24,7 @@ public class User {
                 @ColumnName("email") String email,
                 @ColumnName("phone") String phone,
                 @ColumnName("password") String password,
-                @ColumnName("avatarId")int avatarId) {
+                @ColumnName("avatarId")Integer avatarId) {
         this.id = id;
         this.fullName = fullName;
         this.displayName = displayName;
