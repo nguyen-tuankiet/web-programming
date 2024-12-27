@@ -1,15 +1,15 @@
 
 const routes = {
-    // dashboard: '../component/admin_components/Dashboard.html',
-    // my_profile: '../component/admin_components/MyProfile.html',
-    // product_details: '../component/product_detail/Product-detail-admin.html',
-    // list_products: '../component/admin_components/listProduct.html',
+    dashboard: '/backend_war/admin/Dashboard.jsp',
+    my_profile: '/backend_war/admin/MyProfile.jsp',
+    product_details: '/backend_war/product_detail/Product-detail-admin.jsp',
+    list_products: '/backend_war/admin/listProduct.jsp',
     add_product: `/backend_war/admin/addProduct.jsp`,
-    // orders: '../component/admin_components/orders.html',
-    // order_detail: '../component/admin_components/orderDetail.html',
-    // customers: '../component/admin_components/customers.html',
-    // customers_detail: '../component/admin_components/customerDetail.html',
-    // setting: '../component/admin_components/account_settings.html',
+    orders: '/backend_war/admin/orders.jsp',
+    order_detail: '/backend_war/admin/orderDetail.jsp',
+    customers: '/backend_war/admin/customers.jsp',
+    customers_detail: '/backend_war/admin/customerDetail.jsp',
+    setting: '/backend_war/admin/account_settings.jsp',
 };
 
 const userPopup = document.querySelector(".user-popup");
