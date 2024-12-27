@@ -4,10 +4,10 @@ package com.example.backend.model;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class ProductTag {
-    int productId;
-    int tagId;
+    Integer productId;
+    Integer tagId;
 
-    public ProductTag(@ColumnName("productId") int productId,@ColumnName("tagId") int tagId) {
+    public ProductTag(@ColumnName("productId") Integer productId,@ColumnName("tagId") Integer tagId) {
         this.productId = productId;
         this.tagId = tagId;
     }

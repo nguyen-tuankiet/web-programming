@@ -5,18 +5,18 @@ import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import java.util.Date;
 
 public class Card {
-    int id;
-    int userId;
+    Integer id;
+    Integer userId;
     Date duration;
     String type;
-    boolean isDefault;
+    Boolean isDefault;
 
     public Card(
-            @ColumnName("id") int id,
-            @ColumnName("userId") int userId,
+            @ColumnName("id") Integer id,
+            @ColumnName("userId") Integer userId,
             @ColumnName("duration") Date duration,
             @ColumnName("type") String type,
-            @ColumnName("isDefault") boolean isDefault) {
+            @ColumnName("isDefault") Boolean isDefault) {
         this.id = id;
         this.userId = userId;
         this.duration = duration;
