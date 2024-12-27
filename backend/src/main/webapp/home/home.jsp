@@ -29,7 +29,7 @@
 
 
     <div id="home_body">
-        <jsp:include page="bodyHome.jsp"/>
+        <jsp:include page="body-home.jsp"/>
     </div>
 
 

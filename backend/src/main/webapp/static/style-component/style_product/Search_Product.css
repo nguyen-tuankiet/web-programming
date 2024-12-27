@@ -9,7 +9,7 @@ html{
     width: 100%;
     height: 100%;
 }
-body{
+ body{
     width: 100%;
     height: 100%;
     overflow: scroll;
@@ -87,6 +87,21 @@ a{
 
 
 
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: scroll;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.search_header{
+    height: 70px;
+    width: 100%;
+}
+
 
 /*Banner*/
 
@@ -113,11 +128,9 @@ iframe {
 
 
 
-
-#body  {
+#search_body  {
     width: 100%;
-
-    min-height: 1000px;
+    height: 700px;
     background-color: rgba(239, 239, 239, 0.78);
 }
 
@@ -136,28 +149,34 @@ iframe {
 
 #list_product{
     width: 100%;
-    height: 80%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background-color: #F3F3F3;
     padding: 20px;
+    gap: 20px;
+    border-radius: 15px;
+    overflow: visible;
 }
 
 
 /*Top Product*/
 #top_product{
     width: 100%;
-    height: 800px;
+    height: 700px;
     background-color: #E2ECF7;
     border-radius: 15px;
 
 }
-#top_product span  {
+#top_product>span  {
     font-size: 22px;
     font-weight: bold;
     padding: 20px;
 }
 
 #top_product .wrap_item{
-    height: 100%;
     width: 80%;
+    gap: 20px;
 }
 
 
@@ -168,6 +187,12 @@ iframe {
 }
 
 
+#list_product .popular_title{
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+
+}
 
 /*Product item*/
 
@@ -176,7 +201,7 @@ iframe {
     width: 100%;
 }
 
-.product_item span {
+.product_item>span {
     height: 50px;
     width: 100%;
     justify-content: center;
