@@ -31,16 +31,11 @@
                 </a>
                 <div class="submenu submenu-tu-lanh">
                     <div class="submenu-column">
-                        <a
-                                class="nav_item"
-                                data-src="/web-programming/frontEnd/src/component/product_component/Search_Refrigerator.html"
-                                href="#"
-                        >Tất cả Tủ Lạnh</a>
-                        <a class="nav_item" data-src="/web-programming/frontEnd/src/pages/topRefrigerator.html"
-                           href="#"
-                        >Tủ Lạnh BESPOKE <span class="highlight">HẤP DẪN</span></a
-                        >
-                        <a href="#">Tủ Lạnh Multidoor</a>
+                        <a class="nav_item" href="search-refrigerator"   >Tất cả Tủ Lạnh</a>
+
+
+                        <a class="nav_item" href="#">Tủ Lạnh BESPOKE <span class="highlight">HẤP DẪN</span></a>
+                        <a href="">Tủ Lạnh Multidoor</a>
                         <a href="#">Tủ Lạnh Family Hub</a>
                         <a href="#">Tủ Lạnh Side by Side</a>
                         <a href="#">Tủ Lạnh 2 Cửa Ngăn Đông Dưới</a>
