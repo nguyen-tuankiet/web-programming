@@ -6,11 +6,61 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style-component/product-detail/Product-buying-tool.css">
+    <script src="<%= request.getContextPath() %>/static/style-component/product-detail/Product-buying-tool.js"></script>
 </head>
 <body>
+
+<div class="container">
+    <div class="product-title">
+        <%= "Tủ Lạnh Ngăn Đông Trên RT31CG5424B1SV với Ngăn Đông Mềm 4 Chế Độ Optimal Fresh+ 305 L, màu Đen" %>
+    </div>
+    <a href="<%= request.getContextPath() %>/link-Đánh giá" class="product-rating">
+        ★★★☆☆ <span>(<%= "2.6 / 10 đánh giá" %>)</span>
+    </a>
+
+    <div class="product-features">
+        <ul>
+            <li>
+                <div>Ưu đãi thêm 5% (đến 1 TRIỆU đồng) cho đơn hàng đầu tiên từ 8 triệu</div>
+                <div>Thanh toán online trả trước giảm thêm 2%</div>
+                <div>Giảm thêm 3% khi mua từ 2 - 5 sản phẩm điện gia dụng, điều hòa, TV, điện thoại (trừ phụ kiện)</div>
+                <div>Tích thêm 2% điểm Rewards Samsung</div>
+                <div>Giảm thêm 10% tối đa 1 triệu khi nhập mã SSDDeal. Áp dụng cho đơn hàng shoppapp hệ điều hành iOS
+                    đến hết ngày 07/11
+                </div>
+                <div>Liên hệ với tư vấn viên online để biết thêm chi tiết về ưu đãi hoặc để nhận hướng dẫn mua hàng.
+                </div>
+            </li>
+            <li>Ngăn đông mềm linh hoạt 4 chế độ Optimal Fresh+</li>
+            <li>Tăng 20L dung tích với công nghệ SpaceMax™</li>
+            <li>Khử mùi với hệ thống lọc than hoạt tính</li>
+        </ul>
+    </div>
+
+    <div class="option-title">Chọn Màu Sắc</div>
+    <div class="color-options">
+        <div class="color-option black"></div>
+        <div class="color-option silver"></div>
+    </div>
+
+    <div class="option-title">Chọn Dung Tích</div>
+    <div class="capacity-options">
+        <div class="capacity-option">305 L</div>
+        <div class="capacity-option">348 L</div>
+        <div class="capacity-option">345 L</div>
+    </div>
+    <div class="price">
+        <%= "23.000.000 VND" %>
+    </div>
+    <!--    <button class="btn-add-to-cart">Thêm vào giỏ hàng</button>-->
+</div>
 
 </body>
 </html>
