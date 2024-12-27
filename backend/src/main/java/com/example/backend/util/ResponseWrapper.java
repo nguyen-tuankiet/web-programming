@@ -1,16 +1,19 @@
 package com.example.backend.util;
 
 public class ResponseWrapper<T> {
+    private int statusCode;
     private String status;
     private String message;
     private T data;
 
-    public ResponseWrapper(String status, String message, T data) {
+    public ResponseWrapper(int statusCode, String status, String message, T data) {
+        this.statusCode = statusCode;
         this.status = status;
         this.message = message;
         this.data = data;
     }
 
+    // Getters và Setters
     public String getStatus() {
         return status;
     }
@@ -33,5 +36,13 @@ public class ResponseWrapper<T> {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 }
