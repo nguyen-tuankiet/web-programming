@@ -38,7 +38,7 @@
 <div class="showcase">
     <!-- Product Card 1 -->
     <div class="product-large">
-        <a href="${pageContext.request.contextPath}/static/style-component/product-detail/" aria-label="View more">
+        <a href="${pageContext.request.contextPath}/home/Product-detail/ProductDetail.jsp" aria-label="View more">
             <div class="product-name-large">Trắng Thạch Anh/ Nâu Be</div>
             <div class="img-wrap">
                 <img src="${pageContext.request.contextPath}/static/image/img_showcase/2.1.jpg" alt="2.1">
@@ -51,7 +51,7 @@
     <div class="all-product-small">
         <!-- Product Card 2 -->
         <div class="product-small">
-            <a href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.js" aria-label="View more">
+            <a href="${pageContext.request.contextPath}/home/Product-detail/ProductDetail.jsp" aria-label="View more">
                 <div class="product-name">Trắng Thạch Anh/ Xanh Navy</div>
                 <div class="img-wrap">
                     <img src="${pageContext.request.contextPath}/static/image/img_showcase/2.2.jpg" alt="2.2">
@@ -61,7 +61,7 @@
         </div>
         <!-- Product Card 3 -->
         <div class="product-small">
-            <a href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.js" aria-label="View more">
+            <a href="${pageContext.request.contextPath}/home/Product-detail/ProductDetail.jsp" aria-label="View more">
                 <div class="product-name">Trắng Thạch Anh/ Hồng Pha Lê</div>
                 <div class="img-wrap">
                     <img src="${pageContext.request.contextPath}/static/image/img_showcase/2.3.jpg" alt="2.3">
@@ -71,7 +71,7 @@
         </div>
         <!-- Product Card 4 -->
         <div class="product-small">
-            <a href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.js" aria-label="View more">
+            <a href="${pageContext.request.contextPath}/home/Product-detail/ProductDetail.jsp" aria-label="View more">
                 <div class="product-name">Trắng Thạch Anh</div>
                 <div class="img-wrap">
                     <img src="${pageContext.request.contextPath}/static/image/img_showcase/2.4.jpg" alt="2.4">
@@ -81,7 +81,7 @@
         </div>
         <!-- Product Card 5 -->
         <div class="product-small">
-            <a href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.js" aria-label="View more">
+            <a href="${pageContext.request.contextPath}/home/Product-detail/ProductDetail.jsp" aria-label="View more">
                 <div class="product-name">Trắng Thạch Anh/ Nâu Ánh Than</div>
                 <div class="img-wrap">
                     <img src="${pageContext.request.contextPath}/static/image/img_showcase/2.5.jpg" alt="2.5">
@@ -106,12 +106,8 @@
 
 <!-- Slideshow Container 2 -->
 <div id="slideshow2">
-    <iframe src="${pageContext.request.contextPath}/static/slideshow/slideshow-topRefrigerator.jsp" class="slideshow2"></iframe>
+    <iframe src="${pageContext.request.contextPath}/home/slideshow-topRefrigerator.jsp" class="slideshow2"></iframe>
 </div>
-
-<!-- Rest of the content remains the same, updating paths dynamically -->
-
-
 <!-- Feature benefit -->
 <div class="feature-benefit">
     <div class="feature-benefit__text">
@@ -144,9 +140,11 @@
 
 <footer>
     <div class="footer-container">
-        <!-- Footer content -->
         <p>Bản quyền ©1995-2024 Samsung bảo lưu mọi quyền.</p>
         <p>Công ty TNHH Điện Tử Samsung Vina</p>
+        <p>Giấy CNĐK: 4110430003290, do UBND TP HCM cấp ngày 28/8/2007</p>
+        <p>Địa chỉ: Số 2, đường Hải Triều, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
+        <p>Điện thoại: +84-2839157310</p>
     </div>
 </footer>
 
