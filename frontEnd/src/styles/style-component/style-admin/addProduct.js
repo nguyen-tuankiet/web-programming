@@ -238,3 +238,27 @@ document.getElementById('fileInput').addEventListener('change', function (event)
         previewModal.appendChild(nextButton);
         document.body.appendChild(previewModal);
     }
+
+// Hàm thêm biến thể
+function addVariant() {
+    const optionsContainer = document.getElementById('optionsContainer1');
+    const variantGroup = document.querySelector('.variant-group'); // Lấy phần tử mẫu
+    const newVariant = variantGroup.cloneNode(true); // Tạo bản sao
+
+    // Reset các giá trị trong bản sao
+    const inputs = newVariant.querySelectorAll('input');
+    inputs.forEach(input => input.value = ''); // Xóa giá trị input
+
+    // Gắn bản sao vào container
+    optionsContainer.appendChild(newVariant);
+}
+
+function removeVariant(button) {
+    const variantGroup = button.closest('.variant-group'); // Tìm phần tử cha gần nhất
+    if (variantGroup) {
+        variantGroup.remove();
+    }
+}
+
+
+

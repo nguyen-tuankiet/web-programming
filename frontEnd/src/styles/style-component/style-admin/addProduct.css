@@ -63,7 +63,7 @@ a {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin: 10px 0px;
 }
 
 .form-group label {
@@ -296,7 +296,7 @@ textarea:focus {
     padding: 20px;
 }
 .left-column{
-
+    width: 60%;
 }
 
 .right-column {
@@ -626,5 +626,51 @@ textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
     outline: none;
+}
+
+.pricing-section{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+.pricing-section  input{
+    width: 345px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    color: #7F7B88;
+}
+
+.variant-group{
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.variant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.add-variant-button {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #007bff;
+    background-color: #ffffff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.add-variant-button:hover {
+    cursor: pointer;
+    background-color: #e0f0ff;
 }
 

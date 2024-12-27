@@ -1,8 +1,9 @@
+
 <%--
   Created by IntelliJ IDEA.
-  User: kiet
-  Date: 12/26/2024
-  Time: 10:39 PM
+  User: win10pro
+  Date: 12/27/2024
+  Time: 12:21 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -40,11 +41,14 @@
                         <input type="text" id="sku" placeholder="Ví dụ: 348121032">
                     </div>
                     <div class="form-group half-width">
-                        <label for="weight">Danh mục</label>
-                        <div class="weight-input">
-                            <input type="text" id="weight" placeholder="Tủ lạnh">
-
-                        </div>
+                        <label>Danh mục</label>
+                        <select class="option-select">
+                            <option value="size">Kích thước</option>
+                            <option value="color">Màu sắc</option>
+                            <option value="material">Chất liệu</option>
+                            <option value="style">Kiểu dáng</option>
+                            <option value="title">Tiêu đề</option>
+                        </select>
                     </div>
                 </div>
 
@@ -54,11 +58,14 @@
                     <div class="toolbar">
                         <button type="button" class="toolbar-btn"><i class="fas fa-bold"></i></button> <!-- Bold -->
                         <button type="button" class="toolbar-btn"><i class="fas fa-italic"></i></button> <!-- Italic -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-underline"></i></button> <!-- Underline -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-strikethrough"></i></button> <!-- Strike -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-underline"></i></button>
+                        <!-- Underline -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-strikethrough"></i></button>
+                        <!-- Strike -->
                         <button type="button" class="toolbar-btn"><i class="fas fa-link"></i></button> <!-- Link -->
                         <button type="button" class="toolbar-btn"><i class="fas fa-image"></i></button> <!-- Image -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-quote-right"></i></button> <!-- Blockquote -->
+                        <button type="button" class="toolbar-btn"><i class="fas fa-quote-right"></i></button>
+                        <!-- Blockquote -->
                         <button type="button" class="toolbar-btn"><i class="fas fa-code"></i></button> <!-- Code -->
                         <button type="button" class="toolbar-btn"><i class="fas fa-list-ul"></i></button>
                     </div>
@@ -76,91 +83,72 @@
 
             <div class="media-upload-box">
                 <div class="upload-icon" id="uploadIcon">
-                    <img id="previewImage" src="${pageContext.request.contextPath}/static/image/screenshot-1730907930298-removebg-preview.png" height="170" width="130" alt="Preview Image" />
+                    <img id="previewImage" src="${pageContext.request.contextPath}/static/image/screenshot-1730907930298-removebg-preview.png"
+                         height="170" width="130" alt="Preview Image"/>
 
                 </div>
                 <div id="imagePreviewContainer" class="image-preview-container"></div>
                 <p id="dragDropText">Kéo và thả tệp của bạn vào đây</p>
                 <span>hoặc</span>
-                <input type="file" id="fileInput" style="display: none;" multiple />
-                <button class="browse-files" onclick="document.getElementById('fileInput').click();">Tải ảnh lên</button>
+                <input type="file" id="fileInput" style="display: none;" multiple/>
+                <button class="browse-files" onclick="document.getElementById('fileInput').click();">Tải ảnh lên
+                </button>
             </div>
         </div>
-
-
 
 
         <div id="optionsContainer1" class="options-section">
-            <h2>Biến thể</h2>
-            <div id="optionsContainer" class="options-container">
-                <div class="option-group">
-                    <select class="option-select">
-                        <option value="size">Kích thước</option>
-                        <option value="color">Màu sắc</option>
-                        <option value="material">Chất liệu</option>
-                        <option value="style">Kiểu dáng</option>
-                        <option value="title">Tiêu đề</option>
-                    </select>
-                    <select class="option-select">
-                        <option value="size">Kích thước</option>
-                        <option value="color">Màu sắc</option>
-                        <option value="material">Chất liệu</option>
-                        <option value="style">Kiểu dáng</option>
-                        <option value="title">Tiêu đề</option>
-                    </select>
-
-                    <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
-                </div>
+            <div class="variant-header">
+                <h2>Biến thể</h2>
+                <button class="add-variant-button" onclick="addVariant()">+ Thêm biến thể</button>
             </div>
-            <button class="add-option-button" onclick="addOptionGroup('optionsContainer')">+ Thêm biến thể</button>
+
+            <div class="variant-group">
+                <div id="optionsContainer" class="options-container">
+                    <div class="pricing-section">
+                        <div class="form-group half-width">
+                            <input type="text" id="price" placeholder="Giá">
+                        </div>
+                        <div class="form-group half-width">
+                            <input type="text" id="total" placeholder="Số lượng">
+                        </div>
+
+                    </div>
+
+                    <label for="productName">Thuộc tính</label>
+                    <div class="option-group">
+                        <select class="option-select">
+                            <option value="size">Kích thước</option>
+                            <option value="color">Màu sắc</option>
+                            <option value="material">Chất liệu</option>
+                            <option value="style">Kiểu dáng</option>
+                            <option value="title">Tiêu đề</option>
+                        </select>
+                        <select class="option-select">
+                            <option value="size">Kích thước</option>
+                            <option value="color">Màu sắc</option>
+                            <option value="material">Chất liệu</option>
+                            <option value="style">Kiểu dáng</option>
+                            <option value="title">Tiêu đề</option>
+                        </select>
+
+                        <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
+                    </div>
+                </div>
+                <button class="add-option-button" onclick="addOptionGroup('optionsContainer')">+ Thêm thuộc tính
+                </button>
+            </div>
+
         </div>
-
-
     </div>
 
 
     <div class="right-column">
-        <div class="section pricing-section">
-            <h2>Chiếc khấu</h2>
-            <label for="price">Giá</label>
-            <input type="text" id="price" placeholder="0.00">
-
-            <label for="price">Số lượng</label>
-            <input type="text" id="total" placeholder="0">
-
-        </div>
-
-
-        <div class="section">
-            <h2>Thuộc tính</h2>
-            <div id="optionsContainer2" class="options-container">
-                <div class="option-group">
-                    <select class="option-select">
-                        <option value="size">Kích thước</option>
-                        <option value="color">Màu sắc</option>
-                        <option value="material">Chất liệu</option>
-                        <option value="style">Kiểu dáng</option>
-                        <option value="title">Tiêu đề</option>
-                    </select>
-                    <select class="option-select">
-                        <option value="size">Kích thước</option>
-                        <option value="color">Màu sắc</option>
-                        <option value="material">Chất liệu</option>
-                        <option value="style">Kiểu dáng</option>
-                        <option value="title">Tiêu đề</option>
-                    </select>
-                    <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
-                </div>
-            </div>
-            <button class="add-option-button" onclick="addOptionGroup('optionsContainer2')">+ Thêm thuộc tính</button>
-        </div>
-
 
         <div class="section organization-section">
             <h2>Tổ chức</h2>
             <label for="vendor">Nhà cung cấp</label>
             <input type="text" id="vendor" placeholder="eg. Nike">
-
 
             <label for="collections">Bộ sưu tập</label>
             <select id="collections">
@@ -170,16 +158,17 @@
                 <option value="summer">Khác</option>
             </select>
 
-
             <label for="tags">Thẻ</label>
             <input type="text" id="tags" placeholder="Nhập thẻ tại đây">
         </div>
-        <div class = "save">
+
+
+        <div class="save">
             <button>Lưu</button>
         </div>
     </div>
 
 </div>
-</body>
 <script src="${pageContext.request.contextPath}/static/style-component/style-admin/addProduct.js"></script>
+</body>
 </html>
