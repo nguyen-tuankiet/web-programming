@@ -1,67 +1,53 @@
-package com.example.web_programming.model;
+package com.example.backend.model;
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jetbrains.annotations.Nullable;
+
 
 public class Product {
-    int id;
+    Integer id;
     String name;
     String sku;
     String description;
-    boolean is_active;
-    int categoryId;
-    int brandId;
-    int noOfViews;
-    int noOfSold;
-    int primaryImage;
+    boolean isActive;
+    Integer categoryId;
+    Integer brandId;
+    Integer noOfViews;
+    Integer noOfSold;
+    Integer primaryImage;
+    Integer price;
 
 
-    public Product(@ColumnName("id") int id,
-                   @ColumnName("name") String name,
-                   @ColumnName("sku") String sku,
-                   @ColumnName("description") String description,
-                   @ColumnName("is_active") boolean is_active,
-                   @ColumnName("categoryId") int categoryId,
-                   @ColumnName("brandId") int brandId,
-                   @ColumnName("noOfViews") int noOfViews,
-                   @ColumnName("noOfSold") int noOfSold,
-                   @ColumnName("primaryImage") int primaryImage ){
 
-
+    public Product(
+            @ColumnName("id") Integer id,
+            @ColumnName("name") String name,
+            @ColumnName("sku") String sku,
+            @ColumnName("description") @Nullable String description,
+            @ColumnName("isActive") Boolean isActive,
+            @ColumnName("categoryId") Integer categoryId,
+            @ColumnName("brandId")@Nullable Integer brandId,
+            @ColumnName("noOfViews") Integer noOfViews,
+            @ColumnName("noOfSold") Integer noOfSold,
+            @ColumnName("primaryImage")@Nullable Integer primaryImage,
+            @ColumnName("price") Integer price
+    )
+    {
         this.id = id;
         this.name = name;
         this.sku = sku;
         this.description = description;
-        this.is_active = is_active;
+        this.isActive = isActive;
         this.categoryId = categoryId;
         this.brandId = brandId;
         this.noOfViews = noOfViews;
         this.noOfSold = noOfSold;
         this.primaryImage = primaryImage;
+        this.price = price;
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -89,51 +75,59 @@ public class Product {
         this.description = description;
     }
 
-    public boolean isIs_active() {
-        return is_active;
+    public boolean isActive() {
+        return isActive;
     }
 
-    public void setIs_active(boolean is_active) {
-        this.is_active = is_active;
+    public void setActive(boolean active) {
+        this.isActive = active;
     }
 
-    public int getCategoryId() {
+    public Integer getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
     }
 
-    public int getBrandId() {
+    public Integer getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(int brandId) {
+    public void setBrandId(Integer brandId) {
         this.brandId = brandId;
     }
 
-    public int getNoOfViews() {
+    public Integer getNoOfViews() {
         return noOfViews;
     }
 
-    public void setNoOfViews(int noOfViews) {
+    public void setNoOfViews(Integer noOfViews) {
         this.noOfViews = noOfViews;
     }
 
-    public int getNoOfSold() {
+    public Integer getNoOfSold() {
         return noOfSold;
     }
 
-    public void setNoOfSold(int noOfSold) {
+    public void setNoOfSold(Integer noOfSold) {
         this.noOfSold = noOfSold;
     }
 
-    public int getPrimaryImage() {
+    public Integer getPrimaryImage() {
         return primaryImage;
     }
 
-    public void setPrimaryImage(int primaryImage) {
+    public void setPrimaryImage(Integer primaryImage) {
         this.primaryImage = primaryImage;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }
