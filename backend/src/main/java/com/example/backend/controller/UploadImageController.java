@@ -84,28 +84,37 @@ public class UploadImageController extends HttpServlet {
                 byte[] fileBytes = inputStream.readAllBytes();
                 String imageUrl = imageService.uploadImage(fileBytes);
 
+                // Trả về phản hồi thành công
                 ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                        HttpServletResponse.SC_OK,
                         "success",
                         "Ảnh đã được upload thành công!",
                         new Image(null, imageUrl)
                 );
-
+                response.setStatus(HttpServletResponse.SC_OK); // 200
                 response.getWriter().println(objectMapper.writeValueAsString(responseWrapper));
             } catch (Exception e) {
+                // Trả về phản hồi lỗi
                 ResponseWrapper<Object> errorResponse = new ResponseWrapper<>(
+                        HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                         "error",
                         "Lỗi khi upload ảnh: " + e.getMessage(),
                         null
                 );
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500
                 response.getWriter().println(objectMapper.writeValueAsString(errorResponse));
             }
         } else {
+            // Trả về phản hồi khi không tìm thấy file
             ResponseWrapper<Object> errorResponse = new ResponseWrapper<>(
+                    HttpServletResponse.SC_BAD_REQUEST,
                     "error",
                     "Không tìm thấy file để upload.",
                     null
             );
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400
             response.getWriter().println(objectMapper.writeValueAsString(errorResponse));
         }
     }
+
 }
