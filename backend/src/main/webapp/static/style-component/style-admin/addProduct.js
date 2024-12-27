@@ -262,5 +262,18 @@ function removeVariant(button) {
     }
 }
 
+document.getElementById('fileInput').addEventListener('change', function (event) {
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
 
-
+    fetch(`${pageContext.request.contextPath}/uploadImage`, {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.text())
+        .then(data => {
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            imagePreviewContainer.innerHTML = `<p>${data}</p>`;
+        })
+        .catch(error => console.error('Error:', error));
+});
