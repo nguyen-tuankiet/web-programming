@@ -113,7 +113,7 @@
         </nav>
 
         <div id="content">
-            <iframe src="${pageContext.request.contextPath}/Dashboard.jsp" frameborder="0"></iframe>
+            <iframe src="${pageContext.request.contextPath}/admin/Dashboard.jsp" frameborder="0"></iframe>
         </div>
     </div>
 </div>
