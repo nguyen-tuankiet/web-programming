@@ -4,15 +4,15 @@ package com.example.backend.model;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Options {
-    int id;
-    int productId;
-    int price;
-    int stock;
+    Integer id;
+    Integer productId;
+    Integer price;
+    Integer stock;
 
-    public Options(@ColumnName("id") int id,
-                   @ColumnName("productId") int productId,
-                   @ColumnName("price") int price,
-                   @ColumnName("stock") int stock) {
+    public Options(@ColumnName("id") Integer id,
+                   @ColumnName("productId") Integer productId,
+                   @ColumnName("price") Integer price,
+                   @ColumnName("stock") Integer stock) {
         this.id = id;
         this.productId = productId;
         this.price = price;
