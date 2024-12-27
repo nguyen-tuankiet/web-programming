@@ -1,27 +1,39 @@
+
 const routes = {
-    dashboard: '../component/admin_components/Dashboard.html',
-    my_profile: '../component/admin_components/myProfile.html',
-    product_details: '../component/product_detail/Product-detail-admin.html',
-    list_products: '../component/admin_components/listProduct.html',
-    add_product: '../component/admin_components/addProduct.html',
-    orders: '../component/admin_components/orders.html',
-    order_detail: '../component/admin_components/orderDetail.html',
-    customers: '../component/admin_components/customers.html',
-    customers_detail: '../component/admin_components/customerDetail.html',
-    setting: '../component/admin_components/account_settings.html',
+    // dashboard: '../component/admin_components/Dashboard.html',
+    // my_profile: '../component/admin_components/MyProfile.html',
+    // product_details: '../component/product_detail/Product-detail-admin.html',
+    // list_products: '../component/admin_components/listProduct.html',
+    add_product: `/backend_war/admin/addProduct.jsp`,
+    // orders: '../component/admin_components/orders.html',
+    // order_detail: '../component/admin_components/orderDetail.html',
+    // customers: '../component/admin_components/customers.html',
+    // customers_detail: '../component/admin_components/customerDetail.html',
+    // setting: '../component/admin_components/account_settings.html',
 };
+
 const userPopup = document.querySelector(".user-popup");
 const avatar = document.querySelector(".avatar");
 
 
 function loadPage(pageKey) {
     const pagePath = routes[pageKey];
+    console.log("Đang tải URL:", pagePath);
+
+    const iframe = document.querySelector("#content iframe");
+    if (!iframe) {
+        console.error("Iframe không tồn tại trong DOM.");
+        return;
+    }
+
     if (pagePath) {
-        document.querySelector("#content iframe").src = pagePath;
+        iframe.src = pagePath;
     } else {
-        console.error("Page not found:", pageKey);
+        console.error("Không tìm thấy trang:", pageKey);
     }
 }
+
+
 
 
 document.querySelectorAll('.menu_item').forEach(item => {
