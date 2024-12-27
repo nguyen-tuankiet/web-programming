@@ -3,7 +3,6 @@ package com.example.backend.model;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.jetbrains.annotations.Nullable;
 
-
 public class Product {
     Integer id;
     String name;
