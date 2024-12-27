@@ -81,17 +81,17 @@ body {
 .buy-button:hover {
     background-color: #333;
 }
-.navbar {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 60px 217px;
-    background-color: transparent;
-    font-size: 1.2rem;
-    z-index: 10;
-    position: absolute;
-    transition: color 0.3s ease-in-out;
-}
+/*.navbar {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    gap: 30px;*/
+/*    padding: 60px 217px;*/
+/*    background-color: transparent;*/
+/*    font-size: 1.2rem;*/
+/*    z-index: 10;*/
+/*    position: absolute;*/
+/*    transition: color 0.3s ease-in-out;*/
+/*}*/
 
 
 /*.navbar a {*/
@@ -139,6 +139,9 @@ body {
 .navbar.dark a {
     color: white; /* Màu chữ khi trạng thái tối (image3, image4) */
 }
+
+
+
 .content {
     text-align: center;
     padding: 0 20px;
@@ -302,8 +305,8 @@ body {
 
 #banner {
     width: 100%;
-    min-height: 620px;
-    height: 25%;
+    /*min-height: 620px;*/
+    /*height: 25%;*/
     padding: 0;
     background-color: #ffffff;
     z-index: 1;
