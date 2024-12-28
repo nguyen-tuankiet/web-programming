@@ -16,8 +16,8 @@ public interface ProductDAO {
             "            p.categoryId as categoryId, p.primaryImage as primaryImage,\n" +
 
             "            ops.id as optionId ,ops.price as price,\n" +
-            "            ops.stock as stock         \n" +
-            "            img.url as imageUrl\n" +
+            "            ops.stock as stock, \n" +
+            "            img.url as imageUrl \n" +
 
 
             "            FROM products as p\n" +
@@ -35,6 +35,36 @@ public interface ProductDAO {
 
 
 
+    @SqlQuery(value = "")
+    @RegisterConstructorMapper(Product.class)
+    Product getProductById(@Bind("id") int id);
+
+
+
+
+
+    @SqlQuery(value=
+            "SELECT p.id as id, p.name as name, p.description as description,\n" +
+            "         p.isActive as isActive,\n" +
+            "       p.noOfViews as noOfViews, p.noOfSold as noOfSold,\n" +
+            "        p.primaryImage as primaryImage,\n" +
+
+            "       ops.id as optionId ,ops.price as price,\n" +
+            "       ops.stock as stock,\n" +
+
+            "       img.url as imageUrl\n" +
+
+            "FROM products as p\n" +
+            "         INNER JOIN categories as cate on cate.id = p.categoryId\n" +
+            "         INNER JOIN `options` as ops on ops.productId = p.id\n" +
+            "         inner join image as img on p.primaryImage = img.id\n" +
+
+            "WHERE p.id= :productId and ops.id =:optionId ;" )
+
+
+    @RegisterConstructorMapper(Product.class)
+    Product getProductByIdAndOptionId(@Bind("productId") int productId,
+                                      @Bind("optionId") int optionId);
 
 
 
