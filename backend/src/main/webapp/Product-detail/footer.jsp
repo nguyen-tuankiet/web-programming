@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Footer</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/style-component/style-home/footer.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style-component/style-home/footer.css">
 </head>
 <body>
 
