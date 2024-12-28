@@ -20,15 +20,7 @@
 <div class="wrap mid_align row">
     <input type="checkbox">
     <div class="image">
-
-        <c:if test="${empty item.imageUrl}">
-            <img src="${pageContext.request.contextPath}/static/image/default_img.jpg" alt=""/>
-        </c:if>
-
-        <c:otherwise>
-            <img src="${item.imageUrl}" alt=""/>
-        </c:otherwise>
-
+                <img src="${pageContext.request.contextPath}/static/image/default_img.jpg" alt=""/>
 
     </div>
 

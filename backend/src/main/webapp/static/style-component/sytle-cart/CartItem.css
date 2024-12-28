@@ -89,9 +89,8 @@ a{
 /*Wrap*/
 .wrap{
     /*width: 700px;*/
-    /*height: 200px;*/
+    height: 150px;
     width: 100%;
-    height: 100%;
     padding: 0 10px;
     background-color: rgba(206, 239, 244, 0.38);
     border-radius: 10px;
@@ -117,6 +116,7 @@ a{
 }
 
 .description .title{
+    font-weight: 500;
     display: flex;
     text-align: left;
     font-size: 18px ;
@@ -130,6 +130,11 @@ a{
     font-weight: 400;
     padding: 10px 0;
 }
+
+.color_name{
+    margin-bottom: 5px;
+}
+
 
 .description .status{
     width: 100%;
@@ -159,9 +164,12 @@ a{
     justify-content: space-evenly;
 }
 .section_price .price{
+    margin-bottom: 5px;
     font-size: 18px ;
     font-weight: 600;
     color: #0170F0;
+    display: flex;
+    justify-content: center;
 }
 
 .quantity{
