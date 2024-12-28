@@ -54,9 +54,76 @@
 
 
                     <c:forEach items="${productCarts}" var="p">
-                        <jsp:include page="cart-item.jsp">
-                            <jsp:param name="item" value="${p}"/>
-                        </jsp:include>
+
+                        <div class="wrap mid_align row">
+                            <input type="checkbox">
+                            <div class="image">
+                                <c:choose>
+                                    <c:when test="${empty p.imageUrl}">
+                                        <img src="${pageContext.request.contextPath}/static/image/default_img.jpg" alt=""/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${p.imageUrl}" alt=""/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+
+
+                            <div class="description mid_align col  ">
+                                <div class="title ">${p.name}</div>
+
+                                <div class="color">
+                                    <span class="color_name">Màu Sắc: Đen  </span>
+                                </div>
+
+
+<%--                                <c:choose>--%>
+<%--                                    <c:when test="${not empty p.stock and p.stock > 0}">--%>
+<%--                                        <div class="status">--%>
+<%--                                            <span class="status_type">Còn hàng</span>--%>
+<%--                                        </div>--%>
+<%--                                    </c:when>--%>
+
+<%--                                    <c:otherwise>--%>
+<%--                                        <div class="status">--%>
+<%--                                            <span class="status_type">Đang về hàng</span>--%>
+<%--                                        </div>--%>
+<%--                                    </c:otherwise>--%>
+<%--                                </c:choose>--%>
+
+
+                                <div class="status">
+                                    <span class="status_type">Còn hàng</span>
+                                </div>
+
+                            </div>
+
+
+                            <div class="section_price mid_align col  ">
+                                <span class="price">
+                                    <fmt:formatNumber value="${p.price}" pattern="#,###"/> VND
+                                </span>
+
+
+                                <div class="quantity mid_align row">
+                                    <i class="fa-solid fa-minus"></i>
+                                    <span class="num mid_align">
+                                            ${p.quantity}
+                                    </span>
+                                    <i class="fa-solid fa-plus"></i>
+
+                                </div>
+
+                                <div class="remove">
+                                    <i class=" del fa-solid fa-trash-can"></i>
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
                     </c:forEach>
 
 
