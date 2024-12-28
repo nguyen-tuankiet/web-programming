@@ -1,10 +1,13 @@
 package com.example.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class Image {
+    @JsonProperty("id")
     Integer id;
+    @JsonProperty("url")
     String url;
 
     public Image(@ColumnName("id") Integer id,@ColumnName("url") String url) {
@@ -12,11 +15,11 @@ public class Image {
         this.url = url;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
