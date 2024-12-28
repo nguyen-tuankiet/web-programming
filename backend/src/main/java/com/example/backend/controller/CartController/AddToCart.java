@@ -1,6 +1,7 @@
 package com.example.backend.controller.CartController;
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.model.DAO.cart.Cart;
 import com.example.backend.model.Product;
 import com.example.backend.service.ProductService;
 import jakarta.servlet.*;
@@ -22,8 +23,18 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        Product product = productService.ge
+        Integer productId=  Integer.parseInt(request.getParameter("productId"));
+        Integer optionId =Integer.parseInt(request.getParameter("optionId"));
 
+        Product product = productService.getProductByIdAndOptionId(productId,optionId);
+
+        HttpSession session = request.getSession();
+        Cart cart= (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+            session.setAttribute("cart",cart);
+        }
+        cart.addProduct(product);
 
     }
 }
