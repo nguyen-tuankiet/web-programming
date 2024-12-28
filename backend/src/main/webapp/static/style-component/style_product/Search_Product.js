@@ -1,7 +1,16 @@
-document.getElementById('buy_now').addEventListener('click', function() {
-    window.location.href = '../../../component/Checkout/Checkout.html';
-});
+function addToCart(productId, optionId) {
+    fetch("/backend_war_exploded/add-cart", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `productId=${productId}&optionId=${optionId}`
+    })
+        .then(data => {
+            console.log(data);
+            alert("Added to cart");
 
-document.getElementById('name').addEventListener('click', function() {
-    window.location.href = '../../../component/product_detail/Product-detail.html';
-});
+        }).catch(error => console.log(error));
+
+}
+
