@@ -16,4 +16,14 @@ public class ProductService {
     public List<Product> getProductsByCategory(int categoryId){
         return jdbi.withExtension(ProductDAO.class, dao -> dao.getProductsByCategory(categoryId));
     }
+
+    public Product getProductById(int productId){
+        return jdbi.withExtension(ProductDAO.class, dao -> dao.getProductById(productId));
+    }
+
+
+    public Product getProductByIdAndOptionId(int productId, int optionId){
+        return jdbi.withExtension(ProductDAO.class, dao -> dao.getProductByIdAndOptionId(productId,optionId));
+    }
+
 }
