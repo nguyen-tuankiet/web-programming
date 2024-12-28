@@ -11,8 +11,8 @@ import org.jdbi.v3.core.Jdbi;
 
 public class ProductService {
     Jdbi jdbi;
-    private final ProductDAO productDAO;
-    private final ImageDao imageDao;
+    private  ProductDAO productDAO;
+    private  ImageDao imageDao;
 
 
     public ProductService(Jdbi jdbi, ProductDAO productDAO, ImageDao imageDao){
@@ -21,6 +21,9 @@ public class ProductService {
         this.imageDao = imageDao;
     }
 
+    public ProductService(Jdbi jdbi){
+        this.jdbi = jdbi;
+    }
     public List<Product> getProductsByCategory(int categoryId){
         return jdbi.withExtension(ProductDAO.class, dao -> dao.getProductsByCategory(categoryId));
     }
