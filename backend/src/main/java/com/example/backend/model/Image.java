@@ -12,13 +12,10 @@ public class Image {
         this.url = url;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUrl() {
         return url;

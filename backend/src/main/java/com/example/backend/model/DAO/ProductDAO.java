@@ -9,15 +9,35 @@ import java.util.List;
 
 public interface ProductDAO {
 
-    @SqlQuery("SELECT p.id as id, p.name as name, p.description as description, " +
-            "p.sku as sku, p.isActive as isActive, p.brandId as brandId, " +
-            "p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
-            "p.categoryId as categoryId, p.primaryImage as primaryImage, ops.price as price " +
-            "FROM products as p INNER JOIN categories as cate on cate.id = p.categoryId " +
-            "INNER JOIN `options` as ops on ops.productId = p.id " +
-            "WHERE cate.id= :categoryId and ops.price = (SELECT MIN(price) " +
-            " FROM options " +
-            " WHERE p.id = options.productId) ")
+    @SqlQuery(value = "\n" +
+            "SELECT p.id as id, p.name as name, p.description as description,\n" +
+            "            p.sku as sku, p.isActive as isActive, p.brandId as brandId, \n" +
+            "            p.noOfViews as noOfViews, p.noOfSold as noOfSold, \n" +
+            "            p.categoryId as categoryId, p.primaryImage as primaryImage,\n" +
+
+            "            ops.id as optionId ,ops.price as price,\n" +
+            "            ops.stock as stock         \n" +
+            "            img.url as imageUrl\n" +
+
+
+            "            FROM products as p\n" +
+            "                INNER JOIN categories as cate on cate.id = p.categoryId\n" +
+            "                INNER JOIN `options` as ops on ops.productId = p.id\n" +
+            "                inner join image as img on p.primaryImage = img.id\n" +
+
+            "            WHERE cate.id= :categoryId and ops.price = (\n" +
+            "                    SELECT MIN(price)\n" +
+            "                    FROM options as ops\n" +
+            "                    WHERE p.id = ops.productId and ops.stock > 0);")
+
     @RegisterConstructorMapper(Product.class)
     List<Product> getProductsByCategory(@Bind("categoryId") int categoryId);
+
+
+
+
+
+
+
+
 }
