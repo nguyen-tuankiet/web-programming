@@ -163,7 +163,7 @@
             </a>
 
             <a class="nav_item icon"
-               href="#" id="cart-link"><i class="fas fa-shopping-cart"></i>
+               href="cart" id="cart-link"><i class="fas fa-shopping-cart"></i>
             </a>
 
             <div class="icon user-login" target="_top">

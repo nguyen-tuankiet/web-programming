@@ -1,51 +1,43 @@
 package com.example.backend.model.DAO;
 
-import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
-import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import com.example.backend.model.Product;
 import java.util.List;
 
 public interface ProductDAO {
-    // Create product
-    @SqlUpdate("INSERT INTO products (name, sku, description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage, price) " +
-            "VALUES (:name, :sku, :description, :isActive, :categoryId, :brandId, :noOfViews, :noOfSold, :primaryImage, :price)")
-    @GetGeneratedKeys
-    long addProduct(@Bind("name") String name,
-                     @Bind("sku") String sku,
-                     @Bind("description") String description,
-                     @Bind("isActive") boolean isActive,
-                     @Bind("categoryId") int categoryId,
-                     @Bind("brandId") int brandId,
-                     @Bind("noOfViews") int noOfViews,
-                     @Bind("noOfSold") int noOfSold,
-                     @Bind("primaryImage") Integer primaryImage,
-                     @Bind("price") int price);
+
+    @SqlQuery(value = "\n" +
+            "SELECT p.id as id, p.name as name, p.description as description,\n" +
+            "            p.sku as sku, p.isActive as isActive, p.brandId as brandId, \n" +
+            "            p.noOfViews as noOfViews, p.noOfSold as noOfSold, \n" +
+            "            p.categoryId as categoryId, p.primaryImage as primaryImage,\n" +
+
+            "            ops.id as optionId ,ops.price as price,\n" +
+            "            ops.stock as stock         \n" +
+            "            img.url as imageUrl\n" +
 
 
-    // Liên kết sản phẩm với hình ảnh trong bảng liên kết product_images
-    @SqlUpdate("INSERT INTO product_images (productId, imageId) VALUES (:productId, :imageId)")
-    void linkProductToImage(@Bind("productId") long productId, @Bind("imageId") long imageId);
+            "            FROM products as p\n" +
+            "                INNER JOIN categories as cate on cate.id = p.categoryId\n" +
+            "                INNER JOIN `options` as ops on ops.productId = p.id\n" +
+            "                inner join image as img on p.primaryImage = img.id\n" +
 
-    // Cập nhật hình ảnh chính của sản phẩm
-    @SqlUpdate("UPDATE products SET primaryImage = :primaryImage WHERE id = :productId")
-    void updatePrimaryImage(@Bind("productId") long productId, @Bind("primaryImage") long primaryImage);
+            "            WHERE cate.id= :categoryId and ops.price = (\n" +
+            "                    SELECT MIN(price)\n" +
+            "                    FROM options as ops\n" +
+            "                    WHERE p.id = ops.productId and ops.stock > 0);")
 
-
-
-    //get product by category
-    @SqlQuery("SELECT p.id as id, p.name as name, p.description as description, " +
-            "p.sku as sku, p.isActive as isActive, p.brandId as brandId, " +
-            "p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
-            "p.categoryId as categoryId, p.primaryImage as primaryImage, ops.price as price " +
-            "FROM products as p INNER JOIN categories as cate on cate.id = p.categoryId " +
-            "INNER JOIN `options` as ops on ops.productId = p.id " +
-            "WHERE cate.id= :categoryId and ops.price = (SELECT MIN(price) " +
-            " FROM options " +
-            " WHERE p.id = options.productId) ")
     @RegisterConstructorMapper(Product.class)
     List<Product> getProductsByCategory(@Bind("categoryId") int categoryId);
+
+
+
+
+
+
+
+
 }

@@ -245,10 +245,14 @@
                                 </div>
 
 
-                                <a href="add-cart?pid=${p.id}&optionId=${p.optionId}" class="wrap_btn col">
+                                <div  class="wrap_btn col">
                                     <button class="btn buy" id="buy-now-btn">Mua Ngay</button>
-                                    <button class="btn add">Thêm vào giỏ hàng</button>
-                                </a>
+
+                                    <button onclick="addToCart(${p.id},${p.optionId})" class="btn add">
+                                        Thêm vào giỏ hàng
+                                    </button>
+
+                                </div>
 
                                 <div id="cart-notification" class="notification hidden">
                                     <i class="fa fa-check-circle"></i>

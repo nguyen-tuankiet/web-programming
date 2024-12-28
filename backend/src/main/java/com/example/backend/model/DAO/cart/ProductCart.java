@@ -11,11 +11,11 @@ public class ProductCart {
     Integer price;
 
 
-    public ProductCart(Product product, Integer optionId, String imageUrl) {
+    public ProductCart(Product product) {
         this.productId = product.getId();
-        this.optionId = optionId;
+        this.optionId = product.getOptionId();
         this.name = product.getName();
-        this.imageUrl = imageUrl;
+        this.imageUrl = product.getImageUrl();
         this.quantity = 1;
         this.price = product.getPrice();
     }
