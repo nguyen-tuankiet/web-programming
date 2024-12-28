@@ -12,7 +12,7 @@ html{
 body{
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow-y: scroll !important;
 }
 
 
@@ -88,7 +88,7 @@ a{
 
 /**/
 
-#body  {
+#cart_body  {
     width: 100%;
 
     padding: 20px 0;
@@ -144,12 +144,15 @@ a{
 .content{
     width: 80%;
     height: 100%;
+    gap: 50px;
 }
 
 
 
 .content .list_item{
-
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     width: 65%;
     height: 100%;
 }
@@ -176,6 +179,7 @@ a{
 /*Bill*/
 
 .content .bill{
+    margin-top: 60px;
     width: 35%;
     height: 520px;
     border: 1px solid gray;
@@ -183,6 +187,7 @@ a{
     justify-content: flex-start;
     flex-direction: column;
     padding: 20px;
+    border-radius: 5px;
 }
 
 .bill .discount{
