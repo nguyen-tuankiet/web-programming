@@ -11,4 +11,5 @@ public class ProductTag {
         this.productId = productId;
         this.tagId = tagId;
     }
+
 }
