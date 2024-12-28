@@ -139,12 +139,8 @@
 </div>
 
 <footer>
-    <div class="footer-container">
-        <p>Bản quyền ©1995-2024 Samsung bảo lưu mọi quyền.</p>
-        <p>Công ty TNHH Điện Tử Samsung Vina</p>
-        <p>Giấy CNĐK: 4110430003290, do UBND TP HCM cấp ngày 28/8/2007</p>
-        <p>Địa chỉ: Số 2, đường Hải Triều, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
-        <p>Điện thoại: +84-2839157310</p>
+    <div class="footer">
+        <iframe src="${pageContext.request.contextPath}/home/Product-detail/footer.jsp" class="iframe"></iframe>
     </div>
 </footer>
 
