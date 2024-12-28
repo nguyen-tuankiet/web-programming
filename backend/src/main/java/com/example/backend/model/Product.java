@@ -1,7 +1,8 @@
 package com.example.backend.model;
 
+import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
-import org.jetbrains.annotations.Nullable;
+
 
 
 public class Product {
