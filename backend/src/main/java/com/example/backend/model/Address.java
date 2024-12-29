@@ -1,7 +1,7 @@
 package com.example.backend.model;
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
-import jakarta.annotation.Nullable;
+
 public class Address {
     Integer id;
     Integer userId;
