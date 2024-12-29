@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.controller.image;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
