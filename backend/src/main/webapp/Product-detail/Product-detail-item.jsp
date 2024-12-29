@@ -5,26 +5,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Images</title>
+    <title>Image Carousel</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail-item.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail-item.js" defer></script>
 </head>
 <body>
 
-<h1>Danh sách Hình Ảnh Sản Phẩm</h1>
+<!-- Carousel Container -->
+<div class="carousel-container">
+    <!-- Main Image Display -->
+    <img id="mainImage"
+         src="<c:choose>
+                <c:when test='${not empty images}'>
+                    ${images[0].url}
+                </c:when>
+                <c:otherwise>
+                    ${pageContext.request.contextPath}/static/images/placeholder.jpg
+                </c:otherwise>
+              </c:choose>"
+         alt="Carousel Image"
+         class="carousel-image"
+         data-context-path="${pageContext.request.contextPath}">
 
-<div class="image-gallery">
-    <c:if test="${not empty productImages}">
-        <ul>
-            <c:forEach var="productImage" items="${productImages}">
-                <li>
-                    <img src="${productImage.imageId}" alt="Image for Product ID: ${productImage.productId}" style="max-width: 200px; margin: 10px;">
-                    <p>Image ID: ${productImage.imageId}</p>
-                </li>
-            </c:forEach>
-        </ul>
-    </c:if>
-    <c:if test="${empty productImages}">
-        <p>Không có hình ảnh nào cho sản phẩm này.</p>
-    </c:if>
+    <!-- Navigation Arrows -->
+    <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="nav-arrow right" onclick="nextImage()">&#10095;</div>
+
+    <!-- Thumbnails -->
+    <div class="thumbnails">
+        <c:forEach var="image" items="${images}" varStatus="status">
+            <img src="${image.url}"
+                 alt="Thumbnail ${status.index + 1}"
+                 class="thumbnail <c:if test='${status.index == 0}'>active</c:if>"
+                 onclick="showImage(${status.index})">
+        </c:forEach>
+    </div>
 </div>
 
 </body>
