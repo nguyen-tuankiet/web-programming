@@ -2,7 +2,9 @@ package com.example.backend.model;
 
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
+import java.beans.ConstructorProperties;
 
 
 public class Product {
@@ -17,33 +19,30 @@ public class Product {
     Integer noOfSold;
     Integer primaryImage;
     Integer price;
-//    @Nullable
+    //    @Nullable
     Integer stock;
     Integer optionId;
 
     String imageUrl;
 
 
-
+    @ConstructorProperties({"id", "name", "sku", "description", "isActive", "categoryId", "brandId", "noOfViews", "noOfSold", "primaryImage", "imageUrl", "price", "optionId", "stock"})
     public Product(
             @ColumnName("id") Integer id,
-            @ColumnName("name")@Nullable String name,
+            @ColumnName("name") @Nullable String name,
             @ColumnName("sku") @Nullable String sku,
             @ColumnName("description") @Nullable String description,
-            @ColumnName("isActive")@Nullable  Boolean isActive,
+            @ColumnName("isActive") @Nullable Boolean isActive,
             @ColumnName("categoryId") @Nullable Integer categoryId,
-            @ColumnName("brandId")@Nullable Integer brandId,
+            @ColumnName("brandId") @Nullable Integer brandId,
             @ColumnName("noOfViews") @Nullable Integer noOfViews,
             @ColumnName("noOfSold") @Nullable Integer noOfSold,
-            @ColumnName("primaryImage")@Nullable Integer primaryImage,
-
-
-            @ColumnName("imageUrl")@Nullable String imageUrl,
-            @ColumnName("price")@Nullable Integer price,
+            @ColumnName("primaryImage") @Nullable Integer primaryImage,
+            @ColumnName("imageUrl") @Nullable String imageUrl,
+            @ColumnName("price") @Nullable Integer price,
             @ColumnName("optionId") @Nullable Integer optionId,
-            @ColumnName("stock")  @Nullable Integer stock
-    )
-    {
+            @ColumnName("stock") @Nullable Integer stock
+    ) {
         this.id = id;
         this.name = name;
         this.sku = sku;
@@ -58,32 +57,11 @@ public class Product {
         this.optionId = optionId;
         this.stock = stock;
         this.imageUrl = imageUrl;
-
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Product() {
+    }
 
     public Integer getId() {
         return id;
