@@ -3,13 +3,29 @@ package com.example.backend.service;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.model.DAO.ImageDao;
+import org.jdbi.v3.core.Jdbi;
 
 
 import java.util.Map;
 
 public class ImageService {
-    private final Cloudinary cloudinary;
-    private final ImageDao imageDao;
+    Jdbi jdbi;
+    private  Cloudinary cloudinary;
+
+    private  ImageDao imageDao;
+
+    public ImageService(Jdbi jdbi, Cloudinary cloudinary, ImageDao imageDao) {
+        this.jdbi = jdbi;
+        this.cloudinary = cloudinary;
+        this.imageDao = imageDao;
+    }
+
+
+    public ImageService(Jdbi jdbi) {
+        this.jdbi = jdbi;
+        this.imageDao = jdbi.onDemand(ImageDao.class);
+    }
+
 
     public ImageService(Cloudinary cloudinary, ImageDao imageDao) {
         this.cloudinary = cloudinary;
@@ -24,4 +40,7 @@ public class ImageService {
         return imageUrl;
     }
 
+    public boolean addImageToProduct(Integer productId, Integer imageId) {
+       return imageDao.addImageToProduct(productId, imageId);
+    }
 }

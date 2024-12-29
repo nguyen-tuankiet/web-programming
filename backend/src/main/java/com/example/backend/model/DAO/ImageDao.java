@@ -9,6 +9,9 @@ public interface ImageDao {
 
     @SqlUpdate("INSERT INTO image (url) VALUES (:url)")
     @GetGeneratedKeys
-    long saveImage(@Bind("url") String url);
+    int saveImage(@Bind("url") String url);
+
+    @SqlUpdate("INSERT INTO product_images (productId, imageId) VALUES (:productId, :imageId)")
+    boolean addImageToProduct(@Bind("productId") Integer productId, @Bind("imageId") Integer imageId);
 
 }
