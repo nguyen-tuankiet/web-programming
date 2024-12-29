@@ -3,20 +3,28 @@ package com.example.backend.service;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.backend.model.DAO.ImageDao;
+import org.jdbi.v3.core.Jdbi;
 
 
 import java.util.Map;
 
 public class ImageService {
+    Jdbi jdbi;
     private  Cloudinary cloudinary;
     private  ImageDao imageDao;
 
-    public ImageService(Cloudinary cloudinary, ImageDao imageDao) {
+    public ImageService(Jdbi jdbi) {
+        this.jdbi = jdbi;
         this.cloudinary = cloudinary;
         this.imageDao = imageDao;
     }
 
     public ImageService() {
+    }
+
+    public ImageService(Cloudinary cloudinary, ImageDao imageDao) {
+        this.cloudinary = cloudinary;
+        this.imageDao = imageDao;
     }
 
     // Upload ảnh lên Cloudinary và lưu vào DB
