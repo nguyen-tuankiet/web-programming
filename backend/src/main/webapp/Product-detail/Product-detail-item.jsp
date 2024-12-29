@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: VSiJs
-  Date: 12/27/2024
-  Time: 4:21 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Carousel</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail-item.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail-item.js"></script>
+    <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail-item.js" defer></script>
 </head>
 <body>
 
@@ -21,7 +15,14 @@
 <div class="carousel-container">
     <!-- Main Image Display -->
     <img id="mainImage"
-         src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"
+         src="<c:choose>
+                <c:when test='${not empty images}'>
+                    ${images[0].url}
+                </c:when>
+                <c:otherwise>
+                    ${pageContext.request.contextPath}/static/images/placeholder.jpg
+                </c:otherwise>
+              </c:choose>"
          alt="Carousel Image"
          class="carousel-image"
          data-context-path="${pageContext.request.contextPath}">
@@ -32,18 +33,14 @@
 
     <!-- Thumbnails -->
     <div class="thumbnails">
-        <img src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="showImage(0)">
-        <img src="${pageContext.request.contextPath}/static/image/img-detail/image2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
-        <img src="${pageContext.request.contextPath}/static/image/img-detail/image3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
-        <img src="${pageContext.request.contextPath}/static/image/img-detail/image4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
-        <img src="${pageContext.request.contextPath}/static/image/img-detail/image5.jpg" alt="Thumbnail 5" class="thumbnail" onclick="showImage(4)">
-        <img src="${pageContext.request.contextPath}/static/image/img-detail/image6.jpg" alt="Thumbnail 6" class="thumbnail" onclick="showImage(5)">
-        <img src="${pageContext.request.contextPath}/static/image/img-detail/image7.jpg" alt="Thumbnail 7" class="thumbnail" onclick="showImage(6)">
+        <c:forEach var="image" items="${images}" varStatus="status">
+            <img src="${image.url}"
+                 alt="Thumbnail ${status.index + 1}"
+                 class="thumbnail <c:if test='${status.index == 0}'>active</c:if>"
+                 onclick="showImage(${status.index})">
+        </c:forEach>
     </div>
 </div>
 
 </body>
 </html>
-
-
-

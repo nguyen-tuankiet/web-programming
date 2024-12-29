@@ -27,8 +27,6 @@
             <a href="#"> Tủ Lạnh 4 Cửa RF48A4000B4 với Twin Cooling Plus™ 488 L</a>
         </div>
 
-
-
         <div id="price" class="bold f22">
             20.490.000 ₫
 
