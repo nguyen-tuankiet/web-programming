@@ -11,16 +11,21 @@ import java.util.Map;
 public class ImageService {
     Jdbi jdbi;
     private  Cloudinary cloudinary;
+
     private  ImageDao imageDao;
 
-    public ImageService(Jdbi jdbi) {
+    public ImageService(Jdbi jdbi, Cloudinary cloudinary, ImageDao imageDao) {
         this.jdbi = jdbi;
         this.cloudinary = cloudinary;
         this.imageDao = imageDao;
     }
 
-    public ImageService() {
+
+    public ImageService(Jdbi jdbi) {
+        this.jdbi = jdbi;
+        this.imageDao = jdbi.onDemand(ImageDao.class);
     }
+
 
     public ImageService(Cloudinary cloudinary, ImageDao imageDao) {
         this.cloudinary = cloudinary;
@@ -35,7 +40,7 @@ public class ImageService {
         return imageUrl;
     }
 
-    public void addImageToProduct(Integer productId, Integer imageId) {
-        imageDao.addImageToProduct(productId, imageId);
+    public boolean addImageToProduct(Integer productId, Integer imageId) {
+       return imageDao.addImageToProduct(productId, imageId);
     }
 }
