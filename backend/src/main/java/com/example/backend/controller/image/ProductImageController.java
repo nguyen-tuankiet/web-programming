@@ -2,53 +2,63 @@ package com.example.backend.controller.image;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.ImageService;
-import com.fasterxml.jackson.databind.ObjectMapper; // Thêm thư viện JSON để xử lý JSON
+import com.example.backend.util.ResponseWrapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import jakarta.servlet.annotation.WebServlet;
 
-@WebServlet(name = "ProductImageController", urlPatterns = {"/api/products/{productId}/images"})
+
+@WebServlet("/api/add-product-image")
 public class ProductImageController extends HttpServlet {
 
-    ImageService imageService = new ImageService(DBConnection.getJdbi());
+    private ImageService imageService = new ImageService(DBConnection.getJdbi());
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy productId từ phần còn lại của URL (sau "/api/products/")
-        String pathInfo = request.getPathInfo();
-        if (pathInfo != null && pathInfo.split("/").length > 1) {
-            String productIdStr = pathInfo.split("/")[1];
-            Integer productId = Integer.valueOf(productIdStr);
 
-            // Đọc JSON body từ request
-            ObjectMapper objectMapper = new ObjectMapper();
-            ProductImageRequest productImageRequest = objectMapper.readValue(request.getInputStream(), ProductImageRequest.class);
 
-            Integer imageId = productImageRequest.getImageId();
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
 
-            // Thêm ảnh vào sản phẩm
-            imageService.addImageToProduct(productId, imageId);
+        try {
+            // Lấy dữ liệu từ request
+            int productId = Integer.parseInt(req.getParameter("productId"));
+            int imageId = Integer.parseInt(req.getParameter("imageId"));
 
-            response.setStatus(HttpServletResponse.SC_OK);
-        } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            response.getWriter().write("Product ID is missing in the URL");
+            // Gọi service để thêm ảnh vào product
+            boolean isSuccess = imageService.addImageToProduct(productId, imageId);
+
+            // Tạo JSON response thủ công
+            String jsonResponse = buildJsonResponse(
+                    isSuccess ? 200 : 500,
+                    isSuccess ? "success" : "error",
+                    isSuccess ? "Image added to product successfully." : "Failed to add image to product.",
+                    null
+            );
+
+            resp.getWriter().write(jsonResponse);
+
+        } catch (NumberFormatException e) {
+            // Trả về lỗi khi dữ liệu không hợp lệ
+            String errorResponse = buildJsonResponse(400, "error", "Invalid input data.", null);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.getWriter().write(errorResponse);
         }
     }
 
-    // DTO để chứa thông tin imageId từ request body
-    public static class ProductImageRequest {
-        private Integer imageId;
-
-        public Integer getImageId() {
-            return imageId;
-        }
-
-        public void setImageId(Integer imageId) {
-            this.imageId = imageId;
-        }
+    // Hàm tạo chuỗi JSON
+    private String buildJsonResponse(int statusCode, String status, String message, Object data) {
+        StringBuilder jsonBuilder = new StringBuilder();
+        jsonBuilder.append("{");
+        jsonBuilder.append("\"statusCode\":").append(statusCode).append(",");
+        jsonBuilder.append("\"status\":\"").append(status).append("\",");
+        jsonBuilder.append("\"message\":\"").append(message).append("\",");
+        jsonBuilder.append("\"data\":").append(data == null ? "null" : "\"" + data.toString() + "\"");
+        jsonBuilder.append("}");
+        return jsonBuilder.toString();
     }
 }
