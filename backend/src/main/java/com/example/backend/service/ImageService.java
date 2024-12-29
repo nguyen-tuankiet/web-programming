@@ -8,12 +8,15 @@ import com.example.backend.model.DAO.ImageDao;
 import java.util.Map;
 
 public class ImageService {
-    private final Cloudinary cloudinary;
-    private final ImageDao imageDao;
+    private  Cloudinary cloudinary;
+    private  ImageDao imageDao;
 
     public ImageService(Cloudinary cloudinary, ImageDao imageDao) {
         this.cloudinary = cloudinary;
         this.imageDao = imageDao;
+    }
+
+    public ImageService() {
     }
 
     // Upload ảnh lên Cloudinary và lưu vào DB
@@ -24,4 +27,7 @@ public class ImageService {
         return imageUrl;
     }
 
+    public void addImageToProduct(Integer productId, Integer imageId) {
+        imageDao.addImageToProduct(productId, imageId);
+    }
 }

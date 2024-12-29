@@ -2,11 +2,12 @@ package com.example.backend.model;
 
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
+import java.beans.ConstructorProperties;
 
 
 public class Product {
-    // Fields
     Integer id;
     String name;
     String sku;
@@ -18,8 +19,14 @@ public class Product {
     Integer noOfSold;
     Integer primaryImage;
     Integer price;
+    //    @Nullable
+    Integer stock;
+    Integer optionId;
 
-    // Constructor
+    String imageUrl;
+
+
+    @ConstructorProperties({"id", "name", "sku", "description", "isActive", "categoryId", "brandId", "noOfViews", "noOfSold", "primaryImage", "imageUrl", "price", "optionId", "stock"})
     public Product(
             @ColumnName("id") Integer id,
             @ColumnName("name") @Nullable String name,
@@ -31,7 +38,10 @@ public class Product {
             @ColumnName("noOfViews") @Nullable Integer noOfViews,
             @ColumnName("noOfSold") @Nullable Integer noOfSold,
             @ColumnName("primaryImage") @Nullable Integer primaryImage,
-            @ColumnName("price") @Nullable Integer price
+            @ColumnName("imageUrl") @Nullable String imageUrl,
+            @ColumnName("price") @Nullable Integer price,
+            @ColumnName("optionId") @Nullable Integer optionId,
+            @ColumnName("stock") @Nullable Integer stock
     ) {
         this.id = id;
         this.name = name;
@@ -44,9 +54,15 @@ public class Product {
         this.noOfSold = noOfSold;
         this.primaryImage = primaryImage;
         this.price = price;
+        this.optionId = optionId;
+        this.stock = stock;
+        this.imageUrl = imageUrl;
     }
 
-    // Getters and Setters
+
+    public Product() {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -79,12 +95,12 @@ public class Product {
         this.description = description;
     }
 
-    public Boolean getIsActive() {
+    public Boolean getActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public Integer getCategoryId() {
@@ -133,5 +149,29 @@ public class Product {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public Integer getOptionId() {
+        return optionId;
+    }
+
+    public void setOptionId(Integer optionId) {
+        this.optionId = optionId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
