@@ -55,7 +55,7 @@
 
                     <c:forEach items="${productCarts}" var="p">
 
-                        <div class="wrap mid_align row">
+                        <div class="wrap mid_align row product-item">
                             <input type="checkbox">
                             <div class="image">
                                 <c:choose>
@@ -100,17 +100,20 @@
 
 
                             <div class="section_price mid_align col  ">
-                                <span class="price">
-                                    <fmt:formatNumber value="${p.price}" pattern="#,###"/> VND
+                                <span   class="price" data-price="${p.price}">
+                                    <fmt:formatNumber value="${p.price}" pattern="#,###"/>
+
                                 </span>
 
 
+
                                 <div class="quantity mid_align row">
-                                    <i class="fa-solid fa-minus"></i>
-                                    <span class="num mid_align">
+                                    <button id="decrement" ><i class="fa-solid fa-minus"></i></button>
+                                    <span   class="num mid_align" data-quantity="${p.quantity}">
                                             ${p.quantity}
                                     </span>
-                                    <i class="fa-solid fa-plus"></i>
+
+                                    <button id="increment"><i class="fa-solid fa-plus"></i></button>
 
                                 </div>
 
