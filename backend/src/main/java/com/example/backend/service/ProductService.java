@@ -55,15 +55,6 @@ public class ProductService {
         return null;
     }
 
-    // Thêm ảnh vào sản phẩm
-    public void addImageToProduct(Integer productId, Integer imageId) {
-        imageDao.addImageToProduct(productId, imageId);
-    }
-
-    // Thêm option vào sản phẩm
-    public void addOptionToProduct(Integer productId, Integer price, Integer stock) {
-        optionDao.addOptionToProduct(productId, price, stock);
-    }
 
 
 }
