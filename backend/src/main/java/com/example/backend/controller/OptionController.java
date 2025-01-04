@@ -1,33 +1,42 @@
 package com.example.backend.controller;
 
-
-import com.example.backend.model.Options;
-import com.example.backend.service.ProductService;
+import com.example.backend.Connection.DBConnection;
+import com.example.backend.service.OptionService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.WebServlet;
 
 import java.io.IOException;
 
-public class OptionController {
+@WebServlet(name = "OptionController", urlPatterns = {"/api/options/create"})
+public class OptionController extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+    private final OptionService optionService = new OptionService(DBConnection.getJdbi());
 
-    private ProductService productService = new ProductService();
-
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Integer productId = Integer.valueOf(request.getPathInfo().substring(1));
+        try {
+            String productIdStr = request.getParameter("productId");
+            String priceStr = request.getParameter("price");
+            String stockStr = request.getParameter("stock");
 
-        Integer price = Integer.valueOf(request.getParameter("price"));
-        Integer stock = Integer.valueOf(request.getParameter("stock"));
+            Integer productId = (productIdStr != null && !productIdStr.isEmpty()) ? Integer.parseInt(productIdStr) : null;
+            Integer price = (priceStr != null && !priceStr.isEmpty()) ? Integer.parseInt(priceStr) : null;
+            Integer stock = (stockStr != null && !stockStr.isEmpty()) ? Integer.parseInt(stockStr) : null;
 
-        Options option = new Options();
-        option.setProductId(productId);
-        option.setPrice(price);
-        option.setStock(stock);
+            int optionId = optionService.createOptions(productId, price, stock);
 
-        productService.addOptionToProduct(productId, price, stock);
-
-        response.setStatus(HttpServletResponse.SC_OK);
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            response.getWriter().write("{\"message\": \"Option created successfully\", \"optionId\": " + optionId + "}");
+        } catch (NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"error\": \"Invalid number format for one or more parameters\"}");
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"error\": \"" + e.getMessage() + "\"}");
+        }
     }
 }
