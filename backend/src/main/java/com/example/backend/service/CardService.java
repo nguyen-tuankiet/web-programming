@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Card;
 import com.example.backend.model.DAO.CardDAO;
 import org.jdbi.v3.core.Jdbi;
@@ -15,6 +16,12 @@ public class CardService {
 
     public List<Card> getCartByUserId(Integer userId) {
         return cardDAO.getCardByUserId(userId);
+    }
+
+
+    public static void main(String[] args) {
+        CardService cardService = new CardService(DBConnection.getJdbi());
+        System.out.println(cardService.getCartByUserId(1));
     }
 
 }
