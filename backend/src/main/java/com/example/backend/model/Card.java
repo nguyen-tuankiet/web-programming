@@ -1,22 +1,24 @@
 package com.example.backend.model;
 
+import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Card {
     Integer id;
     Integer userId;
-    Date duration;
+    LocalDate duration;
     String type;
     Boolean isDefault;
 
     public Card(
-            @ColumnName("id") Integer id,
-            @ColumnName("userId") Integer userId,
-            @ColumnName("duration") Date duration,
-            @ColumnName("type") String type,
-            @ColumnName("isDefault") Boolean isDefault) {
+            @ColumnName("id") @Nullable Integer id,
+            @ColumnName("userId")  @Nullable Integer userId,
+            @ColumnName("duration")  @Nullable LocalDate duration,
+            @ColumnName("type")  @Nullable String type,
+            @ColumnName("isDefault")  @Nullable Boolean isDefault) {
         this.id = id;
         this.userId = userId;
         this.duration = duration;
