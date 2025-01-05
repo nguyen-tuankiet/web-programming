@@ -57,6 +57,11 @@ public interface ProductDAO {
     Product getProductByIdAndOptionId(@Bind("productId") int productId,
                                       @Bind("optionId") int optionId);
 
+
+
+
+
+
     @SqlUpdate("INSERT INTO products (name, sku, description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage) "
             + "VALUES (:name, :sku, :description, :isActive, :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL))")
     int addProduct(@Bind("name") String name,

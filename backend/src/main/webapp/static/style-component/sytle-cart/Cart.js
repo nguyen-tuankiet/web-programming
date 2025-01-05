@@ -27,14 +27,15 @@ $(document).ready(function () {
         let quantity = ($(this).find('.num'));
         let increment = $(this).find('#increment');
         let decrement = $(this).find('#decrement');
-
+        let stock = $(this).attr('data-stock');
+            console.log("stock: " , stock);
 
         updatePrice(price, quantity);
 
 
 
         increment.on('click', function () {
-            increaseQuantity( $(this), quantity, price);
+            increaseQuantity( $(this), quantity, price, stock);
         })
 
 
@@ -62,13 +63,23 @@ $(document).ready(function () {
     }
 
 
-    function increaseQuantity( product, quantity , price ) {
-        let newQuantity =parseInt(quantity.attr('data-quantity')) + 1 ;
+    function increaseQuantity( product, quantity , price , stock ) {
+        let newQuantity =parseInt(quantity.attr('data-quantity')) ;
+        if (newQuantity < stock){
+            newQuantity += 1;
+            quantity.attr('data-quantity', newQuantity);
+            quantity.text(newQuantity);
 
-        quantity.attr('data-quantity', newQuantity);
-        quantity.text(newQuantity);
+            updatePrice(price, quantity);
+        }
 
-        updatePrice(price, quantity);
+        else {
+            console.log("stock: " , stock);
+            alert("Đã đạt số lượng tối đa")
+        }
+
+
+
 
 
     }
