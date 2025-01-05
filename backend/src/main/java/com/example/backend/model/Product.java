@@ -19,7 +19,6 @@ public class Product {
     Integer noOfSold;
     Integer primaryImage;
     Integer price;
-    //    @Nullable
     Integer stock;
     Integer optionId;
 

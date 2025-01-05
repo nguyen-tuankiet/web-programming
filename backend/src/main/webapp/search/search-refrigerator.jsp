@@ -160,7 +160,8 @@
 
             <c:if test="${not empty products}">
                 <c:forEach items="${products}" var="p">
-                    <div class="product_item col">
+
+                    <div class="product_item col" data-stock="${p.stock}">
 
                         <div class="wrap mid_align row">
 
