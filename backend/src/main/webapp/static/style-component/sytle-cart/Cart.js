@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 
 
-//     Increase quantity
+//     Increase/Decrease quantity
 
     const product= $('.product-item')
 
@@ -27,6 +27,8 @@ $(document).ready(function () {
         let quantity = ($(this).find('.num'));
         let increment = $(this).find('#increment');
         let decrement = $(this).find('#decrement');
+        let remove = $(this).find('.remove');
+
         let stock = $(this).attr('data-stock');
         let product_id = parseInt($(this).attr('data-id'));
 
@@ -34,18 +36,21 @@ $(document).ready(function () {
 
         updatePrice(price, quantity);
 
-
-
         increment.on('click', function () {
             increaseQuantity( $(this), quantity, price, stock, product_id);
         })
-
 
         decrement.on('click', function () {
             decreaseQuantity( $(this), quantity, price, product_id);
         })
 
+        remove.on('click', function () {
 
+            let productItem = $(this).closest('.product-item');
+            let productId = parseInt(productItem.attr('data-id'));
+
+            removeItem(productId, productItem);
+        })
 
 
 
@@ -115,7 +120,7 @@ $(document).ready(function () {
 
     function updateQuantity( productId, quantity ) {
         $.ajax({
-            url: '/backend_war_exploded/update-quantity' ,
+            url: '/backend_war_exploded/cart/update-quantity' ,
             method: 'POST',
             data: {
                 productId: productId,
@@ -134,6 +139,30 @@ $(document).ready(function () {
 
 
 
+    function removeItem(productId, productItem){
+
+        if (confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+            $.ajax({
+                url: '/backend_war_exploded/cart/remove',
+                method: 'POST',
+                data: {
+                    productId: productId,
+                },
+                success: function (result) {
+                    console.log(result);
+                    productItem.remove();
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                    alert('Xóa sản phẩm không thành công. Vui lòng thử lại!');
+                }
+            });
+        }
+
+
+
+    }
 
 
 
