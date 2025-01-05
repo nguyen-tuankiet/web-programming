@@ -277,3 +277,42 @@ document.getElementById('fileInput').addEventListener('change', function (event)
         })
         .catch(error => console.error('Error:', error));
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy phần tử dropdown
+    const categoryDropdown = document.getElementById("categoryDropdown");
+
+    // Kiểm tra phần tử dropdown có tồn tại
+    if (!categoryDropdown) {
+        console.error("Phần tử dropdown không tồn tại");
+        return;
+    }
+
+    // Gọi API để lấy danh mục
+    fetch('/backend_war/api/categories')
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Không thể lấy danh mục');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data.statusCode === 200 && data.data) {
+                // Xóa các option cũ (nếu cần)
+                categoryDropdown.innerHTML = '<option>Chọn danh mục</option>';
+
+                // Thêm các danh mục mới
+                data.data.forEach((category) => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.name;
+                    categoryDropdown.appendChild(option);
+                });
+            } else {
+                console.error("Dữ liệu danh mục không hợp lệ");
+            }
+        })
+        .catch((err) => {
+            console.error("Error fetching categories:", err);
+        });
+});
