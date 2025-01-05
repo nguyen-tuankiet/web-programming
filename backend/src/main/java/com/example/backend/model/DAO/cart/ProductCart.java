@@ -9,6 +9,7 @@ public class ProductCart {
     String imageUrl;
     Integer quantity;
     Integer price;
+    Integer stock;
 
 
     public ProductCart(Product product) {
@@ -18,6 +19,8 @@ public class ProductCart {
         this.imageUrl = product.getImageUrl();
         this.quantity = 1;
         this.price = product.getPrice();
+        this.stock = product.getStock();
+
     }
 
 
