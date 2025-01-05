@@ -4,14 +4,18 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Category;
 import com.example.backend.service.CategoryService;
 import com.example.backend.util.ResponseWrapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CategoryController", urlPatterns = {"/api/categories/*"})
 public class CategoryController extends HttpServlet {
@@ -60,15 +64,34 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String name = request.getParameter("name");
+            // Đọc nội dung JSON từ body request
+            StringBuilder jsonBuilder = new StringBuilder();
+            String line;
+            try (BufferedReader reader = request.getReader()) {
+                while ((line = reader.readLine()) != null) {
+                    jsonBuilder.append(line);
+                }
+            }
+            String jsonString = jsonBuilder.toString();
+
+            // Parse JSON để lấy dữ liệu
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
+
+            // Lấy giá trị từ JSON
+            String name = jsonData.get("name");
+
+            // Kiểm tra giá trị của name
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Name is required");
             }
 
-            categoryService.createCategory(name);
+            // Thêm category mới
+            Category newCategory = categoryService.createCategory(name);
 
+            // Phản hồi thành công
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    201, "success", "Category created successfully", null);
+                    201, "success", "Category created successfully", newCategory);
             writeResponse(response, responseWrapper);
         } catch (IllegalArgumentException e) {
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -80,6 +103,7 @@ public class CategoryController extends HttpServlet {
             writeResponse(response, responseWrapper);
         }
     }
+
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -95,16 +119,36 @@ public class CategoryController extends HttpServlet {
             }
 
             Integer id = Integer.parseInt(pathParts[1]);
-            String name = request.getParameter("name");
+
+            // Đọc JSON từ body request
+            StringBuilder jsonBuilder = new StringBuilder();
+            String line;
+            try (BufferedReader reader = request.getReader()) {
+                while ((line = reader.readLine()) != null) {
+                    jsonBuilder.append(line);
+                }
+            }
+            String jsonString = jsonBuilder.toString();
+
+            // Parse JSON để lấy giá trị "name"
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
+
+            String name = jsonData.get("name");
 
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Name is required");
             }
 
+            // Cập nhật category
             categoryService.updateCategory(id, name);
 
+            // Truy vấn lại để lấy dữ liệu category đã cập nhật
+            Category updatedCategory = categoryService.getCategoryById(id);
+
+            // Phản hồi thành công
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    200, "success", "Category updated successfully", null);
+                    200, "success", "Category updated successfully", updatedCategory);
             writeResponse(response, responseWrapper);
         } catch (IllegalArgumentException e) {
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -116,6 +160,8 @@ public class CategoryController extends HttpServlet {
             writeResponse(response, responseWrapper);
         }
     }
+
+
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -131,10 +177,20 @@ public class CategoryController extends HttpServlet {
             }
 
             Integer id = Integer.parseInt(pathParts[1]);
+
+            // Lấy thông tin category trước khi xóa
+            Category categoryToDelete = categoryService.getCategoryById(id);
+
+            if (categoryToDelete == null) {
+                throw new IllegalArgumentException("Category not found");
+            }
+
+            // Xóa category
             categoryService.deleteCategory(id);
 
+            // Phản hồi thành công với thông tin của category đã xóa
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    200, "success", "Category deleted successfully", null);
+                    200, "success", "Category deleted successfully", categoryToDelete);
             writeResponse(response, responseWrapper);
         } catch (IllegalArgumentException e) {
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -147,19 +203,14 @@ public class CategoryController extends HttpServlet {
         }
     }
 
+
     private void writeResponse(HttpServletResponse response, ResponseWrapper<?> responseWrapper) throws IOException {
         response.setContentType("application/json");
         response.setStatus(responseWrapper.getStatusCode());
-        response.getWriter().write(toJson(responseWrapper));
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
     }
 
-    private String toJson(ResponseWrapper<?> responseWrapper) {
-        StringBuilder jsonBuilder = new StringBuilder("{");
-        jsonBuilder.append("\"statusCode\":").append(responseWrapper.getStatusCode()).append(",");
-        jsonBuilder.append("\"status\":\"").append(responseWrapper.getStatus()).append("\",");
-        jsonBuilder.append("\"message\":\"").append(responseWrapper.getMessage()).append("\",");
-        jsonBuilder.append("\"data\":").append(responseWrapper.getData() != null ? responseWrapper.getData().toString() : "null");
-        jsonBuilder.append("}");
-        return jsonBuilder.toString();
-    }
+
+
 }

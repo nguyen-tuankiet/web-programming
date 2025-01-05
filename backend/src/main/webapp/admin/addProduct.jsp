@@ -1,3 +1,7 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -41,15 +45,15 @@
                         <input type="text" id="sku" placeholder="Ví dụ: 348121032">
                     </div>
                     <div class="form-group half-width">
-                        <label>Danh mục</label>
-                        <select class="option-select">
-                            <option value="size">Kích thước</option>
-                            <option value="color">Màu sắc</option>
-                            <option value="material">Chất liệu</option>
-                            <option value="style">Kiểu dáng</option>
-                            <option value="title">Tiêu đề</option>
+                        <label  for="categoryDropdown" >Danh mục</label>
+                        <select id="categoryDropdown" class="option-select" data-url="<%= request.getContextPath() %>/backend_war/api/categories">
+                            <option value="">Chọn danh mục</option>
+                            <!-- Danh mục sẽ được load ở đây -->
                         </select>
+
                     </div>
+
+
                 </div>
 
                 <div class="form-group">
