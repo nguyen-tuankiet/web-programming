@@ -2,14 +2,35 @@ $(document).ready(function () {
     const pay = $('#pay')
     pay.on('click', function () {
 
-        const message ={
-            type:'navigate',
-            url: pay.attr('data-src')
+        const products =[]
+
+        $('.product_checked:checked').each(function () {
+            products.push(($(this).val()))
+        })
+
+
+        if (products.length === 0) {
+            alert('Chọn ít nhất một sản phẩm để thanh toán!');
+            return;
         }
 
-        console.log(message);
-        window.parent.postMessage(message, '*');
-    })
+
+        $.ajax({
+            type: 'POST',
+            url: 'checkout',
+            data: {
+                products: products.join(','),
+            },
+            success: function (result) {
+                console.log(result);
+                window.location.href = 'checkout';
+            },
+            error: function () {}
+
+            });
+        });
+
+
 
 
 
