@@ -38,7 +38,9 @@ $(document).ready(function () {
         })
 
 
-
+        decrement.on('click', function () {
+            decreaseQuantity( $(this), quantity, price);
+        })
 
 
 
@@ -50,29 +52,42 @@ $(document).ready(function () {
 
 
     function updatePrice(price, quantity) {
-
-
         let price_value = parseInt(price.attr('data-price'));
         let quantity_value = parseInt(quantity.attr('data-quantity'));
-        let total = price_value * quantity;
+        let total = price_value * quantity_value;
 
         let formatted = new Intl.NumberFormat('vi-VN').format(total);
         price.text(formatted + 'VND');
-
-
-
-
 
     }
 
 
     function increaseQuantity( product, quantity , price ) {
+        let newQuantity =parseInt(quantity.attr('data-quantity')) + 1 ;
 
-
-        let newQuantity =quantity +1;
-
-        updatePrice(price, newQuantity);
+        quantity.attr('data-quantity', newQuantity);
         quantity.text(newQuantity);
+
+        updatePrice(price, quantity);
+
+
+    }
+
+
+
+    function decreaseQuantity( product, quantity , price ) {
+        let newQuantity =parseInt(quantity.attr('data-quantity')) ;
+
+        if(newQuantity  > 1){
+            newQuantity -= 1;
+
+            quantity.attr('data-quantity', newQuantity);
+            quantity.text(newQuantity);
+
+            updatePrice(price, quantity);
+
+        }
+
 
     }
 
