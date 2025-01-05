@@ -28,19 +28,21 @@ $(document).ready(function () {
         let increment = $(this).find('#increment');
         let decrement = $(this).find('#decrement');
         let stock = $(this).attr('data-stock');
-            console.log("stock: " , stock);
+        let product_id = parseInt($(this).attr('data-id'));
+
+
 
         updatePrice(price, quantity);
 
 
 
         increment.on('click', function () {
-            increaseQuantity( $(this), quantity, price, stock);
+            increaseQuantity( $(this), quantity, price, stock, product_id);
         })
 
 
         decrement.on('click', function () {
-            decreaseQuantity( $(this), quantity, price);
+            decreaseQuantity( $(this), quantity, price, product_id);
         })
 
 
@@ -63,14 +65,20 @@ $(document).ready(function () {
     }
 
 
-    function increaseQuantity( product, quantity , price , stock ) {
+    function increaseQuantity( product, quantity , price , stock ,product_id) {
         let newQuantity =parseInt(quantity.attr('data-quantity')) ;
+
+
+
+        console.log("product_id: " , product_id);
+
         if (newQuantity < stock){
             newQuantity += 1;
             quantity.attr('data-quantity', newQuantity);
             quantity.text(newQuantity);
 
             updatePrice(price, quantity);
+            updateQuantity(  product_id, newQuantity );
         }
 
         else {
@@ -86,7 +94,7 @@ $(document).ready(function () {
 
 
 
-    function decreaseQuantity( product, quantity , price ) {
+    function decreaseQuantity( product, quantity , price  ,product_id) {
         let newQuantity =parseInt(quantity.attr('data-quantity')) ;
 
         if(newQuantity  > 1){
@@ -95,6 +103,7 @@ $(document).ready(function () {
             quantity.attr('data-quantity', newQuantity);
             quantity.text(newQuantity);
 
+            updateQuantity(  product_id, newQuantity );
             updatePrice(price, quantity);
 
         }
@@ -104,12 +113,12 @@ $(document).ready(function () {
 
 
 
-    function updateQuantity( product, quantity ) {
+    function updateQuantity( productId, quantity ) {
         $.ajax({
             url: '/backend_war_exploded/update-quantity' ,
             method: 'POST',
             data: {
-                product: product,
+                productId: productId,
                 quantity: quantity
             },
             success: function (result) {
@@ -130,13 +139,7 @@ $(document).ready(function () {
 
 
 
-    // decrement.on('click', function () {
-    //     if (parseInt(quantity.text()) > 1) {
-    //         let newQuantity = parseInt($('#quantity').text()) -1;
-    //         quantity.text(newQuantity);
-    //     }
-    //
-    // })
+
 
 })
 

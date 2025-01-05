@@ -55,7 +55,7 @@
 
                     <c:forEach items="${productCarts}" var="p">
 
-                        <div class="wrap mid_align row product-item" data-stock="${p.stock}">
+                        <div class="wrap mid_align row product-item" data-stock="${p.stock}" data-id="${p.productId}">
                             <input type="checkbox">
                             <div class="image">
                                 <c:choose>
