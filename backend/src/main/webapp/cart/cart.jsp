@@ -56,7 +56,7 @@
                     <c:forEach items="${productCarts}" var="p">
 
                         <div class="wrap mid_align row product-item" data-stock="${p.stock}" data-id="${p.productId}">
-                            <input type="checkbox">
+                            <input type="checkbox" checked class="product_checked" value="${p.productId}">
                             <div class="image">
                                 <c:choose>
                                     <c:when test="${empty p.imageUrl}">
@@ -169,8 +169,8 @@
                     </div>
 
 
-                    <button type="submit" id="pay"
-                            data-src="/web-programming/frontEnd/src/component/checkout/Checkout.html">Thanh Toán
+                    <button type="submit" id="pay">
+                        Thanh Toán
                     </button>
 
                     <div class="term_condition">

@@ -5,12 +5,14 @@ import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 
+import java.util.List;
+
 @RegisterConstructorMapper(Address.class)
 public interface AddressDAO {
 
     @SqlQuery(value = "SELECT *" +
             " FROM address" +
-            " WHERE userId = :id;")
-    Address getAddressByUserId(@Bind("id") Integer id);
+            " WHERE userId = :userId;")
+    List<Address> getAddressByUserId(@Bind("userId") Integer userId);
 
 }
