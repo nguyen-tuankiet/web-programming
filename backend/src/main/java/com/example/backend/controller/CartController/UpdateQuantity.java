@@ -6,7 +6,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "IncreaseQuantity", value = "/update-quantity")
+@WebServlet(name = "IncreaseQuantity", value = "/cart/update-quantity")
 public class UpdateQuantity extends HttpServlet {
     
     @Override
@@ -21,14 +21,18 @@ public class UpdateQuantity extends HttpServlet {
         HttpSession session = request.getSession();
         if (session != null) {
             Cart cart = (Cart) session.getAttribute("cart");
-            Integer productId = Integer.parseInt(request.getParameter("productId"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-            if (cart.getData().containsKey(productId)) {
-                ProductCart productCart = cart.getData().get(productId);
-                productCart.setQuantity(quantity);
-                cart.getData().put(productId, productCart);
+            if (cart != null) {
+                Integer productId = Integer.parseInt(request.getParameter("productId"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+
+                if (cart.getData().containsKey(productId)) {
+                    ProductCart productCart = cart.getData().get(productId);
+                    productCart.setQuantity(quantity);
+                    cart.getData().put(productId, productCart);
+                }
             }
+
 
         }
 
