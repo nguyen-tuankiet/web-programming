@@ -45,13 +45,11 @@ public class Cart {
     }
 
 
+    public Map<Integer, ProductCart> getData() {
+        return data;
+    }
 
-
-
-
-
-
-
-
-
+    public void setData(Map<Integer, ProductCart> data) {
+        this.data = data;
+    }
 }
