@@ -27,6 +27,7 @@ public class CheckoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+
         HttpSession session = request.getSession();
         List<ProductCart > productList = new ArrayList<>();
 
@@ -39,7 +40,7 @@ public class CheckoutController extends HttpServlet {
         }
 
 
-        String productParam = request.getParameter("products");
+        String productParam = request.getParameter("productIds");
 
         if ( productParam != null) {
 
@@ -59,13 +60,15 @@ public class CheckoutController extends HttpServlet {
 
 
 
-
-
         request.setAttribute("productList", productList);
         request.setAttribute("addressList", addressList);
         request.setAttribute("cardList", cardList);
 
+
+
         request.getRequestDispatcher("Checkout/Checkout.jsp").forward(request, response);
+
+
 
 
     }
@@ -73,7 +76,6 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
 
     }
 }
