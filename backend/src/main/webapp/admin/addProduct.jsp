@@ -124,19 +124,13 @@
 
                     <label for="productName">Thuộc tính</label>
                     <div class="option-group">
-                        <select class="option-select">
-                            <option value="size">Kích thước</option>
-                            <option value="color">Màu sắc</option>
-                            <option value="material">Chất liệu</option>
-                            <option value="style">Kiểu dáng</option>
-                            <option value="title">Tiêu đề</option>
+                        <select class="option-select" id="variant-select" onchange="fetchVariantValues(this.value)">
+                            <option value="">Select Variant</option>
                         </select>
-                        <select class="option-select">
-                            <option value="size">Kích thước</option>
-                            <option value="color">Màu sắc</option>
-                            <option value="material">Chất liệu</option>
-                            <option value="style">Kiểu dáng</option>
-                            <option value="title">Tiêu đề</option>
+
+                        <!-- Variant Value Dropdown -->
+                        <select class="option-select" id="variant-value-select">
+                            <option value="">Select Variant-Value</option>
                         </select>
 
                         <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
