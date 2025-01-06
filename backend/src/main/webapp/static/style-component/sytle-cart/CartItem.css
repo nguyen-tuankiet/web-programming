@@ -88,7 +88,7 @@ a{
 
 /*Wrap*/
 .wrap{
-    /*width: 700px;*/
+    margin-bottom: 20px;
     height: 150px;
     width: 100%;
     padding: 0 10px;

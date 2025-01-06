@@ -14,20 +14,11 @@ $(document).ready(function () {
             return;
         }
 
+        const body= products.join(',');
 
-        $.ajax({
-            type: 'POST',
-            url: 'checkout',
-            data: {
-                products: products.join(','),
-            },
-            success: function (result) {
-                console.log(result);
-                window.location.href = 'checkout';
-            },
-            error: function () {}
+        window.location.href="checkout?productIds=" + encodeURIComponent(body);
 
-            });
+
         });
 
 
