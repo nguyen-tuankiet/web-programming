@@ -317,6 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+// nha cung cap
 
 document.addEventListener("DOMContentLoaded", function () {
     // Lấy phần tử dropdown
@@ -356,3 +357,84 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error fetching brand:", err);
         });
 });
+
+//  variant
+// Base API URL
+const API_BASE_URL = "/api";
+
+// Load all variants when the page is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    loadVariants();
+});
+
+// Fetch and populate the variants in the dropdown
+async function loadVariants() {
+    try {
+        const response = await fetch(`/backend_war/api/variants`);
+        const data = await response.json();
+
+        if (data.statusCode === 200) {
+            populateVariants(data.data);
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error("Error fetching variants:", error);
+    }
+}
+
+// Populate the variants dropdown
+function populateVariants(variants) {
+    const variantSelect = document.getElementById("variant-select");
+    variantSelect.innerHTML = `<option value="">Chọn biến thể</option>`;
+    variants.forEach(variant => {
+        const option = document.createElement("option");
+        option.value = variant.id; // Lưu ID để fetch Variant-Values
+        option.textContent = variant.name; // Hiển thị tên
+        variantSelect.appendChild(option);
+    });
+}
+
+// Hàm tải danh sách variant-values dựa trên variantId
+function fetchVariantValues(variantId) {
+    if (!variantId) {
+        // Reset danh sách khi không có giá trị được chọn
+        document.getElementById("variant-value-select").innerHTML = '<option value="">Chọn giá trị</option>';
+        return;
+    }
+
+    fetch(`/backend_war/api/variants/${variantId}`)
+        .then(response => {
+            if (!response.ok) throw new Error("Failed to fetch variant values");
+            return response.json();
+        })
+        .then(data => {
+            const variantValueSelect = document.getElementById("variant-value-select");
+            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+            if (data.statusCode === 200) {
+                if (data.data && data.data.length > 0) {
+                    data.data.forEach(value => {
+                        const option = document.createElement("option");
+                        option.value = value.id;
+                        option.textContent = value.value; // Gán giá trị hiển thị
+                        variantValueSelect.appendChild(option);
+                    });
+                } else {
+                    console.warn("No variant values found for the selected variant.");
+                }
+            } else {
+                console.error("Error fetching variant values:", data.message);
+            }
+        })
+        .catch(error => console.error("Error:", error.message));
+}
+
+
+// Lắng nghe sự kiện khi chọn variant
+document.getElementById("variant-select").addEventListener("change", function () {
+    const variantId = this.value;
+    fetchVariantValues(variantId);
+});
+
+// Gọi hàm để tải danh sách variants khi trang được load
+document.addEventListener("DOMContentLoaded", fetchVariants);
