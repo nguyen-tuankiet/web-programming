@@ -316,3 +316,43 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Error fetching categories:", err);
         });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy phần tử dropdown
+    const vendor = document.getElementById("vendor");
+
+    // Kiểm tra phần tử dropdown có tồn tại
+    if (!vendor) {
+        console.error("Phần tử dropdown không tồn tại");
+        return;
+    }
+
+    // Gọi API để lấy danh mục
+    fetch('/backend_war/api/brand')
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Không thể lấy nhà cung cấp');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data.statusCode === 200 && data.data) {
+                // Xóa các option cũ (nếu cần)
+                vendor.innerHTML = '<option>Chọn nhà cung cấp</option>';
+
+                // Thêm các danh mục mới
+                data.data.forEach((brand) => {
+                    const option = document.createElement('option');
+                    option.value = brand.id;
+                    option.textContent = brand.name;
+                    vendor.appendChild(option);
+                });
+            } else {
+                console.error("Dữ liệu nhà cung cấp không hợp lệ");
+            }
+        })
+        .catch((err) => {
+            console.error("Error fetching brand:", err);
+        });
+});
