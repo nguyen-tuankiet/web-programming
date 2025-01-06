@@ -155,14 +155,8 @@
         <div class="section organization-section">
             <h2>Tổ chức</h2>
             <label for="vendor">Nhà cung cấp</label>
-            <input type="text" id="vendor" placeholder="eg. Nike">
-
-            <label for="collections">Bộ sưu tập</label>
-            <select id="collections">
-                <option value="winter">Nhà bếp</option>
-                <option value="summer">Phòng khách</option>
-                <option value="summer">Phòng ngủ</option>
-                <option value="summer">Khác</option>
+            <select id="vendor"  data-url="<%= request.getContextPath() %>/backend_war/api/categories">
+                <option value="winter">Chọn nhà cung cấp</option>
             </select>
 
             <label for="tags">Thẻ</label>
