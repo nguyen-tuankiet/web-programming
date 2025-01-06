@@ -50,6 +50,7 @@ $(document).ready(function () {
 
         increment.on('click', function () {
             increaseQuantity( $(this), quantity, price, stock, product_id);
+            // updateBill();
         })
 
         decrement.on('click', function () {
@@ -68,6 +69,12 @@ $(document).ready(function () {
 
 
        })
+
+        updateBill();
+
+
+
+
     }
 
 
@@ -77,7 +84,10 @@ $(document).ready(function () {
         let total = price_value * quantity_value;
 
         let formatted = new Intl.NumberFormat('vi-VN').format(total);
-        price.text(formatted + 'VND');
+        price.text(formatted + ' VND');
+
+
+        updateBill();
 
     }
 
@@ -124,6 +134,8 @@ $(document).ready(function () {
             updatePrice(price, quantity);
 
         }
+
+        updateBill();
 
 
     }
@@ -173,12 +185,44 @@ $(document).ready(function () {
         }
 
 
+        updateBill();
+
+
 
     }
 
 
 
+    function updateBill(){
+        const priceList = $('.price')
+        let totalPrice = 0;
+        let total = $('#total')
+        let VAT = $('#VAT')
+        let before_tax = $('#before_tax')
 
+        priceList.each(function () {
+            let price =  $(this).attr('data-price');
+            totalPrice += parseInt(price);
+        })
+
+
+        const tax = totalPrice * 10 /100;
+        const b_t = totalPrice - tax;
+
+        console.log("tax  : " ,tax);
+        console.log("b_t  : " ,b_t);
+
+
+
+
+        total.text(Intl.NumberFormat('vi-VN').format(totalPrice) + ' VND');
+        VAT.text(Intl.NumberFormat('vi-VN').format(tax) + ' VND');
+        before_tax.text(Intl.NumberFormat('vi-VN').format(b_t) + ' VND');
+
+
+
+
+    }
 
 
 
