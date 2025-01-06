@@ -141,6 +141,7 @@ body > #header > nav > ul > li > a {
 .submenu-column {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 .submenu-column a {
