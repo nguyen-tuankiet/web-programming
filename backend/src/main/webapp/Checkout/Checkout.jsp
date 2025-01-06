@@ -220,83 +220,85 @@
             </div>
 
 
-            <div class="right-side col ">
-                <div class="bill mid_align col ">
-                    <div class="discount">
-                        <span class="title">Nhập Mã Khuyến Mãi</span>
 
-                        <div class="wrap_input">
-                            <input id="voucher" type="text" placeholder="Voucher hoặc gift code ">
-                            <label for="voucher"></label>
-                            <button type="submit">Áp Dụng</button>
-                        </div>
+        </div>
 
+        <div class="right-side col ">
+            <div class="bill mid_align col ">
+                <div class="discount">
+                    <span class="title">Nhập Mã Khuyến Mãi</span>
+
+                    <div class="wrap_input">
+                        <input id="voucher" type="text" placeholder="Voucher hoặc gift code ">
+                        <label for="voucher"></label>
+                        <button type="submit">Áp Dụng</button>
                     </div>
 
+                </div>
 
-                    <div class="summary col">
-                        <span class="title">Bản Tóm Tắt</span>
-                        <div class="price item_price">
-                            <span>Tổng giá trước thuế</span>
-                            <span class="value">95,775,561 VND</span>
-                        </div>
 
-                        <div class="tax item_price">
-                            <span>Thuế GTGT</span>
-                            <span class="value">9,577,556 VND</span>
-                        </div>
+                <div class="summary col">
+                    <span class="title">Bản Tóm Tắt</span>
+                    <div class="price item_price">
+                        <span>Tổng giá trước thuế</span>
+                        <span class="value">95,775,561 VND</span>
                     </div>
 
-
-                    <div class="wrap_total">
-                        <div class="total">
-                            <span>Tổng cộng</span>
-                            <span>105,353,117 VND</span>
-                        </div>
-                        <span class="note">Đẫ bao gồm thuế GTGT</span>
+                    <div class="tax item_price">
+                        <span>Thuế GTGT</span>
+                        <span class="value">9,577,556 VND</span>
                     </div>
+                </div>
 
 
-                    <button type="submit" id="pay"
-                            data-src="/web-programming/frontEnd/src/component/user_order/OrderSuccess.html">Thanh Toán
-                    </button>
+                <div class="wrap_total">
+                    <div class="total">
+                        <span>Tổng cộng</span>
+                        <span>105,353,117 VND</span>
+                    </div>
+                    <span class="note">Đẫ bao gồm thuế GTGT</span>
+                </div>
 
-                    <div class="term_condition">
+
+                <button type="submit" id="pay"
+                        data-src="/web-programming/frontEnd/src/component/user_order/OrderSuccess.html">Thanh Toán
+                </button>
+
+                <div class="term_condition">
                 <span>Bằng cách gửi đơn đặt hàng,
                     bạn đồng ý với <a href="#">Điều khoản & điều kiện</a> và
                     chúng tôi sẽ sử dụng dữ liệu cá nhân của bạn theo
                     <a href="#">Chính sách quyền riêng tư</a> của chúng tôi.</span>
-                    </div>
+                </div>
 
 
-                    <div class="ads col">
-                        <div class="ads_item">
-                            <i class="fa-solid fa-medal"></i>
-                            <span>Cam kết giá</span>
-
-                        </div>
-
-                        <div class="ads_item">
-                            <i class="fa-solid fa-truck-fast"></i>
-                            <span>Giao hàng miễn phí toàn quốc </span>
-
-                        </div>
-                        <div class="ads_item">
-                            <i class="fa-solid fa-percent"></i>
-                            <span>Gói trả góp 0%</span>
-
-                        </div>
-
-                        <div class="ads_item">
-                            <i class="fa-solid fa-rotate"></i>
-                            <span>Đổi sản phẩm theo chính sách quy định trong vòng 14 ngày</span>
-
-                        </div>
+                <div class="ads col">
+                    <div class="ads_item">
+                        <i class="fa-solid fa-medal"></i>
+                        <span>Cam kết giá</span>
 
                     </div>
 
+                    <div class="ads_item">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <span>Giao hàng miễn phí toàn quốc </span>
+
+                    </div>
+                    <div class="ads_item">
+                        <i class="fa-solid fa-percent"></i>
+                        <span>Gói trả góp 0%</span>
+
+                    </div>
+
+                    <div class="ads_item">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>Đổi sản phẩm theo chính sách quy định trong vòng 14 ngày</span>
+
+                    </div>
 
                 </div>
+
+
             </div>
         </div>
     </div>
