@@ -22,8 +22,8 @@ public class CategoryService {
     }
 
     public Category createCategory(String name) {
-        int id = categoryDAO.createCategory(name); // Lấy ID từ INSERT
-        return categoryDAO.getCategoryById(id);   // Truy vấn lại để lấy Category đầy đủ
+        int id = categoryDAO.createCategory(name);
+        return categoryDAO.getCategoryById(id);
     }
 
     public void updateCategory(Integer id, String name) {
