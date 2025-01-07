@@ -23,7 +23,7 @@
 
 
     <style>
-        #price{
+        #price {
             margin-bottom: 5px;
             font-size: 18px;
             font-weight: 600;
@@ -106,21 +106,18 @@
                                 </c:choose>
 
 
-
-
                             </div>
 
 
                             <div class=" price_and_quantity mid_align col  ">
-                                <div id="price" data-price="${p.price}" >
+                                <div id="price" data-price="${p.price}">
                                     <fmt:formatNumber value="${p.price * p.quantity}" pattern="#,###"/> VND
                                 </div>
 
 
                                 <div id="quantity" class=" mid_align row" data-quantity="${p.quantity}">
-                                        Số lượng : ${p.quantity}
+                                    Số lượng : ${p.quantity}
                                 </div>
-
 
 
                             </div>
@@ -141,18 +138,57 @@
                     </div>
 
                     <div class="address_body">
+                        <c:if test="${not empty addressList }">
+
+                            <c:set var="found" value="fasle"/>
+                            <c:forEach items="${addressList}" var="address">
+
+                                <c:if test="${address.isDefault == true }">
+                                    <div class="item_header row mid_align" data-id="${address.id}">
+
+                                        <span class="name">${address.name}</span>
+                                        <div class="rec_vertical"></div>
+                                        <span class="phone">${address.phone}</span>
+                                        <a href="#" class="change">Thay đổi</a>
+                                    </div>
+
+                                    <div class="address_detail">
+                                        <span> ${address.detail}, ${address.commune}, ${address.district}, ${address.province}  </span>
+                                    </div>
+
+                                    <c:set var="found" value="true"/>
+                                </c:if>
 
 
-                        <div class="item_header row mid_align">
-                            <span class="name">Jackei Chan</span>
-                            <div class="rec_vertical"></div>
-                            <span class="phone">03999989970</span>
-                            <a href="#" class="change">Thay đổi</a>
-                        </div>
+                            </c:forEach>
 
-                        <div class="address_detail">
-                            <span>Số 8, Đường Hàm Nghi Quận 1, TP.HCM </span>
-                        </div>
+
+                            <c:if test="${found == false }">
+
+                                <c:forEach items="${addressList}" var="address">
+
+                                    <c:if test="${found == false}">
+                                        <div class="item_header row mid_align" data-id="${address.id}">
+
+                                            <span class="name">${address.name}</span>
+                                            <div class="rec_vertical"></div>
+                                            <span class="phone">${address.phone}</span>
+                                            <a href="#" class="change">Thay đổi</a>
+                                        </div>
+
+                                        <div class="address_detail">
+                                            <span> ${address.detail}, ${address.commune}, ${address.district}, ${address.province}  </span>
+                                        </div>
+
+                                        <c:set var="found" value="true"/>
+
+
+                                    </c:if>
+
+                                </c:forEach>
+                            </c:if>
+
+                        </c:if>
 
 
                     </div>
@@ -167,12 +203,12 @@
 
                     <div class="payment_body col">
 
+
                         <div class="item mid_align cod">
                             <i class="fa-solid fa-money-bill"></i>
                             <span>Thanh toán khi nhận hàng</span>
                             <input type="radio" name="payment-method">
                         </div>
-
 
                         <div class="item mid_align banking col">
 
@@ -183,29 +219,39 @@
 
 
                             <div class="card_list col">
-                                <div class="card_item">
-                                    <div class="wrap_card">
-                                        <i class="fa-brands fa-cc-visa"></i>
-                                        <span>**** 5634</span>
-                                        <input type="radio" name="payment-method">
-                                    </div>
-                                </div>
 
-                                <div class="card_item">
-                                    <div class="wrap_card">
-                                        <i class="fa-brands fa-cc-jcb"></i>
-                                        <span>**** 4212</span>
-                                        <input type="radio" name="payment-method">
-                                    </div>
-                                </div>
+                                <c:if test="${not empty cardList }">
+                                    <c:forEach items="${cardList}" var="card">
 
-                                <div class="card_item">
-                                    <div class="wrap_card">
-                                        <i class="fa-brands fa-cc-mastercard"></i>
-                                        <span>**** 1232</span>
-                                        <input type="radio" name="payment-method">
-                                    </div>
-                                </div>
+                                        <div class="card_item">
+                                            <div class="wrap_card">
+
+                                                <c:if test="${card.type == 'Visa'}" >
+                                                    <i class="fa-brands fa-cc-visa"></i>
+                                                </c:if>
+
+                                                <c:if test="${card.type == 'MasterCard'}" >
+                                                    <i class="fa-brands fa-cc-mastercard"></i>
+                                                </c:if>
+
+                                                <span>**** ${card.last4}</span>
+
+
+                                                <c:if test="${card.isDefault == 'true'}" >
+                                                    <input type="radio" name="payment-method" checked>
+                                                </c:if>
+
+                                                <c:if test="${card.isDefault == 'false'}" >
+                                                    <input type="radio" name="payment-method" >
+                                                </c:if>
+
+
+                                            </div>
+                                        </div>
+
+                                    </c:forEach>
+                                </c:if>
+
                             </div>
 
                         </div>
@@ -218,7 +264,6 @@
 
 
             </div>
-
 
 
         </div>
@@ -248,6 +293,7 @@
                         <span>Thuế GTGT</span>
                         <span id="VAT" class="value">0 VND</span>
                     </div>
+
                 </div>
 
 
