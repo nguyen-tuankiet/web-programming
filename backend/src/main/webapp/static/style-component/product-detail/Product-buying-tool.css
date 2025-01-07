@@ -1,11 +1,10 @@
 body {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     margin: 0;
-    padding: 20px;
     background-color: white;
 }
 
-.container {
+.container-product-Bt {
     width: 590px;
     margin: 0 auto;
 }

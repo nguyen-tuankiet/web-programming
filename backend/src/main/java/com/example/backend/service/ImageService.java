@@ -2,10 +2,13 @@ package com.example.backend.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.DAO.ImageDao;
+import com.example.backend.model.Image;
 import org.jdbi.v3.core.Jdbi;
 
 
+import java.util.List;
 import java.util.Map;
 
 public class ImageService {
@@ -19,7 +22,6 @@ public class ImageService {
         this.cloudinary = cloudinary;
         this.imageDao = imageDao;
     }
-
 
     public ImageService(Jdbi jdbi) {
         this.jdbi = jdbi;
@@ -44,8 +46,22 @@ public class ImageService {
        return imageDao.addImageToProduct(productId, imageId);
     }
 
+<<<<<<< HEAD
+    public List<Image> getAllImages() {
+        return List.of();
+    }
+
+    public List <String> getAllImagesByProductId(Integer productId) {
+        return imageDao.getAllImagesByProductId(productId);
+    }
+
+    public static void main(String[] args) {
+        ImageService imageService = new ImageService(DBConnection.getJdbi());
+        System.out.println(imageService.getAllImagesByProductId(1));
+=======
     public int saveImage(String imageUrl) {
         return imageDao.saveImage(imageUrl);
+>>>>>>> f14d424fb0f845bf26785b32df66141cd3af6c9d
     }
 
 }

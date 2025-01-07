@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 
-body {
+body2 {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
@@ -39,6 +39,8 @@ body {
     height: 90vh;
     border: none;
 }
+
+
 
 .iframe-large {
     width: 100%;

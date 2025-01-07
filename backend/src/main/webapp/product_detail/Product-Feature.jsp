@@ -14,7 +14,7 @@
     <title>Product Feature</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/static/style-component/product-detail/Product-Feature.css">
 </head>
-<body>
+<body1>
 
 <!-- Feature benefit 1-->
 <div class="feature-benefit1">
@@ -76,5 +76,5 @@
     </div>
 </div>
 
-</body>
+</body1>
 </html>
