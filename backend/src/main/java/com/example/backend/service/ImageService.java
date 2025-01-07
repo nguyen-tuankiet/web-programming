@@ -43,4 +43,9 @@ public class ImageService {
     public boolean addImageToProduct(Integer productId, Integer imageId) {
        return imageDao.addImageToProduct(productId, imageId);
     }
+
+    public int saveImage(String imageUrl) {
+        return imageDao.saveImage(imageUrl);
+    }
+
 }
