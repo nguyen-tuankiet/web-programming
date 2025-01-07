@@ -2,32 +2,24 @@ package com.example.backend.controller.image;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-
 import com.example.backend.model.DAO.ImageDao;
 import com.example.backend.model.Image;
 import com.example.backend.service.ImageService;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
-import java.util.Properties;
-import java.util.ArrayList;
 import java.util.List;
-
-@WebServlet("/uploadImage")
-@MultipartConfig
+import java.util.Properties;
+@WebServlet("/getUploadedImages")
 public class UploadImageController extends HttpServlet {
     private ImageService imageService;
 
@@ -77,64 +69,47 @@ public class UploadImageController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json");
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        response.setCharacterEncoding("UTF-8");
 
-        Collection<Part> fileParts = request.getParts(); // Lấy tất cả các file từ request
-        List<Image> uploadedImages = new ArrayList<>(); // Danh sách lưu thông tin các ảnh đã upload
+        try {
+            // Lấy danh sách các ảnh từ cơ sở dữ liệu
+            List<Image> images = imageService.getAllImages();
 
-        if (fileParts != null && !fileParts.isEmpty()) {
-            for (Part filePart : fileParts) {
-                if (filePart.getContentType() != null && filePart.getSize() > 0) { // Kiểm tra file hợp lệ
-                    try (InputStream inputStream = filePart.getInputStream()) {
-                        byte[] fileBytes = inputStream.readAllBytes();
-                        String imageUrl = imageService.uploadImage(fileBytes);
-
-                        // Thêm thông tin ảnh đã upload vào danh sách
-                        uploadedImages.add(new Image(null, imageUrl));
-                    } catch (Exception e) {
-                        // Ghi log lỗi (nếu cần)
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            if (!uploadedImages.isEmpty()) {
-                // Trả về phản hồi thành công
-                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+            if (!images.isEmpty()) {
+                // Trả về danh sách ảnh dưới dạng JSON
+                ResponseWrapper<Object> successResponse = new ResponseWrapper<>(
                         HttpServletResponse.SC_OK,
                         "Thành công",
-                        "Tất cả ảnh đã được upload thành công!",
-                        uploadedImages
+                        "Danh sách ảnh được trả về.",
+                        images
                 );
                 response.setStatus(HttpServletResponse.SC_OK); // 200
-                response.getWriter().println(objectMapper.writeValueAsString(responseWrapper));
+                response.getWriter().println(new ObjectMapper().writeValueAsString(successResponse));
             } else {
-                // Trả về phản hồi nếu không có ảnh nào hợp lệ được upload
-                ResponseWrapper<Object> errorResponse = new ResponseWrapper<>(
-                        HttpServletResponse.SC_BAD_REQUEST,
-                        "Lỗi",
-                        "Không có ảnh hợp lệ để upload.",
+                // Trả về thông báo không có ảnh
+                ResponseWrapper<Object> noDataResponse = new ResponseWrapper<>(
+                        HttpServletResponse.SC_OK,
+                        "Thành công",
+                        "Không có ảnh nào trong cơ sở dữ liệu.",
                         null
                 );
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400
-                response.getWriter().println(objectMapper.writeValueAsString(errorResponse));
+                response.setStatus(HttpServletResponse.SC_OK); // 200
+                response.getWriter().println(new ObjectMapper().writeValueAsString(noDataResponse));
             }
-        } else {
-            // Trả về phản hồi khi không tìm thấy file
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Trả về lỗi
             ResponseWrapper<Object> errorResponse = new ResponseWrapper<>(
-                    HttpServletResponse.SC_BAD_REQUEST,
+                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                     "Lỗi",
-                    "Không tìm thấy file để upload.",
+                    "Có lỗi xảy ra khi lấy danh sách ảnh.",
                     null
             );
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400
-            response.getWriter().println(objectMapper.writeValueAsString(errorResponse));
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR); // 500
+            response.getWriter().println(new ObjectMapper().writeValueAsString(errorResponse));
         }
     }
-
-
 }
