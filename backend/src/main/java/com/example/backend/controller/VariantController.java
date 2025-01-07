@@ -30,7 +30,11 @@ public class VariantController extends HttpServlet {
         try {
             if (pathInfo == null || pathInfo.equals("/")) {
                 // Lấy danh sách tất cả các variants
-                List<Variant> variants = variantService.getAllVariants();
+                String categoryIdParam = request.getParameter("categoryId");
+                Integer categoryId = categoryIdParam != null ? Integer.valueOf(categoryIdParam) : null;
+
+                // Gọi service để lấy danh sách variants
+                List<Variant> variants = variantService.getVariantsByCategory(categoryId);
                 ResponseWrapper<List<Variant>> responseWrapper = new ResponseWrapper<>(
                         200, "success", "Fetched variants successfully", variants);
                 writeResponse(response, responseWrapper);
