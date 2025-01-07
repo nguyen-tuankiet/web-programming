@@ -32,4 +32,9 @@ $(document).ready(function () {
         VAT.text(Intl.NumberFormat('vi-VN').format(checkout_tax) + ' VND');
         before_tax.text(Intl.NumberFormat('vi-VN').format(checkout_before_tax) + ' VND');
     }
+
+
+
+
+
 })
