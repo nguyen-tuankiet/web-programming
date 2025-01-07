@@ -176,7 +176,7 @@
                             <div class="infor_section">
 
                                 <div class="infor_name bold f22" id="name">
-                                    <span> ${p.name}</span>
+                                    <a href="product-detail?id=${p.id}"> ${p.name}</a>
                                 </div>
 
 

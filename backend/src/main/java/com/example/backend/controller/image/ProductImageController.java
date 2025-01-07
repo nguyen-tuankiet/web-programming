@@ -2,17 +2,16 @@ package com.example.backend.controller.image;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.ImageService;
-import com.example.backend.util.ResponseWrapper;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-
-@WebServlet("/api/add-product-image")
+@WebServlet(name = "add-product-image", value = "/ImageDetailDao")
+//@WebServlet("/api/add-product-image")
 public class ProductImageController extends HttpServlet {
 
     private ImageService imageService = new ImageService(DBConnection.getJdbi());

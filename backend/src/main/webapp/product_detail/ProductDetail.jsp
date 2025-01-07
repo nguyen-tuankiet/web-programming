@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%--
   Created by IntelliJ IDEA.
   User: VSiJs
@@ -15,17 +16,118 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail-item.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail-item.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-buying-tool.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-buying-tool.js"></script>
 </head>
 <body>
-
+<div class="cart_header">
+    <jsp:include page="/home/header.jsp"/>
+</div>
 <div class="container">
     <div class="section1">
-        <iframe src="${pageContext.request.contextPath}/Product-detail/Product-detail-item.jsp"
-                class="iframe"></iframe>
+        <div class="carousel-container">
+            <!-- Main Image Display -->
+<%--            <img id="mainImage"--%>
+<%--                 src="<c:choose>--%>
+<%--                <c:when test='${not empty images}'>--%>
+<%--                    ${images[0].url}--%>
+<%--                </c:when>--%>
+<%--                <c:otherwise>--%>
+<%--                    ${pageContext.request.contextPath}/static/images/placeholder.jpg--%>
+<%--                </c:otherwise>--%>
+<%--              </c:choose>"--%>
+<%--                 alt="Carousel Image"--%>
+<%--                 class="carousel-image"--%>
+<%--                 data-context-path="${pageContext.request.contextPath}">--%>
+
+            <!-- Navigation Arrows -->
+<%--            <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>--%>
+<%--            <div class="nav-arrow right" onclick="nextImage()">&#10095;</div>--%>
+
+<%--            <!-- Thumbnails -->--%>
+
+
+            <!-- Carousel Container -->
+            <div class="carousel-container">
+                <!-- Main Image Display -->
+                <img id="mainImage" src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg" alt="Carousel Image" class="carousel-image">
+                <!-- Navigation Arrows -->
+                <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
+                <div class="nav-arrow right" onclick="nextImage()">&#10095;</div>
+
+                <!-- Thumbnails -->
+                <div class="thumbnails">
+                    <c:if test="${not empty images}">
+                        <c:forEach var="image" items="${images}">
+                            <img src="${image}" alt="Thumbnail "/>
+                        </c:forEach>
+                    </c:if>
+
+                </div>
+<%--                <div class="thumbnails">--%>
+
+<%--                    <img src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="showImage(0)">--%>
+<%--                    <img src="${pageContext.request.contextPath}/static/image/img-detail/image2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">--%>
+<%--                    <img src="${pageContext.request.contextPath}/static/image/img-detail/image3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">--%>
+<%--                    <img src="${pageContext.request.contextPath}/static/image/img-detail/image4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">--%>
+<%--                    <img src="${pageContext.request.contextPath}/static/image/img-detail/image5.jpg" alt="Thumbnail 5" class="thumbnail" onclick="showImage(4)">--%>
+<%--                    <img src="${pageContext.request.contextPath}/static/image/img-detail/image6.jpg" alt="Thumbnail 6" class="thumbnail" onclick="showImage(5)">--%>
+<%--                    <img src="${pageContext.request.contextPath}/static/image/img-detail/image7.jpg" alt="Thumbnail 7" class="thumbnail" onclick="showImage(6)">--%>
+<%--                </div>--%>
+            </div>
+
+        </div>
     </div>
     <div class="section1">
-        <iframe src="${pageContext.request.contextPath}/Product-detail/Product-buying-tool.jsp"
-                class="iframe"></iframe>
+<%--        <iframe src="${pageContext.request.contextPath}/Product-detail/Product-buying-tool.jsp"--%>
+<%--                class="iframe"></iframe>--%>
+    <div class="container">
+        <div class="product-title">
+<%--            <%= "Tủ Lạnh Ngăn Đông Trên RT31CG5424B1SV với Ngăn Đông Mềm 4 Chế Độ Optimal Fresh+ 305 L, màu Đen" %>--%>
+            ${product.name}
+        </div>
+        <a href="<%= request.getContextPath() %>/link-Đánh giá" class="product-rating">
+            ★★★☆☆ <span>(<%= "2.6 / 10 đánh giá" %>)</span>
+        </a>
+
+        <div class="product-features">
+            <ul>
+                <li>
+                    <div>Ưu đãi thêm 5% (đến 1 TRIỆU đồng) cho đơn hàng đầu tiên từ 8 triệu</div>
+                    <div>Thanh toán online trả trước giảm thêm 2%</div>
+                    <div>Giảm thêm 3% khi mua từ 2 - 5 sản phẩm điện gia dụng, điều hòa, TV, điện thoại (trừ phụ kiện)</div>
+                    <div>Tích thêm 2% điểm Rewards Samsung</div>
+                    <div>Giảm thêm 10% tối đa 1 triệu khi nhập mã SSDDeal. Áp dụng cho đơn hàng shoppapp hệ điều hành iOS
+                        đến hết ngày 07/11
+                    </div>
+                    <div>Liên hệ với tư vấn viên online để biết thêm chi tiết về ưu đãi hoặc để nhận hướng dẫn mua hàng.
+                    </div>
+                </li>
+                <li>Ngăn đông mềm linh hoạt 4 chế độ Optimal Fresh+</li>
+                <li>Tăng 20L dung tích với công nghệ SpaceMax™</li>
+                <li>Khử mùi với hệ thống lọc than hoạt tính</li>
+            </ul>
+        </div>
+
+        <div class="option-title">Chọn Màu Sắc</div>
+        <div class="color-options">
+            <div class="color-option black"></div>
+            <div class="color-option silver"></div>
+        </div>
+
+        <div class="option-title">Chọn Dung Tích</div>
+        <div class="capacity-options">
+            <div class="capacity-option">305 L</div>
+            <div class="capacity-option">348 L</div>
+            <div class="capacity-option">345 L</div>
+        </div>
+        <div class="price">
+            <%= "23.000.000 VND" %>
+        </div>
+        <!--    <button class="btn-add-to-cart">Thêm vào giỏ hàng</button>-->
+    </div>
     </div>
     <div>
         <a href="#">
