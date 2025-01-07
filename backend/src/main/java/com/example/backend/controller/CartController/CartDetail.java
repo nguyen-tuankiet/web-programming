@@ -23,7 +23,6 @@ public class CartDetail extends HttpServlet {
             cart = new Cart();
             session.setAttribute("cart", cart);
         }
-
         List<ProductCart> productCarts = cart.getProducts();
         request.setAttribute("productCarts", productCarts);
 

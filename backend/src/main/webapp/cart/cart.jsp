@@ -32,6 +32,7 @@
     <div id="cart_body" class="mid_align col">
 
 
+
         <c:if test="${empty productCarts}">
             <div id="empty_cart" class="mid_align col">
                 <i class="fa-solid fa-cart-plus"></i>
@@ -55,8 +56,8 @@
 
                     <c:forEach items="${productCarts}" var="p">
 
-                        <div class="wrap mid_align row">
-                            <input type="checkbox">
+                        <div class="wrap mid_align row product-item" data-stock="${p.stock}" data-id="${p.productId}">
+                            <input type="checkbox" checked class="product_checked" value="${p.productId}">
                             <div class="image">
                                 <c:choose>
                                     <c:when test="${empty p.imageUrl}">
@@ -100,17 +101,20 @@
 
 
                             <div class="section_price mid_align col  ">
-                                <span class="price">
-                                    <fmt:formatNumber value="${p.price}" pattern="#,###"/> VND
+                                <span   class="price" data-price="${p.price}">
+                                    <fmt:formatNumber value="${p.price}" pattern="#,###"/>
+
                                 </span>
 
 
+
                                 <div class="quantity mid_align row">
-                                    <i class="fa-solid fa-minus"></i>
-                                    <span class="num mid_align">
+                                    <button id="decrement" ><i class="fa-solid fa-minus"></i></button>
+                                    <span   class="num mid_align" data-quantity="${p.quantity}">
                                             ${p.quantity}
                                     </span>
-                                    <i class="fa-solid fa-plus"></i>
+
+                                    <button id="increment"><i class="fa-solid fa-plus"></i></button>
 
                                 </div>
 
@@ -145,29 +149,29 @@
 
                     <div class="summary col">
                         <span class="title">Bản Tóm Tắt</span>
-                        <div class="price item_price">
+                        <div class="item_price">
                             <span>Tổng giá trước thuế</span>
-                            <span class="value">95,775,561 VND</span>
+                            <span id="before_tax" class="value">0 VND</span>
                         </div>
 
                         <div class="tax item_price">
-                            <span>Thuế GTGT</span>
-                            <span class="value">9,577,556 VND</span>
+                            <span>Thuế GTGT (10%)</span>
+                            <span id="VAT" class="value">0 VND</span>
                         </div>
                     </div>
 
 
                     <div class="wrap_total">
-                        <div class="total">
+                        <div class="total_label">
                             <span>Tổng cộng</span>
-                            <span>105,353,117 VND</span>
+                            <span id="total">0 VND</span>
                         </div>
                         <span class="note">Đẫ bao gồm thuế GTGT</span>
                     </div>
 
 
-                    <button type="submit" id="pay"
-                            data-src="/web-programming/frontEnd/src/component/checkout/Checkout.html">Thanh Toán
+                    <button type="submit" id="pay">
+                        Thanh Toán
                     </button>
 
                     <div class="term_condition">

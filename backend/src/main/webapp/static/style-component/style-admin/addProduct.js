@@ -277,3 +277,189 @@ document.getElementById('fileInput').addEventListener('change', function (event)
         })
         .catch(error => console.error('Error:', error));
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy phần tử dropdown
+    const categoryDropdown = document.getElementById("categoryDropdown");
+
+    // Kiểm tra phần tử dropdown có tồn tại
+    if (!categoryDropdown) {
+        console.error("Phần tử dropdown không tồn tại");
+        return;
+    }
+
+    // Gọi API để lấy danh mục
+    fetch('/backend_war/api/categories')
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Không thể lấy danh mục');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data.statusCode === 200 && data.data) {
+                // Xóa các option cũ (nếu cần)
+                categoryDropdown.innerHTML = '<option>Chọn danh mục</option>';
+
+                // Thêm các danh mục mới
+                data.data.forEach((category) => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.textContent = category.name;
+                    categoryDropdown.appendChild(option);
+                });
+            } else {
+                console.error("Dữ liệu danh mục không hợp lệ");
+            }
+        })
+        .catch((err) => {
+            console.error("Error fetching categories:", err);
+        });
+});
+
+// nha cung cap
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy phần tử dropdown
+    const vendor = document.getElementById("vendor");
+
+    // Kiểm tra phần tử dropdown có tồn tại
+    if (!vendor) {
+        console.error("Phần tử dropdown không tồn tại");
+        return;
+    }
+
+    // Gọi API để lấy danh mục
+    fetch('/backend_war/api/brand')
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Không thể lấy nhà cung cấp');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (data.statusCode === 200 && data.data) {
+                // Xóa các option cũ (nếu cần)
+                vendor.innerHTML = '<option>Chọn nhà cung cấp</option>';
+
+                // Thêm các danh mục mới
+                data.data.forEach((brand) => {
+                    const option = document.createElement('option');
+                    option.value = brand.id;
+                    option.textContent = brand.name;
+                    vendor.appendChild(option);
+                });
+            } else {
+                console.error("Dữ liệu nhà cung cấp không hợp lệ");
+            }
+        })
+        .catch((err) => {
+            console.error("Error fetching brand:", err);
+        });
+});
+
+//  variant
+// Base API URL
+const API_BASE_URL = "/api";
+
+// Load all variants when the page is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    const categorySelect = document.getElementById("categoryDropdown");
+    const variantSelect = document.getElementById("variant-select");
+    const variantValueSelect = document.getElementById("variant-value-select");
+
+    if (!categorySelect || !variantSelect || !variantValueSelect) {
+        console.error("Các phần tử dropdown không tồn tại");
+        return;
+    }
+
+    // Lắng nghe sự kiện thay đổi của category
+    categorySelect.addEventListener("change", function () {
+        const categoryId = this.value;
+        if (categoryId) {
+            loadVariantsByCategory(categoryId);
+        } else {
+            // Reset danh sách variant nếu không chọn category
+            variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
+            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+        }
+    });
+
+    // Lắng nghe sự kiện thay đổi của variant
+    variantSelect.addEventListener("change", function () {
+        const variantId = this.value;
+        if (variantId) {
+            fetchVariantValues(variantId);
+        } else {
+            // Reset danh sách variant values nếu không chọn variant
+            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+        }
+    });
+
+    // Hàm tải danh sách variants dựa trên categoryId
+    async function loadVariantsByCategory(categoryId) {
+        try {
+            variantSelect.innerHTML = '<option>Đang tải...</option>'; // Thông báo trạng thái
+
+            const response = await fetch(`/backend_war/api/variants?categoryId=${categoryId}`);
+            const data = await response.json();
+
+            if (data.statusCode === 200) {
+                populateVariants(data.data);
+            } else {
+                alert("Không thể tải danh sách biến thể!");
+                variantSelect.innerHTML = '<option value="">Chọn biến thể</option>'; // Reset khi lỗi
+            }
+        } catch (error) {
+            console.error("Error fetching variants by category:", error);
+            variantSelect.innerHTML = '<option value="">Chọn biến thể</option>'; // Reset khi lỗi
+        }
+    }
+
+    // Hàm hiển thị danh sách variants
+    function populateVariants(variants) {
+        variantSelect.innerHTML = `<option value="">Chọn biến thể</option>`;
+        variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>'; // Reset variant values
+        variants.forEach(variant => {
+            const option = document.createElement("option");
+            option.value = variant.id; // Lưu ID để fetch Variant-Values
+            option.textContent = variant.name; // Hiển thị tên
+            variantSelect.appendChild(option);
+        });
+    }
+
+    // Hàm tải danh sách variant-values dựa trên variantId
+    function fetchVariantValues(variantId) {
+        if (!variantId) {
+            // Reset danh sách khi không có giá trị được chọn
+            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+            return;
+        }
+
+        fetch(`/backend_war/api/variants/${variantId}`)
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to fetch variant values");
+                return response.json();
+            })
+            .then(data => {
+                variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+                if (data.statusCode === 200) {
+                    if (data.data && data.data.length > 0) {
+                        data.data.forEach(value => {
+                            const option = document.createElement("option");
+                            option.value = value.id;
+                            option.textContent = value.value; // Gán giá trị hiển thị
+                            variantValueSelect.appendChild(option);
+                        });
+                    } else {
+                        console.warn("Không tìm thấy giá trị cho biến thể đã chọn.");
+                    }
+                } else {
+                    console.error("Error fetching variant values:", data.message);
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error.message);
+            });
+    }
+});

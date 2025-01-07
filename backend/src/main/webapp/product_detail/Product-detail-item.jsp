@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: VSiJs
+  Date: 12/27/2024
+  Time: 4:21 PM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -16,14 +23,7 @@
 <div class="carousel-container">
     <!-- Main Image Display -->
     <img id="mainImage"
-         src="<c:choose>
-                <c:when test='${not empty images}'>
-                    ${images[0].url}
-                </c:when>
-                <c:otherwise>
-                    ${pageContext.request.contextPath}/static/images/placeholder.jpg
-                </c:otherwise>
-              </c:choose>"
+         src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"
          alt="Carousel Image"
          class="carousel-image"
          data-context-path="${pageContext.request.contextPath}">
