@@ -9,10 +9,34 @@ public class VariantValue {
     String value;
 
     public VariantValue(@ColumnName("id") Integer id,
-                        @ColumnName("id")  Integer variantId,
-                        @ColumnName("id")  String value) {
+                        @ColumnName("variantId")  Integer variantId,
+                        @ColumnName("value")  String value) {
         this.id = id;
         this.variantId = variantId;
+        this.value = value;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getVariantId() {
+        return variantId;
+    }
+
+    public void setVariantId(Integer variantId) {
+        this.variantId = variantId;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
         this.value = value;
     }
 }

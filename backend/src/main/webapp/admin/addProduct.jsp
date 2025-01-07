@@ -1,3 +1,7 @@
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -41,15 +45,15 @@
                         <input type="text" id="sku" placeholder="Ví dụ: 348121032">
                     </div>
                     <div class="form-group half-width">
-                        <label>Danh mục</label>
-                        <select class="option-select">
-                            <option value="size">Kích thước</option>
-                            <option value="color">Màu sắc</option>
-                            <option value="material">Chất liệu</option>
-                            <option value="style">Kiểu dáng</option>
-                            <option value="title">Tiêu đề</option>
+                        <label  for="categoryDropdown" >Danh mục</label>
+                        <select id="categoryDropdown" class="option-select" data-url="<%= request.getContextPath() %>/backend_war/api/categories">
+                            <option value="">Chọn danh mục</option>
+                            <!-- Danh mục sẽ được load ở đây -->
                         </select>
+
                     </div>
+
+
                 </div>
 
                 <div class="form-group">
@@ -120,19 +124,13 @@
 
                     <label for="productName">Thuộc tính</label>
                     <div class="option-group">
-                        <select class="option-select">
-                            <option value="size">Kích thước</option>
-                            <option value="color">Màu sắc</option>
-                            <option value="material">Chất liệu</option>
-                            <option value="style">Kiểu dáng</option>
-                            <option value="title">Tiêu đề</option>
+                        <select class="option-select" id="variant-select" onchange="fetchVariantValues(this.value)">
+                            <option value="">Chọn danh mục</option>
                         </select>
-                        <select class="option-select">
-                            <option value="size">Kích thước</option>
-                            <option value="color">Màu sắc</option>
-                            <option value="material">Chất liệu</option>
-                            <option value="style">Kiểu dáng</option>
-                            <option value="title">Tiêu đề</option>
+
+                        <!-- Variant Value Dropdown -->
+                        <select class="option-select" id="variant-value-select">
+                            <option value="">Chọn nhà giá trị</option>
                         </select>
 
                         <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
@@ -151,14 +149,8 @@
         <div class="section organization-section">
             <h2>Tổ chức</h2>
             <label for="vendor">Nhà cung cấp</label>
-            <input type="text" id="vendor" placeholder="eg. Nike">
-
-            <label for="collections">Bộ sưu tập</label>
-            <select id="collections">
-                <option value="winter">Nhà bếp</option>
-                <option value="summer">Phòng khách</option>
-                <option value="summer">Phòng ngủ</option>
-                <option value="summer">Khác</option>
+            <select id="vendor"  data-url="<%= request.getContextPath() %>/backend_war/api/categories">
+                <option value="winter">Chọn nhà cung cấp</option>
             </select>
 
             <label for="tags">Thẻ</label>

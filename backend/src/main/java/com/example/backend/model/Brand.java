@@ -1,22 +1,18 @@
 package com.example.backend.model;
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
-public class Category {
+public class Brand {
     Integer id;
     String name;
 
-    public Category(@ColumnName("id") Integer id, @ColumnName("name")  String name) {
+    @JdbiConstructor
+    public Brand(@ColumnName("id") Integer id, @ColumnName("name")  String name) {
         this.id = id;
         this.name = name;
     }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "\"id\": " + id + "," +
-                "\"name\": \"" + name + "\"" +
-                "}";
+    public Brand() {
     }
 
     public Integer getId() {
@@ -33,5 +29,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Brand{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

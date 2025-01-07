@@ -161,7 +161,7 @@ a{
     width: 100%;
     display: flex;
     text-align: left;
-    margin-bottom: 20px ;
+
 }
 
 .list_item iframe{
@@ -268,7 +268,7 @@ a{
     padding: 20px 0;
 
 }
-.wrap_total .total{
+.wrap_total .total_label{
     width: 100%;
     font-size: 18px;
     font-weight: 500;
