@@ -50,7 +50,6 @@ $(document).ready(function () {
 
         increment.on('click', function () {
             increaseQuantity( $(this), quantity, price, stock, product_id);
-            // updateBill();
         })
 
         decrement.on('click', function () {
@@ -85,6 +84,8 @@ $(document).ready(function () {
 
         let formatted = new Intl.NumberFormat('vi-VN').format(total);
         price.text(formatted + ' VND');
+
+        console.log("updatePrice: ", price);
 
 
         updateBill();
@@ -195,13 +196,21 @@ $(document).ready(function () {
 
     function updateBill(){
         const priceList = $('.price')
+
+        console.log("updateBill: ", priceList);
+
+
         let totalPrice = 0;
         let total = $('#total')
         let VAT = $('#VAT')
         let before_tax = $('#before_tax')
 
         priceList.each(function () {
-            let price =  $(this).attr('data-price');
+
+            console.log("price item: ", this);
+
+            let price =  $(this).text().replace(' VND', '').replaceAll('.', '');
+            console.log("price:", price);
             totalPrice += parseInt(price);
         })
 
