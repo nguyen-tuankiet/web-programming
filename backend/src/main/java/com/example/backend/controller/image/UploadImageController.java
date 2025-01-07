@@ -78,9 +78,43 @@ public class UploadImageController extends HttpServlet {
             // Lấy danh sách các ảnh từ cơ sở dữ liệu
             List<Image> images = imageService.getAllImages();
 
+<<<<<<< HEAD
             if (!images.isEmpty()) {
                 // Trả về danh sách ảnh dưới dạng JSON
                 ResponseWrapper<Object> successResponse = new ResponseWrapper<>(
+=======
+        if (fileParts != null && !fileParts.isEmpty()) {
+            for (Part filePart : fileParts) {
+                String fileName = filePart.getSubmittedFileName();
+                String contentType = filePart.getContentType();
+
+                // Kiểm tra MIME type và phần mở rộng
+                if (contentType != null && fileName != null &&
+                        (contentType.equals("image/png") || contentType.equals("image/jpeg")) &&
+                        (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg"))) {
+
+                    if (filePart.getSize() > 0) { // Kiểm tra kích thước file hợp lệ
+                        try (InputStream inputStream = filePart.getInputStream()) {
+                            byte[] fileBytes = inputStream.readAllBytes();
+                            String imageUrl = imageService.uploadImage(fileBytes);
+                            int generatedId = imageService.saveImage(imageUrl);
+
+                            // Thêm thông tin ảnh đã upload vào danh sách
+                            uploadedImages.add(new Image(generatedId, imageUrl));
+                        } catch (Exception e) {
+                            // Ghi log lỗi (nếu cần)
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    System.out.println("File không hợp lệ: " + fileName + " (Loại: " + contentType + ")");
+                }
+            }
+
+            if (!uploadedImages.isEmpty()) {
+                // Trả về phản hồi thành công
+                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+>>>>>>> f14d424fb0f845bf26785b32df66141cd3af6c9d
                         HttpServletResponse.SC_OK,
                         "Thành công",
                         "Danh sách ảnh được trả về.",
@@ -89,11 +123,19 @@ public class UploadImageController extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_OK); // 200
                 response.getWriter().println(new ObjectMapper().writeValueAsString(successResponse));
             } else {
+<<<<<<< HEAD
                 // Trả về thông báo không có ảnh
                 ResponseWrapper<Object> noDataResponse = new ResponseWrapper<>(
                         HttpServletResponse.SC_OK,
                         "Thành công",
                         "Không có ảnh nào trong cơ sở dữ liệu.",
+=======
+                // Trả về phản hồi nếu không có ảnh nào hợp lệ được upload
+                ResponseWrapper<Object> errorResponse = new ResponseWrapper<>(
+                        HttpServletResponse.SC_BAD_REQUEST,
+                        "Lỗi",
+                        "Chỉ chấp nhận ảnh PNG hoặc JPG hợp lệ để upload.",
+>>>>>>> f14d424fb0f845bf26785b32df66141cd3af6c9d
                         null
                 );
                 response.setStatus(HttpServletResponse.SC_OK); // 200
@@ -112,4 +154,10 @@ public class UploadImageController extends HttpServlet {
             response.getWriter().println(new ObjectMapper().writeValueAsString(errorResponse));
         }
     }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> f14d424fb0f845bf26785b32df66141cd3af6c9d
 }

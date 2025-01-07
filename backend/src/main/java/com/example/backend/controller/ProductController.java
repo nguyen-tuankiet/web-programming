@@ -5,6 +5,7 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.ProductService;
 import com.example.backend.model.Product;
 
+import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.*;
@@ -16,7 +17,7 @@ public class ProductController extends HttpServlet {
     ProductService productService = new ProductService(DBConnection.getJdbi());
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Đọc dữ liệu JSON từ request body
+        try {  // Đọc dữ liệu JSON từ request body
         BufferedReader reader = request.getReader();
         StringBuilder json = new StringBuilder();
         String line;
@@ -28,10 +29,28 @@ public class ProductController extends HttpServlet {
         Product product = new ObjectMapper().readValue(json.toString(), Product.class);
 
         // Gọi service để thêm sản phẩm
-        productService.addProduct(product);
+        Product newProduct = productService.addProduct(product);
 
         response.setStatus(HttpServletResponse.SC_OK);
+        ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                201, "success", "Product created successfully", newProduct);
+        writeResponse(response, responseWrapper);
+    } catch (IllegalArgumentException e) {
+        ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                400, "error", e.getMessage(), null);
+        writeResponse(response, responseWrapper);
+    } catch (Exception e) {
+        ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                500, "error", "Internal server error: " + e.getMessage(), null);
+            writeResponse(response, responseWrapper);
     }
 
 
+}
+    private void writeResponse(HttpServletResponse response, ResponseWrapper<?> responseWrapper) throws IOException {
+        response.setContentType("application/json");
+        response.setStatus(responseWrapper.getStatusCode());
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+    }
 }
