@@ -241,20 +241,20 @@
                     <span class="title">Bản Tóm Tắt</span>
                     <div class="price item_price">
                         <span>Tổng giá trước thuế</span>
-                        <span class="value">95,775,561 VND</span>
+                        <span id="before_tax" class="value">0 VND</span>
                     </div>
 
                     <div class="tax item_price">
                         <span>Thuế GTGT</span>
-                        <span class="value">9,577,556 VND</span>
+                        <span id="VAT" class="value">0 VND</span>
                     </div>
                 </div>
 
 
                 <div class="wrap_total">
-                    <div class="total">
+                    <div class="total_label">
                         <span>Tổng cộng</span>
-                        <span>105,353,117 VND</span>
+                        <span id="total">0 VND</span>
                     </div>
                     <span class="note">Đẫ bao gồm thuế GTGT</span>
                 </div>
