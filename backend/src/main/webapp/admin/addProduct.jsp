@@ -94,10 +94,12 @@
                 <div id="imagePreviewContainer" class="image-preview-container"></div>
                 <p id="dragDropText">Kéo và thả tệp của bạn vào đây</p>
                 <span>hoặc</span>
-                <form action="${pageContext.request.contextPath}/uploadImage" method="post" enctype="multipart/form-data">
-                    <input type="file" id="fileInput" name="file" style="display: none;" multiple/>
-                    <button class="browse-files" onclick="document.getElementById('fileInput').click();">Tải ảnh lên</button>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="file" style="display: none;" accept=".png, .jpg, .jpeg" multiple />
+                    <button type="button" class="browse-files" id="uploadButton">Tải ảnh lên</button>
                 </form>
+
+
 
 
             </div>
@@ -130,7 +132,7 @@
 
                         <!-- Variant Value Dropdown -->
                         <select class="option-select" id="variant-value-select">
-                            <option value="">Chọn nhà giá trị</option>
+                            <option value="">Chọn giá trị</option>
                         </select>
 
                         <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
@@ -159,8 +161,9 @@
 
 
         <div class="save">
-            <button>Lưu</button>
+            <button id="saveButton">Lưu</button>
         </div>
+
     </div>
 
 </div>

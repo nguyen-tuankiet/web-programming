@@ -262,22 +262,12 @@ function removeVariant(button) {
     }
 }
 
-document.getElementById('fileInput').addEventListener('change', function (event) {
-    const formData = new FormData();
-    formData.append('file', event.target.files[0]);
 
-    fetch(`${pageContext.request.contextPath}/uploadImage`, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.text())
-        .then(data => {
-            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-            imagePreviewContainer.innerHTML = `<p>${data}</p>`;
-        })
-        .catch(error => console.error('Error:', error));
-});
 
+
+
+
+//get category
 document.addEventListener("DOMContentLoaded", function () {
     // Lấy phần tử dropdown
     const categoryDropdown = document.getElementById("categoryDropdown");
@@ -462,4 +452,129 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error:", error.message);
             });
     }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const uploadButton = document.getElementById("uploadButton");
+    const fileInput = document.getElementById("fileInput");
+    const previewImage = document.getElementById("previewImage");
+    const saveButton = document.getElementById("saveButton");
+
+    // Mở hộp thoại chọn file khi bấm nút "Tải ảnh lên"
+    uploadButton.addEventListener("click", function () {
+        fileInput.click();
+    });
+
+    // Xử lý khi file được chọn
+    fileInput.addEventListener("change", function () {
+        const file = fileInput.files[0];
+        if (file) {
+            // Hiển thị ảnh xem trước
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Lắng nghe sự kiện click của nút Lưu
+    saveButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Ngăn hành động mặc định của button
+
+        const productName = document.getElementById("productName").value.trim();
+        const sku = document.getElementById("sku").value.trim();
+        const category = document.getElementById("categoryDropdown").value;
+        const brand = document.getElementById("vendor").value;
+        const description = document.getElementById("description").value.trim();
+        const price = document.getElementById("price").value.trim();
+        const stock = document.getElementById("total").value.trim();
+        const tags = document.getElementById("tags").value.trim();
+        const imageUpload = document.getElementById("fileInput").files[0];
+
+        if (!productName || !sku || !category || !price || !stock) {
+            alert("Vui lòng điền đầy đủ các trường bắt buộc!");
+            return;
+        }
+
+        if (!imageUpload) {
+            alert("Vui lòng tải lên ảnh sản phẩm!");
+            return;
+        }
+
+        // Upload ảnh trước
+        const formData = new FormData();
+        formData.append("file", imageUpload);
+
+        fetch(`/backend_war/uploadImage`, {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.statusCode === 200 && data.data && data.data[0].id) {
+                    const imageId = data.data[0].id; // Lấy ID của ảnh vừa upload
+
+                    // Sau khi upload ảnh thành công, thêm sản phẩm
+                    const productData = {
+                        name: productName,
+                        sku: sku,
+                        categoryId: category,
+                        description: description,
+                        price: parseFloat(price),
+                        stock: parseInt(stock),
+                        brandId: brand,
+                        tags: tags.split(",").map(tag => tag.trim()),
+                        isActive: true, // Mặc định là true
+                        primaryImage: imageId, // Gán ID của ảnh vừa upload
+                    };
+
+                    return fetch(`/backend_war/products`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(productData),
+                    });
+                } else {
+                    throw new Error("Không thể upload ảnh.");
+                }
+            })
+            .then(response => response.json())
+            .then(product => {
+                if (product.data && product.data.id) {
+                    const productId = product.data.id; // Lấy productId sau khi thêm sản phẩm thành công
+
+                    // Tạo option cho sản phẩm
+                    const optionData = {
+                        productId: productId,
+                        price: parseFloat(price), // Giá option lấy từ giá sản phẩm
+                        stock: parseInt(stock),   // Stock option lấy từ stock sản phẩm
+                    };
+
+                    return fetch(`/backend_war/api/options/create`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(optionData),
+                    });
+                } else {
+                    throw new Error("Không thể thêm sản phẩm.");
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Thêm sản phẩm và option thành công!");
+                    window.location.reload();
+                } else {
+                    throw new Error("Không thể thêm option.");
+                }
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                alert(`Đã xảy ra lỗi: ${error.message}`);
+            });
+    });
 });

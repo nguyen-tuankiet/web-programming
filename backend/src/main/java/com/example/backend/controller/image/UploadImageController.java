@@ -88,17 +88,29 @@ public class UploadImageController extends HttpServlet {
 
         if (fileParts != null && !fileParts.isEmpty()) {
             for (Part filePart : fileParts) {
-                if (filePart.getContentType() != null && filePart.getSize() > 0) { // Kiểm tra file hợp lệ
-                    try (InputStream inputStream = filePart.getInputStream()) {
-                        byte[] fileBytes = inputStream.readAllBytes();
-                        String imageUrl = imageService.uploadImage(fileBytes);
+                String fileName = filePart.getSubmittedFileName();
+                String contentType = filePart.getContentType();
 
-                        // Thêm thông tin ảnh đã upload vào danh sách
-                        uploadedImages.add(new Image(null, imageUrl));
-                    } catch (Exception e) {
-                        // Ghi log lỗi (nếu cần)
-                        e.printStackTrace();
+                // Kiểm tra MIME type và phần mở rộng
+                if (contentType != null && fileName != null &&
+                        (contentType.equals("image/png") || contentType.equals("image/jpeg")) &&
+                        (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg"))) {
+
+                    if (filePart.getSize() > 0) { // Kiểm tra kích thước file hợp lệ
+                        try (InputStream inputStream = filePart.getInputStream()) {
+                            byte[] fileBytes = inputStream.readAllBytes();
+                            String imageUrl = imageService.uploadImage(fileBytes);
+                            int generatedId = imageService.saveImage(imageUrl);
+
+                            // Thêm thông tin ảnh đã upload vào danh sách
+                            uploadedImages.add(new Image(generatedId, imageUrl));
+                        } catch (Exception e) {
+                            // Ghi log lỗi (nếu cần)
+                            e.printStackTrace();
+                        }
                     }
+                } else {
+                    System.out.println("File không hợp lệ: " + fileName + " (Loại: " + contentType + ")");
                 }
             }
 
@@ -117,7 +129,7 @@ public class UploadImageController extends HttpServlet {
                 ResponseWrapper<Object> errorResponse = new ResponseWrapper<>(
                         HttpServletResponse.SC_BAD_REQUEST,
                         "Lỗi",
-                        "Không có ảnh hợp lệ để upload.",
+                        "Chỉ chấp nhận ảnh PNG hoặc JPG hợp lệ để upload.",
                         null
                 );
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400
@@ -135,6 +147,7 @@ public class UploadImageController extends HttpServlet {
             response.getWriter().println(objectMapper.writeValueAsString(errorResponse));
         }
     }
+
 
 
 }

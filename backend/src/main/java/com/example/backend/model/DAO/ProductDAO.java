@@ -63,7 +63,7 @@ public interface ProductDAO {
 
 
     @SqlUpdate("INSERT INTO products (name, sku, description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage) "
-            + "VALUES (:name, :sku, :description, :isActive, :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL))")
+            + "VALUES (:name, :sku, :description,COALESCE(:isActive, 1), :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL))")
     int addProduct(@Bind("name") String name,
                    @Bind("sku") String sku,
                    @Bind("description") String description,
