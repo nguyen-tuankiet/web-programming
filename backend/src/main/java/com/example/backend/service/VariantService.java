@@ -32,6 +32,14 @@ public class VariantService {
     public List<VariantValue> getVariantValuesByVariantId(Integer variantId) {
         return variantDAO.getVariantValuesByVariantId(variantId);
     }
+
+    public List<Variant> getVariantsByCategory(Integer categoryId) {
+        if (categoryId == null) {
+            // Trả về toàn bộ danh sách nếu không có categoryId
+            return variantDAO.getAllVariants();
+        }
+        return variantDAO.getVariantsByCategoryId(categoryId);
+    }
 //    public void updateVariant(Integer id, String name, Integer categoryId) {
 //        variantDAO.updateVariant(id, name, categoryId);
 //    }
