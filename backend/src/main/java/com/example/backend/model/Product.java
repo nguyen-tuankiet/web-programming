@@ -1,12 +1,13 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 import java.beans.ConstructorProperties;
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product {
     Integer id;
     String name;
