@@ -3,7 +3,6 @@ package com.example.backend.controller.auth;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.AuthService;
 import com.example.backend.model.User;
-import com.example.backend.util.MD5Utils;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
