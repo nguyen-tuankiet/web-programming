@@ -83,6 +83,12 @@ $(document).ready(function () {
                 console.error(response);
             }
             return response.json();
+        }).then(function (data) {
+            if (data.success) {
+                window.location.href = "success";
+            } else {
+                alert('Có lỗi xảy ra trong quá trình xử lý đơn hàng.');
+            }
         })
 
 
