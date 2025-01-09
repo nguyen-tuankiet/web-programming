@@ -46,8 +46,7 @@ public class ImageService {
        return imageDao.addImageToProduct(productId, imageId);
     }
 
-<<<<<<< HEAD
-    public List<Image> getAllImages() {
+     public List<Image> getAllImages() {
         return List.of();
     }
 
@@ -55,13 +54,18 @@ public class ImageService {
         return imageDao.getAllImagesByProductId(productId);
     }
 
+
+    public int saveImage(String imageUrl) {
+        return imageDao.saveImage(imageUrl);
+    }
+
+
+
     public static void main(String[] args) {
         ImageService imageService = new ImageService(DBConnection.getJdbi());
         System.out.println(imageService.getAllImagesByProductId(1));
-=======
-    public int saveImage(String imageUrl) {
-        return imageDao.saveImage(imageUrl);
->>>>>>> f14d424fb0f845bf26785b32df66141cd3af6c9d
+
     }
+
 
 }
