@@ -18,9 +18,9 @@
 <div id="main_header">
 
 
-    <div class="logo nav_item" id="logo" data-src="../component/home/homeBody.html">
+    <a class="logo nav_item" id="logo" href="home" >
         <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png"/>
-    </div>
+    </a>
 
 
     <nav class="navbar">

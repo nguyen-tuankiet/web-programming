@@ -1,9 +1,9 @@
 package com.example.backend.util;
 
+import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
-import javax.xml.bind.DatatypeConverter;
 
 public class MD5Utils {
     public static String hash(String input) {

@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Gọi API để lấy danh mục
-    fetch('/backend_war/api/categories')
+    fetch('api/categories')
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Không thể lấy danh mục');
@@ -320,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Gọi API để lấy danh mục
-    fetch('/backend_war/api/brand')
+    fetch(' api/brand')
         .then((response) => {
             if (!response.ok) {
                 throw new Error('Không thể lấy nhà cung cấp');
@@ -391,7 +391,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             variantSelect.innerHTML = '<option>Đang tải...</option>'; // Thông báo trạng thái
 
-            const response = await fetch(`/backend_war/api/variants?categoryId=${categoryId}`);
+            const response = await fetch(` api/variants?categoryId=${categoryId}`);
             const data = await response.json();
 
             if (data.statusCode === 200) {
@@ -426,7 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        fetch(`/backend_war/api/variants/${variantId}`)
+        fetch(` api/variants/${variantId}`)
             .then(response => {
                 if (!response.ok) throw new Error("Failed to fetch variant values");
                 return response.json();
@@ -507,7 +507,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData();
         formData.append("file", imageUpload);
 
-        fetch(`/backend_war/uploadImage`, {
+        fetch(`uploadImage`, {
             method: "POST",
             body: formData,
         })
@@ -530,7 +530,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         primaryImage: imageId, // Gán ID của ảnh vừa upload
                     };
 
-                    return fetch(`/backend_war/products`, {
+                    return fetch(`products`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -553,7 +553,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         stock: parseInt(stock),   // Stock option lấy từ stock sản phẩm
                     };
 
-                    return fetch(`/backend_war/api/options/create`, {
+                    return fetch(` api/options/create`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
