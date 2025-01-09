@@ -12,7 +12,7 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import java.io.*;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/products"})
+@WebServlet(name = "ProductController", value = {"/admin/products"})
 public class ProductController extends HttpServlet {
     ProductService productService = new ProductService(DBConnection.getJdbi());
 

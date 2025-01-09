@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "VariantController", urlPatterns = {"/api/variants/*"})
+@WebServlet(name = "VariantController", urlPatterns = {"/admin/api/variants/*"})
 public class VariantController extends HttpServlet {
 
     private final VariantService variantService = new VariantService(DBConnection.getJdbi());

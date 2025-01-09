@@ -18,6 +18,7 @@ public class SearchRefrigeratorController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         List<Product> products = productService.getProductsByCategory(1);
+
         request.setAttribute("products", products);
 
         request.getRequestDispatcher("search/search-refrigerator.jsp").forward(request, response);
