@@ -34,6 +34,62 @@ $(document).ready(function () {
     }
 
 
+    const pay = $('#pay')
+    pay.on('click', function () {
+        const address_id = $('#address').attr('data-address-id');
+        const card =$('input[name="payment-method"]:checked').attr('data-payment');
+        const product_item  = $('.product-item');
+        const products= [];
+
+        product_item.each(function () {
+            const id = $(this).data('id');
+            const quantity = $(this).data('quantity');
+            const optionId = $(this).data('option-id');
+            const price = $(this).data('price');
+            const total = parseInt(price) * parseInt(quantity);
+
+
+            products.push({
+                id: id,
+                quantity: quantity,
+                optionId: optionId,
+                total: total,
+            })
+
+
+        })
+
+        console.log("products: ", products);
+        console.log("product_item: ",product_item);
+        console.log("payment method: " ,card);
+        console.log("address_id: ", address_id);
+
+
+
+        const form = {
+            address_id: address_id,
+            card: card,
+            products: products,
+        }
+
+        fetch(`checkout`,
+            {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(form),
+            }
+        ).then(function (response) {
+            if (!response.ok) {
+                console.error(response);
+            }
+            return response.json();
+        })
+
+
+     })
+
+
+
 
 
 
