@@ -13,10 +13,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Web Programming</title>
-  <link rel="stylesheet" href="../styles/style-page/auth/auth.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/auth/auth.css">
   <link
           rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
           integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer"
@@ -35,12 +35,12 @@
       </div>
       <span>hoặc sử dụng email của bạn để đăng ký</span>
       <div class="infield">
-        <input id="fristname" placeholder=" " required />
-        <label for="fristname">Họ</label>
+        <input id="fullName" placeholder=" " required />
+        <label for="fullName">Tên đầy đủ</label>
       </div>
       <div class="infield">
-        <input id="fullname" placeholder=" " required />
-        <label for="fullname">Tên</label>
+        <input id="displayname" placeholder=" " required />
+        <label for="displayname">Tên hiển thị</label>
       </div>
       <div class="infield">
         <input type="email" id="emails" placeholder=" " name="email" required />
@@ -116,7 +116,11 @@
 </div>
 
 <main>
-  <script src="../styles/style-page/auth/auth.js"></script>
+  <script src="${pageContext.request.contextPath}/static/style-page/auth/auth.js"></script>
 </main>
+
+<% if (request.getAttribute("errorMessage") != null) { %>
+<p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
+<% } %>
 </body>
 </html>
