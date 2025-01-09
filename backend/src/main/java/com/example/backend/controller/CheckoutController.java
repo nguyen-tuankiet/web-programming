@@ -10,7 +10,11 @@ import com.example.backend.service.CardService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +80,27 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        BufferedReader reader = request.getReader();
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+
+        }
+
+        JSONObject jsonObject = new JSONObject(stringBuilder.toString());
+        String address = jsonObject.getString("address_id");
+        String card = jsonObject.getString("card");
+        JSONArray products = jsonObject.getJSONArray("products");
+
+        System.out.println(products);
+        System.out.println(address);
+        System.out.println(card);
+
+
+
 
     }
 }
