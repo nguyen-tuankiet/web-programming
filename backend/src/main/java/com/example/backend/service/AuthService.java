@@ -5,6 +5,8 @@ import com.example.backend.model.User;
 import com.example.backend.util.MD5Utils;
 import org.jdbi.v3.core.Jdbi;
 
+import java.security.NoSuchAlgorithmException;
+
 public class AuthService {
     private UserDao userDAO;
 
@@ -26,15 +28,23 @@ public class AuthService {
         return userId != null;
     }
 
-    public User login(String email, String password) {
+    public User login(String email, String password) throws NoSuchAlgorithmException, NoSuchAlgorithmException {
         User user = userDAO.getUserByEmail(email);
         if (user != null) {
-            String hashedPassword = MD5Utils.hash(password);
-            if (user.getPassword().equals(hashedPassword)) {
+            String storedHashedPassword = user.getPassword();
+
+
+            if (MD5Utils.verify(password, storedHashedPassword)) {
+                System.out.println("Password match!");
+
                 return user;
+            } else {
+                System.out.println("Password does not match.");
             }
         }
-        return null;
+        return null; // Nếu người dùng không tồn tại hoặc mật khẩu không khớp
     }
+
+
 }
 
