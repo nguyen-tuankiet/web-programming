@@ -143,7 +143,6 @@ public class UploadImageController extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            // Trả về lỗi
             ResponseWrapper<Object> errorResponse = new ResponseWrapper<>(
                     HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
                     "Lỗi",
@@ -154,10 +153,8 @@ public class UploadImageController extends HttpServlet {
             response.getWriter().println(new ObjectMapper().writeValueAsString(errorResponse));
         }
     }
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> f14d424fb0f845bf26785b32df66141cd3af6c9d
+
 }
