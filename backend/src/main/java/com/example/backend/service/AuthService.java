@@ -28,22 +28,26 @@ public class AuthService {
         return userId != null;
     }
 
-    public User login(String email, String password) throws NoSuchAlgorithmException, NoSuchAlgorithmException {
+    public User login(String email, String password) throws NoSuchAlgorithmException {
         User user = userDAO.getUserByEmail(email);
         if (user != null) {
             String storedHashedPassword = user.getPassword();
 
+            // Mã hóa mật khẩu nhập vào và so sánh với mật khẩu đã lưu
+            String hashedPassword = MD5Utils.hash(password);  // Mã hóa lại mật khẩu nhập vào
+            System.out.println(storedHashedPassword);
+            System.out.println(hashedPassword);
 
-            if (MD5Utils.verify(password, storedHashedPassword)) {
+            if (hashedPassword.equals(storedHashedPassword)) {  // So sánh băm
                 System.out.println("Password match!");
-
                 return user;
             } else {
                 System.out.println("Password does not match.");
             }
         }
-        return null; // Nếu người dùng không tồn tại hoặc mật khẩu không khớp
+        return null;
     }
+
 
 
 }
