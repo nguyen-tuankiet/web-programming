@@ -21,13 +21,14 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user WHERE email = :email")
     User getUserByEmail(@Bind("email") String email);
 
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role) " +
-            "VALUES (:fullName, :displayName, :email, :password, 'USER')")
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt) " +
+            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt)")
     @GetGeneratedKeys("id")
     String createUser(@Bind("fullName") String fullName,
                       @Bind("displayName") String displayName,
                       @Bind("email") String email,
-                      @Bind("password") String password);
+                      @Bind("password") String password,
+                      @Bind("salt") String salt);
 
 
     @SqlUpdate("UPDATE user SET fullname = :fullname, email = :email, password = :password WHERE id = :id")

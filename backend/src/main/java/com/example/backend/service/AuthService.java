@@ -2,7 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.DAO.UserDao;
 import com.example.backend.model.User;
-import com.example.backend.util.MD5Utils;
+import com.example.backend.util.HashUtils;
 import org.jdbi.v3.core.Jdbi;
 
 import java.security.NoSuchAlgorithmException;
@@ -15,38 +15,38 @@ public class AuthService {
     }
 
     public boolean register(String fullName, String displayName, String email, String password) {
-        // Kiểm tra email đã tồn tại chưa
         if (userDAO.getUserByEmail(email) != null) {
-            return false;
+            return false; // Email đã tồn tại
         }
 
-        // Mã hóa mật khẩu
-        String hashedPassword = MD5Utils.hash(password);
+        // Tạo salt ngẫu nhiên
+        String salt = HashUtils.generateSalt();
 
-        // Tạo user mới
-        String userId = userDAO.createUser(fullName, displayName, email, hashedPassword);
+        // Mã hóa mật khẩu với salt
+        String hashedPassword = HashUtils.hashWithSalt(password, salt);
+
+        // Tạo user mới và lưu thông tin
+        String userId = userDAO.createUser(fullName, displayName, email, hashedPassword, salt);
         return userId != null;
     }
 
-    public User login(String email, String password) throws NoSuchAlgorithmException {
+
+    public User login(String email, String password) {
         User user = userDAO.getUserByEmail(email);
         if (user != null) {
+            String storedSalt = user.getSalt(); // Lấy salt từ cơ sở dữ liệu
             String storedHashedPassword = user.getPassword();
 
-            // Mã hóa mật khẩu nhập vào và so sánh với mật khẩu đã lưu
-            String hashedPassword = MD5Utils.hash(password);  // Mã hóa lại mật khẩu nhập vào
-            System.out.println(storedHashedPassword);
-            System.out.println(hashedPassword);
+            // Mã hóa mật khẩu nhập vào với salt
+            String hashedPassword = HashUtils.hashWithSalt(password, storedSalt);
 
-            if (hashedPassword.equals(storedHashedPassword)) {  // So sánh băm
-                System.out.println("Password match!");
-                return user;
-            } else {
-                System.out.println("Password does not match.");
+            if (hashedPassword.equals(storedHashedPassword)) {
+                return user; // Mật khẩu đúng
             }
         }
-        return null;
+        return null; // Mật khẩu không đúng hoặc user không tồn tại
     }
+
 
 
 
