@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "CategoryController", urlPatterns = {"/api/categories/*"})
+@WebServlet(name = "CategoryController", urlPatterns = {"/admin/api/categories/*"})
 public class CategoryController extends HttpServlet {
 
     private final CategoryService categoryService = new CategoryService(DBConnection.getJdbi());
