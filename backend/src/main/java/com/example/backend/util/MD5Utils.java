@@ -2,6 +2,8 @@ package com.example.backend.util;
 
 import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import javax.xml.bind.DatatypeConverter;
 
 public class MD5Utils {
     public static String hash(String input) {
@@ -20,5 +22,15 @@ public class MD5Utils {
         } catch (Exception e) {
             throw new RuntimeException("Error generating MD5 hash", e);
         }
+    }
+
+    public static boolean verify(String inputPassword, String hashPassWord)
+            throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(inputPassword.getBytes());
+        byte[] digest = md.digest();
+        String myChecksum = DatatypeConverter
+                .printHexBinary(digest).toUpperCase();
+        return hashPassWord.equals(myChecksum);
     }
 }
