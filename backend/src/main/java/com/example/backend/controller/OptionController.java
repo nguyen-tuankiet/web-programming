@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 
 import java.io.IOException;
 
-@WebServlet(name = "OptionController", urlPatterns = {"/api/options/create"})
+@WebServlet(name = "OptionController", urlPatterns = {"/admin/api/options/create"})
 public class OptionController extends HttpServlet {
 
     private final OptionService optionService = new OptionService(DBConnection.getJdbi());
