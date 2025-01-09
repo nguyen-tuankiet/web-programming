@@ -17,6 +17,7 @@ public class User {
     String password;
     Integer avatarId;
     String role;
+    String salt;
 
     public User(@ColumnName("id") String id,
                 @ColumnName("fullName") String fullName,
@@ -27,7 +28,8 @@ public class User {
                 @ColumnName("phone") @Nullable  String phone,
                 @ColumnName("password") String password,
                 @ColumnName("avatarId") @Nullable Integer avatarId,
-                @ColumnName("role")String role) {
+                @ColumnName("role")String role,
+                @ColumnName("salt") String salt) {
         this.id = id;
         this.fullName = fullName;
         this.displayName = displayName;
@@ -38,6 +40,7 @@ public class User {
         this.password = password;
         this.avatarId = avatarId;
         this.role = role;
+        this.salt = salt;
     }
 
     public String getId() {
@@ -116,5 +119,13 @@ public class User {
     }
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSalt() { // Getter cho salt
+        return salt;
+    }
+
+    public void setSalt(String salt) { // Setter cho salt
+        this.salt = salt;
     }
 }

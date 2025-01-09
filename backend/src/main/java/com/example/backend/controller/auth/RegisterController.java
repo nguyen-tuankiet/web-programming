@@ -2,7 +2,6 @@ package com.example.backend.controller.auth;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.AuthService;
-import com.example.backend.util.MD5Utils;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,6 +55,7 @@ public class RegisterController extends HttpServlet {
                 return;
             }
 
+            // Kiểm tra mật khẩu có trùng khớp với mật khẩu xác nhận không
             if (!inputPassword.equals(confirmPassword)) {
                 ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
                         400, "error", "Passwords do not match", null);
@@ -63,11 +63,8 @@ public class RegisterController extends HttpServlet {
                 return;
             }
 
-            // Mã hóa mật khẩu
-            String hashedPassword = MD5Utils.hash(inputPassword);
-
-            // Xử lý đăng ký người dùng
-            if (authService.register(fullName, displayName, email, hashedPassword)) {
+            // Đăng ký người dùng
+            if (authService.register(fullName, displayName, email, inputPassword)) {
                 // Chuẩn bị thông tin người dùng để trả về
                 Map<String, String> userData = Map.of(
                         "fullName", fullName,
@@ -92,4 +89,3 @@ public class RegisterController extends HttpServlet {
         }
     }
 }
-
