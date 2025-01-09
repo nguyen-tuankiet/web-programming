@@ -24,13 +24,11 @@ public class MD5Utils {
         }
     }
 
-    public static boolean verify(String inputPassword, String hashPassWord)
-            throws NoSuchAlgorithmException {
+    public static boolean verify(String inputPassword, String hashPassword) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(inputPassword.getBytes());
         byte[] digest = md.digest();
-        String myChecksum = DatatypeConverter
-                .printHexBinary(digest).toUpperCase();
-        return hashPassWord.equals(myChecksum);
+        String myChecksum = DatatypeConverter.printHexBinary(digest).toUpperCase();
+        return hashPassword.equals(myChecksum);
     }
 }
