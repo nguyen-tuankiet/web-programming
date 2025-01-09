@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "BrandController", urlPatterns = {"/api/brand/*"})
+@WebServlet(name = "BrandController", urlPatterns = {"/admin/api/brand/*"})
 public class BrandController extends HttpServlet {
     private final BrandService brandService = new BrandService(DBConnection.getJdbi());
 
