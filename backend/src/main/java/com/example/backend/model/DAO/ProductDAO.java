@@ -57,6 +57,19 @@ public interface ProductDAO {
     Product getProductByIdAndOptionId(@Bind("productId") int productId,
                                       @Bind("optionId") int optionId);
 
+    @SqlQuery(value = "SELECT p.id, p.name, p.sku, p.description, p.isActive,\n" +
+            "       p.categoryId, cate.name as categoryName,\n" +
+            "       p.brandId, p.noOfViews, p.noOfSold,\n" +
+            "       p.primaryImage, img.url as imageUrl,\n" +
+            "       ops.price, ops.stock, ops.id as optionId\n" +
+            "FROM products p\n" +
+            "         INNER JOIN categories cate ON cate.id = p.categoryId\n" +
+            "         INNER JOIN options ops ON ops.productId = p.id\n" +
+            "         INNER JOIN image img ON img.id = p.primaryImage\n" +
+            "WHERE ops.stock > 0 "
+)
+    @RegisterConstructorMapper(Product.class)
+    List<Product> getAllProducts();
 
 
 

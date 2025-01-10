@@ -133,6 +133,7 @@ body {
 
 .product {
     display: flex;
+    max-width: 240px;
     align-items: center; /* Align image and text vertically centered */
     text-align: left;
     height: 104px;
