@@ -73,6 +73,7 @@
                 <div class="product-title">
                     ${product.name}
                 </div>
+
                 <a href="<%= request.getContextPath() %>/link-Đánh giá" class="product-rating">
                     ★★★☆☆ <span>(<%= "2.6 / 10 đánh giá" %>)</span>
                 </a>
@@ -95,9 +96,10 @@
                                 hàng.
                             </div>
                         </li>
-                        <li>Ngăn đông mềm linh hoạt 4 chế độ Optimal Fresh+</li>
-                        <li>Tăng 20L dung tích với công nghệ SpaceMax™</li>
-                        <li>Khử mùi với hệ thống lọc than hoạt tính</li>
+                        <!-- Lặp qua danh sách descriptions -->
+                        <c:forEach var="desc" items="${descriptions}">
+                            <li>${desc}</li>
+                        </c:forEach>
                     </ul>
                 </div>
 
