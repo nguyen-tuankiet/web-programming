@@ -1,7 +1,6 @@
 package com.example.backend.service;
 
-import com.example.backend.model.DAO.ImageDao;
-import com.example.backend.model.DAO.OptionDAO;
+import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.DAO.ProductDAO;
 import com.example.backend.model.Product;
 import org.jdbi.v3.core.Jdbi;
@@ -12,19 +11,12 @@ import java.util.List;
 public class ProductService {
     Jdbi jdbi;
     private ProductDAO productDao;
-    private ImageDao imageDao;
-    private OptionDAO optionDao;
 
     public ProductService(Jdbi jdbi) {
         this.jdbi = jdbi;
         this.productDao = jdbi.onDemand(ProductDAO.class);
-        this.imageDao = jdbi.onDemand(ImageDao.class);
-        this.optionDao = jdbi.onDemand(OptionDAO.class);
     }
 
-
-    public ProductService() {
-    }
 
     public List<Product> getProductsByCategory(int categoryId){
         return jdbi.withExtension(ProductDAO.class, dao -> dao.getProductsByCategory(categoryId));
@@ -38,6 +30,13 @@ public class ProductService {
     public Product getProductByIdAndOptionId(int productId, int optionId){
         return jdbi.withExtension(ProductDAO.class, dao -> dao.getProductByIdAndOptionId(productId,optionId));
     }
+
+    public List<Product> getAllProducts() {
+        List<Product>  products = jdbi.withExtension(ProductDAO.class, dao -> dao.getAllProducts());
+
+        return products;
+    }
+
 
     public Product addProduct(Product product) {
 
@@ -56,5 +55,8 @@ public class ProductService {
     }
 
 
-
+    public static void main(String[] args) {
+        ProductService productService = new ProductService(DBConnection.getJdbi());
+        System.out.println(productService.getAllProducts());
+    }
 }

@@ -3,7 +3,6 @@ package com.example.backend.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
-import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 import java.beans.ConstructorProperties;
 
@@ -22,11 +21,11 @@ public class Product {
     Integer price;
     Integer stock;
     Integer optionId;
-
+    String categoryName;
     String imageUrl;
 
 
-    @ConstructorProperties({"id", "name", "sku", "description", "isActive", "categoryId", "brandId", "noOfViews", "noOfSold", "primaryImage", "imageUrl", "price", "optionId", "stock"})
+    @ConstructorProperties({"id", "name", "sku", "description", "isActive", "categoryId", "brandId", "noOfViews", "noOfSold", "primaryImage", "imageUrl", "price", "optionId", "stock", "categoryName"})
     public Product(
             @ColumnName("id") Integer id,
             @ColumnName("name") @Nullable String name,
@@ -41,7 +40,8 @@ public class Product {
             @ColumnName("imageUrl") @Nullable String imageUrl,
             @ColumnName("price") @Nullable Integer price,
             @ColumnName("optionId") @Nullable Integer optionId,
-            @ColumnName("stock") @Nullable Integer stock
+            @ColumnName("stock") @Nullable Integer stock,
+            @ColumnName("categoryName") @Nullable String categoryName
     ) {
         this.id = id;
         this.name = name;
@@ -57,6 +57,7 @@ public class Product {
         this.optionId = optionId;
         this.stock = stock;
         this.imageUrl = imageUrl;
+        this.categoryName = categoryName;
     }
 
 
@@ -173,5 +174,13 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
