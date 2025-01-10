@@ -1157,7 +1157,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
     </schema>
     <schema id="329" parent="1" name="web_ecommerce">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-01-10.04:03:41</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-01-10.07:55:03</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_general_ci</CollationName>
     </schema>
     <user id="330" parent="1" name="pma">
@@ -1720,7 +1720,7 @@ test\\_%|schema||&apos;&apos;||UPDATE|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="450" parent="345" name="id">
-      <AutoIncrement>32</AutoIncrement>
+      <AutoIncrement>33</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int(11)|0s</StoredType>
