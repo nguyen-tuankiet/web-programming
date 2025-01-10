@@ -21,8 +21,10 @@ public class ProductDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = productService.getProductById(Integer.parseInt(request.getParameter("id")));
         List<String> images = imageService.getAllImagesByProductId(product.getId());
+        List<String> descriptions = List.of(product.getDescription().split("\\n"));
         request.setAttribute("images", images);
         request.setAttribute("product", product);
+        request.setAttribute("descriptions", descriptions);
         request.getRequestDispatcher("product_detail/ProductDetail.jsp").forward(request, response);
     }
 
