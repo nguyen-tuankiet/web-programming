@@ -273,7 +273,7 @@
             <li class="menu_item"  >
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-gear"></i>
-                    <a href="category">Danh mục</a>
+                    <a href="categories">Danh mục</a>
 <%--                    <span>  Danh mục </span>--%>
                 </div>
             </li>

@@ -17,8 +17,16 @@ public class CategoryService {
         return categoryDAO.getAllCategories();
     }
 
+//    public Category getCategoryById(Integer id) {
+//        return categoryDAO.getCategoryById(id);
+//    }
+
     public Category getCategoryById(Integer id) {
-        return categoryDAO.getCategoryById(id);
+        Category category = categoryDAO.getCategoryById(id);
+        if (category == null) {
+            throw new IllegalArgumentException("Category not found");
+        }
+        return category;
     }
 
     public Category createCategory(String name) {
