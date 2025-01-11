@@ -51,6 +51,7 @@ document.querySelector(".sign-up-container form").addEventListener("submit", asy
                 displayName,
                 email,
                 password,
+                confirmPassword
             }),
         });
 
