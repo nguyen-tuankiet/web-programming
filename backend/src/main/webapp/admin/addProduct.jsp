@@ -54,7 +54,7 @@
                         <div class="form-row">
                             <div class="form-group half-width">
                                 <label for="sku">Mã SKU</label>
-                                <input type="text" id="sku" placeholder="Ví dụ: 348121032">
+                                <input type="text" id="sku"  disabled>
                             </div>
                             <div class="form-group half-width">
                                 <label  for="categoryDropdown" >Danh mục</label>

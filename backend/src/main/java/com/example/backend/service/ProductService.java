@@ -40,8 +40,11 @@ public class ProductService {
 
     public Product addProduct(Product product) {
 
-        int productId =  productDao.addProduct( product.getName(), product.getSku(), product.getDescription(),
-                product.getActive(), product.getCategoryId(), product.getBrandId(), product.getPrimaryImage());
+        String generatedSku = "HKS-" + System.currentTimeMillis();
+        product.setSku(generatedSku);
+
+        int productId =  productDao.addProduct( product.getName(), product.getDescription(),
+                product.getActive(), product.getCategoryId(), product.getBrandId(), product.getPrimaryImage(), product.getSku());
 
         if (productId > 0) {
             product.setId(productId);
