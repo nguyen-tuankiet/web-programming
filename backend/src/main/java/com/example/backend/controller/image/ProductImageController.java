@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "add-product-image", value = "/ImageDetailDao")
+@WebServlet(name = "add-product-image", value = "/admin/ImageDetailDao")
 //@WebServlet("/api/add-product-image")
 public class ProductImageController extends HttpServlet {
 

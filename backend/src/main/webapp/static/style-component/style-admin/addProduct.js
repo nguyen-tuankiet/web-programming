@@ -479,7 +479,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Lắng nghe sự kiện click của nút Lưu
     saveButton.addEventListener("click", function (event) {
         event.preventDefault(); // Ngăn hành động mặc định của button
 
@@ -491,25 +490,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const price = document.getElementById("price").value.trim();
         const stock = document.getElementById("total").value.trim();
         const tags = document.getElementById("tags").value.trim();
-        const imageUpload = document.getElementById("fileInput").files[0];
+        const imageUpload = document.getElementById("fileInput").files;
 
         if (!productName || !category || !price || !stock) {
             alert("Vui lòng điền đầy đủ các trường bắt buộc!");
             return;
         }
 
-        if (!imageUpload) {
+        if (imageUpload.length === 0) {
             alert("Vui lòng tải lên ảnh sản phẩm!");
             return;
         }
 
         // Upload ảnh trước
         const formData = new FormData();
-        const files = document.getElementById("fileInput").files;
-
-        for (let i = 0; i < files.length; i++) {
-            formData.append("files[]", files[i]); // Gửi tất cả các ảnh
-        }
+        Array.from(imageUpload).forEach(file => formData.append("file", file));
 
         fetch(`uploadImage`, {
             method: "POST",
@@ -518,9 +513,9 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
                 if (data.statusCode === 200 && data.data && data.data.length > 0) {
-                    const imageIds = data.data.map(image => image.id); // Lấy các ID của ảnh vừa upload
+                    const imageId = data.data[0].id; // Lấy ID của ảnh chính
 
-                    // Sau khi upload ảnh thành công, thêm sản phẩm
+                    // Tạo sản phẩm
                     const productData = {
                         name: productName,
                         sku: sku,
@@ -531,8 +526,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         brandId: brand,
                         tags: tags.split(",").map(tag => tag.trim()),
                         isActive: true, // Mặc định là true
-                        primaryImage: imageIds[0], // Gán ID của ảnh đầu tiên làm ảnh chính
-                        images: imageIds, // Gán tất cả các ID ảnh đã upload
+                        primaryImage: imageId, // Gán ID của ảnh chính
                     };
 
                     return fetch(`products`, {
@@ -541,40 +535,65 @@ document.addEventListener("DOMContentLoaded", function () {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(productData),
-                    });
+                    })
+                        .then(response => response.json())
+                        .then(product => {
+                            if (product.data && product.data.id) {
+                                const productId = product.data.id; // Lấy productId sau khi thêm sản phẩm thành công
+
+                                // Gán các ảnh còn lại cho sản phẩm
+                                const imageIds = data.data.slice(1).map(image => image.id); // Lấy các ảnh còn lại, trừ ảnh chính
+
+                                return Promise.all(imageIds.map(imageId => {
+                                    return fetch(`ImageDetailDao`, {
+                                        method: "POST",
+                                        headers: {
+                                            "Content-Type": "application/x-www-form-urlencoded",
+                                        },
+                                        body: `productId=${productId}&imageId=${imageId}`,
+                                    })
+                                        .then(response => response.json())
+                                        .then(result => {
+                                            if (result.statusCode !== 200) {
+                                                console.error("Không thể thêm ảnh vào sản phẩm");
+                                            }
+                                        })
+                                        .catch(error => console.error("Lỗi khi gán ảnh:", error));
+                                }))
+                                    .then(() => {
+                                        // Tạo option cho sản phẩm
+                                        const optionData = {
+                                            productId: productId,
+                                            price: parseFloat(price), // Giá option lấy từ giá sản phẩm
+                                            stock: parseInt(stock),   // Stock option lấy từ stock sản phẩm
+                                        };
+
+                                        return fetch(`api/options/create`, {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify(optionData),
+                                        });
+                                    });
+                            } else {
+                                throw new Error("Không thể thêm sản phẩm.");
+                            }
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                alert("Thêm sản phẩm và option thành công!");
+                                window.location.href = 'list-product';
+                            } else {
+                                throw new Error("Không thể thêm option.");
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Lỗi:", error);
+                            alert(`Đã xảy ra lỗi: ${error.message}`);
+                        });
                 } else {
                     throw new Error("Không thể upload ảnh.");
-                }
-            })
-            .then(response => response.json())
-            .then(product => {
-                if (product.data && product.data.id) {
-                    const productId = product.data.id; // Lấy productId sau khi thêm sản phẩm thành công
-
-                    // Tạo option cho sản phẩm
-                    const optionData = {
-                        productId: productId,
-                        price: parseFloat(price), // Giá option lấy từ giá sản phẩm
-                        stock: parseInt(stock),   // Stock option lấy từ stock sản phẩm
-                    };
-
-                    return fetch(` api/options/create`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(optionData),
-                    });
-                } else {
-                    throw new Error("Không thể thêm sản phẩm.");
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert("Thêm sản phẩm và option thành công!");
-                    window.location.href = 'list-product';
-                } else {
-                    throw new Error("Không thể thêm option.");
                 }
             })
             .catch(error => {
@@ -582,4 +601,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert(`Đã xảy ra lỗi: ${error.message}`);
             });
     });
+
 });
