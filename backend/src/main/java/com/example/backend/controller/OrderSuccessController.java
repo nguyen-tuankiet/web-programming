@@ -1,4 +1,4 @@
-package com.example.backend.controller.admin;
+package com.example.backend.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
