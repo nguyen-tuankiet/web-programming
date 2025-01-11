@@ -64,7 +64,9 @@ public class LoginController extends HttpServlet {
                         "id", user.getId(),
                         "fullName", user.getFullName(),
                         "displayName", user.getDisplayName(),
-                        "email", user.getEmail()
+                        "email", user.getEmail(),
+                        "role", user.getRole(),
+                        "sessionId", session.getId()
                 );
 
 
