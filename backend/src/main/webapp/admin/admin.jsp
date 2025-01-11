@@ -12,9 +12,15 @@
     <title>Quản trị</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/admin/Admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+
+
+
+
 </head>
 <body>
 <div class="wrap col">
+
+
     <div id="header" class="row">
         <div class="logo">
             <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png" alt="Logo">
@@ -40,6 +46,9 @@
             </div>
         </div>
     </div>
+
+
+
     <div id="body" class="row">
         <nav id="sidebar" class="col">
             <ul>
