@@ -8,6 +8,19 @@ body{
     padding: 10px;
 
 }
+
+
+
+.container{
+    display: flex;
+}
+
+
+.content{
+    padding-left: 20px;
+}
+
+
 .page-header {
     padding: 10px;
 }
