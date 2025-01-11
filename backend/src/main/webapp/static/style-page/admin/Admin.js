@@ -1,41 +1,4 @@
 
-const routes = {
-    dashboard: 'admin/Dashboard.jsp',
-    my_profile: 'admin/MyProfile.jsp',
-    product_details: 'product_detail/Product-detail-admin.jsp',
-    list_products: 'admin/listProduct.jsp',
-    add_product: `admin/addProduct.jsp`,
-    orders: 'admin/orders.jsp',
-    order_detail: 'admin/orderDetail.jsp',
-    customers: 'admin/customers.jsp',
-    customers_detail: 'admin/customerDetail.jsp',
-    setting: 'admin/account_settings.jsp',
-};
-
-const userPopup = document.querySelector(".user-popup");
-const avatar = document.querySelector(".avatar");
-
-
-function loadPage(pageKey) {
-    const pagePath = routes[pageKey];
-    console.log("Đang tải URL:", pagePath);
-
-    const iframe = document.querySelector("#content iframe");
-    if (!iframe) {
-        console.error("Iframe không tồn tại trong DOM.");
-        return;
-    }
-
-    if (pagePath) {
-        iframe.src = pagePath;
-    } else {
-        console.error("Không tìm thấy trang:", pageKey);
-    }
-}
-
-
-
-
 document.querySelectorAll('.menu_item').forEach(item => {
     item.addEventListener('click', (event) => {
         // Ngăn chặn các sự kiện không mong muốn
@@ -106,22 +69,3 @@ document.querySelectorAll('.submenu li').forEach(submenuItem => {
 
 
 
-
-
-avatar.addEventListener("mouseenter", () => {
-    userPopup.style.display = "block";
-});
-
-avatar.addEventListener("mouseleave", () => {
-    setTimeout(() => {
-        userPopup.style.display = "none";
-    }, 200);
-});
-
-userPopup.addEventListener("mouseenter", () => {
-    userPopup.style.display = "block";
-});
-
-userPopup.addEventListener("mouseleave", () => {
-    userPopup.style.display = "none";
-});

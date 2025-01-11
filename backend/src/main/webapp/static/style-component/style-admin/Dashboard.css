@@ -10,9 +10,11 @@ html{
     overflow: visible;
 }
 body{
-    width: 100%;
     height: auto ;
     overflow: visible;
+    display: flex;
+    flex-direction: column;
+
 
 }
 
@@ -93,10 +95,18 @@ body{
     display: flex;
     justify-content: center;
     background-color: #F0F4F8;
-    padding: 20px 0;
-    /*border: 1px solid #e5e7eb;*/
 
 }
+
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.side_bar{
+}
+
 
 .wrap{
     width: 90%;
