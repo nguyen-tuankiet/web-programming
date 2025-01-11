@@ -268,13 +268,13 @@
             </li>
 
 
-            <!-- Cài đặt -->
-            <li class="menu_item"  >
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-gear"></i>
-                    <span>  Cài đặt </span>
-                </div>
-            </li>
+<%--            <!-- Cài đặt -->--%>
+<%--            <li class="menu_item"  >--%>
+<%--                <div class="wrap_menu_item">--%>
+<%--                    <i class="fa-solid fa-gear"></i>--%>
+<%--                    <span>  Cài đặt </span>--%>
+<%--                </div>--%>
+<%--            </li>--%>
 
 
         </ul>
