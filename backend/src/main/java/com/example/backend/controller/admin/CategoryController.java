@@ -1,8 +1,8 @@
-package com.example.backend.controller;
+package com.example.backend.controller.admin;
 
 import com.example.backend.Connection.DBConnection;
-import com.example.backend.model.Brand;
-import com.example.backend.service.BrandService;
+import com.example.backend.model.Category;
+import com.example.backend.service.CategoryService;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,9 +17,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "BrandController", urlPatterns = {"/admin/api/brand/*"})
-public class BrandController extends HttpServlet {
-    private final BrandService brandService = new BrandService(DBConnection.getJdbi());
+@WebServlet(name = "CategoryController", urlPatterns = {"/admin/api/categories/*"})
+public class CategoryController extends HttpServlet {
+
+    private final CategoryService categoryService = new CategoryService(DBConnection.getJdbi());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,23 +29,23 @@ public class BrandController extends HttpServlet {
         try {
             if (pathInfo == null || pathInfo.equals("/")) {
                 // Lấy danh sách tất cả danh mục
-                List<Brand> brands = brandService.getAllBrands();
-                ResponseWrapper<List<Brand>> responseWrapper = new ResponseWrapper<>(
-                        200, "success", "Fetched categories successfully", brands);
+                List<Category> categories = categoryService.getAllCategories();
+                ResponseWrapper<List<Category>> responseWrapper = new ResponseWrapper<>(
+                        200, "success", "Fetched categories successfully", categories);
                 writeResponse(response, responseWrapper);
             } else {
                 // Lấy danh mục theo ID
                 String[] pathParts = pathInfo.split("/");
                 if (pathParts.length == 2) {
                     Integer id = Integer.parseInt(pathParts[1]);
-                    Brand brand = brandService.getBrandById(id);
-                    if (brand != null) {
-                        ResponseWrapper<Brand> responseWrapper = new ResponseWrapper<>(
-                                200, "success", "Fetched brand successfully", brand);
+                    Category category = categoryService.getCategoryById(id);
+                    if (category != null) {
+                        ResponseWrapper<Category> responseWrapper = new ResponseWrapper<>(
+                                200, "success", "Fetched category successfully", category);
                         writeResponse(response, responseWrapper);
                     } else {
                         ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                                404, "error", "Brand not found", null);
+                                404, "error", "Category not found", null);
                         writeResponse(response, responseWrapper);
                     }
                 } else {
@@ -86,7 +87,7 @@ public class BrandController extends HttpServlet {
             }
 
             // Thêm category mới
-            Brand newCategory = brandService.createBrand(name);
+            Category newCategory = categoryService.createCategory(name);
 
             // Phản hồi thành công
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -140,10 +141,10 @@ public class BrandController extends HttpServlet {
             }
 
             // Cập nhật category
-            brandService.updateBrand(id, name);
+            categoryService.updateCategory(id, name);
 
             // Truy vấn lại để lấy dữ liệu category đã cập nhật
-            Brand updatedCategory = brandService.getBrandById(id);
+            Category updatedCategory = categoryService.getCategoryById(id);
 
             // Phản hồi thành công
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -178,18 +179,18 @@ public class BrandController extends HttpServlet {
             Integer id = Integer.parseInt(pathParts[1]);
 
             // Lấy thông tin category trước khi xóa
-            Brand brand = brandService.getBrandById(id);
+            Category categoryToDelete = categoryService.getCategoryById(id);
 
-            if (brand == null) {
+            if (categoryToDelete == null) {
                 throw new IllegalArgumentException("Category not found");
             }
 
             // Xóa category
-            brandService.deleteBrand(id);
+            categoryService.deleteCategory(id);
 
             // Phản hồi thành công với thông tin của category đã xóa
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    200, "success", "Brand deleted successfully", brand);
+                    200, "success", "Category deleted successfully", categoryToDelete);
             writeResponse(response, responseWrapper);
         } catch (IllegalArgumentException e) {
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -209,5 +210,7 @@ public class BrandController extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
     }
+
+
 
 }

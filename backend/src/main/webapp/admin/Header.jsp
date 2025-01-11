@@ -14,6 +14,7 @@
     <style>
 
         #header {
+            background-color: white;
             height: 60px;
             border-bottom: 1px solid #e5e7eb;
             display: flex;

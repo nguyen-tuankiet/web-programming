@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.controller.admin;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Variant;
