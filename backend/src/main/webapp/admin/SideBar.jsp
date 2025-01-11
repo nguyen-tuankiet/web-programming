@@ -10,7 +10,6 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-
     <style>
         * {
             padding: 0;
@@ -218,7 +217,7 @@
             <li class="menu_item " >
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-house"></i>
-                    <span>Tổng quan</span>
+                    <a href="dashboard">Tổng quan</a>
                 </div>
             </li>
 
@@ -232,9 +231,12 @@
                 </div>
 
                 <ul class="submenu">
-                    <li class="submenu_item"  > Danh sách sản phẩm</li>
-                    <!--                        <li onclick="loadPage('product_details')" ><a href="#" >Chi tiết sản phẩm</a></li>-->
-                    <li class="submenu_item"  > Thêm sản phẩm</li>
+                    <li class="submenu_item"  >
+                        <a href="">Danh sách sản phẩm</a>
+                    </li>
+                    <li class="submenu_item"  >
+                        <a href="add-product">Thêm sản phẩm</a>
+                        </li>
                 </ul>
             </li>
 
