@@ -19,13 +19,13 @@ public class AdminController extends HttpServlet {
 
         switch (action) {
             case "addProduct":
-                request.getRequestDispatcher("admin/addProduct.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/admin/products");
                 break;
             case "account_settings":
-                request.getRequestDispatcher("admin/account_settings.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/admin/account_settings");
                 break;
             case "list_products":
-                request.getRequestDispatcher("admin/listProduct.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/admin/list_products");
                 break;
             case "product_details":
                 request.getRequestDispatcher("admin/Product-detail-admin.jsp").forward(request, response);
@@ -49,7 +49,7 @@ public class AdminController extends HttpServlet {
 //
 
             default:
-                request.getRequestDispatcher("admin/admin.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/admin/dashboard");
                 break;
         }
     }
