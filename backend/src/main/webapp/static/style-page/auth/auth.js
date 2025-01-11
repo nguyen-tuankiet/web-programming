@@ -25,49 +25,7 @@ togglePasswords.forEach((togglePassword) => {
         this.classList.toggle("fa-eye-slash");
     });
 });
-//
-// window.onload = () => {
-//     if (!localStorage.getItem("isLoggedIn")) {
-//         localStorage.removeItem("isLoggedIn");
-//         localStorage.removeItem("userEmail");
-//     }
-// };
-//
-//
-// // Xử lý logic đăng nhập
-// const signInForm = document.querySelector(".sign-in-container form");
-// signInForm.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const email = document.querySelector("#email").value.trim();
-//     const password = document.querySelector("#password").value.trim();
-//
-//     // Giả lập tài khoản
-//     const accounts = {
-//         "admin@gmail.com": {
-//             password: "admin123",
-//             role: "admin",
-//             redirect: "../../../frontEnd/src/pages/Admin.html",
-//         },
-//         "user@gmail.com": {
-//             password: "user123",
-//             role: "user",
-//             redirect: "../../../frontEnd/src/pages/Home.html",
-//         },
-//     };
-//
-//
-//     if (accounts[email] && accounts[email].password === password) {
-//         // Lưu trạng thái đăng nhập
-//         localStorage.setItem("isLoggedIn", "true");
-//         localStorage.setItem("userEmail", email);
-//         localStorage.setItem("userRole", accounts[email].role);
-//
-//
-//         window.location.href = accounts[email].redirect;
-//     } else {
-//         alert("Email hoặc mật khẩu không đúng!");
-//     }
-// });
+
 document.querySelector(".sign-up-container form").addEventListener("submit", async (e) => {
     e.preventDefault(); // Ngăn gửi form truyền thống
 
@@ -111,7 +69,7 @@ document.querySelector(".sign-up-container form").addEventListener("submit", asy
 });
 
 document.querySelector(".sign-in-container form").addEventListener("submit", async (e) => {
-    e.preventDefault(); // Ngăn gửi form truyền thống
+    e.preventDefault();
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -130,8 +88,24 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
 
         if (response.ok) {
             const data = await response.json();
-            alert("Đăng nhập thành công!");
-            window.location.href = "home";
+            console.log("Dữ liệu trả về từ server:", data);  // Kiểm tra dữ liệu trả về
+
+            // Kiểm tra xem data có chứa "data" và các thuộc tính cần thiết không
+            if (data && data.data) {
+                console.log("Session ID:", data.data.sessionId);
+                console.log("User ID:", data.data.id);
+                console.log("Role:", data.data.role);
+
+                // Lưu vào sessionStorage
+                sessionStorage.setItem("sessionId", data.data.sessionId);
+                sessionStorage.setItem("userId", data.data.id);
+                sessionStorage.setItem("role", data.data.role);
+
+                alert("Đăng nhập thành công!");
+                window.location.href = "home";
+            } else {
+                alert("Dữ liệu không hợp lệ từ server");
+            }
         } else {
             const errorData = await response.json();
             alert("Lỗi đăng nhập: " + errorData.message);
