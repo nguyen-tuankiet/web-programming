@@ -15,7 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/auth/register")
+@WebServlet("/register")
 public class RegisterController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
