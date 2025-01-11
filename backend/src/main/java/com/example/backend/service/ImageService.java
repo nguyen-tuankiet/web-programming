@@ -51,31 +51,5 @@ public class ImageService {
     public List<String> getAllImagesByProductId(Integer productId) {
         return imageDao.getAllImagesByProductId(productId);
     }
-//    public static void main(String[] args) {
-//        // Tạo kết nối với cơ sở dữ liệu
-//        ProductService productService = new ProductService(DBConnection.getJdbi());
-//        ImageService imageService = new ImageService(DBConnection.getJdbi());
-//
-//        try {
-//            // ID sản phẩm để kiểm tra
-//            int productId = 1; // Thay bằng một ID thực trong cơ sở dữ liệu của bạn
-//
-//            // Lấy danh sách ảnh của sản phẩm từ ImageService
-//            List<String> images = imageService.getAllImagesByProductId(productId);
-//
-//            // Kiểm tra và in danh sách ảnh
-//            if (images != null && !images.isEmpty()) {
-//                System.out.println("Images for Product ID " + productId + ":");
-//                for (String image : images) {
-//                    System.out.println(image);
-//                }
-//            } else {
-//                System.out.println("No images found for Product ID " + productId);
-//            }
-//        } catch (Exception e) {
-//            System.err.println("Error occurred: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
 
 }

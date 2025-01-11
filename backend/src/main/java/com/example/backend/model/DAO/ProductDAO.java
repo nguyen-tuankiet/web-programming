@@ -75,14 +75,14 @@ public interface ProductDAO {
 
 
 
-    @SqlUpdate("INSERT INTO products (name, sku, description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage) "
-            + "VALUES (:name, :sku, :description,COALESCE(:isActive, 1), :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL))")
+    @SqlUpdate("INSERT INTO products (name,description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage, sku) "
+            + "VALUES (:name, :description,COALESCE(:isActive, 1), :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL), :sku)")
     int addProduct(@Bind("name") String name,
-                   @Bind("sku") String sku,
                    @Bind("description") String description,
                    @Bind("isActive") Boolean isActive,
                    @Bind("categoryId") Integer categoryId,
                    @Bind("brandId") Integer brandId,
-                   @Bind("primaryImage") Integer primaryImage);
+                   @Bind("primaryImage") Integer primaryImage,
+                   @Bind("sku") String sku);
 
 }

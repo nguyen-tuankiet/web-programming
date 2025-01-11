@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const tags = document.getElementById("tags").value.trim();
         const imageUpload = document.getElementById("fileInput").files[0];
 
-        if (!productName || !sku || !category || !price || !stock) {
+        if (!productName || !category || !price || !stock) {
             alert("Vui lòng điền đầy đủ các trường bắt buộc!");
             return;
         }
@@ -505,7 +505,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Upload ảnh trước
         const formData = new FormData();
-        formData.append("file", imageUpload);
+        const files = document.getElementById("fileInput").files;
+
+        for (let i = 0; i < files.length; i++) {
+            formData.append("files[]", files[i]); // Gửi tất cả các ảnh
+        }
 
         fetch(`uploadImage`, {
             method: "POST",
@@ -513,8 +517,8 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.statusCode === 200 && data.data && data.data[0].id) {
-                    const imageId = data.data[0].id; // Lấy ID của ảnh vừa upload
+                if (data.statusCode === 200 && data.data && data.data.length > 0) {
+                    const imageIds = data.data.map(image => image.id); // Lấy các ID của ảnh vừa upload
 
                     // Sau khi upload ảnh thành công, thêm sản phẩm
                     const productData = {
@@ -527,7 +531,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         brandId: brand,
                         tags: tags.split(",").map(tag => tag.trim()),
                         isActive: true, // Mặc định là true
-                        primaryImage: imageId, // Gán ID của ảnh vừa upload
+                        primaryImage: imageIds[0], // Gán ID của ảnh đầu tiên làm ảnh chính
+                        images: imageIds, // Gán tất cả các ID ảnh đã upload
                     };
 
                     return fetch(`products`, {
@@ -567,7 +572,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => {
                 if (response.ok) {
                     alert("Thêm sản phẩm và option thành công!");
-                    window.location.reload();
+                    window.location.href = 'list-product';
                 } else {
                     throw new Error("Không thể thêm option.");
                 }
