@@ -70,7 +70,7 @@ public class UploadImageController extends HttpServlet {
             imageService = new ImageService(cloudinary, imageDao);
 
         } catch (ClassNotFoundException e) {
-            throw new ServletException("MySQL JDBC Driver không tìm thấy", e);
+            throw new ServletException("MySQL  Driver không tìm thấy", e);
         } catch (Exception e) {
             throw new ServletException("Lỗi khi khởi tạo", e);
         }
