@@ -70,6 +70,7 @@
             width: 100%;
             height: 100%;
             display: flex;
+            flex-direction: column;
             background-color: #f9fafb;
         }
 
@@ -244,7 +245,7 @@
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <span>Đơn hàng</span>
+                    <a href="orders">Đơn hàng</a>
                 </div>
 
             </li>
@@ -253,7 +254,7 @@
             <li class="menu_item"  >
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-users"></i>
-                    <span>Khách hàng</span>
+                    <a href="customers">Khách hàng</a>
                 </div>
 
             </li>

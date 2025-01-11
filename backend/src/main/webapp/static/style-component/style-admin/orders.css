@@ -1,5 +1,4 @@
 body{
-    padding: 20px;
     font-family: Helvetica Neue, Helvetica, Arial, serif;
     background: #FFFFFF;
 }
@@ -17,6 +16,21 @@ body > div.container{
     border-radius: 10px;
 
 }
+
+
+#container{
+    display: flex;
+}
+
+
+.wrap_content{
+    width: 100%;
+    padding: 20px;
+}
+
+
+
+
 .search-bar {
     display: flex;
     align-items: center;
