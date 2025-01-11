@@ -23,6 +23,14 @@
 
     <div class="content">
         <div class="toolbar">
+            <div id="add-category-box" class="hidden">
+                <h3>Thêm Sản Phẩm</h3>
+                <input type="text" placeholder="Nhập" class="input-field" />
+                <div class="action-buttons">
+                    <button class="add-btn">Thêm</button>
+                    <button class="discard-btn">Hủy</button>
+                </div>
+            </div>
             <button class="add-product-btn">+ Thêm Sản Phẩm</button>
             <div class="toolbar-buttons">
                 <button class="export-btn">Xuất</button>
