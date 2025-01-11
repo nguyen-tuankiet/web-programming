@@ -3,7 +3,6 @@ package com.example.backend.controller.ProductDetail;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Product;
 import com.example.backend.service.ImageService;
-import com.example.backend.service.OptionService;
 import com.example.backend.service.ProductService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,7 +17,7 @@ import java.util.List;
 public class ProductDetailController extends HttpServlet {
     ProductService productService = new ProductService(DBConnection.getJdbi());
     ImageService imageService = new ImageService(DBConnection.getJdbi());
-    OptionService optionService = new OptionService(DBConnection.getJdbi());
+//    OptionService optionService = new OptionService(DBConnection.getJdbi());
 
 
 
