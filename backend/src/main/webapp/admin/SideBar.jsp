@@ -232,7 +232,7 @@
 
                 <ul class="submenu">
                     <li class="submenu_item"  >
-                        <a href="">Danh sách sản phẩm</a>
+                        <a href="list-product">Danh sách sản phẩm</a>
                     </li>
                     <li class="submenu_item"  >
                         <a href="add-product">Thêm sản phẩm</a>
