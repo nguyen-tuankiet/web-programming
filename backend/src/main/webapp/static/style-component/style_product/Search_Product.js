@@ -1,5 +1,6 @@
 function addToCart(productId, optionId) {
-    fetch("/backend_war_exploded/add-cart", {
+    // fetch("/backend_war_exploded/add-cart", {
+    fetch("add-cart", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -14,3 +15,22 @@ function addToCart(productId, optionId) {
 
 }
 
+
+
+function buyNow(productId, optionId) {
+    fetch("buy-now", {
+        method: "POST",
+        headers: {  "Content-Type": "application/x-www-form-urlencoded"},
+        body: `productId=${productId}&optionId=${optionId}`
+    })
+    .then(data => {
+        console.log(data);
+        if (data.ok){
+            // window.location.href = "cart";
+        }
+        // window.location.href= "cart";
+
+
+    }).catch(error => console.log(error));
+
+}

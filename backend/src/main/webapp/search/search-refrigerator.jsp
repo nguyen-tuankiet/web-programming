@@ -247,7 +247,8 @@
 
 
                                 <div  class="wrap_btn col">
-                                    <button class="btn buy" id="buy-now-btn">Mua Ngay</button>
+<%--                                    <button onclick="buyNow(${p.id}, ${p.optionId})" class="btn buy" id="buy-now-btn">Mua Ngay</button>--%>
+                                    <a href="buy-now?productId=${p.id}&optionId=${p.optionId}" class="btn buy" id="buy-now-btn">Mua Ngay</a>
 
                                     <button onclick="addToCart(${p.id},${p.optionId})" class="btn add">
                                         Thêm vào giỏ hàng
