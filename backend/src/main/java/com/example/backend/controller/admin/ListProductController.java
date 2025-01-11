@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "listProduct", value = "/listProduct")
+@WebServlet(name = "listProduct", value = "/admin/list-product")
 public class ListProductController extends HttpServlet {
 
      ProductService productService = new ProductService(DBConnection.getJdbi());
@@ -25,7 +25,7 @@ public class ListProductController extends HttpServlet {
             request.setAttribute("products", products);
 
             // Forward sang JSP
-            RequestDispatcher dispatcher = request.getRequestDispatcher("admin/listProduct.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("listProduct.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
