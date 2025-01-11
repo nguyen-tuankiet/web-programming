@@ -1,4 +1,4 @@
-package com.example.backend.controller.adminListProduct;
+package com.example.backend.controller.admin;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Product;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "listProduct", value = "/listProduct")
-public class listProduct extends HttpServlet {
+public class ListProduct extends HttpServlet {
 
      ProductService productService = new ProductService(DBConnection.getJdbi());
 
