@@ -1,14 +1,10 @@
 /* General Styling for Container and Content */
-body {
-    font-family: Arial, sans-serif;
+.container{
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    height: 100vh;
-    margin: 0;
 }
 
-.container {
+
+.wrap_content {
     display: flex;
     gap: 20px;
     width: 90%;
@@ -37,9 +33,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    position: fixed;
-    top: 20px;
-    left: 20px;
+
 }
 
 .navbar a {
