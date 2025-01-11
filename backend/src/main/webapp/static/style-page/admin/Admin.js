@@ -1,41 +1,4 @@
 
-const routes = {
-    dashboard: '/backend_war/admin/Dashboard.jsp',
-    my_profile: '/backend_war/admin/MyProfile.jsp',
-    product_details: '/backend_war/product_detail/Product-detail-admin.jsp',
-    list_products: '/backend_war/admin/listProduct.jsp',
-    add_product: `/backend_war/admin/addProduct.jsp`,
-    orders: '/backend_war/admin/orders.jsp',
-    order_detail: '/backend_war/admin/orderDetail.jsp',
-    customers: '/backend_war/admin/customers.jsp',
-    customers_detail: '/backend_war/admin/customerDetail.jsp',
-    setting: '/backend_war/admin/account_settings.jsp',
-};
-
-const userPopup = document.querySelector(".user-popup");
-const avatar = document.querySelector(".avatar");
-
-
-function loadPage(pageKey) {
-    const pagePath = routes[pageKey];
-    console.log("Đang tải URL:", pagePath);
-
-    const iframe = document.querySelector("#content iframe");
-    if (!iframe) {
-        console.error("Iframe không tồn tại trong DOM.");
-        return;
-    }
-
-    if (pagePath) {
-        iframe.src = pagePath;
-    } else {
-        console.error("Không tìm thấy trang:", pageKey);
-    }
-}
-
-
-
-
 document.querySelectorAll('.menu_item').forEach(item => {
     item.addEventListener('click', (event) => {
         // Ngăn chặn các sự kiện không mong muốn
@@ -104,20 +67,5 @@ document.querySelectorAll('.submenu li').forEach(submenuItem => {
 });
 
 
-avatar.addEventListener("mouseenter", () => {
-    userPopup.style.display = "block";
-});
 
-avatar.addEventListener("mouseleave", () => {
-    setTimeout(() => {
-        userPopup.style.display = "none";
-    }, 200);
-});
 
-userPopup.addEventListener("mouseenter", () => {
-    userPopup.style.display = "block";
-});
-
-userPopup.addEventListener("mouseleave", () => {
-    userPopup.style.display = "none";
-});
