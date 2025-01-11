@@ -176,8 +176,6 @@
         </c:if>
 
 
-
-
 <%--        <!-- Sản phẩm 2 -->--%>
 <%--        <tr>--%>
 <%--            <td><label><input type="checkbox" class="checkbox"></label></td>--%>

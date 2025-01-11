@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "listProduct", value = "/listProduct")
-public class ListProduct extends HttpServlet {
+public class ListProductController extends HttpServlet {
 
      ProductService productService = new ProductService(DBConnection.getJdbi());
 
