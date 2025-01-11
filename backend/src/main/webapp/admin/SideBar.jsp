@@ -263,7 +263,7 @@
             <li class="menu_item"  >
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-user"></i>
-                    <span>Hồ sơ</span>
+                    <a href="profile">Hồ sơ</a>
                 </div>
             </li>
 
