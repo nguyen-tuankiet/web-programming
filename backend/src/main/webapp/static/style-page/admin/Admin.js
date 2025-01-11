@@ -1,15 +1,15 @@
 
 const routes = {
-    dashboard: 'admin/Dashboard.jsp',
-    my_profile: 'admin/MyProfile.jsp',
-    product_details: 'product_detail/Product-detail-admin.jsp',
-    list_products: 'admin/listProduct.jsp',
-    add_product: `admin/addProduct.jsp`,
-    orders: 'admin/orders.jsp',
-    order_detail: 'admin/orderDetail.jsp',
-    customers: 'admin/customers.jsp',
-    customers_detail: 'admin/customerDetail.jsp',
-    setting: 'admin/account_settings.jsp',
+    dashboard: '/backend_war/admin/Dashboard.jsp',
+    my_profile: '/backend_war/admin/MyProfile.jsp',
+    product_details: '/backend_war/product_detail/Product-detail-admin.jsp',
+    list_products: '/backend_war/admin/listProduct.jsp',
+    add_product: `/backend_war/admin/addProduct.jsp`,
+    orders: '/backend_war/admin/orders.jsp',
+    order_detail: '/backend_war/admin/orderDetail.jsp',
+    customers: '/backend_war/admin/customers.jsp',
+    customers_detail: '/backend_war/admin/customerDetail.jsp',
+    setting: '/backend_war/admin/account_settings.jsp',
 };
 
 const userPopup = document.querySelector(".user-popup");
@@ -102,10 +102,6 @@ document.querySelectorAll('.submenu li').forEach(submenuItem => {
         submenuItem.classList.add('active');
     });
 });
-
-
-
-
 
 
 avatar.addEventListener("mouseenter", () => {

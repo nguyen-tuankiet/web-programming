@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group half-width">
                         <label  for="categoryDropdown" >Danh mục</label>
-                        <select id="categoryDropdown" class="option-select" data-url="<%= request.getContextPath() %>/backend_war/api/categories">
+                        <select id="categoryDropdown" class="option-select" data-url="<%= request.getContextPath() %>categories">
                             <option value="">Chọn danh mục</option>
                             <!-- Danh mục sẽ được load ở đây -->
                         </select>
@@ -151,7 +151,7 @@
         <div class="section organization-section">
             <h2>Tổ chức</h2>
             <label for="vendor">Nhà cung cấp</label>
-            <select id="vendor"  data-url="<%= request.getContextPath() %>/backend_war/api/categories">
+            <select id="vendor"  data-url="<%= request.getContextPath() %>categories">
                 <option value="winter">Chọn nhà cung cấp</option>
             </select>
 
