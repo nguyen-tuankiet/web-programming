@@ -84,4 +84,11 @@ public class LoginController extends HttpServlet {
             response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
         }
     }
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/auth/auth.jsp").forward(request, response);
+    }
+
 }
