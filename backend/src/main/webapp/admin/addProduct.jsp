@@ -22,151 +22,168 @@
 </head>
 <body>
 
-<div class="page-header">
-    <div class="row align-items-center">
-        <div class="col-sm mb-2 mb-sm-0">
-            <h1 class="page-header-title">Thêm sản phẩm</h1>
-        </div>
-    </div>
+<div class="wrap_header">
+    <jsp:include page="Header.jsp"/>
 </div>
-<div class="main-container">
-    <div class="left-column">
-        <div class="product-information">
-            <h2>Thông tin sản phẩm</h2>
-            <form>
-                <div class="form-group">
-                    <label for="productName">Tên</label>
-                    <input type="text" id="productName" placeholder="Tủ lạnh, máy giặt, ect.">
+
+<div class="container">
+    <div class="side_bar">
+        <jsp:include page="SideBar.jsp"/>
+    </div>
+
+
+    <div class="content">
+
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-sm mb-2 mb-sm-0">
+                    <h1 class="page-header-title">Thêm sản phẩm</h1>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group half-width">
-                        <label for="sku">Mã SKU</label>
-                        <input type="text" id="sku" placeholder="Ví dụ: 348121032">
-                    </div>
-                    <div class="form-group half-width">
-                        <label  for="categoryDropdown" >Danh mục</label>
-                        <select id="categoryDropdown" class="option-select" data-url="<%= request.getContextPath() %>categories">
-                            <option value="">Chọn danh mục</option>
-                            <!-- Danh mục sẽ được load ở đây -->
-                        </select>
-
-                    </div>
-
-
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Mô tả (Tùy chọn)</label>
-
-                    <div class="toolbar">
-                        <button type="button" class="toolbar-btn"><i class="fas fa-bold"></i></button> <!-- Bold -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-italic"></i></button> <!-- Italic -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-underline"></i></button>
-                        <!-- Underline -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-strikethrough"></i></button>
-                        <!-- Strike -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-link"></i></button> <!-- Link -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-image"></i></button> <!-- Image -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-quote-right"></i></button>
-                        <!-- Blockquote -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-code"></i></button> <!-- Code -->
-                        <button type="button" class="toolbar-btn"><i class="fas fa-list-ul"></i></button>
-                    </div>
-
-                    <textarea id="description" placeholder="Nhập mô tả của bạn..."></textarea>
-                </div>
-
-            </form>
-        </div>
-
-        <div class="media-section">
-            <div class="media-header">
-                <h2>Hình ảnh</h2>
-            </div>
-
-            <div class="media-upload-box">
-                <div class="upload-icon" id="uploadIcon">
-                    <img id="previewImage" src="${pageContext.request.contextPath}/static/image/screenshot-1730907930298-removebg-preview.png"
-                         height="170" width="130" alt="Preview Image"/>
-
-                </div>
-                <div id="imagePreviewContainer" class="image-preview-container"></div>
-                <p id="dragDropText">Kéo và thả tệp của bạn vào đây</p>
-                <span>hoặc</span>
-                <form id="uploadForm" enctype="multipart/form-data">
-                    <input type="file" id="fileInput" name="file" style="display: none;" accept=".png, .jpg, .jpeg" multiple />
-                    <button type="button" class="browse-files" id="uploadButton">Tải ảnh lên</button>
-                </form>
-
-
-
-
             </div>
         </div>
-
-
-        <div id="optionsContainer1" class="options-section">
-            <div class="variant-header">
-                <h2>Biến thể</h2>
-                <button class="add-variant-button" onclick="addVariant()">+ Thêm biến thể</button>
-            </div>
-
-            <div class="variant-group">
-                <div id="optionsContainer" class="options-container">
-                    <div class="pricing-section">
-                        <div class="form-group half-width">
-                            <input type="text" id="price" placeholder="Giá">
-                        </div>
-                        <div class="form-group half-width">
-                            <input type="text" id="total" placeholder="Số lượng">
+        <div class="main-container">
+            <div class="left-column">
+                <div class="product-information">
+                    <h2>Thông tin sản phẩm</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="productName">Tên</label>
+                            <input type="text" id="productName" placeholder="Tủ lạnh, máy giặt, ect.">
                         </div>
 
+                        <div class="form-row">
+                            <div class="form-group half-width">
+                                <label for="sku">Mã SKU</label>
+                                <input type="text" id="sku" placeholder="Ví dụ: 348121032">
+                            </div>
+                            <div class="form-group half-width">
+                                <label  for="categoryDropdown" >Danh mục</label>
+                                <select id="categoryDropdown" class="option-select" data-url="<%= request.getContextPath() %>categories">
+                                    <option value="">Chọn danh mục</option>
+                                    <!-- Danh mục sẽ được load ở đây -->
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Mô tả (Tùy chọn)</label>
+
+                            <div class="toolbar">
+                                <button type="button" class="toolbar-btn"><i class="fas fa-bold"></i></button> <!-- Bold -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-italic"></i></button> <!-- Italic -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-underline"></i></button>
+                                <!-- Underline -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-strikethrough"></i></button>
+                                <!-- Strike -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-link"></i></button> <!-- Link -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-image"></i></button> <!-- Image -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-quote-right"></i></button>
+                                <!-- Blockquote -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-code"></i></button> <!-- Code -->
+                                <button type="button" class="toolbar-btn"><i class="fas fa-list-ul"></i></button>
+                            </div>
+
+                            <textarea id="description" placeholder="Nhập mô tả của bạn..."></textarea>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="media-section">
+                    <div class="media-header">
+                        <h2>Hình ảnh</h2>
                     </div>
 
-                    <label for="productName">Thuộc tính</label>
-                    <div class="option-group">
-                        <select class="option-select" id="variant-select" onchange="fetchVariantValues(this.value)">
-                            <option value="">Chọn danh mục</option>
-                        </select>
+                    <div class="media-upload-box">
+                        <div class="upload-icon" id="uploadIcon">
+                            <img id="previewImage" src="${pageContext.request.contextPath}/static/image/screenshot-1730907930298-removebg-preview.png"
+                                 height="170" width="130" alt="Preview Image"/>
 
-                        <!-- Variant Value Dropdown -->
-                        <select class="option-select" id="variant-value-select">
-                            <option value="">Chọn giá trị</option>
-                        </select>
+                        </div>
+                        <div id="imagePreviewContainer" class="image-preview-container"></div>
+                        <p id="dragDropText">Kéo và thả tệp của bạn vào đây</p>
+                        <span>hoặc</span>
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <input type="file" id="fileInput" name="file" style="display: none;" accept=".png, .jpg, .jpeg" multiple />
+                            <button type="button" class="browse-files" id="uploadButton">Tải ảnh lên</button>
+                        </form>
 
-                        <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
+
+
+
                     </div>
                 </div>
-                <button class="add-option-button" onclick="addOptionGroup('optionsContainer')">+ Thêm thuộc tính
-                </button>
+
+
+                <div id="optionsContainer1" class="options-section">
+                    <div class="variant-header">
+                        <h2>Biến thể</h2>
+                        <button class="add-variant-button" onclick="addVariant()">+ Thêm biến thể</button>
+                    </div>
+
+                    <div class="variant-group">
+                        <div id="optionsContainer" class="options-container">
+                            <div class="pricing-section">
+                                <div class="form-group half-width">
+                                    <input type="text" id="price" placeholder="Giá">
+                                </div>
+                                <div class="form-group half-width">
+                                    <input type="text" id="total" placeholder="Số lượng">
+                                </div>
+
+                            </div>
+
+                            <label for="productName">Thuộc tính</label>
+                            <div class="option-group">
+                                <select class="option-select" id="variant-select" onchange="fetchVariantValues(this.value)">
+                                    <option value="">Chọn danh mục</option>
+                                </select>
+
+                                <!-- Variant Value Dropdown -->
+                                <select class="option-select" id="variant-value-select">
+                                    <option value="">Chọn giá trị</option>
+                                </select>
+
+                                <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
+                            </div>
+                        </div>
+                        <button class="add-option-button" onclick="addOptionGroup('optionsContainer')">+ Thêm thuộc tính
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="right-column">
+
+                <div class="section organization-section">
+                    <h2>Tổ chức</h2>
+                    <label for="vendor">Nhà cung cấp</label>
+                    <select id="vendor"  data-url="<%= request.getContextPath() %>categories">
+                        <option value="winter">Chọn nhà cung cấp</option>
+                    </select>
+
+                    <label for="tags">Thẻ</label>
+                    <input type="text" id="tags" placeholder="Nhập thẻ tại đây">
+                </div>
+
+
+                <div class="save">
+                    <button id="saveButton">Lưu</button>
+                </div>
+
             </div>
 
         </div>
     </div>
 
 
-    <div class="right-column">
-
-        <div class="section organization-section">
-            <h2>Tổ chức</h2>
-            <label for="vendor">Nhà cung cấp</label>
-            <select id="vendor"  data-url="<%= request.getContextPath() %>categories">
-                <option value="winter">Chọn nhà cung cấp</option>
-            </select>
-
-            <label for="tags">Thẻ</label>
-            <input type="text" id="tags" placeholder="Nhập thẻ tại đây">
-        </div>
-
-
-        <div class="save">
-            <button id="saveButton">Lưu</button>
-        </div>
-
-    </div>
-
 </div>
+
 <script src="${pageContext.request.contextPath}/static/style-component/style-admin/addProduct.js"></script>
 </body>
 </html>
