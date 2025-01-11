@@ -6,12 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // Kiểm tra trạng thái đăng nhập
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-
-
-
     // Hiệu ứng hover cho menu
     menuItems.forEach((item) => {
         let timeout;
@@ -78,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isLoggedIn) {
             alert("Bạn cần đăng nhập trước!");
         } else {
-            iframe.src = "/web-programming/frontEnd/src/pages/UserProfile.html";
+            // iframe.src = "/web-programming/frontEnd/src/pages/UserProfile.html";
             history.pushState({ page: "user-profile" }, "Trang của tôi", "/user-profile");
         }
     });
@@ -105,23 +99,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Xử lý trạng thái đăng nhập
     const loginLink = document.getElementById("login-link");
-    if (isLoggedIn) {
-        loginLink.textContent = "Đăng xuất";
-        loginLink.addEventListener("click", (event) => {
-            event.preventDefault();
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("userEmail");
+    if (loginLink) {
+        if (isLoggedIn) {
+            loginLink.textContent = "Đăng xuất";
+            loginLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                localStorage.setItem("isLoggedIn", "false");
+                alert("Bạn đã đăng xuất!");
+                window.location.href = 'login';
+            });
+        } else {
             loginLink.textContent = "Đăng nhập/Đăng ký";
-            window.location.reload();
-            alert("Bạn đã đăng xuất!");
-            window.location.href = "/web-programming/frontEnd/src/pages/auth.html";
-
-        });
-    } else {
-        loginLink.textContent = "Đăng nhập/Đăng ký";
-        loginLink.addEventListener("click", (event) => {
-            event.preventDefault();
-            window.location.href = "/web-programming/frontEnd/src/pages/auth.html";
-        });
+            loginLink.addEventListener("click", (event) => {
+                event.preventDefault();
+                window.location.href = 'login';
+            });
+        }
     }
 });
