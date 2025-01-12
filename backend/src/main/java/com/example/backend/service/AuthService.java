@@ -54,12 +54,16 @@ public class AuthService {
             throw new IllegalArgumentException("User not found");
         }
 
-        String storedSalt = user.getSalt();
+        String storedSalt = user.getSalt(); // Lấy salt từ cơ sở dữ liệu
+        String storedHashedPassword = user.getPassword();
 
-        String hashedCurrentPassword = HashUtils.hashWithSalt(oldPassword, storedSalt);
-        System.out.println(hashedCurrentPassword);
+        // Mã hóa mật khẩu nhập vào với salt
+        String hashedPassword = HashUtils.hashWithSalt(oldPassword, storedSalt);
+        System.out.println("Stored Salt: " + storedSalt);
+        System.out.println("Stored Hashed Password: " + storedHashedPassword);
+        System.out.println("Hashed Password: " + hashedPassword);
 
-        if (!hashedCurrentPassword.equals(user.getPassword())) {
+        if (!hashedPassword.equals(storedHashedPassword)) {
             throw new IllegalArgumentException("Current password is incorrect");
         }
 
@@ -67,8 +71,8 @@ public class AuthService {
         String hashedNewPassword = HashUtils.hashWithSalt(newPassword, newSalt);
 
         return userDAO.updatePassword(userId, hashedNewPassword, newSalt) > 0;
-
     }
+
 
 }
 
