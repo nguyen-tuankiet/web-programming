@@ -387,4 +387,21 @@ tr:hover{
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     z-index: 9998; /* Slightly lower than the Add Category box */
 }
+.status {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+}
 
+.status.active {
+    color: #2ecc71;
+    background-color: #e9f7ef;
+}
+
+.status.deactive {
+    color: #e74c3c;
+    background-color: #fde2e2;
+}
