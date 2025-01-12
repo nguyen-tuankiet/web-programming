@@ -295,7 +295,7 @@ $(document).ready(function () {
 
         if (confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')) {
             $.ajax({
-                url: '/backend_war_exploded/cart/remove',
+                url: '/cart/remove',
                 method: 'POST',
                 data: {
                     productId: productId,

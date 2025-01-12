@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "UserDetailController", value = "/profile")
+@WebServlet(name = "UserDetailController", value = "/user-profile")
 public class UserDetailController extends HttpServlet {
 
     @Override
