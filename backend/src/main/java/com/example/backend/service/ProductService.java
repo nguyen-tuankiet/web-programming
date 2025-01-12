@@ -37,6 +37,14 @@ public class ProductService {
         return products;
     }
 
+    public Integer getMinimumPriceForProduct(int productId) {
+        return productDao.getMinimumPriceForProduct(productId);
+    }
+
+    public Integer getPriceForOption(int optionId) {
+        return productDao.getPriceForOption(optionId);
+    }
+
 
     public Product addProduct(Product product) {
 
