@@ -56,19 +56,19 @@
 
                 <li class="sub_items nav">
                     <i class="fa-solid fa-location-dot"></i>
-                    <a href="#" class="item_link" data-src="../component/user_profile_component/Address.html">
+                    <a href="user-address" class="item_link">
                         Địa chỉ</a>
                 </li>
 
                 <li class="sub_items nav">
                     <i class="fa-solid fa-key"></i>
-                    <a href="#" class="item_link" data-src="../component/user_profile_component/Password.html">
+                    <a href="user-password" class="item_link" >
                         Bảo mật</a>
                 </li>
 
                 <li class="sub_items nav">
                     <i class="fa-regular fa-bell"></i>
-                    <a href="#" class="item_link" data-src="../component/admin_components/notifications.html">
+                    <a href="#" class="item_link" >
                         Thông báo</a>
                 </li>
             </ul>
@@ -78,14 +78,14 @@
 
     <div class="item nav ">
         <i class="fa-solid fa-cart-shopping"></i>
-        <span>  <a href="#" class="item_link"  data-src="../component/user_order/UserOrder.html">Đơn hàng</a></span>
+        <span>  <a href="#" class="item_link"   >Đơn hàng</a></span>
 
     </div>
 
 
     <div class="item  ">
         <i class="fa-brands fa-rocketchat"></i>
-        <span>  <a href="#" class="item_link"  data-src="../component/user_order/UserOrder.html">Tin nhắn</a></span>
+        <span>  <a href="#" class="item_link"   >Tin nhắn</a></span>
 
     </div>
 

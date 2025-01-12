@@ -86,7 +86,7 @@ a{
     margin-left: 10px;
 }
 
-.item  {
+#side_bar .item  {
     padding: 10px 20px;
     width: 100%;
     height: 35px;
@@ -98,7 +98,7 @@ a{
     align-items: center;
 }
 
-.item  span{
+#side_bar .item  span{
     margin-left: 10px;
 }
 
