@@ -17,6 +17,9 @@ public interface ImageDao {
     @SqlUpdate("INSERT INTO product_images (productId, imageId) VALUES (:productId, :imageId)")
     boolean addImageToProduct(@Bind("productId") Integer productId, @Bind("imageId") Integer imageId);
 
+    @SqlQuery("SELECT url FROM image WHERE id = :id")
+    String getImageUrlById(@Bind("id") int id);
+
     @SqlQuery(value = "SELECT image.url from image " +
             "INNER JOIN product_images ON image.id = product_images.imageId " +
             "WHERE product_images.productId = :productId ")
