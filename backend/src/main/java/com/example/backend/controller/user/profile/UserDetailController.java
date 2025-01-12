@@ -18,11 +18,10 @@ public class UserDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        HttpSession session = request.getSession();
-       String idString = (String) session.getAttribute("userId");
+       Integer userId = (Integer) session.getAttribute("userId");
 
        User user= null;
-        if (idString != null) {
-           Integer userId = Integer.parseInt(idString);
+        if (userId != null) {
            user = userService.getUserById(userId);
            request.setAttribute("user", user);
 
