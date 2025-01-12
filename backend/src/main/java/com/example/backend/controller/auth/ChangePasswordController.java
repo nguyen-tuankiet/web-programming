@@ -2,9 +2,10 @@ package com.example.backend.controller.auth;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.AuthService;
-import com.example.backend.model.User;
 import com.example.backend.util.ResponseWrapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.cj.Session;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,9 +17,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
-
+@WebServlet("/change-password")
+public class ChangePasswordController extends HttpServlet {
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
 
     @Override
@@ -39,58 +39,50 @@ public class LoginController extends HttpServlet {
             String jsonString = jsonBuilder.toString();
 
             // Parse JSON để lấy dữ liệu
-            Map<String, String> jsonData = objectMapper.readValue(jsonString, Map.class);
-            String email = jsonData.get("email");
-            String password = jsonData.get("password");
+            Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
 
-            // Kiểm tra thông tin đầu vào
-            if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
+            // Lấy các tham số từ JSON
+            String currentPassword = jsonData.get("currentPassword");
+            String newPassword = jsonData.get("newPassword");
+            String confirmPassword = jsonData.get("confirmPassword");
+
+
+            HttpSession session = request.getSession();
+            Integer userId = (Integer) session.getAttribute("userId");
+
+
+            // Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp không
+            if (newPassword == null || newPassword.isEmpty()) {
                 ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                        400, "error", "Email và mật khẩu không được để trống", null);
+                        400, "error", "New password cannot be null or empty", null);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
                 return;
             }
 
-            // Xử lý đăng nhập
-            User user = authService.login(email, password);
-            if (user != null) {
-                // Lưu thông tin người dùng vào session
-                HttpSession session = request.getSession();
-                session.setAttribute("userId", user.getId());
-                session.setAttribute("role", user.getRole()); // Lưu thông tin role (nếu có)
+            if (!newPassword.equals(confirmPassword)) {
+                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                        400, "error", "New password and confirmation do not match", null);
+                response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+                return;
+            }
 
-                // Trả về thông tin người dùng
-                Map<String, String> userData = Map.of(
-                        "id", String.valueOf(user.getId()),
-                        "fullName", user.getFullName(),
-                        "displayName", user.getDisplayName(),
-                        "email", user.getEmail(),
-                        "role", user.getRole(),
-                        "sessionId", session.getId()
-                );
-
-
-                ResponseWrapper<Map<String, String>> responseWrapper = new ResponseWrapper<>(
-                        200, "success", "Đăng nhập thành công", userData);
+            // Gọi UserService để thay đổi mật khẩu
+            boolean isPasswordChanged = authService.changePassword(userId, currentPassword, newPassword);
+            if (isPasswordChanged) {
+                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                        200, "success", "Password changed successfully", null);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
             } else {
-                // Trả về lỗi nếu thông tin đăng nhập không hợp lệ
                 ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                        401, "error", "Email hoặc mật khẩu không chính xác", null);
+                        400, "error", "Current password is incorrect", null);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
             }
+
         } catch (Exception e) {
-            // Xử lý lỗi hệ thống
+            // Xử lý lỗi và trả về phản hồi phù hợp
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    500, "error", "Đã xảy ra lỗi: " + e.getMessage(), null);
+                    500, "error", "An error occurred: " + e.getMessage(), null);
             response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
         }
     }
-
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/auth/auth.jsp").forward(request, response);
-    }
-
 }
