@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class User {
-    String id;
+    Integer id;
     String fullName;
     String displayName;
     LocalDate birth;
@@ -20,7 +20,7 @@ public class User {
     String salt;
     String avatarUrl;
 
-    public User(@ColumnName("id") String id,
+    public User(@ColumnName("id") Integer id,
                 @ColumnName("fullName") @Nullable  String fullName,
                 @ColumnName("displayName") @Nullable String displayName,
                 @ColumnName("birth") @Nullable LocalDate  birth,
@@ -48,11 +48,11 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

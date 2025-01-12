@@ -25,6 +25,8 @@ public class UserDetailController extends HttpServlet {
            Integer userId = Integer.parseInt(idString);
            user = userService.getUserById(userId);
            request.setAttribute("user", user);
+
+            System.out.println(user.toString());
        }
 
         request.getRequestDispatcher("user/user-profile.jsp").forward(request, response);
