@@ -45,6 +45,23 @@ a{
 
 /**/
 
+
+.container{
+    width: 100%;
+    display: flex;
+    height: 100%;
+    padding: 10px 20px;
+}
+
+.warp_content{
+    width: 100%;
+    padding: 0 20px;
+}
+
+
+
+
+
 #side_bar{
     width: 300px;
     height: 100%;
@@ -86,7 +103,7 @@ a{
     margin-left: 10px;
 }
 
-.item  {
+#side_bar .item  {
     padding: 10px 20px;
     width: 100%;
     height: 35px;
@@ -98,7 +115,7 @@ a{
     align-items: center;
 }
 
-.item  span{
+#side_bar .item  span{
     margin-left: 10px;
 }
 
