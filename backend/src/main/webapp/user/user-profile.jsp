@@ -49,8 +49,16 @@
 
     <div class="form_infor row mid_align">
     <div class="avatar">
-    <img id="avatar" src="${pageContext.request.contextPath}/static/image/medium%20(1).png" height="500"
-    width="500"/>
+        <c:if   test="${not empty user.avatarUrl}">
+            <img id="avatar" src="${user.avatarUrl}"/>
+        </c:if>
+
+        <c:if   test="${empty user.avatarUrl}">
+            <img id="avatar" src="${pageContext.request.contextPath}/static/image/medium%20(1).png" height="500" width="500"/>
+        </c:if>
+
+
+
     <i id="btn_upload" class="fa-solid fa-camera"></i>
     <input type="file" name="" id="upload_avatar" accept="image/*" style="display: none;"/>
     </div>
@@ -74,21 +82,22 @@
 
             <div class="gender_radio mid_align">
                 <label>
-                    <c:if  test="${user.gender == 'Male'}">
-
-                    </c:if>
-                    <input type="radio" name="gender" value="male" checked>
+                    <input type="radio" name="gender" value="male"
+                           <c:if test="${user.gender == 'Male'}">checked</c:if>>
                     Nam
                 </label>
                 <label>
-                    <input type="radio" name="gender" value="female">
+                    <input type="radio" name="gender" value="female"
+                           <c:if test="${user.gender == 'Female'}">checked</c:if>>
                     Nữ
                 </label>
                 <label>
-                    <input type="radio" name="gender" value="other">
+                    <input type="radio" name="gender" value="other"
+                           <c:if test="${user.gender == 'Other'}">checked</c:if>>
                     Khác
                 </label>
             </div>
+
         </div>
         </div>
 
@@ -101,22 +110,39 @@
                     <span>Ngày sinh : </span>
                 </div>
 
+
+
+                <c:set var="birthDay" value="${user.birth.dayOfMonth}" />
+                <c:set var="birthMonth" value="${user.birth.monthValue}" />
+                <c:set var="birthYear" value="${user.birth.year}" />
+
+
+
                 <div class="birth_form mid_align">
                     <div class="col">
                         <select id="day">
                             <option value="" disabled selected>Ngày</option>
+                            <c:forEach var="i" begin="1" end="31">
+                                <option value="${i}" <c:if test="${i == birthDay}">selected</c:if>>${i}</option>
+                            </c:forEach>
                         </select>
                     </div>
 
                     <div class="col">
                         <select id="month">
                             <option value="" disabled selected>Tháng</option>
+                            <c:forEach var="i" begin="1" end="12">
+                                <option value="${i}" <c:if test="${i == birthMonth}">selected</c:if>>${i}</option>
+                            </c:forEach>
                         </select>
                     </div>
 
                     <div class="col">
                         <select id="year">
                             <option value="" disabled selected>Năm</option>
+                            <c:forEach var="i" begin="1900" end="2025">
+                                <option value="${i}" <c:if test="${i == birthYear}">selected</c:if>>${i}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>
@@ -143,13 +169,18 @@
 
                 <div class="contact_item row mid_align">
                     <i class="fa-solid fa-phone"></i>
-                    <span class="item_text">0399989979 </span>
+                    <c:if test="${not empty user.phone}">
+                        <span class="item_text">${user.phone} </span>
+                    </c:if>
                     <button type="button" class="update_btn">Cập nhật</button>
                 </div>
 
                 <div class="contact_item row mid_align">
                     <i class="fa-regular fa-envelope"></i>
-                    <span class="item_text ">qhung.fw@gmail.com </span>
+                    <c:if test="${not empty user.email}">
+                        <span class="item_text">${user.email} </span>
+                    </c:if>
+
                     <button type="button" class="update_btn">Cập nhật</button>
                 </div>
 
