@@ -10,11 +10,12 @@
     <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="4">
+          <list size="5">
             <item index="0" class="java.lang.String" itemvalue="_mstmutation" />
             <item index="1" class="java.lang.String" itemvalue="_mstaria-label" />
             <item index="2" class="java.lang.String" itemvalue="xsi:schemaLocation" />
             <item index="3" class="java.lang.String" itemvalue="src" />
+            <item index="4" class="java.lang.String" itemvalue="fa-solid" />
           </list>
         </value>
       </option>
