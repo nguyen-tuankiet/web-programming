@@ -44,31 +44,32 @@
             <ul>
                 <li class="sub_items  nav ">
                     <i class="fa-solid fa-address-card"></i>
-                    <a href="#" class="item_link" data-src="../component/user_profile_component/UserProfileDetail.html">Hồ
-                        sơ</a>
+                    <a href="profile" class="item_link" >
+                        Hồ sơ</a>
                 </li>
 
                 <li class="sub_items nav">
                     <i class="fa-regular fa-credit-card"></i>
-                    <a href="#" class="item_link" data-src="../component/user_profile_component/Payment.html">Thanh
-                        toán</a>
+                    <a href="user-card" class="item_link" >
+                        Thanh toán</a>
                 </li>
 
                 <li class="sub_items nav">
                     <i class="fa-solid fa-location-dot"></i>
-                    <a href="#" class="item_link" data-src="../component/user_profile_component/Address.html">Địa
-                        chỉ</a>
+                    <a href="#" class="item_link" data-src="../component/user_profile_component/Address.html">
+                        Địa chỉ</a>
                 </li>
 
                 <li class="sub_items nav">
                     <i class="fa-solid fa-key"></i>
-                    <a href="#" class="item_link" data-src="../component/user_profile_component/Password.html">Bảo
-                        mật</a>
+                    <a href="#" class="item_link" data-src="../component/user_profile_component/Password.html">
+                        Bảo mật</a>
                 </li>
 
                 <li class="sub_items nav">
                     <i class="fa-regular fa-bell"></i>
-                    <a href="#" class="item_link" data-src="../component/admin_components/notifications.html">Thông báo</a>
+                    <a href="#" class="item_link" data-src="../component/admin_components/notifications.html">
+                        Thông báo</a>
                 </li>
             </ul>
         </div>
