@@ -182,7 +182,7 @@ $(document).ready(function () {
 
     function updateQuantity( productId, quantity ) {
         $.ajax({
-            url: '/cart/update-quantity' ,
+            url: 'cart/update-quantity' ,
             method: 'POST',
             data: {
                 productId: productId,
@@ -205,7 +205,7 @@ $(document).ready(function () {
 
         if (confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')) {
             $.ajax({
-                url: '/cart/remove',
+                url: 'cart/remove',
                 method: 'POST',
                 data: {
                     productId: productId,
