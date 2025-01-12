@@ -145,7 +145,7 @@ $(document).ready(function () {
 
     function updateQuantity( productId, quantity ) {
         $.ajax({
-            url: '/backend_war_exploded/cart/update-quantity' ,
+            url: '/cart/update-quantity' ,
             method: 'POST',
             data: {
                 productId: productId,
