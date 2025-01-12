@@ -671,7 +671,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             })
             .catch(error => {
-                console.error("Lỗi:", error);
+                console.error("Lỗi:", error.message);
+                console.log(error);
                 alert(`Đã xảy ra lỗi: ${error.message}`);
             });
     });
