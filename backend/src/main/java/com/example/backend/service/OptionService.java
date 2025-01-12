@@ -11,9 +11,7 @@ public class OptionService {
     }
 
     public int createOptions(Integer productId, Integer price, Integer stock) {
-//        return optionDao.createOption(productId, price, stock);
-        return 0;
-
+        return optionDao.createOption(productId, price, stock);
     }
 
 }
