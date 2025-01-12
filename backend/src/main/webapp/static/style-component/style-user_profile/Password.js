@@ -17,47 +17,40 @@ document.querySelectorAll('.toggle_pass')
         })
 });
 
-document.querySelector(".form").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Ngăn hành vi submit mặc định
+document.querySelector("form").addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-    // Lấy giá trị từ các ô input
-    const currentPassword = document.getElementById("current_pass").value;
-    const newPassword = document.getElementById("new_pass").value;
-    const confirmPassword = document.getElementById("confirm_pass").value;
-
-    // Kiểm tra mật khẩu mới và mật khẩu xác nhận có khớp không
-    if (newPassword !== confirmPassword) {
-        alert("Mật khẩu mới và mật khẩu xác nhận không khớp.");
-        return;
-    }
+    const formData = {
+        currentPassword: document.getElementById("current_pass").value,
+        newPassword: document.getElementById("new_pass").value,
+        confirmPassword: document.getElementById("confirm_pass").value,
+    };
 
     try {
-        // Gọi API đổi mật khẩu
         const response = await fetch("change-password", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                currentPassword: currentPassword,
-                newPassword: newPassword,
-                confirmPassword: confirmPassword,
-            }),
+            body: JSON.stringify(formData),
         });
 
-        // Xử lý kết quả trả về từ API
-        const result = await response.json();
+        // Kiểm tra trạng thái HTTP trước khi parse JSON
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-        if (response.ok) {
-            alert(result.message || "Đổi mật khẩu thành công!");
-            // Reset form sau khi đổi mật khẩu thành công
-            document.querySelector(".form").reset();
+        const data = await response.json();
+
+        if (data.statusCode === 200) {
+            alert("Thay đổi password thành công! Vui lòng đăng nhập lại...");
+            window.location.href = "login";
         } else {
-            alert(result.message || "Đổi mật khẩu thất bại.");
+            alert(data.message);
         }
     } catch (error) {
-        console.error("Lỗi:", error);
-        alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
+        console.error("Lỗi:", error.message);
+        alert("Có lỗi xảy ra: " + error.message);
     }
 });
 
