@@ -10,11 +10,25 @@ $(document).ready(function () {
     upload_avatar.on('change', function (event) {
         const file = event.target.files[0];
         if (file){
+
+            const formData = new FormData();
+            formData.append("file", file);
+            fetch(`admin\uploadImage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                body: formData,
+            })
+            .then(response => response.json())
+
             const reader = new FileReader();
             reader.onload = function (e) {
                 avatar.attr('src', e.target.result);
             }
             reader.readAsDataURL(file);
+
+
         }
     })
 })
