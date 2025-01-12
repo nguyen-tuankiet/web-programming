@@ -1,4 +1,29 @@
 
+$(document).ready(function () {
+    const loginButton = $('.btn_login');
+
+    // Xử lý khi người dùng click nút Đăng nhập
+    loginButton.on('click', function () {
+        // Chuyển đến trang đăng nhập
+        window.location.href = "login"; // Đường dẫn trang đăng nhập
+    });
+
+    // Kiểm tra trạng thái đăng nhập khi trang được tải
+    const userId = sessionStorage.getItem("userId");
+    const sessionId = sessionStorage.getItem("sessionId");
+
+    if (userId && sessionId) {
+        // Nếu đã đăng nhập, ẩn nút Đăng nhập
+        $('.btn_login').hide();
+        // Hiển thị thông tin cá nhân (tùy theo logic của bạn)
+        $('.user-popup').prepend(`<p>Xin chào, User!</p>`); // Tùy chỉnh hiển thị displayName nếu có
+    }
+});
+
+
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const menuItems = document.querySelectorAll(".navbar ul li");
