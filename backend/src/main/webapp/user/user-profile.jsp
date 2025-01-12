@@ -74,7 +74,9 @@
 
             <div class="gender_radio mid_align">
                 <label>
-                    <c:if  test="${user.gender}"
+                    <c:if  test="${user.gender == 'Male'}">
+
+                    </c:if>
                     <input type="radio" name="gender" value="male" checked>
                     Nam
                 </label>
