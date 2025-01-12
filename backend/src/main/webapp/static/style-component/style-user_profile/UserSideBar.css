@@ -135,6 +135,7 @@ a{
     list-style-type: none;
     border: 1px solid #F5F5F5;
     height: 35px;
+    text-align:start;
 }
 
 
