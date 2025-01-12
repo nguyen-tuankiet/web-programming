@@ -43,7 +43,7 @@
                 <label class="item">
                     <span>Mật khẩu hiện tại<span class="asterisk">*</span></span>
                     <div class="input">
-                        <input id="current_pass" type="password" required>
+                        <input id="current_pass" type="password" required autocomplete="current-password">
                         <i class="toggle_pass fa-regular fa-eye"></i>
                     </div>
                 </label>
@@ -51,7 +51,7 @@
                 <label class="item">
                     <span>Mật khẩu mới<span class="asterisk">*</span></span>
                     <div class="input">
-                        <input id="new_pass" type="password" required>
+                        <input id="new_pass" type="password" required autocomplete="new-password">
                         <i class="toggle_pass fa-regular fa-eye"></i>
                     </div>
                 </label>
@@ -59,7 +59,7 @@
                 <label class="item">
                     <span>Xác nhận mật khẩu <span class="asterisk">*</span></span>
                     <div class="input">
-                        <input id="confirm_pass" type="password" required>
+                        <input id="confirm_pass" type="password" required autocomplete="new-password">
                         <i class="toggle_pass fa-regular fa-eye"></i>
                     </div>
                 </label>
