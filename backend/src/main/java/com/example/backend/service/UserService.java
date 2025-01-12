@@ -19,10 +19,15 @@ public class UserService {
     }
 
 
+    public Boolean updateAvatar(Integer userId, Integer avatarId) {
+        return userDao.updateAvatar(userId, avatarId);
+    }
+
+
     public static void main(String[] args) {
         UserService userService = new UserService(DBConnection.getJdbi());
         User user = userService.getUserById(111);
-        System.out.println(user.toString());
+        System.out.println(userService.updateAvatar(user.getId(), 1));
     }
 
 }

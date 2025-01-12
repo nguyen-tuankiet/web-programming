@@ -55,4 +55,13 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user WHERE id = :id")
     User getPasswordByUserId(@Bind("id") Integer userId);
 
+
+
+    @SqlUpdate(value ="UPDATE user\n" +
+            "SET avatarId = :avatarId " +
+            "where id = :userId")
+    Boolean updateAvatar(@Bind("userId") Integer userId, @Bind("avatarId") Integer avatarId);
+
+
+
 }
