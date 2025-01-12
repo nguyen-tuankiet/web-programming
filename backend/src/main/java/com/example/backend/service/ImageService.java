@@ -48,6 +48,11 @@ public class ImageService {
         return imageDao.saveImage(imageUrl);
     }
 
+    public String getImageUrlById(int imageId) {
+        return imageDao.getImageUrlById(imageId);
+    }
+
+
     public List<String> getAllImagesByProductId(Integer productId) {
         return imageDao.getAllImagesByProductId(productId);
     }
