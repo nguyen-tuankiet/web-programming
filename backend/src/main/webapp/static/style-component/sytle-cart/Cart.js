@@ -13,11 +13,14 @@ $(document).ready(function () {
     const sessionId = sessionStorage.getItem("sessionId");
 
     if (userId && sessionId) {
-        // Nếu đã đăng nhập, ẩn nút Đăng nhập
         $('.btn_login').hide();
-        // Hiển thị thông tin cá nhân (tùy theo logic của bạn)
-        $('.user-popup').prepend(`<p>Xin chào, User!</p>`); // Tùy chỉnh hiển thị displayName nếu có
     }
+
+    const tieptuc = $('.btn_shopping');
+    tieptuc.on('click', function (){
+        window.location.href = 'home';
+    })
+
 });
 
 
