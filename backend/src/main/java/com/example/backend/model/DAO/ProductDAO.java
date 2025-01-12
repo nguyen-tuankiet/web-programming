@@ -71,11 +71,6 @@ public interface ProductDAO {
     @RegisterConstructorMapper(Product.class)
     List<Product> getAllProducts();
 
-    @SqlQuery("SELECT price FROM options WHERE productId = :productId AND stock > 0 ORDER BY price ASC LIMIT 1")
-    Integer getMinimumPriceForProduct(@Bind("productId") int productId);
-
-    @SqlQuery("SELECT price FROM options WHERE id = :optionId AND stock > 0")
-    Integer getPriceForOption(@Bind("optionId") int optionId);
 
 
 

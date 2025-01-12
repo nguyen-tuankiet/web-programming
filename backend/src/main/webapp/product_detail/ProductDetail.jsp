@@ -117,10 +117,13 @@
                     <div class="capacity-option">348 L</div>
                     <div class="capacity-option">345 L</div>
                 </div>
+<%--                <div class="price">--%>
+<%--                    <%= "23.000.000 VND" %>--%>
+<%--                </div>--%>
                 <div class="price">
                     <c:choose>
-                        <c:when test="${not empty productPrice}">
-                            ${productPrice} VND
+                        <c:when test="${not empty product.price}">
+                            ${product.price} VND
                         </c:when>
                         <c:otherwise>
                             Giá không khả dụng
