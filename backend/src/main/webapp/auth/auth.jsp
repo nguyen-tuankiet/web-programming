@@ -91,7 +91,7 @@
           <input type="checkbox" id="remember-checkbox" />
           <label for="remember-checkbox">Ghi nhớ đăng nhập</label>
         </div>
-        <a href="../component/auth_component/forgotpassword.html" class="forgot">Quên mật khẩu?</a>
+        <a href="${pageContext.request.contextPath}/auth/forgotpassword.jsp" class="forgot">Quên mật khẩu?</a>
       </div>
       <button type="submit" id="signInButton">Đăng nhập</button>
     </form>
