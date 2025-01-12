@@ -1,56 +1,3 @@
-// Hàm thêm nhóm tùy chọn mới vào container cụ thể
-function addOptionGroup(containerId) {
-    // Tạo các phần tử mới
-    const optionGroup = document.createElement('div');
-    const select = document.createElement('select');
-    const secondSelect = document.createElement('select');
-    const removeButton = document.createElement('button');
-
-    // Thêm class và nội dung cho các phần tử
-    optionGroup.classList.add('option-group');
-
-    select.classList.add('option-select');
-    select.innerHTML = `
-        <option value="size">Kích thước</option>
-        <option value="color">Màu sắc</option>
-        <option value="material">Chất liệu</option>
-        <option value="style">Kiểu dáng</option>
-        <option value="title">Tiêu đề</option>
-    `;
-
-    secondSelect.classList.add('option-select');
-    secondSelect.innerHTML = `
-        <option value="size">Kích thước</option>
-        <option value="color">Màu sắc</option>
-        <option value="material">Chất liệu</option>
-        <option value="style">Kiểu dáng</option>
-        <option value="title">Tiêu đề</option>
-    `;
-
-    removeButton.classList.add('remove-option-button');
-    removeButton.innerHTML = '×';
-    removeButton.onclick = function () {
-        removeOptionGroup(removeButton);
-    };
-
-    // Thêm các phần tử con vào nhóm tùy chọn
-    optionGroup.appendChild(select);
-    optionGroup.appendChild(secondSelect);
-    optionGroup.appendChild(removeButton);
-
-    // Lấy container cần thao tác và thêm nhóm tùy chọn
-    const container = document.getElementById(containerId);
-    container.appendChild(optionGroup);
-}
-
-// Hàm xóa nhóm tùy chọn
-function removeOptionGroup(button) {
-    const optionGroup = button.parentElement; // Lấy nhóm tùy chọn
-    const container = optionGroup.parentElement; // Xác định container hiện tại
-    container.removeChild(optionGroup); // Xóa nhóm tùy chọn khỏi container
-}
-
-
 
 document.getElementById('fileInput').addEventListener('change', function (event) {
     const files = Array.from(event.target.files);
@@ -262,6 +209,121 @@ function removeVariant(button) {
     }
 }
 
+async function addOptionGroup(containerId) {
+    const optionGroup = document.createElement('div');
+    const select = document.createElement('select');
+    const secondSelect = document.createElement('select');
+    const removeButton = document.createElement('button');
+
+    // Thêm class và nội dung cho các phần tử
+    optionGroup.classList.add('option-group');
+    select.classList.add('option-select');
+    secondSelect.classList.add('option-select');
+    removeButton.classList.add('remove-option-button');
+    removeButton.innerHTML = '×';
+    removeButton.onclick = function () {
+        removeOptionGroup(removeButton);
+    };
+
+    // Thêm id và sự kiện onchange cho các select mới
+    select.id = "variant-select";  // Tạo id giống như phần tử gốc
+    select.setAttribute("onchange", "fetchVariantValues(this.value, this.nextElementSibling)"); // Thêm sự kiện onchange
+
+    secondSelect.id = "variant-value-select"; // Tạo id giống như phần tử gốc
+
+    // Lấy danh sách các biến thể (variants) và điền vào dropdowns
+    const categoryId = getSelectedCategoryId();
+    if (categoryId) {
+        try {
+            const variants = await loadVariantsByCategory(categoryId); // Chờ đợi kết quả
+            populateSelect(select, variants);
+        } catch (error) {
+            console.error("Lỗi khi tải biến thể:", error);
+        }
+    } else {
+        console.warn("Chưa chọn danh mục.");
+    }
+
+    // Thêm các phần tử con vào nhóm tùy chọn
+    optionGroup.appendChild(select);
+    optionGroup.appendChild(secondSelect);
+    optionGroup.appendChild(removeButton);
+
+    // Lấy container cần thao tác và thêm nhóm tùy chọn
+    const container = document.getElementById(containerId);
+    container.appendChild(optionGroup);
+}
+
+// Hàm xóa nhóm tùy chọn
+function removeOptionGroup(button) {
+    const optionGroup = button.parentElement; // Lấy nhóm tùy chọn
+    const container = optionGroup.parentElement; // Xác định container hiện tại
+    container.removeChild(optionGroup); // Xóa nhóm tùy chọn khỏi container
+}
+
+// Hàm lấy categoryId đã chọn (ví dụ: từ dropdown)
+function getSelectedCategoryId() {
+    const categorySelect = document.getElementById("categoryDropdown");
+    return categorySelect ? categorySelect.value : null;
+}
+
+// Hàm tải danh sách biến thể dựa trên categoryId
+async function loadVariantsByCategory(categoryId) {
+    const variantSelect = document.getElementById('variant-select'); // Hoặc chọn select khác nếu cần
+    const url = categoryId ? `api/variants?categoryId=${categoryId}` : `api/variants`;
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data.statusCode === 200) {
+        return data.data; // Trả về danh sách các biến thể
+    } else {
+        throw new Error("Không thể tải biến thể");
+    }
+}
+
+// Hàm gọi API lấy giá trị cho variant và cập nhật select "variant-value-select"
+async function fetchVariantValues(variantId, variantValueSelect) {
+    if (!variantId) {
+        variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+        return;
+    }
+
+    try {
+        const response = await fetch(`api/variants/${variantId}`);
+        const data = await response.json();
+
+        if (data.statusCode === 200) {
+            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+            if (data.data && data.data.length > 0) {
+                data.data.forEach(value => {
+                    const option = document.createElement("option");
+                    option.value = value.id;
+                    option.textContent = value.value; // Gán giá trị hiển thị
+                    variantValueSelect.appendChild(option);
+                });
+            } else {
+                console.warn("Không tìm thấy giá trị cho biến thể đã chọn.");
+            }
+        } else {
+            console.error("Lỗi khi lấy giá trị cho biến thể:", data.message);
+        }
+    } catch (error) {
+        console.error("Lỗi khi gọi API:", error.message);
+    }
+}
+
+// Hàm hiển thị dữ liệu vào một select element
+function populateSelect(selectElement, variants) {
+    selectElement.innerHTML = ''; // Xóa các option cũ
+    variants.forEach(variant => {
+        const option = document.createElement('option');
+        option.value = variant.id;
+        option.textContent = variant.name; // Hiển thị tên biến thể
+        selectElement.appendChild(option);
+    });
+}
+
+
+
 
 
 
@@ -348,32 +410,36 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
-//  variant
-// Base API URL
-const API_BASE_URL = "/api";
 
-// Load all variants when the page is loaded
+
+
+//  variant
 document.addEventListener("DOMContentLoaded", () => {
     const categorySelect = document.getElementById("categoryDropdown");
     const variantSelect = document.getElementById("variant-select");
     const variantValueSelect = document.getElementById("variant-value-select");
 
-    if (!categorySelect || !variantSelect || !variantValueSelect) {
+    if (!variantSelect || !variantValueSelect) {
         console.error("Các phần tử dropdown không tồn tại");
         return;
     }
 
+    if (!categorySelect){
+        loadVariantsByCategory(null);
+    }
     // Lắng nghe sự kiện thay đổi của category
-    categorySelect.addEventListener("change", function () {
-        const categoryId = this.value;
-        if (categoryId) {
-            loadVariantsByCategory(categoryId);
-        } else {
-            // Reset danh sách variant nếu không chọn category
-            variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
-            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
-        }
-    });
+    else {
+        categorySelect.addEventListener("change", function () {
+            const categoryId = this.value;
+            if (categoryId) {
+                loadVariantsByCategory(categoryId);
+            } else {
+                // Reset danh sách variant nếu không chọn category
+                variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
+                variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+            }
+        });
+    }
 
     // Lắng nghe sự kiện thay đổi của variant
     variantSelect.addEventListener("change", function () {
@@ -391,8 +457,16 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             variantSelect.innerHTML = '<option>Đang tải...</option>'; // Thông báo trạng thái
 
-            const response = await fetch(` api/variants?categoryId=${categoryId}`);
+
+
+            const url = categoryId
+                ? `api/variants?categoryId=${categoryId}`
+                : `api/variants`;
+
+            const response = await fetch(url);
             const data = await response.json();
+
+
 
             if (data.statusCode === 200) {
                 populateVariants(data.data);
