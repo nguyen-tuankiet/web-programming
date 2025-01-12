@@ -48,7 +48,7 @@ public class AuthService {
     }
 
 
-    public boolean changePassword(String userId, String oldPassword, String newPassword) {
+    public boolean changePassword(Integer userId, String oldPassword, String newPassword) {
         User user = userDAO.getUserById(userId);
         if (user == null) {
             throw new IllegalArgumentException("User not found");

@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
 
                 // Trả về thông tin người dùng
                 Map<String, String> userData = Map.of(
-                        "id", user.getId(),
+                        "id", String.valueOf(user.getId()),
                         "fullName", user.getFullName(),
                         "displayName", user.getDisplayName(),
                         "email", user.getEmail(),
