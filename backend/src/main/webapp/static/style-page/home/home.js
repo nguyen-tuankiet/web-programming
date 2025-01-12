@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // history.pushState({ page: "user-profile" }, "Trang của tôi", "user-profile");
             window.location.href = 'user-profile';
         }
-
     });
 
     window.addEventListener("message", (event) => {

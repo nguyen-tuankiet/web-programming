@@ -1,93 +1,27 @@
-let currentSortColumn = null;
-let currentSortOrder = 'asc';
-
-function sortTable(columnIndex) {
-    const tableBody = document.getElementById("product-table-body");
-    const rows = Array.from(tableBody.rows);
-    const columnType = document.querySelector(`th:nth-child(${columnIndex + 1})`).getAttribute("data-sort");
-    const header = document.querySelectorAll("th")[columnIndex];
-
-    // Remove the active class from all sort arrows
-    document.querySelectorAll(".sort-arrow").forEach(arrow => arrow.classList.remove("active"));
-
-    // Toggle the sort order if the current column is selected again
-    if (currentSortColumn === columnIndex) {
-        currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
-    } else {
-        currentSortOrder = 'asc';
-    }
-    currentSortColumn = columnIndex;
-
-    // Set the active class for the appropriate arrow
-    const sortArrows = header.querySelector(".sort-arrows");
-    if (currentSortOrder === 'asc') {
-        sortArrows.querySelector(".asc").classList.add("active");
-    } else {
-        sortArrows.querySelector(".desc").classList.add("active");
-    }
-
-    // Sort the rows based on column type
-    let sortedRows;
-    if (columnType === "number") {
-        sortedRows = rows.sort((a, b) => {
-            const valA = parseFloat(a.cells[columnIndex].innerText.replace('$', ''));
-            const valB = parseFloat(b.cells[columnIndex].innerText.replace('$', ''));
-            return currentSortOrder === 'asc' ? valA - valB : valB - valA;
-        });
-    } else if (columnType === "date") {
-        sortedRows = rows.sort((a, b) => {
-            const dateA = new Date(a.cells[columnIndex].innerText);
-            const dateB = new Date(b.cells[columnIndex].innerText);
-            return currentSortOrder === 'asc' ? dateA - dateB : dateB - dateA;
-        });
-    } else {
-        sortedRows = rows.sort((a, b) => {
-            const textA = a.cells[columnIndex].innerText;
-            const textB = b.cells[columnIndex].innerText;
-            return currentSortOrder === 'asc' ? textA.localeCompare(textB) : textB.localeCompare(textA);
-        });
-    }
-
-    // Update the table with sorted rows
-    tableBody.innerHTML = "";
-    sortedRows.forEach(row => tableBody.appendChild(row));
-}
-
-// function  dropdown
-
-function toggleDropdown(button) {
-    const dropdownContent = button.nextElementSibling;
-    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
-}
-
-// Đóng dropdown khi nhấn ra ngoài
-window.onclick = function (event) {
-    if (!event.target.matches('.dropdown button') && !event.target.closest('.dropdown')) {
-        const dropdowns = document.querySelectorAll(".dropdown-content");
-        dropdowns.forEach(dropdown => {
-            dropdown.style.display = "none";
-        });
-    }
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-    const pageButtons = document.querySelectorAll(".page-number");
+    const entriesDropdown = document.getElementById("entries");
+    const productTableBody = document.getElementById("product-table-body");
+    const paginationContainer = document.querySelector(".pagination");
     const prevButton = document.querySelector(".prev-btn");
     const nextButton = document.querySelector(".next-btn");
+    const addProductBtn = document.querySelector('.add-product-btn');
 
-    const page1Products = document.getElementById("product-table-body");
-    const page2Products = document.getElementById("product-table-body-page2");
-
+    let allRows = Array.from(productTableBody.rows); // Lưu tất cả các dòng sản phẩm vào mảng
     let currentPage = 1;
+    let entriesPerPage = parseInt(entriesDropdown.value, 10);
 
+    // Hàm hiển thị các dòng sản phẩm tương ứng với trang hiện tại
     function showPage(page) {
-        // Hiển thị đúng các sản phẩm của trang
-        if (page === 1) {
-            page1Products.style.display = "table-row-group";
-            page2Products.style.display = "none";
-        } else if (page === 2) {
-            page1Products.style.display = "none";
-            page2Products.style.display = "table-row-group";
+        // Tính toán chỉ số bắt đầu và kết thúc
+        const startIndex = (page - 1) * entriesPerPage;
+        const endIndex = Math.min(startIndex + entriesPerPage, allRows.length);
+
+        // Ẩn tất cả các dòng trước khi hiển thị dòng phù hợp
+        allRows.forEach(row => (row.style.display = "none"));
+
+        // Hiển thị các dòng thuộc trang hiện tại
+        for (let i = startIndex; i < endIndex; i++) {
+            allRows[i].style.display = "table-row";
         }
 
         // Cập nhật nút phân trang
@@ -95,86 +29,117 @@ document.addEventListener("DOMContentLoaded", function () {
         currentPage = page;
     }
 
+    // Hàm cập nhật nút phân trang
     function updatePaginationButtons(page) {
-        // Loại bỏ lớp active khỏi tất cả nút
-        pageButtons.forEach(btn => btn.classList.remove("active"));
+        // Xóa các nút phân trang hiện có
+        paginationContainer.querySelectorAll(".page-number").forEach(button => button.remove());
 
-        // Thêm lớp active vào nút của trang hiện tại
-        document.querySelector(`.page-number:nth-child(${page + 1})`).classList.add("active");
+        // Tính toán số trang
+        const totalPages = Math.ceil(allRows.length / entriesPerPage);
 
-        // Cập nhật trạng thái vô hiệu hóa của nút Trước và Tiếp Theo
+        // Thêm các nút số trang
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement("button");
+            pageButton.classList.add("page-number");
+            pageButton.textContent = i;
+
+            if (i === page) {
+                pageButton.classList.add("active");
+            }
+
+            pageButton.addEventListener("click", () => showPage(i));
+            paginationContainer.insertBefore(pageButton, nextButton);
+        }
+
+        // Cập nhật trạng thái nút Trước và Tiếp
         prevButton.disabled = page === 1;
-        nextButton.disabled = page === pageButtons.length;
+        nextButton.disabled = page === totalPages;
     }
 
-    // Xử lý sự kiện khi người dùng nhấp vào các nút số trang
-    pageButtons.forEach((button, index) => {
-        button.addEventListener("click", () => showPage(index + 1));
+    // Lắng nghe sự kiện khi người dùng thay đổi giá trị dropdown
+    entriesDropdown.addEventListener("change", function () {
+        entriesPerPage = parseInt(entriesDropdown.value, 10);
+        showPage(1); // Luôn hiển thị trang đầu tiên khi thay đổi số mục hiển thị
     });
 
-    // Xử lý sự kiện khi người dùng nhấp vào nút Trước
-    prevButton.addEventListener("click", () => {
+    // Xử lý sự kiện khi nhấn nút Trước
+    prevButton.addEventListener("click", function () {
         if (currentPage > 1) {
             showPage(currentPage - 1);
         }
     });
 
-    // Xử lý sự kiện khi người dùng nhấp vào nút Tiếp Theo
-    nextButton.addEventListener("click", () => {
-        if (currentPage < pageButtons.length) {
+    // Xử lý sự kiện khi nhấn nút Tiếp
+    nextButton.addEventListener("click", function () {
+        const totalPages = Math.ceil(allRows.length / entriesPerPage);
+        if (currentPage < totalPages) {
             showPage(currentPage + 1);
         }
     });
 
-    // Khởi động trang đầu tiên
+    // Hàm sắp xếp bảng
+    let currentSortColumn = null;
+    let currentSortOrder = 'asc';
+
+    function sortTable(columnIndex) {
+        const columnType = document.querySelector(`th:nth-child(${columnIndex + 1})`).getAttribute("data-sort");
+        const header = document.querySelectorAll("th")[columnIndex];
+
+        // Remove the active class from all sort arrows
+        document.querySelectorAll(".sort-arrow").forEach(arrow => arrow.classList.remove("active"));
+
+        // Toggle the sort order if the current column is selected again
+        if (currentSortColumn === columnIndex) {
+            currentSortOrder = currentSortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSortOrder = 'asc';
+        }
+        currentSortColumn = columnIndex;
+
+        // Set the active class for the appropriate arrow
+        const sortArrows = header.querySelector(".sort-arrows");
+        if (currentSortOrder === 'asc') {
+            sortArrows.querySelector(".asc").classList.add("active");
+        } else {
+            sortArrows.querySelector(".desc").classList.add("active");
+        }
+
+        // Sort the rows based on column type
+        let sortedRows;
+        if (columnType === "number") {
+            sortedRows = allRows.sort((a, b) => {
+                const valA = parseFloat(a.cells[columnIndex].innerText.replace('$', ''));
+                const valB = parseFloat(b.cells[columnIndex].innerText.replace('$', ''));
+                return currentSortOrder === 'asc' ? valA - valB : valB - valA;
+            });
+        } else if (columnType === "date") {
+            sortedRows = allRows.sort((a, b) => {
+                const dateA = new Date(a.cells[columnIndex].innerText);
+                const dateB = new Date(b.cells[columnIndex].innerText);
+                return currentSortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+            });
+        } else {
+            sortedRows = allRows.sort((a, b) => {
+                const textA = a.cells[columnIndex].innerText;
+                const textB = b.cells[columnIndex].innerText;
+                return currentSortOrder === 'asc' ? textA.localeCompare(textB) : textB.localeCompare(textA);
+            });
+        }
+
+        // Update the table with sorted rows
+        productTableBody.innerHTML = "";
+        sortedRows.forEach(row => productTableBody.appendChild(row));
+        allRows = Array.from(productTableBody.rows); // Cập nhật danh sách hàng sau khi sắp xếp
+        showPage(1); // Reset lại phân trang
+    }
+
+    // Xử lý thêm sản phẩm
+    addProductBtn.addEventListener('click', () => {
+        const contextPath = '/backend_war';
+        const addProductUrl = `${window.location.origin}${contextPath}/admin/add-product`;
+        window.location.href = addProductUrl;
+    });
+
+    // Khởi tạo hiển thị mặc định
     showPage(1);
 });
-
-document.addEventListener('click', function (e) {
-    const row = e.target.closest('.product-row');
-    if (row) {
-        console.log('Row clicked!');
-        const url = row.getAttribute('data-url');
-        if (url) {
-            window.location.href = url;
-        }
-    }
-});
-// document.addEventListener('DOMContentLoaded', () => {
-//     const addProductBtn = document.querySelector('.add-product-btn');
-//     const addCategoryBox = document.getElementById('add-category-box');
-//     const overlay = document.getElementById('overlay');
-//     const discardBtn = document.querySelector('.discard-btn');
-//
-//     // Show the Add Category box and overlay
-//     addProductBtn.addEventListener('click', () => {
-//         addCategoryBox.classList.toggle('hidden');
-//         overlay.classList.toggle('hidden');
-//     });
-//
-//     // Hide the Add Category box and overlay
-//     discardBtn.addEventListener('click', () => {
-//         addCategoryBox.classList.add('hidden');
-//         overlay.classList.add('hidden');
-//     });
-//
-//     // Hide the Add Category box and overlay when clicking on the overlay
-//     overlay.addEventListener('click', () => {
-//         addCategoryBox.classList.add('hidden');
-//         overlay.classList.add('hidden');
-//     });
-// });
-
-
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const addProductBtn = document.querySelector('.add-product-btn');
-//     const contextPath = '/backend_war';   ko duọc dùng fix contextPath
-//
-//     addProductBtn.addEventListener('click', () => {
-//         const addProductUrl = `${window.location.origin}${contextPath}/admin/add-product`;
-//         console.log("Generated URL:", addProductUrl);
-//         window.location.href = addProductUrl;
-//     });
-// });
