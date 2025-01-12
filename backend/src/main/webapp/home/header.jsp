@@ -169,7 +169,7 @@
             <div class="icon user-login" target="_top">
                 <i class="fas fa-user"></i>
                 <div class="user-popup">
-                    <a class="nav_item" href="#" id="my-page-link">Trang của tôi</a>
+                    <a class="nav_item" href="user-profile" id="my-page-link">Trang của tôi</a>
                     <a href="login" id="login-link">Đăng nhập/Đăng ký</a>
                 </div>
             </div>

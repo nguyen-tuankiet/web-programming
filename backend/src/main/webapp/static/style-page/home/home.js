@@ -70,7 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Bạn cần đăng nhập trước!");
         } else {
             // iframe.src = "/web-programming/frontEnd/src/pages/UserProfile.html";
-            history.pushState({ page: "user-profile" }, "Trang của tôi", "user-profile");
+            // history.pushState({ page: "user-profile" }, "Trang của tôi", "user-profile");
+            window.location.href = 'user-profile';
         }
     });
 

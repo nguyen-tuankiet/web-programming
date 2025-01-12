@@ -1,5 +1,4 @@
 function addToCart(productId, optionId) {
-    // fetch("/backend_war_exploded/add-cart", {
     fetch("add-cart", {
         method: "POST",
         headers: {
