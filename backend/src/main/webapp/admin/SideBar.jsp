@@ -19,7 +19,6 @@
         }
 
 
-
         /* Utility classes */
         .mid_align {
             display: flex;
@@ -215,7 +214,7 @@
     <nav id="sidebar" class="col">
         <ul>
             <!-- Bảng điều khiển -->
-            <li class="menu_item " >
+            <li class="menu_item ">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-house"></i>
                     <a href="dashboard">Tổng quan</a>
@@ -232,12 +231,12 @@
                 </div>
 
                 <ul class="submenu">
-                    <li class="submenu_item"  >
+                    <li class="submenu_item">
                         <a href="list-product">Danh sách sản phẩm</a>
                     </li>
-                    <li class="submenu_item"  >
+                    <li class="submenu_item">
                         <a href="add-product">Thêm sản phẩm</a>
-                        </li>
+                    </li>
                 </ul>
             </li>
 
@@ -251,7 +250,7 @@
             </li>
 
             <!-- Khách hàng -->
-            <li class="menu_item"  >
+            <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-users"></i>
                     <a href="customers">Khách hàng</a>
@@ -261,7 +260,7 @@
 
 
             <!-- Hồ sơ -->
-            <li class="menu_item"  >
+            <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-user"></i>
                     <a href="profile">Hồ sơ</a>
@@ -269,12 +268,13 @@
             </li>
 
 
-            <!-- Cài đặt -->
-            <li class="menu_item"  >
+            <!-- Danh mục -->
+            <li class="menu_item">
                 <div class="wrap_menu_item">
-                    <i class="fa-solid fa-gear"></i>
-                    <a href="categories">Danh mục</a>
-<%--                    <span>  Danh mục </span>--%>
+                    <%--                    <i class="fa-solid fa-gear"></i>--%>
+                        <i class="fa-solid fa-warehouse"></i>
+                        <a href="add-category">Danh mục</a>
+                    <%--                    <span>  Danh mục </span>--%>
                 </div>
             </li>
 
