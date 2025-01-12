@@ -68,7 +68,7 @@
 
                 <li class="sub_items nav">
                     <i class="fa-regular fa-bell"></i>
-                    <a href="#" class="item_link" >
+                    <a href="user-noti" class="item_link" >
                         Thông báo</a>
                 </li>
             </ul>
