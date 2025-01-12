@@ -102,7 +102,6 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                 sessionStorage.setItem("userId", data.data.id);
                 sessionStorage.setItem("role", data.data.role);
 
-                alert("Đăng nhập thành công!");
                 window.location.href = "home";
             } else {
                 alert("Dữ liệu không hợp lệ từ server");
