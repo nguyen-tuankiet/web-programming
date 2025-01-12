@@ -15,7 +15,11 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user")
     List<User> getAllUsers();
 
-    @SqlQuery("SELECT * FROM user WHERE id = :id")
+    @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
+            "        i.url as avatarUrl\n" +
+            "from user as u\n" +
+            "    inner join image as i on u.avatarId = i.id\n" +
+            "where u.id  = :id")
     User getUserById(@Bind("id") Integer id);
 
     @SqlQuery("SELECT * FROM user WHERE email = :email")

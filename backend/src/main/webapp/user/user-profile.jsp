@@ -53,6 +53,7 @@
 
                             <div class="base_infor col">
                                 <span class=name_title>Họ và Tên :</span>
+                                <c:if
                                 <input type="text" class="name" placeholder="Full Name" value="Jackie Chan">
 
                                 <span class=name_title>Tên hiển thị :</span>
