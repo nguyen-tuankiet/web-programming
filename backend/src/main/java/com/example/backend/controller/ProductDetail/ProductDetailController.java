@@ -26,6 +26,11 @@ public class ProductDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int productId = Integer.parseInt(request.getParameter("id"));
         Product product = productService.getProductById(productId);
+
+        Integer productPrice = productService.getMinimumPriceForProduct(productId); // Default to minimum price
+        if (product.getOptionId() != null) {
+            productPrice = productService.getPriceForOption(product.getOptionId());
+        }
         List<String> images = imageService.getAllImagesByProductId(product.getId());
         String primaryImageUrl = imageService.getImageUrlById(product.getPrimaryImage());
         List<String> descriptions = List.of(product.getDescription().split("\\n"));
@@ -34,6 +39,7 @@ public class ProductDetailController extends HttpServlet {
         request.setAttribute("primaryImageUrl", primaryImageUrl); // Add primary image URL
         request.setAttribute("product", product);
         request.setAttribute("descriptions", descriptions);
+        request.setAttribute("productPrice", productPrice);
         request.getRequestDispatcher("product_detail/ProductDetail.jsp").forward(request, response);
     }
 
