@@ -18,18 +18,22 @@ public class User {
     Integer avatarId;
     String role;
     String salt;
+    String avatarUrl;
 
     public User(@ColumnName("id") String id,
-                @ColumnName("fullName") String fullName,
-                @ColumnName("displayName") String displayName,
+                @ColumnName("fullName") @Nullable  String fullName,
+                @ColumnName("displayName") @Nullable String displayName,
                 @ColumnName("birth") @Nullable LocalDate  birth,
                 @ColumnName("gender") @Nullable String gender,
-                @ColumnName("email") String email,
+                @ColumnName("email")@Nullable String email,
                 @ColumnName("phone") @Nullable  String phone,
-                @ColumnName("password") String password,
+                @ColumnName("password") @Nullable String password,
                 @ColumnName("avatarId") @Nullable Integer avatarId,
-                @ColumnName("role")String role,
-                @ColumnName("salt") String salt) {
+                @ColumnName("role") @Nullable String role,
+                @ColumnName("salt")  @Nullable String salt,
+                @ColumnName("avatarUrl") @Nullable String avatarUrl )
+
+    {
         this.id = id;
         this.fullName = fullName;
         this.displayName = displayName;
@@ -41,6 +45,7 @@ public class User {
         this.avatarId = avatarId;
         this.role = role;
         this.salt = salt;
+        this.avatarUrl = avatarUrl;
     }
 
     public String getId() {
@@ -127,5 +132,29 @@ public class User {
 
     public void setSalt(String salt) { // Setter cho salt
         this.salt = salt;
+    }
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", birth=" + birth +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", avatarId=" + avatarId +
+                ", role='" + role + '\'' +
+                ", salt='" + salt + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                '}';
     }
 }
