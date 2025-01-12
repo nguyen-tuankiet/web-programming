@@ -23,8 +23,9 @@ public interface VariantDAO {
     @SqlQuery("SELECT * FROM variant_value WHERE variantId = :variantId")
     List<VariantValue> getVariantValuesByVariantId(@Bind("variantId") Integer variantId);
 
-    @SqlQuery("SELECT * FROM variant WHERE categoryId = :categoryId")
+    @SqlQuery("SELECT * FROM variant WHERE categoryId IS NULL OR categoryId = :categoryId")
     List<Variant> getVariantsByCategoryId(@Bind("categoryId") Integer categoryId);
+
 
     @SqlUpdate("INSERT INTO variant (name, category_id) VALUES (:name, :categoryId)")
     @GetGeneratedKeys("id")
