@@ -24,14 +24,19 @@ public class ProductDetailController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Product product = productService.getProductById(Integer.parseInt(request.getParameter("id")));
+        int productId = Integer.parseInt(request.getParameter("id"));
+        Product product = productService.getProductById(productId);
         List<String> images = imageService.getAllImagesByProductId(product.getId());
+        String primaryImageUrl = imageService.getImageUrlById(product.getPrimaryImage());
         List<String> descriptions = List.of(product.getDescription().split("\\n"));
+
         request.setAttribute("images", images);
+        request.setAttribute("primaryImageUrl", primaryImageUrl); // Add primary image URL
         request.setAttribute("product", product);
         request.setAttribute("descriptions", descriptions);
         request.getRequestDispatcher("product_detail/ProductDetail.jsp").forward(request, response);
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
