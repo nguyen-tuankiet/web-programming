@@ -117,8 +117,8 @@ body{
 
 .form_infor .avatar i{
     position: absolute;
-    bottom: 70px;
-    right: 30px;
+    bottom: 60px;
+    right: 60px;
     font-size: 16px;
     background-color: white;
     padding: 10px;
@@ -175,6 +175,7 @@ body{
 
 
 .personal_infor{
+    padding-left: 340px;
     width: 100%;
     padding-top: 10px;
 }

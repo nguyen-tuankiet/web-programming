@@ -67,12 +67,12 @@
     <span class=name_title>Họ và Tên :</span>
 
     <c:if test="${not empty user.fullName}">
-        <input type="text" class="name" placeholder="Full Name" value="${user.fullName}">
+        <input id="name" type="text" class="name" placeholder="Full Name" value="${user.fullName}">
     </c:if>
 
     <span class=name_title>Tên hiển thị :</span>
     <c:if test="${not empty user.displayName}">
-        <input type="text" class="name" placeholder="Display name" value="${user.displayName}">
+        <input id="displayName" type="text" class="name" placeholder="Display name" value="${user.displayName}">
     </c:if>
 
         <div class="gender row ">
@@ -152,7 +152,7 @@
         </div>
 
         <div class="mid_align bottom">
-            <button class="save_btn">
+            <button id="save" class="save_btn">
                 Lưu
             </button>
         </div>
@@ -170,7 +170,7 @@
                 <div class="contact_item row mid_align">
                     <i class="fa-solid fa-phone"></i>
                     <c:if test="${not empty user.phone}">
-                        <span class="item_text">${user.phone} </span>
+                        <span id="phone" class="item_text">${user.phone} </span>
                     </c:if>
                     <button type="button" class="update_btn">Cập nhật</button>
                 </div>
@@ -178,7 +178,7 @@
                 <div class="contact_item row mid_align">
                     <i class="fa-regular fa-envelope"></i>
                     <c:if test="${not empty user.email}">
-                        <span class="item_text">${user.email} </span>
+                        <span id="email" class="item_text">${user.email} </span>
                     </c:if>
 
                     <button type="button" class="update_btn">Cập nhật</button>
