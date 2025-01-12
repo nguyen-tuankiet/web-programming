@@ -54,7 +54,11 @@ public class AuthService {
             throw new IllegalArgumentException("User not found");
         }
 
-        String hashedCurrentPassword = HashUtils.hashWithSalt(oldPassword, user.getSalt());
+        String storedSalt = user.getSalt();
+
+        String hashedCurrentPassword = HashUtils.hashWithSalt(oldPassword, storedSalt);
+        System.out.println(hashedCurrentPassword);
+
         if (!hashedCurrentPassword.equals(user.getPassword())) {
             throw new IllegalArgumentException("Current password is incorrect");
         }
