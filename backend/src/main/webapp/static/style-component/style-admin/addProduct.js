@@ -568,7 +568,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             stock: parseInt(stock),   // Stock option lấy từ stock sản phẩm
                                         };
 
-                                        return fetch(`api/options/create`, {
+                                        return fetch(`options/create`, {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json",
