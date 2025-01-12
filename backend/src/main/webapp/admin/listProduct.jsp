@@ -23,15 +23,7 @@
 
     <div class="content">
         <div class="toolbar">
-            <div id="add-category-box" class="hidden">
-                <h3>Thêm Sản Phẩm</h3>
-                <input type="text" placeholder="Nhập" class="input-field"/>
-                <div class="action-buttons">
-                    <button class="add-btn">Thêm</button>
-                    <button class="discard-btn">Hủy</button>
-                </div>
-            </div>
-            <button class="add-product-btn">+ Thêm Sản Phẩm</button>
+            <button class="add-product-btn" >+ Thêm Sản Phẩm</button>
             <div class="toolbar-buttons">
                 <button class="export-btn">Xuất</button>
             </div>
@@ -119,54 +111,6 @@
 
             <tbody id="product-table-body">
             <!-- Sản phẩm 1 -->
-            <%--            <c:if test="${empty products}">--%>
-            <%--                <p> Khong co product</p>--%>
-            <%--            </c:if>--%>
-            <%--            <c:if test="${not empty products}">--%>
-            <%--                <c:forEach items="${products}" var="p">--%>
-            <%--                    <tr>--%>
-
-            <%--                        <td><label><input type="checkbox" class="checkbox"></label></td>--%>
-            <%--                        <td>--%>
-            <%--                            <div class="product">--%>
-            <%--                                <img src="../../../resource/image/listProduct/1.jpg" alt="listProduct1" class="product-img">--%>
-            <%--                                <p>Máy Giặt</p>--%>
-            <%--                            </div>--%>
-            <%--                        </td>--%>
-            <%--                        <td>Thiết Bị Gia Dụng</td>--%>
-            <%--                        <td>01/8/2023</td>--%>
-            <%--                        <td>6,500,000 VNĐ</td>--%>
-            <%--                        <td>25</td>--%>
-            <%--                        <td><span class="status active">Hoạt Động</span></td>--%>
-            <%--                        <td>--%>
-            <%--                            <div class="action-icons">--%>
-            <%--                                <div class="dropdown">--%>
-            <%--                                    <button onclick="toggleDropdown(this)"> <!-- Nút chính gọi dropdown -->--%>
-            <%--                                        <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;" ></i>--%>
-            <%--                                        <i class="fa-solid fa-chevron-down" style="padding: 5px;" ></i>--%>
-            <%--                                    </button>--%>
-            <%--                                    <div class="dropdown-content"> <!-- Nội dung dropdown -->--%>
-            <%--                                        <span class="icon view-icon">--%>
-            <%--                     <i class="fa-regular fa-eye" style="padding: 5px;"></i>--%>
-            <%--                    View--%>
-            <%--                </span>--%>
-            <%--                                        <span class="icon edit-icon">--%>
-            <%--                   <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>--%>
-            <%--                    Edit--%>
-            <%--                </span>--%>
-            <%--                                        <span class="icon delete-icon">--%>
-            <%--                    <i class="fa-solid fa-trash" style="padding: 5px;"></i>--%>
-            <%--                    Delete--%>
-            <%--                </span>--%>
-
-            <%--                                    </div>--%>
-            <%--                                </div>--%>
-            <%--                            </div>--%>
-            <%--                        </td>--%>
-            <%--                    </tr>--%>
-            <%--                </c:forEach>--%>
-            <%--            </c:if>--%>
-
             <c:if test="${empty products}">
                 <p>Không có sản phẩm</p>
             </c:if>
