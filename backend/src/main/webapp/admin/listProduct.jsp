@@ -25,7 +25,7 @@
         <div class="toolbar">
             <div id="add-category-box" class="hidden">
                 <h3>Thêm Sản Phẩm</h3>
-                <input type="text" placeholder="Nhập" class="input-field" />
+                <input type="text" placeholder="Nhập" class="input-field"/>
                 <div class="action-buttons">
                     <button class="add-btn">Thêm</button>
                     <button class="discard-btn">Hủy</button>
@@ -119,59 +119,123 @@
 
             <tbody id="product-table-body">
             <!-- Sản phẩm 1 -->
+            <%--            <c:if test="${empty products}">--%>
+            <%--                <p> Khong co product</p>--%>
+            <%--            </c:if>--%>
+            <%--            <c:if test="${not empty products}">--%>
+            <%--                <c:forEach items="${products}" var="p">--%>
+            <%--                    <tr>--%>
+
+            <%--                        <td><label><input type="checkbox" class="checkbox"></label></td>--%>
+            <%--                        <td>--%>
+            <%--                            <div class="product">--%>
+            <%--                                <img src="../../../resource/image/listProduct/1.jpg" alt="listProduct1" class="product-img">--%>
+            <%--                                <p>Máy Giặt</p>--%>
+            <%--                            </div>--%>
+            <%--                        </td>--%>
+            <%--                        <td>Thiết Bị Gia Dụng</td>--%>
+            <%--                        <td>01/8/2023</td>--%>
+            <%--                        <td>6,500,000 VNĐ</td>--%>
+            <%--                        <td>25</td>--%>
+            <%--                        <td><span class="status active">Hoạt Động</span></td>--%>
+            <%--                        <td>--%>
+            <%--                            <div class="action-icons">--%>
+            <%--                                <div class="dropdown">--%>
+            <%--                                    <button onclick="toggleDropdown(this)"> <!-- Nút chính gọi dropdown -->--%>
+            <%--                                        <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;" ></i>--%>
+            <%--                                        <i class="fa-solid fa-chevron-down" style="padding: 5px;" ></i>--%>
+            <%--                                    </button>--%>
+            <%--                                    <div class="dropdown-content"> <!-- Nội dung dropdown -->--%>
+            <%--                                        <span class="icon view-icon">--%>
+            <%--                     <i class="fa-regular fa-eye" style="padding: 5px;"></i>--%>
+            <%--                    View--%>
+            <%--                </span>--%>
+            <%--                                        <span class="icon edit-icon">--%>
+            <%--                   <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>--%>
+            <%--                    Edit--%>
+            <%--                </span>--%>
+            <%--                                        <span class="icon delete-icon">--%>
+            <%--                    <i class="fa-solid fa-trash" style="padding: 5px;"></i>--%>
+            <%--                    Delete--%>
+            <%--                </span>--%>
+
+            <%--                                    </div>--%>
+            <%--                                </div>--%>
+            <%--                            </div>--%>
+            <%--                        </td>--%>
+            <%--                    </tr>--%>
+            <%--                </c:forEach>--%>
+            <%--            </c:if>--%>
+
             <c:if test="${empty products}">
-                <p> Khong co product</p>
+                <p>Không có sản phẩm</p>
             </c:if>
             <c:if test="${not empty products}">
                 <c:forEach items="${products}" var="p">
                     <tr>
-
                         <td><label><input type="checkbox" class="checkbox"></label></td>
                         <td>
                             <div class="product">
-                                <img src="../../../resource/image/listProduct/1.jpg" alt="listProduct1" class="product-img">
-                                <p>Máy Giặt</p>
+                                <!-- Lấy hình ảnh dựa trên `imageUrl` -->
+                                <img src="${p.imageUrl}" alt="${p.name}" class="product-img">
+                                <!-- Hiển thị tên sản phẩm -->
+                                <p>${p.name}</p>
                             </div>
                         </td>
-                        <td>Thiết Bị Gia Dụng</td>
+                        <!-- Lấy tên của danh mục -->
+                        <td>${p.categoryName}</td>
+                        <!-- Ngày thêm sản phẩm (nếu cần thêm trường này trong model, bạn có thể lấy từ phía backend) -->
                         <td>01/8/2023</td>
-                        <td>6,500,000 VNĐ</td>
-                        <td>25</td>
-                        <td><span class="status active">Hoạt Động</span></td>
+                        <!-- Lấy giá của sản phẩm từ options -->
+                        <td>${p.price} VNĐ</td>
+                        <!-- Lấy số lượng tồn kho từ options -->
+                        <td>${p.stock}</td>
+                        <!-- Hiển thị trạng thái -->
+<%--                        <td>--%>
+<%--                            <c:choose>--%>
+<%--                                <c:when test="${p.isActive == 1}">--%>
+<%--                                    <span class="status active">Hoạt Động</span>--%>
+<%--                                </c:when>--%>
+<%--                                <c:otherwise>--%>
+<%--                                    <span class="status deactive">Không Hoạt Động</span>--%>
+<%--                                </c:otherwise>--%>
+<%--                            </c:choose>--%>
+<%--                        </td>--%>
+<%--                        <td><span class="status active">Hoạt Động</span></td>--%>
+                        <td>
+                            <c:choose>
+                                <c:when test="${p.active}">
+                                    <span class="status active">Hoạt Động</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="status deactive">Không Hoạt Động</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+
+
+
+                        <!-- Thao tác -->
                         <td>
                             <div class="action-icons">
                                 <div class="dropdown">
-                                    <button onclick="toggleDropdown(this)"> <!-- Nút chính gọi dropdown -->
-<%--                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"--%>
-<%--                                             fill="none"--%>
-<%--                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"--%>
-<%--                                             class="feather feather-edit icon-xs">--%>
-<%--                                            <path--%>
-<%--                                                    d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>--%>
-<%--                                            <path--%>
-<%--                                                    d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>--%>
-<%--                                        </svg>--%>
-<%--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"--%>
-<%--                                             viewBox="0 0 24 24">--%>
-<%--                                            <path d="M6 9l6 6 6-6"></path>--%>
-<%--                                        </svg>--%>
-                                        <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;" ></i>
-                                        <i class="fa-solid fa-chevron-down" style="padding: 5px;" ></i>
+                                    <button onclick="toggleDropdown(this)">
+                                        <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;"></i>
+                                        <i class="fa-solid fa-chevron-down" style="padding: 5px;"></i>
                                     </button>
-                                    <div class="dropdown-content"> <!-- Nội dung dropdown -->
-                                        <span class="icon view-icon">
-                     <i class="fa-regular fa-eye" style="padding: 5px;"></i>
-                    View
-                </span>
+                                    <div class="dropdown-content">
+                            <span class="icon view-icon">
+                                <i class="fa-regular fa-eye" style="padding: 5px;"></i>
+                                View
+                            </span>
                                         <span class="icon edit-icon">
-                   <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
-                    Edit
-                </span>
+                                <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
+                                Edit
+                            </span>
                                         <span class="icon delete-icon">
-                    <i class="fa-solid fa-trash" style="padding: 5px;"></i>
-                    Delete
-                </span>
-
+                                <i class="fa-solid fa-trash" style="padding: 5px;"></i>
+                                Delete
+                            </span>
                                     </div>
                                 </div>
                             </div>
@@ -179,8 +243,6 @@
                     </tr>
                 </c:forEach>
             </c:if>
-
-
 
 
             <%--        <!-- Sản phẩm 2 -->--%>
