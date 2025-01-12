@@ -140,27 +140,37 @@ document.addEventListener('click', function (e) {
         }
     }
 });
+// document.addEventListener('DOMContentLoaded', () => {
+//     const addProductBtn = document.querySelector('.add-product-btn');
+//     const addCategoryBox = document.getElementById('add-category-box');
+//     const overlay = document.getElementById('overlay');
+//     const discardBtn = document.querySelector('.discard-btn');
+//
+//     // Show the Add Category box and overlay
+//     addProductBtn.addEventListener('click', () => {
+//         addCategoryBox.classList.toggle('hidden');
+//         overlay.classList.toggle('hidden');
+//     });
+//
+//     // Hide the Add Category box and overlay
+//     discardBtn.addEventListener('click', () => {
+//         addCategoryBox.classList.add('hidden');
+//         overlay.classList.add('hidden');
+//     });
+//
+//     // Hide the Add Category box and overlay when clicking on the overlay
+//     overlay.addEventListener('click', () => {
+//         addCategoryBox.classList.add('hidden');
+//         overlay.classList.add('hidden');
+//     });
+// });
 document.addEventListener('DOMContentLoaded', () => {
     const addProductBtn = document.querySelector('.add-product-btn');
-    const addCategoryBox = document.getElementById('add-category-box');
-    const overlay = document.getElementById('overlay');
-    const discardBtn = document.querySelector('.discard-btn');
+    const contextPath = '/backend_war';
 
-    // Show the Add Category box and overlay
     addProductBtn.addEventListener('click', () => {
-        addCategoryBox.classList.toggle('hidden');
-        overlay.classList.toggle('hidden');
-    });
-
-    // Hide the Add Category box and overlay
-    discardBtn.addEventListener('click', () => {
-        addCategoryBox.classList.add('hidden');
-        overlay.classList.add('hidden');
-    });
-
-    // Hide the Add Category box and overlay when clicking on the overlay
-    overlay.addEventListener('click', () => {
-        addCategoryBox.classList.add('hidden');
-        overlay.classList.add('hidden');
+        const addProductUrl = `${window.location.origin}${contextPath}/admin/add-product`;
+        console.log("Generated URL:", addProductUrl);
+        window.location.href = addProductUrl;
     });
 });
