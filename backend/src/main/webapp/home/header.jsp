@@ -11,6 +11,7 @@
     <title>Header</title>
     <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/home/Home.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/home/home.js"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 

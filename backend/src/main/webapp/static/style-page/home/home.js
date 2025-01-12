@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const userPopup = document.querySelector(".user-popup");
     const iframe = document.querySelector("#body iframe");
 
-
+    let isLoggedIn = sessionStorage.getItem("userId") && sessionStorage.getItem("sessionId");
 
     // Hiệu ứng hover cho menu
     menuItems.forEach((item) => {
@@ -35,9 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
-
-
-
 
     userLoginIcon.addEventListener("mouseenter", () => {
         userPopup.style.display = "block";
@@ -73,29 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Bạn cần đăng nhập trước!");
         } else {
             // iframe.src = "/web-programming/frontEnd/src/pages/UserProfile.html";
-            history.pushState({ page: "user-profile" }, "Trang của tôi", "/user-profile");
+            history.pushState({ page: "user-profile" }, "Trang của tôi", "profile");
         }
     });
 
-    // Xử lý nút "Đơn hàng"
-    // document.getElementById("cart-link").addEventListener("click", (event) => {
-    //     event.preventDefault();
-    //     if (!isLoggedIn) {
-    //         alert("Bạn cần đăng nhập trước!");
-    //     } else {
-    //         iframe.src = "/web-programming/frontEnd/src/component/cart/Cart.html";
-    //         history.pushState({ page: "user-orders" }, "Giỏ Hàng", "/cart");
-    //     }
-    // });
-
-    window.addEventListener("message", (event ) => {
+    window.addEventListener("message", (event) => {
         if (event.data.type === "navigate") {
             iframe.src = event.data.url;
-            history.pushState({page:"checkout"}, "Thanh toan", "/cart/payment");
+            history.pushState({page:"checkout"}, "Thanh toán", "checkout");
         }
-    })
-
-
+    });
 
     // Xử lý trạng thái đăng nhập
     const loginLink = document.getElementById("login-link");
@@ -104,7 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
             loginLink.textContent = "Đăng xuất";
             loginLink.addEventListener("click", (event) => {
                 event.preventDefault();
-                localStorage.setItem("isLoggedIn", "false");
+                sessionStorage.removeItem("userId");
+                sessionStorage.removeItem("sessionId");
+                sessionStorage.removeItem("role");
                 alert("Bạn đã đăng xuất!");
                 window.location.href = 'login';
             });
