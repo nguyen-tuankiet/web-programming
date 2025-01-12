@@ -122,14 +122,15 @@
 <%--                </div>--%>
                 <div class="price">
                     <c:choose>
-                        <c:when test="${not empty product.price}">
-                            ${product.price} VND
+                        <c:when test="${not empty productPrice}">
+                            ${productPrice} VND
                         </c:when>
                         <c:otherwise>
                             Giá không khả dụng
                         </c:otherwise>
                     </c:choose>
                 </div>
+
 
                 <!--    <button class="btn-add-to-cart">Thêm vào giỏ hàng</button>-->
             </div>
