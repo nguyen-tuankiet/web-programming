@@ -48,8 +48,10 @@
                 <!-- Carousel Container -->
                 <div class="carousel-container">
                     <!-- Main Image Display -->
-                    <img id="mainImage" src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"
-                         alt="Carousel Image" class="carousel-image">
+<%--                    <img id="mainImage" src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"--%>
+<%--                         alt="Carousel Image" class="carousel-image">--%>
+<%--                    <img id="mainImage" src="../../../resource/image/img-detail/image1.jpg" alt="Carousel Image" class="carousel-image">--%>
+                    <img id="mainImage" src="${primaryImageUrl}" alt="Carousel Image" class="carousel-image">
                     <!-- Navigation Arrows -->
                     <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
                     <div class="nav-arrow right" onclick="nextImage()">&#10095;</div>
@@ -115,13 +117,10 @@
                     <div class="capacity-option">348 L</div>
                     <div class="capacity-option">345 L</div>
                 </div>
-<%--                <div class="price">--%>
-<%--                    <%= "23.000.000 VND" %>--%>
-<%--                </div>--%>
                 <div class="price">
                     <c:choose>
-                        <c:when test="${not empty product.price}">
-                            ${product.price} VND
+                        <c:when test="${not empty productPrice}">
+                            ${productPrice} VND
                         </c:when>
                         <c:otherwise>
                             Giá không khả dụng
