@@ -164,13 +164,17 @@ document.addEventListener('click', function (e) {
 //         overlay.classList.add('hidden');
 //     });
 // });
-document.addEventListener('DOMContentLoaded', () => {
-    const addProductBtn = document.querySelector('.add-product-btn');
-    const contextPath = '/backend_war';
 
-    addProductBtn.addEventListener('click', () => {
-        const addProductUrl = `${window.location.origin}${contextPath}/admin/add-product`;
-        console.log("Generated URL:", addProductUrl);
-        window.location.href = addProductUrl;
-    });
-});
+
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const addProductBtn = document.querySelector('.add-product-btn');
+//     const contextPath = '/backend_war';   ko duọc dùng fix contextPath
+//
+//     addProductBtn.addEventListener('click', () => {
+//         const addProductUrl = `${window.location.origin}${contextPath}/admin/add-product`;
+//         console.log("Generated URL:", addProductUrl);
+//         window.location.href = addProductUrl;
+//     });
+// });

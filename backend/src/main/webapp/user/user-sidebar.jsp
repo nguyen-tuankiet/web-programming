@@ -44,7 +44,7 @@
             <ul>
                 <li class="sub_items  nav ">
                     <i class="fa-solid fa-address-card"></i>
-                    <a href="profile" class="item_link" >
+                    <a href="user-profile" class="item_link" >
                         Hồ sơ</a>
                 </li>
 
