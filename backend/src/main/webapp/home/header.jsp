@@ -119,12 +119,6 @@
                 <a href="#">Điều Hòa Không Khí</a>
                 <div class="submenu submenu-dieu-hoa">
                     <div class="submenu-column">
-<%--                        <a--%>
-<%--                                class="nav_item"--%>
-<%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_AirConditioner.html"--%>
-<%--                                href="#"--%>
-<%--                        >Tất cả Máy Điều Hòa</a--%>
-<%--                        >--%>
                         <a class="nav_item" href="Search_AirConditioner" >Tất cả Máy Điều Hòa</a>
                         <a href="#">Điều Hòa Treo Tường</a>
                         <a href="#">Điều Hòa Cục Bộ Thương Mại</a>
@@ -133,7 +127,10 @@
                 </div>
             </li>
             <li><a href="#">Phụ kiện</a></li>
-            <li><a href="#">SmartThings</a></li>
+            <li>
+<%--                <a href="#">SmartThings</a>--%>
+                <a class="nav_item" href="Search_SmartThings" >SmartThings</a>
+            </li>
             <li>
                 <a href="#">Hỗ Trợ</a>
                 <div class="submenu submenu-ho-tro">
