@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Xử lý thêm sản phẩm
     addProductBtn.addEventListener('click', () => {
-        const contextPath = '/backend_war';
-        const addProductUrl = `${window.location.origin}${contextPath}/admin/add-product`;
+        // const contextPath = '/backend_war';
+        const addProductUrl = `add-product`;
         window.location.href = addProductUrl;
     });
 
