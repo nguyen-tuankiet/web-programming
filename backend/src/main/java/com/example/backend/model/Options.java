@@ -2,6 +2,7 @@ package com.example.backend.model;
 
 
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 public class Options {
     Integer id;
@@ -9,6 +10,8 @@ public class Options {
     Integer price;
     Integer stock;
 
+
+    @JdbiConstructor
     public Options(@ColumnName("id") Integer id,
                    @ColumnName("productId") Integer productId,
                    @ColumnName("price") Integer price,
