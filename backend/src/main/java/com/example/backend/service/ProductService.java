@@ -66,6 +66,15 @@ public class ProductService {
     }
 
 
+    public List<Product> searchProducts(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Keyword must not be empty");
+        }
+        String keyword = "%" + name + "%";
+        return productDao.searchProducts(keyword);
+    }
+
+
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
         System.out.println(productService.getAllProducts());

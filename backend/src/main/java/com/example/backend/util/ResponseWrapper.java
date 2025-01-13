@@ -1,5 +1,8 @@
 package com.example.backend.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class ResponseWrapper<T> {
     private int statusCode;
     private String status;
@@ -44,5 +47,15 @@ public class ResponseWrapper<T> {
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public String toJson() {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "{}";  // Trả về đối tượng JSON rỗng nếu có lỗi
+        }
     }
 }
