@@ -67,11 +67,8 @@ $(document).ready(function () {
 
         inputField.on('blur', function() {
             var newValue = inputField.val().trim();
-
-            // Nếu giá trị mới khác giá trị cũ, cập nhật lại UI
             if (newValue !== currentValue) {
-                // Cập nhật lại nội dung trong span
-                var newSpan = $('<span>', {
+                 var newSpan = $('<span>', {
                     id: field,
                     class: 'item_text',
                     text: newValue
@@ -79,8 +76,7 @@ $(document).ready(function () {
 
                 inputField.replaceWith(newSpan);
             } else {
-                // Nếu không thay đổi, thay thế input trở lại span mà không thay đổi giá trị
-                var currentSpan = $('<span>', {
+                 var currentSpan = $('<span>', {
                     id: field,
                     class: 'item_text',
                     text: currentValue
