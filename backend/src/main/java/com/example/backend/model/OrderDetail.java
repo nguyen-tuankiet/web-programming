@@ -12,6 +12,7 @@ public class OrderDetail {
     Integer total;
     Integer optionId;
     String productName;
+    String imageUrl;
 
     @JdbiConstructor
     public OrderDetail(@ColumnName("id") @Nullable Integer id,
@@ -20,7 +21,8 @@ public class OrderDetail {
                        @ColumnName("quantity") @Nullable Integer quantity,
                        @ColumnName("total") @Nullable Integer total,
                        @ColumnName("optionId") @Nullable Integer optionId,
-                       @ColumnName("productName") @Nullable String productName
+                       @ColumnName("productName") @Nullable String productName,
+                       @ColumnName("imageUrl") @Nullable String imageUrl
     ) {
         this.id = id;
         this.orderId = orderId;
@@ -29,6 +31,7 @@ public class OrderDetail {
         this.total = total;
         this.optionId = optionId;
         this.productName = productName;
+        this.imageUrl = imageUrl;
     }
 
 
@@ -88,5 +91,13 @@ public class OrderDetail {
     }
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
