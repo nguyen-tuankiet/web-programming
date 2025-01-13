@@ -5,6 +5,9 @@ import com.example.backend.model.DAO.OptionDAO;
 import com.example.backend.model.Options;
 import org.jdbi.v3.core.Jdbi;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OptionService {
     private final OptionDAO optionDao;
 
@@ -27,10 +30,24 @@ public class OptionService {
     }
 
 
+    public List<Options> getVariantByOptionId(List<Integer> optionIds) {
+        return optionDao.getVariantByOptionId(optionIds);
+    }
+
+
+    public List<Options> getOptionsByProductId(Integer productId) {
+        return optionDao.getOptionsByProductId(productId);
+    }
+
+
+
     public static void main(String[] args) {
         OptionService  optionService = new OptionService(DBConnection.getJdbi());
-        System.out.println(optionService.getOptionById(1));
-        System.out.println(optionService.updateStock(1, 200));
+
+        System.out.println(optionService.getOptionsByProductId(1));
+
+
+
     }
 
 
