@@ -115,50 +115,53 @@
             <%--            </div>--%>
 
             <%--        </div>--%>
-            <c:if test="${empty orderDetails}">
-                <div class="no_order">Hiện tại không có đơn hàng nào.</div>
-            </c:if>
-            <c:if test="${not empty orderDetails}">
-                <c:forEach var="order_detail" items="${orderDetails}">
-                    <div id="order_container" class="mid_align row">
-                        <!-- Product Image -->
-                        <div class="image">
-                            <img src="${order_detail.imageUrl}" alt="Product Image"/>
-                        </div>
+                <c:if test="${empty orderDetails}">
+                    <div class="no_order">Hiện tại không có đơn hàng nào.</div>
+                </c:if>
+                <c:if test="${not empty orderDetails}">
+                    <c:forEach var="order_detail" items="${orderDetails}">
+                        <div id="order_container" class="mid_align row">
+                            <!-- Product Image -->
+                            <div class="image">
+<%--                                <img src="${orderDetails.imageUrl}" alt="Hình ảnh sản phẩm" />--%>
+                                <p>Ảnh</p>
+                            </div>
 
-                        <!-- Product Info -->
-                        <div class="description mid_align col">
-                            <div class="title bold">${order_detail.productName}</div>
-                            <div class="color">
-                                <span class="color_name">Màu Sắc: <span>${order_detail.color}</span></span>
+                            <!-- Product Info -->
+                            <div class="description mid_align col">
+<%--                                <div class="title bold">${orderDetails.productName}</div>--%>
+                                <div class="title bold">Name</div>
+                                <div class="color">
+                                    <span class="color_name">Màu Sắc: <span>Fix color</span></span>
+                                </div>
+                                <div class="quantity">
+<%--                                    <span class="color_name">Số lượng: <span>${orderDetails.quantity}</span></span>--%>
+                                    <span class="color_name">Số lượng: <span>1231232321</span></span>
+                                </div>
+                                <div class="status">
+                                    <span>Fix status</span>
+                                </div>
                             </div>
-                            <div class="quantity">
-                                <span class="color_name">Số lượng: <span>${order_detail.quantity}</span></span>
-                            </div>
-                            <div class="status">
-                                <span>${order_detail.status}</span>
-                            </div>
-                        </div>
 
-                        <!-- Price Info -->
-                        <div class="section_price mid_align col">
-                            <div class="date">
-                                <span>${order_detail.date}</span>
-                            </div>
-                            <div class="wrap_price col">
-                                <span class="title">Tổng thanh toán: </span>
-                                <span class="price">${order_detail.total} VND</span>
-                            </div>
-                            <div class="btn col">
-                                <button class="btn_detail" data-src="../component/user_order/OrderHistory.html">Xem chi
-                                    tiết
-                                </button>
-                                <button class="btn_support">Hỗ trợ</button>
+                            <!-- Price Info -->
+                            <div class="section_price mid_align col">
+                                <div class="date">
+                                    <span>Fix date</span>
+                                </div>
+                                <div class="wrap_price col">
+                                    <span class="title">Tổng thanh toán: </span>
+<%--                                    <span class="price">${orderDetails.total} VND</span>--%>
+                                    <span class="price">43134234 VND</span>
+                                </div>
+                                <div class="btn col">
+                                    <button class="btn_detail">Xem chi tiết</button>
+                                    <button class="btn_support">Hỗ trợ</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
-            </c:if>
+                    </c:forEach>
+                </c:if>
+
         </div>
 
 
