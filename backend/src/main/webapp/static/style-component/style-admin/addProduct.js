@@ -187,20 +187,34 @@ function showPreview(images, startIndex = 0) {
     document.body.appendChild(previewModal);
 }
 
+
+
 function addVariant() {
     const optionsContainer = document.getElementById('optionsContainer1');
     const variantGroup = document.querySelector('.variant-group'); // Lấy phần tử mẫu
     const newVariant = variantGroup.cloneNode(true); // Tạo bản sao
 
-    // Reset các giá trị trong bản sao
+    // Sao chép giá trị của các input
     const inputs = newVariant.querySelectorAll('input');
     inputs.forEach(input => input.value = ''); // Xóa giá trị input
 
-    // Gắn bản sao vào container
-    optionsContainer.appendChild(newVariant)
-    console.log(optionsContainer, variantGroup);
+    // Kiểm tra số lượng biến thể trong tất cả các nhóm
+    const variantSelects = newVariant.querySelectorAll('.option-select');
+    const numVariants = variantSelects.length;  // Lấy số lượng variant
 
+    // Đảm bảo rằng số lượng biến thể giống nhau ở tất cả các nhóm
+    const allVariantGroups = optionsContainer.querySelectorAll('.variant-group');
+    allVariantGroups.forEach(group => {
+        const currentVariantSelects = group.querySelectorAll('.option-select');
+        while (currentVariantSelects.length < numVariants) {
+            addOptionGroup(group.id);
+        }
+    });
+
+    optionsContainer.appendChild(newVariant);
+    console.log(optionsContainer, variantGroup);
 }
+
 window.addVariant = addVariant;
 
 function removeVariant(button) {
@@ -209,6 +223,9 @@ function removeVariant(button) {
         variantGroup.remove();
     }
 }
+
+
+
 
 async function addOptionGroup(containerId) {
     const optionGroup = document.createElement('div');
@@ -226,13 +243,11 @@ async function addOptionGroup(containerId) {
         removeOptionGroup(removeButton);
     };
 
-    // Thêm id và sự kiện onchange cho các select mới
-    select.id = "variant-select";  // Tạo id giống như phần tử gốc
-    select.setAttribute("onchange", "fetchVariantValues(this.value, this.nextElementSibling)"); // Thêm sự kiện onchange
+    select.id = "variant-select";
+    select.setAttribute("onchange", "fetchVariantValues(this.value, this.nextElementSibling)");
 
-    secondSelect.id = "variant-value-select"; // Tạo id giống như phần tử gốc
+    secondSelect.id = "variant-value-select";
 
-    // Lấy danh sách các biến thể (variants) và điền vào dropdowns
     const categoryId = getSelectedCategoryId();
     if (categoryId) {
         try {

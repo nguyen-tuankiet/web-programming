@@ -85,6 +85,11 @@ function updateSuggestions(products) {
                 <span>${price} VND</span>
             `;
 
+            productDiv.addEventListener('click', () => {
+                const url = new URL(window.location.origin + '/backend_war/product-detail');
+                url.searchParams.append('id', product.id);
+                window.location.href = url.toString();
+            });
             // Thêm vào danh sách kết quả
             suggestionsContainer.appendChild(productDiv);
         });
