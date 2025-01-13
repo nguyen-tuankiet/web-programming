@@ -33,6 +33,31 @@ function updateDots() {
     });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Trạng thái mở rộng thông số kỹ thuật
 let isExpanded = false;
 
@@ -96,9 +121,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-// Sử lý variant
-$(document).ready(function () {
-
-})
 
