@@ -150,11 +150,79 @@
                 <span>Top Sản Phẩm Bán Chạy </span>
 
                 <div class="wrap_item row mid_align">
-                    <jsp:include page="top-product.jsp"/>
-                    <jsp:include page="top-product.jsp"/>
-                    <jsp:include page="top-product.jsp"/>
+                    <c:if test="${not empty topProducts}">
+                        <c:forEach var="pro" items="${topProducts}">
+
+
+                            <div id="search_body">
+
+                                <div class="wrap_img">
+                                    <img id="image" src="${pro.imageUrl}"
+                                         alt="" height="225"
+                                         width="225"/>
+                                </div>
+
+                                <div class="infor mid_align col ">
+                                    <div id="top_name" class="bold f16">
+                                        <a href="product-detail?id=${pro.id}"> ${pro.name}</a>
+                                    </div>
+
+
+                                    <div id="price" class="bold f22">
+<%--                                        20.490.000 ₫--%>
+                                        <fmt:formatNumber value="${pro.price}" pattern="#,###"/> VND
+
+                                        <span id="ratting" class="" style="padding: 0 5px">
+                                            5 (153)
+                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                        </span>
+
+                                    </div>
+
+
+                                    <div id="top_description">
+                                        <ul class="list_descriptions">
+                                            <li class="desc_item f12">Ngăn Đông Mềm -1 độ giữ thịt cá tươi ngon</li>
+                                            <li class=" desc_item f12">Làm đá tự động nhanh chóng, tiện lợi</li>
+                                            <li class="desc_item f12">Công nghệ làm lạnh vòm All Around Cooling</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="operation col">
+                                    <button id="buy_now">
+                                        <a href="buy-now?productId=${pro.id}&optionId=${pro.optionId}"  >Mua ngay</a>
+                                    </button>
+                                    <button onclick="addToCart(${pro.id},${pro.optionId})"  class="btn add">Thêm vào giỏ hàng</button>
+                                </div>
+
+                                <div id="top_cart-notification" class="notification hidden">
+                                    <i class="fa fa-check-circle"></i>
+                                    <span>Thêm vào giỏ hàng thành công</span>
+                                </div>
+
+
+                            </div>
+
+                        </c:forEach>
+
+                    </c:if>
+
+                    <c:if test="${empty topProducts}">
+                        <p>Empty product</p>
+                    </c:if>
+
                 </div>
             </div>
+
+
+
+
+
 
             <span class="popular_title mid_align">Top Sản Phẩm Nổi Bậc </span>
 
@@ -246,9 +314,10 @@
                                 </div>
 
 
-                                <div  class="wrap_btn col">
-<%--                                    <button onclick="buyNow(${p.id}, ${p.optionId})" class="btn buy" id="buy-now-btn">Mua Ngay</button>--%>
-                                    <a href="buy-now?productId=${p.id}&optionId=${p.optionId}" class="btn buy" id="buy-now-btn">Mua Ngay</a>
+                                <div class="wrap_btn col">
+                                        <%--                                    <button onclick="buyNow(${p.id}, ${p.optionId})" class="btn buy" id="buy-now-btn">Mua Ngay</button>--%>
+                                    <a href="buy-now?productId=${p.id}&optionId=${p.optionId}" class="btn buy"
+                                       id="buy-now-btn">Mua Ngay</a>
 
                                     <button onclick="addToCart(${p.id},${p.optionId})" class="btn add">
                                         Thêm vào giỏ hàng
