@@ -11,14 +11,16 @@ public class OrderDetail {
     Integer quantity;
     Integer total;
     Integer optionId;
+    String productName;
 
     @JdbiConstructor
     public OrderDetail(@ColumnName("id") @Nullable Integer id,
-                       @ColumnName("orderId") @Nullable  Integer orderId,
-                       @ColumnName("productId") @Nullable  Integer productId,
-                       @ColumnName("quantity") @Nullable  Integer quantity,
+                       @ColumnName("orderId") @Nullable Integer orderId,
+                       @ColumnName("productId") @Nullable Integer productId,
+                       @ColumnName("quantity") @Nullable Integer quantity,
                        @ColumnName("total") @Nullable Integer total,
-                       @ColumnName("optionId") @Nullable Integer optionId
+                       @ColumnName("optionId") @Nullable Integer optionId,
+                       @ColumnName("productName") @Nullable String productName
     ) {
         this.id = id;
         this.orderId = orderId;
@@ -26,11 +28,11 @@ public class OrderDetail {
         this.quantity = quantity;
         this.total = total;
         this.optionId = optionId;
+        this.productName = productName;
     }
 
 
-
-    public OrderDetail( ) {
+    public OrderDetail() {
     }
 
     public Integer getId() {
@@ -76,7 +78,15 @@ public class OrderDetail {
     public Integer getOptionId() {
         return optionId;
     }
+
     public void setOptionId(Integer optionId) {
         this.optionId = optionId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }
