@@ -91,4 +91,8 @@ public interface ProductDAO {
                    @Bind("primaryImage") Integer primaryImage,
                    @Bind("sku") String sku);
 
+
+
+
+
 }
