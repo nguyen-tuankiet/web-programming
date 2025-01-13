@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 sessionStorage.removeItem("userId");
                 sessionStorage.removeItem("sessionId");
                 sessionStorage.removeItem("role");
-                alert("Bạn đã đăng xuất!");
+                // alert("Bạn đã đăng xuất!");
                 window.location.href = 'login';
             });
         } else {
