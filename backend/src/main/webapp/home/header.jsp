@@ -55,8 +55,8 @@
                     <div class="submenu-column">
                         <a
                                 class="nav_item"
-                                data-src="/web-programming/frontEnd/src/component/product_component/Search_WashingMachine.html"
-                                href="#"
+<%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_WashingMachine.html"--%>
+                                href="Search_KitchenEquipment"
                         >Tất cả Máy Giặt</a
                         >
                         <a href="#">Tiết kiệm sống xanh với BESPOKE AI</a>

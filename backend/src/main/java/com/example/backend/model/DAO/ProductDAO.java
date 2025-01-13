@@ -117,9 +117,6 @@ public interface ProductDAO {
                    @Bind("brandId") Integer brandId,
                    @Bind("primaryImage") Integer primaryImage,
                    @Bind("sku") String sku);
-
-
-
     @SqlQuery("""
    SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
    FROM products p
@@ -158,14 +155,6 @@ public interface ProductDAO {
             "order by p.noOfViews desc , p.noOfSold desc " +
             "limit 3")
     public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit );
-
-
-
-
-
-
-
-
 
 
 
