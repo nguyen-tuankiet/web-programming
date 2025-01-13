@@ -93,5 +93,6 @@ public interface ProductDAO {
 
 
     @SqlQuery("SELECT * FROM products WHERE LOWER(name) LIKE LOWER(:name)")
+    @RegisterConstructorMapper(Product.class)
     List<Product> searchProducts(@Bind("name") String name);
 }
