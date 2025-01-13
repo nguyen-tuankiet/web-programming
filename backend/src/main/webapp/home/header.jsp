@@ -33,7 +33,7 @@
                 </a>
                 <div class="submenu submenu-tu-lanh">
                     <div class="submenu-column">
-                        <a class="nav_item" href="search-refrigerator"   >Tất cả Tủ Lạnh</a>
+                        <a class="nav_item" href="search-refrigerator" >Tất cả Tủ Lạnh</a>
 
 
                         <a class="nav_item" href="#">Tủ Lạnh BESPOKE <span class="highlight">HẤP DẪN</span></a>

@@ -8,6 +8,8 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import com.example.backend.model.Product;
 import java.util.List;
 
+
+@RegisterConstructorMapper(Product.class)
 public interface ProductDAO {
 
     @SqlQuery(value = "\n" +
@@ -92,6 +94,7 @@ public interface ProductDAO {
                    @Bind("sku") String sku);
 
 
+<<<<<<< HEAD
     @SqlQuery("""
    SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
    FROM products p
@@ -99,8 +102,57 @@ public interface ProductDAO {
    LEFT JOIN image i ON p.primaryImage = i.id
    WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
 """)
+=======
+
+
+
+    @SqlQuery("SELECT * FROM products WHERE LOWER(name) LIKE LOWER(:name)")
+>>>>>>> dc0a345f7c858ff16a2e7ec1988c43fa3c7757d7
     @RegisterConstructorMapper(Product.class)
     List<Product> searchProducts(@Bind("name") String name);
 
 
+<<<<<<< HEAD
+=======
+
+
+    @SqlQuery(value = "SELECT p.id           as id,\n" +
+            "       p.name         as name,\n" +
+            "       p.description  as description,\n" +
+            "       p.sku          as sku,\n" +
+            "       p.isActive     as isActive,\n" +
+            "       p.brandId      as brandId,\n" +
+            "       p.noOfViews    as noOfViews,\n" +
+            "       p.noOfSold     as noOfSold,\n" +
+            "       p.categoryId   as categoryId,\n" +
+            "       p.primaryImage as primaryImage,\n" +
+            "       ops.id         as optionId,\n" +
+            "       ops.price      as price,\n" +
+            "       ops.stock      as stock,\n" +
+            "       img.url        as imageUrl\n" +
+            "FROM products as p\n" +
+            "         INNER JOIN categories as cate on cate.id = p.categoryId\n" +
+            "         INNER JOIN `options` as ops on ops.productId = p.id\n" +
+            "         inner join image as img on p.primaryImage = img.id\n" +
+            "WHERE cate.id = :categoryId\n" +
+            "  and ops.price = (SELECT MIN(price)\n" +
+            "                   FROM options as ops\n" +
+            "                   WHERE p.id = ops.productId\n" +
+            "                     and ops.stock > 0)\n" +
+            "order by p.noOfViews desc , p.noOfSold desc\n" +
+            "limit 3")
+    public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit );
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> dc0a345f7c858ff16a2e7ec1988c43fa3c7757d7
 }

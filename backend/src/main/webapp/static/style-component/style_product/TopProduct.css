@@ -125,19 +125,20 @@ body{
 
 }
 
-#name{
+#top_name{
     display: flex;
     width: 100%;
     justify-content: flex-start;
     text-align: left;
 }
 
-#name a{
+#top_name a{
     text-decoration: none;
     color: #000000;
 }
 
 #price{
+    padding-left: 70px;;
     display: flex;
     width: 100%;
     justify-content: flex-start;
@@ -163,13 +164,13 @@ body{
 }
 
 
-#description{
+#top_description{
     display: flex;
     width: 100%;
     justify-content:flex-start;
 }
 
-#description .desc_item{
+#top_description .desc_item{
     padding: 3px 0;
     display: flex;
     justify-content: flex-start;
@@ -177,13 +178,13 @@ body{
 }
 
 
-#description .list_descriptions {
+#top_description .list_descriptions {
     list-style-type: none;
     padding-left: 10px;
 }
 
 
-#description .desc_item::before {
+#top_description .desc_item::before {
     content: '•';
     color: black;
     font-size: 1.2em;
