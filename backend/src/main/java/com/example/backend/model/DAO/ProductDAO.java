@@ -67,7 +67,7 @@ public interface ProductDAO {
             "         INNER JOIN categories cate ON cate.id = p.categoryId\n" +
             "         INNER JOIN options ops ON ops.productId = p.id\n" +
             "         INNER JOIN image img ON img.id = p.primaryImage\n" +
-            "WHERE ops.stock > 0 "
+            "WHERE p.isActive = true and stock > 0"
 )
     @RegisterConstructorMapper(Product.class)
     List<Product> getAllProducts();
@@ -92,7 +92,7 @@ public interface ProductDAO {
                    @Bind("sku") String sku);
 
 
-
-
-
+    @SqlQuery("SELECT * FROM products WHERE LOWER(name) LIKE LOWER(:name)")
+    @RegisterConstructorMapper(Product.class)
+    List<Product> searchProducts(@Bind("name") String name);
 }
