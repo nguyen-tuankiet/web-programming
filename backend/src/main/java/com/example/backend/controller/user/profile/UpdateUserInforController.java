@@ -1,6 +1,7 @@
 package com.example.backend.controller.user.profile;
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.*;
@@ -9,6 +10,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +42,16 @@ public class UpdateUserInforController extends HttpServlet {
 
 
         Integer userId = (Integer) session.getAttribute("userId");
+        User user = new User();
+        user.setId(userId);
+        user.setFullName(requestData.get("fullName").toString());
+        user.setDisplayName(requestData.get("displayName").toString());
+        user.setGender(requestData.get("gender").toString());
+        user.setBirth(LocalDate.parse(requestData.get("birth").toString()));
+        user.setEmail(requestData.get("email").toString());
+        user.setPhone(requestData.get("phone").toString());
 
-        Boolean success = Boolean.TRUE;
+        Boolean success = userService.updateUser(user);
 
 
 
@@ -50,12 +60,12 @@ public class UpdateUserInforController extends HttpServlet {
         if (success){
             response.setStatus(HttpServletResponse.SC_OK);
             responseBody.put("status", "success");
-            responseBody.put("message", "Avatar updated successfully!");
+            responseBody.put("message", "User updated successfully!");
         }
         else {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseBody.put("status", "failed");
-            responseBody.put("message", "Update avatar failed!");
+            responseBody.put("message", "Update user failed!");
         }
 
         objectMapper.writeValue(response.getWriter(), responseBody);
