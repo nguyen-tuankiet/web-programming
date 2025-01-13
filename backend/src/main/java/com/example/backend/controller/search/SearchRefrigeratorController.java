@@ -1,4 +1,4 @@
-package com.example.backend.controller;
+package com.example.backend.controller.search;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.ProductService;
 import jakarta.servlet.*;
@@ -10,7 +10,6 @@ import com.example.backend.model.Product;
 
 @WebServlet(name = "SearchRefrigerator", value = "/search-refrigerator")
 public class SearchRefrigeratorController extends HttpServlet {
-
     ProductService productService = new ProductService(DBConnection.getJdbi());
 
 
@@ -18,8 +17,10 @@ public class SearchRefrigeratorController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         List<Product> products = productService.getProductsByCategory(1);
+        List<Product> topProducts = productService.getTopProductsByCategory(1,3);
 
         request.setAttribute("products", products);
+        request.setAttribute("topProducts", topProducts);
 
         request.getRequestDispatcher("search/search-refrigerator.jsp").forward(request, response);
     }
