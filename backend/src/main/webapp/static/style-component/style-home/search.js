@@ -50,12 +50,32 @@ function searchProducts() {
     clearTimeout(timeout);  // Hủy bỏ lần gọi API cũ
     timeout = setTimeout(function() {
         // Gọi API tìm kiếm sản phẩm (ở đây dùng fetch hoặc XMLHttpRequest)
-        fetch(`/api/search/products?query=${encodeURIComponent(searchInput)}`)
-            .then(response => response.json())
-            .then(data => {
-                updatePopularKeywords(data);  // Cập nhật kết quả tìm kiếm
+        const encodedQuery = encodeURIComponent(searchInput);
+        fetch(`products/search?name=${encodedQuery}`)
+            .then(response => {
+                console.log('Response Status:', response.status);
+                // Kiểm tra mã trạng thái HTTP và chỉ parse JSON nếu trạng thái là OK
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`HTTP error! Status: ${response.status}, Message: ${text}`);
+                    });
+                }
+                return response.text();  // Đọc phản hồi dưới dạng text
             })
-            .catch(error => console.error('Có lỗi khi gọi API:', error));
+            .then(text => {
+                console.log('Response Body:', text);
+                try {
+                    const data = JSON.parse(text);  // Cố gắng parse thành JSON
+                    console.log('Data received:', data);
+                    updatePopularKeywords(data);
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                }
+            })
+            .catch(error => {
+                console.error('Có lỗi khi gọi API:', error);
+            });
+
     }, 1000);  // Delay 1 giây giữa các lần gọi API
 }
 
