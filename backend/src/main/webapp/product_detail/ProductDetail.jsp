@@ -14,7 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Product Detail</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
@@ -26,7 +28,7 @@
           href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-buying-tool.css">
     <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-buying-tool.js"></script>
 </head>
-<body2>
+<body>
     <div class="cart_header">
         <jsp:include page="/home/header.jsp"/>
     </div>
@@ -66,64 +68,27 @@
 
 
                 <%--   VARIANT              --%>
-
-
                 <c:if test="${not empty optionVariant  && not empty varaints}">
                     <c:forEach items="${varaints}" var="type">
 
-
-                        <div class="wrap_variant option-color-title">
-
+                        <div class="wrap_variant ">
                             <div class="option-title">Chọn ${type}:</div>
 
                             <c:forEach items="${optionVariant}" var="op">
                                 <c:if test="${op.variantName eq type  }">
-                                    <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>
+                                    <div class="option-item" data-option-id="${op.id}"  data-price="${op.price}"> ${op.variantValue}</div>
                                 </c:if>
-
                             </c:forEach>
                         </div>
 
-
-                        <%--   COLOR   --%>
-                        <%--                        <c:if test="${type eq 'Màu sắc' }">--%>
-                        <%--                            <div class="wrap_variant option-color-title">--%>
-
-                        <%--                                <div class="option-title">Chọn Màu sắc:</div>--%>
-
-                        <%--                                <c:forEach items="${optionVariant}" var="op">--%>
-                        <%--                                    <c:if test="${op.variantName eq type && type eq 'Màu sắc' }">--%>
-                        <%--                                        <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>--%>
-                        <%--                                    </c:if>--%>
-
-                        <%--                                </c:forEach>--%>
-                        <%--                            </div>--%>
-                        <%--                        </c:if>--%>
-
-                        <%--                        <c:if test="${type eq 'Dung tích' }">--%>
-                        <%--                            <div class="wrap_variant ">--%>
-
-                        <%--                                <div class="option-title">Chọn Dung Tích:</div>--%>
-
-                        <%--                                <c:forEach items="${optionVariant}" var="op">--%>
-
-                        <%--                                    <c:if test="${op.variantName eq type && type eq 'Dung tích' }">--%>
-                        <%--                                        <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>--%>
-                        <%--                                    </c:if>--%>
-
-                        <%--                                </c:forEach>--%>
-                        <%--                            </div>--%>
-
-                        <%--                        </c:if>--%>
-
-
                     </c:forEach>
-
 
                 </c:if>
 
 
-                <div class="price">
+
+
+                <div id="price" class="price">
                     <c:choose>
                         <c:when test="${not empty productPrice}">
 
@@ -134,6 +99,7 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
+
 
                 <div class="product-features">
                     <ul>
@@ -160,6 +126,19 @@
         </div>
 
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <div class="summary__list">
@@ -479,12 +458,8 @@
         <button id="toggle-specs-btn-bottom">Ẩn tất cả các đặc tả</button>
     </div>
 
-    <footer>
-        <div class="footer">
-            <iframe src="${pageContext.request.contextPath}/Product-detail/footer.jsp" class="iframe"></iframe>
-        </div>
-    </footer>
+
 
     <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.js"></script>
-</body2>
+</body>
 </html>

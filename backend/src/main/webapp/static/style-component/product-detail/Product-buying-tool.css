@@ -46,7 +46,7 @@ body {
     font-weight: bold;
 }
 
-.color-options, .capacity-options {
+.option-item  {
     display: flex;
     gap: 10px;
     margin-top: 10px;
@@ -61,23 +61,23 @@ body {
     gap: 10px;
     margin-top: 10px;
 }
-.color-option {
+.option-item {
     padding: 8px 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.color-option.selected, .capacity-option.selected {
+.option-item.selected  {
     border-color: #007bff;
     background-color: #f0f8ff; /* Nền sáng hơn cho phần tử được chọn */
 }
 
-.color-option.black {
+.option-item.black {
     background-color: #000;
 }
 
-.color-option.silver {
+.option-item.silver {
     background-color: #bbb;
 }
 
