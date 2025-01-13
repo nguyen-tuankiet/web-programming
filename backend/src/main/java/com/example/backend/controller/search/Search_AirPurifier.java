@@ -16,8 +16,8 @@ public class Search_AirPurifier extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> products = productService.getProductsByCategory(5);
-        List<Product> topProducts = productService.getTopProductsByCategory(5 ,4);
+        List<Product> products = productService.getProductsByCategory(4);
+        List<Product> topProducts = productService.getTopProductsByCategory(4 ,4);
 
         request.setAttribute("products", products);
         request.setAttribute("topProducts", topProducts);
