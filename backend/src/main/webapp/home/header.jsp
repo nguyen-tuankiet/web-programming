@@ -179,12 +179,16 @@
 
         <div id="search-overlay" class="layer">
             <div class="search-container">
-<%--                <jsp:include page="search.jsp"/>--%>
+                <!-- Nội dung sẽ được tải vào đây -->
+                <div id="search-content"></div>
                 <button id="close-search-overlay" class="close-btn">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
         </div>
+
+
+
     </nav>
 
 </div>
