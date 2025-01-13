@@ -668,21 +668,62 @@ document.addEventListener("DOMContentLoaded", function () {
                                         .catch(error => console.error("Lỗi khi gán ảnh:", error));
                                 }))
                                     .then(() => {
-                                        // Tạo option cho sản phẩm
-                                        const optionData = {
-                                            productId: productId,
-                                            price: parseFloat(price), // Giá option lấy từ giá sản phẩm
-                                            stock: parseInt(stock),   // Stock option lấy từ stock sản phẩm
-                                        };
+                                        // Lấy tất cả các nhóm tùy chọn
+                                        const optionGroups = document.querySelectorAll('.variant-group');
+                                        const optionPromises = [];
 
-                                        return fetch(`options/create`, {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                            },
-                                            body: JSON.stringify(optionData),
+                                        optionGroups.forEach(group => {
+                                            // Truy vấn các input theo đúng cách trong mỗi nhóm
+                                            const priceInput = group.querySelector('input[id="price"]'); // Thay bằng chính xác ID
+                                            const stockInput = group.querySelector('input[id="total"]'); // Thay bằng chính xác ID
+
+                                            if (priceInput && stockInput) {
+                                                const priceValue = priceInput.value.trim();
+                                                const stockValue = stockInput.value.trim();
+
+                                                if (priceValue && stockValue) {
+                                                    const optionData = {
+                                                        productId: productId,
+                                                        price: parseFloat(priceValue),
+                                                        stock: parseInt(stockValue),
+                                                    };
+
+                                                    const optionPromise = fetch(`options/create`, {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "application/json",
+                                                        },
+                                                        body: JSON.stringify(optionData),
+                                                    }).then(response => response.json())
+                                                        .then(option => {
+                                                            if (option.statusCode !== 200) {
+                                                                console.error("Không thể tạo option cho sản phẩm.");
+                                                            }
+                                                        })
+                                                        .catch(error => console.error("Lỗi khi tạo option:", error));
+
+                                                    optionPromises.push(optionPromise);
+                                                } else {
+                                                    console.error("Giá hoặc số lượng không hợp lệ.");
+                                                }
+                                            } else {
+                                                console.error("Không tìm thấy trường giá hoặc số lượng trong nhóm.");
+                                            }
                                         });
+
+                                        // Đợi tất cả các option được tạo xong
+                                        return Promise.all(optionPromises);
+                                    })
+                                    .then(response => {
+                                        alert("Thêm sản phẩm và option thành công!");
+                                        window.location.href = 'list-product';
+                                    })
+                                    .catch(error => {
+                                        console.error("Lỗi:", error);
+                                        alert(`Đã xảy ra lỗi: ${error.message}`);
                                     });
+
+
                             } else {
                                 throw new Error("Không thể thêm sản phẩm.");
                             }
