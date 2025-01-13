@@ -23,14 +23,14 @@
 
 <body id="container">
 
-    <div id="home_header">
-        <jsp:include page="header.jsp"/>
-    </div>
+<div id="home_header">
+    <jsp:include page="header.jsp"/>
+</div>
 
 
-    <div id="home_body">
-        <jsp:include page="body-home.jsp"/>
-    </div>
+<div id="home_body">
+    <jsp:include page="body-home.jsp"/>
+</div>
 
 
 <script src="${pageContext.request.contextPath}/static/style-page/home/home.js"></script>
