@@ -43,8 +43,9 @@ body {
 .navbar {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 60px 217px;
+    gap: 140px;
+    /*padding: 60px 217px;*/
+    margin-left: 100px;
     background-color: transparent;
     font-size: 1.2rem;
     font-weight: 600;
@@ -60,6 +61,7 @@ body {
     gap: 10px;
 }
 .navbar ul {
+    gap: 20px;
     list-style: none;
     display: flex;
     align-items: center;
