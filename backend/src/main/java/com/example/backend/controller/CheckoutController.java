@@ -102,14 +102,15 @@ public class CheckoutController extends HttpServlet {
         String address = jsonObject.getString("address_id");
         String card = jsonObject.getString("card");
         JSONArray products = jsonObject.getJSONArray("products");
-
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
         //TODO: get user from section
 
         Order order = new Order();
         order.setCreateAt(LocalDate.now());
         order.setPaymentStatus("PAID");
         order.setOrderStatus("DELIVERY");
-        order.setUserId(1);
+        order.setUserId(userId);
         try {
             order.setAddressId(Integer.parseInt(address));
             if (card.equals("COD")) {
@@ -144,6 +145,7 @@ public class CheckoutController extends HttpServlet {
                 od.setOptionId(optionId);
 
                 flag= orderDetailService.addOrderDetail(od);
+
 
             }
         }

@@ -45,9 +45,61 @@ $(document).ready(function () {
     })
 
 
+
+
+    $('.update_btn').click(function() {
+        var field = $(this).data('field');
+        var currentValue = $('#' + field).text().trim();
+
+        console.log(field);
+        console.log(currentValue);
+
+        var inputField = $('<input>', {
+            type: 'text',
+            id: field + '-input',
+            value: currentValue,
+            class: 'update-input'
+        });
+
+        $('#' + field).replaceWith(inputField);
+        inputField.focus();
+
+
+        inputField.on('blur', function() {
+            var newValue = inputField.val().trim();
+            if (newValue !== currentValue) {
+                 var newSpan = $('<span>', {
+                    id: field,
+                    class: 'item_text',
+                    text: newValue
+                });
+
+                inputField.replaceWith(newSpan);
+            } else {
+                 var currentSpan = $('<span>', {
+                    id: field,
+                    class: 'item_text',
+                    text: currentValue
+                });
+
+                inputField.replaceWith(currentSpan);
+            }
+        });
+    });
+
+
+
+
+
+
     save.on('click', function (event) {
         update_profile();
     })
+
+
+
+
+
 
 
 
@@ -64,10 +116,11 @@ function update_profile() {
     const birthDay =$('#day')
     const email = $('#email')
     const phone = $('#phone')
-    const birth = `${birthYear.val()}-${birthMonth.val().padStart(2, '0')}-${birthDay.val().padStart(2, '0')}`;
+
+    const birth =(`${birthYear.val()}-${birthMonth.val().padStart(2, '0')}-${birthDay.val().padStart(2, '0')}`);
 
     const formData = new FormData();
-    formData.append("name", name.val());
+    formData.append("fullName", name.val());
     formData.append("displayName", displayName.val());
     formData.append("gender", gender.val());
     formData.append("birth", birth);
@@ -75,14 +128,24 @@ function update_profile() {
     formData.append("phone", phone.text());
 
 
-    console.log(formData);
+    for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+    }
+
+
+    const jsonObject = {};
+    formData.forEach((value, key) => {
+        jsonObject[key] = value;
+    });
+
 
     fetch(`updateUser`, {
         method: 'POST',
-        headers: {   'Content-Type': 'application/json',
+        headers: {
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(jsonObject),
     }).then(response => {
-        response.json()
+         return  response.json()
     })
 }
