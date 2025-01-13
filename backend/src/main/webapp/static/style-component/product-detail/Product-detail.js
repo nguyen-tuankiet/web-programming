@@ -1,9 +1,4 @@
-// Danh sách ảnh cho carousel
-const images = [
-    "../../../resource/image/img-detail/carousel1.jpg",
-    "../../../resource/image/img-detail/carousel2.jpg",
-    "../../../resource/image/img-detail/carousel3.jpg"
-];
+
 const mainToggleButton = document.getElementById("toggle-specs-btn");
 const bottomToggleButton = document.getElementById("toggle-specs-btn-bottom");
 const specsSection = document.getElementById("specification-section");
@@ -98,3 +93,12 @@ document.addEventListener("DOMContentLoaded", function () {
     showSlide(0); // Hiển thị slide đầu tiên
     updateDots(); // Cập nhật trạng thái chấm điều hướng
 });
+
+
+
+
+// Sử lý variant
+$(document).ready(function () {
+
+})
+
