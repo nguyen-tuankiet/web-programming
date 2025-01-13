@@ -10,14 +10,14 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "Search_KitchenEquipment", value = "/Search_KitchenEquipment")
-public class Search_KitchenEquipment extends HttpServlet {
+@WebServlet(name = "Search_AirPurifier", value = "/Search_AirPurifier")
+public class Search_AirPurifier extends HttpServlet {
     ProductService productService = new ProductService(DBConnection.getJdbi());
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> products = productService.getProductsByCategory(6);
-        List<Product> topProducts = productService.getTopProductsByCategory(6,3);
+        List<Product> products = productService.getProductsByCategory(5);
+        List<Product> topProducts = productService.getTopProductsByCategory(5 ,4);
 
         request.setAttribute("products", products);
         request.setAttribute("topProducts", topProducts);
