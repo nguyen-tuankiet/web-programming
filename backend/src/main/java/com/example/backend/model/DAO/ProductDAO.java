@@ -94,7 +94,7 @@ public interface ProductDAO {
                    @Bind("sku") String sku);
 
 
-<<<<<<< HEAD
+
     @SqlQuery("""
    SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
    FROM products p
@@ -102,18 +102,9 @@ public interface ProductDAO {
    LEFT JOIN image i ON p.primaryImage = i.id
    WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
 """)
-=======
-
-
-
-    @SqlQuery("SELECT * FROM products WHERE LOWER(name) LIKE LOWER(:name)")
->>>>>>> dc0a345f7c858ff16a2e7ec1988c43fa3c7757d7
     @RegisterConstructorMapper(Product.class)
     List<Product> searchProducts(@Bind("name") String name);
 
-
-<<<<<<< HEAD
-=======
 
 
     @SqlQuery(value = "SELECT p.id           as id,\n" +
@@ -154,5 +145,4 @@ public interface ProductDAO {
 
 
 
->>>>>>> dc0a345f7c858ff16a2e7ec1988c43fa3c7757d7
 }

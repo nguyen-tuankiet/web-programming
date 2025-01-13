@@ -35,7 +35,7 @@
             <div class="carousel-container">
 
 
-                 <div class="carousel-container">
+                <div class="carousel-container">
 
                     <img id="mainImage" src="${primaryImageUrl}" alt="Carousel Image" class="carousel-image">
                     <!-- Navigation Arrows -->
@@ -58,7 +58,6 @@
         </div>
 
 
-
         <div class="section1">
             <div class="container-product-Bt">
                 <div class="product-title">
@@ -66,75 +65,62 @@
                 </div>
 
 
-
-
-
-
-
-
-
-
                 <%--   VARIANT              --%>
 
 
-
-                <c:if  test="${not empty optionVariant  && not empty varaints}">
+                <c:if test="${not empty optionVariant  && not empty varaints}">
                     <c:forEach items="${varaints}" var="type">
 
-                                 <%--   COLOR   --%>
 
-                        <div class="option-color-title">
-                        <c:forEach items="${optionVariant}" var="op">
+                        <div class="wrap_variant option-color-title">
 
-                            <c:if  test="${op.variantName eq type && type eq 'Màu sắc' }">
-<%--                                <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>--%>
-                                <p>${op.variantName  } +  ${ type } </p>
-                            </c:if>
+                            <div class="option-title">Chọn ${type}:</div>
 
-                        </c:forEach>
+                            <c:forEach items="${optionVariant}" var="op">
+                                <c:if test="${op.variantName eq type  }">
+                                    <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>
+                                </c:if>
+
+                            </c:forEach>
+                        </div>
+
+
+                        <%--   COLOR   --%>
+                        <%--                        <c:if test="${type eq 'Màu sắc' }">--%>
+                        <%--                            <div class="wrap_variant option-color-title">--%>
+
+                        <%--                                <div class="option-title">Chọn Màu sắc:</div>--%>
+
+                        <%--                                <c:forEach items="${optionVariant}" var="op">--%>
+                        <%--                                    <c:if test="${op.variantName eq type && type eq 'Màu sắc' }">--%>
+                        <%--                                        <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>--%>
+                        <%--                                    </c:if>--%>
+
+                        <%--                                </c:forEach>--%>
+                        <%--                            </div>--%>
+                        <%--                        </c:if>--%>
+
+                        <%--                        <c:if test="${type eq 'Dung tích' }">--%>
+                        <%--                            <div class="wrap_variant ">--%>
+
+                        <%--                                <div class="option-title">Chọn Dung Tích:</div>--%>
+
+                        <%--                                <c:forEach items="${optionVariant}" var="op">--%>
+
+                        <%--                                    <c:if test="${op.variantName eq type && type eq 'Dung tích' }">--%>
+                        <%--                                        <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>--%>
+                        <%--                                    </c:if>--%>
+
+                        <%--                                </c:forEach>--%>
+                        <%--                            </div>--%>
+
+                        <%--                        </c:if>--%>
+
 
                     </c:forEach>
 
 
-
-                    </div>
                 </c:if>
-
-
-<%--                <div class="option-title">Chọn Màu Sắc</div>--%>
-<%--                <div class="color-options">--%>
-<%--                    <div class="color-option black"></div>--%>
-<%--                    <div class="color-option silver"></div>--%>
-<%--                </div>--%>
-
-                <div class="option-title">Chọn Dung Tích</div>
-                <div class="capacity-options">
-                    <div class="capacity-option">305 L</div>
-                    <div class="capacity-option">348 L</div>
-                    <div class="capacity-option">345 L</div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 <div class="price">
@@ -165,7 +151,7 @@
                         <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>
                     </a>
 
-                    <a href="buy-now?productId=${product.id}&optionId=${product.optionId}"  >
+                    <a href="buy-now?productId=${product.id}&optionId=${product.optionId}">
                         <button class="btn-buy-now btn buy">Mua ngay</button>
                     </a>
 
@@ -174,17 +160,6 @@
         </div>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
     <div class="summary__list">
