@@ -33,26 +33,10 @@
     <div class="container">
         <div class="section1">
             <div class="carousel-container">
-                <!-- Main Image Display -->
-                <%--            <img id="mainImage"--%>
-                <%--                 src="<c:choose>--%>
-                <%--                <c:when test='${not empty images}'>--%>
-                <%--                    ${images[0].url}--%>
-                <%--                </c:when>--%>
-                <%--                <c:otherwise>--%>
-                <%--                    ${pageContext.request.contextPath}/static/images/placeholder.jpg--%>
-                <%--                </c:otherwise>--%>
-                <%--              </c:choose>"--%>
-                <%--                 alt="Carousel Image"--%>
-                <%--                 class="carousel-image"--%>
-                <%--                 data-context-path="${pageContext.request.contextPath}">--%>
 
-                <!-- Carousel Container -->
-                <div class="carousel-container">
-                    <!-- Main Image Display -->
-                    <%--                    <img id="mainImage" src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"--%>
-                    <%--                         alt="Carousel Image" class="carousel-image">--%>
-                    <%--                    <img id="mainImage" src="../../../resource/image/img-detail/image1.jpg" alt="Carousel Image" class="carousel-image">--%>
+
+                 <div class="carousel-container">
+
                     <img id="mainImage" src="${primaryImageUrl}" alt="Carousel Image" class="carousel-image">
                     <!-- Navigation Arrows -->
                     <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
@@ -72,6 +56,9 @@
 
             </div>
         </div>
+
+
+
         <div class="section1">
             <div class="container-product-Bt">
                 <div class="product-title">
@@ -79,11 +66,46 @@
                 </div>
 
 
-                <div class="option-title">Chọn Màu Sắc</div>
-                <div class="color-options">
-                    <div class="color-option black"></div>
-                    <div class="color-option silver"></div>
-                </div>
+
+
+
+
+
+
+
+
+                <%--   VARIANT              --%>
+
+
+
+                <c:if  test="${not empty optionVariant  && not empty varaints}">
+                    <c:forEach items="${varaints}" var="type">
+
+                                 <%--   COLOR   --%>
+
+                        <div class="option-color-title">
+                        <c:forEach items="${optionVariant}" var="op">
+
+                            <c:if  test="${op.variantName eq type && type eq 'Màu sắc' }">
+<%--                                <div class="color-option" data-option-id="${op.id}"> ${op.variantValue}</div>--%>
+                                <p>${op.variantName  } +  ${ type } </p>
+                            </c:if>
+
+                        </c:forEach>
+
+                    </c:forEach>
+
+
+
+                    </div>
+                </c:if>
+
+
+<%--                <div class="option-title">Chọn Màu Sắc</div>--%>
+<%--                <div class="color-options">--%>
+<%--                    <div class="color-option black"></div>--%>
+<%--                    <div class="color-option silver"></div>--%>
+<%--                </div>--%>
 
                 <div class="option-title">Chọn Dung Tích</div>
                 <div class="capacity-options">
@@ -92,14 +114,37 @@
                     <div class="capacity-option">345 L</div>
                 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="price">
                     <c:choose>
                         <c:when test="${not empty productPrice}">
-                            <%--                            ${productPrice} VND--%>
+
                             <fmt:formatNumber value="${productPrice}" pattern="#,###"/> VND
                         </c:when>
                         <c:otherwise>
-                            Giá không khả dụng
+                            Đang câp nhật
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -120,7 +165,7 @@
                         <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>
                     </a>
 
-                    <a href="#">
+                    <a href="buy-now?productId=${product.id}&optionId=${product.optionId}"  >
                         <button class="btn-buy-now btn buy">Mua ngay</button>
                     </a>
 
@@ -129,6 +174,18 @@
         </div>
 
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="summary__list">
         <div class="summary__item">
