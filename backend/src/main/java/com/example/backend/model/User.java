@@ -2,6 +2,7 @@ package com.example.backend.model;
 
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class User {
     String salt;
     String avatarUrl;
 
+    @JdbiConstructor
     public User(@ColumnName("id") Integer id,
                 @ColumnName("fullName") @Nullable  String fullName,
                 @ColumnName("displayName") @Nullable String displayName,
@@ -46,6 +48,10 @@ public class User {
         this.role = role;
         this.salt = salt;
         this.avatarUrl = avatarUrl;
+    }
+
+
+    public User() {
     }
 
     public Integer getId() {

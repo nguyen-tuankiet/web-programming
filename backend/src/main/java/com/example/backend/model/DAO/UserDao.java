@@ -8,6 +8,7 @@ import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RegisterConstructorMapper(User.class)
@@ -63,5 +64,24 @@ public interface UserDao {
     Boolean updateAvatar(@Bind("userId") Integer userId, @Bind("avatarId") Integer avatarId);
 
 
+    @SqlUpdate(value = "UPDATE user\n" +
+            "SET\n" +
+            "    fullName = :fullName ,\n" +
+            "    displayName = :displayName,\n" +
+            "    birth = :birth, " +
+            "    gender = :gender,\n" +
+            "    phone = :phone," +
+            "    email = :email " +
+            "where id = :userId")
+    Boolean updateUser(
+            @Bind("userId") Integer userId,
+            @Bind("fullName") String fullName,
+            @Bind("displayName") String displayName,
+            @Bind("birth") LocalDate birth,
+            @Bind("gender") String gender,
+            @Bind("phone") String phone,
+            @Bind("email") String email
+
+    );
 
 }
