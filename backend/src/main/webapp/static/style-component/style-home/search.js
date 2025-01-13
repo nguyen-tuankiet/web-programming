@@ -34,3 +34,48 @@ if (productType) {
     // Thay đổi tiêu đề danh sách sản phẩm
     titleElement.textContent = productMap[productType] || 'Sản Phẩm Nổi Bật';
 }
+let timeout;  // Biến để lưu trữ timeout cũ
+
+// Hàm gọi API tìm kiếm sản phẩm
+function searchProducts() {
+    const searchInput = document.getElementById("search-input").value;
+
+    // Nếu độ dài từ khóa nhỏ hơn 3, không gọi API
+    if (searchInput.length < 3) {
+        document.getElementById("popular-keywords").innerHTML = '<p>Từ khóa tìm kiếm ít nhất 3 ký tự</p>';
+        return;
+    }
+
+    // Gọi API sau khi debounce
+    clearTimeout(timeout);  // Hủy bỏ lần gọi API cũ
+    timeout = setTimeout(function() {
+        // Gọi API tìm kiếm sản phẩm (ở đây dùng fetch hoặc XMLHttpRequest)
+        fetch(`/api/search/products?query=${encodeURIComponent(searchInput)}`)
+            .then(response => response.json())
+            .then(data => {
+                updatePopularKeywords(data);  // Cập nhật kết quả tìm kiếm
+            })
+            .catch(error => console.error('Có lỗi khi gọi API:', error));
+    }, 1000);  // Delay 1 giây giữa các lần gọi API
+}
+
+// Cập nhật kết quả tìm kiếm vào `popular-keywords`
+function updatePopularKeywords(data) {
+    const popularKeywordsDiv = document.getElementById("popular-keywords");
+    popularKeywordsDiv.innerHTML = "<p>Từ khóa phổ biến</p>";
+
+    if (data && data.length > 0) {
+        const ul = document.createElement("ul");
+        data.forEach(product => {
+            const li = document.createElement("li");
+            li.textContent = product.name;
+            ul.appendChild(li);
+        });
+        popularKeywordsDiv.appendChild(ul);
+    } else {
+        popularKeywordsDiv.innerHTML += "<p>Không tìm thấy kết quả nào</p>";
+    }
+}
+
+// Lắng nghe sự kiện keyup trên input
+document.getElementById("search-input").addEventListener("keyup", searchProducts);
