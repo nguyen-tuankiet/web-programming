@@ -1,17 +1,18 @@
-
-
 function toggleDropdown() {
     const dropdown = document.getElementById("popular-keywords");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    if (dropdown) {
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
 }
 
 document.addEventListener("click", function(event) {
     const searchContainer = document.querySelector(".search-container");
     const dropdown = document.getElementById("popular-keywords");
-    if (!searchContainer.contains(event.target)) {
+    if (dropdown && !searchContainer.contains(event.target)) {
         dropdown.style.display = "none";
     }
 });
+
 // Hàm đọc tham số từ URL
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
@@ -34,68 +35,65 @@ if (productType) {
     // Thay đổi tiêu đề danh sách sản phẩm
     titleElement.textContent = productMap[productType] || 'Sản Phẩm Nổi Bật';
 }
-let timeout;  // Biến để lưu trữ timeout cũ
 
-// Hàm gọi API tìm kiếm sản phẩm
-function searchProducts() {
-    const searchInput = document.getElementById("search-input").value;
+let debounceTimeout;
 
-    // Nếu độ dài từ khóa nhỏ hơn 3, không gọi API
-    if (searchInput.length < 3) {
-        document.getElementById("popular-keywords").innerHTML = '<p>Từ khóa tìm kiếm ít nhất 3 ký tự</p>';
-        return;
-    }
+document.getElementById('search-input').addEventListener('input', () => {
+    const searchInput = document.getElementById('search-input').value.trim();
 
-    // Gọi API sau khi debounce
-    clearTimeout(timeout);  // Hủy bỏ lần gọi API cũ
-    timeout = setTimeout(function() {
-        // Gọi API tìm kiếm sản phẩm (ở đây dùng fetch hoặc XMLHttpRequest)
-        const encodedQuery = encodeURIComponent(searchInput);
-        fetch(`products/search?name=${encodedQuery}`)
-            .then(response => {
-                console.log('Response Status:', response.status);
-                // Kiểm tra mã trạng thái HTTP và chỉ parse JSON nếu trạng thái là OK
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error(`HTTP error! Status: ${response.status}, Message: ${text}`);
-                    });
-                }
-                return response.text();  // Đọc phản hồi dưới dạng text
-            })
-            .then(text => {
-                console.log('Response Body:', text);
-                try {
-                    const data = JSON.parse(text);  // Cố gắng parse thành JSON
-                    console.log('Data received:', data);
-                    updatePopularKeywords(data);
-                } catch (e) {
-                    console.error('Error parsing JSON:', e);
-                }
-            })
-            .catch(error => {
-                console.error('Có lỗi khi gọi API:', error);
-            });
+    // Xóa timeout cũ nếu người dùng tiếp tục nhập
+    clearTimeout(debounceTimeout);
 
-    }, 1000);  // Delay 1 giây giữa các lần gọi API
-}
+    // Thiết lập timeout mới
+    debounceTimeout = setTimeout(() => {
+        if (searchInput) {
+            fetch(`products/search?name=${encodeURIComponent(searchInput)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        updateSuggestions(data.data);
+                    } else {
+                        clearSuggestions();
+                        console.log(data.message || 'Không tìm thấy sản phẩm phù hợp.');
+                    }
+                })
+                .catch(err => {
+                    console.error('Lỗi khi tìm kiếm sản phẩm:', err);
+                });
+        } else {
+            clearSuggestions();
+        }
+    }, 500); // 500ms debounce
+});
 
-// Cập nhật kết quả tìm kiếm vào `popular-keywords`
-function updatePopularKeywords(data) {
-    const popularKeywordsDiv = document.getElementById("popular-keywords");
-    popularKeywordsDiv.innerHTML = "<p>Từ khóa phổ biến</p>";
+function updateSuggestions(products) {
+    const suggestionsContainer = document.querySelector('.product-suggestions');
+    suggestionsContainer.innerHTML = ''; // Xóa kết quả cũ
 
-    if (data && data.length > 0) {
-        const ul = document.createElement("ul");
-        data.forEach(product => {
-            const li = document.createElement("li");
-            li.textContent = product.name;
-            ul.appendChild(li);
+    if (products && products.length > 0) {
+        products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+
+            // Hiển thị giá sản phẩm nếu có, nếu không thì hiển thị "Đang cập nhật"
+            const price = product.price ? product.price.toLocaleString() : 'Đang cập nhật';
+
+            // Cập nhật nội dung của productDiv để hiển thị giá, tên và ảnh
+            productDiv.innerHTML = `
+                <img src="${product.imageUrl}">
+                <p>${product.name || 'Sản phẩm chưa có tên'}</p>
+                <span>${price} VND</span>
+            `;
+
+            // Thêm vào danh sách kết quả
+            suggestionsContainer.appendChild(productDiv);
         });
-        popularKeywordsDiv.appendChild(ul);
     } else {
-        popularKeywordsDiv.innerHTML += "<p>Không tìm thấy kết quả nào</p>";
+        suggestionsContainer.innerHTML = '<p>Không tìm thấy sản phẩm nào phù hợp.</p>';
     }
 }
 
-// Lắng nghe sự kiện keyup trên input
-document.getElementById("search-input").addEventListener("keyup", searchProducts);
+function clearSuggestions() {
+    const suggestionsContainer = document.querySelector('.product-suggestions');
+    suggestionsContainer.innerHTML = ''; // Xóa kết quả hiển thị
+}
