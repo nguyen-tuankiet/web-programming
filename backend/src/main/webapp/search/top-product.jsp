@@ -15,6 +15,7 @@
 
 </head>
 <body>
+
 <div id="search_body">
 
     <div class="wrap_img">
