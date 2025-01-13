@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("search-content").innerHTML = data;
-                    searchOverlay.style.display = "flex"; 
+                    searchOverlay.style.display = "flex";
                 })
                 .catch(error => console.error("Lỗi khi tải search.jsp:", error));
         });

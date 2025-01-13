@@ -187,20 +187,34 @@ function showPreview(images, startIndex = 0) {
     document.body.appendChild(previewModal);
 }
 
+
+
 function addVariant() {
     const optionsContainer = document.getElementById('optionsContainer1');
     const variantGroup = document.querySelector('.variant-group'); // Lấy phần tử mẫu
     const newVariant = variantGroup.cloneNode(true); // Tạo bản sao
 
-    // Reset các giá trị trong bản sao
+    // Sao chép giá trị của các input
     const inputs = newVariant.querySelectorAll('input');
     inputs.forEach(input => input.value = ''); // Xóa giá trị input
 
-    // Gắn bản sao vào container
-    optionsContainer.appendChild(newVariant)
-    console.log(optionsContainer, variantGroup);
+    // Kiểm tra số lượng biến thể trong tất cả các nhóm
+    const variantSelects = newVariant.querySelectorAll('.option-select');
+    const numVariants = variantSelects.length;  // Lấy số lượng variant
 
+    // Đảm bảo rằng số lượng biến thể giống nhau ở tất cả các nhóm
+    const allVariantGroups = optionsContainer.querySelectorAll('.variant-group');
+    allVariantGroups.forEach(group => {
+        const currentVariantSelects = group.querySelectorAll('.option-select');
+        while (currentVariantSelects.length < numVariants) {
+            addOptionGroup(group.id);
+        }
+    });
+
+    optionsContainer.appendChild(newVariant);
+    console.log(optionsContainer, variantGroup);
 }
+
 window.addVariant = addVariant;
 
 function removeVariant(button) {
@@ -209,6 +223,9 @@ function removeVariant(button) {
         variantGroup.remove();
     }
 }
+
+
+
 
 async function addOptionGroup(containerId) {
     const optionGroup = document.createElement('div');
@@ -226,13 +243,11 @@ async function addOptionGroup(containerId) {
         removeOptionGroup(removeButton);
     };
 
-    // Thêm id và sự kiện onchange cho các select mới
-    select.id = "variant-select";  // Tạo id giống như phần tử gốc
-    select.setAttribute("onchange", "fetchVariantValues(this.value, this.nextElementSibling)"); // Thêm sự kiện onchange
+    select.id = "variant-select";
+    select.setAttribute("onchange", "fetchVariantValues(this.value, this.nextElementSibling)");
 
-    secondSelect.id = "variant-value-select"; // Tạo id giống như phần tử gốc
+    secondSelect.id = "variant-value-select";
 
-    // Lấy danh sách các biến thể (variants) và điền vào dropdowns
     const categoryId = getSelectedCategoryId();
     if (categoryId) {
         try {
@@ -653,21 +668,62 @@ document.addEventListener("DOMContentLoaded", function () {
                                         .catch(error => console.error("Lỗi khi gán ảnh:", error));
                                 }))
                                     .then(() => {
-                                        // Tạo option cho sản phẩm
-                                        const optionData = {
-                                            productId: productId,
-                                            price: parseFloat(price), // Giá option lấy từ giá sản phẩm
-                                            stock: parseInt(stock),   // Stock option lấy từ stock sản phẩm
-                                        };
+                                        // Lấy tất cả các nhóm tùy chọn
+                                        const optionGroups = document.querySelectorAll('.variant-group');
+                                        const optionPromises = [];
 
-                                        return fetch(`options/create`, {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                            },
-                                            body: JSON.stringify(optionData),
+                                        optionGroups.forEach(group => {
+                                            // Truy vấn các input theo đúng cách trong mỗi nhóm
+                                            const priceInput = group.querySelector('input[id="price"]'); // Thay bằng chính xác ID
+                                            const stockInput = group.querySelector('input[id="total"]'); // Thay bằng chính xác ID
+
+                                            if (priceInput && stockInput) {
+                                                const priceValue = priceInput.value.trim();
+                                                const stockValue = stockInput.value.trim();
+
+                                                if (priceValue && stockValue) {
+                                                    const optionData = {
+                                                        productId: productId,
+                                                        price: parseFloat(priceValue),
+                                                        stock: parseInt(stockValue),
+                                                    };
+
+                                                    const optionPromise = fetch(`options/create`, {
+                                                        method: "POST",
+                                                        headers: {
+                                                            "Content-Type": "application/json",
+                                                        },
+                                                        body: JSON.stringify(optionData),
+                                                    }).then(response => response.json())
+                                                        .then(option => {
+                                                            if (option.statusCode !== 200) {
+                                                                console.error("Không thể tạo option cho sản phẩm.");
+                                                            }
+                                                        })
+                                                        .catch(error => console.error("Lỗi khi tạo option:", error));
+
+                                                    optionPromises.push(optionPromise);
+                                                } else {
+                                                    console.error("Giá hoặc số lượng không hợp lệ.");
+                                                }
+                                            } else {
+                                                console.error("Không tìm thấy trường giá hoặc số lượng trong nhóm.");
+                                            }
                                         });
+
+                                        // Đợi tất cả các option được tạo xong
+                                        return Promise.all(optionPromises);
+                                    })
+                                    .then(response => {
+                                        alert("Thêm sản phẩm và option thành công!");
+                                        window.location.href = 'list-product';
+                                    })
+                                    .catch(error => {
+                                        console.error("Lỗi:", error);
+                                        alert(`Đã xảy ra lỗi: ${error.message}`);
                                     });
+
+
                             } else {
                                 throw new Error("Không thể thêm sản phẩm.");
                             }

@@ -19,7 +19,7 @@
 <body>
 
 <div id="banner">
-   <jsp:include page="banner.jsp"/>
+  <jsp:include page="banner.jsp"/>
 </div>
 
 

@@ -14,7 +14,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Product Detail</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
@@ -26,33 +28,17 @@
           href="${pageContext.request.contextPath}/static/style-component/product-detail/Product-buying-tool.css">
     <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-buying-tool.js"></script>
 </head>
-<body2>
+<body>
     <div class="cart_header">
         <jsp:include page="/home/header.jsp"/>
     </div>
     <div class="container">
         <div class="section1">
             <div class="carousel-container">
-                <!-- Main Image Display -->
-                <%--            <img id="mainImage"--%>
-                <%--                 src="<c:choose>--%>
-                <%--                <c:when test='${not empty images}'>--%>
-                <%--                    ${images[0].url}--%>
-                <%--                </c:when>--%>
-                <%--                <c:otherwise>--%>
-                <%--                    ${pageContext.request.contextPath}/static/images/placeholder.jpg--%>
-                <%--                </c:otherwise>--%>
-                <%--              </c:choose>"--%>
-                <%--                 alt="Carousel Image"--%>
-                <%--                 class="carousel-image"--%>
-                <%--                 data-context-path="${pageContext.request.contextPath}">--%>
 
-                <!-- Carousel Container -->
+
                 <div class="carousel-container">
-                    <!-- Main Image Display -->
-                    <%--                    <img id="mainImage" src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"--%>
-                    <%--                         alt="Carousel Image" class="carousel-image">--%>
-                    <%--                    <img id="mainImage" src="../../../resource/image/img-detail/image1.jpg" alt="Carousel Image" class="carousel-image">--%>
+
                     <img id="mainImage" src="${primaryImageUrl}" alt="Carousel Image" class="carousel-image">
                     <!-- Navigation Arrows -->
                     <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
@@ -72,37 +58,48 @@
 
             </div>
         </div>
+
+
         <div class="section1">
-            <div class="container-product-Bt">
+            <div  id="product" data-id="${product.id}" data-option-default="${product.optionId}" class="container-product-Bt">
                 <div class="product-title">
                     ${product.name}
                 </div>
 
 
-                <div class="option-title">Chọn Màu Sắc</div>
-                <div class="color-options">
-                    <div class="color-option black"></div>
-                    <div class="color-option silver"></div>
-                </div>
+                <%--   VARIANT              --%>
+                <c:if test="${not empty optionVariant  && not empty varaints}">
+                    <c:forEach items="${varaints}" var="type">
 
-                <div class="option-title">Chọn Dung Tích</div>
-                <div class="capacity-options">
-                    <div class="capacity-option">305 L</div>
-                    <div class="capacity-option">348 L</div>
-                    <div class="capacity-option">345 L</div>
-                </div>
+                        <div class="wrap_variant ">
+                            <div class="option-title">Chọn ${type}:</div>
 
-                <div class="price">
+                            <c:forEach items="${optionVariant}" var="op">
+                                <c:if test="${op.variantName eq type  }">
+                                    <div class="option-item" data-option-id="${op.id}"  data-price="${op.price}"> ${op.variantValue}</div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+
+                    </c:forEach>
+
+                </c:if>
+
+
+
+
+                <div id="price" class="price">
                     <c:choose>
                         <c:when test="${not empty productPrice}">
-                            <%--                            ${productPrice} VND--%>
+
                             <fmt:formatNumber value="${productPrice}" pattern="#,###"/> VND
                         </c:when>
                         <c:otherwise>
-                            Giá không khả dụng
+                            Đang câp nhật
                         </c:otherwise>
                     </c:choose>
                 </div>
+
 
                 <div class="product-features">
                     <ul>
@@ -115,20 +112,45 @@
                 </div>
 
 
+<%--                <div class="button-group">--%>
+<%--                    <a id="add-to-cart" href="#" onclick="addToCart(${product.id},${product.optionId})">--%>
+<%--                        <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>--%>
+<%--                    </a>--%>
+
+<%--                    <a id="buy-now" href="buy-now?productId=${product.id}&optionId=${product.optionId}">--%>
+<%--                        <button class="btn-buy-now btn buy"> Mua ngay </button>--%>
+<%--                    </a>--%>
+<%--                </div>--%>
+
                 <div class="button-group">
-                    <a href="#">
+                    <a id="add-to-cart" href="#">
                         <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>
                     </a>
 
-                    <a href="#">
-                        <button class="btn-buy-now btn buy">Mua ngay</button>
+                    <a id="buy-now" href="#">
+                        <button class="btn-buy-now btn buy"> Mua ngay </button>
                     </a>
-
                 </div>
+
+
             </div>
         </div>
 
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="summary__list">
         <div class="summary__item">
@@ -447,12 +469,8 @@
         <button id="toggle-specs-btn-bottom">Ẩn tất cả các đặc tả</button>
     </div>
 
-    <footer>
-        <div class="footer">
-            <iframe src="${pageContext.request.contextPath}/Product-detail/footer.jsp" class="iframe"></iframe>
-        </div>
-    </footer>
+
 
     <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.js"></script>
-</body2>
+</body>
 </html>
