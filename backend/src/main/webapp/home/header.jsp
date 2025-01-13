@@ -53,13 +53,12 @@
                 <a href="#">Máy Giặt</a>
                 <div class="submenu submenu-may-giat">
                     <div class="submenu-column">
-<%--                        <a--%>
-<%--                                class="nav_item"--%>
+                        <a
+                                class="nav_item"
 <%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_WashingMachine.html"--%>
-<%--                                href="#"--%>
-<%--                        >Tất cả Máy Giặt</a--%>
-<%--                        >--%>
-                        <a class="nav_item" href="Search_WashingMachine" >Tất cả Máy Giặt</a>
+                                href="Search_KitchenEquipment"
+                        >Tất cả Máy Giặt</a
+                        >
                         <a href="#">Tiết kiệm sống xanh với BESPOKE AI</a>
                         <a href="#"
                         >Máy giặt thông minh Bespoke AI
