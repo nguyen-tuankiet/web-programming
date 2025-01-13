@@ -73,6 +73,9 @@ public class AuthService {
         return userDAO.updatePassword(userId, hashedNewPassword, newSalt) > 0;
     }
 
+    public User getUserByEmail(String email) {
+        return userDAO.getUserByEmail(email);
+    }
 
 }
 
