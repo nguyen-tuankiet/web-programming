@@ -170,9 +170,9 @@
                 <div class="contact_item row mid_align">
                     <i class="fa-solid fa-phone"></i>
                     <c:if test="${not empty user.phone}">
-                        <span id="phone" class="item_text">${user.phone} </span>
+                        <span id="phone" class="item_text"  >${user.phone} </span>
                     </c:if>
-                    <button type="button" class="update_btn">Cập nhật</button>
+                    <button type="button" class="update_btn" data-field="phone" >Cập nhật</button>
                 </div>
 
                 <div class="contact_item row mid_align">
@@ -181,7 +181,7 @@
                         <span id="email" class="item_text">${user.email} </span>
                     </c:if>
 
-                    <button type="button" class="update_btn">Cập nhật</button>
+                    <button type="button" class="update_btn"  data-field="email" >Cập nhật</button>
                 </div>
 
 
