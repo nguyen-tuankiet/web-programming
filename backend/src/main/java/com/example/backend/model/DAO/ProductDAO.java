@@ -2,6 +2,7 @@ package com.example.backend.model.DAO;
 
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import com.example.backend.model.Product;
@@ -81,6 +82,7 @@ public interface ProductDAO {
 
     @SqlUpdate("INSERT INTO products (name,description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage, sku) "
             + "VALUES (:name, :description,COALESCE(:isActive, 1), :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL), :sku)")
+    @GetGeneratedKeys
     int addProduct(@Bind("name") String name,
                    @Bind("description") String description,
                    @Bind("isActive") Boolean isActive,
