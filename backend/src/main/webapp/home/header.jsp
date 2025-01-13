@@ -53,12 +53,7 @@
                 <a href="#">Máy Giặt</a>
                 <div class="submenu submenu-may-giat">
                     <div class="submenu-column">
-                        <a
-                                class="nav_item"
-<%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_WashingMachine.html"--%>
-                                href="Search_KitchenEquipment"
-                        >Tất cả Máy Giặt</a
-                        >
+                        <a class="nav_item" href="Search_WashingMachine" >Tất cả Máy Giặt</a>
                         <a href="#">Tiết kiệm sống xanh với BESPOKE AI</a>
                         <a href="#"
                         >Máy giặt thông minh Bespoke AI
@@ -83,12 +78,13 @@
                 <a href="#">Máy Hút Bụi</a>
                 <div class="submenu submenu-hut-bui">
                     <div class="submenu-column">
-                        <a
-                                class="nav_item"
-                                data-src="/web-programming/frontEnd/src/component/product_component/Search_VacuumCleaner.html"
-                                href="#"
-                        >Tất cả Máy Hút Bụi</a
-                        >
+<%--                        <a--%>
+<%--                                class="nav_item"--%>
+<%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_VacuumCleaner.html"--%>
+<%--                                href="#"--%>
+<%--                        >Tất cả Máy Hút Bụi</a--%>
+<%--                        >--%>
+                        <a class="nav_item" href="Search_VacuumCleaner" >Tất cả Máy Hút Bụi</a>
                         <a href="#">Máy Hút Bụi Không Dây</a>
                         <a href="#">Robot Hút Bụi <span class="new">MỚI</span></a>
                         <a href="#">Máy Hút Bụi Dạng Hộp</a>
@@ -100,12 +96,7 @@
                 <a href="#">Thiết Bị Nhà Bếp</a>
                 <div class="submenu submenu-nha-bep">
                     <div class="submenu-column">
-                        <a
-                                class="nav_item"
-                                data-src="/web-programming/frontEnd/src/component/product_component/Search_KitchenEquipment.html"
-                                href="#"
-                        >Tất cả Thiết Bị Nhà Bếp <span class="new">MỚI</span></a
-                        >
+                        <a class="nav_item" href="Search_KitchenEquipment" >Tất cả Thiết Bị Nhà Bếp</a>
                         <a href="#">Lò Vi Sóng <span class="new">MỚI</span></a>
                         <a href="#">Lò Nướng </a>
                         <a href="#">Bếp Từ </a>
