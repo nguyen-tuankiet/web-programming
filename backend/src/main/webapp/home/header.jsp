@@ -110,12 +110,13 @@
                 <a href="#">Máy Lọc Không Khí</a>
                 <div class="submenu submenu-may-loc">
                     <div class="submenu-column">
-                        <a
-                                class="nav_item"
-                                data-src="/web-programming/frontEnd/src/component/product_component/Search_AirPurifier.html"
-                                href="#"
-                        >Máy Lọc Không Khí</a
-                        >
+<%--                        <a--%>
+<%--                                class="nav_item"--%>
+<%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_AirPurifier.html"--%>
+<%--                                href="#"--%>
+<%--                        >Máy Lọc Không Khí</a--%>
+<%--                        >--%>
+                        <a class="nav_item" href="Search_AirPurifier" >Máy Lọc Không Khí</a>
                         <a href="#">Bộ Sưu Tập Máy Lọc Không Khí</a>
                     </div>
                 </div>
