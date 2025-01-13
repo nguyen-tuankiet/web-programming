@@ -1,3 +1,4 @@
+const variantValueSelect = document.getElementById("variant-value-select");
 
 document.getElementById('fileInput').addEventListener('change', function (event) {
     const files = Array.from(event.target.files);
@@ -281,7 +282,16 @@ async function loadVariantsByCategory(categoryId) {
 }
 
 // Hàm gọi API lấy giá trị cho variant và cập nhật select "variant-value-select"
-async function fetchVariantValues(variantId, variantValueSelect) {
+async function fetchVariantValues(variantId) {
+    // Lấy dropdown "variant-value-select" trong cùng nhóm tùy chọn
+    const variantGroup = event.target.closest('.option-group');
+    const variantValueSelect = variantGroup.querySelector('#variant-value-select');
+
+    if (!variantValueSelect) {
+        console.error("Không tìm thấy 'variant-value-select'!");
+        return;
+    }
+
     if (!variantId) {
         variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
         return;
@@ -310,6 +320,8 @@ async function fetchVariantValues(variantId, variantValueSelect) {
         console.error("Lỗi khi gọi API:", error.message);
     }
 }
+
+
 
 // Hàm hiển thị dữ liệu vào một select element
 function populateSelect(selectElement, variants) {
@@ -495,24 +507,29 @@ document.addEventListener("DOMContentLoaded", () => {
     // Hàm tải danh sách variant-values dựa trên variantId
     function fetchVariantValues(variantId) {
         if (!variantId) {
-            // Reset danh sách khi không có giá trị được chọn
             variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
             return;
         }
 
-        fetch(` api/variants/${variantId}`)
+        fetch(`api/variants/${variantId}`)
             .then(response => {
                 if (!response.ok) throw new Error("Failed to fetch variant values");
                 return response.json();
             })
             .then(data => {
+                if (!variantValueSelect) {
+                    console.error("variantValueSelect không tồn tại!");
+                    return;
+                }
+
                 variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+
                 if (data.statusCode === 200) {
                     if (data.data && data.data.length > 0) {
                         data.data.forEach(value => {
                             const option = document.createElement("option");
                             option.value = value.id;
-                            option.textContent = value.value; // Gán giá trị hiển thị
+                            option.textContent = value.value;
                             variantValueSelect.appendChild(option);
                         });
                     } else {
@@ -526,6 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Error:", error.message);
             });
     }
+
 });
 
 
