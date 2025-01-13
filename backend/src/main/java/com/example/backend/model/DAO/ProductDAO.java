@@ -12,63 +12,88 @@ import java.util.List;
 @RegisterConstructorMapper(Product.class)
 public interface ProductDAO {
 
-    @SqlQuery(value = "\n" +
-            "SELECT p.id as id, p.name as name, p.description as description,\n" +
-            "            p.sku as sku, p.isActive as isActive, p.brandId as brandId, \n" +
-            "            p.noOfViews as noOfViews, p.noOfSold as noOfSold, \n" +
-            "            p.categoryId as categoryId, p.primaryImage as primaryImage,\n" +
-            "            ops.id as optionId ,ops.price as price,\n" +
-            "            ops.stock as stock, \n" +
-            "            img.url as imageUrl \n" +
-            "            FROM products as p\n" +
-            "                INNER JOIN categories as cate on cate.id = p.categoryId\n" +
-            "                INNER JOIN `options` as ops on ops.productId = p.id\n" +
-            "                inner join image as img on p.primaryImage = img.id\n" +
-            "            WHERE cate.id= :categoryId and ops.price = (\n" +
-            "                    SELECT MIN(price)\n" +
-            "                    FROM options as ops\n" +
+    @SqlQuery(value = " " +
+            "SELECT p.id as id, p.name as name, p.description as description, " +
+            "            p.sku as sku, p.isActive as isActive, p.brandId as brandId,  " +
+            "            p.noOfViews as noOfViews, p.noOfSold as noOfSold,  " +
+            "            p.categoryId as categoryId, p.primaryImage as primaryImage, " +
+            "            ops.id as optionId ,ops.price as price, " +
+            "            ops.stock as stock,  " +
+            "            img.url as imageUrl  " +
+            "            FROM products as p " +
+            "                INNER JOIN categories as cate on cate.id = p.categoryId " +
+            "                INNER JOIN `options` as ops on ops.productId = p.id " +
+            "                inner join image as img on p.primaryImage = img.id " +
+            "            WHERE cate.id= :categoryId and ops.price = ( " +
+            "                    SELECT MIN(price) " +
+            "                    FROM options as ops " +
             "                    WHERE p.id = ops.productId and ops.stock > 0);")
     @RegisterConstructorMapper(Product.class)
     List<Product> getProductsByCategory(@Bind("categoryId") int categoryId);
 
 
-    @SqlQuery("SELECT p.id as id, p.name as name, p.description as description, " +
-            "p.sku as sku, p.isActive as isActive, p.brandId as brandId, " +
-            "p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
-            "p.categoryId as categoryId, p.primaryImage as primaryImage " +
-            "FROM products p WHERE p.id = :id")
+//    @SqlQuery("SELECT p.id as id, p.name as name, p.description as description, " +
+//            "p.sku as sku, p.isActive as isActive, p.brandId as brandId, " +
+//            "p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
+//            "p.categoryId as categoryId, p.primaryImage as primaryImage " +
+//            "FROM products p WHERE p.id = :id")
+
+
+    @SqlQuery(value =  "SELECT p.id           as id,\n" +
+            "       p.name         as name,\n" +
+            "       p.description  as description,\n" +
+            "       p.sku          as sku,\n" +
+            "       p.isActive     as isActive,\n" +
+            "       p.brandId      as brandId,\n" +
+            "       p.noOfViews    as noOfViews,\n" +
+            "       p.noOfSold     as noOfSold,\n" +
+            "       p.categoryId   as categoryId,\n" +
+            "       p.primaryImage as primaryImage,\n" +
+            "       ops.id         as optionId,\n" +
+            "       ops.price      as price,\n" +
+            "       ops.stock      as stock,\n" +
+            "       img.url        as imageUrl\n" +
+            "FROM products as p\n" +
+            "         INNER JOIN categories as cate on cate.id = p.categoryId\n" +
+            "         INNER JOIN `options` as ops on ops.productId = p.id\n" +
+            "         inner join image as img on p.primaryImage = img.id\n" +
+            "WHERE p.id = :id" +
+            "  and ops.price = (SELECT MIN(price)\n" +
+            "                   FROM options as ops\n" +
+            "                   WHERE p.id = ops.productId\n" +
+            "                     and ops.stock > 0)")
     @RegisterConstructorMapper(Product.class)
     Product getProductById(@Bind("id") int id);
 
 
 
     @SqlQuery(value=
-            "SELECT p.id as id, p.name as name, p.description as description,\n" +
-                    "         p.isActive as isActive,\n" +
-                    "       p.noOfViews as noOfViews, p.noOfSold as noOfSold,\n" +
-                    "        p.primaryImage as primaryImage,\n" +
-                    "       ops.id as optionId ,ops.price as price,\n" +
-                    "       ops.stock as stock,\n" +
-                    "       img.url as imageUrl\n" +
-                    "FROM products as p\n" +
-                    "         INNER JOIN categories as cate on cate.id = p.categoryId\n" +
-                    "         INNER JOIN `options` as ops on ops.productId = p.id\n" +
-                    "         inner join image as img on p.primaryImage = img.id\n" +
+            "SELECT p.id as id, p.name as name, p.description as description, " +
+                    "         p.isActive as isActive, " +
+                    "       p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
+                    "        p.primaryImage as primaryImage, " +
+                    "       ops.id as optionId ,ops.price as price, " +
+                    "       ops.stock as stock, " +
+                    "       img.url as imageUrl " +
+                    "FROM products as p " +
+                    "         INNER JOIN categories as cate on cate.id = p.categoryId " +
+                    "         INNER JOIN `options` as ops on ops.productId = p.id " +
+                    "         inner join image as img on p.primaryImage = img.id " +
                     "WHERE p.id= :productId and ops.id =:optionId ;" )
 
     @RegisterConstructorMapper(Product.class)
     Product getProductByIdAndOptionId(@Bind("productId") int productId,
                                       @Bind("optionId") int optionId);
 
-    @SqlQuery(value = "SELECT p.id, p.name, p.sku, p.description, p.isActive,\n" +
-            "       p.categoryId, cate.name as categoryName,\n" +
-            "       p.brandId, p.noOfViews, p.noOfSold,\n" +
-            "       p.primaryImage, img.url as imageUrl,\n" +
-            "       ops.price, ops.stock, ops.id as optionId\n" +
-            "FROM products p\n" +
-            "         INNER JOIN categories cate ON cate.id = p.categoryId\n" +
-            "         INNER JOIN options ops ON ops.productId = p.id\n" +
-            "         INNER JOIN image img ON img.id = p.primaryImage\n" +
+    @SqlQuery(value = "SELECT p.id, p.name, p.sku, p.description, p.isActive, " +
+            "       p.categoryId, cate.name as categoryName, " +
+            "       p.brandId, p.noOfViews, p.noOfSold, " +
+            "       p.primaryImage, img.url as imageUrl, " +
+            "       ops.price, ops.stock, ops.id as optionId " +
+            "FROM products p " +
+            "         INNER JOIN categories cate ON cate.id = p.categoryId " +
+            "         INNER JOIN options ops ON ops.productId = p.id " +
+            "         INNER JOIN image img ON img.id = p.primaryImage " +
             "WHERE p.isActive = true and stock > 0"
 )
     @RegisterConstructorMapper(Product.class)
@@ -92,8 +117,6 @@ public interface ProductDAO {
                    @Bind("brandId") Integer brandId,
                    @Bind("primaryImage") Integer primaryImage,
                    @Bind("sku") String sku);
-
-
     @SqlQuery("""
    SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
    FROM products p
@@ -106,36 +129,32 @@ public interface ProductDAO {
 
 
 
-    @SqlQuery(value = "SELECT p.id           as id,\n" +
-            "       p.name         as name,\n" +
-            "       p.description  as description,\n" +
-            "       p.sku          as sku,\n" +
-            "       p.isActive     as isActive,\n" +
-            "       p.brandId      as brandId,\n" +
-            "       p.noOfViews    as noOfViews,\n" +
-            "       p.noOfSold     as noOfSold,\n" +
-            "       p.categoryId   as categoryId,\n" +
-            "       p.primaryImage as primaryImage,\n" +
-            "       ops.id         as optionId,\n" +
-            "       ops.price      as price,\n" +
-            "       ops.stock      as stock,\n" +
-            "       img.url        as imageUrl\n" +
-            "FROM products as p\n" +
-            "         INNER JOIN categories as cate on cate.id = p.categoryId\n" +
-            "         INNER JOIN `options` as ops on ops.productId = p.id\n" +
-            "         inner join image as img on p.primaryImage = img.id\n" +
-            "WHERE cate.id = :categoryId\n" +
-            "  and ops.price = (SELECT MIN(price)\n" +
-            "                   FROM options as ops\n" +
-            "                   WHERE p.id = ops.productId\n" +
-            "                     and ops.stock > 0)\n" +
-            "order by p.noOfViews desc , p.noOfSold desc\n" +
+    @SqlQuery(value = "SELECT p.id           as id, " +
+            "       p.name         as name, " +
+            "       p.description  as description, " +
+            "       p.sku          as sku, " +
+            "       p.isActive     as isActive, " +
+            "       p.brandId      as brandId, " +
+            "       p.noOfViews    as noOfViews, " +
+            "       p.noOfSold     as noOfSold, " +
+            "       p.categoryId   as categoryId, " +
+            "       p.primaryImage as primaryImage, " +
+            "       ops.id         as optionId, " +
+            "       ops.price      as price, " +
+            "       ops.stock      as stock, " +
+            "       img.url        as imageUrl " +
+            "FROM products as p " +
+            "         INNER JOIN categories as cate on cate.id = p.categoryId " +
+            "         INNER JOIN `options` as ops on ops.productId = p.id " +
+            "         inner join image as img on p.primaryImage = img.id " +
+            "WHERE cate.id = :categoryId " +
+            "  and ops.price = (SELECT MIN(price) " +
+            "                   FROM options as ops " +
+            "                   WHERE p.id = ops.productId " +
+            "                     and ops.stock > 0) " +
+            "order by p.noOfViews desc , p.noOfSold desc " +
             "limit 3")
     public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit );
-
-
-
-
 
 
 

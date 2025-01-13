@@ -10,9 +10,9 @@ body {
 }
 
 .product-title {
-    font-size: 1.2em;
+    font-size: 28px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .product-rating {
@@ -44,36 +44,40 @@ body {
 
 .option-title {
     font-weight: bold;
-    margin-top: 20px;
 }
 
-.color-options, .capacity-options {
+.option-item  {
     display: flex;
     gap: 10px;
     margin-top: 10px;
     cursor: pointer;
 }
 
-.color-option {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
+.wrap_variant{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.option-item {
+    padding: 8px 16px;
     border: 1px solid #ccc;
-    display: inline-block;
-    box-sizing: border-box;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.color-option.selected, .capacity-option.selected {
+.option-item.selected  {
     border-color: #007bff;
     background-color: #f0f8ff; /* Nền sáng hơn cho phần tử được chọn */
 }
 
-.color-option.black {
+.option-item.black {
     background-color: #000;
 }
 
-.color-option.silver {
+.option-item.silver {
     background-color: #bbb;
 }
 
@@ -95,22 +99,3 @@ body {
     color: black;
 }
 
-/*.btn-add-to-cart {*/
-/*    display: inline-block;*/
-/*    margin-top: 20px;*/
-/*    background-color: #007bff;*/
-/*    color: #fff;*/
-/*    font-size: 16px;*/
-/*    font-family: Arial, sans-serif;*/
-/*    padding: 10px 20px;*/
-/*    border: none;*/
-/*    border-radius: 20px;*/
-/*    cursor: pointer;*/
-/*    text-align: center;*/
-/*    text-decoration: none;*/
-/*    transition: background-color 0.3s;*/
-/*}*/
-
-/*.btn-add-to-cart:hover {*/
-/*    background-color: #0056b3;*/
-/*}*/
