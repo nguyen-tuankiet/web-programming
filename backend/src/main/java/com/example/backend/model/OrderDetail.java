@@ -100,4 +100,18 @@ public class OrderDetail {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", productId=" + productId +
+                ", quantity=" + quantity +
+                ", total=" + total +
+                ", optionId=" + optionId +
+                ", productName='" + productName + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }
