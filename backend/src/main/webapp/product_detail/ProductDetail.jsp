@@ -61,7 +61,7 @@
 
 
         <div class="section1">
-            <div class="container-product-Bt">
+            <div  id="product" data-id="${product.id}" data-option-default="${product.optionId}" class="container-product-Bt">
                 <div class="product-title">
                     ${product.name}
                 </div>
@@ -112,16 +112,27 @@
                 </div>
 
 
+<%--                <div class="button-group">--%>
+<%--                    <a id="add-to-cart" href="#" onclick="addToCart(${product.id},${product.optionId})">--%>
+<%--                        <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>--%>
+<%--                    </a>--%>
+
+<%--                    <a id="buy-now" href="buy-now?productId=${product.id}&optionId=${product.optionId}">--%>
+<%--                        <button class="btn-buy-now btn buy"> Mua ngay </button>--%>
+<%--                    </a>--%>
+<%--                </div>--%>
+
                 <div class="button-group">
-                    <a href="#">
+                    <a id="add-to-cart" href="#">
                         <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>
                     </a>
 
-                    <a href="buy-now?productId=${product.id}&optionId=${product.optionId}">
-                        <button class="btn-buy-now btn buy">Mua ngay</button>
+                    <a id="buy-now" href="#">
+                        <button class="btn-buy-now btn buy"> Mua ngay </button>
                     </a>
-
                 </div>
+
+
             </div>
         </div>
 

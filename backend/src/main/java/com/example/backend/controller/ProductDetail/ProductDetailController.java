@@ -31,6 +31,9 @@ public class ProductDetailController extends HttpServlet {
         if (product.getOptionId() != null) {
             productPrice = productService.getPriceForOption(product.getOptionId());
         }
+
+
+
         List<String> images = imageService.getAllImagesByProductId(product.getId());
         String primaryImageUrl = imageService.getImageUrlById(product.getPrimaryImage());
         List<String> descriptions = List.of(product.getDescription().split("\\n"));
