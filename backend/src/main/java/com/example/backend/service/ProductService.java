@@ -5,6 +5,7 @@ import com.example.backend.model.DAO.ProductDAO;
 import com.example.backend.model.Product;
 import org.jdbi.v3.core.Jdbi;
 
+import javax.swing.plaf.PanelUI;
 import java.util.List;
 
 
@@ -66,8 +67,28 @@ public class ProductService {
     }
 
 
+    public List<Product> searchProducts(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Keyword must not be empty");
+        }
+        String keyword = "%" + name + "%";
+        return productDao.searchProducts(keyword);
+    }
+
+
+    public List<Product> getTopProductsByCategory(Integer categoryId, Integer limit) {
+        if (categoryId <=0  || limit <= 0) {
+            throw new IllegalArgumentException("Bad request");
+        }
+        else {
+            return productDao.getTopProductsByCategoryId(categoryId, limit);
+        }
+    }
+
+
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
-        System.out.println(productService.getAllProducts());
+        System.out.println(productService.getTopProductsByCategory(1, 3));
+
     }
 }

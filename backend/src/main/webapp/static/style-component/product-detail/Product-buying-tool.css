@@ -38,7 +38,8 @@ body {
 }
 
 .product-features li {
-    margin-bottom: 8px;
+    padding-top: 20px;
+    list-style: none;
 }
 
 .option-title {
@@ -88,10 +89,10 @@ body {
 }
 
 .price{
-    font-size: 20px;
+    font-size: 35px;
     font-weight: bold;
     padding-top: 20px;
-    color: red;
+    color: black;
 }
 
 /*.btn-add-to-cart {*/

@@ -33,7 +33,7 @@
                 </a>
                 <div class="submenu submenu-tu-lanh">
                     <div class="submenu-column">
-                        <a class="nav_item" href="search-refrigerator"   >Tất cả Tủ Lạnh</a>
+                        <a class="nav_item" href="search-refrigerator" >Tất cả Tủ Lạnh</a>
 
 
                         <a class="nav_item" href="#">Tủ Lạnh BESPOKE <span class="highlight">HẤP DẪN</span></a>
@@ -161,8 +161,10 @@
         </ul>
         <!-- User Login Icon and Popup -->
         <div class="icons">
-            <a href="#" class="icon" id="search-icon"><i class="fas fa-search"></i>
+            <a href="#" class="icon" id="search-icon" onclick="showSearchOverlay()">
+                <i class="fas fa-search"></i>
             </a>
+
 
             <a class="nav_item icon"
                href="cart" id="cart-link"><i class="fas fa-shopping-cart"></i>
@@ -179,7 +181,11 @@
 
         <div id="search-overlay" class="layer">
             <div class="search-container">
-                <!-- Nội dung sẽ được tải vào đây -->
+                <iframe
+                        src="${pageContext.request.contextPath}/home/search.jsp"
+                        frameborder="0"
+                        id="search-iframe"
+                ></iframe>
                 <div id="search-content"></div>
                 <button id="close-search-overlay" class="close-btn">
                     <i class="fas fa-times"></i>

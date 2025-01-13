@@ -7,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,9 +50,9 @@
                 <!-- Carousel Container -->
                 <div class="carousel-container">
                     <!-- Main Image Display -->
-<%--                    <img id="mainImage" src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"--%>
-<%--                         alt="Carousel Image" class="carousel-image">--%>
-<%--                    <img id="mainImage" src="../../../resource/image/img-detail/image1.jpg" alt="Carousel Image" class="carousel-image">--%>
+                    <%--                    <img id="mainImage" src="${pageContext.request.contextPath}/static/image/img-detail/image1.jpg"--%>
+                    <%--                         alt="Carousel Image" class="carousel-image">--%>
+                    <%--                    <img id="mainImage" src="../../../resource/image/img-detail/image1.jpg" alt="Carousel Image" class="carousel-image">--%>
                     <img id="mainImage" src="${primaryImageUrl}" alt="Carousel Image" class="carousel-image">
                     <!-- Navigation Arrows -->
                     <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
@@ -76,34 +78,6 @@
                     ${product.name}
                 </div>
 
-                <a href="<%= request.getContextPath() %>/link-Đánh giá" class="product-rating">
-                    ★★★☆☆ <span>(<%= "2.6 / 10 đánh giá" %>)</span>
-                </a>
-
-                <div class="product-features">
-                    <ul>
-                        <li>
-                            <div>Ưu đãi thêm 5% (đến 1 TRIỆU đồng) cho đơn hàng đầu tiên từ 8 triệu</div>
-                            <div>Thanh toán online trả trước giảm thêm 2%</div>
-                            <div>Giảm thêm 3% khi mua từ 2 - 5 sản phẩm điện gia dụng, điều hòa, TV, điện thoại (trừ phụ
-                                kiện)
-                            </div>
-                            <div>Tích thêm 2% điểm Rewards Samsung</div>
-                            <div>Giảm thêm 10% tối đa 1 triệu khi nhập mã SSDDeal. Áp dụng cho đơn hàng shoppapp hệ điều
-                                hành iOS
-                                đến hết ngày 07/11
-                            </div>
-                            <div>Liên hệ với tư vấn viên online để biết thêm chi tiết về ưu đãi hoặc để nhận hướng dẫn
-                                mua
-                                hàng.
-                            </div>
-                        </li>
-                        <!-- Lặp qua danh sách descriptions -->
-                        <c:forEach var="desc" items="${descriptions}">
-                            <li>${desc}</li>
-                        </c:forEach>
-                    </ul>
-                </div>
 
                 <div class="option-title">Chọn Màu Sắc</div>
                 <div class="color-options">
@@ -117,13 +91,12 @@
                     <div class="capacity-option">348 L</div>
                     <div class="capacity-option">345 L</div>
                 </div>
-<%--                <div class="price">--%>
-<%--                    <%= "23.000.000 VND" %>--%>
-<%--                </div>--%>
+
                 <div class="price">
                     <c:choose>
                         <c:when test="${not empty productPrice}">
-                            ${productPrice} VND
+                            <%--                            ${productPrice} VND--%>
+                            <fmt:formatNumber value="${productPrice}" pattern="#,###"/> VND
                         </c:when>
                         <c:otherwise>
                             Giá không khả dụng
@@ -131,19 +104,30 @@
                     </c:choose>
                 </div>
 
+                <div class="product-features">
+                    <ul>
 
-                <!--    <button class="btn-add-to-cart">Thêm vào giỏ hàng</button>-->
+                        <!-- Lặp qua danh sách descriptions -->
+                        <c:forEach var="desc" items="${descriptions}">
+                            <li>${desc}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+
+
+                <div class="button-group">
+                    <a href="#">
+                        <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>
+                    </a>
+
+                    <a href="#">
+                        <button class="btn-buy-now btn buy">Mua ngay</button>
+                    </a>
+
+                </div>
             </div>
         </div>
-        <div>
-            <a href="#">
-                <button></button>
-            </a>
-        </div>
 
-        <a href="#">
-            <button class="btn-add-to-cart btn add">Thêm vào giỏ hàng</button>
-        </a>
     </div>
 
     <div class="summary__list">
@@ -170,7 +154,8 @@
     </div>
     <div class="text1">
         <h2>Thiết kế phẳng hiện đại, hoàn hảo mọi gian bếp</h2>
-        <p>Nâng tầm không gian bếp với thiết kế thời thượng từ tủ lạnh Samsung thế hệ mới. Thiết kế phẳng giảm thiểu chi
+        <p>Nâng tầm không gian bếp với thiết kế thời thượng từ tủ lạnh Samsung thế hệ mới. Thiết kế phẳng giảm thiểu
+            chi
             tiết đem lại sự tao nhã sang trọng, cùng chất liệu cao cấp bền đẹp theo thời gian.</p>
     </div>
     <div class="carousel-container">
@@ -222,9 +207,11 @@
     <div class="feature-benefit4__text">
         <h2>Tiết kiệm điện năng, vận hành bền bỉ</h2>
         <h3>Máy nén Digital Inverter</h3>
-        <p>Máy nén biến tần kỹ thuật số Digital Inverter tự động điều chỉnh tốc độ vận hành tùy theo nhu cầu làm lạnh.
+        <p>Máy nén biến tần kỹ thuật số Digital Inverter tự động điều chỉnh tốc độ vận hành tùy theo nhu cầu làm
+            lạnh.
             Nhờ
-            đó, tủ lạnh tiết kiệm điện năng tốt hơn, giảm thiểu tiếng ồn và hạn chế hao mòn động cơ để kéo dài tuổi thọ
+            đó, tủ lạnh tiết kiệm điện năng tốt hơn, giảm thiểu tiếng ồn và hạn chế hao mòn động cơ để kéo dài tuổi
+            thọ
             máy,
             đồng thời được bảo hành đến 20 năm*.</p>
     </div>
