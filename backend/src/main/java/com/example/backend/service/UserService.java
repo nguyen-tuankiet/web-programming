@@ -5,6 +5,8 @@ import com.example.backend.model.DAO.UserDao;
 import com.example.backend.model.User;
 import org.jdbi.v3.core.Jdbi;
 
+import java.time.LocalDate;
+
 public class UserService {
     UserDao userDao;
 
@@ -24,10 +26,27 @@ public class UserService {
     }
 
 
+    public Boolean updateUser(User user) {
+        return userDao.updateUser(
+                user.getId(),
+                user.getFullName(),
+                user.getDisplayName(),
+                user.getBirth(),
+                user.getGender(),
+                user.getPhone(),
+                user.getEmail()
+        );
+    }
+
     public static void main(String[] args) {
         UserService userService = new UserService(DBConnection.getJdbi());
-        User user = userService.getUserById(111);
-        System.out.println(userService.updateAvatar(user.getId(), 1));
+        User user =new User(
+                1, "qhung", "qhung",
+                LocalDate.now(), "male","hun@gmad.ee", "232232222", null, null, null, null, null
+
+        );
+
+        System.out.println(userService.updateUser(user));
     }
 
 }
