@@ -129,3 +129,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+
+function showSearchOverlay() {
+    // Hiển thị overlay tìm kiếm bằng cách thay đổi style
+    document.getElementById("search-overlay").style.display = "block";
+}
+
+// Đóng overlay tìm kiếm khi bấm vào nút đóng
+document.getElementById("close-search-overlay").addEventListener("click", function() {
+    document.getElementById("search-overlay").style.display = "none";
+});
+
+
+// Hàm đọc tham số từ URL
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Lấy loại sản phẩm từ URL
+const productType = getQueryParam('product');
+
+// Hiển thị nội dung theo loại sản phẩm
+if (productType) {
+    const titleElement = document.querySelector('#list_product .product_item > span');
+    const productMap = {
+        'tu-lanh': 'Tủ Lạnh Bán Chạy',
+        'may-giat': 'Máy Giặt Thông Minh',
+        'may-lanh': 'Máy Lạnh Hiện Đại',
+        'dung-cu-nha-bep': 'Dụng Cụ Nhà Bếp'
+    };
+
+    // Thay đổi tiêu đề danh sách sản phẩm
+    titleElement.textContent = productMap[productType] || 'Sản Phẩm Nổi Bật';
+}
+
