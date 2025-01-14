@@ -1,5 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -24,9 +26,6 @@
     <div class="content">
         <div class="toolbar">
             <button class="add-product-btn" >+ Thêm Sản Phẩm</button>
-<%--            <div class="toolbar-buttons">--%>
-<%--                <button class="export-btn">Xuất</button>--%>
-<%--            </div>--%>
         </div>
 
         <div class="row">
@@ -40,9 +39,6 @@
                 </select>
                 mục
             </div>
-<%--            <label>--%>
-<%--                <input type="text" class="search-bar" placeholder="Tìm kiếm">--%>
-<%--            </label>--%>
         </div>
 
         <table class="product-table">
@@ -120,32 +116,21 @@
                         <td><label><input type="checkbox" class="checkbox"></label></td>
                         <td>
                             <div class="product">
-                                <!-- Lấy hình ảnh dựa trên `imageUrl` -->
+
                                 <img src="${p.imageUrl}" alt="${p.name}" class="product-img">
-                                <!-- Hiển thị tên sản phẩm -->
+
                                 <p>${p.name}</p>
                             </div>
                         </td>
-                        <!-- Lấy tên của danh mục -->
+
                         <td>${p.categoryName}</td>
-                        <!-- Ngày thêm sản phẩm (nếu cần thêm trường này trong model, bạn có thể lấy từ phía backend) -->
+
                         <td>01/8/2023</td>
-                        <!-- Lấy giá của sản phẩm từ options -->
-                        <td>${p.price} VNĐ</td>
-                        <!-- Lấy số lượng tồn kho từ options -->
+
+                        <td>   <fmt:formatNumber value="${p.price}" pattern="#,###"/> VND </td>
+
                         <td>${p.stock}</td>
-                        <!-- Hiển thị trạng thái -->
-<%--                        <td>--%>
-<%--                            <c:choose>--%>
-<%--                                <c:when test="${p.isActive == 1}">--%>
-<%--                                    <span class="status active">Hoạt Động</span>--%>
-<%--                                </c:when>--%>
-<%--                                <c:otherwise>--%>
-<%--                                    <span class="status deactive">Không Hoạt Động</span>--%>
-<%--                                </c:otherwise>--%>
-<%--                            </c:choose>--%>
-<%--                        </td>--%>
-<%--                        <td><span class="status active">Hoạt Động</span></td>--%>
+
                         <td>
                             <c:choose>
                                 <c:when test="${p.active}">
