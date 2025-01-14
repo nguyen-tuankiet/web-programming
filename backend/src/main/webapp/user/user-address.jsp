@@ -33,36 +33,68 @@
             </div>
             <div id="addAddressFormContainer" style="display: none;">
                 <h2>Thêm Địa Chỉ</h2>
-                <form id="addAddressForm">
+<%--                <form id="addAddressForm">--%>
+<%--                    <label for="province">Tỉnh/Thành phố:</label>--%>
+<%--                    <input type="text" id="province" name="province" placeholder="Nhập tỉnh/thành phố"/>--%>
+
+<%--                    <label for="district">Quận/Huyện:</label>--%>
+<%--                    <input type="text" id="district" name="district" placeholder="Nhập quận/huyện"/>--%>
+
+<%--                    <label for="commune">Phường/Xã:</label>--%>
+<%--                    <input type="text" id="commune" name="commune" placeholder="Nhập phường/xã"/>--%>
+
+<%--                    <label for="name">Tên:</label>--%>
+<%--                    <input type="text" id="name" name="name" placeholder="Nhập tên"/>--%>
+
+<%--                    <label for="phone">Số điện thoại:</label>--%>
+<%--                    <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại"/>--%>
+
+<%--                    <div class="HomeorOffice">--%>
+<%--                        <label>--%>
+<%--                            <input type="radio" name="type" value="house"/> Nhà--%>
+<%--                        </label>--%>
+<%--                        <label>--%>
+<%--                            <input type="radio" name="type" value="building"/> Văn phòng--%>
+<%--                        </label>--%>
+
+<%--                    </div>--%>
+<%--                    <div class="savecane">--%>
+<%--                        <button type="button" id="saveAddress">Lưu</button>--%>
+<%--                        <button type="button" id="cancelAddressForm">Hủy</button>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+                <form method="POST" action="AddAddressController">
                     <label for="province">Tỉnh/Thành phố:</label>
-                    <input type="text" id="province" name="province" placeholder="Nhập tỉnh/thành phố"/>
+                    <input type="text" id="province" name="province" placeholder="Nhập tỉnh/thành phố" required/>
 
                     <label for="district">Quận/Huyện:</label>
-                    <input type="text" id="district" name="district" placeholder="Nhập quận/huyện"/>
+                    <input type="text" id="district" name="district" placeholder="Nhập quận/huyện" required/>
 
                     <label for="commune">Phường/Xã:</label>
-                    <input type="text" id="commune" name="commune" placeholder="Nhập phường/xã"/>
+                    <input type="text" id="commune" name="commune" placeholder="Nhập phường/xã" required/>
 
-                    <label for="name">Tên:</label>
-                    <input type="text" id="name" name="name" placeholder="Nhập tên"/>
+                    <label for="detail">Chi tiết:</label>
+                    <input type="text" id="detail" name="detail" placeholder="Nhập địa chỉ chi tiết" required/>
 
                     <label for="phone">Số điện thoại:</label>
-                    <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại"/>
+                    <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" required/>
 
-                    <div class="HomeorOffice">
-                        <label>
-                            <input type="radio" name="type" value="house"/> Nhà
-                        </label>
-                        <label>
-                            <input type="radio" name="type" value="building"/> Văn phòng
-                        </label>
+                    <label for="name">Họ tên:</label>
+                    <input type="text" id="name" name="name" placeholder="Nhập họ tên" required/>
 
-                    </div>
-                    <div class="savecane">
-                        <button type="button" id="saveAddress">Lưu</button>
-                        <button type="button" id="cancelAddressForm">Hủy</button>
-                    </div>
+                    <label>Loại địa chỉ:</label>
+                    <input type="radio" id="home" name="type" value="Home" checked/>
+                    <label for="home">Nhà</label>
+                    <input type="radio" id="office" name="type" value="Office"/>
+                    <label for="office">Văn phòng</label>
+
+                    <!-- Hidden field to pass userId -->
+                    <input type="hidden" name="userId" value="${userId}"/>
+
+                    <button type="submit">Lưu</button>
+                    <button type="reset">Hủy</button>
                 </form>
+
             </div>
 
 
