@@ -2,12 +2,15 @@ package com.example.backend.model;
 
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 public class OptionVariantValue {
     Integer id ;
     Integer optionId;
     Integer variantValueId;
 
+
+    @JdbiConstructor
     public OptionVariantValue(@ColumnName("id")  @Nullable Integer id,
                               @ColumnName("optionId")  @Nullable Integer optionId,
                               @ColumnName("variantValueId")  @Nullable Integer variantValueId) {
@@ -16,10 +19,10 @@ public class OptionVariantValue {
         this.variantValueId = variantValueId;
     }
 
-    public OptionVariantValue(@Nullable Integer optionId, @Nullable Integer variantValueId) {
-        this.optionId = optionId;
-        this.variantValueId = variantValueId;
-    }
+//    public OptionVariantValue(@Nullable Integer optionId, @Nullable Integer variantValueId) {
+//        this.optionId = optionId;
+//        this.variantValueId = variantValueId;
+//    }
 
     public Integer getId() {
         return id;

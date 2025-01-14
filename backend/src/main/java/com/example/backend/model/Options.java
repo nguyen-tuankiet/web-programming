@@ -15,16 +15,13 @@ public class Options {
     String variantValue;
 
 
-    @JdbiConstructor
     public Options(@ColumnName("id") @Nullable Integer id,
                    @ColumnName("productId") @Nullable Integer productId,
                    @ColumnName("price") @Nullable Integer price,
                    @ColumnName("stock") @Nullable  Integer stock ,
-                    @ColumnName("variantId") @Nullable Integer variantId,
+                   @ColumnName("variantId") @Nullable Integer variantId,
                     @ColumnName("variantName") @Nullable String variantName,
                     @ColumnName("variantValue") @Nullable String variantValue
-
-
                    ){
         this.id = id;
         this.productId = productId;
@@ -36,9 +33,6 @@ public class Options {
 
     }
 
-    public Options() {
-
-    }
 
     public Integer getId() {
         return id;
