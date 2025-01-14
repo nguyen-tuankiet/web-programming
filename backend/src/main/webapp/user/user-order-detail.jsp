@@ -21,7 +21,6 @@
     <script src="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderHistory.js"></script>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderHistoryItem.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderHistoryItem.js"></script>
 
 </head>
 <body>
@@ -53,8 +52,15 @@
 
                 <div id="order_infor" class=" col">
                     <div class="wrap row">
-                        <div class="order_id">Mã đơn hàng: <span>241107KHA2WV23</span></div>
-                        <div class="order_status mid_align">Đã giao hàng</div>
+                        <div class="order_id">Mã đơn hàng: <span>${order.id}</span></div>
+
+                        <c:if   test="${order.orderStatus =='DELIVERY'}">
+                            <div class="order_status mid_align" style="color: #0a7cff" >Đang giao hàng</div>
+                        </c:if>
+
+                        <c:if   test="${order.orderStatus =='DELIVERED'}">
+                            <div class="order_status mid_align">Đã giao hàng</div>
+                        </c:if>
                     </div>
                     <!--        <div class="date">22/10/2024</div>-->
                 </div>
@@ -109,15 +115,6 @@
 
                                      </span>
                                     </div>
-
-                                        <%--                                 <div class="btn col">--%>
-                                        <%--                                     <button class="btn_detail" data-src="../component/user_order/OrderHistory.html">Xem chi--%>
-                                        <%--                                         tiết--%>
-                                        <%--                                     </button>--%>
-                                        <%--                                     <button class="btn_support">Hỗ trợ</button>--%>
-                                        <%--                                 </div>--%>
-
-
                                 </div>
 
 
@@ -183,7 +180,7 @@
                     <div id="payment_infor" class="col">
 
                         <div class="title">
-                            <span>Thông tin thanh toán</span>
+                            <span>Thông tin thanh toán </span>
                         </div>
 
                         <div class="content">
@@ -191,33 +188,22 @@
 
                             <div class="content_item">
                                 <span class="desc">Giá sản phẩm</span>
-                                <span class="value">79,000,000 VND</span>
+                                <span id="product_price" class="value">79,000,000 VND</span>
                             </div>
 
 
                             <div class="content_item">
-                                <span class="desc">Thuế GTGT</span>
-                                <span class="value">7,900,000 VND</span>
+                                <span class="desc">Thuế GTGT ( 10% )</span>
+                                <span id="VAT" class="value">7,900,000 VND</span>
                             </div>
-
-
-                            <div class="content_item">
-                                <span class="desc">Giảm giá</span>
-                                <span class="value"> 7,900,000 VND</span>
-                            </div>
-
 
                             <div class="rec_horizontal"></div>
 
                             <div class="content_item">
-                                <span class="desc">Phải thanh toán:</span>
-                                <span class="value">79,000,000 VND</span>
-                            </div>
-
-
-                            <div class="content_item">
                                 <span class="desc">Đã thanh toán:</span>
-                                <span class="value">79,000,000 VND</span>
+                                <span id="total_charge" class="value">
+                                     <fmt:formatNumber value="${order.total}" pattern="#,###"/> VND
+                                </span>
                             </div>
 
 
@@ -237,9 +223,9 @@
                             <div class="section_left col">
 
 
-                                <div class="content_item full_name">
-                                    <i class="fa-regular fa-user"></i>
-                                    <span> Trần Quốc Hưng</span>
+                                <div class="content_item full_name" >
+                                    <i class="fa-regular fa-user" ></i>
+                                    <span> Trần Quốc Hưng </span>
                                 </div>
 
                                 <div class="content_item phone">
