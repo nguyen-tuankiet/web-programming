@@ -8,9 +8,9 @@ public class EmailService {
     // Hàm gửi email chứa mã OTP
     public void sendEmailWithOTP(String toEmail, String otp) {
         // Cấu hình thông tin kết nối với SMTP server
-        String host = "smtp.gmail.com";  // Đối với Gmail
-        String fromEmail = "tuankietcoder2211@gmail.com";  // Thay bằng email của bạn
-        String password = "abc";
+        String host = "smtp.gmail.com";
+        String fromEmail = "22130136@st.hcmuaf.edu.vn";
+        String password = "paej hzcy qwml bwoc";
 
         // Cấu hình các thuộc tính SMTP
         Properties properties = new Properties();
@@ -35,7 +35,7 @@ public class EmailService {
             message.setSubject("Mã OTP xác thực");  // Tiêu đề email
 
             // Nội dung email
-            String emailContent = "<h3>Mã OTP của bạn là: " + otp + "</h3>"
+            String emailContent = "<h3>Ma OTP cua ban la: " + otp + "</h3>"
                     + "<p>Vui lòng không chia sẻ mã OTP này với bất kỳ ai.</p>";
             message.setContent(emailContent, "text/html");
 
@@ -48,9 +48,13 @@ public class EmailService {
         }
     }
 
-    // Hàm tạo mã OTP ngẫu nhiên (5 chữ số)
     public String generateOTP() {
         int otp = (int) (Math.random() * 90000) + 10000;  // Tạo OTP 5 chữ số
         return String.valueOf(otp);
     }
+    public static void main(String[] args) {
+        EmailService emailService = new EmailService();
+        emailService.sendEmailWithOTP("22130136@st.hcmuaf.edu.vn", "12345");
+    }
+
 }
