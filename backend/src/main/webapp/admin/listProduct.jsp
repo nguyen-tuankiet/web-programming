@@ -155,12 +155,14 @@
                                     <div class="dropdown-content">
 
                                         <span class="icon edit-icon">
-                                <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
-                                Edit
-                            </span>
+    <a href="addProduct.jsp?id=${p.id}">
+        <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i> Chỉnh sửa
+    </a>
+</span>
+
                                         <span class="icon delete-icon" data-product-id="${p.id}">
     <i class="fa-solid fa-trash" style="padding: 5px;"></i>
-    Delete
+    Xóa
 </span>
 
                                     </div>
