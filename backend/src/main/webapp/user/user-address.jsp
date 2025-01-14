@@ -50,7 +50,7 @@
                         <label for="phone">Số điện thoại:</label>
                         <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" />
 
-<%--                        <label for="type">Loại:</label>--%>
+                        <%--                        <label for="type">Loại:</label>--%>
                         <div>
                             <div class="HomeorOffice">
                                 <label>
