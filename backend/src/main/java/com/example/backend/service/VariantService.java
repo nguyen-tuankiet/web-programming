@@ -40,6 +40,8 @@ public class VariantService {
         }
         return variantDAO.getVariantsByCategoryId(categoryId);
     }
+
+
 //    public void updateVariant(Integer id, String name, Integer categoryId) {
 //        variantDAO.updateVariant(id, name, categoryId);
 //    }
