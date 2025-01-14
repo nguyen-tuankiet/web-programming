@@ -36,7 +36,7 @@
                     name="email"
                     required
             />
-            <label for="emailInput">Nhập lại email</label>
+            <label for="emailInput">Nhập lại email <span class="required">*</span> </label>
         </div>
         <div id="errorMessage" class="error-message">Email không hợp lệ</div>
         <button onclick="validateEmail()">Tiếp theo</button>
@@ -64,9 +64,9 @@
     <div id="passwordBox" class="reset-box" style="display: none;">
         <div class="header">
             <span class="back-arrow" onclick="goBackToOTP()">&#8592;</span> <!-- Mũi tên quay lại -->
-            <h2>Nhập mật khẩu mới</h2>
+            <h2>Nhập mật khẩu mới </h2>
         </div>
-        <input type="password" id="passwordInput" name="newPassword"  placeholder="Nhập mật khẩu mới" required>
+        <input type="password" id="passwordInput" name="newPassword"  placeholder="Nhập mật khẩu mới" required >
         <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" required>
         <div id="passwordErrorMessage" class="error-message">Mật khẩu không khớp</div>
         <button onclick="submitPassword()">Đặt lại mật khẩu</button>
