@@ -75,9 +75,9 @@
                 <tr class="order-row">
                     <td><input type="checkbox"></td>
                     <td>
-                        <img src="<%= user.getAvatarUrl() != null ? user.getAvatarUrl() : application.getContextPath() + "/static/default-avatar.png" %>"
-                             alt="Avatar" class="avatar">
-
+<%--                        <%= user.getFullName() %>--%>
+    <img src="<%= user.getAvatarUrl() %>" alt="Avatar" style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
+    <%= user.getFullName() %>
                     </td>
                     <td><%= user.getPhone() %></td>
                     <td><%= user.getEmail() %></td>
