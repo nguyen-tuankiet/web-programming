@@ -44,20 +44,21 @@ public interface OrderDetailDAO {
             "WHERE od.orderId = :orderId")
     OrderDetail getOrderDetailById(@Bind("orderId") Integer orderId);
 
-//    @SqlQuery(value = "SELECT " +
-//            "u.id AS userId, " +
-//            "u.fullName, " +
-//            "u.email, " +
-//            "o.id AS orderId, " +
-//            "od.id AS orderDetailId, " +
-//            "p.name AS productName, " +
-//            "od.quantity, " +
-//            "od.total " +
-//            "FROM user u " +
-//            "LEFT JOIN orders o ON u.id = o.userId " +
-//            "LEFT JOIN order_detail od ON o.id = od.orderId " +
-//            "LEFT JOIN products p ON od.productId = p.id" +
-//            "WHERE u.id = 1 "
-//    )
-//    List<OrderDetail> getOrderByUserId(@Bind("userId") Integer userId);
+    @SqlQuery(value ="\n" +
+            "select\n" +
+            "    od.id, od.orderId, od.productId, od.quantity,\n" +
+            "    od.total,\n" +
+            "    p.name as productName,\n" +
+            "    i.url as imageUrl\n" +
+            "from order_detail as od\n" +
+            "    inner join products as p\n" +
+            "        on p.id = od.productId\n" +
+            "    inner join options as ops\n" +
+            "        on od.optionId = ops.id\n" +
+            "    inner join image as i\n" +
+            "        on i.id = p.primaryImage\n" +
+            "\n" +
+            "where od.orderId = :orderId \n"
+    )
+    List<OrderDetail> getOrderDetailByOrderId(@Bind("orderId") Integer orderId );
 }

@@ -72,42 +72,43 @@
             <c:if test="${not empty orders}">
                 <c:forEach var="o" items="${orders}">
                     <div id="order_container" class="mid_align row">
-                        <!-- Product Image -->
-                        <div class="image">
+                         <div class="image">
                             <img src="${o.productImage}" alt="Hình ảnh sản phẩm"/>
                         </div>
 
-                        <!-- Product Info -->
-                        <div class="description mid_align col">
-                                <%--                                <div class="title bold">${orderDetails.productName}</div>--%>
-                            <div class="title bold">${o.productName}</div>
-<%--                            <div class="color">--%>
-<%--                                <span class="color_name">Màu Sắc: <span>Đen</span></span>--%>
-<%--                            </div>--%>
+                         <div class="description mid_align col">
+                             <div class="title bold">${o.productName}</div>
+
                             <div class="quantity">
-                                    <%--                                    <span class="color_name">Số lượng: <span>${orderDetails.quantity}</span></span>--%>
-                                <span class="color_name">Số lượng: <span>${o.quantity}</span></span>
+                                 <span class="color_name">Số lượng: <span>${o.quantity}</span></span>
                             </div>
                             <div class="status">
-                                <span>${o.orderStatus}</span>
+                                <c:if  test="${o.orderStatus =='DELIVERY'}">
+                                    <span style="color: #0a7cff">Đang giao hàng</span>
+                                </c:if>
+
+                                <c:if  test="${o.orderStatus =='DELIVERED'}">
+                                    <span >Đã giao hàng</span>
+                                </c:if>
+
                             </div>
                         </div>
 
-                        <!-- Price Info -->
-                        <div class="section_price mid_align col">
+                         <div class="section_price mid_align col">
                             <div class="date">
                                 <span>${o.createAt}</span>
                             </div>
                             <div class="wrap_price col">
                                 <span class="title">Tổng thanh toán: </span>
-                                    <%--                                    <span class="price">${orderDetails.total} VND</span>--%>
-                                <span class="price">
+                                 <span class="price">
                                     <fmt:formatNumber value="${o.total}" pattern="#,###"/> VND
                                 </span>
 
                             </div>
                             <div class="btn col">
-                                <button class="btn_detail">Xem chi tiết</button>
+                                <a href="user-order-detail?orderId=${o.id}">
+                                    <button class="btn_detail">Xem chi tiết</button>
+                                </a>
                                 <button class="btn_support">Hỗ trợ</button>
                             </div>
                         </div>

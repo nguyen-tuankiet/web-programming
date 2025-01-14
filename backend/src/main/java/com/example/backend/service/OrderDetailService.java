@@ -61,9 +61,15 @@ public class OrderDetailService {
 
 
 
+    public List<OrderDetail> getOrderDetailByOrderId(Integer orderId) {
+        return orderDetailDAO.getOrderDetailByOrderId(orderId);
+    }
+
+
+
     public static void main(String[] args) {
         OrderDetailService orderDetailService = new OrderDetailService(DBConnection.getJdbi());
-//        System.out.println(orderDetailService.getOrderDetailsByOrderId(1));
+        System.out.println(orderDetailService.getOrderDetailByOrderId(39));
     }
 
 }
