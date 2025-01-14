@@ -1,7 +1,9 @@
 package com.example.backend.controller.admin;
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.model.Options;
 import com.example.backend.service.OptionService;
+import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -40,16 +42,25 @@ public class OptionController extends HttpServlet {
             Integer stock = (Integer) requestData.get("stock");
 
             // Gọi service để tạo option
-            int optionId = optionService.createOptions(productId, price, stock);
+            int option = optionService.createOptions(productId, price, stock);
+            Options newOption = optionService.getOptionById(option);
 
-            // Trả về kết quả
-            response.setContentType("application/json");
-            response.setStatus(HttpServletResponse.SC_CREATED);
-            response.getWriter().write("{\"message\": \"Option created successfully\", \"optionId\": " + optionId + "}");
+            // Trả về kết quả thành công với đối tượng Option
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                    201, "success", "Option created successfully", newOption);
+            writeResponse(response, responseWrapper);
+
         } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("{\"error\": \"" + e.getMessage() + "\"}");
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                    500, "error", "Internal server error: " + e.getMessage(), null);
+            writeResponse(response, responseWrapper);
         }
     }
 
+    private void writeResponse(HttpServletResponse response, ResponseWrapper<?> responseWrapper) throws IOException {
+        response.setContentType("application/json");
+        response.setStatus(responseWrapper.getStatusCode());
+        ObjectMapper objectMapper = new ObjectMapper();
+        response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+    }
 }
