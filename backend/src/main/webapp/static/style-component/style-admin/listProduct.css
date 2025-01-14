@@ -253,57 +253,39 @@ td .checkbox input {
     cursor: pointer;
 }
 
-/* Styling cho dropdown */
+/* CSS cho dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-.dropdown button {
-    display: flex;
-    align-items: center;
-    color: #7f7f7f;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-.dropdown button svg {
-    margin-left: 4px;
-}
-
-.dropdown-content {
+/* Ẩn nội dung dropdown mặc định */
+.dropdown .dropdown-content {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    min-width: 111px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+    background-color: white;
+    min-width: 95px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
-.dropdown-content .icon {
-    display: flex;
-    align-items: center;
-    padding: 8px 12px;
-    font-size: 14px;
-    color: #7f7f7f;
-    cursor: pointer;
+/* Hiển thị dropdown khi hover vào nút */
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
-.dropdown-content .icon svg {
-    margin-right: 8px;
+/* Cải tiến giao diện cho các item trong dropdown */
+.dropdown-content .icon {
+    padding: 10px;
+    cursor: pointer;
+    display: block;
+    transition: background-color 0.3s;
 }
 
 .dropdown-content .icon:hover {
     background-color: #f1f1f1;
 }
+
 tr:hover{
     cursor: pointer;
     background-color: #F1F5F9;

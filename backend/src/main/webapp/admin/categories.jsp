@@ -23,14 +23,23 @@
 
     <div class="content">
         <div class="toolbar">
-            <div id="add-category-box" class="hidden">
-                <h3>Thêm Sản Phẩm</h3>
-                <input type="text" placeholder="Nhập" class="input-field"/>
-                <div class="action-buttons">
-                    <button class="add-btn">Thêm</button>
-                    <button class="discard-btn">Hủy</button>
-                </div>
-            </div>
+<%--            <div id="add-category-box" class="hidden">--%>
+<%--                <h3>Thêm Sản Phẩm</h3>--%>
+<%--                <input type="text" placeholder="Nhập" class="input-field"/>--%>
+<%--                <div class="action-buttons">--%>
+<%--                    <button class="add-btn">Thêm</button>--%>
+<%--                    <button class="discard-btn">Hủy</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+    <div id="add-category-box" class="hidden">
+        <h3>Thêm Danh Mục</h3>
+        <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên danh mục" class="input-field" required />
+        <div id="error-message" class="error hidden">Tên danh mục không được để trống</div>
+        <div class="action-buttons">
+            <button class="add-btn" id="add-category-btn">Thêm</button>
+            <button class="discard-btn" id="discard-category-btn">Hủy</button>
+        </div>
+    </div>
             <button class="add-product-btn">+ Thêm</button>
         </div>
 
@@ -94,11 +103,9 @@
                         <td>
                             <div class="product">
                                 <p>${category.name}</p>
-<%--                                <p>name</p>--%>
                             </div>
                         </td>
                         <td>${category.totalStock}</td>
-<%--                        <p>stock</p>--%>
                         <td>
                             <div class="action-icons">
                                 <div class="dropdown">
@@ -107,18 +114,18 @@
                                         <i class="fa-solid fa-chevron-down" style="padding: 5px;"></i>
                                     </button>
                                     <div class="dropdown-content">
-                                        <span class="icon view-icon">
-                                            <i class="fa-regular fa-eye" style="padding: 5px;"></i>
-                                            Xem
-                                        </span>
+<%--                                        <span class="icon view-icon">--%>
+<%--                                            <i class="fa-regular fa-eye" style="padding: 5px;"></i>--%>
+<%--                                            Xem--%>
+<%--                                        </span>--%>
                                         <span class="icon edit-icon">
                                             <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
                                             Sửa
                                         </span>
-                                        <span class="icon delete-icon">
-                                            <i class="fa-solid fa-trash" style="padding: 5px;"></i>
-                                            Xóa
-                                        </span>
+<%--                                        <span class="icon delete-icon">--%>
+<%--                                            <i class="fa-solid fa-trash" style="padding: 5px;"></i>--%>
+<%--                                            Xóa--%>
+<%--                                        </span>--%>
                                     </div>
                                 </div>
                             </div>
