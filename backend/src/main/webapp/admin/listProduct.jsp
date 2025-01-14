@@ -24,9 +24,6 @@
     <div class="content">
         <div class="toolbar">
             <button class="add-product-btn" >+ Thêm Sản Phẩm</button>
-<%--            <div class="toolbar-buttons">--%>
-<%--                <button class="export-btn">Xuất</button>--%>
-<%--            </div>--%>
         </div>
 
         <div class="row">
@@ -40,9 +37,6 @@
                 </select>
                 mục
             </div>
-<%--            <label>--%>
-<%--                <input type="text" class="search-bar" placeholder="Tìm kiếm">--%>
-<%--            </label>--%>
         </div>
 
         <table class="product-table">

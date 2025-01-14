@@ -29,17 +29,17 @@ body {
 }
 
 .add-product-btn {
-    background-color: #6c5ce7;
-    color: white;
+    background-color: white;
+    color: #0a7cff;
     padding: 8px 15px;
-    border: none;
+    border: 1px solid #007bff;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .add-product-btn:hover {
-    background-color: #5b49c3;
+    background-color: #69c0fd;
 }
 
 .toolbar-buttons button {
@@ -347,9 +347,9 @@ tr:hover{
 }
 
 .add-btn {
-    background-color: #6c5ce7;
-    color: white;
-    border: none;
+    background-color: white;
+    color: #0a7cff;
+    border: 1px solid #007bff;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -357,7 +357,7 @@ tr:hover{
 }
 
 .add-btn:hover {
-    background-color: #5b49c3;
+    background-color: #69c0fd;
 }
 
 .discard-btn {
@@ -371,7 +371,7 @@ tr:hover{
 }
 
 .discard-btn:hover {
-    background-color: #c0392b;
+    background-color: #ef2d1b;
 }
 
 .hidden {
