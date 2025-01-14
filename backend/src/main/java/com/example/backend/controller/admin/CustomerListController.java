@@ -38,6 +38,13 @@ public class CustomerListController extends HttpServlet {
         for (User user : users) {
             Address address = addressDAO.getAddressByUserId(user.getId()).stream().findFirst().orElse(null);
             userAddresses.put(user.getId(), address != null ? address.getProvince() : "N/A");
+
+            if (user.getAvatarId() != null) {
+                String avatarUrl = userService.getAvatarUrlById(user.getAvatarId());
+                user.setAvatarUrl(avatarUrl); // Set avatar URL to User object
+            } else {
+                user.setAvatarUrl("default-avatar-url.jpg"); // Default avatar URL
+            }
         }
 
         request.setAttribute("users", users);
