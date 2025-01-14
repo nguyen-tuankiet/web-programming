@@ -1,8 +1,27 @@
 body {
     font-family: Helvetica Neue, Helvetica, Arial, serif;
-    margin: 20px;
     background: #F1F5F9;
 }
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 20px;
+}
+
+
+.content{
+    width: 100%;
+    padding: 30px;
+}
+
+
+
+
+
+
+
+
 
 .order-details {
     display: flex;
@@ -99,7 +118,7 @@ h3 {
 }
 
 .order-info {
-    flex: 3;
+    flex: 5;
 }
 
 .products-table {
@@ -112,7 +131,7 @@ h3 {
 .products-table td {
     border: 1px solid #ccc;
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
 
 .invoice-btn {
