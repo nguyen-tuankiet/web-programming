@@ -1,7 +1,6 @@
 package com.example.backend.model.DAO;
 
 import com.example.backend.model.User;
-import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
@@ -56,6 +55,8 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user WHERE id = :id")
     User getPasswordByUserId(@Bind("id") Integer userId);
 
+    @SqlQuery("SELECT url FROM image WHERE id = :avatarId")
+    String getAvatarUrlById(@Bind("avatarId") Integer avatarId);
 
 
     @SqlUpdate(value ="UPDATE user\n" +
