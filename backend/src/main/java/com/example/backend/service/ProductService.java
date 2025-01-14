@@ -103,10 +103,16 @@ public class ProductService {
     }
 
 
+    public List<Product> getTop10(){
+        return productDao.getTop10();
+    }
+
+
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
 //        System.out.println(productService.getTopProductsByCategory(1, 3));
 //        System.out.println(productService.increaseNoOfViews(1));
-        System.out.println(productService.increaseNoOfSold(10, 5));
+//        System.out.println(productService.increaseNoOfSold(10, 5));
+        System.out.println(productService.getTop10( ).toString());
     }
 }
