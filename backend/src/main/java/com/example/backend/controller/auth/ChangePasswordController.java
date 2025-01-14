@@ -57,7 +57,7 @@ public class ChangePasswordController extends HttpServlet {
                 return;
             }
 
-            boolean isPasswordChanged = authService.changePassword(userId, currentPassword, newPassword);
+            boolean isPasswordChanged = authService.changePassword(userId, currentPassword, newPassword, true);
             if (isPasswordChanged) {
                 // Xóa session sau khi đổi mật khẩu thành công
                 session.invalidate();

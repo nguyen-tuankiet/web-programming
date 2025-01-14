@@ -35,8 +35,8 @@ public class EmailService {
             message.setSubject("Mã OTP xác thực");  // Tiêu đề email
 
             // Nội dung email
-            String emailContent = "<h3>Ma OTP cua ban la: " + otp + "</h3>"
-                    + "<p>Vui lòng không chia sẻ mã OTP này với bất kỳ ai.</p>";
+            String emailContent = "<h3>Kiet da gui ma OTP cho ban. Ma OTP cua ban la: " + otp + "</h3>"
+                    + "<p>Vui lòng không chia sẻ mã OTP này voi bat ki ai.</p>";
             message.setContent(emailContent, "text/html");
 
             // Gửi email
