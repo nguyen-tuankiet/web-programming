@@ -145,11 +145,9 @@
             <div class="user-popup">
                 <a
                         class="nav_item"
-                        href="#" onclick="loadPage('my_profile')"
-                        id="my-page-link"
-                >Trang của tôi</a
+                        href="profile">Trang của tôi</a
                 >
-                <a href="${pageContext.request.contextPath}/auth/auth.jsp">Đăng xuất</a>
+                <a href="/backend_war/login">Đăng xuất</a>
             </div>
         </div>
     </div>
