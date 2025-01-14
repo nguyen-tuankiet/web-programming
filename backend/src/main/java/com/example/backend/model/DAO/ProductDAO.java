@@ -1,5 +1,6 @@
 package com.example.backend.model.DAO;
 
+import com.example.backend.model.OptionVariant;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
@@ -160,5 +161,62 @@ public interface ProductDAO {
     @SqlUpdate("UPDATE products SET isActive = false WHERE id = :id")
     boolean deactivateProduct(@Bind("id") int id);
 
+    @SqlQuery(value = """
+    SELECT p.id as id, p.name as name, p.description as description,
+           p.sku as sku, p.isActive as isActive, p.brandId as brandId,  
+           p.noOfViews as noOfViews, p.noOfSold as noOfSold,  
+           p.categoryId as categoryId, p.primaryImage as primaryImage,
+           ops.id as optionId, ops.price as price,
+           ops.stock as stock,  
+           img.url as imageUrl,
+           v.id as variantId,
+           vv.id as variantValueId,
+           vv.value as variantValueName,
+           v.name as variantName 
+    FROM products as p 
+        INNER JOIN categories as cate on cate.id = p.categoryId 
+        INNER JOIN `options` as ops on ops.productId = p.id 
+        INNER JOIN image as img on p.primaryImage = img.id 
+        INNER JOIN option_variant_value as ovv on ops.id = ovv.optionId 
+        INNER JOIN variant_value as vv on ovv.variantValueId = vv.id 
+        INNER JOIN variant as v on vv.variantId = v.id 
+    WHERE p.id = :id 
+      AND ops.price = (
+            SELECT MIN(price) 
+            FROM options as ops 
+            WHERE p.id = ops.productId AND ops.stock > 0
+      );
+""")
+    @RegisterConstructorMapper(Product.class)
+    Product editProduct(@Bind("id") int id);
 
+
+    @SqlQuery("""
+    SELECT p.id as id, p.name as name, p.description as description,
+           p.sku as sku, p.isActive as isActive, p.brandId as brandId,  
+           p.noOfViews as noOfViews, p.noOfSold as noOfSold,  
+           p.categoryId as categoryId, p.primaryImage as primaryImage,
+           ops.id as optionId, ops.price as price,
+           ops.stock as stock,  
+           img.url as imageUrl,
+           v.id as variantId,
+           vv.id as variantValueId,
+           vv.value as variantValueName,
+           v.name as variantName 
+    FROM products as p 
+        INNER JOIN categories as cate on cate.id = p.categoryId 
+        INNER JOIN `options` as ops on ops.productId = p.id 
+        INNER JOIN image as img on p.primaryImage = img.id 
+        INNER JOIN option_variant_value as ovv on ops.id = ovv.optionId 
+        INNER JOIN variant_value as vv on ovv.variantValueId = vv.id 
+        INNER JOIN variant as v on vv.variantId = v.id 
+    WHERE p.id = :id 
+      AND ops.price = (
+            SELECT MIN(price) 
+            FROM options as ops 
+            WHERE p.id = ops.productId AND ops.stock > 0
+    );
+""")
+    @RegisterConstructorMapper(OptionVariant.class)
+    List<OptionVariant> getVariants(@Bind("id") int id);
 }

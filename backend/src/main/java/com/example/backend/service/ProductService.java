@@ -2,7 +2,9 @@ package com.example.backend.service;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.DAO.ProductDAO;
+import com.example.backend.model.OptionVariant;
 import com.example.backend.model.Product;
+import com.example.backend.model.ProductDTO;
 import org.jdbi.v3.core.Jdbi;
 
 import javax.swing.plaf.PanelUI;
@@ -25,6 +27,13 @@ public class ProductService {
 
     public Product getProductById(int productId){
         return jdbi.withExtension(ProductDAO.class, dao -> dao.getProductById(productId));
+    }
+
+
+    public ProductDTO editProductById(int id) {
+        Product product = productDao.editProduct(id);
+        List<OptionVariant> variants = productDao.getVariants(id);
+        return new ProductDTO(product, variants);
     }
 
 
@@ -65,7 +74,6 @@ public class ProductService {
 
         return null;
     }
-
 
     public List<Product> searchProducts(String name) {
         if (name == null || name.trim().isEmpty()) {

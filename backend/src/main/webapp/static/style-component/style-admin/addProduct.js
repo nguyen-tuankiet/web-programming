@@ -731,7 +731,6 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchProductDetails(productId);
     }
 });
-
 function fetchProductDetails(productId) {
     fetch(`editProduct?id=${productId}`, {
         method: 'GET',
@@ -743,9 +742,11 @@ function fetchProductDetails(productId) {
         .then(data => {
             if (data.statusCode === 200 && data.data) {
                 const product = data.data;
+
+                // Điền thông tin sản phẩm vào các input
                 document.getElementById('productName').value = product.name;
                 document.getElementById('sku').value = product.sku;
-                document.getElementById('categoryDropdown').value = product.categoryId; // Lựa chọn danh mục tương ứng
+                document.getElementById('categoryDropdown').value = product.categoryId;
                 document.getElementById('description').value = product.description;
                 document.getElementById('previewImage').src = product.imageUrl;
                 document.getElementById('price').value = product.price;
@@ -753,6 +754,37 @@ function fetchProductDetails(productId) {
                 document.getElementById('vendor').value = product.brandId || '';
                 document.getElementById('tags').value = product.tags || '';
                 document.getElementById('optionsContainer1').value = product.optionId;
+
+                // Điền các variants vào dropdown
+                const variantSelect = document.getElementById('variant-select');
+                const variantValueSelect = document.getElementById('variant-value-select');
+
+                // Đảm bảo dropdown variant và variant-value được reset trước khi thêm mới
+                variantSelect.innerHTML = '<option value="">Chọn danh mục</option>'; // Reset dropdown
+                variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>'; // Reset dropdown
+
+                // Thêm các variants vào dropdown variant-select
+                if (product.variants && product.variants.length > 0) {
+                    product.variants.forEach(variant => {
+                        let variantOption = document.createElement("option");
+                        variantOption.value = variant.variantName;
+                        variantOption.textContent = `Biến thể ${variant.variantName}`;
+                        variantSelect.appendChild(variantOption);
+
+                        // Nếu có variantValueId, chọn mặc định cho variant-value-select
+                        if (variant.variantValueName) {
+                            let variantValueOption = document.createElement("option");
+                            variantValueOption.value = variant.variantValueName;
+                            variantValueOption.textContent = `Giá trị ${variant.variantValueName}`;
+                            variantValueSelect.appendChild(variantValueOption);
+                        }
+                    });
+
+                    // Chọn mặc định cho variant và variant value từ response
+                    variantSelect.value = product.variants[0].variantId;
+                    variantValueSelect.value = product.variants[0].variantValueId;
+                }
+
             } else {
                 alert('Không tìm thấy thông tin sản phẩm.');
             }
@@ -762,3 +794,5 @@ function fetchProductDetails(productId) {
             alert('Có lỗi xảy ra khi lấy thông tin sản phẩm.');
         });
 }
+
+
