@@ -1,4 +1,6 @@
-<%--
+<%@ page import="com.example.backend.model.User" %>
+<%@ page import="com.example.backend.model.Address" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: mr.hung
   Date: 1/12/25
@@ -33,139 +35,185 @@
                 <a href="#">Thêm </a>
             </div>
         </div>
+<%--        <div id="card_body">--%>
+
+<%--            <div class="address_item row">--%>
+
+<%--                <div class="icon mid_align">--%>
+<%--                    <i class="fa-solid fa-house"></i>--%>
+<%--                </div>--%>
+
+
+<%--                <div class="infor">--%>
+<%--                    <div class="item_header row mid_align">--%>
+<%--                        <span class="name">Jackei Chan</span>--%>
+<%--                        <div class="rec_vertical"></div>--%>
+<%--                        <span class="phone">03999989970</span>--%>
+
+<%--                        <div class="default">Mặc định</div>--%>
+
+<%--                    </div>--%>
+
+
+<%--                    <div class="item_body">--%>
+<%--                        <div class="address_detail">--%>
+<%--                            <span>Số 8, Đường Hàm Nghi </span>--%>
+<%--                        </div>--%>
+
+<%--                        <div class="location">--%>
+<%--                            <span>Quận 1, TP.HCM </span>--%>
+<%--                        </div>--%>
+
+<%--                    </div>--%>
+<%--                </div>--%>
+
+<%--                <div class="manage mid_align col">--%>
+<%--                    <button class="update_btn">--%>
+<%--                        Thay đổi--%>
+<%--                    </button>--%>
+<%--                    <button disabled class="set_default_btn disabled">--%>
+<%--                        Đặt làm mặc định--%>
+<%--                    </button>--%>
+<%--                    <button class="delete_btn">Xóa</button>--%>
+<%--                </div>--%>
+
+
+<%--            </div>--%>
+
+
+<%--            <div class="address_item row">--%>
+
+<%--                <div class="icon mid_align">--%>
+<%--                    <i class="fa-regular fa-building"></i>--%>
+<%--                </div>--%>
+
+
+<%--                <div class="infor">--%>
+<%--                    <div class="item_header row mid_align">--%>
+<%--                        <span class="name">Jackei Chan</span>--%>
+<%--                        <div class="rec_vertical"></div>--%>
+<%--                        <span class="phone">03999989970</span>--%>
+
+
+<%--                    </div>--%>
+
+
+<%--                    <div class="item_body">--%>
+<%--                        <div class="address_detail">--%>
+<%--                            <span>Số 8, Đường Hàm Nghi </span>--%>
+<%--                        </div>--%>
+
+<%--                        <div class="location">--%>
+<%--                            <span>Quận 1, TP.HCM </span>--%>
+<%--                        </div>--%>
+
+<%--                    </div>--%>
+<%--                </div>--%>
+
+<%--                <div class="manage mid_align col">--%>
+<%--                    <button class="update_btn">--%>
+<%--                        Thay đổi--%>
+<%--                    </button>--%>
+<%--                    <button class="set_default_btn">--%>
+<%--                        Đặt làm mặc định--%>
+<%--                    </button>--%>
+<%--                    <button class="delete_btn">Xóa</button>--%>
+<%--                </div>--%>
+
+
+<%--            </div>--%>
+
+
+<%--            <div class="address_item row">--%>
+
+<%--                <div class="icon mid_align">--%>
+<%--                    <i class="fa-solid fa-house"></i>--%>
+<%--                </div>--%>
+
+
+<%--                <div class="infor">--%>
+<%--                    <div class="item_header row mid_align">--%>
+<%--                        <span class="name">Jackei Chan</span>--%>
+<%--                        <div class="rec_vertical"></div>--%>
+<%--                        <span class="phone">03999989970</span>--%>
+
+
+<%--                    </div>--%>
+
+
+<%--                    <div class="item_body">--%>
+<%--                        <div class="address_detail">--%>
+<%--                            <span>Số 8, Đường Hàm Nghi </span>--%>
+<%--                        </div>--%>
+
+<%--                        <div class="location">--%>
+<%--                            <span>Quận 1, TP.HCM </span>--%>
+<%--                        </div>--%>
+
+<%--                    </div>--%>
+<%--                </div>--%>
+
+<%--                <div class="manage mid_align col">--%>
+<%--                    <button class="update_btn">--%>
+<%--                        Thay đổi--%>
+<%--                    </button>--%>
+<%--                    <button class="set_default_btn">--%>
+<%--                        Đặt làm mặc đinh--%>
+<%--                    </button>--%>
+<%--                    <button class="delete_btn">Xóa</button>--%>
+<%--                </div>--%>
+
+
+<%--            </div>--%>
+
+<%--        </div>--%>
         <div id="card_body">
-
+            <%
+                User user = (User) request.getAttribute("user");
+                List<Address> addresses = (List<Address>) request.getAttribute("addresses");
+                if (user != null && addresses != null) {
+                    for (Address address : addresses) {
+            %>
             <div class="address_item row">
-
                 <div class="icon mid_align">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid <%= address.getType().equals("house") ? "fa-house" : "fa-building" %>"></i>
                 </div>
-
 
                 <div class="infor">
                     <div class="item_header row mid_align">
-                        <span class="name">Jackei Chan</span>
+                        <span class="name"><%= user.getFullName() %></span>
                         <div class="rec_vertical"></div>
-                        <span class="phone">03999989970</span>
-
+                        <span class="phone"><%= user.getPhone() %></span>
+                        <% if (address.getIsDefault()) { %>
                         <div class="default">Mặc định</div>
-
+                        <% } %>
                     </div>
-
 
                     <div class="item_body">
                         <div class="address_detail">
-                            <span>Số 8, Đường Hàm Nghi </span>
+                            <span><%= address.getDetail() %></span>
                         </div>
-
                         <div class="location">
-                            <span>Quận 1, TP.HCM </span>
+                            <span><%= address.getDistrict() %>, <%= address.getProvince() %></span>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="manage mid_align col">
-                    <button class="update_btn">
-                        Thay đổi
-                    </button>
-                    <button disabled class="set_default_btn disabled">
-                        Đặt làm mặc định
-                    </button>
+                    <button class="update_btn">Thay đổi</button>
+                    <% if (!address.getIsDefault()) { %>
+                    <button class="set_default_btn">Đặt làm mặc định</button>
+                    <% } else { %>
+                    <button class="set_default_btn disabled" disabled>Đặt làm mặc định</button>
+                    <% } %>
                     <button class="delete_btn">Xóa</button>
                 </div>
-
-
             </div>
-
-
-            <div class="address_item row">
-
-                <div class="icon mid_align">
-                    <i class="fa-regular fa-building"></i>
-                </div>
-
-
-                <div class="infor">
-                    <div class="item_header row mid_align">
-                        <span class="name">Jackei Chan</span>
-                        <div class="rec_vertical"></div>
-                        <span class="phone">03999989970</span>
-
-
-                    </div>
-
-
-                    <div class="item_body">
-                        <div class="address_detail">
-                            <span>Số 8, Đường Hàm Nghi </span>
-                        </div>
-
-                        <div class="location">
-                            <span>Quận 1, TP.HCM </span>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="manage mid_align col">
-                    <button class="update_btn">
-                        Thay đổi
-                    </button>
-                    <button class="set_default_btn">
-                        Đặt làm mặc định
-                    </button>
-                    <button class="delete_btn">Xóa</button>
-                </div>
-
-
-            </div>
-
-
-            <div class="address_item row">
-
-                <div class="icon mid_align">
-                    <i class="fa-solid fa-house"></i>
-                </div>
-
-
-                <div class="infor">
-                    <div class="item_header row mid_align">
-                        <span class="name">Jackei Chan</span>
-                        <div class="rec_vertical"></div>
-                        <span class="phone">03999989970</span>
-
-
-                    </div>
-
-
-                    <div class="item_body">
-                        <div class="address_detail">
-                            <span>Số 8, Đường Hàm Nghi </span>
-                        </div>
-
-                        <div class="location">
-                            <span>Quận 1, TP.HCM </span>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="manage mid_align col">
-                    <button class="update_btn">
-                        Thay đổi
-                    </button>
-                    <button class="set_default_btn">
-                        Đặt làm mặc đinh
-                    </button>
-                    <button class="delete_btn">Xóa</button>
-                </div>
-
-
-            </div>
-
+            <%
+                    }
+                }
+            %>
         </div>
-
     </div>
 
 
