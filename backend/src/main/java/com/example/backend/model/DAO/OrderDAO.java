@@ -32,29 +32,37 @@ public interface OrderDAO {
 
 
 
-    @SqlQuery(value ="\n" +
-            "select\n" +
-            "    o.id as id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
+    @SqlQuery(value ="select\n" +
+            "    o.id , o.createAt, o.paymentStatus, o.orderStatus,\n" +
             "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
             "    sum(od.quantity) as quantity, sum(od.total) as total,\n" +
             "    min(p.name) as productName,\n" +
             "    i.url as productImage\n" +
-            "\n" +
             "from orders as o inner join order_detail as od\n" +
             "        on o.id = od.orderId\n" +
             "    inner join products as p\n" +
             "        on p.id = od.productId\n" +
             "    inner join image as i\n" +
             "        on  i.id = p.primaryImage\n" +
-            "\n" +
             "where o.userId = :userId\n" +
             "group by\n" +
             "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
-            "    i.url\n"+
-            " order by o.createAt desc "
+            "    o.userId, o.addressId, o.cardId, o.isCOD\n" +
+            "order by o.createAt desc  ;"
 
     )
     List<Order> getOrdersByUserId(@Bind("userId") Integer userId);
 
+
+    @SqlQuery(value = "select\n" +
+            "    o.id as id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
+            "    sum(od.total) as total\n" +
+            "from orders as o inner join order_detail as od\n" +
+            "                            on o.id = od.orderId\n" +
+            "where o.userId = :userId and o.id = :orderId\n" +
+            "group by\n" +
+            "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD\n")
+        Order getOrderByIdAndUserId(@Bind("orderId") Integer orderId, @Bind("userId") Integer userId);
 }
