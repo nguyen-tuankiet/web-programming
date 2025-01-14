@@ -1,40 +1,39 @@
-// JavaScript cho trang User Address
 document.addEventListener("DOMContentLoaded", function () {
-    // Mở bảng (modal)
     const addBtn = document.querySelector(".add_btn");
-    const modal = document.getElementById("addAddressModal");
-    const closeBtn = document.querySelector(".close_modal");
+    const formContainer = document.getElementById("addAddressFormContainer");
     const saveBtn = document.querySelector("#saveAddress");
+    const cancelBtn = document.querySelector("#cancelAddressForm");
 
+    // Hiển thị form thêm địa chỉ
     addBtn.addEventListener("click", function () {
-        modal.style.display = "block";
+        formContainer.style.display = "block";
     });
 
-    // Đóng bảng
-    closeBtn.addEventListener("click", function () {
-        modal.style.display = "none";
+    // Ẩn form khi nhấn Hủy
+    cancelBtn.addEventListener("click", function () {
+        formContainer.style.display = "none";
     });
 
-    // Lưu địa chỉ
+    // Lưu địa chỉ (Thêm logic tại đây)
     saveBtn.addEventListener("click", function () {
-        const province = document.getElementById("province").value;
-        const district = document.getElementById("district").value;
-        const commune = document.getElementById("commune").value;
-        const name = document.getElementById("name").value;
-        const phone = document.getElementById("phone").value;
-        // const type = document.querySelector('input[name="type"]:checked')?.value;
+        const province = document.getElementById("province").value.trim();
+        const district = document.getElementById("district").value.trim();
+        const commune = document.getElementById("commune").value.trim();
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
 
-        // if (!province || !district || !commune || !name || !phone || !type) {
-        if (!province || !district || !commune || !name || !phone ) {
+        // Kiểm tra thông tin
+        if (!province || !district || !commune || !name || !phone) {
             alert("Vui lòng điền đầy đủ thông tin.");
             return;
         }
 
-        // Gửi dữ liệu đến backend hoặc xử lý tại đây
-        // console.log({ province, district, commune, name, phone, type });
         console.log({ province, district, commune, name, phone });
 
-        // Đóng bảng
-        modal.style.display = "none";
+        // Reset form
+        document.getElementById("addAddressForm").reset();
+
+        // Ẩn form
+        formContainer.style.display = "none";
     });
 });
