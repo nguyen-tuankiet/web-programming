@@ -232,4 +232,50 @@ public interface ProductDAO {
             "set noOfSold = noOfSold + :quantity\n" +
             "where id = :id ;\n")
     Boolean increaseNoOfSold(@Bind("id") int id, @Bind("quantity") Integer quantity );
+
+
+
+
+
+    @SqlQuery(value = "SELECT p.id           as id,\n" +
+            "       p.name         as name,\n" +
+            "       p.noOfViews    as noOfViews,\n" +
+            "       p.noOfSold     as noOfSold,\n" +
+            "       p.sku          as sku,\n" +
+            "       p.isActive     as isActive,\n" +
+            "       p.brandId      as brandId,\n" +
+            "       p.categoryId   as categoryId,\n" +
+            "       p.primaryImage as primaryImage,\n" +
+            "       img.url        as imageUrl,\n" +
+            "       sum(ops.stock) as stock\n" +
+            "\n" +
+            "FROM products as p\n" +
+            "          INNER JOIN `options` as ops on ops.productId = p.id\n" +
+            "         inner join image as img on p.primaryImage = img.id\n" +
+            "\n" +
+            "where p.isActive = true\n" +
+            "group by p.id, p.name, p.description,\n" +
+            "         p.sku, p.isActive, p.brandId,\n" +
+            "         p.noOfViews, p.noOfSold, p.categoryId,\n" +
+            "         p.primaryImage, img.url\n" +
+            "\n" +
+            "order by p.noOfSold desc , p.noOfViews desc\n" +
+            "\n" +
+            "limit 10;\n")
+    List<Product> getTop10();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
