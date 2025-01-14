@@ -1,31 +1,31 @@
 // // Hàm kiểm tra email và hiển thị hộp nhập OTP
-// function validateEmail() {
-//     const emailInput = document.getElementById("emailInput").value.trim();
-//     const errorMessage = document.getElementById("errorMessage");
-//     const resetBox = document.getElementById("resetBox");
-//     const otpBox = document.getElementById("otpBox");
-//
-//     // Biểu thức chính quy kiểm tra email hợp lệ
-//     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-//
-//     // Nếu ô email trống
-//     if (emailInput === "") {
-//         errorMessage.textContent = "Vui lòng nhập email của bạn.";
-//         errorMessage.style.display = "block"; // Hiển thị thông báo lỗi
-//         return; // Dừng lại ở đây, không tiếp tục kiểm tra email
-//     }
-//
-//     // Nếu email không hợp lệ
-//     if (!emailRegex.test(emailInput)) {
-//         errorMessage.textContent = "Vui lòng nhập một email hợp lệ.";
-//         errorMessage.style.display = "block"; // Hiển thị thông báo lỗi
-//     } else {
-//         errorMessage.style.display = "none";  // Ẩn thông báo lỗi nếu email hợp lệ
-//         resetBox.style.display = "none";      // Ẩn hộp nhập email
-//         otpBox.style.display = "block";       // Hiển thị hộp nhập OTP
-//         startTimer();                         // Bắt đầu đếm ngược thời gian cho OTP
-//     }
-// }
+function validateEmail() {
+    const emailInput = document.getElementById("emailInput").value.trim();
+    const errorMessage = document.getElementById("errorMessage");
+    const resetBox = document.getElementById("resetBox");
+    const otpBox = document.getElementById("otpBox");
+
+    // Biểu thức chính quy kiểm tra email hợp lệ
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    // Nếu ô email trống
+    if (emailInput === "") {
+        errorMessage.textContent = "Vui lòng nhập email của bạn.";
+        errorMessage.style.display = "block"; // Hiển thị thông báo lỗi
+        return; // Dừng lại ở đây, không tiếp tục kiểm tra email
+    }
+
+    // Nếu email không hợp lệ
+    if (!emailRegex.test(emailInput)) {
+        errorMessage.textContent = "Vui lòng nhập một email hợp lệ.";
+        errorMessage.style.display = "block"; // Hiển thị thông báo lỗi
+    } else {
+        errorMessage.style.display = "none";  // Ẩn thông báo lỗi nếu email hợp lệ
+        resetBox.style.display = "none";      // Ẩn hộp nhập email
+        otpBox.style.display = "block";       // Hiển thị hộp nhập OTP
+        startTimer();                         // Bắt đầu đếm ngược thời gian cho OTP
+    }
+}
 //
 // // Chuyển đến ô tiếp theo khi nhập mã OTP
 // function moveToNext(current, nextFieldID) {
@@ -164,9 +164,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function submitPassword() {
-        const password = document.getElementById("passwordInput").value;
+        const newPassword = document.getElementById("passwordInput").value;
         const confirmPassword = document.getElementById("confirmPasswordInput").value;
-        if (!password || password !== confirmPassword) {
+        if (!newPassword || newPassword !== confirmPassword) {
             passwordErrorMessage.textContent = "Mật khẩu không khớp.";
             passwordErrorMessage.style.display = "block";
             return;
@@ -174,12 +174,13 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch("reset-password", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: `password=${encodeURIComponent(password)}`,
+            body: `newPassword=${encodeURIComponent(newPassword)}&confirmPassword=${encodeURIComponent(confirmPassword)}`,
+
         })
             .then((response) => {
                 if (response.ok) {
                     alert("Mật khẩu của bạn đã được đặt lại thành công!");
-                    window.location.href = "/login.jsp";
+                    window.location.href = `/backend_war/login`;
                 } else {
                     passwordErrorMessage.textContent = "Không thể đặt lại mật khẩu.";
                     passwordErrorMessage.style.display = "block";
