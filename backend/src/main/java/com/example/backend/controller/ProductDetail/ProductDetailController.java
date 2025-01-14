@@ -56,7 +56,7 @@ public class ProductDetailController extends HttpServlet {
         request.setAttribute("varaints", varaints);
 
 
-
+        productService.increaseNoOfViews(productId);
 
         request.getRequestDispatcher("product_detail/ProductDetail.jsp").forward(request, response);
     }
