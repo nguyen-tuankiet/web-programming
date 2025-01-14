@@ -18,10 +18,14 @@ public class CardService {
         return cardDAO.getCardByUserId(userId);
     }
 
+    public Card getCardById(Integer cardId) {
+        return cardDAO.getCardById(cardId);
+    }
 
     public static void main(String[] args) {
         CardService cardService = new CardService(DBConnection.getJdbi());
-        System.out.println(cardService.getCartByUserId(1));
+//        System.out.println(cardService.getCartByUserId(1));
+        System.out.println(cardService.getCardById(1));
     }
 
 }
