@@ -15,4 +15,11 @@ public interface CardDAO {
             "WHERE userId = :userId;")
     List<Card> getCardByUserId(@Bind("userId") Integer userId);
 
+
+
+    @SqlQuery(value = "SELECT *\n" +
+            "FROM card\n" +
+            "WHERE id = :cardId;")
+    Card getCardById(@Bind("cardId") Integer cardId);
+
 }

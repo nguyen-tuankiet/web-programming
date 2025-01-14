@@ -188,13 +188,13 @@
 
                             <div class="content_item">
                                 <span class="desc">Giá sản phẩm</span>
-                                <span id="product_price" class="value">79,000,000 VND</span>
+                                <span id="product_price" class="value">0 VND</span>
                             </div>
 
 
                             <div class="content_item">
                                 <span class="desc">Thuế GTGT ( 10% )</span>
-                                <span id="VAT" class="value">7,900,000 VND</span>
+                                <span id="VAT" class="value">0 VND</span>
                             </div>
 
                             <div class="rec_horizontal"></div>
@@ -213,57 +213,76 @@
                     </div>
 
 
-                    <div id="customer" class="col">
-                        <div class="title">
-                            <span>Thông tin khách hàng</span>
-                        </div>
 
-                        <div class="content row">
+                    <c:if   test="${not empty user}">
+                        <div id="customer" class="col">
 
-                            <div class="section_left col">
+                            <div class="title">
+                                <span>Thông tin khách hàng</span>
+                            </div>
+
+                            <div class="content row">
+
+                                <div class="section_left col">
 
 
-                                <div class="content_item full_name" >
-                                    <i class="fa-regular fa-user" ></i>
-                                    <span> Trần Quốc Hưng </span>
+                                    <div class="content_item full_name" >
+                                        <i class="fa-regular fa-user" ></i>
+                                        <span> ${user.fullName} </span>
+                                    </div>
+
+                                    <div class="content_item phone">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <c:if test="${not empty user.phone}">
+                                            <span>${user.phone}</span>
+                                        </c:if>
+                                    </div>
+
+                                    <div class="content_item mail">
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <span>${user.email}</span>
+                                    </div>
+
+                                    <div class="content_item address">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span>Số 8, Đường Hàm Nghi,Quận 1, TP.HCM</span>
+                                    </div>
+
+
                                 </div>
 
-                                <div class="content_item phone">
-                                    <i class="fa-solid fa-phone"></i>
-                                    <span>0399989970</span>
-                                </div>
 
-                                <div class="content_item mail">
-                                    <i class="fa-regular fa-envelope"></i>
-                                    <span>tranquochung0404@gmail.com</span>
-                                </div>
+                                <div class="section_right">
+                                    <div class="title">
+                                        <span>Phương thức thanh toán:</span>
+                                    </div>
 
-                                <div class="content_item address">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <span>Số 8, Đường Hàm Nghi,Quận 1, TP.HCM</span>
+                                    <div class="content col">
+
+                                        <c:if test="${ not empty card}">
+                                            <span>${card.type} : **** ${card.last4}</span>
+                                            <span>Thời hạn: ${card.duration}.</span>
+                                        </c:if>
+
+
+                                        <c:if test="${COD == true }">
+                                            <span>Thanh toán khi nhận hàng</span>
+
+                                        </c:if>
+
+
+                                    </div>
+
                                 </div>
 
 
                             </div>
 
 
-                            <div class="section_right">
-                                <div class="title">
-                                    <span>Phương thức thanh toán:</span>
-                                </div>
-
-                                <div class="content col">
-                                    <span>Visa: ****9999.</span>
-                                    <span>Thời hạn: 12/25.</span>
-                                </div>
-
-                            </div>
-
-
                         </div>
+                    </c:if>
 
 
-                    </div>
 
 
                 </div>
