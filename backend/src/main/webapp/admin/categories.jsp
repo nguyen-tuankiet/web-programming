@@ -23,14 +23,7 @@
 
     <div class="content">
         <div class="toolbar">
-<%--            <div id="add-category-box" class="hidden">--%>
-<%--                <h3>Thêm Sản Phẩm</h3>--%>
-<%--                <input type="text" placeholder="Nhập" class="input-field"/>--%>
-<%--                <div class="action-buttons">--%>
-<%--                    <button class="add-btn">Thêm</button>--%>
-<%--                    <button class="discard-btn">Hủy</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+
     <div id="add-category-box" class="hidden">
         <h3>Thêm Danh Mục</h3>
         <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên danh mục" class="input-field" required />
@@ -54,9 +47,7 @@
                 </select>
                 mục
             </div>
-<%--            <label>--%>
-<%--                <input type="text" class="search-bar" placeholder="Tìm kiếm">--%>
-<%--            </label>--%>
+
         </div>
 
         <table class="product-table">
@@ -114,18 +105,12 @@
                                         <i class="fa-solid fa-chevron-down" style="padding: 5px;"></i>
                                     </button>
                                     <div class="dropdown-content">
-<%--                                        <span class="icon view-icon">--%>
-<%--                                            <i class="fa-regular fa-eye" style="padding: 5px;"></i>--%>
-<%--                                            Xem--%>
-<%--                                        </span>--%>
+
                                         <span class="icon edit-icon">
                                             <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
                                             Sửa
                                         </span>
-<%--                                        <span class="icon delete-icon">--%>
-<%--                                            <i class="fa-solid fa-trash" style="padding: 5px;"></i>--%>
-<%--                                            Xóa--%>
-<%--                                        </span>--%>
+
                                     </div>
                                 </div>
                             </div>
