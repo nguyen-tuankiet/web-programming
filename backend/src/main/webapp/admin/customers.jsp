@@ -65,7 +65,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="order-row" data-url="${pageContext.request.contextPath}/admin/customerDetail.jsp">
+                <tr class="order-row"
+<%--                    data-url="${pageContext.request.contextPath}/admin/customerDetail.jsp"--%>
+                >
                     <td><input type="checkbox"></td>
                     <td>
                         <img src="https://dashui.codescandy.com/dashuipro/assets/images/avatar/avatar-11.jpg" class="avatar"> Nguyễn Tuấn Kiệt
@@ -74,7 +76,7 @@
                     <td>nguyentuankiet@gmail.com</td>
                     <td>Bến tre</td>
                     <td>03/24/2023</td>
-                    <td><span class="status active">Hoạt Động</span></td>
+<%--                    <td><span class="status active">Hoạt Động</span></td>--%>
                     <td>
                         <button class="edit-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
