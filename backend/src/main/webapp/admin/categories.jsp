@@ -94,11 +94,9 @@
                         <td>
                             <div class="product">
                                 <p>${category.name}</p>
-<%--                                <p>name</p>--%>
                             </div>
                         </td>
                         <td>${category.totalStock}</td>
-<%--                        <p>stock</p>--%>
                         <td>
                             <div class="action-icons">
                                 <div class="dropdown">
