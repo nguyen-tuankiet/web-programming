@@ -104,7 +104,6 @@ public class CheckoutController extends HttpServlet {
         JSONArray products = jsonObject.getJSONArray("products");
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
-        //TODO: get user from section
 
         Order order = new Order();
         order.setCreateAt(LocalDate.now());
