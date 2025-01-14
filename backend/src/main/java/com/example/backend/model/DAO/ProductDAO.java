@@ -157,6 +157,8 @@ public interface ProductDAO {
     public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit );
 
 
+    @SqlUpdate("UPDATE products SET isActive = false WHERE id = :id")
+    boolean deactivateProduct(@Bind("id") int id);
 
 
 }
