@@ -18,10 +18,10 @@ public class OTPVerificationController extends HttpServlet {
         String sessionOtp = (String) request.getSession().getAttribute("otp");
 
         if (enteredOtp != null && enteredOtp.equals(sessionOtp)) {
-            response.sendRedirect("/new-password.jsp");
+            response.sendRedirect("/forgotpassword.jsp");
         } else {
             request.setAttribute("errorMessage", "Mã OTP không chính xác");
-            request.getRequestDispatcher("/otp-verification.jsp").forward(request, response);
+            request.getRequestDispatcher("/forgotpassword.jsp").forward(request, response);
         }
     }
 }
