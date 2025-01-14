@@ -721,3 +721,44 @@ document.addEventListener("DOMContentLoaded", () => {
         await Promise.all(optionPromises);
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+
+    if (productId) {
+        // Gọi API để lấy dữ liệu sản phẩm và điền vào form
+        fetchProductDetails(productId);
+    }
+});
+
+function fetchProductDetails(productId) {
+    fetch(`editProduct?id=${productId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.statusCode === 200 && data.data) {
+                const product = data.data;
+                document.getElementById('productName').value = product.name;
+                document.getElementById('sku').value = product.sku;
+                document.getElementById('categoryDropdown').value = product.categoryId; // Lựa chọn danh mục tương ứng
+                document.getElementById('description').value = product.description;
+                document.getElementById('previewImage').src = product.imageUrl;
+                document.getElementById('price').value = product.price;
+                document.getElementById('total').value = product.stock;
+                document.getElementById('vendor').value = product.brandId || '';
+                document.getElementById('tags').value = product.tags || '';
+                document.getElementById('optionsContainer1').value = product.optionId;
+            } else {
+                alert('Không tìm thấy thông tin sản phẩm.');
+            }
+        })
+        .catch(error => {
+            console.error('Có lỗi xảy ra khi gọi API:', error);
+            alert('Có lỗi xảy ra khi lấy thông tin sản phẩm.');
+        });
+}

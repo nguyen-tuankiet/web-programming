@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.model.Category;
 import com.example.backend.model.DAO.CategoryDAO;
 import org.jdbi.v3.core.Jdbi;
 
@@ -16,7 +17,7 @@ public class CategoryService {
 //    public void addCategory(Category category) {
 //        categoryDAO.addCategory(category.getName());
 //    }
-=======
+
     public List<Category> getAllCategories() {
         return categoryDAO.getAllCategories();
     }
@@ -45,5 +46,6 @@ public class CategoryService {
     public void deleteCategory(Integer id) {
         categoryDAO.deleteCategory(id);
     }
+
 
 }
