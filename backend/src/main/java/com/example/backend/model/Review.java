@@ -3,6 +3,7 @@ package com.example.backend.model;
 
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 public class Review {
     Integer id;
@@ -12,6 +13,8 @@ public class Review {
     String description;
     Integer orderId;
 
+
+    @JdbiConstructor
     public Review(@ColumnName("id") @Nullable Integer id,
                   @ColumnName("userId") @Nullable Integer userId,
                   @ColumnName("productId") @Nullable Integer productId,
@@ -26,6 +29,10 @@ public class Review {
         this.description = description;
         this.orderId = orderId;
     }
+
+
+    public Review() {
+     }
 
     public Integer getId() {
         return id;
