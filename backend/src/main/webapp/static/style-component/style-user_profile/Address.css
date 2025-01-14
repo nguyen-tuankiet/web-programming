@@ -309,3 +309,70 @@ i{
 .HomeorOffice{
     display:inline-flex;
 }
+#addAddressFormContainer {
+    display: none; /* Ẩn form theo mặc định */
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 50%; /* Giới hạn chiều rộng */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Hiển thị nổi */
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    z-index: 1000;
+}
+
+#addAddressFormContainer h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#addAddressFormContainer label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#addAddressFormContainer input[type="text"],
+#addAddressFormContainer input[type="radio"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #cfcfcf;
+    border-radius: 5px;
+}
+
+#addAddressFormContainer button {
+    width: calc(50% - 10px); /* Căn chỉnh nút */
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#addAddressFormContainer #saveAddress {
+    background-color: #3665F3;
+    color: white;
+}
+
+#addAddressFormContainer #saveAddress:hover {
+    background-color: #274bb3;
+}
+
+#addAddressFormContainer #cancelAddressForm {
+    background-color: #f44336;
+    color: white;
+}
+
+#addAddressFormContainer #cancelAddressForm:hover {
+    background-color: #d32f2f;
+}
+.savecane{
+    display:inline-flex;
+}
