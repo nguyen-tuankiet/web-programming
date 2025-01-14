@@ -51,7 +51,8 @@ public class UserService {
 
         );
 
-        System.out.println(userService.updateUser(user));
+//        System.out.println(userService.updateUser(user));
+        System.out.println(userService.getUserById(112));
     }
 
 }
