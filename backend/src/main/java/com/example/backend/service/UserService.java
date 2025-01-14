@@ -25,6 +25,10 @@ public class UserService {
         return userDao.getAllUsers();
     }
 
+    public String getAvatarUrlById(Integer avatarId) {
+        return userDao.getAvatarUrlById(avatarId);
+    }
+
 
     public Boolean updateAvatar(Integer userId, Integer avatarId) {
         return userDao.updateAvatar(userId, avatarId);
