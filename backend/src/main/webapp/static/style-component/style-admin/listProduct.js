@@ -143,3 +143,48 @@ document.addEventListener("DOMContentLoaded", function () {
     // Khởi tạo hiển thị mặc định
     showPage(1);
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const deleteIcons = document.querySelectorAll('.delete-icon');
+
+    deleteIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
+                deleteProduct(productId);
+            }
+        });
+    });
+});
+function deleteProduct(productId) {
+    const url = 'delete-product';  // URL của Servlet xử lý yêu cầu
+
+    const requestData = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId: productId })
+    };
+
+    fetch(url, requestData)
+        .then(response => response.json())  // Chuyển phản hồi thành JSON
+        .then(data => {
+            if (data.status === "success") {
+                alert(data.message);  // Hiển thị thông báo thành công
+                window.location.reload()
+                const row = document.querySelector(`tr[data-product-id="${productId}"]`);
+
+                if (row) {
+                    row.remove();
+                }
+            } else {
+                alert(data.message);  // Hiển thị thông báo lỗi
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Không thể kết nối đến máy chủ!');
+        });
+}
