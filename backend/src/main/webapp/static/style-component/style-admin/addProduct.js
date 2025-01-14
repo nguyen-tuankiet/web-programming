@@ -438,157 +438,163 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
-//  variant
 document.addEventListener("DOMContentLoaded", () => {
     const categorySelect = document.getElementById("categoryDropdown");
     const variantSelect = document.getElementById("variant-select");
     const variantValueSelect = document.getElementById("variant-value-select");
+    const uploadButton = document.getElementById("uploadButton");
+    const fileInput = document.getElementById("fileInput");
+    const previewImage = document.getElementById("previewImage");
+    const saveButton = document.getElementById("saveButton");
+
+    // Khai báo biến lưu trữ ID variant và variantValue
+    let selectedVariantId = null;
+    let selectedVariantValueId = null;
 
     if (!variantSelect || !variantValueSelect) {
         console.error("Các phần tử dropdown không tồn tại");
         return;
     }
 
-    if (!categorySelect){
-        loadVariantsByCategory(null);
-    }
-    // Lắng nghe sự kiện thay đổi của category
-    else {
-        categorySelect.addEventListener("change", function () {
-            const categoryId = this.value;
-            if (categoryId) {
-                loadVariantsByCategory(categoryId);
-            } else {
-                // Reset danh sách variant nếu không chọn category
-                variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
-                variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
-            }
+    // Xử lý sự kiện thay đổi của category
+    if (categorySelect) {
+        categorySelect.addEventListener("change", () => {
+            const categoryId = categorySelect.value;
+            loadVariantsByCategory(categoryId || null);
         });
     }
 
     // Lắng nghe sự kiện thay đổi của variant
-    variantSelect.addEventListener("change", function () {
-        const variantId = this.value;
-        if (variantId) {
-            fetchVariantValues(variantId);
+    variantSelect.addEventListener("change", () => {
+        selectedVariantId = variantSelect.value;  // Lưu ID của variant đã chọn
+        if (selectedVariantId) {
+            fetchVariantValues(selectedVariantId);
         } else {
-            // Reset danh sách variant values nếu không chọn variant
-            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+            resetVariantValues();
         }
     });
 
-    // Hàm tải danh sách variants dựa trên categoryId
+    // Lắng nghe sự kiện thay đổi của variantValue
+    variantValueSelect.addEventListener("change", () => {
+        selectedVariantValueId = Number(variantValueSelect.value); // Lưu ID variantValue được chọn
+        console.log("Selected VariantValue ID:", selectedVariantValueId);
+    });
+
+    // Mở hộp thoại chọn file khi bấm nút "Tải ảnh lên"
+    uploadButton.addEventListener("click", () => fileInput.click());
+
+    // Hiển thị ảnh xem trước khi chọn file
+    fileInput.addEventListener("change", () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => previewImage.src = e.target.result;
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Xử lý sự kiện lưu thông tin sản phẩm
+    saveButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+        const formData = gatherFormData();
+        if (!formData) return alert("Vui lòng điền đầy đủ các trường bắt buộc!");
+
+        try {
+            // Upload ảnh sản phẩm
+            const uploadData = await uploadImages(fileInput.files);
+            const productData = await createProduct(formData, uploadData);
+            await assignAdditionalImages(uploadData, productData.id);
+
+            // Thêm các tùy chọn sản phẩm
+            await addProductOptions(productData.id);
+            alert("Thêm sản phẩm và tùy chọn thành công!");
+            window.location.href = "list-product";
+        } catch (error) {
+            console.error("Lỗi:", error);
+            alert(`Đã xảy ra lỗi: ${error.message}`);
+        }
+    });
+
+    // Hàm tải variants theo category
     async function loadVariantsByCategory(categoryId) {
         try {
-            variantSelect.innerHTML = '<option>Đang tải...</option>'; // Thông báo trạng thái
-
-
-
-            const url = categoryId
-                ? `api/variants?categoryId=${categoryId}`
-                : `api/variants`;
-
+            variantSelect.innerHTML = '<option>Đang tải...</option>';
+            const url = categoryId ? `api/variants?categoryId=${categoryId}` : `api/variants`;
             const response = await fetch(url);
             const data = await response.json();
-
-
 
             if (data.statusCode === 200) {
                 populateVariants(data.data);
             } else {
                 alert("Không thể tải danh sách biến thể!");
-                variantSelect.innerHTML = '<option value="">Chọn biến thể</option>'; // Reset khi lỗi
+                resetVariantsAndValues();
             }
         } catch (error) {
-            console.error("Error fetching variants by category:", error);
-            variantSelect.innerHTML = '<option value="">Chọn biến thể</option>'; // Reset khi lỗi
+            console.error("Lỗi khi tải variants:", error);
+            resetVariantsAndValues();
         }
     }
 
     // Hàm hiển thị danh sách variants
     function populateVariants(variants) {
-        variantSelect.innerHTML = `<option value="">Chọn biến thể</option>`;
-        variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>'; // Reset variant values
+        variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
+        resetVariantValues();
         variants.forEach(variant => {
             const option = document.createElement("option");
-            option.value = variant.id; // Lưu ID để fetch Variant-Values
-            option.textContent = variant.name; // Hiển thị tên
+            option.value = variant.id;
+            option.textContent = variant.name;
             variantSelect.appendChild(option);
         });
     }
 
-    // Hàm tải danh sách variant-values dựa trên variantId
-    function fetchVariantValues(variantId) {
-        if (!variantId) {
-            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
-            return;
+    // Hàm tải giá trị của variant
+    async function fetchVariantValues(variantId) {
+        try {
+            variantValueSelect.innerHTML = '<option>Đang tải...</option>';
+            const response = await fetch(`api/variants/${variantId}`);
+            const data = await response.json();
+
+            if (data.statusCode === 200) {
+                populateVariantValues(data.data);
+            } else {
+                alert("Không thể tải danh sách giá trị biến thể!");
+                resetVariantValues();
+            }
+        } catch (error) {
+            console.error("Lỗi khi tải variant values:", error);
+            resetVariantValues();
         }
-
-        fetch(`api/variants/${variantId}`)
-            .then(response => {
-                if (!response.ok) throw new Error("Failed to fetch variant values");
-                return response.json();
-            })
-            .then(data => {
-                if (!variantValueSelect) {
-                    console.error("variantValueSelect không tồn tại!");
-                    return;
-                }
-
-                variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
-
-                if (data.statusCode === 200) {
-                    if (data.data && data.data.length > 0) {
-                        data.data.forEach(value => {
-                            const option = document.createElement("option");
-                            option.value = value.id;
-                            option.textContent = value.value;
-                            variantValueSelect.appendChild(option);
-                        });
-                    } else {
-                        console.warn("Không tìm thấy giá trị cho biến thể đã chọn.");
-                    }
-                } else {
-                    console.error("Error fetching variant values:", data.message);
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error.message);
-            });
     }
 
-});
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const uploadButton = document.getElementById("uploadButton");
-    const fileInput = document.getElementById("fileInput");
-    const previewImage = document.getElementById("previewImage");
-    const saveButton = document.getElementById("saveButton");
-
-    // Mở hộp thoại chọn file khi bấm nút "Tải ảnh lên"
-    uploadButton.addEventListener("click", function () {
-        fileInput.click();
-    });
-
-    // Xử lý khi file được chọn
-    fileInput.addEventListener("change", function () {
-        const file = fileInput.files[0];
-        if (file) {
-            // Hiển thị ảnh xem trước
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                previewImage.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
+    // Hàm hiển thị danh sách variant values
+    function populateVariantValues(values) {
+        variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+        if (values.length > 0) {
+            values.forEach(value => {
+                const option = document.createElement("option");
+                option.value = value.id;
+                option.textContent = value.value;
+                variantValueSelect.appendChild(option);
+            });
+        } else {
+            console.warn("Không tìm thấy giá trị cho biến thể đã chọn.");
         }
-    });
+    }
 
-    saveButton.addEventListener("click", function (event) {
-        event.preventDefault(); // Ngăn hành động mặc định của button
+    // Hàm reset variant values
+    function resetVariantValues() {
+        variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+        selectedVariantValueId = null; // Đặt lại selectedVariantValueId về null
+    }
 
+    // Hàm reset variants và variant-values
+    function resetVariantsAndValues() {
+        variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
+        resetVariantValues();
+    }
+
+    // Hàm thu thập dữ liệu từ form
+    function gatherFormData() {
         const productName = document.getElementById("productName").value.trim();
         const sku = document.getElementById("sku").value.trim();
         const category = document.getElementById("categoryDropdown").value;
@@ -597,158 +603,121 @@ document.addEventListener("DOMContentLoaded", function () {
         const price = document.getElementById("price").value.trim();
         const stock = document.getElementById("total").value.trim();
         const tags = document.getElementById("tags").value.trim();
-        const imageUpload = document.getElementById("fileInput").files;
+        const imageUpload = fileInput.files;
 
-        if (!productName || !category || !price || !stock) {
-            alert("Vui lòng điền đầy đủ các trường bắt buộc!");
-            return;
+        if (!productName || !category || !price || !stock || imageUpload.length === 0) {
+            return null;
         }
 
-        if (imageUpload.length === 0) {
-            alert("Vui lòng tải lên ảnh sản phẩm!");
-            return;
-        }
+        return {
+            productName,
+            sku,
+            category,
+            brand,
+            description,
+            price,
+            stock,
+            tags,
+            imageUpload
+        };
+    }
 
-        // Upload ảnh trước
+    // Hàm upload ảnh
+    async function uploadImages(files) {
         const formData = new FormData();
-        Array.from(imageUpload).forEach(file => formData.append("file", file));
+        Array.from(files).forEach(file => formData.append("file", file));
+        const uploadResponse = await fetch("uploadImage", { method: "POST", body: formData });
+        const uploadData = await uploadResponse.json();
 
-        fetch(`uploadImage`, {
+        if (uploadData.statusCode !== 200 || !uploadData.data || !uploadData.data.length) {
+            throw new Error("Không thể upload ảnh.");
+        }
+        return uploadData;
+    }
+
+    // Hàm tạo sản phẩm
+    async function createProduct(formData, uploadData) {
+        const productData = {
+            name: formData.productName,
+            sku: formData.sku,
+            categoryId: formData.category,
+            description: formData.description,
+            price: parseFloat(formData.price),
+            stock: parseInt(formData.stock),
+            brandId: formData.brand,
+            tags: formData.tags.split(",").map(tag => tag.trim()),
+            isActive: true,
+            primaryImage: uploadData.data[0].id,
+        };
+
+        const response = await fetch("products", {
             method: "POST",
-            body: formData,
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.statusCode === 200 && data.data && data.data.length > 0) {
-                    const imageId = data.data[0].id; // Lấy ID của ảnh chính
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(productData),
+        });
+        const product = await response.json();
 
-                    // Tạo sản phẩm
-                    const productData = {
-                        name: productName,
-                        sku: sku,
-                        categoryId: category,
-                        description: description,
-                        price: parseFloat(price),
-                        stock: parseInt(stock),
-                        brandId: brand,
-                        tags: tags.split(",").map(tag => tag.trim()),
-                        isActive: true, // Mặc định là true
-                        primaryImage: imageId, // Gán ID của ảnh chính
-                    };
+        if (!product.data || !product.data.id) {
+            throw new Error("Không thể thêm sản phẩm.");
+        }
 
-                    return fetch(`products`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(productData),
-                    })
-                        .then(response => response.json())
-                        .then(product => {
-                            if (product.data && product.data.id) {
-                                const productId = product.data.id; // Lấy productId sau khi thêm sản phẩm thành công
+        return product.data;
+    }
 
-                                // Gán các ảnh còn lại cho sản phẩm
-                                const imageIds = data.data.slice(1).map(image => image.id); // Lấy các ảnh còn lại, trừ ảnh chính
-
-                                return Promise.all(imageIds.map(imageId => {
-                                    return fetch(`ImageDetailDao`, {
-                                        method: "POST",
-                                        headers: {
-                                            "Content-Type": "application/x-www-form-urlencoded",
-                                        },
-                                        body: `productId=${productId}&imageId=${imageId}`,
-                                    })
-                                        .then(response => response.json())
-                                        .then(result => {
-                                            if (result.statusCode !== 200) {
-                                                console.error("Không thể thêm ảnh vào sản phẩm");
-                                            }
-                                        })
-                                        .catch(error => console.error("Lỗi khi gán ảnh:", error));
-                                }))
-                                    .then(() => {
-                                        // Lấy tất cả các nhóm tùy chọn
-                                        const optionGroups = document.querySelectorAll('.variant-group');
-                                        const optionPromises = [];
-
-                                        optionGroups.forEach(group => {
-                                            // Truy vấn các input theo đúng cách trong mỗi nhóm
-                                            const priceInput = group.querySelector('input[id="price"]'); // Thay bằng chính xác ID
-                                            const stockInput = group.querySelector('input[id="total"]'); // Thay bằng chính xác ID
-
-                                            if (priceInput && stockInput) {
-                                                const priceValue = priceInput.value.trim();
-                                                const stockValue = stockInput.value.trim();
-
-                                                if (priceValue && stockValue) {
-                                                    const optionData = {
-                                                        productId: productId,
-                                                        price: parseFloat(priceValue),
-                                                        stock: parseInt(stockValue),
-                                                    };
-
-                                                    const optionPromise = fetch(`options/create`, {
-                                                        method: "POST",
-                                                        headers: {
-                                                            "Content-Type": "application/json",
-                                                        },
-                                                        body: JSON.stringify(optionData),
-                                                    }).then(response => response.json())
-                                                        .then(option => {
-                                                            if (option.statusCode !== 200) {
-                                                                console.error("Không thể tạo option cho sản phẩm.");
-                                                            }
-                                                        })
-                                                        .catch(error => console.error("Lỗi khi tạo option:", error));
-
-                                                    optionPromises.push(optionPromise);
-                                                } else {
-                                                    console.error("Giá hoặc số lượng không hợp lệ.");
-                                                }
-                                            } else {
-                                                console.error("Không tìm thấy trường giá hoặc số lượng trong nhóm.");
-                                            }
-                                        });
-
-                                        // Đợi tất cả các option được tạo xong
-                                        return Promise.all(optionPromises);
-                                    })
-                                    .then(response => {
-                                        alert("Thêm sản phẩm và option thành công!");
-                                        window.location.href = 'list-product';
-                                    })
-                                    .catch(error => {
-                                        console.error("Lỗi:", error);
-                                        alert(`Đã xảy ra lỗi: ${error.message}`);
-                                    });
-
-
-                            } else {
-                                throw new Error("Không thể thêm sản phẩm.");
-                            }
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                alert("Thêm sản phẩm và option thành công!");
-                                window.location.href = 'list-product';
-                            } else {
-                                throw new Error("Không thể thêm option.");
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Lỗi:", error);
-                            alert(`Đã xảy ra lỗi: ${error.message}`);
-                        });
-                } else {
-                    throw new Error("Không thể upload ảnh.");
-                }
-            })
-            .catch(error => {
-                console.error("Lỗi:", error.message);
-                console.log(error);
-                alert(`Đã xảy ra lỗi: ${error.message}`);
+    // Hàm gán ảnh bổ sung cho sản phẩm
+    async function assignAdditionalImages(uploadData, productId) {
+        const additionalImages = uploadData.data.slice(1).map(image => image.id);
+        await Promise.all(additionalImages.map(imageId => {
+            return fetch("ImageDetailDao", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `productId=${productId}&imageId=${imageId}`,
             });
-    });
+        }));
+    }
 
+    // Hàm thêm tùy chọn sản phẩm
+    async function addProductOptions(productId) {
+        const optionGroups = document.querySelectorAll(".variant-group");
+        const optionPromises = Array.from(optionGroups).map(group => {
+            const priceInput = group.querySelector("input[id='price']");
+            const stockInput = group.querySelector("input[id='total']");
+            const priceValue = priceInput?.value.trim();
+            const stockValue = stockInput?.value.trim();
+
+            if (priceValue && stockValue) {
+                const optionData = {
+                    productId,
+                    price: parseFloat(priceValue),
+                    stock: parseInt(stockValue),
+                };
+
+                return fetch("options/create", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(optionData),
+                }).then(async (optionResponse) => {
+                    const option = await optionResponse.json();
+                    if (option.data?.id) {
+                        const optionId = option.data.id;
+                        const variantValueId = selectedVariantValueId;
+                        const variantValueApiUrl = "addOptionVariantValue";
+                        const variantValueData = {
+                            optionId: optionId,
+                            variantValueId: variantValueId
+                        };
+
+                        await fetch(variantValueApiUrl, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(variantValueData), // Gửi dưới dạng JSON
+                        });
+                    }
+                });
+            }
+            return Promise.resolve();
+        });
+
+        await Promise.all(optionPromises);
+    }
 });
