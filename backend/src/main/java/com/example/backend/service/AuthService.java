@@ -3,6 +3,8 @@ package com.example.backend.service;
 import com.example.backend.model.DAO.UserDao;
 import com.example.backend.model.User;
 import com.example.backend.util.HashUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.jdbi.v3.core.Jdbi;
 
 import java.security.NoSuchAlgorithmException;
@@ -78,5 +80,38 @@ public class AuthService {
     public User getUserById(Integer userId) {
         return userDAO.getUserById(userId);
     }
+
+    public boolean verifySession(HttpServletRequest request, String sessionId) {
+        HttpSession session = request.getSession(false);  // Lấy session hiện tại, nếu không có thì trả về null
+        if (session != null) {
+            String storedSessionId = (String) session.getAttribute("sessionId");
+            return storedSessionId != null && storedSessionId.equals(sessionId);
+        }
+        return false;
+    }
+
+
+    public void activateUserAccount(HttpServletRequest request, String sessionId) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            String storedSessionId = (String) session.getAttribute("sessionId");
+            if (storedSessionId != null && storedSessionId.equals(sessionId)) {
+                String email = (String) session.getAttribute("email");
+
+                // Thông báo tài khoản đã được xác nhận
+                System.out.println("Tài khoản với email " + email + " đã được xác nhận.");
+//                sendAccountActivationEmail(email);
+            }
+        }
+    }
+
+
+
+    public void saveSessionId(HttpServletRequest request, String email, String sessionId) {
+        HttpSession session = request.getSession();
+        session.setAttribute("sessionId", sessionId);
+        session.setAttribute("email", email);  // Lưu email vào session nếu cần thiết
+    }
+
 }
 

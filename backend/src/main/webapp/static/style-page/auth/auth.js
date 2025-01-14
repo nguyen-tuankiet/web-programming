@@ -57,8 +57,9 @@ document.querySelector(".sign-up-container form").addEventListener("submit", asy
 
         if (response.ok) {
             const data = await response.json();
-            alert("Đăng ký thành công! Vui lòng đăng nhập.");
-            document.querySelector(".sign-in-container form").reset(); // Reset form đăng nhập
+            alert("Đăng ký thành công! Vui lòng vào mail để xác nhận.");
+            window.location.reload();
+            // document.querySelector(".sign-in-container form").reset(); // Reset form đăng nhập
         } else {
             const errorData = await response.json();
             alert("Lỗi đăng ký: " + errorData.message);
@@ -108,7 +109,7 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                     window.location.href = "home";
                 }
             } else {
-                alert("Dữ liệu không hợp lệ từ server");
+                alert("Email hoặc mật khẩu không chính xác!");
             }
         } else {
             const errorData = await response.json();
@@ -121,3 +122,54 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
 });
 
 
+// Hàm kiểm tra mật khẩu
+function validatePassword(password) {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+}
+
+// Hàm kiểm tra khi người dùng nhập mật khẩu
+document.getElementById('passwordd').addEventListener('input', function () {
+    const password = document.getElementById('passwordd').value;
+    if (!validatePassword(password)) {
+        document.getElementById('password-error').style.display = 'block';
+    } else {
+        document.getElementById('password-error').style.display = 'none';
+    }
+});
+
+document.getElementById('conf').addEventListener('input', function () {
+    const password = document.getElementById('passwordd').value;
+    const confirmPassword = document.getElementById('conf').value;
+    if (confirmPassword && confirmPassword !== password) {
+        document.getElementById('conf-error').style.display = 'block';
+    } else {
+        document.getElementById('conf-error').style.display = 'none';
+    }
+});
+
+// Hàm kiểm tra khi người dùng cố gắng đăng ký
+function validateForm() {
+    const password = document.getElementById('passwordd').value;
+    const confirmPassword = document.getElementById('conf').value;
+
+    // Kiểm tra mật khẩu hợp lệ
+    if (!validatePassword(password)) {
+        document.getElementById('password-error').style.display = 'block';
+        return false;
+    }
+    // Kiểm tra mật khẩu và xác nhận mật khẩu có khớp không
+    if (password !== confirmPassword) {
+        document.getElementById('conf-error').style.display = 'block';
+        return false;
+    }
+
+    return true;
+}
+
+// Thêm sự kiện submit để kiểm tra form khi người dùng nhấn nút đăng ký
+document.querySelector('form').addEventListener('submit', function(event) {
+    if (!validateForm()) {
+        event.preventDefault(); // Ngừng gửi form nếu không hợp lệ
+    }
+});

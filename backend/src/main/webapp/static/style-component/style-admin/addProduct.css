@@ -687,3 +687,8 @@ textarea:focus {
     background-color: #e0f0ff;
 }
 
+.required {
+    color: red;
+    font-size: 1.2em;
+    margin-left: 5px;
+}

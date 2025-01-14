@@ -47,7 +47,7 @@
                     <h2>Thông tin sản phẩm</h2>
                     <form>
                         <div class="form-group">
-                            <label for="productName">Tên</label>
+                            <label for="productName">Tên  <span class="required">*</span> </label>
                             <input type="text" id="productName" placeholder="Tủ lạnh, máy giặt, ect.">
                         </div>
 
@@ -57,7 +57,7 @@
                                 <input type="text" id="sku"  disabled>
                             </div>
                             <div class="form-group half-width">
-                                <label  for="categoryDropdown" >Danh mục</label>
+                                <label  for="categoryDropdown" >Danh mục  <span class="required">*</span> </label>
                                 <select id="categoryDropdown" class="option-select" data-url="<%= request.getContextPath() %>categories">
                                     <option value="">Chọn danh mục</option>
                                     <!-- Danh mục sẽ được load ở đây -->
@@ -94,7 +94,7 @@
 
                 <div class="media-section">
                     <div class="media-header">
-                        <h2>Hình ảnh</h2>
+                        <h2>Hình ảnh <span class="required">*</span></h2>
                     </div>
 
                     <div class="media-upload-box">
@@ -120,7 +120,7 @@
 
                 <div id="optionsContainer1" class="options-section">
                     <div class="variant-header">
-                        <h2>Biến thể</h2>
+                        <h2>Biến thể <span class="required">*</span> </h2 >
                         <button class="add-variant-button" onclick="addVariant()">+ Thêm biến thể</button>
                     </div>
 
@@ -131,7 +131,7 @@
                                     <input type="text" id="price" placeholder="Giá">
                                 </div>
                                 <div class="form-group half-width">
-                                    <input type="text" id="total" placeholder="Số lượng">
+                                    <input type="text" id="total" placeholder="Số lượng" >
                                 </div>
 
                             </div>
@@ -162,7 +162,7 @@
 
                 <div class="section organization-section">
                     <h2>Tổ chức</h2>
-                    <label for="vendor">Nhà cung cấp</label>
+                    <label for="vendor">Nhà cung cấp <span class="required">*</span> </label>
                     <select id="vendor"  data-url="<%= request.getContextPath() %>categories">
                         <option value="winter">Chọn nhà cung cấp</option>
                     </select>

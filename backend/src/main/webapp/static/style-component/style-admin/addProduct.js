@@ -593,7 +593,30 @@ document.addEventListener("DOMContentLoaded", () => {
         resetVariantValues();
     }
 
-    // Hàm thu thập dữ liệu từ form
+    // Hàm kiểm tra các trường bắt buộc
+    function validateForm() {
+        const productName = document.getElementById("productName").value.trim();
+        const category = document.getElementById("categoryDropdown").value;
+        const price = document.getElementById("price").value.trim();
+        const stock = document.getElementById("total").value.trim();
+        const imageUpload = fileInput.files;
+
+        // Kiểm tra các trường bắt buộc
+        if (productName && category && price && stock && imageUpload.length > 0) {
+            document.getElementById("saveButton").disabled = false;  // Bật nút Lưu
+        } else {
+            document.getElementById("saveButton").disabled = true;  // Tắt nút Lưu
+        }
+    }
+
+// Gọi hàm validate khi người dùng thay đổi giá trị trong các trường
+    document.getElementById("productName").addEventListener("input", validateForm);
+    document.getElementById("categoryDropdown").addEventListener("change", validateForm);
+    document.getElementById("price").addEventListener("input", validateForm);
+    document.getElementById("total").addEventListener("input", validateForm);
+    document.getElementById("fileInput").addEventListener("change", validateForm);
+
+// Hàm thu thập dữ liệu từ form
     function gatherFormData() {
         const productName = document.getElementById("productName").value.trim();
         const sku = document.getElementById("sku").value.trim();
@@ -605,7 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const tags = document.getElementById("tags").value.trim();
         const imageUpload = fileInput.files;
 
-        if (!productName || !category || !price || !stock || imageUpload.length === 0) {
+        if (!productName || !category || !price || !stock || imageUpload.length === 0 || !brand) {
             return null;
         }
 
@@ -621,6 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
             imageUpload
         };
     }
+
 
     // Hàm upload ảnh
     async function uploadImages(files) {
