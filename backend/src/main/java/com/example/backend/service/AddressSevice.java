@@ -23,6 +23,24 @@ public class AddressSevice {
         return addressDAO.getAddressById(id);
     }
 
+    public int addAddress(Address address) {
+        // Đảm bảo isDefault mặc định là false nếu không được chỉ định
+        if (address.getIsDefault() == null) {
+            address.setIsDefault(false);
+        }
+        return addressDAO.addAddress(
+                address.getUserId(),
+                address.getProvince(),
+                address.getDistrict(),
+                address.getCommune(),
+                address.getDetail(),
+                address.getPhone(),
+                address.getName(),
+                address.getIsDefault(),
+                address.getType()
+        );
+    }
+
 
     public static void main(String[] args) {
         AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());
