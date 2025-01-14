@@ -71,7 +71,9 @@ i {
 
 
 
-
+.container{
+    overflow: scroll;
+}
 
 
 
@@ -105,9 +107,7 @@ i {
 }
 
 
-.container{
-    overflow: scroll;
-}
+
 
 /*Menu*/
 #order_menu{
@@ -144,4 +144,10 @@ i {
     margin :10px 0 ;
     background-color: #EDF9FB;
     border-radius: 10px;
+}
+
+.description{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

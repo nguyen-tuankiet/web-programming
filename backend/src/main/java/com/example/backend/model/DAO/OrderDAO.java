@@ -51,7 +51,10 @@ public interface OrderDAO {
             "group by\n" +
             "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
             "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
-            "    i.url\n")
+            "    i.url\n"+
+            " order by o.createAt desc "
+
+    )
     List<Order> getOrdersByUserId(@Bind("userId") Integer userId);
 
 }
