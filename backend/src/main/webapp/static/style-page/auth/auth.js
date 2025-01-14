@@ -102,7 +102,11 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                 sessionStorage.setItem("userId", data.data.id);
                 sessionStorage.setItem("role", data.data.role);
 
-                window.location.href = "home";
+                if (data.data.role === "ADMIN") {
+                    window.location.href = "admin/dashboard";
+                } else {
+                    window.location.href = "home";
+                }
             } else {
                 alert("Dữ liệu không hợp lệ từ server");
             }

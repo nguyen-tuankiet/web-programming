@@ -75,5 +75,8 @@ public class AuthService {
         return userDAO.getUserByEmail(email);
     }
 
+    public User getUserById(Integer userId) {
+        return userDAO.getUserById(userId);
+    }
 }
 
