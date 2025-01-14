@@ -52,7 +52,7 @@
 
                 <div id="order_infor" class=" col">
                     <div class="wrap row">
-                        <div class="order_id">Mã đơn hàng: <span>${order.id}</span></div>
+                        <div class="order_id" data-order-id="${order.id}" >Mã đơn hàng: <span>${order.id}</span></div>
 
                         <c:if test="${order.orderStatus =='DELIVERY'}">
                             <div class="order_status mid_align" style="color: #0a7cff">Đang giao hàng</div>
@@ -66,7 +66,7 @@
                 </div>
 
 
-                <div id="wrap_order_item" class=" col">
+                <div id="wrap_order_item"  class=" col">
 
 
                     <c:if test="${empty orderDetails}">
@@ -77,7 +77,7 @@
                     <c:if test="${not empty orderDetails}">
                         <c:forEach var="od" items="${orderDetails}">
 
-                            <div id="order_item" class="mid_align row">
+                            <div    class="order_item mid_align row" data-product-id="${od.productId}">
 
 
                                 <div class="image">
@@ -101,9 +101,6 @@
 
 
                                 <div class="section_price mid_align col  ">
-                                        <%--                        <div class="date">--%>
-                                        <%--                            <span>22/10/2024</span>--%>
-                                        <%--                        </div>--%>
 
                                     <div class="wrap_price col">
                                         <span class="title">Tổng thanh toán: </span>
@@ -199,12 +196,12 @@
                                 <span>Thông tin khách hàng</span>
                             </div>
 
-                            <div class="content row">
+                            <div class= "content row">
 
                                 <div class="section_left col">
 
 
-                                    <div class="content_item full_name">
+                                    <div class= "content_item full_name">
                                         <i class="fa-regular fa-user"></i>
                                         <span> ${address.name} </span>
                                     </div>
@@ -270,9 +267,25 @@
                 </div>
             </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="write-review-section">
                 <h2>Viết đánh giá của bạn</h2>
-                <form id="review-form" method="post" action="<%=request.getContextPath()%>/submitReview">
+                <form id="review-form" method="post" >
                     <div class="input-group">
                         <label for="rating-value"> </label>
                         <div id="user-rating" class="stars">
@@ -309,7 +322,7 @@
                     </div>
 
                    <div class="send">
-                       <button type="submit">Gửi đánh giá</button>
+                       <button id="btn_submit">Gửi đánh giá</button>
                    </div>
 
 
