@@ -96,8 +96,7 @@ body {
 }
 
 .product-table th, .product-table td {
-    padding: 12px;
-    text-align: left;
+     text-align: left;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
 }
@@ -137,10 +136,9 @@ body {
 
 .product {
     display: flex;
-    max-width: 240px;
+
     align-items: center; /* Align image and text vertically centered */
     text-align: left;
-    height: 60px;
     margin-top: 20px;
 }
 
@@ -361,7 +359,7 @@ tr:hover{
 }
 
 .discard-btn {
-    background-color: #e74c3c;
+    background-color: #7e7e7e;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -371,7 +369,7 @@ tr:hover{
 }
 
 .discard-btn:hover {
-    background-color: #ef2d1b;
+    background-color: #878686;
 }
 
 .hidden {
