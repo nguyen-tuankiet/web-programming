@@ -6,6 +6,7 @@ import com.example.backend.model.User;
 import org.jdbi.v3.core.Jdbi;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserService {
     UserDao userDao;
@@ -18,6 +19,10 @@ public class UserService {
     public User getUserById(Integer id) {
         User user = userDao.getUserById(id);
         return user;
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
     }
 
 
