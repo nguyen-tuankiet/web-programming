@@ -161,4 +161,17 @@ public interface ProductDAO {
     boolean deactivateProduct(@Bind("id") int id);
 
 
+
+
+
+    @SqlUpdate(value = "update products\n" +
+            "set noOfViews = noOfViews +1\n" +
+            "where id = :id;")
+    Boolean increaseNoOfViews(@Bind("id") int id);
+
+
+    @SqlUpdate(value =  "update products\n" +
+            "set noOfSold = noOfSold + :quantity\n" +
+            "where id = :id ;\n")
+    Boolean increaseNoOfSold(@Bind("id") int id, @Bind("quantity") Integer quantity );
 }

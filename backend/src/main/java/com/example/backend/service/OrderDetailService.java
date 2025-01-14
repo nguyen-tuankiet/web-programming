@@ -35,6 +35,7 @@ public class OrderDetailService {
 
             if (flag) {
                 Integer newStock = options.getStock() - orderDetail.getQuantity() ;
+                // Increase Stock Quantity
                 optionService.updateStock(orderDetail.getOptionId(), newStock);
             }
 
