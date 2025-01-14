@@ -1,7 +1,7 @@
 package com.example.backend.model.DAO;
 
 import com.example.backend.model.OptionVariant;
-import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
+ import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
@@ -219,4 +219,17 @@ public interface ProductDAO {
 """)
     @RegisterConstructorMapper(OptionVariant.class)
     List<OptionVariant> getVariants(@Bind("id") int id);
+
+
+
+    @SqlUpdate(value = "update products\n" +
+            "set noOfViews = noOfViews +1\n" +
+            "where id = :id;")
+    Boolean increaseNoOfViews(@Bind("id") int id);
+
+
+    @SqlUpdate(value =  "update products\n" +
+            "set noOfSold = noOfSold + :quantity\n" +
+            "where id = :id ;\n")
+    Boolean increaseNoOfSold(@Bind("id") int id, @Bind("quantity") Integer quantity );
 }

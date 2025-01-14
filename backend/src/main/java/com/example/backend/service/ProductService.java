@@ -42,7 +42,7 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts() {
-        List<Product>  products = jdbi.withExtension(ProductDAO.class, dao -> dao.getAllProducts());
+        List<Product> products = jdbi.withExtension(ProductDAO.class, dao -> dao.getAllProducts());
 
         return products;
     }
@@ -61,7 +61,7 @@ public class ProductService {
         String generatedSku = "HKS-" + System.currentTimeMillis();
         product.setSku(generatedSku);
 
-        int productId =  productDao.addProduct( product.getName(), product.getDescription(),
+        int productId = productDao.addProduct(product.getName(), product.getDescription(),
                 product.getActive(), product.getCategoryId(), product.getBrandId(), product.getPrimaryImage(), product.getSku());
 
         if (productId > 0) {
@@ -85,18 +85,28 @@ public class ProductService {
 
 
     public List<Product> getTopProductsByCategory(Integer categoryId, Integer limit) {
-        if (categoryId <=0  || limit <= 0) {
+        if (categoryId <= 0 || limit <= 0) {
             throw new IllegalArgumentException("Bad request");
-        }
-        else {
+        } else {
             return productDao.getTopProductsByCategoryId(categoryId, limit);
         }
     }
 
 
+    public Boolean increaseNoOfViews(Integer productId) {
+        return productDao.increaseNoOfViews(productId);
+    }
+
+
+    public Boolean increaseNoOfSold(Integer productId, Integer quantity) {
+        return productDao.increaseNoOfSold(productId, quantity );
+    }
+
+
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
-        System.out.println(productService.getTopProductsByCategory(1, 3));
-
+//        System.out.println(productService.getTopProductsByCategory(1, 3));
+//        System.out.println(productService.increaseNoOfViews(1));
+        System.out.println(productService.increaseNoOfSold(10, 5));
     }
 }
