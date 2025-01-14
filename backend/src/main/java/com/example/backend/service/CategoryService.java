@@ -41,4 +41,8 @@ public class CategoryService {
     public void deleteCategory(Integer id) {
         categoryDAO.deleteCategory(id);
     }
+
+    public void addCategory(Category category) {
+
+    }
 }
