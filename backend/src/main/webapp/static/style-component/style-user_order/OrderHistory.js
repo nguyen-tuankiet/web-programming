@@ -33,4 +33,29 @@ $(document).ready(function(){
 
 
 
+//     Review
+
+
+    const stars = $('.star');
+    const ratingInput = $('#rating-value');
+
+     stars.on('click', function () {
+        const selectedValue = $(this).data('value');
+        ratingInput.val(selectedValue);
+
+         stars.each(function () {
+            const starValue = $(this).data('value');
+            if (starValue <= selectedValue) {
+                $(this).find('i').css('color', 'gold');
+            } else {
+                $(this).find('i').css('color', 'gray');
+            }
+
+
+        });
+         console.log(ratingInput.val())
+     });
+
+
+
 });
