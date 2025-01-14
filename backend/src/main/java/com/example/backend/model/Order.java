@@ -18,6 +18,13 @@ public class Order {
     Boolean isCOD;
 
 
+    // Su dung cho đại diẹn order
+    Integer quantity;
+    Integer total;
+    String productName;
+    String productImage;
+
+
     @JdbiConstructor
     public Order(@ColumnName("id") @Nullable Integer id,
                  @ColumnName("createAt") @Nullable LocalDate createAt,
@@ -26,7 +33,14 @@ public class Order {
                  @ColumnName("userId") @Nullable Integer userId,
                  @ColumnName("cardId") @Nullable Integer cardId,
                  @ColumnName("addressId") @Nullable Integer addressId,
-                 @ColumnName("isCOD") @Nullable Boolean isCOD) {
+                 @ColumnName("isCOD") @Nullable Boolean isCOD,
+
+                 @ColumnName("quantity") @Nullable Integer quantity,
+                 @ColumnName("total") @Nullable Integer total,
+                 @ColumnName("productName") @Nullable String productName,
+                 @ColumnName("productImage") @Nullable String productImage
+
+    ){
         this.id = id;
         this.createAt = createAt;
         this.paymentStatus = paymentStatus;
@@ -35,6 +49,10 @@ public class Order {
         this.cardId = cardId;
         this.addressId = addressId;
         this.isCOD = isCOD;
+        this.quantity = quantity;
+        this.total = total;
+        this.productName = productName;
+        this.productImage = productImage;
     }
 
 
@@ -106,5 +124,55 @@ public class Order {
 
     public void setIsCOD(Boolean COD) {
         isCOD = COD;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", createAt=" + createAt +
+                ", paymentStatus='" + paymentStatus + '\'' +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", userId=" + userId +
+                ", cardId=" + cardId +
+                ", addressId=" + addressId +
+                ", isCOD=" + isCOD +
+                ", quantity=" + quantity +
+                ", total=" + total +
+                ", productName='" + productName + '\'' +
+                ", productImage='" + productImage + '\'' +
+                '}';
     }
 }

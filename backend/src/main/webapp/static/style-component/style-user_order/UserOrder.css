@@ -104,6 +104,11 @@ i {
     margin: 0 50px;
 }
 
+
+.container{
+    overflow: scroll;
+}
+
 /*Menu*/
 #order_menu{
     width: 100%;
