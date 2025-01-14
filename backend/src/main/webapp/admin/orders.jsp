@@ -98,10 +98,10 @@
                     <c:if test="${not empty orders}">
                         <c:forEach items="${orders}" var="o">
 
-                            <tr class="order-row" data-url="${pageContext.request.contextPath}/admin/orderDetail.jsp">
+                            <tr class="order-row" >
                                 <td><input type="checkbox"></td>
 
-                                <td><a href="${pageContext.request.contextPath}/admin/orderDetail.jsp" class="order-id">#${o.id}</a>
+                                <td><a href="order-detail?orderId=${o.id}" class="order-id">#${o.id}</a>
                                 </td>
 
                                 <td class="order-name">${o.userName}</td>
