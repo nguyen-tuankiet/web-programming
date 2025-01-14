@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: VSiJs
-  Date: 1/11/2025
-  Time: 6:21 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -14,9 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Category Management</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/categories.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories.js" defer></script>
+    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories1.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
 </head>
 <body>
 
@@ -28,7 +20,6 @@
     <div class="side_bar">
         <jsp:include page="SideBar.jsp"/>
     </div>
-
 
     <div class="content">
         <div class="toolbar">
@@ -67,7 +58,7 @@
                 </label></th>
                 <th data-sort="string" onclick="sortTable(1)">
                     <div class="header-content">
-                        <span class="header-text">Loại Sản Phẩm</span>
+                        <span class="header-text">Tên Danh Mục</span>
                         <span class="sort-arrows">
                         <span class="sort-arrow asc">▲</span>
                         <span class="sort-arrow desc">▼</span>
@@ -88,44 +79,46 @@
             </thead>
 
             <tbody id="product-table-body">
-            <!-- Sản phẩm 1 -->
-            <c:if test="${empty products}">
-                <p> Khong co product</p>
+            <!-- Hiển thị danh mục -->
+            <c:if test="${empty categoriesWithStock}">
+                <tr>
+                    <td colspan="4">Không có danh mục nào được tìm thấy.</td>
+                </tr>
             </c:if>
-            <c:if test="${not empty products}">
-                <c:forEach items="${products}" var="p">
+            <c:if test="${not empty categoriesWithStock}">
+                <c:forEach items="${categoriesWithStock}" var="category">
                     <tr>
-
-                        <td><label><input type="checkbox" class="checkbox"></label></td>
+                        <td>
+                            <label><input type="checkbox" class="checkbox"></label>
+                        </td>
                         <td>
                             <div class="product">
-                                <p>Máy Giặt</p>
+                                <p>${category.name}</p>
+<%--                                <p>name</p>--%>
                             </div>
                         </td>
-                        <td>42</td>
+                        <td>${category.totalStock}</td>
+<%--                        <p>stock</p>--%>
                         <td>
                             <div class="action-icons">
                                 <div class="dropdown">
-                                    <button onclick="toggleDropdown(this)"> <!-- Nút chính gọi dropdown -->
-                                      <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;" ></i>
-                                      <i class="fa-solid fa-chevron-down" style="padding: 5px;" ></i>
+                                    <button onclick="toggleDropdown(this)">
+                                        <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;"></i>
+                                        <i class="fa-solid fa-chevron-down" style="padding: 5px;"></i>
                                     </button>
-                                    <div class="dropdown-content"> <!-- Nội dung dropdown -->
+                                    <div class="dropdown-content">
                                         <span class="icon view-icon">
-                    <i class="fa-regular fa-eye" style="padding: 5px;"></i>
-                    View
-                </span>
+                                            <i class="fa-regular fa-eye" style="padding: 5px;"></i>
+                                            Xem
+                                        </span>
                                         <span class="icon edit-icon">
-                    <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
-
-                    Edit
-                </span>
+                                            <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
+                                            Sửa
+                                        </span>
                                         <span class="icon delete-icon">
-                  <i class="fa-solid fa-trash" style="padding: 5px;"></i>
-
-                    Delete
-                </span>
-
+                                            <i class="fa-solid fa-trash" style="padding: 5px;"></i>
+                                            Xóa
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +126,6 @@
                     </tr>
                 </c:forEach>
             </c:if>
-
             </tbody>
         </table>
 
@@ -144,7 +136,6 @@
             <button class="next-btn">Tiếp Theo</button>
         </div>
     </div>
-
 </div>
 
 </body>
