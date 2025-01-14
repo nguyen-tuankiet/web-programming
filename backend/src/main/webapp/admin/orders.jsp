@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -35,8 +39,10 @@
             <div class="header-container">
                 <div class="row">
                     <div class="search-bar">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
                         </svg>
                         <input type="text" placeholder="Tìm kiếm">
                     </div>
@@ -83,43 +89,114 @@
                         <th>Ngày</th>
                         <th>Thanh Toán</th>
                         <th>Tổng Tiền</th>
-                        <th>Trạng Thái </th>
+                        <th>Trạng Thái</th>
                         <th>Hoạt Động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="order-row" data-url="${pageContext.request.contextPath}/admin/orderDetail.jsp">
-                        <td><input type="checkbox"></td>
-                        <td><a href="${pageContext.request.contextPath}/admin/orderDetail.jsp" class="order-id">#DU00017</a></td>
-                        <td class="order-name">Nguyễn Tuấn Kiệt</td>
-                        <td class="order-date">3/10/2024 20:02</td>
-                        <td><span class="status status-paid">Đã Thanh Toán</span></td>
-                        <td class="order-total">200.000 VND</td>
-                        <td><span class="status order-status-shipped">Đã Gửi</span></td>
 
-                        <td class="actions">
-                            <button class="actions-btn">⋮</button>
-                            <div class="actions-menu">
-                                <div class="options">
-                                    <p>OPTIONS</p>
-                                    <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
-                                    <button class="action-option"><i class="fas fa-print"></i> Print</button>
-                                </div>
-                                <div class="divider"></div>
-                                <div class="download-options">
-                                    <p>DOWNLOAD OPTIONS</p>
-                                    <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
-                                    <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
-                                    <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
-                                </div>
-                                <div class="divider"></div>
-                                <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
-                            </div>
-                        </td>
-                    </tr>
+                    <c:if test="${not empty orders}">
+                        <c:forEach items="${orders}" var="o">
+
+                            <tr class="order-row" data-url="${pageContext.request.contextPath}/admin/orderDetail.jsp">
+                                <td><input type="checkbox"></td>
+
+                                <td><a href="${pageContext.request.contextPath}/admin/orderDetail.jsp" class="order-id">#${o.id}</a>
+                                </td>
+
+                                <td class="order-name">${o.userName}</td>
+
+                                <td class="order-date">${o.createAt}</td>
+
+                                <td>
+                                    <c:if test="${o.paymentStatus == 'PAID'}">
+                                        <span class="status status-paid">Đã Thanh Toán</span>
+                                    </c:if>
+                                </td>
+
+                                <td class="order-total">
+                                    <fmt:formatNumber value="${o.total}" pattern="#,###"/> VND
+                                </td>
+
+                                <td>
+                                    <c:if test="${o.orderStatus == 'DELIVERED'}">
+                                        <span class="status order-status-shipped">Đã Gửi</span>
+                                    </c:if>
+
+                                    <c:if test="${o.orderStatus == 'DELIVERY'}">
+                                        <span  class="status order-status-shipped" style="color: #000;">Đang Gửi</span>
+                                    </c:if>
+
+
+                                </td>
+
+                                <td class="actions">
+                                    <button class="actions-btn">⋮</button>
+                                    <div class="actions-menu">
+                                        <div class="options">
+                                            <p>OPTIONS</p>
+                                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="download-options">
+                                            <p>DOWNLOAD OPTIONS</p>
+                                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel
+                                            </button>
+                                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        </c:forEach>
+                    </c:if>
+
+
+                    <%--                    <tr class="order-row" data-url="${pageContext.request.contextPath}/admin/orderDetail.jsp">--%>
+                    <%--                        <td><input type="checkbox"></td>--%>
+
+                    <%--                        <td><a href="${pageContext.request.contextPath}/admin/orderDetail.jsp" class="order-id">#DU00017</a></td>--%>
+
+                    <%--                        <td class="order-name">Nguyễn Tuấn Kiệt</td>--%>
+
+                    <%--                        <td class="order-date">3/10/2024 20:02</td>--%>
+
+                    <%--                        <td><span class="status status-paid">Đã Thanh Toán</span></td>--%>
+
+                    <%--                        <td class="order-total">200.000 VND</td>--%>
+
+                    <%--                        <td><span class="status order-status-shipped">Đã Gửi</span></td>--%>
+
+                    <%--                        <td class="actions">--%>
+                    <%--                            <button class="actions-btn">⋮</button>--%>
+                    <%--                            <div class="actions-menu">--%>
+                    <%--                                <div class="options">--%>
+                    <%--                                    <p>OPTIONS</p>--%>
+                    <%--                                    <button class="action-option"><i class="fas fa-copy"></i> Copy</button>--%>
+                    <%--                                    <button class="action-option"><i class="fas fa-print"></i> Print</button>--%>
+                    <%--                                </div>--%>
+                    <%--                                <div class="divider"></div>--%>
+                    <%--                                <div class="download-options">--%>
+                    <%--                                    <p>DOWNLOAD OPTIONS</p>--%>
+                    <%--                                    <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>--%>
+                    <%--                                    <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>--%>
+                    <%--                                    <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>--%>
+                    <%--                                </div>--%>
+                    <%--                                <div class="divider"></div>--%>
+                    <%--                                <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>--%>
+                    <%--                            </div>--%>
+                    <%--                        </td>--%>
+                    <%--                    </tr>--%>
 
                     </tbody>
                 </table>
+
+
             </div>
             <div class="footer-container">
                 <nav class="mt-2 mt-md-0">
@@ -137,7 +214,6 @@
     </div>
 
 </div>
-
 
 
 </body>

@@ -65,4 +65,31 @@ public interface OrderDAO {
             "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
             "    o.userId, o.addressId, o.cardId, o.isCOD\n")
         Order getOrderByIdAndUserId(@Bind("orderId") Integer orderId, @Bind("userId") Integer userId);
+
+
+
+
+    @SqlQuery(value = "select\n" +
+            "    o.id, o.createAt, o.paymentStatus,\n" +
+            "    o.orderStatus, o.userId, o.addressId,\n" +
+            "    o.cardId, o.isCOD,\n" +
+            "    u.fullName as userName ,\n" +
+            "    sum(od.total) as total\n" +
+            "from orders as o\n" +
+            "    inner join order_detail as od\n" +
+            "        on o.id = od.orderId\n" +
+            "    inner join user as u\n" +
+            "        on u.id = o.userId\n" +
+            "group by\n" +
+            "    o.id, o.createAt, o.paymentStatus,\n" +
+            "    o.orderStatus, o.userId, o.addressId,\n" +
+            "    o.cardId, o.isCOD,\n" +
+            "    u.fullName\n" +
+            "order by o.createAt desc    ;\n" +
+            "\n" +
+            "\n")
+
+    List<Order> getAllOrders();
+
+
 }

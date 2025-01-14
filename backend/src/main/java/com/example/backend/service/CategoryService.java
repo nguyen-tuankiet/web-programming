@@ -13,6 +13,11 @@ public class CategoryService {
         this.categoryDAO = jdbi.onDemand(CategoryDAO.class);
     }
 
+
+//    public void addCategory(Category category) {
+//        categoryDAO.addCategory(category.getName());
+//    }
+
     public List<Category> getAllCategories() {
         return categoryDAO.getAllCategories();
     }
@@ -42,7 +47,5 @@ public class CategoryService {
         categoryDAO.deleteCategory(id);
     }
 
-    public void addCategory(Category category) {
 
-    }
 }
