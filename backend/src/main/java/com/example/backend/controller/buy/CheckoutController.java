@@ -7,10 +7,7 @@ import com.example.backend.model.DAO.cart.Cart;
 import com.example.backend.model.DAO.cart.ProductCart;
 import com.example.backend.model.Order;
 import com.example.backend.model.OrderDetail;
-import com.example.backend.service.AddressSevice;
-import com.example.backend.service.CardService;
-import com.example.backend.service.OrderDetailService;
-import com.example.backend.service.OrderSerivce;
+import com.example.backend.service.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -30,7 +27,7 @@ public class CheckoutController extends HttpServlet {
     OrderDetailService orderDetailService = new OrderDetailService(DBConnection.getJdbi());
     CardService cardService = new CardService(DBConnection.getJdbi());
     AddressSevice addressService = new AddressSevice(DBConnection.getJdbi());
-
+    ProductService productService = new ProductService(DBConnection.getJdbi());
 
 
     @Override
@@ -144,12 +141,17 @@ public class CheckoutController extends HttpServlet {
                 od.setOptionId(optionId);
 
                 flag= orderDetailService.addOrderDetail(od);
+                if (flag){
+                    productService.increaseNoOfSold(productId, quantity);
+                }
 
 
             }
         }
 
-       if (flag) {
+       if (flag){
+
+
            JSONObject jsonResponse = new JSONObject();
            jsonResponse.put("success", true);
            response.getWriter().write(jsonResponse.toString());
