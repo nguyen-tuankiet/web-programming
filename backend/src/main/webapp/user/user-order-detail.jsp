@@ -5,7 +5,10 @@
   Time: 13:04
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,53 +59,86 @@
             <div id="wrap_order_item" class=" col">
 
 
-                <div id="order_item" class="mid_align row">
-
-
-                    <div class="image">
-                        <img src="${pageContext.request.contextPath}/static/image/tivi.png"/>
-                    </div>
-
-
-                    <div class="description mid_align col  ">
-                        <div class="title bold">98 Inch Crystal UHD DU9000 4K Tizen OS Smart TV (2024)</div>
-
-                        <div class="color">
-                            <span class="color_name">Màu Sắc: <span>Đen</span></span>
-                        </div>
-
-                        <div class="quantity">
-                            <span class="color_name">Số lượng: <span>1</span></span>
-                        </div>
+                <c:if test="${empty orderDetails}">
+                    <p>Đã xảy ra lỗi</p>
+                </c:if>
 
 
 
+                <c:if test="${not empty orderDetails}">
+                     <c:forEach var="od" items="${orderDetails}">
 
-                    </div>
-
-
-                    <div class="section_price mid_align col  ">
-<%--                        <div class="date">--%>
-<%--                            <span>22/10/2024</span>--%>
-<%--                        </div>--%>
-
-                        <div class="wrap_price col">
-                            <span class="title">Tổng thanh toán: </span>
-                            <span class="price">79,000,000 VND</span>
-                        </div>
-
-                        <div class="btn col">
-                            <button class="btn_detail" data-src="../component/user_order/OrderHistory.html">Xem chi
-                                tiết
-                            </button>
-                            <button class="btn_support">Hỗ trợ</button>
-                        </div>
+                         <div id="order_item" class="mid_align row">
 
 
-                    </div>
+                             <div class="image">
+                                 <img src="${od.imageUrl}"/>
+                             </div>
 
 
-                </div>
+                             <div class="description mid_align col  ">
+                                 <div class="title bold">${od.productName}</div>
+
+                                 <div class="color">
+                                     <span class="color_name">Màu Sắc: <span>Đen</span></span>
+                                 </div>
+
+                                 <div class="quantity">
+                                     <span class="color_name">Số lượng: <span>${od.quantity}</span></span>
+                                 </div>
+
+
+
+
+                             </div>
+
+
+                             <div class="section_price mid_align col  ">
+                                     <%--                        <div class="date">--%>
+                                     <%--                            <span>22/10/2024</span>--%>
+                                     <%--                        </div>--%>
+
+                                 <div class="wrap_price col">
+                                     <span class="title">Tổng thanh toán: </span>
+                                     <span class="price">
+                                         <fmt:formatNumber value="${od.total}" pattern="#,###"/> VND
+
+                                     </span>
+                                 </div>
+
+<%--                                 <div class="btn col">--%>
+<%--                                     <button class="btn_detail" data-src="../component/user_order/OrderHistory.html">Xem chi--%>
+<%--                                         tiết--%>
+<%--                                     </button>--%>
+<%--                                     <button class="btn_support">Hỗ trợ</button>--%>
+<%--                                 </div>--%>
+
+
+                             </div>
+
+
+                         </div>
+
+                     </c:forEach>
+                </c:if>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                 <div id="status_detail" class=" row">
