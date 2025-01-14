@@ -5,18 +5,20 @@ import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.time.LocalDate;
+import java.util.List;
 
+@RegisterConstructorMapper(Order.class)
 public interface OrderDAO {
 
-    @SqlUpdate(value = "INSERT INTO orders(createAt, paymentStatus, orderStatus, userId, addressId, cardId, isCOD)\n" +
-            "VALUE (\n" +
+    @SqlUpdate(value = "INSERT INTO orders(createAt, paymentStatus, orderStatus, userId, addressId, cardId, isCOD)" +
+            "VALUE (" +
             "  :createAt , :paymentStatus, :orderStatus , :userId, :addressId, :cardId, :isCOD" +
             " )")
 
-    @RegisterConstructorMapper(Order.class)
     @GetGeneratedKeys
     Integer createOrder(
             @Bind("createAt")LocalDate createAt,
@@ -27,5 +29,29 @@ public interface OrderDAO {
             @Bind("cardId") Integer cardId,
             @Bind("isCOD") Boolean isCOD
     );
+
+
+
+    @SqlQuery(value ="\n" +
+            "select\n" +
+            "    o.id as id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
+            "    sum(od.quantity) as quantity, sum(od.total) as total,\n" +
+            "    min(p.name) as productName,\n" +
+            "    i.url as productImage\n" +
+            "\n" +
+            "from orders as o inner join order_detail as od\n" +
+            "        on o.id = od.orderId\n" +
+            "    inner join products as p\n" +
+            "        on p.id = od.productId\n" +
+            "    inner join image as i\n" +
+            "        on  i.id = p.primaryImage\n" +
+            "\n" +
+            "where o.userId = :userId\n" +
+            "group by\n" +
+            "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
+            "    i.url\n")
+    List<Order> getOrdersByUserId(@Bind("userId") Integer userId);
 
 }
