@@ -54,9 +54,9 @@
                 </select>
                 mục
             </div>
-            <label>
-                <input type="text" class="search-bar" placeholder="Tìm kiếm">
-            </label>
+<%--            <label>--%>
+<%--                <input type="text" class="search-bar" placeholder="Tìm kiếm">--%>
+<%--            </label>--%>
         </div>
 
         <table class="product-table">

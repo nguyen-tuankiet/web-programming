@@ -2,7 +2,7 @@ package com.example.backend.controller.admin;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Category;
-import com.example.backend.service.CategoryService;
+import com.example.backend.service.CategoryManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "AddCategoryController", value = "/admin/add-category")
 public class AddCategoryController extends HttpServlet {
 
-    CategoryService categoryService = new CategoryService(DBConnection.getJdbi());
+    CategoryManager categoryManager = new CategoryManager(DBConnection.getJdbi());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +49,7 @@ public class AddCategoryController extends HttpServlet {
             }
 
             // Thêm danh mục
-            categoryService.addCategory(new Category(null, categoryName));
+            categoryManager.addCategory(new Category(null, categoryName));
 
             // Phản hồi thành công
             response.setStatus(HttpServletResponse.SC_OK);
@@ -63,5 +63,4 @@ public class AddCategoryController extends HttpServlet {
             out.close();
         }
     }
-
 }
