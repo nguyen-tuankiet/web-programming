@@ -315,6 +315,7 @@
                         </div>
                         <input type="hidden" id="rating-value" name="rating" value="0">
                     </div>
+
                     <div class="input-group">
                         <label for="review-text">Viết đánh giá:</label>
                         <textarea id="review-text" name="review" rows="4" placeholder="Chia sẻ suy nghĩ của bạn"
