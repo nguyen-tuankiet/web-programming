@@ -39,6 +39,11 @@ public class OrderSerivce {
         return orderDAO.getOrderByIdAndUserId(orderId, userId);
     }
 
+    public  Order getOrderById(Integer orderId  ) {
+        return orderDAO.getOrderById(orderId);
+    }
+
+
 
     public List<Order> getAllOrders( ) {
         return orderDAO.getAllOrders();

@@ -157,41 +157,6 @@
                     </c:if>
 
 
-                    <%--                    <tr class="order-row" data-url="${pageContext.request.contextPath}/admin/orderDetail.jsp">--%>
-                    <%--                        <td><input type="checkbox"></td>--%>
-
-                    <%--                        <td><a href="${pageContext.request.contextPath}/admin/orderDetail.jsp" class="order-id">#DU00017</a></td>--%>
-
-                    <%--                        <td class="order-name">Nguyễn Tuấn Kiệt</td>--%>
-
-                    <%--                        <td class="order-date">3/10/2024 20:02</td>--%>
-
-                    <%--                        <td><span class="status status-paid">Đã Thanh Toán</span></td>--%>
-
-                    <%--                        <td class="order-total">200.000 VND</td>--%>
-
-                    <%--                        <td><span class="status order-status-shipped">Đã Gửi</span></td>--%>
-
-                    <%--                        <td class="actions">--%>
-                    <%--                            <button class="actions-btn">⋮</button>--%>
-                    <%--                            <div class="actions-menu">--%>
-                    <%--                                <div class="options">--%>
-                    <%--                                    <p>OPTIONS</p>--%>
-                    <%--                                    <button class="action-option"><i class="fas fa-copy"></i> Copy</button>--%>
-                    <%--                                    <button class="action-option"><i class="fas fa-print"></i> Print</button>--%>
-                    <%--                                </div>--%>
-                    <%--                                <div class="divider"></div>--%>
-                    <%--                                <div class="download-options">--%>
-                    <%--                                    <p>DOWNLOAD OPTIONS</p>--%>
-                    <%--                                    <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>--%>
-                    <%--                                    <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>--%>
-                    <%--                                    <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>--%>
-                    <%--                                </div>--%>
-                    <%--                                <div class="divider"></div>--%>
-                    <%--                                <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>--%>
-                    <%--                            </div>--%>
-                    <%--                        </td>--%>
-                    <%--                    </tr>--%>
 
                     </tbody>
                 </table>
