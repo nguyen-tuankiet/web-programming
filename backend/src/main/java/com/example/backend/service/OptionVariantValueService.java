@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.model.DAO.OptionVariantValueDAO;
 import com.example.backend.model.OptionVariantValue;
+import com.example.backend.model.Options;
 import org.jdbi.v3.core.Jdbi;
 
 public class OptionVariantValueService {
@@ -12,7 +13,12 @@ public class OptionVariantValueService {
         this.optionVariantValueDAO = jdbi.onDemand(OptionVariantValueDAO.class);
     }
 
-    public int addOptionVariantValue(OptionVariantValue optionVariantValue) {
-        return optionVariantValueDAO.addOptionVariantValue(optionVariantValue.getOptionId(), optionVariantValue.getVariantValueId());
+    public int addOptionVariantValue(Integer optionId, Integer variantId) {
+        return optionVariantValueDAO.addOptionVariantValue(optionId, variantId);
+    }
+
+
+    public OptionVariantValue getOptionById(Integer id) {
+        return optionVariantValueDAO.getOptionVariantValueId(id);
     }
 }
