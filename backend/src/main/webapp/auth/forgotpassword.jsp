@@ -66,8 +66,8 @@
             <span class="back-arrow" onclick="goBackToOTP()">&#8592;</span> <!-- Mũi tên quay lại -->
             <h2>Nhập mật khẩu mới</h2>
         </div>
-        <input type="password" id="passwordInput" placeholder="Nhập mật khẩu mới" required>
-        <input type="password" id="confirmPasswordInput" placeholder="Nhập lại mật khẩu mới" required>
+        <input type="password" id="passwordInput" name="newPassword"  placeholder="Nhập mật khẩu mới" required>
+        <input type="password" id="confirmPasswordInput" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" required>
         <div id="passwordErrorMessage" class="error-message">Mật khẩu không khớp</div>
         <button onclick="submitPassword()">Đặt lại mật khẩu</button>
     </div>
