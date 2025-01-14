@@ -183,4 +183,26 @@ public class Product {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sku='" + sku + '\'' +
+                ", description='" + description + '\'' +
+                ", isActive=" + isActive +
+                ", categoryId=" + categoryId +
+                ", brandId=" + brandId +
+                ", noOfViews=" + noOfViews +
+                ", noOfSold=" + noOfSold +
+                ", primaryImage=" + primaryImage +
+                ", price=" + price +
+                ", stock=" + stock +
+                ", optionId=" + optionId +
+                ", categoryName='" + categoryName + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }
