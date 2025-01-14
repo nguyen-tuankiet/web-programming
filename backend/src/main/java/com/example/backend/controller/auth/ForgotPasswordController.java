@@ -31,11 +31,9 @@ public class ForgotPasswordController extends HttpServlet {
         // Kiểm tra email có tồn tại trong hệ thống hay không
         User user = authService.getUserByEmail(email);
         if (user == null) {
-            // Email không tồn tại
             request.setAttribute("errorMessage", "Email không tồn tại");
             request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
         } else {
-            // Gửi mã OTP qua email (sử dụng thư viện gửi email)
             String otp = generateOTP();
             sendEmailWithOTP(user.getEmail(), otp);
 
@@ -44,7 +42,7 @@ public class ForgotPasswordController extends HttpServlet {
             request.getSession().setAttribute("userEmail", user.getEmail());
 
             // Chuyển sang trang nhập OTP
-            response.sendRedirect("otp-verification.jsp");
+            response.sendRedirect("forgotpassword.jsp");
         }
     }
 
