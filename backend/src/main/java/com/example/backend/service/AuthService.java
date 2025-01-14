@@ -48,23 +48,21 @@ public class AuthService {
     }
 
 
-    public boolean changePassword(Integer userId, String oldPassword, String newPassword) {
+    public boolean changePassword(Integer userId, String oldPassword, String newPassword, boolean verifyOldPassword) {
         User user = userDAO.getPasswordByUserId(userId);
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }
 
-        String storedSalt = user.getSalt(); // Lấy salt từ cơ sở dữ liệu
-        String storedHashedPassword = user.getPassword();
+        if (verifyOldPassword) {
+            String storedSalt = user.getSalt();
+            String storedHashedPassword = user.getPassword();
 
-        // Mã hóa mật khẩu nhập vào với salt
-        String hashedPassword = HashUtils.hashWithSalt(oldPassword, storedSalt);
-        System.out.println("Session userId: " + userId);
-        System.out.println("Current Password: " + storedHashedPassword);
-        System.out.println("New Password: " + newPassword);
+            String hashedPassword = HashUtils.hashWithSalt(oldPassword, storedSalt);
 
-        if (!hashedPassword.equals(storedHashedPassword)) {
-            throw new IllegalArgumentException("Current password is incorrect");
+            if (!hashedPassword.equals(storedHashedPassword)) {
+                throw new IllegalArgumentException("Current password is incorrect");
+            }
         }
 
         String newSalt = HashUtils.generateSalt();
