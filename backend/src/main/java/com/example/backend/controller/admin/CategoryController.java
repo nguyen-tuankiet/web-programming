@@ -209,6 +209,9 @@ public class CategoryController extends HttpServlet {
         response.setStatus(responseWrapper.getStatusCode());
         ObjectMapper objectMapper = new ObjectMapper();
         response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+
+
+
     }
 
 
