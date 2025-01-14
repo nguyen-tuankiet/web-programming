@@ -188,3 +188,47 @@ function deleteProduct(productId) {
             alert('Không thể kết nối đến máy chủ!');
         });
 }
+
+/*
+
+function editProduct(productId) {
+    // Gọi API lấy thông tin sản phẩm
+    fetch(`editProduct?id=${productId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.statusCode === 200 && data.data) {
+                const product = data.data;
+
+                // Điền dữ liệu vào các trường trong form Add Product
+                document.getElementById('productName').value = product.name;
+                document.getElementById('sku').value = product.sku;
+                document.getElementById('categoryDropdown').value = product.categoryId; // Lựa chọn danh mục tương ứng
+                document.getElementById('description').value = product.description;
+
+                // Cập nhật hình ảnh (nếu cần)
+                document.getElementById('previewImage').src = product.imageUrl;
+
+                // Cập nhật thông tin biến thể, giá và số lượng
+                document.getElementById('price').value = product.price;
+                document.getElementById('total').value = product.stock;
+
+                // Cập nhật nhà cung cấp và thẻ
+                document.getElementById('vendor').value = product.vendor || '';  // Đảm bảo bạn có thông tin nhà cung cấp
+                document.getElementById('tags').value = product.tags || ''; // Nếu có thẻ
+
+                // Bạn có thể bổ sung các phần khác nếu có (ví dụ: biến thể, thuộc tính...)
+            } else {
+                alert('Không tìm thấy thông tin sản phẩm.');
+            }
+        })
+        .catch(error => {
+            console.error('Có lỗi xảy ra khi gọi API:', error);
+            alert('Có lỗi xảy ra khi lấy thông tin sản phẩm.');
+        });
+}
+*/
