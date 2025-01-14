@@ -34,11 +34,11 @@
         <jsp:include page="user-sidebar.jsp"/>
     </div>
 
-    <c:if   test="${not empty order}">
-        <p>Có lỗi xảy ra</p>
+    <c:if test="${ empty order}">
+        <p>Chưa có đơn hàng</p>
     </c:if>
 
-    <c:if   test="${not empty order}">
+    <c:if test="${not empty order}">
         <div class="content">
 
             <div id="order_header" class="row mid_align">
@@ -54,11 +54,11 @@
                     <div class="wrap row">
                         <div class="order_id">Mã đơn hàng: <span>${order.id}</span></div>
 
-                        <c:if   test="${order.orderStatus =='DELIVERY'}">
-                            <div class="order_status mid_align" style="color: #0a7cff" >Đang giao hàng</div>
+                        <c:if test="${order.orderStatus =='DELIVERY'}">
+                            <div class="order_status mid_align" style="color: #0a7cff">Đang giao hàng</div>
                         </c:if>
 
-                        <c:if   test="${order.orderStatus =='DELIVERED'}">
+                        <c:if test="${order.orderStatus =='DELIVERED'}">
                             <div class="order_status mid_align">Đã giao hàng</div>
                         </c:if>
                     </div>
@@ -72,7 +72,6 @@
                     <c:if test="${empty orderDetails}">
                         <p>Đã xảy ra lỗi</p>
                     </c:if>
-
 
 
                     <c:if test="${not empty orderDetails}">
@@ -98,8 +97,6 @@
                                     </div>
 
 
-
-
                                 </div>
 
 
@@ -122,24 +119,6 @@
 
                         </c:forEach>
                     </c:if>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     <div id="status_detail" class=" row">
@@ -213,8 +192,7 @@
                     </div>
 
 
-
-                    <c:if   test="${not empty user}">
+                    <c:if test="${not empty user}">
                         <div id="customer" class="col">
 
                             <div class="title">
@@ -226,8 +204,8 @@
                                 <div class="section_left col">
 
 
-                                    <div class="content_item full_name" >
-                                        <i class="fa-regular fa-user" ></i>
+                                    <div class="content_item full_name">
+                                        <i class="fa-regular fa-user"></i>
                                         <span> ${address.name} </span>
                                     </div>
 
@@ -289,11 +267,54 @@
                     </c:if>
 
 
-
-
                 </div>
             </div>
 
+            <div class="write-review-section">
+                <h2>Viết đánh giá của bạn</h2>
+                <form id="review-form" method="post" action="<%=request.getContextPath()%>/submitReview">
+                    <div class="input-group">
+                        <label for="rating-value"> </label>
+                        <div id="user-rating" class="stars">
+
+                            <span class="star" data-value="1">
+                                 <i class="fa-solid fa-star" ></i>
+                            </span>
+                                    
+                            <span class="star"  data-value="2">
+                                <i class="fa-solid fa-star" ></i>
+                            </span>
+                                    
+                            <span class="star" data-value="3">
+                                <i class="fa-solid fa-star" ></i>
+                            </span>
+                                    
+                            <span class="star" data-value="4">
+                                <i class="fa-solid fa-star" ></i>
+                            </span>
+                                    
+                            <span class="star"  data-value="5">
+                                <i class="fa-solid fa-star" ></i>
+                            </span>
+
+
+
+                        </div>
+                        <input type="hidden" id="rating-value" name="rating" value="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="review-text">Viết đánh giá:</label>
+                        <textarea id="review-text" name="review" rows="4" placeholder="Chia sẻ suy nghĩ của bạn"
+                                  required></textarea>
+                    </div>
+
+                   <div class="send">
+                       <button type="submit">Gửi đánh giá</button>
+                   </div>
+
+
+                </form>
+            </div>
 
         </div>
     </c:if>
