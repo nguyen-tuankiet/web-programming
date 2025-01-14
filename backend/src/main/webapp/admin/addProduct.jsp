@@ -37,7 +37,7 @@
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Thêm sản phẩm</h1>
+                    <h1 class="page-header-title">Sản phẩm</h1>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Mô tả (Tùy chọn)</label>
+                            <label for="description" id="product-description">Mô tả (Tùy chọn)</label>
 
                             <div class="toolbar">
                                 <button type="button" class="toolbar-btn"><i class="fas fa-bold"></i></button> <!-- Bold -->
