@@ -273,7 +273,7 @@
                 <div class="wrap_menu_item">
                     <%--                    <i class="fa-solid fa-gear"></i>--%>
                         <i class="fa-solid fa-warehouse"></i>
-                        <a href="add-category">Danh mục</a>
+                        <a href="category">Danh mục</a>
                     <%--                    <span>  Danh mục </span>--%>
                 </div>
             </li>
