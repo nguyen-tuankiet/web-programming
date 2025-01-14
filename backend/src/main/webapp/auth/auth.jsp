@@ -36,26 +36,36 @@
       <span>hoặc sử dụng email của bạn để đăng ký</span>
       <div class="infield">
         <input id="fullName" placeholder=" " required />
-        <label for="fullName">Tên đầy đủ</label>
+        <label for="fullName">Tên đầy đủ <span class="required">*</span> </label>
       </div>
       <div class="infield">
         <input id="displayname" placeholder=" " required />
-        <label for="displayname">Tên hiển thị</label>
+        <label for="displayname">Tên hiển thị <span class="required">*</span> </label>
       </div>
       <div class="infield">
         <input type="email" id="emails" placeholder=" " name="email" required />
-        <label for="emails">Email</label>
+        <label for="emails">Email <span class="required">*</span> </label>
       </div>
+
       <div class="infield password">
         <input type="password" id="passwordd" placeholder=" " required>
-        <label for="passwordd">Mật khẩu</label>
+        <label for="passwordd">Mật khẩu <span class="required">*</span> </label>
         <i class="fas fa-eye toggle-password" data-toggle="#passwordd"></i>
       </div>
+      <div id="password-error" style="color: red; display: none;">
+        Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm một ký tự viết hoa, một ký tự số và một ký tự đặc biệt.
+      </div>
+
       <div class="infield password">
         <input type="password" id="conf" placeholder=" " required />
-        <label for="conf">Xác nhận mật khẩu</label>
+        <label for="conf">Xác nhận mật khẩu <span class="required">*</span> </label>
         <i class="fas fa-eye toggle-password" data-toggle="#conf"></i>
       </div>
+      <div id="conf-error" style="color: red; display: none;">
+        Mật khẩu xác nhận không khớp với mật khẩu.
+      </div>
+
+
       <div class="infield terms">
         <input type="checkbox" id="terms-checkbox" required />
         <label for="terms-checkbox">
@@ -79,11 +89,11 @@
       <span>hoặc sử dụng tài khoản của bạn</span>
       <div class="infield">
         <input type="email" id="email" placeholder=" " name="email" required />
-        <label for="email">Email</label>
+        <label for="email">Email <span class="required">*</span> </label>
       </div>
       <div class="infield password">
         <input type="password" id="password" placeholder=" " required>
-        <label for="password">Mật khẩu</label>
+        <label for="password">Mật khẩu <span class="required">*</span> </label>
         <i class="fas fa-eye toggle-password" data-toggle="#password"></i>
       </div>
       <div class="remember-forgot-container">
