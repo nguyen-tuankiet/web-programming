@@ -140,4 +140,38 @@ document.addEventListener("DOMContentLoaded", () => {
     discardBtn.addEventListener("click", () => {
         addCategoryBox.classList.add("hidden");
     });
+
+    // **Xử lý nút "Thêm"**
+    const addBtn = document.querySelector(".add-btn");
+    const inputField = document.querySelector(".input-field");
+
+    addBtn.addEventListener("click", async () => {
+        const categoryName = inputField.value.trim();
+
+        if (!categoryName) {
+            alert("Vui lòng nhập tên danh mục!");
+            return;
+        }
+
+        try {
+            const response = await fetch('add-category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: categoryName }),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert("Danh mục được thêm thành công!");
+                inputField.value = ""; // Reset input field
+            } else {
+                alert(`Lỗi: ${result.message}`);
+            }
+        } catch (error) {
+            alert("Có lỗi xảy ra khi thêm danh mục!");
+            console.error(error);
+        }
+    });
 });
