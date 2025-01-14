@@ -15,4 +15,14 @@ public interface AddressDAO {
             " WHERE userId = :userId;")
     List<Address> getAddressByUserId(@Bind("userId") Integer userId);
 
+
+    @SqlQuery(value = "SELECT *" +
+            " FROM address" +
+            " WHERE id = :addressId;")
+    Address getAddressById(@Bind("addressId") Integer addressId);
+
+
+
+
+
 }

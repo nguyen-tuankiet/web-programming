@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Address;
 import com.example.backend.model.DAO.AddressDAO;
 import org.jdbi.v3.core.Jdbi;
@@ -17,4 +18,19 @@ public class AddressSevice {
     public List<Address> findByUserId(Integer userId) {
         return addressDAO.getAddressByUserId(userId);
     }
+
+    public Address findById(Integer id) {
+        return addressDAO.getAddressById(id);
+    }
+
+
+    public static void main(String[] args) {
+        AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());
+        System.out.println(addressSevice.findById(1));
+    }
+
+
+
+
+
 }

@@ -228,13 +228,13 @@
 
                                     <div class="content_item full_name" >
                                         <i class="fa-regular fa-user" ></i>
-                                        <span> ${user.fullName} </span>
+                                        <span> ${address.name} </span>
                                     </div>
 
                                     <div class="content_item phone">
                                         <i class="fa-solid fa-phone"></i>
-                                        <c:if test="${not empty user.phone}">
-                                            <span>${user.phone}</span>
+                                        <c:if test="${not empty address.phone}">
+                                            <span>${address.phone}</span>
                                         </c:if>
                                     </div>
 
@@ -245,7 +245,13 @@
 
                                     <div class="content_item address">
                                         <i class="fa-solid fa-location-dot"></i>
-                                        <span>Số 8, Đường Hàm Nghi,Quận 1, TP.HCM</span>
+
+                                        <c:if test="${not empty address}">
+                                            <span>${address.detail}, ${address.commune}, ${address.district}, ${address.province}
+                                             </span>
+                                        </c:if>
+
+
                                     </div>
 
 
