@@ -23,6 +23,7 @@ public class Order {
     Integer total;
     String productName;
     String productImage;
+    String userName;
 
 
     @JdbiConstructor
@@ -38,7 +39,8 @@ public class Order {
                  @ColumnName("quantity") @Nullable Integer quantity,
                  @ColumnName("total") @Nullable Integer total,
                  @ColumnName("productName") @Nullable String productName,
-                 @ColumnName("productImage") @Nullable String productImage
+                 @ColumnName("productImage") @Nullable String productImage,
+                 @ColumnName("userName") @Nullable String userName
 
     ){
         this.id = id;
@@ -53,6 +55,7 @@ public class Order {
         this.total = total;
         this.productName = productName;
         this.productImage = productImage;
+        this.userName = userName;
     }
 
 
@@ -156,6 +159,13 @@ public class Order {
 
     public void setProductImage(String productImage) {
         this.productImage = productImage;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
