@@ -7,6 +7,7 @@ import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
 import org.jdbi.v3.core.Jdbi;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class OrderSerivce {
 
@@ -29,20 +30,29 @@ public class OrderSerivce {
         );
     }
 
+    public List<Order> getOrdersByUserId(Integer userId) {
+        return orderDAO.getOrdersByUserId(userId);
+    }
+
+
+
+
+
+
     public static void main(String[] args) {
         OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
-        Order order = new Order();
-        order.setCreateAt(LocalDate.now());
-        order.setPaymentStatus("PAID");
-        order.setOrderStatus("PAID");
-        order.setUserId(1);
-        order.setAddressId(1);
-        order.setCardId(1);
-        order.setIsCOD(false);
-
-
-        Integer orderId = orderSerivce.addOrder(order);
-        System.out.println(orderId);
-
+//        Order order = new Order();
+//        order.setCreateAt(LocalDate.now());
+//        order.setPaymentStatus("PAID");
+//        order.setOrderStatus("PAID");
+//        order.setUserId(1);
+//        order.setAddressId(1);
+//        order.setCardId(1);
+//        order.setIsCOD(false);
+//
+//
+//        Integer orderId = orderSerivce.addOrder(order);
+//        System.out.println(orderId);
+        System.out.println(orderSerivce.getOrdersByUserId(112));
     }
 }

@@ -1,8 +1,10 @@
 package com.example.backend.controller.user.order;
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.model.Order;
 import com.example.backend.model.OrderDetail;
 import com.example.backend.service.OrderDetailService;
+import com.example.backend.service.OrderSerivce;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -13,14 +15,19 @@ import java.util.List;
 
 @WebServlet(name = "UserOrderController", value = "/user-order")
 public class UserOrderController extends HttpServlet {
-    OrderDetailService orderDetailService = new OrderDetailService(DBConnection.getJdbi());
+    OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
+
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<OrderDetail> orders = new ArrayList<>();
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        List<Order> orders = new ArrayList<>();
         try {
 
-            orders = orderDetailService.getOrderByUserId(1);
+            orders = orderSerivce.getOrdersByUserId(userId);
             request.setAttribute("orders", orders);
         } catch (Exception e) {
             e.printStackTrace();
