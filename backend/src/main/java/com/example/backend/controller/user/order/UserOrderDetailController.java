@@ -1,14 +1,8 @@
 package com.example.backend.controller.user.order;
 
 import com.example.backend.Connection.DBConnection;
-import com.example.backend.model.Card;
-import com.example.backend.model.Order;
-import com.example.backend.model.OrderDetail;
-import com.example.backend.model.User;
-import com.example.backend.service.CardService;
-import com.example.backend.service.OrderDetailService;
-import com.example.backend.service.OrderSerivce;
-import com.example.backend.service.UserService;
+import com.example.backend.model.*;
+import com.example.backend.service.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -23,6 +17,7 @@ public class UserOrderDetailController extends HttpServlet {
     OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
     UserService userService = new UserService(DBConnection.getJdbi());
     CardService cardService = new CardService(DBConnection.getJdbi());
+    AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,11 +37,16 @@ public class UserOrderDetailController extends HttpServlet {
            request.setAttribute("order", order);
 
            if (!order.getIsCOD()){
-
                Card card = cardService.getCardById(order.getCardId());
                if (card != null) {
                    request.setAttribute("card", card);
                }
+           }
+
+
+           Address address = addressSevice.findById(order.getAddressId());
+           if (address != null) {
+               request.setAttribute("address", address);
            }
 
            request.setAttribute("COD", order.getIsCOD());
