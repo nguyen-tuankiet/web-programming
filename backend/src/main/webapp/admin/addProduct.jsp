@@ -173,7 +173,7 @@
 
 
                 <div class="save">
-                    <button id="saveButton">Lưu</button>
+                    <button id="saveButton" onclick="saveProductDetails()"> Lưu</button>
                 </div>
 
             </div>
