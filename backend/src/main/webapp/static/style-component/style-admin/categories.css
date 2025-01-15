@@ -16,8 +16,8 @@ body {
 .content {
     width: 100%;
     background-color: #ffffff;
-    padding: 20px;
     border: 1px solid #e5e7eb;
+    padding: 80px 10px;
     border-radius: 10px;
 }
 
