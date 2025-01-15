@@ -33,36 +33,6 @@
             </div>
             <div id="addAddressFormContainer" style="display: none;">
                 <h2>Thêm Địa Chỉ</h2>
-                <%--                <form id="addAddressForm">--%>
-                <%--                    <label for="province">Tỉnh/Thành phố:</label>--%>
-                <%--                    <input type="text" id="province" name="province" placeholder="Nhập tỉnh/thành phố"/>--%>
-
-                <%--                    <label for="district">Quận/Huyện:</label>--%>
-                <%--                    <input type="text" id="district" name="district" placeholder="Nhập quận/huyện"/>--%>
-
-                <%--                    <label for="commune">Phường/Xã:</label>--%>
-                <%--                    <input type="text" id="commune" name="commune" placeholder="Nhập phường/xã"/>--%>
-
-                <%--                    <label for="name">Tên:</label>--%>
-                <%--                    <input type="text" id="name" name="name" placeholder="Nhập tên"/>--%>
-
-                <%--                    <label for="phone">Số điện thoại:</label>--%>
-                <%--                    <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại"/>--%>
-
-                <%--                    <div class="HomeorOffice">--%>
-                <%--                        <label>--%>
-                <%--                            <input type="radio" name="type" value="house"/> Nhà--%>
-                <%--                        </label>--%>
-                <%--                        <label>--%>
-                <%--                            <input type="radio" name="type" value="building"/> Văn phòng--%>
-                <%--                        </label>--%>
-
-                <%--                    </div>--%>
-                <%--                    <div class="savecane">--%>
-                <%--                        <button type="button" id="saveAddress">Lưu</button>--%>
-                <%--                        <button type="button" id="cancelAddressForm">Hủy</button>--%>
-                <%--                    </div>--%>
-                <%--                </form>--%>
                 <form method="POST" action="AddAddressController">
                     <label for="province">Tỉnh/Thành phố:</label>
                     <input type="text" id="province" name="province" placeholder="Nhập tỉnh/thành phố" required/>
