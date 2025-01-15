@@ -22,10 +22,23 @@ public class CardService {
         return cardDAO.getCardById(cardId);
     }
 
+    public Boolean addCard(Card card) {
+        return cardDAO.addCard(
+                card.getUserId(),
+                card.getDuration(),
+                card.getType(),
+                card.getIsDefault(),
+                card.getLast4()
+        );
+    }
+
+
     public static void main(String[] args) {
         CardService cardService = new CardService(DBConnection.getJdbi());
 //        System.out.println(cardService.getCartByUserId(1));
-        System.out.println(cardService.getCardById(1));
+//        System.out.println(cardService.getCardById(1));
+//        System.out.println(cardService.getCardById(1));
+//        System.out.println(cardService.getCardById(1));
     }
 
 }
