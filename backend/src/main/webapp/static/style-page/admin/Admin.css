@@ -61,6 +61,18 @@ a {
     width: 100%;
 }
 
+.content {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 80px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.wrap_content {
+    width: 83%;
+    padding: 20px;
+}
 /*#header {*/
 /*    width: 100%;*/
 /*    height: 70px;*/
@@ -181,14 +193,15 @@ a {
 /*    background-color: #f9fafb;*/
 /*}*/
 
-/*#sidebar {*/
-/*    width: 250px;*/
-/*    background-color: #ffffff; !* Thay màu trắng *!*/
-/*    border-right: 1px solid #e5e7eb;*/
-/*    padding-top: 20px;*/
-/*    padding-bottom: 20px;*/
-/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); !* Hiệu ứng shadow nhẹ *!*/
-/*}*/
+#sidebar {
+    height: 100%;
+    width: 250px;
+    background-color: #ffffff; /* Thay màu trắng */
+    border-right: 1px solid #e5e7eb;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Hiệu ứng shadow nhẹ */
+}
 
 /*#sidebar ul {*/
 /*    list-style-type: none;*/
