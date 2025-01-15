@@ -222,7 +222,7 @@
 
 
     <c:if test="${empty user}">
-        <p>User Not found </p>
+        <p>Không tìm thấy người dung</p>
     </c:if>
 
 

@@ -212,7 +212,7 @@
                     <div class="item mid_align cod">
                         <i class="fa-solid fa-money-bill"></i>
                         <span>Thanh toán khi nhận hàng</span>
-                        <input type="radio" name="payment-method" data-payment="COD">
+                        <input type="radio" name="payment-method" data-payment="COD" checked>
                     </div>
 
                     <div class="item mid_align banking col">

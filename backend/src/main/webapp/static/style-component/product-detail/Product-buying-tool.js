@@ -76,7 +76,7 @@ function addToCart(productId, optionId) {
     })
         .then(data => {
             console.log(data);
-            alert("Added to cart");
+            // alert("Sản Phẩm đã");
 
         }).catch(error => console.log(error));
 
