@@ -5,7 +5,11 @@
   Time: 12:05
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <html>
 <head>
     <title>Title</title>
@@ -49,48 +53,58 @@
         <div id="content_body" class="mid_align">
 
 
-            <div id="card"
-                 style="background-image: url('${pageContext.request.contextPath}/static/image/card_bg.jpg');">
-                <div class="overlay"></div>
-                <div id="card_header" class="mid_align">
 
-                    <div class="infor col">
-                        <div class="card_infor row">
-                            <span class="title">Số thẻ :</span>
-                            <span class="last4"> **** 9999</span>
+            <c:if   test="${not empty cards}">
+
+                <c:forEach items="${cards}" var="c">
+                    <div id="card"
+                         style="background-image: url('${pageContext.request.contextPath}/static/image/card_bg.jpg');">
+                        <div class="overlay"></div>
+                        <div id="card_header" class="mid_align">
+
+                            <div class="infor col">
+                                <div class="card_infor row">
+                                    <span class="title">Số thẻ :</span>
+                                    <span class="last4"> **** ${c.last4}</span>
+
+                                </div>
+                                <span class="card_holder">${user.fullName}</span>
+                            </div>
+
+
+                            <div class="type_card">
+                                <img src="${pageContext.request.contextPath}/static/image/visa.png" alt="">
+                            </div>
+
 
                         </div>
-                        <span class="card_holder">JACKIE CHAN</span>
-                    </div>
+
+                        <div id="card_body">
+                            <div class="card_date">
+                                <span> Date: ${c.duration}</span>
+                            </div>
 
 
-                    <div class="type_card">
-                        <img src="${pageContext.request.contextPath}/static/image/visa.png" alt="">
-                    </div>
+                        </div>
 
 
-                </div>
+                        <div id="footer" class="mid_align">
+                            <c:if  test="${c.isDefault}">
+                                <div id="default">Mặc định</div>
+                            </c:if>
+                            <div class="edit_card mid_align">
+                                 <a href="#" class="delete_btn">Xóa</a>
 
-                <div id="card_body">
-                    <div class="card_date">
-                        <span> Date: 11/25</span>
-                    </div>
+                            </div>
+                        </div>
 
-
-                </div>
-
-
-                <div id="footer" class="mid_align">
-                    <div id="default">Mặc định</div>
-                    <div class="edit_card mid_align">
-                        <a href="#" class="edit_btn">Sửa</a>
-                        <a href="#" class="delete_btn">Xóa</a>
 
                     </div>
-                </div>
+                </c:forEach>
+
+            </c:if>
 
 
-            </div>
 
 
         </div>
@@ -102,33 +116,6 @@
 
                 <div class="card-form">
                     <h2>Thêm thẻ</h2>
-                    <%--                    <label for="name">Tên trên thẻ</label>--%>
-                    <%--                    <input type="text" id="name" placeholder="TÊN CHỦ THẺ">--%>
-
-                    <%--                    <label for="card-number">Số thẻ</label>--%>
-                    <%--                    <input type="number" id="card-number" placeholder="XXXX XXXX XXXX XXXX">--%>
-
-                    <%--                    <div class="input-group">--%>
-                    <%--                        <div>--%>
-                    <%--                            <label for="expiry">Ngày hết hạn</label>--%>
-                    <%--                            <input type="month" id="expiry" placeholder="XX/XXXX">--%>
-                    <%--                        </div>--%>
-                    <%--                        <div>--%>
-                    <%--                            <label for="cvv">Mã CVV</label>--%>
-                    <%--                            <input type="password" id="cvv" placeholder="XXX">--%>
-                    <%--                        </div>--%>
-                    <%--                    </div>--%>
-
-                    <%--                    <div class="checkbox-group">--%>
-                    <%--                        <input type="checkbox" id="primary-card">--%>
-                    <%--                        <label for="primary-card">Đặt làm thẻ chính</label>--%>
-                    <%--                    </div>--%>
-
-                    <%--                    <div class="button-group">--%>
-                    <%--                        <button class="close-btn">Đóng</button>--%>
-                    <%--                        <button class="save-btn">Lưu thay đổi</button>--%>
-                    <%--                    </div>--%>
-
                     <form id="card_form"  >
                         <label for="name">Tên trên thẻ:</label>
                         <input type="text" id="name" name="name" required><br>

@@ -35,7 +35,7 @@ public class CardService {
 
     public static void main(String[] args) {
         CardService cardService = new CardService(DBConnection.getJdbi());
-//        System.out.println(cardService.getCartByUserId(1));
+        System.out.println(cardService.getCartByUserId(1));
 //        System.out.println(cardService.getCardById(1));
 //        System.out.println(cardService.getCardById(1));
 //        System.out.println(cardService.getCardById(1));
