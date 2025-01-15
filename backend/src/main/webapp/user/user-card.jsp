@@ -12,9 +12,12 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style-user_profile/Payment.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-user_profile/CardComponent.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-user_profile/AddCard.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/style-component/style-user_profile/CardComponent.css">
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/style-component/style-user_profile/AddCard.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -99,32 +102,54 @@
 
                 <div class="card-form">
                     <h2>Thêm thẻ</h2>
-                    <label for="name">Tên trên thẻ</label>
-                    <input type="text" id="name" placeholder="TÊN CHỦ THẺ">
+                    <%--                    <label for="name">Tên trên thẻ</label>--%>
+                    <%--                    <input type="text" id="name" placeholder="TÊN CHỦ THẺ">--%>
 
-                    <label for="card-number">Số thẻ</label>
-                    <input type="number" id="card-number" placeholder="XXXX XXXX XXXX XXXX">
+                    <%--                    <label for="card-number">Số thẻ</label>--%>
+                    <%--                    <input type="number" id="card-number" placeholder="XXXX XXXX XXXX XXXX">--%>
 
-                    <div class="input-group">
-                        <div>
-                            <label for="expiry">Ngày hết hạn</label>
-                            <input type="text" id="expiry" placeholder="XX/XXXX">
+                    <%--                    <div class="input-group">--%>
+                    <%--                        <div>--%>
+                    <%--                            <label for="expiry">Ngày hết hạn</label>--%>
+                    <%--                            <input type="month" id="expiry" placeholder="XX/XXXX">--%>
+                    <%--                        </div>--%>
+                    <%--                        <div>--%>
+                    <%--                            <label for="cvv">Mã CVV</label>--%>
+                    <%--                            <input type="password" id="cvv" placeholder="XXX">--%>
+                    <%--                        </div>--%>
+                    <%--                    </div>--%>
+
+                    <%--                    <div class="checkbox-group">--%>
+                    <%--                        <input type="checkbox" id="primary-card">--%>
+                    <%--                        <label for="primary-card">Đặt làm thẻ chính</label>--%>
+                    <%--                    </div>--%>
+
+                    <%--                    <div class="button-group">--%>
+                    <%--                        <button class="close-btn">Đóng</button>--%>
+                    <%--                        <button class="save-btn">Lưu thay đổi</button>--%>
+                    <%--                    </div>--%>
+
+                    <form id="card_form"  >
+                        <label for="name">Tên trên thẻ:</label>
+                        <input type="text" id="name" name="name" required><br>
+
+                        <label for="card-number">Số thẻ:</label>
+                        <input type="number" id="card-number" name="cardNumber" required><br>
+
+                        <label for="expiry">Ngày hết hạn:</label>
+                        <input type="text" id="expiry" name="expiry" placeholder="MM/YYYY" required><br>
+
+                        <label for="cvv">Mã CVV:</label>
+                        <input type="password" id="cvv" name="cvv" required><br>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="primary-card">
+                            <label for="primary-card">Đặt làm thẻ chính</label>
                         </div>
-                        <div>
-                            <label for="cvv">Mã CVV</label>
-                            <input type="password" id="cvv" placeholder="XXX">
-                        </div>
-                    </div>
 
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="primary-card">
-                        <label for="primary-card">Đặt làm thẻ chính</label>
-                    </div>
+                        <button type="submit">Lưu thẻ</button>
+                    </form>
 
-                    <div class="button-group">
-                        <button class="close-btn">Đóng</button>
-                        <button class="save-btn">Lưu thay đổi</button>
-                    </div>
                 </div>
 
 

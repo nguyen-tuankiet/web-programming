@@ -2,6 +2,7 @@ package com.example.backend.model;
 
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -14,6 +15,8 @@ public class Card {
     String type;
     Boolean isDefault;
 
+
+    @JdbiConstructor
     public Card(
             @ColumnName("id") @Nullable Integer id,
             @ColumnName("last4") @Nullable Integer last4,
@@ -28,6 +31,11 @@ public class Card {
         this.type = type;
         this.isDefault = isDefault;
         this.last4 = last4;
+    }
+
+
+    public Card( ) {
+
     }
 
     public Integer getId() {
