@@ -8,7 +8,7 @@ function addToCart(productId, optionId) {
     })
         .then(data => {
             console.log(data);
-            alert("Added to cart");
+            // alert("Added to cart");
 
         }).catch(error => console.log(error));
 

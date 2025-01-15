@@ -28,3 +28,5 @@ function showImage(imageId) {
         productDescription.textContent = activeLink.getAttribute("data-text");
     }
 }
+
+
