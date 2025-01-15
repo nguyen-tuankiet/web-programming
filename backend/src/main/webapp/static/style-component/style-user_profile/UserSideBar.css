@@ -55,7 +55,7 @@ a{
 
 .warp_content{
     width: 100%;
-    padding: 0 20px;
+    padding-top: 80px;
 }
 
 
@@ -67,7 +67,7 @@ a{
     height: 100%;
     background: #F5F5F5;
     align-items: center;
-
+    padding-top: 80px;
 
 }
 
