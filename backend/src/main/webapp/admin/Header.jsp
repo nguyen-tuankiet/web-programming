@@ -21,6 +21,10 @@
             align-items: center;
             padding: 0 20px;
             position: relative;
+            /*top: 0;*/
+            /*position: fixed;*/
+            /*z-index: 1000;*/
+            /*width: 100%;*/
         }
 
         #header .logo {
