@@ -22,7 +22,7 @@
             <img src="${pageContext.request.contextPath}/static/image/medium%20(1).png" height="500" width="500"/>
         </div>
         <div class="name">
-            <span>Jackie Chan</span>
+            <span>User</span>
         </div>
 
     </div>
