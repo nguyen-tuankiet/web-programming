@@ -51,7 +51,7 @@
 
             <div class="content row">
                 <div class="list_item ">
-                    <span>Bạn đang có 4 sản phâm trong giỏ hàng</span>
+<%--                    <span>Bạn đang có 4 sản phâm trong giỏ hàng</span>--%>
 
 
                     <c:forEach items="${productCarts}" var="p">

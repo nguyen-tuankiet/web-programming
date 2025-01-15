@@ -43,7 +43,7 @@ body {
 .navbar {
     display: flex;
     justify-content: center;
-    gap: 140px;
+    gap: 40px;
     /*padding: 60px 217px;*/
     margin-left: 100px;
     background-color: transparent;
@@ -54,7 +54,19 @@ body {
     transition: color 0.3s ease-in-out;
 }
 
-
+.navbar-light{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 217px;
+    /*margin-left: 100px ;*/
+    background-color: transparent;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 10;
+    position: absolute;
+    transition: color 0.3s ease-in-out;
+}
 
 #header > nav > ul{
     margin: 0 100px;
