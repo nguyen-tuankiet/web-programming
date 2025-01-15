@@ -8,12 +8,16 @@
         #container{
             display: flex;
             flex-direction: column;
+            padding-top: 85px;
         }
 
         #home_header{
             height: 70px;
             width: 100%;
             margin-bottom: 20px;
+            top: 0;
+            position: fixed;
+            z-index: 1000;
         }
 
     </style>

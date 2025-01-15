@@ -43,17 +43,17 @@
     <div class="product-item">
       <img src="${pageContext.request.contextPath}/static/image/pc-1440x810bic.jpg" alt="The Frame">
       <h3>Nhà Bếp</h3>
-      <a href="../product_component/Search_KitchenEquipment.html" class="buy-button">Tìm hiểu thêm</a>
+      <a href="Search_KitchenEquipment" class="buy-button">Tìm hiểu thêm</a>
     </div>
     <div class="product-item">
       <img src="${pageContext.request.contextPath}/static/image/pc-achomepage.jpg" alt="WindFree Wall-Mount">
       <h3>Phòng Ngủ</h3>
-      <a href="../product_component/Search_AirConditioner.html" class="buy-button">Tìm hiểu thêm</a>
+      <a href="Search_AirConditioner" class="buy-button">Tìm hiểu thêm</a>
     </div>
     <div class="product-item">
       <img src="https://images.samsung.com/is/image/samsung/assets/vn/home/2024/PC_1440x810HA.jpg?$1440_810_JPG$" alt="Tủ Lạnh Bespoke">
       <h3>Phòng Khách</h3>
-      <a href="../product_component/Search_VacuumCleaner.html" class="buy-button">Tìm hiểu thêm</a>
+      <a href="search-refrigerator" class="buy-button">Tìm hiểu thêm</a>
     </div>
   </div>
 </section>
@@ -134,7 +134,7 @@
 <section class="body">
   <div class="content">
 
-    <div class="navbar light">
+    <div class="navbar-light">
       <a onclick="showImage('image1')" data-text="Bespoke Đẹp Đi Đừng Đợi!">Tủ Lạnh BESPOKE</a>
       <a onclick="showImage('image2')" data-text="Dẫn Đầu Kỷ Nguyên Bếp Thông Minh">Thiết Bị Bếp</a>
       <a onclick="showImage('image3')" data-text="Sạch Thông Minh, Giặt Hoàn Hảo">Máy Giặt BESPOKE AI</a>
@@ -150,7 +150,7 @@
 
       <div class="text-overlay">
         <h1 id="product-description">Bespoke Đẹp Đi Đừng Đợi!</h1>
-        <a href="../../pages/topRefrigerator.html" class="link">Tìm hiểu thêm</a>
+        <a href="search-refrigerator" class="link">Tìm hiểu thêm</a>
         <!--                <a href="../../component/Checkout/Checkout.html" class="link">Mua ngay</a>-->
       </div>
     </div>
