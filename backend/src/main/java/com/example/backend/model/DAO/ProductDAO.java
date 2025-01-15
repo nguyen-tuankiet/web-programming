@@ -28,7 +28,8 @@ public interface ProductDAO {
             "            WHERE cate.id= :categoryId and ops.price = ( " +
             "                    SELECT MIN(price) " +
             "                    FROM options as ops " +
-            "                    WHERE p.id = ops.productId and ops.stock > 0);")
+            "                    WHERE p.id = ops.productId and ops.stock > 0 " +
+            "                       and p.isActive = true );")
     @RegisterConstructorMapper(Product.class)
     List<Product> getProductsByCategory(@Bind("categoryId") int categoryId);
 
@@ -152,7 +153,8 @@ public interface ProductDAO {
             "  and ops.price = (SELECT MIN(price) " +
             "                   FROM options as ops " +
             "                   WHERE p.id = ops.productId " +
-            "                     and ops.stock > 0) " +
+            "                     and ops.stock > 0" +
+            "                       and p.isActive = true ) " +
             "order by p.noOfViews desc , p.noOfSold desc " +
             "limit 3")
     public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit );

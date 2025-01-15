@@ -28,6 +28,10 @@ public class BuyNowController extends HttpServlet {
         Product product = productService.getProductByIdAndOptionId(Integer.parseInt(request.getParameter("productId")),
                 Integer.parseInt(request.getParameter("optionId")));
 
+
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+
         if (product == null) {
             throw new ServletException("Product not found");
         }
@@ -40,8 +44,8 @@ public class BuyNowController extends HttpServlet {
         List<Card> cardList = new ArrayList<>();
 
 
-        addressList = addressService.findByUserId(1);
-        cardList = cardService.getCartByUserId(1);
+        addressList = addressService.findByUserId(userId);
+        cardList = cardService.getCartByUserId(userId);
 
 
 
