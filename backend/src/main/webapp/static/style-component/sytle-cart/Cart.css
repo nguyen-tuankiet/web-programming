@@ -90,8 +90,7 @@ a{
 
 #cart_body  {
     width: 100%;
-
-    padding: 20px 0;
+    padding: 85px 0;
 }
 
 
@@ -107,6 +106,12 @@ a{
     color: #2e2c2c;
 }
 
+/*#cart_header{*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    z-index: 1000;*/
+/*    padding-bottom: 20px;*/
+/*}*/
 .btn{
     height: 100px;
     padding: 30px 0;

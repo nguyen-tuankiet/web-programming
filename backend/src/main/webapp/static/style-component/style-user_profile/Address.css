@@ -68,7 +68,7 @@ i{
 .content{
     width: 100%;
     padding-left:20px;
-
+    padding-top: 80px;
 }
 
 
@@ -375,4 +375,83 @@ i{
 }
 .savecane{
     display:inline-flex;
+}
+
+
+#addAddressFormContainer {
+    display: none;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 100%;
+    max-width: 500px; /* Giới hạn chiều rộng tối đa của form */
+    max-height: 80vh; /* Giới hạn chiều cao tối đa là 80% chiều cao màn hình */
+    overflow-y: auto; /* Hiển thị thanh cuộn dọc nếu nội dung vượt quá chiều cao */
+    margin: 20px auto; /* Căn giữa form */
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+#addAddressFormContainer h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+#addAddressFormContainer form label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#addAddressFormContainer form input[type="text"],
+#addAddressFormContainer form input[type="radio"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#addAddressFormContainer form input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+#addAddressFormContainer form label[for="home"],
+#addAddressFormContainer form label[for="office"] {
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+#addAddressFormContainer form button[type="submit"],
+#addAddressFormContainer form button[type="reset"] {
+    width: 48%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#addAddressFormContainer form button[type="submit"] {
+    background-color: #28a745;
+}
+
+#addAddressFormContainer form button[type="reset"] {
+    background-color: #dc3545;
+}
+
+#addAddressFormContainer form button:hover {
+    opacity: 0.9;
 }

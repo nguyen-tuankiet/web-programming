@@ -50,7 +50,7 @@ a{
     height: 750px;
     background: #F5F5F5;
     align-items: center;
-
+    padding-top: 80px;
 
 }
 
@@ -60,6 +60,8 @@ a{
     min-height: 70px;
     font-weight: 500;
 }
+
+
 
 
 
