@@ -47,46 +47,85 @@ $(document).ready(function () {
 
 
 
+    // $('.update_btn').click(function() {
+    //     var field = $(this).data('field');
+    //     var currentValue = $('#' + field).text().trim();
+    //
+    //
+    //     console.log(field);
+    //     console.log(currentValue);
+    //
+    //     var inputField = $('<input>', {
+    //         type: 'text',
+    //         id: field + '-input',
+    //         value: currentValue,
+    //         class: 'update-input'
+    //     });
+    //
+    //     $('#' + field).replaceWith(inputField);
+    //     inputField.focus();
+    //
+    //
+    //     inputField.on('blur', function() {
+    //         var newValue = inputField.val().trim();
+    //         if (newValue !== currentValue) {
+    //              var newSpan = $('<span>', {
+    //                 id: field,
+    //                 class: 'item_text',
+    //                 text: newValue
+    //             });
+    //
+    //             inputField.replaceWith(newSpan);
+    //         } else {
+    //              var currentSpan = $('<span>', {
+    //                 id: field,
+    //                 class: 'item_text',
+    //                 text: currentValue
+    //             });
+    //
+    //             inputField.replaceWith(currentSpan);
+    //         }
+    //     });
+    // });
+
+
     $('.update_btn').click(function() {
         var field = $(this).data('field');
-        var currentValue = $('#' + field).text().trim();
+        var spanElement = $('#' + field); // Lấy phần tử span
+        var currentValue = spanElement.length ? spanElement.text().trim() : ''; // Kiểm tra xem phần tử tồn tại
 
         console.log(field);
-        console.log(currentValue);
+        console.log("Current Value:", currentValue);
 
+        // Tạo ô input thay thế
         var inputField = $('<input>', {
             type: 'text',
             id: field + '-input',
-            value: currentValue,
+            value: currentValue, // Nếu trống thì vẫn hiển thị input rỗng
             class: 'update-input'
         });
 
-        $('#' + field).replaceWith(inputField);
+        // Thay thế span bằng input
+        if (spanElement.length) {
+            spanElement.replaceWith(inputField);
+        } else {
+            console.error("Element with ID '" + field + "' does not exist.");
+        }
+
         inputField.focus();
 
-
+        // Xử lý khi người dùng nhấn blur (thoát ô input)
         inputField.on('blur', function() {
             var newValue = inputField.val().trim();
-            if (newValue !== currentValue) {
-                 var newSpan = $('<span>', {
-                    id: field,
-                    class: 'item_text',
-                    text: newValue
-                });
+            var newSpan = $('<span>', {
+                id: field,
+                class: 'item_text',
+                text: newValue // Trả lại nội dung mới hoặc trống
+            });
 
-                inputField.replaceWith(newSpan);
-            } else {
-                 var currentSpan = $('<span>', {
-                    id: field,
-                    class: 'item_text',
-                    text: currentValue
-                });
-
-                inputField.replaceWith(currentSpan);
-            }
+            inputField.replaceWith(newSpan);
         });
     });
-
 
 
 
