@@ -36,6 +36,7 @@ public class CheckoutController extends HttpServlet {
 
 
         HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
         List<ProductCart > productList = new ArrayList<>();
 
         List<Address> addressList = new ArrayList<>();
@@ -60,8 +61,11 @@ public class CheckoutController extends HttpServlet {
 
         }
 
-        addressList = addressService.findByUserId(1);
-        cardList = cardService.getCartByUserId(1);
+
+
+
+        addressList = addressService.findByUserId(userId);
+        cardList = cardService.getCartByUserId(userId);
 
 
 
