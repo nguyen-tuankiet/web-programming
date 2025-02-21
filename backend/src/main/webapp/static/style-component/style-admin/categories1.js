@@ -142,10 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // **Xử lý nút "Thêm"**
-    const addBtn = document.querySelector(".add-btn");
+    const addCateBtn = document.querySelector(".add-cate-btn");
     const inputField = document.querySelector(".input-field");
 
-    addBtn.addEventListener("click", async () => {
+    addCateBtn.addEventListener("click", async () => {
         const categoryName = inputField.value.trim();
 
         if (!categoryName) {
@@ -174,4 +174,23 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(error);
         }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });

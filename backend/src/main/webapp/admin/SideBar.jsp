@@ -278,6 +278,15 @@
                 </div>
             </li>
 
+            <li class="menu_item">
+                <div class="wrap_menu_item">
+                    <%--                    <i class="fa-solid fa-gear"></i>--%>
+                        <i class="fa-solid fa-warehouse"></i>
+                        <a href="brand">Nhà sản xuất</a>
+                    <%--                    <span>  Danh mục </span>--%>
+                </div>
+            </li>
+
 
         </ul>
     </nav>
