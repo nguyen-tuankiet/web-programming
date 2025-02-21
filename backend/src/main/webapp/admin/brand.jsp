@@ -22,19 +22,28 @@
     </div>
 
     <div class="content">
-        <div class="toolbar">
 
-    <div id="add-category-box" class="hidden">
-        <h3>Thêm Danh Mục</h3>
-        <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên danh mục" class="input-field" required />
-        <div id="error-message" class="error hidden">Tên danh mục không được để trống</div>
-        <div class="action-buttons">
-            <button class="add-btn add-cate-btn" id="add-category-btn">Thêm</button>
-            <button class="discard-btn" id="discard-category-btn">Hủy</button>
-        </div>
-    </div>
+
+
+
+        <div class="toolbar">
+            <div id="add-category-box" class="hidden">
+                <h3>Thêm Danh Mục</h3>
+                <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên nhà sản xuất"
+                       class="input-field brand-input-field " required/>
+                <div id="error-message" class="error hidden">Tên nhà sản xuất không được để trống</div>
+                <div class="action-buttons">
+                    <button class="add-btn add-brand-btn" id="add-category-btn">Thêm</button>
+                    <button class="discard-btn" id="discard-category-btn">Hủy</button>
+                </div>
+            </div>
+
             <button class="add-product-btn">+ Thêm</button>
         </div>
+
+
+
+
 
         <div class="row">
             <div class="entries-dropdown">
@@ -58,45 +67,36 @@
                 </label></th>
                 <th data-sort="string" onclick="sortTable(1)">
                     <div class="header-content">
-                        <span class="header-text">Tên Danh Mục</span>
+                        <span class="header-text">Tên nhà sản xuất</span>
                         <span class="sort-arrows">
                         <span class="sort-arrow asc">▲</span>
                         <span class="sort-arrow desc">▼</span>
                     </span>
                     </div>
                 </th>
-                <th data-sort="string" onclick="sortTable(2)">
-                    <div class="header-content">
-                        <span class="header-text">Tổng Sản Phẩm</span>
-                        <span class="sort-arrows">
-                        <span class="sort-arrow asc">▲</span>
-                        <span class="sort-arrow desc">▼</span>
-                    </span>
-                    </div>
-                </th>
+
                 <th>Thao Tác</th>
             </tr>
             </thead>
 
             <tbody id="product-table-body">
             <!-- Hiển thị danh mục -->
-            <c:if test="${empty categoriesWithStock}">
+            <c:if test="${empty brands}">
                 <tr>
-                    <td colspan="4">Không có danh mục nào được tìm thấy.</td>
+                    <td colspan="4">Không có nhà sản xuất nào được tìm thấy.</td>
                 </tr>
             </c:if>
-            <c:if test="${not empty categoriesWithStock}">
-                <c:forEach items="${categoriesWithStock}" var="category">
+            <c:if test="${not empty brands}">
+                <c:forEach items="${brands}" var="b">
                     <tr>
                         <td>
                             <label><input type="checkbox" class="checkbox"></label>
                         </td>
                         <td>
                             <div class="product">
-                                <p>${category.name}</p>
+                                <p>${b.name}</p>
                             </div>
                         </td>
-                        <td>${category.totalStock}</td>
                         <td>
                             <div class="action-icons">
                                 <div class="dropdown">
@@ -129,6 +129,46 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    //     Add brand
+    const addBrandBtn = document.querySelector(".add-brand-btn");
+    const brand_input_field = document.querySelector(".brand-input-field");
+
+    addBrandBtn.addEventListener("click", async () => {
+        const brandName = brand_input_field.value.trim();
+
+        if (!brandName) {
+            alert("Vui lòng nhập tên danh mục!");
+            return;
+        }
+
+        try {
+            const response = await fetch('add-brand', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name: brandName }),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert("Thêm thành công!");
+                inputField.value = ""; // Reset input field
+            } else {
+                alert(`Lỗi: ${result.message}`);
+            }
+        } catch (error) {
+            alert("Có lỗi xảy ra khi thêm  !");
+            console.error(error);
+        }
+    });
+
+
+
+</script>
 
 </body>
 </html>
