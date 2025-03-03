@@ -1,0 +1,369 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+/* Utility classes */
+.mid_align {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.rec_horizontal {
+    width: 100%;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin-top: 20px;
+}
+
+.rec_vertical {
+    height: 70%;
+    width: 1px;
+    background-color: #e0e0e0;
+    margin: 0 10px;
+    min-height: 20px;
+}
+
+i {
+    color: #9ca3af; /* Default gray for icons */
+}
+
+a {
+    text-decoration: none;
+    color: #111827; /* Dark text color for links */
+}
+
+.bold {
+    font-weight: 500;
+}
+
+/* Header */
+.wrap {
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 80px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.wrap_content {
+    width: 83%;
+    padding: 20px;
+}
+/*#header {*/
+/*    width: 100%;*/
+/*    height: 70px;*/
+/*    border-bottom: 1px solid #e5e7eb;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    padding: 0 20px;*/
+/*    position: relative;*/
+/*}*/
+
+/*#header .logo {*/
+/*    height: 100%;*/
+/*    width: 200px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+/*#header .logo img {*/
+/*    object-fit: contain;*/
+/*    width: 70%;*/
+/*    height: 80%;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.search-bar {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    margin-left: 30px;*/
+/*    width: 250px;*/
+/*}*/
+
+/*.search-bar input {*/
+/*    width: 100%;*/
+/*    padding: 8px 10px;*/
+/*    border: 1px solid #e5e7eb;*/
+/*    border-radius: 5px 0 0 5px;*/
+/*    outline: none;*/
+/*}*/
+
+/*.search-bar button {*/
+/*    padding: 8px 10px;*/
+/*    border: 1px solid #e5e7eb;*/
+/*    border-left: none;*/
+/*    background-color: #f3f4f6;*/
+/*    border-radius: 0 5px 5px 0;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.search-bar button i {*/
+/*    color: #6b7280;*/
+/*}*/
+
+/*#header .menu {*/
+/*    margin-left: auto;*/
+/*    font-size: 24px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+/*#header .menu i {*/
+/*    margin: 0 15px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*#header .menu i:hover {*/
+/*    color: #3461E9;*/
+/*}*/
+
+/*#header .menu .avatar {*/
+/*    height: 35px;*/
+/*    width: 35px;*/
+/*    border-radius: 50%;*/
+/*    cursor: pointer;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*.avatar img {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    object-fit: cover;*/
+/*    border-radius: 50%;*/
+/*    position: relative;*/
+
+/*}*/
+/*.user-popup {*/
+/*    display: none;*/
+/*    position: absolute;*/
+/*    top: 100%;*/
+/*    right: 0;*/
+/*    background-color: white;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 4px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+/*    padding: 10px;*/
+/*    width: 120px;*/
+/*    z-index: 9999;*/
+/*    transform: translate(-10%, -15px);*/
+
+/*}*/
+
+/*.user-popup a {*/
+/*    display: block;*/
+/*    padding: 8px 10px;*/
+/*    color: #333;*/
+/*    text-decoration: none;*/
+/*    font-size: 13px;*/
+/*}*/
+
+/*.user-popup a:hover {*/
+/*    background-color: #f0f0f0;*/
+/*}*/
+
+/* Body and Sidebar */
+/*#body {*/
+/*    width: 100%;*/
+/*    min-height: 90vh;*/
+/*    display: flex;*/
+/*    background-color: #f9fafb;*/
+/*}*/
+
+#sidebar {
+    height: 100%;
+    width: 250px;
+    background-color: #ffffff; /* Thay màu trắng */
+    border-right: 1px solid #e5e7eb;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Hiệu ứng shadow nhẹ */
+}
+
+/*#sidebar ul {*/
+/*    list-style-type: none;*/
+
+/*    margin: 5px;*/
+/*}*/
+
+/*.menu_item {*/
+
+/*    align-items: center;*/
+/*    padding: 12px 20px;*/
+/*    color: #4b5563;*/
+/*    font-weight: 500;*/
+/*    font-size: 14px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s, color 0.3s;*/
+/*    position: relative;*/
+/*    border-radius: 5px;*/
+/*    gap: 15px;*/
+/*}*/
+
+/* .menu_item:hover {*/
+/*    background-color: #f3f4f6;*/
+/*    color: #267cff;*/
+/*}*/
+
+
+/*.menu_item:hover .submenu li {*/
+/*    background-color: transparent; !* Không thay đổi nền của submenu *!*/
+/*    color: #4b5563; !* Giữ nguyên màu chữ của submenu *!*/
+/*}*/
+
+
+/*!*.menu_item a:hover {*!*/
+/*!*    background-color: #f3f4f6;*!*/
+/*!*    color: #2563eb;*!*/
+/*!*}*!*/
+
+
+/*.menu_item .wrap_menu_item{*/
+/*    display: flex;*/
+/*}*/
+
+/*.menu_item i {*/
+/*    font-size: 18px;*/
+/*    margin-right: 20px;*/
+/*    color: #9ca3af;*/
+/*    transition: color 0.3s;*/
+/*    height: 20px;*/
+/*    width: 20px;*/
+/*    align-items: center;*/
+/*    text-align: center;*/
+/*}*/
+
+
+
+/*.menu_item:hover i {*/
+/*    color: #2563eb;*/
+/*}*/
+
+/*.menu_item:hover a {*/
+/*    color: #2563eb;*/
+/*}*/
+
+
+/*.menu_item .toggle-arrow {*/
+/*    font-size: 14px;*/
+/*    transition: transform 0.3s, color 0.3s;*/
+/*    color: #9ca3af;*/
+/*    margin-left: auto;*/
+
+/*}*/
+
+/*.menu_item.active .toggle-arrow {*/
+/*    transform: rotate(180deg);*/
+/*    color: #2563eb;*/
+/*}*/
+
+
+/*.submenu {*/
+/*    display: none;*/
+/*    flex-direction: column;*/
+/*    padding-left: 25px; !* Đẩy submenu vào trong một chút *!*/
+/*    margin-top: 5px;*/
+/*}*/
+/*.menu_item.active .submenu {*/
+/*    display: flex;*/
+/*    color: #4b5563;*/
+/*}*/
+
+/*.submenu li {*/
+/*    padding: 10px;*/
+/*    font-size: 13px;*/
+/*}*/
+
+/*#header > div.menu.row.mid_align > i.fa-regular.fa-envelope{*/
+/*    padding-right: 15px;*/
+/*}*/
+/*.submenu a {*/
+/*    color: #4b5563;*/
+/*    text-decoration: none;*/
+/*    font-weight: 400;*/
+/*}*/
+
+/*.menu_item>.submenu>li:hover {*/
+/*    color: #2563eb;*/
+/*    background-color: #e1e1e1;*/
+/*    border-radius: 3px;*/
+
+/*}*/
+
+/*.menu_item.active {*/
+/*    !*background-color: #2563eb; !* Màu xanh lam *!*!*/
+/*    color:  #2563eb;*/
+/*}*/
+
+/*.menu_item.active i {*/
+/*    color: #2563eb;*/
+/*}*/
+/*.menu_item.active span  {*/
+/*    color: #2563eb;*/
+/*}*/
+
+/*.submenu li.active {*/
+/*    !*background-color: #e5e7eb; !* Màu xanh đậm hơn *!*!*/
+/*    color: #2563eb;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+
+#content {
+    flex: 1;
+    padding: 10px;
+    background-color: white;
+}
+
+#content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#content iframe {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#content iframe::-webkit-scrollbar {
+    width: 6px;
+}
+
+#content iframe::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+
+#content iframe::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+#content iframe::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 10px;
+}
