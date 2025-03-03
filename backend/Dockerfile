@@ -1,5 +1,5 @@
 # Stage 1: Build ứng dụng với Maven
-FROM maven:3.8.7-openjdk-17 AS builder
+FROM maven:3.9.6-openjdk-21 AS builder
 
 # Set thư mục làm việc trong container
 WORKDIR /app
