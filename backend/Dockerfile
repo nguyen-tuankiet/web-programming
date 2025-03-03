@@ -16,7 +16,7 @@ RUN mvn dependency:go-offline
 COPY backend/ .
 
 # Build ứng dụng mà không chạy test
-RUN mvn clean package -DskipTests
+RUN ./mvnw clean package -DskipTests -X
 
 # Stage 2: Deploy lên Tomcat
 FROM tomcat:11.0
