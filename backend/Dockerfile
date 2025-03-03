@@ -9,3 +9,5 @@ EXPOSE 8080
 
 # Chạy Tomcat khi container khởi động
 CMD ["catalina.sh", "run"]
+
+RUN chmod +x mvnw
