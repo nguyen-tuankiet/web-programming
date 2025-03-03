@@ -4,14 +4,17 @@ FROM maven:3.8.7-openjdk-17 AS builder
 # Set thư mục làm việc trong container
 WORKDIR /app
 
-# Copy toàn bộ source code vào container
-COPY backend/ /app/
+# Copy file pom.xml trước để cache dependency
+COPY backend/pom.xml .
 
-# Cấp quyền thực thi cho mvnw
-RUN chmod +x mvnw
+# Download dependencies trước để tối ưu build
+RUN mvn dependency:go-offline
+
+# Copy toàn bộ source code vào container
+COPY backend/ .
 
 # Build ứng dụng mà không chạy test
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Stage 2: Deploy lên Tomcat
 FROM tomcat:11.0
