@@ -1,4 +1,4 @@
-FROM amazoncorretto:17
+FROM openjdk:17
 WORKDIR /app
 COPY . /app
 RUN chmod +x ./mvnw && ./mvnw clean install
