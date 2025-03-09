@@ -13,38 +13,25 @@ document.addEventListener("click", function(event) {
     }
 });
 
-// Hàm đọc tham số từ URL
-function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-}
 
-// Lấy loại sản phẩm từ URL
-const productType = getQueryParam('product');
 
-// Hiển thị nội dung theo loại sản phẩm
-if (productType) {
-    const titleElement = document.querySelector('#list_product .product_item > span');
-    const productMap = {
-        'tu-lanh': 'Tủ Lạnh Bán Chạy',
-        'may-giat': 'Máy Giặt Thông Minh',
-        'may-lanh': 'Máy Lạnh Hiện Đại',
-        'dung-cu-nha-bep': 'Dụng Cụ Nhà Bếp'
-    };
-
-    // Thay đổi tiêu đề danh sách sản phẩm
-    titleElement.textContent = productMap[productType] || 'Sản Phẩm Nổi Bật';
-}
 
 let debounceTimeout;
 
 document.getElementById('search-input').addEventListener('input', () => {
     const searchInput = document.getElementById('search-input').value.trim();
+    // const searchIcon = searchInput.querySelector(".search-icon")[0];
+    // console.log(searchIcon);
 
     // Xóa timeout cũ nếu người dùng tiếp tục nhập
     clearTimeout(debounceTimeout);
 
     // Thiết lập timeout mới
+
+    // searchIcon.classList.remove('fa-search');
+    // searchIcon.classList.add('fa-spinner', 'fa-spin');
+    // clearSuggestions();
+
     debounceTimeout = setTimeout(() => {
         if (searchInput) {
             fetch(`products/search?name=${encodeURIComponent(searchInput)}`)
@@ -80,9 +67,11 @@ function updateSuggestions(products) {
 
             // Cập nhật nội dung của productDiv để hiển thị giá, tên và ảnh
             productDiv.innerHTML = `
-                <img src="${product.imageUrl}">
-                <p>${product.name || 'Sản phẩm chưa có tên'}</p>
-                <span>${price} VND</span>
+                <img class="" src="${product.imageUrl}">
+                <div class="product-content"> 
+                    <p class="product-name" >${product.name || 'Sản phẩm chưa có tên'}</p>
+                    <span class="product-price" >${price} VND</span>
+                </div>
             `;
 
             productDiv.addEventListener('click', () => {
