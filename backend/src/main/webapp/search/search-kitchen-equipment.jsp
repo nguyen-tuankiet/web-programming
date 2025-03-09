@@ -43,31 +43,31 @@
             <!---------------------------------------------------------------------------->
             <div class="section_type section_item col">
 
-                <div class="title">Kiểu Tủ</div>
+                <div class="title">Loại thiết bị</div>
 
                 <div class="item mid_align">
                     <input type="checkbox" id="type1">
-                    <label for="type1">4 Cửa</label>
+                    <label for="type1">Lò nướng</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type2">
-                    <label for="type2">Family Hub</label>
+                    <label for="type2">Bếp từ</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type3">
-                    <label for="type3">Side by Side</label>
+                    <label for="type3">Máy hút mùi</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type4">
-                    <label for="type4">2 Cửa - Ngăn đông dưới</label>
+                    <label for="type4">Lò vi sóng</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type5">
-                    <label for="type5">2 Cửa - Ngăn đông trên</label>
+                    <label for="type5">Máy rửa bát</label>
                 </div>
 
 
@@ -114,35 +114,7 @@
 
             <!-------------------------------------------------------------------------->
 
-            <div class="section_capacity section_item col">
 
-                <div class="title">Dung tích</div>
-
-                <div class="item mid_align">
-                    <input type="checkbox" id="capacity1">
-                    <label for="capacity1">Dưới 300L</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity2">
-                    <label for="capacity2">Từ 300L đến 400L</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity3">
-                    <label for="capacity3">Từ 400L đến 500L</label>
-                </div>
-
-
-                <div class="item">
-                    <input type="checkbox" id="capacity4">
-                    <label for="capacity4">Trên 550L </label>
-                </div>
-
-
-            </div>
-
-            <div class="rec_horizontal"></div>
 
 
         </div>
