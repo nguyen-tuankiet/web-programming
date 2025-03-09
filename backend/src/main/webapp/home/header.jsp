@@ -53,7 +53,7 @@
                 <a href="#">Máy Giặt</a>
                 <div class="submenu submenu-may-giat">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_WashingMachine" >Tất cả Máy Giặt</a>
+                        <a class="nav_item" href="search-washing-machine" >Tất cả Máy Giặt</a>
                         <a href="#">Tiết kiệm sống xanh với BESPOKE AI</a>
                         <a href="#"
                         >Máy giặt thông minh Bespoke AI
@@ -84,7 +84,7 @@
 <%--                                href="#"--%>
 <%--                        >Tất cả Máy Hút Bụi</a--%>
 <%--                        >--%>
-                        <a class="nav_item" href="Search_VacuumCleaner" >Tất cả Máy Hút Bụi</a>
+                        <a class="nav_item" href="search-vacuum-cleaner" >Tất cả Máy Hút Bụi</a>
                         <a href="#">Máy Hút Bụi Không Dây</a>
                         <a href="#">Robot Hút Bụi <span class="new">MỚI</span></a>
                         <a href="#">Máy Hút Bụi Dạng Hộp</a>
@@ -96,7 +96,7 @@
                 <a href="#">Thiết Bị Nhà Bếp</a>
                 <div class="submenu submenu-nha-bep">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_KitchenEquipment" >Tất cả Thiết Bị Nhà Bếp</a>
+                        <a class="nav_item" href="search-kitchen-equipment" >Tất cả Thiết Bị Nhà Bếp</a>
                         <a href="#">Lò Vi Sóng <span class="new">MỚI</span></a>
                         <a href="#">Lò Nướng </a>
                         <a href="#">Bếp Từ </a>
@@ -110,7 +110,7 @@
                 <a href="#">Máy Lọc Không Khí</a>
                 <div class="submenu submenu-may-loc">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_AirPurifier" >Máy Lọc Không Khí</a>
+                        <a class="nav_item" href="search-air-purifier" >Máy Lọc Không Khí</a>
                         <a href="#">Bộ Sưu Tập Máy Lọc Không Khí</a>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                 <a href="#">Điều Hòa Không Khí</a>
                 <div class="submenu submenu-dieu-hoa">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_AirConditioner" >Tất cả Máy Điều Hòa</a>
+                        <a class="nav_item" href="search-air-conditioner" >Tất cả Máy Điều Hòa</a>
                         <a href="#">Điều Hòa Treo Tường</a>
                         <a href="#">Điều Hòa Cục Bộ Thương Mại</a>
                         <a href="#">Khám phá Điều hòa WindFree</a>
