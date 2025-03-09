@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "Search_VacuumCleaner", value = "/Search_VacuumCleaner")
+@WebServlet(name = "Search_VacuumCleaner", value = "/search-vacuum-cleaner")
 public class Search_VacuumCleaner extends HttpServlet {
     ProductService productService = new ProductService(DBConnection.getJdbi());
     @Override
@@ -22,7 +22,7 @@ public class Search_VacuumCleaner extends HttpServlet {
         request.setAttribute("products", products);
         request.setAttribute("topProducts", topProducts);
 
-        request.getRequestDispatcher("search/search-refrigerator.jsp").forward(request, response);
+        request.getRequestDispatcher("search/search-vacuum-cleaner.jsp").forward(request, response);
     }
 
 

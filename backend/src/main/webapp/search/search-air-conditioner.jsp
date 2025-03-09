@@ -43,32 +43,18 @@
             <!---------------------------------------------------------------------------->
             <div class="section_type section_item col">
 
-                <div class="title">Kiểu Tủ</div>
+                <div class="title">Loại điều hoà</div>
 
                 <div class="item mid_align">
                     <input type="checkbox" id="type1">
-                    <label for="type1">4 Cửa</label>
+                    <label for="type1">Điều hoà treo tường</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type2">
-                    <label for="type2">Family Hub</label>
+                    <label for="type2">Điều hoà cục bộ thương mại</label>
                 </div>
 
-                <div class="item">
-                    <input type="checkbox" id="type3">
-                    <label for="type3">Side by Side</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type4">
-                    <label for="type4">2 Cửa - Ngăn đông dưới</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type5">
-                    <label for="type5">2 Cửa - Ngăn đông trên</label>
-                </div>
 
 
             </div>
@@ -116,33 +102,83 @@
 
             <div class="section_capacity section_item col">
 
-                <div class="title">Dung tích</div>
+                <div class="title">Công xuất</div>
 
                 <div class="item mid_align">
                     <input type="checkbox" id="capacity1">
-                    <label for="capacity1">Dưới 300L</label>
+                    <label for="capacity1">9.000 Btu/h</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="capacity2">
-                    <label for="capacity2">Từ 300L đến 400L</label>
+                    <label for="capacity2">12.000 Btu/h</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="capacity3">
-                    <label for="capacity3">Từ 400L đến 500L</label>
+                    <label for="capacity3">18.000 Btu/h</label>
                 </div>
 
 
                 <div class="item">
                     <input type="checkbox" id="capacity4">
-                    <label for="capacity4">Trên 550L </label>
+                    <label for="capacity4">24.000 Btu/h </label>
                 </div>
+
+                <div class="item">
+                    <input type="checkbox" id="capacity5">
+                    <label for="capacity5">34.000 Btu/h </label>
+                </div>
+
+                <div class="item">
+                    <input type="checkbox" id="capacity6">
+                    <label for="capacity6">41.000 Btu/h </label>
+                </div>
+
+                <div class="item">
+                    <input type="checkbox" id="capacity7">
+                    <label for="capacity7">48.000 Btu/h </label>
+                </div>
+
 
 
             </div>
 
             <div class="rec_horizontal"></div>
+
+
+            <div class="section_type section_item col">
+
+                <div class="title">Công nghệ</div>
+
+                <div class="item mid_align">
+                    <input type="checkbox" id="tech1">
+                    <label for="tech1">WindFree lạnh tức thì</label>
+                </div>
+
+                <div class="item">
+                    <input type="checkbox" id="tech2">
+                    <label for="tech2">Bộ lọc bụi mịn</label>
+                </div>
+
+
+                <div class="item">
+                    <input type="checkbox" id="tech3">
+                    <label for="tech3">Tự động làm sạch</label>
+                </div>
+
+
+                <div class="item">
+                    <input type="checkbox" id="tech4">
+                    <label for="tech4">Bộ lọc bụi mịn PM2.5</label>
+                </div>
+
+
+
+            </div>
+
+            <div class="rec_horizontal"></div>
+
 
 
         </div>
@@ -174,7 +210,7 @@
 
 
                                     <div id="price" class="bold f22">
-<%--                                        20.490.000 ₫--%>
+                                            <%--                                        20.490.000 ₫--%>
                                         <fmt:formatNumber value="${pro.price}" pattern="#,###"/> VND
 
                                         <span id="ratting" class="" style="padding: 0 5px">

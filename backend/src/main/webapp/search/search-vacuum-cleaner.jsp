@@ -43,31 +43,21 @@
             <!---------------------------------------------------------------------------->
             <div class="section_type section_item col">
 
-                <div class="title">Kiểu Tủ</div>
+                <div class="title">Loại máy hút bụi</div>
 
                 <div class="item mid_align">
-                    <input type="checkbox" id="type1">
-                    <label for="type1">4 Cửa</label>
+                    <input type="checkbox" >
+                    <label > Máy hút bụi không dây</label>
                 </div>
 
                 <div class="item">
-                    <input type="checkbox" id="type2">
-                    <label for="type2">Family Hub</label>
+                    <input type="checkbox"  >
+                    <label  > Máy hút bụi dạng hộp</label>
                 </div>
 
                 <div class="item">
-                    <input type="checkbox" id="type3">
-                    <label for="type3">Side by Side</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type4">
-                    <label for="type4">2 Cửa - Ngăn đông dưới</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type5">
-                    <label for="type5">2 Cửa - Ngăn đông trên</label>
+                    <input type="checkbox"  >
+                    <label  >Robot hút bụi</label>
                 </div>
 
 
@@ -116,36 +106,47 @@
 
             <div class="section_capacity section_item col">
 
-                <div class="title">Dung tích</div>
+                <div class="title">Công suất hút</div>
 
                 <div class="item mid_align">
-                    <input type="checkbox" id="capacity1">
-                    <label for="capacity1">Dưới 300L</label>
+                    <input type="checkbox" >
+                    <label  >Dưới 150W</label>
                 </div>
 
-                <div class="item">
-                    <input type="checkbox" id="capacity2">
-                    <label for="capacity2">Từ 300L đến 400L</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity3">
-                    <label for="capacity3">Từ 400L đến 500L</label>
+                <div class="item mid_align">
+                    <input type="checkbox" >
+                    <label  >Từ 300W - 500W </label>
                 </div>
 
 
-                <div class="item">
-                    <input type="checkbox" id="capacity4">
-                    <label for="capacity4">Trên 550L </label>
-                </div>
 
 
             </div>
 
             <div class="rec_horizontal"></div>
 
+            <div class=" section_item col">
 
-        </div>
+                <div class="title">Công nghệ</div>
+
+                <div class="item mid_align">
+                    <input type="checkbox" >
+                    <label  >Hút bụi</label>
+                </div>
+
+                <div class="item mid_align">
+                    <input type="checkbox" >
+                    <label  >Lau nhà</label>
+                </div>
+
+                <div class="item mid_align">
+                    <input type="checkbox" >
+                    <label  >Tự giặc giẻ lau </label>
+                </div>
+
+
+
+            </div>
 
 
         <div id="list_product">
