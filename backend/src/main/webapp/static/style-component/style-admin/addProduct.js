@@ -819,4 +819,3 @@ function fetchProductDetails(productId) {
         });
 }
 
-

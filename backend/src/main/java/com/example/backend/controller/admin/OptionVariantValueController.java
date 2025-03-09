@@ -4,6 +4,7 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.OptionVariantValue;
 import com.example.backend.service.OptionVariantValueService;
 import com.example.backend.util.ResponseWrapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -13,7 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
 @WebServlet("/admin/addOptionVariantValue")
 public class OptionVariantValueController extends HttpServlet {
 
@@ -22,7 +26,11 @@ public class OptionVariantValueController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Đọc payload JSON từ request
+            if (!"application/json".equals(request.getContentType())) {
+                writeResponse(response, new ResponseWrapper<>(400, "error", "Invalid Content-Type, expected application/json", null));
+                return;
+            }
+
             StringBuilder payload = new StringBuilder();
             try (BufferedReader reader = request.getReader()) {
                 String line;
@@ -30,47 +38,80 @@ public class OptionVariantValueController extends HttpServlet {
                     payload.append(line);
                 }
             }
+            System.out.println("Received payload: " + payload.toString());
 
-            // Chuyển đổi JSON thành đối tượng Java
             ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, Object> requestData = objectMapper.readValue(payload.toString(), Map.class);
-
-            // Lấy giá trị từ JSON
-            Integer optionId = (Integer) requestData.get("optionId");
-            Object variantValueIdObj = requestData.get("variantValueId");
-
-            Integer variantValueId = null;
-
-            // Kiểm tra xem variantValueId là String hay Integer và chuyển đổi
-            if (variantValueIdObj instanceof String) {
-                variantValueId = Integer.parseInt((String) variantValueIdObj);
-            } else if (variantValueIdObj instanceof Integer) {
-                variantValueId = (Integer) variantValueIdObj;
+            List<Map<String, Object>> requestDataList;
+            try {
+                requestDataList = objectMapper.readValue(payload.toString(), new TypeReference<>() {});
+            } catch (Exception e) {
+                writeResponse(response, new ResponseWrapper<>(400, "error", "Invalid JSON format", null));
+                return;
             }
 
-            int result = optionVariantValueService.addOptionVariantValue(optionId, variantValueId);
+            List<OptionVariantValue> addedValues = new ArrayList<>();
+            List<String> errors = new ArrayList<>();
 
-            // Lấy thông tin OptionVariantValue mới
-            OptionVariantValue newOptionVariantValue = optionVariantValueService.getOptionById(result);
+            for (Map<String, Object> requestData : requestDataList) {
+                try {
+                    Integer optionId = getIntegerValue(requestData.get("optionId"));
+                    Integer variantValueId = getIntegerValue(requestData.get("variantValueId"));
 
-            // Trả về kết quả thành công với đối tượng OptionVariantValue
-            ResponseWrapper<OptionVariantValue> responseWrapper;
-            if (result > 0) {
-                responseWrapper = new ResponseWrapper<>(200, "success", "OptionVariantValue added successfully.", newOptionVariantValue);
+                    if (optionId == null || variantValueId == null) {
+                        errors.add("Invalid optionId or variantValueId for item: " + requestData);
+                        continue;
+                    }
+
+                    System.out.println("Inserting optionId: " + optionId + ", variantValueId: " + variantValueId);
+                    int result = optionVariantValueService.addOptionVariantValue(optionId, variantValueId);
+
+                    if (result > 0) {
+                        OptionVariantValue newOptionVariantValue = optionVariantValueService.getOptionById(result);
+                        if (newOptionVariantValue != null) {
+                            addedValues.add(newOptionVariantValue);
+                        }
+                    } else {
+                        errors.add("Failed to add OptionVariantValue for: " + requestData);
+                    }
+                } catch (Exception e) {
+                    errors.add("Error processing item " + requestData + ": " + e.getMessage());
+                }
+            }
+
+            ResponseWrapper responseWrapper;
+            if (!addedValues.isEmpty()) {
+                responseWrapper = new ResponseWrapper<>(200, "success",
+                        errors.isEmpty() ? "All OptionVariantValues added successfully." : "Some OptionVariantValues added with errors: " + String.join(", ", errors),
+                        addedValues);
             } else {
-                responseWrapper = new ResponseWrapper<>(500, "error", "Failed to add OptionVariantValue.", null);
+                responseWrapper = new ResponseWrapper<>(500, "error", "Failed to add any OptionVariantValues. Errors: " + String.join(", ", errors), null);
             }
 
             writeResponse(response, responseWrapper);
 
         } catch (Exception e) {
-            ResponseWrapper<String> errorWrapper = new ResponseWrapper<>(500, "error", "An error occurred: " + e.getMessage(), null);
-            writeResponse(response, errorWrapper);
+            writeResponse(response, new ResponseWrapper<>(500, "error", "An error occurred: " + e.getMessage(), null));
         }
     }
 
-    // Phương thức để ghi phản hồi vào response
-    private void writeResponse(HttpServletResponse response, ResponseWrapper<?> responseWrapper) throws IOException {
+    private Integer getIntegerValue(Object value) {
+        if (value instanceof Integer) {
+            return (Integer) value;
+        } else if (value instanceof String) {
+            try {
+                return Integer.parseInt((String) value);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        } else if (value instanceof Long) {
+            return ((Long) value).intValue();
+        } else if (value instanceof Double) {
+            return ((Double) value).intValue();
+        }
+        return null;
+    }
+
+    private void writeResponse(HttpServletResponse response, ResponseWrapper responseWrapper) throws IOException {
         response.setContentType("application/json");
         response.setStatus(responseWrapper.getStatusCode());
         ObjectMapper objectMapper = new ObjectMapper();
