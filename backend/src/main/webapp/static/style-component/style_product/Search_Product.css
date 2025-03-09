@@ -148,6 +148,29 @@ iframe {
     background-color: #ffffff;
 }
 
+.wrap_title{
+    display: flex;
+    justify-content: space-between;
+}
+
+#apply_btn{
+    color: white;
+    padding: 5px 15px;
+    background-color: #1781FE;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ;
+
+
+}
+#apply_btn:hover{
+    color: white;
+    scale: 1.045;
+    background-color: #1079f6;
+
+}
+
 
 #list_product{
     width: 100%;
