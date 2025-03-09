@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "Search_WashingMachine", value = "/Search_WashingMachine")
+@WebServlet(name = "Search_WashingMachine", value = "/search-washing-machine")
 public class Search_WashingMachine extends HttpServlet {
     ProductService productService = new ProductService(DBConnection.getJdbi());
     @Override
@@ -22,7 +22,7 @@ public class Search_WashingMachine extends HttpServlet {
         request.setAttribute("products", products);
         request.setAttribute("topProducts", topProducts);
 
-        request.getRequestDispatcher("search/search-refrigerator.jsp").forward(request, response);
+        request.getRequestDispatcher("search/search-washing-machine.jsp").forward(request, response);
     }
 
 

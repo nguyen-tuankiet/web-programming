@@ -39,36 +39,26 @@
                 <button id="apply_btn"> Áp dụng </button>
 
             </div>
-
             <!---------------------------------------------------------------------------->
             <div class="section_type section_item col">
 
-                <div class="title">Kiểu Tủ</div>
+                <div class="title">Phân loại</div>
 
                 <div class="item mid_align">
                     <input type="checkbox" id="type1">
-                    <label for="type1">4 Cửa</label>
+                    <label for="type1">Máy giặc</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type2">
-                    <label for="type2">Family Hub</label>
+                    <label for="type2">Máy giặc kèm sấy</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type3">
-                    <label for="type3">Side by Side</label>
+                    <label for="type3">Máy sấy</label>
                 </div>
 
-                <div class="item">
-                    <input type="checkbox" id="type4">
-                    <label for="type4">2 Cửa - Ngăn đông dưới</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type5">
-                    <label for="type5">2 Cửa - Ngăn đông trên</label>
-                </div>
 
 
             </div>
@@ -116,33 +106,48 @@
 
             <div class="section_capacity section_item col">
 
-                <div class="title">Dung tích</div>
+                <div class="title">Kiểu Máy</div>
 
                 <div class="item mid_align">
                     <input type="checkbox" id="capacity1">
-                    <label for="capacity1">Dưới 300L</label>
+                    <label for="capacity1">Máy giặc cửa trước</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="capacity2">
-                    <label for="capacity2">Từ 300L đến 400L</label>
+                    <label for="capacity2">Máy giặc cửa trên</label>
                 </div>
 
-                <div class="item">
-                    <input type="checkbox" id="capacity3">
-                    <label for="capacity3">Từ 400L đến 500L</label>
-                </div>
-
-
-                <div class="item">
-                    <input type="checkbox" id="capacity4">
-                    <label for="capacity4">Trên 550L </label>
-                </div>
 
 
             </div>
 
             <div class="rec_horizontal"></div>
+
+
+
+            <div class="section_capacity section_item col">
+
+                <div class="title">Khối lượng giặc</div>
+
+                <div class="item mid_align">
+                    <input type="checkbox"  >
+                    <label for="capacity1"> Từ 8-9kg </label>
+                </div>
+
+                <div class="item">
+                    <input type="checkbox"  >
+                    <label for="capacity2">Từ 9-10kg </label>
+                </div>
+
+                <div class="item">
+                    <input type="checkbox"  >
+                    <label for="capacity2">Trên 10kg </label>
+                </div>
+
+
+
+            </div>
 
 
         </div>
