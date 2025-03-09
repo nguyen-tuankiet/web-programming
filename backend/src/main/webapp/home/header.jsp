@@ -53,7 +53,7 @@
                 <a href="#">Máy Giặt</a>
                 <div class="submenu submenu-may-giat">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_WashingMachine" >Tất cả Máy Giặt</a>
+                        <a class="nav_item" href="search-washing-machine" >Tất cả Máy Giặt</a>
                         <a href="#">Tiết kiệm sống xanh với BESPOKE AI</a>
                         <a href="#"
                         >Máy giặt thông minh Bespoke AI
@@ -84,7 +84,7 @@
 <%--                                href="#"--%>
 <%--                        >Tất cả Máy Hút Bụi</a--%>
 <%--                        >--%>
-                        <a class="nav_item" href="Search_VacuumCleaner" >Tất cả Máy Hút Bụi</a>
+                        <a class="nav_item" href="search-vacuum-cleaner" >Tất cả Máy Hút Bụi</a>
                         <a href="#">Máy Hút Bụi Không Dây</a>
                         <a href="#">Robot Hút Bụi <span class="new">MỚI</span></a>
                         <a href="#">Máy Hút Bụi Dạng Hộp</a>
