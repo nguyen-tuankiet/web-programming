@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
@@ -43,32 +50,23 @@
             <!---------------------------------------------------------------------------->
             <div class="section_type section_item col">
 
-                <div class="title">Kiểu Tủ</div>
+                <div class="title">Không gian lọc </div>
 
                 <div class="item mid_align">
                     <input type="checkbox" id="type1">
-                    <label for="type1">4 Cửa</label>
+                    <label for="type1">Dưới 40m2</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type2">
-                    <label for="type2">Family Hub</label>
+                    <label for="type2">Từ 40-55m2</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="type3">
-                    <label for="type3">Side by Side</label>
+                    <label for="type3">Lớn hơn 55m2</label>
                 </div>
 
-                <div class="item">
-                    <input type="checkbox" id="type4">
-                    <label for="type4">2 Cửa - Ngăn đông dưới</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type5">
-                    <label for="type5">2 Cửa - Ngăn đông trên</label>
-                </div>
 
 
             </div>
@@ -116,28 +114,25 @@
 
             <div class="section_capacity section_item col">
 
-                <div class="title">Dung tích</div>
+                <div class="title">Công nghệ lọc</div>
 
                 <div class="item mid_align">
                     <input type="checkbox" id="capacity1">
-                    <label for="capacity1">Dưới 300L</label>
+                    <label for="capacity1">Màng lọc bụi siêu mịn </label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="capacity2">
-                    <label for="capacity2">Từ 300L đến 400L</label>
+                    <label for="capacity2">Màng lọc than hoạt tính, khử mùi</label>
                 </div>
 
                 <div class="item">
                     <input type="checkbox" id="capacity3">
-                    <label for="capacity3">Từ 400L đến 500L</label>
+                    <label for="capacity3">Kháng khuẩn</label>
                 </div>
 
 
-                <div class="item">
-                    <input type="checkbox" id="capacity4">
-                    <label for="capacity4">Trên 550L </label>
-                </div>
+
 
 
             </div>
@@ -174,7 +169,7 @@
 
 
                                     <div id="price" class="bold f22">
-<%--                                        20.490.000 ₫--%>
+                                            <%--                                        20.490.000 ₫--%>
                                         <fmt:formatNumber value="${pro.price}" pattern="#,###"/> VND
 
                                         <span id="ratting" class="" style="padding: 0 5px">
