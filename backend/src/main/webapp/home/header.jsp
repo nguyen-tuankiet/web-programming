@@ -96,7 +96,7 @@
                 <a href="#">Thiết Bị Nhà Bếp</a>
                 <div class="submenu submenu-nha-bep">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_KitchenEquipment" >Tất cả Thiết Bị Nhà Bếp</a>
+                        <a class="nav_item" href="search-kitchen-equipment" >Tất cả Thiết Bị Nhà Bếp</a>
                         <a href="#">Lò Vi Sóng <span class="new">MỚI</span></a>
                         <a href="#">Lò Nướng </a>
                         <a href="#">Bếp Từ </a>
@@ -110,7 +110,7 @@
                 <a href="#">Máy Lọc Không Khí</a>
                 <div class="submenu submenu-may-loc">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_AirPurifier" >Máy Lọc Không Khí</a>
+                        <a class="nav_item" href="search-air-purifier" >Máy Lọc Không Khí</a>
                         <a href="#">Bộ Sưu Tập Máy Lọc Không Khí</a>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                 <a href="#">Điều Hòa Không Khí</a>
                 <div class="submenu submenu-dieu-hoa">
                     <div class="submenu-column">
-                        <a class="nav_item" href="Search_AirConditioner" >Tất cả Máy Điều Hòa</a>
+                        <a class="nav_item" href="search-air-conditioner" >Tất cả Máy Điều Hòa</a>
                         <a href="#">Điều Hòa Treo Tường</a>
                         <a href="#">Điều Hòa Cục Bộ Thương Mại</a>
                         <a href="#">Khám phá Điều hòa WindFree</a>
