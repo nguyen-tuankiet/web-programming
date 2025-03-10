@@ -74,12 +74,14 @@
         }
 
         #sidebar {
-            width: 250px;
+            width: 270px;
+            height: 100%;
             background-color: #ffffff; /* Thay màu trắng */
             border-right: 1px solid #e5e7eb;
             padding-top: 20px;
-            padding-bottom: 20px;
+            padding-bottom: 250px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Hiệu ứng shadow nhẹ */
+            position: fixed;
         }
 
         #sidebar ul {
@@ -94,7 +96,7 @@
             padding: 12px 20px;
             color: #4b5563;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s, color 0.3s;
             position: relative;
@@ -205,6 +207,18 @@
             color: #2563eb;
             border-radius: 5px;
         }
+        .logo {
+            display: flex;
+            align-items: center;
+            margin: 0px 12px;
+            padding-bottom: 30px;
+        }
+         .logo img {
+            object-fit: contain;
+            width: 105%;
+            height: 80%;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -212,6 +226,11 @@
 <body>
 <div id="body" class="row">
     <nav id="sidebar" class="col">
+
+        <div class="logo">
+            <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png" alt="Logo">
+        </div>
+
         <ul>
             <!-- Bảng điều khiển -->
             <li class="menu_item ">
@@ -287,7 +306,12 @@
                 </div>
             </li>
 
-
+            <li class="menu_item" onclick="loadPage('setting')" >
+                <div class="wrap_menu_item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>  Cài đặt </span>
+                </div>
+            </li>
         </ul>
     </nav>
 

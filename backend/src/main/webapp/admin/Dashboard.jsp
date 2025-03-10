@@ -20,59 +20,59 @@
 </head>
 <body>
 
-<div class="wrap_header">
-    <jsp:include page="Header.jsp"/>
-</div>
-
-
 <div class="container">
-
-    <div class="side_bar">
-        <jsp:include page="SideBar.jsp"/>
-    </div>
-
-
-    <div class=" wrap">
-        <div class="title ">
-            <h2>Tổng quan tháng 11</h2>
-            <!--        <span>Here's what's happening with your store today.</span>-->
+    <div class ="left">
+        <div class="side_bar">
+            <jsp:include page="SideBar.jsp"/>
         </div>
 
-        <div class="report row mid_align">
+    </div>
+    <div class="center">
+        <div class="wrap_header">
+            <jsp:include page="Header.jsp"/>
+        </div>
+
+        <div class=" wrap">
+            <div class="title ">
+                <h2>Tổng quan tháng 11</h2>
+                <!--        <span>Here's what's happening with your store today.</span>-->
+            </div>
+
+            <div class="report row mid_align">
 
 
-            <div class="report_item col">
+                <div class="report_item col">
             <span class="title row">Tổng Doanh Thu
                  <div class="status increase row ">
                     <i class="fa-solid fa-arrow-trend-up"></i>
                     <span>12.2%</span>
                 </div>
             </span>
-                <span class="value">720,700,000 <span class="f16">VND</span></span>
+                    <span class="value">720,700,000 <span class="f16">VND</span></span>
 
-            </div>
+                </div>
 
-            <!--        <div class="rec_vertical"></div>-->
+                <!--        <div class="rec_vertical"></div>-->
 
-            <!------------------------------------------------------------------------------------------------------>
+                <!------------------------------------------------------------------------------------------------------>
 
-            <div class="report_item col">
+                <div class="report_item col">
             <span class="title row">Tổng Lượt Truy Cập
                 <div class="status decrease ">
                 <i class="fa-solid fa-arrow-trend-down"></i>
                 <span>8.2%</span>
             </div>
             </span>
-                <span class="value">320   </span>
+                    <span class="value">320   </span>
 
-            </div>
+                </div>
 
-            <!--        <div class="rec_vertical"></div>-->
+                <!--        <div class="rec_vertical"></div>-->
 
-            <!-------------------------------------------------------------------------------------------------->
+                <!-------------------------------------------------------------------------------------------------->
 
 
-            <div class="report_item col">
+                <div class="report_item col">
             <span class="title row ">
                 Số Lượng Đơn Hàng
                  <div class="status increase ">
@@ -81,15 +81,15 @@
                 </div>
 
             </span>
-                <span class="value">57 </span>
+                    <span class="value">57 </span>
 
-            </div>
-            <!--        <div class="rec_vertical"></div>-->
+                </div>
+                <!--        <div class="rec_vertical"></div>-->
 
-            <!------------------------------------------------------------------------------------------------------------->
+                <!------------------------------------------------------------------------------------------------------------->
 
 
-            <div class="report_item col">
+                <div class="report_item col">
             <span class="title">
                 Khách Hàng mới
                  <div class="status increase ">
@@ -98,81 +98,82 @@
                  </div>
 
             </span>
-                <span class="value">231 </span>
+                    <span class="value">231 </span>
 
+                </div>
+
+                <!------------------------------------------------------------------------------------------------------->
             </div>
 
-            <!------------------------------------------------------------------------------------------------------->
-        </div>
+            <c:if test="${not empty top10}">
 
-        <c:if test="${not empty top10}">
+                <div id="table_product">
 
-            <div id="table_product">
-
-                <table id="table">
+                    <table id="table">
 
 
-                    <thead>
+                        <thead>
 
-                    <tr>
-                        <td>Top</td>
-                        <td class="product_col">Sản Phẩm</td>
-                        <td> Lượt Mua</td>
-                        <td>Còn Lại</td>
-                        <td>Số Lượt Xem</td>
-                        <td>Đánh Giá</td>
-                        <td>Xu Hướng</td>
-                    </tr>
+                        <tr>
+                            <td>Top</td>
+                            <td class="product_col">Sản Phẩm</td>
+                            <td> Lượt Mua</td>
+                            <td>Còn Lại</td>
+                            <td>Số Lượt Xem</td>
+                            <td>Đánh Giá</td>
+                            <td>Xu Hướng</td>
+                        </tr>
 
-                    </thead>
-
-
-                    <tbody>
+                        </thead>
 
 
-                    <c:forEach var="p" items="${top10}" varStatus="status">
-                        <tr class="product_item">
-                            <td class="rank">
-                                <i class="fa-solid fa-medal fa-xl
+                        <tbody>
+
+
+                        <c:forEach var="p" items="${top10}" varStatus="status">
+                            <tr class="product_item">
+                                <td class="rank">
+                                    <i class="fa-solid fa-medal fa-xl
                                 <c:choose>
                                    <c:when test="${status.index == 0}">top1</c:when>
                                    <c:when test="${status.index == 1}">top2</c:when>
                                    <c:when test="${status.index == 2}">top3</c:when>
                                 </c:choose>"
 
-                                ></i>
-                            </td>
-                            <td class="product">
-                                <img class="product_image" src="${p.imageUrl}"/>
-                                <span class="product_name">${p.name}</span>
-                            </td>
-                            <td class="sold">${p.noOfSold}</td>
-                            <td class="remaining">${p.stock}</td>
-                            <td class="view">${p.noOfViews}</td>
-                            <td class="rating">
-                                4.8
-                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                            </td>
-                            <td class="wrap_trend_up">
-                                <i class="fa-solid fa-arrow-trend-up"></i>
-                                <span>4.5%</span>
-                            </td>
-                        </tr>
-                    </c:forEach>
+                                    ></i>
+                                </td>
+                                <td class="product">
+                                    <img class="product_image" src="${p.imageUrl}"/>
+                                    <span class="product_name">${p.name}</span>
+                                </td>
+                                <td class="sold">${p.noOfSold}</td>
+                                <td class="remaining">${p.stock}</td>
+                                <td class="view">${p.noOfViews}</td>
+                                <td class="rating">
+                                    4.8
+                                    <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                </td>
+                                <td class="wrap_trend_up">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                    <span>4.5%</span>
+                                </td>
+                            </tr>
+                        </c:forEach>
 
-                    </tbody>
+                        </tbody>
 
-                </table>
-
-
-            </div>
-        </c:if>
+                    </table>
 
 
+                </div>
+            </c:if>
+
+
+        </div>
     </div>
 
-
 </div>
+
 
 </body>
 </html>
