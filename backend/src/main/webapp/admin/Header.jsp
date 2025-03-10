@@ -20,11 +20,14 @@
             display: flex;
             align-items: center;
             padding: 0 20px;
-            position: relative;
+            /*position: relative;*/
             /*top: 0;*/
-            /*position: fixed;*/
+            position: fixed;
             /*z-index: 1000;*/
-            /*width: 100%;*/
+            /*width: 119%;*/
+            left: 270px;
+            width: 82%;
+            box-shadow: 0 -10px 0px -5px rgba(0, 0, 0, 0.2), 0 3px 6px -2px rgba(0, 0, 0, 0.1);
         }
 
         #header .logo {
@@ -133,16 +136,16 @@
 <body>
 
 <div id="header" class="row">
-    <div class="logo">
-        <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png" alt="Logo">
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Tìm kiếm...">
-        <button type="submit"><i class="fa-solid fa-search"></i></button>
-    </div>
+<%--    <div class="logo">--%>
+<%--        <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png" alt="Logo">--%>
+<%--    </div>--%>
+<%--    <div class="search-bar">--%>
+<%--        <input type="text" placeholder="Tìm kiếm...">--%>
+<%--        <button type="submit"><i class="fa-solid fa-search"></i></button>--%>
+<%--    </div>--%>
     <div class="menu row mid_align">
-        <i class="fa-regular fa-bell"></i>
-        <i class="fa-regular fa-envelope"></i>
+<%--        <i class="fa-regular fa-bell"></i>--%>
+<%--        <i class="fa-regular fa-envelope"></i>--%>
         <div class="avatar" id="avatar">
             <img src="${pageContext.request.contextPath}/static/image/avatar.jpg" alt="Avatar" height="1024"
                  width="1024"/>
