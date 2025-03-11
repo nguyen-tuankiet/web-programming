@@ -23,7 +23,7 @@
             /*position: relative;*/
             /*top: 0;*/
             position: fixed;
-            /*z-index: 1000;*/
+            z-index: 1000;
             /*width: 119%;*/
             left: 270px;
             width: 82%;
@@ -139,10 +139,10 @@
 <%--    <div class="logo">--%>
 <%--        <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png" alt="Logo">--%>
 <%--    </div>--%>
-<%--    <div class="search-bar">--%>
-<%--        <input type="text" placeholder="Tìm kiếm...">--%>
-<%--        <button type="submit"><i class="fa-solid fa-search"></i></button>--%>
-<%--    </div>--%>
+    <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm...">
+        <button type="submit"><i class="fa-solid fa-search"></i></button>
+    </div>
     <div class="menu row mid_align">
 <%--        <i class="fa-regular fa-bell"></i>--%>
 <%--        <i class="fa-regular fa-envelope"></i>--%>
