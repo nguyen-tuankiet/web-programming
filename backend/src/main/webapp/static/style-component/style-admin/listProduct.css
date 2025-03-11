@@ -19,7 +19,9 @@ body {
     padding: 80px 20px;
     border: 1px solid #e5e7eb;
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    border-radius: 10px;
+    /*border-radius: 10px;*/
+    margin-left: 269px;
+    margin-top: 50px;
 }
 
 .toolbar {
