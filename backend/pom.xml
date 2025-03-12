@@ -153,6 +153,14 @@
             <version>1.6.2</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
+        </dependency>
+
+
     </dependencies>
 
 

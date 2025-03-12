@@ -39,4 +39,7 @@ public class VariantValue {
     public void setValue(String value) {
         this.value = value;
     }
+
+
+
 }
