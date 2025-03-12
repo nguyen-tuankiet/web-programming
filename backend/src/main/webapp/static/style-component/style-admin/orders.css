@@ -249,15 +249,15 @@ body > div.container{
     gap: 10px;
 }
 
-@media (max-width: 768px) {
-    .header-actions {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .header-title {
-        text-align: left;
-    }
-}
+/*@media (max-width: 768px) {*/
+/*    .header-actions {*/
+/*        flex-direction: column;*/
+/*        align-items: flex-start;*/
+/*    }*/
+/*    .header-title {*/
+/*        text-align: left;*/
+/*    }*/
+/*}*/
 .table-container{
 
 }
