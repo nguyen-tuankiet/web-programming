@@ -1,26 +1,50 @@
 package com.example.backend.controller.search;
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.model.Variant;
+import com.example.backend.model.VariantValue;
 import com.example.backend.service.ProductService;
+import com.example.backend.service.VariantService;
+import com.example.backend.service.VariantValueService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import com.example.backend.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "SearchRefrigerator", value = "/search-refrigerator")
 public class SearchRefrigeratorController extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(SearchRefrigeratorController.class);
+    int categoryId = 1;
+
     ProductService productService = new ProductService(DBConnection.getJdbi());
+    VariantService variantService = new VariantService(DBConnection.getJdbi());
+    VariantValueService variantValueService = new VariantValueService(DBConnection.getJdbi());
+
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        List<Product> products = productService.getProductsByCategory(1);
-        List<Product> topProducts = productService.getTopProductsByCategory(1,3);
+        List<Product> products = productService.getProductsByCategory(categoryId);
+        List<Product> topProducts = productService.getTopProductsByCategory(categoryId,3);
+        List<Variant> variants = variantService.getVariantsByCategory(categoryId);
+
+        for (Variant v : variants) {
+            List<VariantValue> variantValues = variantValueService.getVariantValuesByVariantId(v.getId());
+
+            v.setVariantValues(variantValues);
+
+        }
+
+        log.info(variants.toString());
+
 
         request.setAttribute("products", products);
         request.setAttribute("topProducts", topProducts);
+        request.setAttribute("variants", variants);
 
         request.getRequestDispatcher("search/search-refrigerator.jsp").forward(request, response);
     }
