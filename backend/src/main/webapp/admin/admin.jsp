@@ -25,13 +25,13 @@
         <div class="logo">
             <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png" alt="Logo">
         </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Tìm kiếm...">
-            <button type="submit"><i class="fa-solid fa-search"></i></button>
-        </div>
+<%--        <div class="search-bar">--%>
+<%--            <input type="text" placeholder="Tìm kiếm...">--%>
+<%--            <button type="submit"><i class="fa-solid fa-search"></i></button>--%>
+<%--        </div>--%>
         <div class="menu row mid_align">
-            <i class="fa-regular fa-bell"></i>
-            <i class="fa-regular fa-envelope"></i>
+<%--            <i class="fa-regular fa-bell"></i>--%>
+<%--            <i class="fa-regular fa-envelope"></i>--%>
             <div class="avatar" id="avatar">
                 <img src="${pageContext.request.contextPath}/static/image/avatar.jpg" alt="Avatar" height="1024" width="1024"/>
                 <div class="user-popup">
