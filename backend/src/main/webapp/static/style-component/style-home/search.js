@@ -20,20 +20,13 @@ let debounceTimeout;
 
 document.getElementById('search-input').addEventListener('input', () => {
     const searchInput = document.getElementById('search-input').value.trim();
-    // const searchIcon = searchInput.querySelector(".search-icon")[0];
-    // console.log(searchIcon);
 
     // Xóa timeout cũ nếu người dùng tiếp tục nhập
     clearTimeout(debounceTimeout);
 
-    // Thiết lập timeout mới
-
-    // searchIcon.classList.remove('fa-search');
-    // searchIcon.classList.add('fa-spinner', 'fa-spin');
-    // clearSuggestions();
-
     debounceTimeout = setTimeout(() => {
         if (searchInput) {
+            const limit = 5;
             fetch(`products/search?name=${encodeURIComponent(searchInput)}`)
                 .then(response => response.json())
                 .then(data => {
