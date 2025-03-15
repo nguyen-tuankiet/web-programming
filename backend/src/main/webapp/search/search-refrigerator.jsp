@@ -14,6 +14,7 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style_product/SearchProductItem.css">
 
+
 </head>
 <body>
 <div class="container">
@@ -28,7 +29,7 @@
     </div>
 
     <div id="body" class="row">
-        <div id="sidebar">
+        <div id="sidebar" data-category="${categoryId}">
 
             <div class="wrap_title">
                 <div class="title f18 ">
@@ -46,29 +47,36 @@
 
                 <div class="title">Mức giá</div>
 
+
                 <div class="item mid_align">
-                    <input type="checkbox" id="price1">
-                    <label for="price1">Từ 5-8 triệu</label>
+                    <input type="radio" name="price" id="price1" data-max="5000000" >
+                    <label for="price1">Dưới 5tr</label>
+                </div>
+
+
+                <div class="item mid_align">
+                    <input type="radio" name="price" id="price2" data-max="8000000" data-min="5000000">
+                    <label for="price2">Từ 5-8 triệu</label>
                 </div>
 
                 <div class="item">
-                    <input type="checkbox" id="price2">
-                    <label for="price2">Từ 8-12 triệu</label>
+                    <input type="radio" name="price" id="price3"  data-min="8000000" data-max="12000000">
+                    <label for="price3">Từ 8-12 triệu</label>
                 </div>
 
                 <div class="item">
-                    <input type="checkbox" id="price3">
+                    <input type="radio" name="price"  id="price4"  data-min="12000000" data-max="15000000">
                     <label for="price3">Từ 12-15 triệu</label>
                 </div>
 
                 <div class="item">
-                    <input type="checkbox" id="price4">
-                    <label for="price4">Từ 15-20 triệu</label>
+                    <input type="radio" name="price" id="price5"  data-min="15000000" data-max="20000000">
+                    <label for="price5">Từ 15-20 triệu</label>
                 </div>
 
                 <div class="item">
-                    <input type="checkbox" id="price5">
-                    <label for="price5">Trên 20 triệu</label>
+                    <input type="radio" name="price"  id="price6"  data-min="20000000">
+                    <label for="price6">Trên 20 triệu</label>
                 </div>
 
 
@@ -89,8 +97,8 @@
                         <c:if test="${not empty var.variantValues}">
                             <c:forEach var="value" items="${var.variantValues}">
                                 <div class="item mid_align">
-                                    <input type="checkbox" id="type1">
-                                    <label for="type1">${value.value}</label>
+                                    <input type="checkbox" id="${value.id}" data-options-id="${value.id}">
+                                    <label for="${value.id}">${value.value}</label>
 
                                 </div>
 
@@ -189,119 +197,122 @@
 
             <span class="popular_title mid_align">Top Sản Phẩm Nổi Bậc </span>
 
-            <c:if test="${not empty products}">
-                <c:forEach items="${products}" var="p">
+            <div id="product_list">
+                <c:if test="${not empty products}">
+                    <c:forEach items="${products}" var="p">
 
-                    <div class="product_item col" data-stock="${p.stock}">
+                        <div class="product_item col" data-stock="${p.stock}">
 
-                        <div class="wrap mid_align row">
+                            <div class="wrap mid_align row">
 
-                            <div class="img_section">
+                                <div class="img_section">
 
-                                <c:if test="${not empty p.imageUrl}">
-                                    <img src="${p.imageUrl}" alt=""/>
-                                </c:if>
+                                    <c:if test="${not empty p.imageUrl}">
+                                        <img src="${p.imageUrl}" alt=""/>
+                                    </c:if>
 
-                            </div>
-
-
-                            <div class="infor_section">
-
-                                <div class="infor_name bold f22" id="name">
-                                    <a href="product-detail?id=${p.id}"> ${p.name}</a>
                                 </div>
 
 
-                                <div class="infor_color col">
-                                    <span class="bold f16">Màu Sắc: <span class="normal f16"> Đen Starry</span></span>
+                                <div class="infor_section">
 
-                                    <div class="choose_color row">
-                                        <div class="col_item" id="pink"></div>
-                                        <div class="col_item" id="gray"></div>
-                                        <div class="col_item" id="yellow"></div>
+                                    <div class="infor_name bold f22" id="name">
+                                        <a href="product-detail?id=${p.id}"> ${p.name}</a>
                                     </div>
 
 
-                                </div>
+                                    <div class="infor_color col">
+                                        <span class="bold f16">Màu Sắc: <span class="normal f16"> Đen Starry</span></span>
 
-                                <div class="rating row mid_align">
+                                        <div class="choose_color row">
+                                            <div class="col_item" id="pink"></div>
+                                            <div class="col_item" id="gray"></div>
+                                            <div class="col_item" id="yellow"></div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="rating row mid_align">
                             <span id="noOfRatting" class="bold" style="padding: 0 5px">
                                 4.7 (153)
                                 <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
                             </span>
+                                    </div>
+
+
+                                    <div id="description">
+                                        <ul class="list_descriptions">
+                                            <li class="desc_item f14">Ngăn Đông Mềm -1 độ giữ thịt cá tươi ngon</li>
+                                            <li class=" desc_item f14">Làm đá tự động nhanh chóng, tiện lợi</li>
+                                            <li class="desc_item f14">Công nghệ làm lạnh vòm All Around Cooling</li>
+                                        </ul>
+                                    </div>
+
                                 </div>
 
 
-                                <div id="description">
-                                    <ul class="list_descriptions">
-                                        <li class="desc_item f14">Ngăn Đông Mềm -1 độ giữ thịt cá tươi ngon</li>
-                                        <li class=" desc_item f14">Làm đá tự động nhanh chóng, tiện lợi</li>
-                                        <li class="desc_item f14">Công nghệ làm lạnh vòm All Around Cooling</li>
-                                    </ul>
-                                </div>
-
-                            </div>
+                                <div class="rec_vertical"></div>
 
 
-                            <div class="rec_vertical"></div>
-
-
-                            <div class="section_right col">
-                                <div class="price">
+                                <div class="section_right col">
+                                    <div class="price">
                                    <span class="bold f22">
                                        <fmt:formatNumber value="${p.price}" pattern="#,###"/> VND
                                    </span>
-                                </div>
-
-                                <div class="service">
-                                    <div class="service_item">
-                                        <i class="fa-solid fa-gift"></i>
-                                        <span>Ưu đãi thêm 5% (đến 1TRIỆU đồng)</span>
                                     </div>
 
-                                    <div class="service_item">
-                                        <i class="fa-solid fa-truck"></i>
-                                        <span>Miễn Phí Vận Chuyển Toàn Quốc</span>
+                                    <div class="service">
+                                        <div class="service_item">
+                                            <i class="fa-solid fa-gift"></i>
+                                            <span>Ưu đãi thêm 5% (đến 1TRIỆU đồng)</span>
+                                        </div>
+
+                                        <div class="service_item">
+                                            <i class="fa-solid fa-truck"></i>
+                                            <span>Miễn Phí Vận Chuyển Toàn Quốc</span>
+                                        </div>
+
+                                        <div class="service_item">
+                                            <i class="fa-solid fa-box-open"></i>
+                                            <span>Đổi trả trong 14 ngày nếu phát sinh lỗi</span>
+                                        </div>
+
+                                        <div class="service_item">
+                                            <i class="fa-solid fa-wallet"></i>
+                                            <span>Trả Góp 0% Linh Hoạt Đến 24 Tháng</span>
+                                        </div>
+
                                     </div>
 
-                                    <div class="service_item">
-                                        <i class="fa-solid fa-box-open"></i>
-                                        <span>Đổi trả trong 14 ngày nếu phát sinh lỗi</span>
+
+                                    <div class="wrap_btn col">
+                                            <%--                                    <button onclick="buyNow(${p.id}, ${p.optionId})" class="btn buy" id="buy-now-btn">Mua Ngay</button>--%>
+                                        <a href="buy-now?productId=${p.id}&optionId=${p.optionId}" class="btn buy"
+                                           id="buy-now-btn">Mua Ngay</a>
+
+                                        <button onclick="addToCart(${p.id},${p.optionId})" class="btn add">
+                                            Thêm vào giỏ hàng
+                                        </button>
+
                                     </div>
 
-                                    <div class="service_item">
-                                        <i class="fa-solid fa-wallet"></i>
-                                        <span>Trả Góp 0% Linh Hoạt Đến 24 Tháng</span>
+                                    <div id="cart-notification" class="notification hidden">
+                                        <i class="fa fa-check-circle"></i>
+                                        <span>Thêm vào giỏ hàng thành công</span>
                                     </div>
 
                                 </div>
 
-
-                                <div class="wrap_btn col">
-                                        <%--                                    <button onclick="buyNow(${p.id}, ${p.optionId})" class="btn buy" id="buy-now-btn">Mua Ngay</button>--%>
-                                    <a href="buy-now?productId=${p.id}&optionId=${p.optionId}" class="btn buy"
-                                       id="buy-now-btn">Mua Ngay</a>
-
-                                    <button onclick="addToCart(${p.id},${p.optionId})" class="btn add">
-                                        Thêm vào giỏ hàng
-                                    </button>
-
-                                </div>
-
-                                <div id="cart-notification" class="notification hidden">
-                                    <i class="fa fa-check-circle"></i>
-                                    <span>Thêm vào giỏ hàng thành công</span>
-                                </div>
 
                             </div>
 
 
                         </div>
+                    </c:forEach>
+                </c:if>
+            </div>
 
-
-                    </div>
-                </c:forEach>
-            </c:if>
 
 
         </div>
@@ -313,5 +324,6 @@
 </div>
 <script src="${pageContext.request.contextPath}/static/style-component/style_product/SearchProductItem.js"></script>
 <script src="${pageContext.request.contextPath}/static/style-component/style_product/Search_Product.js"></script>
+<script src="${pageContext.request.contextPath}/static/style-component/style_product/FilterProduct.js"></script>
 
 </body>

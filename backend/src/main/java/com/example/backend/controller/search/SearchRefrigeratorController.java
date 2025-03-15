@@ -39,7 +39,7 @@ public class SearchRefrigeratorController extends HttpServlet {
         }
 
         request.setAttribute("variants", variants);
-
+        request.setAttribute("categoryId", categoryId);
         request.setAttribute("products", products);
         request.setAttribute("topProducts", topProducts);
 
