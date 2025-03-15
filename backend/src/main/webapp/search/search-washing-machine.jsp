@@ -6,7 +6,6 @@
     <title>List Product</title>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style_product/Search_Product.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style_product/TopProduct.css">
@@ -23,7 +22,6 @@
     </div>
 
     <div id="banner">
-        <%--    <iframe src = "../home/banner.html"></iframe>--%>
         <jsp:include page="../home/banner.jsp"/>
     </div>
 
