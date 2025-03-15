@@ -23,8 +23,7 @@
     </div>
 
     <div id="banner">
-        <%--    <iframe src = "../home/banner.html"></iframe>--%>
-        <jsp:include page="../home/banner.jsp"/>
+         <jsp:include page="../home/banner.jsp"/>
     </div>
 
     <div id="body" class="row">
@@ -36,37 +35,11 @@
                     Bộ lọc
                 </div>
 
-                <button id="apply_btn"> Áp dụng </button>
-
-            </div>
-            <!---------------------------------------------------------------------------->
-            <div class="section_type section_item col">
-
-                <div class="title">Phân loại</div>
-
-                <div class="item mid_align">
-                    <input type="checkbox" id="type1">
-                    <label for="type1">Máy giặc</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type2">
-                    <label for="type2">Máy giặc kèm sấy</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type3">
-                    <label for="type3">Máy sấy</label>
-                </div>
-
-
+                <button id="apply_btn"> Áp dụng</button>
 
             </div>
 
-            <div class="rec_horizontal"></div>
-
-            <!-------------------------------------------------------------------------->
-
+            <!---------------------------- Default ------------------------------------------------>
 
             <div class="section_price section_item col">
 
@@ -102,52 +75,35 @@
 
             <div class="rec_horizontal"></div>
 
-            <!-------------------------------------------------------------------------->
 
-            <div class="section_capacity section_item col">
+            <!---------------------------------------------------------------------------->
 
-                <div class="title">Kiểu Máy</div>
+            <c:if test="${not empty variants}">
+                <c:forEach var="var" items="${variants}">
 
-                <div class="item mid_align">
-                    <input type="checkbox" id="capacity1">
-                    <label for="capacity1">Máy giặc cửa trước</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity2">
-                    <label for="capacity2">Máy giặc cửa trên</label>
-                </div>
+                    <div class="section_type section_item col">
+                        <div class="title">${var.name}</div>
 
 
+                        <c:if test="${not empty var.variantValues}">
+                            <c:forEach var="value" items="${var.variantValues}">
+                                <div class="item mid_align">
+                                    <input type="checkbox" id="type1">
+                                    <label for="type1">${value.value}</label>
 
-            </div>
+                                </div>
 
-            <div class="rec_horizontal"></div>
+                            </c:forEach>
+                        </c:if>
 
+                    </div>
 
+                    <div class="rec_horizontal"></div>
 
-            <div class="section_capacity section_item col">
-
-                <div class="title">Khối lượng giặc</div>
-
-                <div class="item mid_align">
-                    <input type="checkbox"  >
-                    <label for="capacity1"> Từ 8-9kg </label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox"  >
-                    <label for="capacity2">Từ 9-10kg </label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox"  >
-                    <label for="capacity2">Trên 10kg </label>
-                </div>
+                </c:forEach>
 
 
-
-            </div>
+            </c:if>
 
 
         </div>
@@ -179,7 +135,7 @@
 
 
                                     <div id="price" class="bold f22">
-<%--                                        20.490.000 ₫--%>
+                                            <%--                                        20.490.000 ₫--%>
                                         <fmt:formatNumber value="${pro.price}" pattern="#,###"/> VND
 
                                         <span id="ratting" class="" style="padding: 0 5px">
@@ -201,13 +157,13 @@
                                 </div>
 
 
-
-
                                 <div class="operation col">
                                     <button id="buy_now">
-                                        <a href="buy-now?productId=${pro.id}&optionId=${pro.optionId}"  >Mua ngay</a>
+                                        <a href="buy-now?productId=${pro.id}&optionId=${pro.optionId}">Mua ngay</a>
                                     </button>
-                                    <button onclick="addToCart(${pro.id},${pro.optionId})"  class="btn add">Thêm vào giỏ hàng</button>
+                                    <button onclick="addToCart(${pro.id},${pro.optionId})" class="btn add">Thêm vào giỏ
+                                        hàng
+                                    </button>
                                 </div>
 
                                 <div id="top_cart-notification" class="notification hidden">
@@ -228,10 +184,6 @@
 
                 </div>
             </div>
-
-
-
-
 
 
             <span class="popular_title mid_align">Top Sản Phẩm Nổi Bậc </span>
