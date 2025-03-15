@@ -75,7 +75,7 @@ a {
 
 /* Thẻ sản phẩm */
 .search_body {
-    width: 300px;
+    width: 30%;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -91,7 +91,7 @@ a {
 
 /* Ảnh sản phẩm */
 .wrap_img {
-    height: 35%;
+    height:45%;
     cursor: pointer;
 }
 
@@ -109,20 +109,96 @@ a {
     padding: 10px 0;
 }
 
-#name {
+#name2 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 8px;
+    margin-top: 20px;
+}
+.name_results {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-top: 20px;
+}
+/* Giá sản phẩm */
+#top_name{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    text-align: left;
 }
 
-/* Giá sản phẩm */
-#price {
-    padding-left: 10px;
+#top_name a{
+    text-decoration: none;
+    color: #000000;
+}
+
+
+.rating{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    height: 30px;
     align-items: center;
+
+}
+
+
+#ratting {
+    font-size: 16px !important;
+    text-align: center;
+    align-content: center;
+    margin-left: auto;
+    font-weight: 400;
+}
+
+
+#top_description{
+    display: flex;
+    width: 100%;
+    justify-content:flex-start;
+}
+
+#top_description .desc_item{
+    padding: 3px 0;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+}
+
+
+#top_description .list_descriptions {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+
+#top_description .desc_item::before {
+    content: '•';
+    color: black;
+    font-size: 1.2em;
+    position: absolute;
+    left: -10px;
+    top:2px;
+}
+#price {
+    padding-left: 70px;
+    display: flex;
+    width: 100%;
     justify-content: flex-start;
 }
+
+/* Đồng bộ font chữ và kích thước cho tất cả tiêu đề sản phẩm */
+.product-title {
+    font-size: 18px;  /* Kích thước font chữ đồng nhất */
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    text-align: center;
+    color: #000000;
+}
+
 
 .new-price {
     font-size: 20px;
