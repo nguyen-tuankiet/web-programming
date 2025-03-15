@@ -36,47 +36,11 @@
                     Bộ lọc
                 </div>
 
-                <button id="apply_btn"> Áp dụng </button>
+                <button id="apply_btn"> Áp dụng</button>
 
             </div>
 
-            <!---------------------------------------------------------------------------->
-            <div class="section_type section_item col">
-
-                <div class="title">Loại thiết bị</div>
-
-                <div class="item mid_align">
-                    <input type="checkbox" id="type1">
-                    <label for="type1">Lò nướng</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type2">
-                    <label for="type2">Bếp từ</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type3">
-                    <label for="type3">Máy hút mùi</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type4">
-                    <label for="type4">Lò vi sóng</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type5">
-                    <label for="type5">Máy rửa bát</label>
-                </div>
-
-
-            </div>
-
-            <div class="rec_horizontal"></div>
-
-            <!-------------------------------------------------------------------------->
-
+            <!---------------------------- Default ------------------------------------------------>
 
             <div class="section_price section_item col">
 
@@ -112,9 +76,35 @@
 
             <div class="rec_horizontal"></div>
 
-            <!-------------------------------------------------------------------------->
+
+            <!---------------------------------------------------------------------------->
+
+            <c:if test="${not empty variants}">
+                <c:forEach var="var" items="${variants}">
+
+                    <div class="section_type section_item col">
+                        <div class="title">${var.name}</div>
 
 
+                        <c:if test="${not empty var.variantValues}">
+                            <c:forEach var="value" items="${var.variantValues}">
+                                <div class="item mid_align">
+                                    <input type="checkbox" id="type1">
+                                    <label for="type1">${value.value}</label>
+
+                                </div>
+
+                            </c:forEach>
+                        </c:if>
+
+                    </div>
+
+                    <div class="rec_horizontal"></div>
+
+                </c:forEach>
+
+
+            </c:if>
 
 
         </div>
