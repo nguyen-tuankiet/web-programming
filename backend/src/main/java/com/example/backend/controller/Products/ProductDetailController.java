@@ -1,4 +1,4 @@
-package com.example.backend.controller.ProductDetail;
+package com.example.backend.controller.Products;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Options;
