@@ -215,7 +215,7 @@
         }
          .logo img {
             object-fit: contain;
-            width: 105%;
+            width: 95%;
             height: 80%;
             cursor: pointer;
         }
