@@ -83,6 +83,15 @@ public class ProductService {
         return productDao.searchProducts(keyword);
     }
 
+    public List<Product> searchProducts(String name , int limit) {
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Keyword must not be empty");
+        }
+        String keyword = "%" + name + "%";
+        return productDao.searchProducts(keyword, limit);
+    }
+
+
 
     public List<Product> getTopProductsByCategory(Integer categoryId, Integer limit) {
         if (categoryId <= 0 || limit <= 0) {

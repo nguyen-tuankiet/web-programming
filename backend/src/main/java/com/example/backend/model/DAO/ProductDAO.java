@@ -9,7 +9,6 @@ import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import com.example.backend.model.Product;
-
 import java.util.List;
 
 
@@ -99,7 +98,7 @@ public interface ProductDAO {
             "         INNER JOIN options ops ON ops.productId = p.id " +
             "         INNER JOIN image img ON img.id = p.primaryImage " +
             "WHERE p.isActive = true and stock > 0"
-    )
+)
     @RegisterConstructorMapper(Product.class)
     List<Product> getAllProducts();
 
@@ -108,6 +107,7 @@ public interface ProductDAO {
 
     @SqlQuery("SELECT price FROM options WHERE id = :optionId AND stock > 0")
     Integer getPriceForOption(@Bind("optionId") int optionId);
+
 
 
     @SqlUpdate("INSERT INTO products (name,description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage, sku) "
@@ -120,7 +120,6 @@ public interface ProductDAO {
                    @Bind("brandId") Integer brandId,
                    @Bind("primaryImage") Integer primaryImage,
                    @Bind("sku") String sku);
-
     @SqlQuery("""
                SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
                FROM products p
@@ -130,6 +129,25 @@ public interface ProductDAO {
             """)
     @RegisterConstructorMapper(Product.class)
     List<Product> searchProducts(@Bind("name") String name);
+
+
+
+
+
+    @SqlQuery("""
+   SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
+   FROM products p
+   LEFT JOIN options o ON p.id = o.productId
+   LEFT JOIN image i ON p.primaryImage = i.id
+   WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
+   LIMIT : limit 
+""")
+    @RegisterConstructorMapper(Product.class)
+    List<Product> searchProducts(@Bind("name") String name, @Bind("limit") int limit);
+
+
+
+
 
 
     @SqlQuery(value = "SELECT p.id           as id, " +
@@ -158,38 +176,38 @@ public interface ProductDAO {
             "                       and p.isActive = true ) " +
             "order by p.noOfViews desc , p.noOfSold desc " +
             "limit 3")
-    public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit);
+    public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit );
 
 
     @SqlUpdate("UPDATE products SET isActive = false WHERE id = :id")
     boolean deactivateProduct(@Bind("id") int id);
 
     @SqlQuery(value = """
-                SELECT p.id as id, p.name as name, p.description as description,
-                       p.sku as sku, p.isActive as isActive, p.brandId as brandId,  
-                       p.noOfViews as noOfViews, p.noOfSold as noOfSold,  
-                       p.categoryId as categoryId, p.primaryImage as primaryImage,
-                       ops.id as optionId, ops.price as price,
-                       ops.stock as stock,  
-                       img.url as imageUrl,
-                       v.id as variantId,
-                       vv.id as variantValueId,
-                       vv.value as variantValueName,
-                       v.name as variantName 
-                FROM products as p 
-                    INNER JOIN categories as cate on cate.id = p.categoryId 
-                    INNER JOIN `options` as ops on ops.productId = p.id 
-                    INNER JOIN image as img on p.primaryImage = img.id 
-                    INNER JOIN option_variant_value as ovv on ops.id = ovv.optionId 
-                    INNER JOIN variant_value as vv on ovv.variantValueId = vv.id 
-                    INNER JOIN variant as v on vv.variantId = v.id 
-                WHERE p.id = :id 
-                  AND ops.price = (
-                        SELECT MIN(price) 
-                        FROM options as ops 
-                        WHERE p.id = ops.productId AND ops.stock > 0
-                  );
-            """)
+    SELECT p.id as id, p.name as name, p.description as description,
+           p.sku as sku, p.isActive as isActive, p.brandId as brandId,  
+           p.noOfViews as noOfViews, p.noOfSold as noOfSold,  
+           p.categoryId as categoryId, p.primaryImage as primaryImage,
+           ops.id as optionId, ops.price as price,
+           ops.stock as stock,  
+           img.url as imageUrl,
+           v.id as variantId,
+           vv.id as variantValueId,
+           vv.value as variantValueName,
+           v.name as variantName 
+    FROM products as p 
+        INNER JOIN categories as cate on cate.id = p.categoryId 
+        INNER JOIN `options` as ops on ops.productId = p.id 
+        INNER JOIN image as img on p.primaryImage = img.id 
+        INNER JOIN option_variant_value as ovv on ops.id = ovv.optionId 
+        INNER JOIN variant_value as vv on ovv.variantValueId = vv.id 
+        INNER JOIN variant as v on vv.variantId = v.id 
+    WHERE p.id = :id 
+      AND ops.price = (
+            SELECT MIN(price) 
+            FROM options as ops 
+            WHERE p.id = ops.productId AND ops.stock > 0
+      );
+""")
     @RegisterConstructorMapper(Product.class)
     Product editProduct(@Bind("id") int id);
 
@@ -224,16 +242,20 @@ public interface ProductDAO {
     List<OptionVariant> getVariants(@Bind("id") int id);
 
 
+
     @SqlUpdate(value = "update products\n" +
             "set noOfViews = noOfViews +1\n" +
             "where id = :id;")
     Boolean increaseNoOfViews(@Bind("id") int id);
 
 
-    @SqlUpdate(value = "update products\n" +
+    @SqlUpdate(value =  "update products\n" +
             "set noOfSold = noOfSold + :quantity\n" +
             "where id = :id ;\n")
-    Boolean increaseNoOfSold(@Bind("id") int id, @Bind("quantity") Integer quantity);
+    Boolean increaseNoOfSold(@Bind("id") int id, @Bind("quantity") Integer quantity );
+
+
+
 
 
     @SqlQuery(value = "SELECT p.id           as id,\n" +
