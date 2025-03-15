@@ -47,7 +47,7 @@
         .search-bar {
             display: flex;
             align-items: center;
-            margin-left: 30px;
+            /*margin-left: 30px;*/
             width: 250px;
         }
 
