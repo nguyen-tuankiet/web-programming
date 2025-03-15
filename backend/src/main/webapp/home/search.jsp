@@ -32,36 +32,13 @@
                         <span class="product-price" >13.490.000 VND</span>
                     </div>
                 </div>
-
-
-                <div class="product">
-                    <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt31cg5424b1sv/gallery/vn-top-mount-freezer-spacemax-rt31cg5424b1sv-thumb-536303518"
-                         alt="Product 2">
-                        <div class="product-content">
-                            <p class="product-name" >307 L Tủ Lạnh Ngăn Đông Dưới với Optimal Fresh+</p>
-                            <span class="product-price" >13.490.000 VND</span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-                <div class="product">
-                    <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt42cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt42cg6584b1sv-thumb-536331785"
-                         alt="Product 3">
-                    <div class="product-content">
-                        <p class="product-name" >Tủ Lạnh Ngăn Đông Trên RT42CG6584</p>
-                        <span class="product-price" >15.490.278 VND</span>
-                    </div>
-                </div>
-
-
-
-
-
             </div>
+
+
+
+
+
+        </div>
         </div>
 
 
