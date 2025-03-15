@@ -14,8 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slideshow Example</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style_product/topRefrigerator.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style_product/topRefrigerator.js"></script>
-</head>
+ </head>
 <body>
 
 <div id="banner">
