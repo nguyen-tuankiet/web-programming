@@ -119,6 +119,11 @@ public interface ProductDAO {
                    @Bind("brandId") Integer brandId,
                    @Bind("primaryImage") Integer primaryImage,
                    @Bind("sku") String sku);
+
+
+
+
+
     @SqlQuery("""
    SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
    FROM products p
@@ -128,6 +133,24 @@ public interface ProductDAO {
 """)
     @RegisterConstructorMapper(Product.class)
     List<Product> searchProducts(@Bind("name") String name);
+
+
+
+
+
+    @SqlQuery("""
+   SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
+   FROM products p
+   LEFT JOIN options o ON p.id = o.productId
+   LEFT JOIN image i ON p.primaryImage = i.id
+   WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
+   LIMIT : limit 
+""")
+    @RegisterConstructorMapper(Product.class)
+    List<Product> searchProducts(@Bind("name") String name, @Bind("limit") int limit);
+
+
+
 
 
 
