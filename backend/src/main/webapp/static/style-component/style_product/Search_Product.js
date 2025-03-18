@@ -17,19 +17,23 @@ function addToCart(productId, optionId) {
 
 
 function buyNow(productId, optionId) {
-    fetch("buy-now", {
-        method: "POST",
-        headers: {  "Content-Type": "application/x-www-form-urlencoded"},
-        body: `productId=${productId}&optionId=${optionId}`
-    })
-    .then(data => {
-        console.log(data);
-        if (data.ok){
-            // window.location.href = "cart";
-        }
-        // window.location.href= "cart";
+    window.location.href = `buy-now?productId=${productId}&optionId=${optionId}`;
 
 
-    }).catch(error => console.log(error));
+    // fetch(`buy-now?productId=${productId}&optionId=${optionId}`, {
+    //     method: "POST",
+    //     headers: {  "Content-Type": "application/x-www-form-urlencoded"},
+    //     // body: `productId=${productId}&optionId=${optionId}`
+    // })
+    //     .then(response => response.json())
+    // .then(data => {
+    //     console.log(data);
+    //     if (data.ok){
+    //         window.location.href = `buy-now?productId=${productId}&optionId=${optionId}`;
+    //     }
+    //     // window.location.href= "cart";
+    //
+    //
+    // }).catch(error => console.log(error));
 
 }
