@@ -286,6 +286,13 @@
                 </div>
             </li>
 
+            <li class="menu_item">
+                <div class="wrap_menu_item">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="profile">Thành Viên</a>
+                </div>
+            </li>
+
 
             <!-- Danh mục -->
             <li class="menu_item">
