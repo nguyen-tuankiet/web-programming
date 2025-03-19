@@ -188,95 +188,6 @@ function showPreview(images, startIndex = 0) {
 }
 
 
-
-function addVariant() {
-    const optionsContainer = document.getElementById('optionsContainer1');
-    const variantGroup = document.querySelector('.variant-group'); // Lấy phần tử mẫu
-    const newVariant = variantGroup.cloneNode(true); // Tạo bản sao
-
-    // Sao chép giá trị của các input
-    const inputs = newVariant.querySelectorAll('input');
-    inputs.forEach(input => input.value = ''); // Xóa giá trị input
-
-    // Kiểm tra số lượng biến thể trong tất cả các nhóm
-    const variantSelects = newVariant.querySelectorAll('.option-select');
-    const numVariants = variantSelects.length;  // Lấy số lượng variant
-
-    // Đảm bảo rằng số lượng biến thể giống nhau ở tất cả các nhóm
-    const allVariantGroups = optionsContainer.querySelectorAll('.variant-group');
-    allVariantGroups.forEach(group => {
-        const currentVariantSelects = group.querySelectorAll('.option-select');
-        while (currentVariantSelects.length < numVariants) {
-            addOptionGroup(group.id);
-        }
-    });
-
-    optionsContainer.appendChild(newVariant);
-    console.log(optionsContainer, variantGroup);
-}
-
-window.addVariant = addVariant;
-
-function removeVariant(button) {
-    const variantGroup = button.closest('.variant-group'); // Tìm phần tử cha gần nhất
-    if (variantGroup) {
-        variantGroup.remove();
-    }
-}
-
-
-
-
-async function addOptionGroup(containerId) {
-    const optionGroup = document.createElement('div');
-    const select = document.createElement('select');
-    const secondSelect = document.createElement('select');
-    const removeButton = document.createElement('button');
-
-    // Thêm class và nội dung cho các phần tử
-    optionGroup.classList.add('option-group');
-    select.classList.add('option-select');
-    secondSelect.classList.add('option-select');
-    removeButton.classList.add('remove-option-button');
-    removeButton.innerHTML = '×';
-    removeButton.onclick = function () {
-        removeOptionGroup(removeButton);
-    };
-
-    select.id = "variant-select";
-    select.setAttribute("onchange", "fetchVariantValues(this.value, this.nextElementSibling)");
-
-    secondSelect.id = "variant-value-select";
-
-    const categoryId = getSelectedCategoryId();
-    if (categoryId) {
-        try {
-            const variants = await loadVariantsByCategory(categoryId); // Chờ đợi kết quả
-            populateSelect(select, variants);
-        } catch (error) {
-            console.error("Lỗi khi tải biến thể:", error);
-        }
-    } else {
-        console.warn("Chưa chọn danh mục.");
-    }
-
-    // Thêm các phần tử con vào nhóm tùy chọn
-    optionGroup.appendChild(select);
-    optionGroup.appendChild(secondSelect);
-    optionGroup.appendChild(removeButton);
-
-    // Lấy container cần thao tác và thêm nhóm tùy chọn
-    const container = document.getElementById(containerId);
-    container.appendChild(optionGroup);
-}
-
-// Hàm xóa nhóm tùy chọn
-function removeOptionGroup(button) {
-    const optionGroup = button.parentElement; // Lấy nhóm tùy chọn
-    const container = optionGroup.parentElement; // Xác định container hiện tại
-    container.removeChild(optionGroup); // Xóa nhóm tùy chọn khỏi container
-}
-
 // Hàm lấy categoryId đã chọn (ví dụ: từ dropdown)
 function getSelectedCategoryId() {
     const categorySelect = document.getElementById("categoryDropdown");
@@ -297,58 +208,53 @@ async function loadVariantsByCategory(categoryId) {
 }
 
 // Hàm gọi API lấy giá trị cho variant và cập nhật select "variant-value-select"
-async function fetchVariantValues(variantId) {
-    // Lấy dropdown "variant-value-select" trong cùng nhóm tùy chọn
-    const variantGroup = event.target.closest('.option-group');
-    const variantValueSelect = variantGroup.querySelector('#variant-value-select');
-
-    if (!variantValueSelect) {
-        console.error("Không tìm thấy 'variant-value-select'!");
-        return;
-    }
-
-    if (!variantId) {
-        variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
-        return;
-    }
-
+async function fetchVariantValues(variantId, targetSelectId = 'variant-value-select') {
     try {
+        const variantValueSelect = document.getElementById(targetSelectId);
+        if (!variantValueSelect) {
+            console.error("Không tìm thấy select với ID:", targetSelectId);
+            return;
+        }
+
+        variantValueSelect.innerHTML = '<option>Đang tải...</option>';
         const response = await fetch(`api/variants/${variantId}`);
         const data = await response.json();
 
         if (data.statusCode === 200) {
-            variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
-            if (data.data && data.data.length > 0) {
-                data.data.forEach(value => {
-                    const option = document.createElement("option");
-                    option.value = value.id;
-                    option.textContent = value.value; // Gán giá trị hiển thị
-                    variantValueSelect.appendChild(option);
-                });
-            } else {
-                console.warn("Không tìm thấy giá trị cho biến thể đã chọn.");
-            }
+            populateVariantValues(data.data, targetSelectId);
         } else {
-            console.error("Lỗi khi lấy giá trị cho biến thể:", data.message);
+            alert("Không thể tải danh sách giá trị biến thể!");
+            resetVariantValues(targetSelectId);
         }
     } catch (error) {
-        console.error("Lỗi khi gọi API:", error.message);
+        console.error("Lỗi khi tải variant values:", error);
+        resetVariantValues(targetSelectId);
     }
 }
 
+function populateVariantValues(values, targetSelectId = 'variant-value-select') {
+    const variantValueSelect = document.getElementById(targetSelectId);
+    if (!variantValueSelect) return;
 
-
-// Hàm hiển thị dữ liệu vào một select element
-function populateSelect(selectElement, variants) {
-    selectElement.innerHTML = ''; // Xóa các option cũ
-    variants.forEach(variant => {
-        const option = document.createElement('option');
-        option.value = variant.id;
-        option.textContent = variant.name; // Hiển thị tên biến thể
-        selectElement.appendChild(option);
-    });
+    variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+    if (values.length > 0) {
+        values.forEach(value => {
+            const option = document.createElement("option");
+            option.value = value.id;
+            option.textContent = value.value;
+            variantValueSelect.appendChild(option);
+        });
+    } else {
+        console.warn("Không tìm thấy giá trị cho biến thể đã chọn.");
+    }
 }
 
+function resetVariantValues(targetSelectId = 'variant-value-select') {
+    const variantValueSelect = document.getElementById(targetSelectId);
+    if (variantValueSelect) {
+        variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+    }
+}
 
 
 
@@ -438,6 +344,128 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+
+
+function addVariant() {
+    const variantGroupsContainer = document.getElementById('optionsContainer1'); // Container chứa tất cả nhóm biến thể
+    const variantGroup = document.querySelector('.variant-group'); // Lấy phần tử mẫu
+    const newVariant = variantGroup.cloneNode(true); // Tạo bản sao
+
+    // Tạo ID mới cho container options trong nhóm variant mới
+    const newOptionsContainerId = 'optionsContainer-' + Date.now();
+    const variantOptionsContainer = newVariant.querySelector('.options-container');
+    variantOptionsContainer.id = newOptionsContainerId;
+
+    // Đặt lại giá trị của các input
+    const inputs = newVariant.querySelectorAll('input');
+    inputs.forEach(input => input.value = '');
+
+    // Đặt lại giá trị của các select và cập nhật các sự kiện
+    const variantSelect = newVariant.querySelector('#variant-select');
+    const variantValueSelect = newVariant.querySelector('#variant-value-select');
+
+    // Đặt ID mới cho các select để tránh trùng lặp
+    const newVariantSelectId = 'variant-select-' + Date.now();
+    const newVariantValueSelectId = 'variant-value-select-' + Date.now();
+
+    variantSelect.id = newVariantSelectId;
+    variantValueSelect.id = newVariantValueSelectId;
+
+    // Đặt lại giá trị
+    variantSelect.selectedIndex = 0;
+    variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>';
+
+    // Cập nhật sự kiện onchange
+    variantSelect.setAttribute('onchange', `fetchVariantValues(this.value, '${newVariantValueSelectId}')`);
+
+    // Cập nhật sự kiện cho nút thêm thuộc tính
+    const addOptionButton = newVariant.querySelector('.add-option-button');
+    addOptionButton.setAttribute('onclick', `addOptionGroup('${newOptionsContainerId}')`);
+
+    // Thêm nhóm variant mới vào container
+    variantGroupsContainer.appendChild(newVariant);
+
+    console.log("Đã thêm variant mới");
+}
+
+window.addVariant = addVariant;
+
+function removeVariant(button) {
+    const variantGroup = button.closest('.variant-group'); // Tìm phần tử cha gần nhất
+    if (variantGroup) {
+        variantGroup.remove();
+    }
+}
+
+
+
+function addOptionGroup(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.error("Không tìm thấy container:", containerId);
+        return;
+    }
+
+    // Tạo các ID duy nhất cho các select mới
+    const newVariantSelectId = 'variant-select-' + Date.now();
+    const newVariantValueSelectId = 'variant-value-select-' + Date.now();
+
+    // Tạo nhóm option mới
+    const optionGroup = document.createElement('div');
+    optionGroup.className = 'option-group';
+    optionGroup.innerHTML = `
+        <select class="option-select" id="${newVariantSelectId}" onchange="fetchVariantValues(this.value, '${newVariantValueSelectId}')">
+            <option value="">Chọn danh mục</option>
+        </select>
+        <select class="option-select" id="${newVariantValueSelectId}">
+            <option value="">Chọn giá trị</option>
+        </select>
+        <button class="remove-option-button" onclick="removeOptionGroup(this)">×</button>
+    `;
+
+    // Thêm vào container
+    container.appendChild(optionGroup);
+
+    // Tải danh sách variants cho select mới
+    loadVariantsForSelect(newVariantSelectId);
+}
+
+// Hàm để tải variants cho một select cụ thể
+async function loadVariantsForSelect(selectId, categoryId = null) {
+    try {
+        const variantSelect = document.getElementById(selectId);
+        if (!variantSelect) return;
+
+        variantSelect.innerHTML = '<option>Đang tải...</option>';
+        const url = categoryId ? `api/variants?categoryId=${categoryId}` : `api/variants`;
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.statusCode === 200) {
+            variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
+            data.data.forEach(variant => {
+                const option = document.createElement("option");
+                option.value = variant.id;
+                option.textContent = variant.name;
+                variantSelect.appendChild(option);
+            });
+        } else {
+            variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
+            alert("Không thể tải danh sách biến thể!");
+        }
+    } catch (error) {
+        console.error("Lỗi khi tải variants:", error);
+    }
+}
+
+// Hàm xóa nhóm tùy chọn
+function removeOptionGroup(button) {
+    const optionGroup = button.parentElement; // Lấy nhóm tùy chọn
+    const container = optionGroup.parentElement; // Xác định container hiện tại
+    container.removeChild(optionGroup); // Xóa nhóm tùy chọn khỏi container
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const categorySelect = document.getElementById("categoryDropdown");
     const variantSelect = document.getElementById("variant-select");
@@ -449,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Khai báo biến lưu trữ ID variant và variantValue
     let selectedVariantId = null;
-    let selectedVariantValueId = null;
+    let selectedVariantValueId = [];
 
     if (!variantSelect || !variantValueSelect) {
         console.error("Các phần tử dropdown không tồn tại");
@@ -500,13 +528,28 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!formData) return alert("Vui lòng điền đầy đủ các trường bắt buộc!");
 
         try {
-            // Upload ảnh sản phẩm
+            // 1. Upload ảnh sản phẩm
             const uploadData = await uploadImages(fileInput.files);
+            if (!uploadData || !uploadData.data || uploadData.data.length === 0) {
+                throw new Error("Lỗi khi tải ảnh lên.");
+            }
+
+            // 2. Tạo sản phẩm
             const productData = await createProduct(formData, uploadData);
+            if (!productData || !productData.id) {
+                throw new Error("Lỗi khi tạo sản phẩm.");
+            }
+
+            // 3. Gán ảnh bổ sung
             await assignAdditionalImages(uploadData, productData.id);
 
-            // Thêm các tùy chọn sản phẩm
-            await addProductOptions(productData.id);
+            // 4. Thêm các tùy chọn sản phẩm
+            const addOptionsSuccess = await addProductOptions(productData.id);
+            if (!addOptionsSuccess) {
+                throw new Error("Lỗi khi thêm tùy chọn sản phẩm.");
+            }
+
+            // Nếu tất cả API đều thành công
             alert("Thêm sản phẩm và tùy chọn thành công!");
             window.location.href = "list-product";
         } catch (error) {
@@ -702,48 +745,76 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Hàm thêm tùy chọn sản phẩm
     async function addProductOptions(productId) {
-        const optionGroups = document.querySelectorAll(".variant-group");
-        const optionPromises = Array.from(optionGroups).map(group => {
+        const variantGroups = document.querySelectorAll(".variant-group");
+        const optionPromises = Array.from(variantGroups).map(async (group) => {
             const priceInput = group.querySelector("input[id='price']");
             const stockInput = group.querySelector("input[id='total']");
             const priceValue = priceInput?.value.trim();
             const stockValue = stockInput?.value.trim();
 
-            if (priceValue && stockValue) {
+            // Lấy tất cả các select variant-value trong nhóm này
+            // Lưu ý: thay "#variant-value-select" bằng ".option-select:nth-child(2)"
+            // hoặc selector phù hợp để lấy tất cả các select variant-value
+            const variantValueSelects = group.querySelectorAll(".option-select:nth-child(2)");
+
+            console.log("Số lượng select trong nhóm:", variantValueSelects.length);
+
+            // Thu thập tất cả giá trị variant-value đã chọn
+            const variantValueIds = [];
+            variantValueSelects.forEach(select => {
+                const valueId = parseInt(select.value);
+                if (!isNaN(valueId) && valueId > 0) {
+                    variantValueIds.push(valueId);
+                    console.log("Đã thêm variant value ID:", valueId);
+                }
+            });
+
+            console.log("Tổng số variant-value IDs:", variantValueIds.length, variantValueIds);
+
+            if (priceValue && stockValue && variantValueIds.length > 0) {
                 const optionData = {
                     productId,
                     price: parseFloat(priceValue),
                     stock: parseInt(stockValue),
                 };
 
-                return fetch("options/create", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(optionData),
-                }).then(async (optionResponse) => {
+                try {
+                    const optionResponse = await fetch("options/create", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(optionData),
+                    });
+
                     const option = await optionResponse.json();
                     if (option.data?.id) {
                         const optionId = option.data.id;
-                        const variantValueId = selectedVariantValueId;
+
+                        // Gửi optionId cùng danh sách variantValueIds đến API
                         const variantValueApiUrl = "addOptionVariantValue";
                         const variantValueData = {
                             optionId: optionId,
-                            variantValueId: variantValueId
+                            variantValueIds: variantValueIds,
                         };
+
+                        console.log("Gửi dữ liệu:", JSON.stringify(variantValueData));
 
                         await fetch(variantValueApiUrl, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(variantValueData), // Gửi dưới dạng JSON
+                            body: JSON.stringify(variantValueData),
                         });
                     }
-                });
+                } catch (error) {
+                    console.error("Lỗi khi thêm option:", error);
+                }
             }
-            return Promise.resolve();
         });
 
         await Promise.all(optionPromises);
+        return true;
     }
+
+
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -818,4 +889,3 @@ function fetchProductDetails(productId) {
             alert('Có lỗi xảy ra khi lấy thông tin sản phẩm.');
         });
 }
-
