@@ -55,7 +55,7 @@ public class ResponseWrapper<T> {
             return objectMapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "{}";  // Trả về đối tượng JSON rỗng nếu có lỗi
+            return "{}";
         }
     }
 }
