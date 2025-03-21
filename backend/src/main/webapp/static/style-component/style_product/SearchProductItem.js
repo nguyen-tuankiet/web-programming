@@ -22,12 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
 //     }
 // });
 
-document.getElementById('name').addEventListener('click', function () {
-    const mainIframe = window.top.document.querySelector('#body iframe');
-    if (mainIframe) {
-        mainIframe.src = '/web-programming/frontEnd/src/component/product_detail/Product-detail.html';
-    }
-});
+// document.getElementById('name').addEventListener('click', function () {
+//     const mainIframe = window.top.document.querySelector('#body iframe');
+//     if (mainIframe) {
+//         mainIframe.src = '/web-programming/frontEnd/src/component/product_detail/Product-detail.html';
+//     }
+// });
 
 
 const isLoggedIn = localStorage.getItem("isLoggedIn");

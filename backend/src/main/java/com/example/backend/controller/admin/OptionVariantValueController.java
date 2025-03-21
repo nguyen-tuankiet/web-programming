@@ -4,7 +4,6 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.OptionVariantValue;
 import com.example.backend.service.OptionVariantValueService;
 import com.example.backend.util.ResponseWrapper;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +24,8 @@ public class OptionVariantValueController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+
         try {
             if (!"application/json".equals(request.getContentType())) {
                 writeResponse(response, new ResponseWrapper<>(400, "error", "Invalid Content-Type, expected application/json", null));
@@ -41,27 +42,27 @@ public class OptionVariantValueController extends HttpServlet {
             System.out.println("Received payload: " + payload.toString());
 
             ObjectMapper objectMapper = new ObjectMapper();
-            List<Map<String, Object>> requestDataList;
+            Map<String, Object> requestData;
             try {
-                requestDataList = objectMapper.readValue(payload.toString(), new TypeReference<>() {});
+                requestData = objectMapper.readValue(payload.toString(), Map.class);
             } catch (Exception e) {
                 writeResponse(response, new ResponseWrapper<>(400, "error", "Invalid JSON format", null));
+                return;
+            }
+
+            Integer optionId = getIntegerValue(requestData.get("optionId"));
+            List<Integer> variantValueIds = (List<Integer>) requestData.get("variantValueIds");
+
+            if (optionId == null || variantValueIds == null || variantValueIds.isEmpty()) {
+                writeResponse(response, new ResponseWrapper<>(400, "error", "Missing or invalid optionId or variantValueIds", null));
                 return;
             }
 
             List<OptionVariantValue> addedValues = new ArrayList<>();
             List<String> errors = new ArrayList<>();
 
-            for (Map<String, Object> requestData : requestDataList) {
+            for (Integer variantValueId : variantValueIds) {
                 try {
-                    Integer optionId = getIntegerValue(requestData.get("optionId"));
-                    Integer variantValueId = getIntegerValue(requestData.get("variantValueId"));
-
-                    if (optionId == null || variantValueId == null) {
-                        errors.add("Invalid optionId or variantValueId for item: " + requestData);
-                        continue;
-                    }
-
                     System.out.println("Inserting optionId: " + optionId + ", variantValueId: " + variantValueId);
                     int result = optionVariantValueService.addOptionVariantValue(optionId, variantValueId);
 
@@ -71,23 +72,21 @@ public class OptionVariantValueController extends HttpServlet {
                             addedValues.add(newOptionVariantValue);
                         }
                     } else {
-                        errors.add("Failed to add OptionVariantValue for: " + requestData);
+                        errors.add("Failed to add OptionVariantValue for variantValueId: " + variantValueId);
                     }
                 } catch (Exception e) {
-                    errors.add("Error processing item " + requestData + ": " + e.getMessage());
+                    errors.add("Error processing variantValueId " + variantValueId + ": " + e.getMessage());
                 }
             }
 
-            ResponseWrapper responseWrapper;
             if (!addedValues.isEmpty()) {
-                responseWrapper = new ResponseWrapper<>(200, "success",
-                        errors.isEmpty() ? "All OptionVariantValues added successfully." : "Some OptionVariantValues added with errors: " + String.join(", ", errors),
-                        addedValues);
+                String message = errors.isEmpty()
+                        ? "All OptionVariantValues added successfully."
+                        : "Some OptionVariantValues added with errors: " + String.join(", ", errors);
+                writeResponse(response, new ResponseWrapper<>(200, "success", message, addedValues));
             } else {
-                responseWrapper = new ResponseWrapper<>(500, "error", "Failed to add any OptionVariantValues. Errors: " + String.join(", ", errors), null);
+                writeResponse(response, new ResponseWrapper<>(500, "error", "Failed to add any OptionVariantValues. Errors: " + String.join(", ", errors), null));
             }
-
-            writeResponse(response, responseWrapper);
 
         } catch (Exception e) {
             writeResponse(response, new ResponseWrapper<>(500, "error", "An error occurred: " + e.getMessage(), null));
@@ -111,10 +110,8 @@ public class OptionVariantValueController extends HttpServlet {
         return null;
     }
 
-    private void writeResponse(HttpServletResponse response, ResponseWrapper responseWrapper) throws IOException {
-        response.setContentType("application/json");
+    private void writeResponse(HttpServletResponse response, ResponseWrapper<?> responseWrapper) throws IOException {
         response.setStatus(responseWrapper.getStatusCode());
-        ObjectMapper objectMapper = new ObjectMapper();
-        response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+        response.getWriter().write(responseWrapper.toJson());
     }
 }

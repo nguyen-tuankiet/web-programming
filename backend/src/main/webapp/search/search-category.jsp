@@ -167,8 +167,9 @@
 
 
                                 <div class="operation col">
-                                    <button id="buy_now">
-                                        <a href="buy-now?productId=${pro.id}&optionId=${pro.optionId}">Mua ngay</a>
+                                    <button id="buy_now"  onclick="buyNow(${pro.id}, ${pro.optionId})">
+<%--                                        <a href="buy-now?productId=${pro.id}&optionId=${pro.optionId}">Mua ngay</a>--%>
+                                        Mua ngay
                                     </button>
                                     <button onclick="addToCart(${pro.id},${pro.optionId})" class="btn add">Thêm vào giỏ
                                         hàng
@@ -287,9 +288,10 @@
 
 
                                     <div class="wrap_btn col">
-                                            <%--                                    <button onclick="buyNow(${p.id}, ${p.optionId})" class="btn buy" id="buy-now-btn">Mua Ngay</button>--%>
-                                        <a href="buy-now?productId=${p.id}&optionId=${p.optionId}" class="btn buy"
-                                           id="buy-now-btn">Mua Ngay</a>
+
+                                        <button onclick="buyNow(${p.id}, ${p.optionId})" class="btn buy" id="buy-now-btn">Mua Ngay</button>
+<%--                                        <a href="buy-now?productId=${p.id}&optionId=${p.optionId}" class="btn buy"--%>
+<%--                                           id="buy-now-btn">Mua Ngay</a>--%>
 
                                         <button onclick="addToCart(${p.id},${p.optionId})" class="btn add">
                                             Thêm vào giỏ hàng
