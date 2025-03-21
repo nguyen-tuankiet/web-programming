@@ -198,7 +198,6 @@ body{
 
 .operation{
     padding-top: 10px;
-
 }
 
 .operation button{
@@ -219,6 +218,9 @@ body{
 
 .operation #buy_now {
     background-color: #000000;
+    color: white;
+
+
 }
 .operation #buy_now a {
     color: white;

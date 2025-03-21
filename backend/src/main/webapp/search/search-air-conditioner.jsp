@@ -36,33 +36,11 @@
                     Bộ lọc
                 </div>
 
-                <button id="apply_btn"> Áp dụng </button>
+                <button id="apply_btn"> Áp dụng</button>
 
             </div>
 
-            <!---------------------------------------------------------------------------->
-            <div class="section_type section_item col">
-
-                <div class="title">Loại điều hoà</div>
-
-                <div class="item mid_align">
-                    <input type="checkbox" id="type1">
-                    <label for="type1">Điều hoà treo tường</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type2">
-                    <label for="type2">Điều hoà cục bộ thương mại</label>
-                </div>
-
-
-
-            </div>
-
-            <div class="rec_horizontal"></div>
-
-            <!-------------------------------------------------------------------------->
-
+            <!---------------------------- Default ------------------------------------------------>
 
             <div class="section_price section_item col">
 
@@ -98,90 +76,39 @@
 
             <div class="rec_horizontal"></div>
 
-            <!-------------------------------------------------------------------------->
 
-            <div class="section_capacity section_item col">
+            <!---------------------------------------------------------------------------->
 
-                <div class="title">Công xuất</div>
+            <c:if test="${not empty variants}">
+                <c:forEach var="var" items="${variants}">
 
-                <div class="item mid_align">
-                    <input type="checkbox" id="capacity1">
-                    <label for="capacity1">9.000 Btu/h</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity2">
-                    <label for="capacity2">12.000 Btu/h</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity3">
-                    <label for="capacity3">18.000 Btu/h</label>
-                </div>
+                    <div class="section_type section_item col">
+                        <div class="title">${var.name}</div>
 
 
-                <div class="item">
-                    <input type="checkbox" id="capacity4">
-                    <label for="capacity4">24.000 Btu/h </label>
-                </div>
+                        <c:if test="${not empty var.variantValues}">
+                            <c:forEach var="value" items="${var.variantValues}">
+                                <div class="item mid_align">
+                                    <input type="checkbox" id="type1">
+                                    <label for="type1">${value.value}</label>
 
-                <div class="item">
-                    <input type="checkbox" id="capacity5">
-                    <label for="capacity5">34.000 Btu/h </label>
-                </div>
+                                </div>
 
-                <div class="item">
-                    <input type="checkbox" id="capacity6">
-                    <label for="capacity6">41.000 Btu/h </label>
-                </div>
+                            </c:forEach>
+                        </c:if>
 
-                <div class="item">
-                    <input type="checkbox" id="capacity7">
-                    <label for="capacity7">48.000 Btu/h </label>
-                </div>
+                    </div>
+
+                    <div class="rec_horizontal"></div>
+
+                </c:forEach>
 
 
-
-            </div>
-
-            <div class="rec_horizontal"></div>
-
-
-            <div class="section_type section_item col">
-
-                <div class="title">Công nghệ</div>
-
-                <div class="item mid_align">
-                    <input type="checkbox" id="tech1">
-                    <label for="tech1">WindFree lạnh tức thì</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="tech2">
-                    <label for="tech2">Bộ lọc bụi mịn</label>
-                </div>
-
-
-                <div class="item">
-                    <input type="checkbox" id="tech3">
-                    <label for="tech3">Tự động làm sạch</label>
-                </div>
-
-
-                <div class="item">
-                    <input type="checkbox" id="tech4">
-                    <label for="tech4">Bộ lọc bụi mịn PM2.5</label>
-                </div>
-
-
-
-            </div>
-
-            <div class="rec_horizontal"></div>
-
+            </c:if>
 
 
         </div>
+
 
 
         <div id="list_product">

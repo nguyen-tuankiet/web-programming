@@ -17,12 +17,11 @@ import org.slf4j.LoggerFactory;
 @WebServlet(name = "SearchRefrigerator", value = "/search-refrigerator")
 public class SearchRefrigeratorController extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(SearchRefrigeratorController.class);
-    int categoryId = 1;
 
     ProductService productService = new ProductService(DBConnection.getJdbi());
     VariantService variantService = new VariantService(DBConnection.getJdbi());
     VariantValueService variantValueService = new VariantValueService(DBConnection.getJdbi());
-
+    int categoryId = 1;
 
 
     @Override
@@ -39,12 +38,11 @@ public class SearchRefrigeratorController extends HttpServlet {
 
         }
 
-        log.info(variants.toString());
-
-
+        request.setAttribute("variants", variants);
+        request.setAttribute("categoryId", categoryId);
         request.setAttribute("products", products);
         request.setAttribute("topProducts", topProducts);
-        request.setAttribute("variants", variants);
+
 
         request.getRequestDispatcher("search/search-refrigerator.jsp").forward(request, response);
     }

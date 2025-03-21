@@ -68,6 +68,9 @@ public class ProductService {
             product.setId(productId);
             return product;
         }
+//        if (rowsAffected > 0) {
+//            return productDao.getProductById(product.getId());  // Trả về sản phẩm đã được thêm vào
+//        }
 
         return null;
     }
@@ -112,6 +115,13 @@ public class ProductService {
     public List<Product> getTop10(){
         return productDao.getTop10();
     }
+
+
+    public List<Product> filterProducts(Integer categoryId, List<Integer> optionsId,
+                                        Integer minPrice, Integer maxPrice) {
+        return productDao.filterProduct(categoryId, optionsId, minPrice, maxPrice);
+    }
+
 
 
     public static void main(String[] args) {

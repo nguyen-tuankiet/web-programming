@@ -215,7 +215,7 @@
         }
          .logo img {
             object-fit: contain;
-            width: 105%;
+            width: 95%;
             height: 80%;
             cursor: pointer;
         }
@@ -286,6 +286,13 @@
                 </div>
             </li>
 
+            <li class="menu_item">
+                <div class="wrap_menu_item">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="profile">Thành Viên</a>
+                </div>
+            </li>
+
 
             <!-- Danh mục -->
             <li class="menu_item">
@@ -306,11 +313,30 @@
                 </div>
             </li>
 
-            <li class="menu_item" onclick="loadPage('setting')" >
+            <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-gear"></i>
-                    <span>  Cài đặt </span>
+                    <a href="account_settings.jsp"> Cài đặt</a>
+                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
                 </div>
+                <ul class="submenu">
+                    <li class="submenu_item">
+                        <a href="">Hồ sơ</a>
+                    </li>
+                    <li class="submenu_item">
+                        <a href="">Quên mật khẩu</a>
+                    </li>
+                    <li class="submenu_item">
+                        <a href="">Thông báo</a>
+                    </li>
+                    <li class="submenu_item">
+                        <a href="">Kết nối</a>
+                    </li>
+                    <li class="submenu_item">
+                        <a href="">Hủy tài khoản</a>
+                    </li>
+
+                </ul>
             </li>
         </ul>
     </nav>

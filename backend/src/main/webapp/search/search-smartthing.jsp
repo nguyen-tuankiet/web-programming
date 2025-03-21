@@ -36,47 +36,11 @@
                     Bộ lọc
                 </div>
 
-                <button id="apply_btn"> Áp dụng </button>
+                <button id="apply_btn"> Áp dụng</button>
 
             </div>
 
-            <!---------------------------------------------------------------------------->
-            <div class="section_type section_item col">
-
-                <div class="title">Kiểu Tủ</div>
-
-                <div class="item mid_align">
-                    <input type="checkbox" id="type1">
-                    <label for="type1">4 Cửa</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type2">
-                    <label for="type2">Family Hub</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type3">
-                    <label for="type3">Side by Side</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type4">
-                    <label for="type4">2 Cửa - Ngăn đông dưới</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="type5">
-                    <label for="type5">2 Cửa - Ngăn đông trên</label>
-                </div>
-
-
-            </div>
-
-            <div class="rec_horizontal"></div>
-
-            <!-------------------------------------------------------------------------->
-
+            <!---------------------------- Default ------------------------------------------------>
 
             <div class="section_price section_item col">
 
@@ -112,40 +76,39 @@
 
             <div class="rec_horizontal"></div>
 
-            <!-------------------------------------------------------------------------->
 
-            <div class="section_capacity section_item col">
+            <!---------------------------------------------------------------------------->
 
-                <div class="title">Dung tích</div>
+            <c:if test="${not empty variants}">
+                <c:forEach var="var" items="${variants}">
 
-                <div class="item mid_align">
-                    <input type="checkbox" id="capacity1">
-                    <label for="capacity1">Dưới 300L</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity2">
-                    <label for="capacity2">Từ 300L đến 400L</label>
-                </div>
-
-                <div class="item">
-                    <input type="checkbox" id="capacity3">
-                    <label for="capacity3">Từ 400L đến 500L</label>
-                </div>
+                    <div class="section_type section_item col">
+                        <div class="title">${var.name}</div>
 
 
-                <div class="item">
-                    <input type="checkbox" id="capacity4">
-                    <label for="capacity4">Trên 550L </label>
-                </div>
+                        <c:if test="${not empty var.variantValues}">
+                            <c:forEach var="value" items="${var.variantValues}">
+                                <div class="item mid_align">
+                                    <input type="checkbox" id="type1">
+                                    <label for="type1">${value.value}</label>
+
+                                </div>
+
+                            </c:forEach>
+                        </c:if>
+
+                    </div>
+
+                    <div class="rec_horizontal"></div>
+
+                </c:forEach>
 
 
-            </div>
-
-            <div class="rec_horizontal"></div>
+            </c:if>
 
 
         </div>
+
 
 
         <div id="list_product">
