@@ -98,7 +98,7 @@ public interface ProductDAO {
             "         INNER JOIN options ops ON ops.productId = p.id " +
             "         INNER JOIN image img ON img.id = p.primaryImage " +
             "WHERE p.isActive = true and stock > 0"
-)
+    )
     @RegisterConstructorMapper(Product.class)
     List<Product> getAllProducts();
 
@@ -132,21 +132,30 @@ public interface ProductDAO {
 
 
 
+//
+//
+//    @SqlQuery("""
+//   SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
+//   FROM products p
+//   LEFT JOIN options o ON p.id = o.productId
+//   LEFT JOIN image i ON p.primaryImage = i.id
+//   WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
+//   LIMIT : limit
+//""")
+//    @RegisterConstructorMapper(Product.class)
+//    List<Product> searchProducts(@Bind("name") String name, @Bind("limit") int limit);
+//
 
 
     @SqlQuery("""
-   SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
-   FROM products p
-   LEFT JOIN options o ON p.id = o.productId
-   LEFT JOIN image i ON p.primaryImage = i.id
-   WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
-   LIMIT : limit 
-""")
-    @RegisterConstructorMapper(Product.class)
-    List<Product> searchProducts(@Bind("name") String name, @Bind("limit") int limit);
-
-
-
+        SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
+        FROM products p
+        LEFT JOIN options o ON p.id = o.productId
+        LEFT JOIN image i ON p.primaryImage = i.id
+        WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
+        LIMIT :limit OFFSET :offset
+    """)
+    List<Product> searchProducts(@Bind("name") String name, @Bind("limit") int limit, @Bind("offset") int offset);
 
 
 
