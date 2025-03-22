@@ -83,14 +83,14 @@ public class ProductService {
         return productDao.searchProducts(keyword);
     }
 
-    public List<Product> searchProducts(String name , int limit) {
+
+    public List<Product> searchProducts(String name, int limit, int offset) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Keyword must not be empty");
         }
         String keyword = "%" + name + "%";
-        return productDao.searchProducts(keyword, limit);
+        return productDao.searchProducts(keyword, limit, offset);
     }
-
 
 
     public List<Product> getTopProductsByCategory(Integer categoryId, Integer limit) {
@@ -126,10 +126,6 @@ public class ProductService {
 
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
-//        System.out.println(productService.getTopProductsByCategory(1, 3));
-//        System.out.println(productService.increaseNoOfViews(1));
-//        System.out.println(productService.increaseNoOfSold(10, 5));
-//        System.out.println(productService.getTop10( ).toString());
-        System.out.println(productService.filterProducts(1, List.of(35, 12), 20000000, null));
+        System.out.println(productService.getTop10( ).toString());
     }
 }

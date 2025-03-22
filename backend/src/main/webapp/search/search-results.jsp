@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <head>
     <title>Kết quả tìm kiếm</title>
@@ -18,128 +20,47 @@
 </div>
 
 <div id="list_product">
-    <%-- Hàng sản phẩm 1 --%>
-    <div class="product-row">
-        <div class="search_body">
-            <div class="wrap_img">
-                <img src="${pageContext.request.contextPath}/static/image/tulanh2.jpeg" alt="Tủ lạnh 1" />
-            </div>
-            <div class="infor col">
-<%--                <div  class="product-title"><a href="#">636 L Tủ Lạnh Bespoke 4 Cửa - AI Family Hub™</a></div>--%>
-                <div class="infor mid_align col ">
-                    <div id="top_name" class="bold f16">
-                        <a href="product-detail?id=${pro.id}"> ${pro.name} 636 L Tủ Lạnh Bespoke 4 Cửa - AI Family Hub™</a>
+    <c:choose>
+        <c:when test="${not empty products}">
+            <div class="product-row">
+                <c:forEach var="product" items="${products}">
+                    <div class="search_body">
+                        <div class="wrap_img">
+                            <img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="${product.name}" />
+                        </div>
+                        <div class="infor col">
+                            <div class="product-title">
+                                <a href="product-detail?id=${product.id}">
+                                    <c:out value="${product.name}" />
+                                </a>
+                            </div>
+                            <div class="infor mid_align col">
+                                <div id="top_name" class="bold f16">
+                                    <a href="product-detail?id=${product.id}">
+                                        <c:out value="${product.name}" />
+                                    </a>
+                                </div>
+                                <div id="price" class="bold f22">
+                                    <fmt:formatNumber value="${product.price}" pattern="#,###"/> VND
+                                    <span id="ratting" class="" style="padding: 0 5px">
+                                        5 (153)
+                                        <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="operation">
+                            <button class="buy-now">Mua ngay</button>
+                            <button class="btn add">Thêm vào giỏ hàng</button>
+                        </div>
                     </div>
-
-
-                    <div id="price" class="bold f22">
-                        <%--                                        20.490.000 ₫--%>
-                        <fmt:formatNumber value="${pro.price}" pattern="#,###"/> VND
-
-                        <span id="ratting" class="" style="padding: 0 5px">
-                                            5 (153)
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                        </span>
-
-                    </div>
-
-
-                    <div id="top_description">
-                        <ul class="list_descriptions">
-                            <li class="desc_item f12">Ngăn Đông Mềm -1 độ giữ thịt cá tươi ngon</li>
-                            <li class=" desc_item f12">Làm đá tự động nhanh chóng, tiện lợi</li>
-                            <li class="desc_item f12">Công nghệ làm lạnh vòm All Around Cooling</li>
-                        </ul>
-                    </div>
-
-                </div>
+                </c:forEach>
             </div>
-            <div class="operation">
-                <button class="buy-now">Mua ngay</button>
-                <button class="btn add">Thêm vào giỏ hàng</button>
-            </div>
-        </div>
-
-        <div class="search_body">
-            <div class="wrap_img">
-                <img src="${pageContext.request.contextPath}/static/image/tulanh2.jpeg" alt="Tủ lạnh 2" />
-            </div>
-            <div class="infor col">
-<%--                <div  class="product-title"><a href="#">Tủ lạnh LG French Door mặt gương 612L</a></div>--%>
-                <div class="infor mid_align col ">
-                    <div id="top_name" class="bold f16">
-                        <a href="product-detail?id=${pro.id}"> ${pro.name} Tủ lạnh LG French Door mặt gương 612L</a>
-                    </div>
-
-
-                    <div id="price" class="bold f22">
-                        <%--                                        20.490.000 ₫--%>
-                        <fmt:formatNumber value="${pro.price}" pattern="#,###"/> VND
-
-                        <span id="ratting" class="" style="padding: 0 5px">
-                                            5 (153)
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                        </span>
-
-                    </div>
-
-
-                    <div id="top_description">
-                        <ul class="list_descriptions">
-                            <li class="desc_item f12">Ngăn Đông Mềm -1 độ giữ thịt cá tươi ngon</li>
-                            <li class=" desc_item f12">Làm đá tự động nhanh chóng, tiện lợi</li>
-                            <li class="desc_item f12">Công nghệ làm lạnh vòm All Around Cooling</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="operation">
-                <button class="buy-now">Mua ngay</button>
-                <button class="btn add">Thêm vào giỏ hàng</button>
-            </div>
-        </div>
-
-        <div class="search_body">
-            <div class="wrap_img">
-                <img src="${pageContext.request.contextPath}/static/image/tulanh2.jpeg" alt="Tủ lạnh 3" />
-            </div>
-            <div class="infor col">
-<%--                <div  class="product-title"><a href="#">Tủ lạnh ngăn đá dưới 340L InstaView™</a></div>--%>
-                <div class="infor mid_align col ">
-                    <div id="top_name" class="bold f16">
-                        <a href="product-detail?id=${pro.id}"> ${pro.name} Tủ lạnh ngăn đá dưới 340L InstaView™</a>
-                    </div>
-
-
-                    <div id="price" class="bold f22">
-                        <%--                                        20.490.000 ₫--%>
-                        <fmt:formatNumber value="${pro.price}" pattern="#,###"/> VND
-
-                        <span id="ratting" class="" style="padding: 0 5px">
-                                            5 (153)
-                                            <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
-                                        </span>
-
-                    </div>
-
-
-                    <div id="top_description">
-                        <ul class="list_descriptions">
-                            <li class="desc_item f12">Ngăn Đông Mềm -1 độ giữ thịt cá tươi ngon</li>
-                            <li class=" desc_item f12">Làm đá tự động nhanh chóng, tiện lợi</li>
-                            <li class="desc_item f12">Công nghệ làm lạnh vòm All Around Cooling</li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-            <div class="operation">
-                <button class="buy-now">Mua ngay</button>
-                <button class="btn add">Thêm vào giỏ hàng</button>
-            </div>
-        </div>
-    </div>
+        </c:when>
+        <c:otherwise>
+            <p class="no-results">Không tìm thấy sản phẩm nào phù hợp.</p>
+        </c:otherwise>
+    </c:choose>
 </div>
 
 </body>
