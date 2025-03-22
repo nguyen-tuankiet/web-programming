@@ -20,13 +20,17 @@ let debounceTimeout;
 
 document.getElementById('search-input').addEventListener('input', () => {
     const searchInput = document.getElementById('search-input').value.trim();
+    const searchIcon = document.querySelector('.search-icon i');
+
+    // Thay đổi icon thành loader khi người dùng nhập từ khóa
+    searchIcon.classList.remove('fa-magnifying-glass');
+    searchIcon.classList.add('fa-spinner', 'fa-spin');
 
     // Xóa timeout cũ nếu người dùng tiếp tục nhập
     clearTimeout(debounceTimeout);
 
     debounceTimeout = setTimeout(() => {
         if (searchInput) {
-            const limit = 5;
             fetch(`products/search?name=${encodeURIComponent(searchInput)}`)
                 .then(response => response.json())
                 .then(data => {
@@ -39,12 +43,23 @@ document.getElementById('search-input').addEventListener('input', () => {
                 })
                 .catch(err => {
                     console.error('Lỗi khi tìm kiếm sản phẩm:', err);
+                })
+                .finally(() => {
+                    // Khôi phục lại icon tìm kiếm sau khi hoàn thành
+                    searchIcon.classList.remove('fa-spinner', 'fa-spin');
+                    searchIcon.classList.add('fa-magnifying-glass');
                 });
         } else {
             clearSuggestions();
+            // Khôi phục lại icon nếu input rỗng
+            searchIcon.classList.remove('fa-spinner', 'fa-spin');
+            searchIcon.classList.add('fa-magnifying-glass');
         }
     }, 500); // 500ms debounce
 });
+
+
+
 
 function updateSuggestions(products) {
     const suggestionsContainer = document.querySelector('.product-suggestions');
@@ -68,9 +83,9 @@ function updateSuggestions(products) {
             `;
 
             productDiv.addEventListener('click', () => {
-                const url = new URL(window.location.origin + '/backend_war/product-detail');
-                url.searchParams.append('id', product.id);
-                window.location.href = url.toString();
+                const url = `${window.location.origin}/backend_war/product-detail?id=${encodeURIComponent(product.id)}`;
+                console.log("Đang mở URL:", url); // Kiểm tra URL xem có đúng không
+                window.open(url, '_blank');
             });
             // Thêm vào danh sách kết quả
             suggestionsContainer.appendChild(productDiv);
@@ -83,4 +98,14 @@ function updateSuggestions(products) {
 function clearSuggestions() {
     const suggestionsContainer = document.querySelector('.product-suggestions');
     suggestionsContainer.innerHTML = ''; // Xóa kết quả hiển thị
+}
+function performSearch() {
+    const searchInput = document.getElementById('search-input').value.trim();
+    if (searchInput) {
+        const baseURL = window.location.origin + "/backend_war/search-results";
+        const searchURL = `${baseURL}?name=${encodeURIComponent(searchInput)}`;
+        window.open(searchURL, '_blank');
+    } else {
+        alert("Vui lòng nhập từ khóa tìm kiếm!");
+    }
 }
