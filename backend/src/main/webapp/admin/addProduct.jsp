@@ -2,14 +2,6 @@
 <%@ page import="java.util.List" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<%--
-  Created by IntelliJ IDEA.
-  User: win10pro
-  Date: 12/27/2024
-  Time: 12:21 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,24 +14,32 @@
 </head>
 <body>
 
-<div class="wrap_header">
-    <jsp:include page="Header.jsp"/>
-</div>
+
 
 <div class="container">
-    <div class="side_bar">
-        <jsp:include page="SideBar.jsp"/>
+    <div class ="left">
+        <div class="side_bar">
+            <jsp:include page="SideBar.jsp"/>
+        </div>
+
     </div>
+
+
+    <div class="center">
+        <div class="wrap_header">
+            <jsp:include page="Header.jsp"/>
+        </div>
+
+
+
+
+
 
 
     <div class="content">
 
         <div class="page-header">
-            <div class="row align-items-center">
-                <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Sản phẩm</h1>
-                </div>
-            </div>
+            <h1 class="page-header-title">Thêm Sản phẩm</h1>
         </div>
         <div class="main-container">
             <div class="left-column">
@@ -181,8 +181,11 @@
         </div>
     </div>
 
+    </div>
+
 
 </div>
+
 
 <script src="${pageContext.request.contextPath}/static/style-component/style-admin/products/addProduct.js"></script>
 </body>

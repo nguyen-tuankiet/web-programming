@@ -9,19 +9,29 @@ body {
 
 }
 
+
 .container{
     display: flex;
+    flex-direction: row;
 }
+
+.side_bar{
+    width: 270px;
+}
+
+.center{
+    width: 100%;
+}
+
 
 .content {
     width: 100%;
     background-color: #ffffff;
-    padding: 80px 20px;
+    margin-top: 60px;
+    padding: 20px;
     border: 1px solid #e5e7eb;
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    /*border-radius: 10px;*/
-    margin-left: 269px;
-    margin-top: 50px;
+
+
 }
 
 .toolbar {
@@ -59,15 +69,8 @@ body {
     background-color: #e0e0e0;
 }
 
-/*.row {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: space-between; !* Tạo khoảng cách giữa các phần tử *!*/
-/*    gap: 10px;*/
-/*    margin-bottom: 15px;*/
-/*}*/
 
-.entries-dropdown, .search-bar {
+.entries-dropdown {
     width: 50%;
 }
 
@@ -79,18 +82,18 @@ body {
     gap: 5px;
 }
 
-.search-bar {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 100%;
-    transition: border-color 0.3s;
-}
+/*.search-bar {*/
+/*    padding: 8px;*/
+/*    font-size: 14px;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 8px;*/
+/*    width: 100%;*/
+/*    transition: border-color 0.3s;*/
+/*}*/
 
-.search-bar:focus {
-    border-color: #6c5ce7;
-}
+/*.search-bar:focus {*/
+/*    border-color: #6c5ce7;*/
+/*}*/
 
 .product-table {
     width: 100%;
