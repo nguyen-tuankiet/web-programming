@@ -13,7 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/customer.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/customers/customer.css">
 </head>
 <body>
 
@@ -108,6 +108,6 @@
 </div>
 
 
-<script src="${pageContext.request.contextPath}/static/style-component/style-admin/customer.js"></script>
+<script src="${pageContext.request.contextPath}/static/style-component/style-admin/customers/customer.js"></script>
 </body>
 </html>

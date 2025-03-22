@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Category Management</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/categories.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
     <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>

@@ -8,8 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản Lý Sản Phẩm</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/listProduct.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/listProduct.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/products/listProduct.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/products/listProduct.js"></script>
 </head>
 <body>
 
