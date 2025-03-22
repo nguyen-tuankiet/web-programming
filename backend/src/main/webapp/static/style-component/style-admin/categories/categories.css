@@ -11,17 +11,31 @@ body {
 
 .container{
     display: flex;
+    flex-direction: row;
+}
+left {
+    width: 270px;
 }
 
+.center{
+    width: 100%;
+}
+
+.side_bar {
+    width: 270px;
+}
+
+
 .content {
+    margin-top: 60px;
+    padding: 20px;
     width: 100%;
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
-    padding: 80px 20px;
-    border-radius: 10px;
-    margin-top: 74px;
-    margin-left: 286px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
+
 
 .toolbar {
     display: flex;
@@ -78,18 +92,18 @@ body {
     gap: 5px;
 }
 
-.search-bar {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    width: 100%;
-    transition: border-color 0.3s;
-}
+/*.search-bar {*/
+/*    padding: 8px;*/
+/*    font-size: 14px;*/
+/*    border: 1px solid #ddd;*/
+/*    border-radius: 8px;*/
+/*    width: 100%;*/
+/*    transition: border-color 0.3s;*/
+/*}*/
 
-.search-bar:focus {
-    border-color: #6c5ce7;
-}
+/*.search-bar:focus {*/
+/*    border-color: #6c5ce7;*/
+/*}*/
 
 .product-table {
     width: 100%;

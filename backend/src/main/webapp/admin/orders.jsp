@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
+
+
 <div class="container">
     <div class="left">
         <div class="side_bar">
@@ -26,7 +29,7 @@
         </div>
     </div>
 
-    <div id="right">
+    <div class="center">
 
         <div class="header">
             <jsp:include page="Header.jsp"/>
@@ -38,7 +41,7 @@
                 <h1 class="header-title">Đơn Hàng</h1>
             </div>
 
-            <div class="container">
+            <div class="content">
                 <div class="header-container">
                     <div class="row">
                         <div class="search-bar">
