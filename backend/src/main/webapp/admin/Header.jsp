@@ -20,14 +20,12 @@
             display: flex;
             align-items: center;
             padding: 0 20px;
-            /*position: relative;*/
-            /*top: 0;*/
+            right: 0;
+            top: 0;
             position: fixed;
             z-index: 1000;
-            /*width: 119%;*/
-            left: 270px;
-            width: 82%;
-            box-shadow: 0 -10px 0px -5px rgba(0, 0, 0, 0.2), 0 3px 6px -2px rgba(0, 0, 0, 0.1);
+             left: 270px;
+            box-shadow: 0 -10px 0 -5px rgba(0, 0, 0, 0.2), 0 3px 6px -2px rgba(0, 0, 0, 0.1);
         }
 
         #header .logo {

@@ -27,6 +27,8 @@
         </div>
 
     </div>
+
+
     <div class="center">
         <div class="wrap_header">
             <jsp:include page="Header.jsp"/>
@@ -34,9 +36,8 @@
 
         <div class=" wrap">
             <div class="title ">
-                <h2>Tổng quan tháng 11</h2>
-                <!--        <span>Here's what's happening with your store today.</span>-->
-            </div>
+                <h2>Tổng quan tháng 5</h2>
+             </div>
 
             <div class="report row mid_align">
 
