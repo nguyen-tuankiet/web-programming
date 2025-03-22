@@ -78,7 +78,7 @@
             height: 100%;
             background-color: #ffffff; /* Thay màu trắng */
             border-right: 1px solid #e5e7eb;
-            padding-top: 20px;
+
             padding-bottom: 250px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); /* Hiệu ứng shadow nhẹ */
             position: fixed;
@@ -278,18 +278,18 @@
             </li>
 
 
-            <!-- Hồ sơ -->
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="profile">Hồ sơ</a>
-                </div>
-            </li>
+<%--            <!-- Hồ sơ -->--%>
+<%--            <li class="menu_item">--%>
+<%--                <div class="wrap_menu_item">--%>
+<%--                    <i class="fa-solid fa-user"></i>--%>
+<%--                    <a href="profile">Hồ sơ</a>--%>
+<%--                </div>--%>
+<%--            </li>--%>
 
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-user"></i>
-                    <a href="profile">Thành Viên</a>
+                    <a href="members">Thành Viên</a>
                 </div>
             </li>
 
