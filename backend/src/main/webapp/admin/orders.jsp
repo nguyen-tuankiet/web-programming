@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Đơn Hàng</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/orders.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/orders/orders.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -191,6 +191,6 @@
 
 
 </body>
-<script src="${pageContext.request.contextPath}/static/style-component/style-admin/order.js"></script>
+<script src="${pageContext.request.contextPath}/static/style-component/style-admin/orders/order.js"></script>
 </html>
 

@@ -16,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/addProduct.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/products/addProduct.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
@@ -184,6 +184,6 @@
 
 </div>
 
-<script src="${pageContext.request.contextPath}/static/style-component/style-admin/addProduct.js"></script>
+<script src="${pageContext.request.contextPath}/static/style-component/style-admin/products/addProduct.js"></script>
 </body>
 </html>
