@@ -13,14 +13,27 @@
 </head>
 <body>
 
-<div class="header">
-    <jsp:include page="Header.jsp"/>
-</div>
+
+
+
+
 
 <div class="container">
-    <div class="side_bar">
-        <jsp:include page="SideBar.jsp"/>
+
+    <div class ="left">
+        <div class="side_bar">
+            <jsp:include page="SideBar.jsp"/>
+        </div>
+
     </div>
+
+
+
+    <div class="center">
+        <div class="header">
+            <jsp:include page="Header.jsp"/>
+        </div>
+
 
 
     <div class="content">
@@ -185,6 +198,9 @@
     </div>
 
 </div>
+
+</div>
+
 
 </body>
 </html>
