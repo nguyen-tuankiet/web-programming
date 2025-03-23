@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
   <meta charset="UTF-8">
@@ -38,7 +39,20 @@
   </div>
 </div>
 
+<%--<div class="banner-container">--%>
+<%--  <c:forEach var="banner" items="${bannerList}" varStatus="loop">--%>
+<%--    <div class="banner-slide ${loop.first ? 'active' : ''}" style="background-image: url('${banner.imageId}');">--%>
+<%--      <div class="overlay"></div>--%>
+<%--      <div class="banner-content">--%>
+<%--        <h2>Tiêu đề banner ${loop.index + 1}</h2>--%>
+<%--        <p>Mô tả nội dung banner ${loop.index + 1}</p>--%>
+<%--      </div>--%>
+<%--    </div>--%>
+<%--  </c:forEach>--%>
 
+<%--  <button class="nav-btn prev-btn">❮</button>--%>
+<%--  <button class="nav-btn next-btn">❯</button>--%>
+<%--</div>--%>
 <div class="banner-container">
   <div class="banner-slide active" id="slide-1"
        style="background-image: url('${pageContext.request.contextPath}/static/image/1440x640_disclaimer.webp');">
