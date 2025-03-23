@@ -4,74 +4,54 @@
     box-sizing: border-box;
     font-family: Helvetica Neue, Helvetica, Arial, serif;
 }
-body{
+
+body {
 
 }
 
 
-
-.container{
+.container {
     display: flex;
+    flex-direction: row;
+}
+
+.left {
+    width: 270px;
+}
+
+.center{
+    width: 100%;
+}
+
+.side_bar {
+    width: 270px;
 }
 
 
-.content{
-    /*padding-left: 20px;*/
+.content {
+    margin-top: 60px;
+    padding: 20px;
     width: 100%;
     background-color: #ffffff;
-    /*padding: 80px 20px;*/
     border: 1px solid #e5e7eb;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /*border-radius: 10px;*/
-    /*margin-left: 269px;*/
-    /*margin-top: 50px;*/
+
 }
 
 
-.page-header {
-    padding: 10px;
-}
-
-.page-header .breadcrumb {
-    display: flex;
-    margin-bottom: 0.5rem;
-    gap: 5px;
-    font-size: 14px;
-    color: #6c757d;
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.breadcrumb .breadcrumb-item {
-    color: #8c98a4;
-}
-
-.breadcrumb .breadcrumb-item.active {
-    color: #1e2022;
-}
-
-.breadcrumb .breadcrumb-link {
-    color: #8c98a4;
-    text-decoration: none;
-}
 
 .page-header-title {
     font-size: 24px;
     font-weight: bold;
     color: #1e2022;
-    /*margin-top: 0.5rem;*/
-    margin-top: 77px;
-    margin-left: 278px;
+
 }
 
 a {
     text-decoration: none;
 }
-.breadcrumb .breadcrumb-item:not(:first-child)::before {
-    content: "/";
-    margin-right: 5px;
-    color: #8c98a4;
-}
+
+
 .product-information {
     padding: 20px;
     background-color: #f8f9fa;
@@ -138,6 +118,7 @@ a {
 .product-information textarea::placeholder {
     color: #adb5bd;
 }
+
 .toolbar {
     display: flex;
     align-items: center;
@@ -178,10 +159,12 @@ a {
 .product-information textarea::placeholder {
     color: #adb5bd;
 }
+
 textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
 }
+
 .media-section {
     margin-top: 20px;
     padding: 20px;
@@ -253,6 +236,7 @@ textarea:focus {
 .browse-files:hover {
     background-color: #e0f0ff;
 }
+
 .options-section {
     padding: 20px;
     margin-top: 20px;
@@ -260,21 +244,25 @@ textarea:focus {
     border: 1px solid #e0e0e0;
     border-radius: 6px;
 }
+
 .options-section h2 {
     font-size: 20px;
     margin-bottom: 10px;
 }
+
 .options-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 .option-group {
     display: flex;
     align-items: center;
     gap: 10px;
     position: relative;
 }
+
 .option-select {
     width: 345px;
     padding: 8px;
@@ -289,15 +277,17 @@ textarea:focus {
     font-size: 16px;
     border: 1px solid #ced4da;
 }
+
 .add-option-button {
     margin-top: 10px;
     font-size: 16px;
     cursor: pointer;
     border: none;
     font-weight: 600;
-    color:#1366FF ;
+    color: #1366FF;
     background-color: transparent;
 }
+
 .remove-option-button {
     background: none;
     border: none;
@@ -312,17 +302,18 @@ textarea:focus {
 }
 
 
-
 .main-container {
     display: flex;
+    justify-content: center;
     gap: 20px;
     padding: 20px;
-    width: 80%;
+    width: 100%;
+
 }
-.left-column{
+
+.left-column {
     width: 60%;
-    margin-left: 273px;
-}
+ }
 
 .right-column {
     flex: 0.5;
@@ -403,7 +394,7 @@ textarea:focus {
 }
 
 .toggle-button input[type="checkbox"]:checked {
-    background-color:  #007bff;
+    background-color: #007bff;
 }
 
 .toggle-button input[type="checkbox"]:before {
@@ -421,10 +412,12 @@ textarea:focus {
 .toggle-button input[type="checkbox"]:checked:before {
     transform: translateX(20px);
 }
-.save{
+
+.save {
     padding-left: 380px;
 }
-.save button{
+
+.save button {
     display: inline-block;
     padding: 8px 20px;
     font-size: 14px;
@@ -436,10 +429,11 @@ textarea:focus {
     text-decoration: none;
 }
 
-.save button:hover{
+.save button:hover {
     cursor: pointer;
     background-color: #e0f0ff;
 }
+
 .image-preview-container {
     display: flex;
     gap: 15px;
@@ -478,6 +472,7 @@ textarea:focus {
 .image-preview-container .image-wrapper:nth-child(n+5) {
     display: none;
 }
+
 .preview-image {
     width: 100px;
     height: 100px;
@@ -571,11 +566,13 @@ textarea:focus {
     cursor: pointer;
     z-index: 1001;
 }
+
 .image-preview-container .image-wrapper img {
     width: 130px;
     height: 170px;
     object-fit: cover;
 }
+
 .preview-modal {
     z-index: 9999; /* Tăng giá trị nếu bị che */
 }
@@ -583,6 +580,7 @@ textarea:focus {
 .carousel-image {
     display: block;
 }
+
 .image-wrapper {
     position: relative;
     display: inline-block;
@@ -642,7 +640,6 @@ textarea:focus {
 }
 
 
-
 .product-information input[type="text"]:focus,
 .product-information input[type="number"]:focus,
 .product-information textarea:focus,
@@ -654,13 +651,14 @@ textarea:focus {
     outline: none;
 }
 
-.pricing-section{
+.pricing-section {
     display: flex;
     align-items: center;
     gap: 10px;
     position: relative;
 }
-.pricing-section  input{
+
+.pricing-section input {
     width: 305px;
     padding: 8px;
     font-size: 16px;
@@ -668,7 +666,7 @@ textarea:focus {
     color: #7F7B88;
 }
 
-.variant-group{
+.variant-group {
     padding: 20px;
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
