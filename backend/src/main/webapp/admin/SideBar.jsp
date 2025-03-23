@@ -36,6 +36,22 @@
             flex-direction: column;
         }
 
+        .menu_item button {
+            background: none;
+            border: none;
+            color: #4b5563;
+            font-size: 16px;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 0;
+            text-align: left;
+        }
+
+        .menu_item button:hover {
+            color: #2563eb;
+        }
+
+
         .rec_horizontal {
             width: 100%;
             height: 1px;
@@ -241,7 +257,6 @@
             </li>
 
 
-            <!--Sản phẩm-->
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-box"></i>
@@ -251,10 +266,14 @@
 
                 <ul class="submenu">
                     <li class="submenu_item">
-                        <a href="list-product">Danh sách sản phẩm</a>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/list-product'">
+                            Danh sách sản phẩm
+                        </button>
                     </li>
                     <li class="submenu_item">
-                        <a href="add-product">Thêm sản phẩm</a>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/add-product'">
+                            Thêm sản phẩm
+                        </button>
                     </li>
                 </ul>
             </li>
@@ -263,7 +282,10 @@
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-cart-shopping"></i>
-                    <a href="orders">Đơn hàng</a>
+<%--                    <a href="orders">Đơn hàng</a>--%>
+                    <button onclick="location.href='${pageContext.request.contextPath}/admin/orders'">
+                        Đơn hàng
+                    </button>
                 </div>
 
             </li>
@@ -272,7 +294,10 @@
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-users"></i>
-                    <a href="customers">Khách hàng</a>
+<%--                    <a href="customers">Khách hàng</a>--%>
+                    <button onclick="location.href='${pageContext.request.contextPath}/admin/customers'">
+                        Khách hàng
+                    </button>
                 </div>
 
             </li>
@@ -289,7 +314,10 @@
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-user"></i>
-                    <a href="members">Thành Viên</a>
+<%--                    <a href="members">Thành Viên</a>--%>
+                    <button onclick="location.href='${pageContext.request.contextPath}/admin/Member'">
+                        Khách hàng
+                    </button>
                 </div>
             </li>
 
@@ -297,10 +325,11 @@
             <!-- Danh mục -->
             <li class="menu_item">
                 <div class="wrap_menu_item">
-                    <%--                    <i class="fa-solid fa-gear"></i>--%>
                         <i class="fa-solid fa-warehouse"></i>
-                        <a href="category">Danh mục</a>
-                    <%--                    <span>  Danh mục </span>--%>
+<%--                        <a href="category">Danh mục</a>--%>
+                    <button onclick="location.href='${pageContext.request.contextPath}/admin/category'">
+                        Danh mục
+                    </button>
                 </div>
             </li>
 
