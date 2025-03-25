@@ -323,4 +323,32 @@ public interface ProductDAO {
     public List<Product> filterProduct(@Bind("categoryId") int categoryId, @BindList("optionsId") List<Integer> optionsId,
                                        @Bind("minPrice") @Nullable Integer minPrice, @Bind("maxPrice") @Nullable Integer maxPrice);
 
+
+
+
+
+    @SqlQuery("SELECT p.id           as id, \n" +
+            "                                          p.name         as name, \n" +
+            "                                           p.description  as description, \n" +
+            "                                           p.sku          as sku,  \n" +
+            "                                           p.isActive     as isActive, \n" +
+            "                                           p.brandId      as brandId, \n" +
+            "                                           p.noOfViews    as noOfViews, \n" +
+            "                                           p.noOfSold     as noOfSold,  \n" +
+            "                                          p.categoryId   as categoryId,  \n" +
+            "                                           p.primaryImage as primaryImage,  \n" +
+            "                                           opt.id         as optionId, \n" +
+            "                                           opt.price      as price, \n" +
+            "                                           opt.stock      as stock,  \n" +
+            "                                           img.url        as imageUrl\n" +
+            "                        FROM products as p  \n" +
+            "                         INNER JOIN options as opt ON p.id = opt.productId\n" +
+            "                        INNER JOIN image as img on img.id = p.primaryImage\n" +
+            "                        INNER JOIN categories as cate on p.categoryId = cate.id\n" +
+            "                        INNER JOIN option_variant_value as ovv ON opt.id = ovv.optionId\n" +
+            "                         ORDER BY p.noOfViews DESC, p.noOfSold DESC\n" +
+            "                         LIMIT 3")
+
+    public List<Product> suggestProduct();
+
 }
