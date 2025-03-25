@@ -10,8 +10,10 @@
 <html lang="en">
 <head>
     <title>Header</title>
-    <link rel="stylesheet"   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/home/Home.css"/>
+    <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-home/search.css">--%>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
@@ -20,7 +22,7 @@
 <div id="main_header">
 
 
-    <a class="logo nav_item" id="logo" href="home" >
+    <a class="logo nav_item" id="logo" href="home">
         <img class="logo" src="${pageContext.request.contextPath}/static/image/logo_web.png"/>
     </a>
 
@@ -33,8 +35,8 @@
                 </a>
                 <div class="submenu submenu-tu-lanh">
                     <div class="submenu-column">
-<%--                        <a class="nav_item" href="search-refrigerator" >Tất cả Tủ Lạnh</a>--%>
-                        <a class="nav_item" href="search-category?categoryId=1" >Tất cả Tủ Lạnh</a>
+                        <%--                        <a class="nav_item" href="search-refrigerator" >Tất cả Tủ Lạnh</a>--%>
+                        <a class="nav_item" href="search-category?categoryId=1">Tất cả Tủ Lạnh</a>
 
 
                         <a class="nav_item" href="#">Tủ Lạnh BESPOKE <span class="highlight">HẤP DẪN</span></a>
@@ -54,8 +56,8 @@
                 <a href="#">Máy Giặt</a>
                 <div class="submenu submenu-may-giat">
                     <div class="submenu-column">
-<%--                        <a class="nav_item" href="search-washing-machine" >Tất cả Máy Giặt</a>--%>
-                        <a class="nav_item" href="search-category?categoryId=2" >Tất cả Máy Giặt</a>
+                        <%--                        <a class="nav_item" href="search-washing-machine" >Tất cả Máy Giặt</a>--%>
+                        <a class="nav_item" href="search-category?categoryId=2">Tất cả Máy Giặt</a>
 
                         <a href="#">Tiết kiệm sống xanh với BESPOKE AI</a>
                         <a href="#"
@@ -81,17 +83,17 @@
                 <a href="#">Máy Hút Bụi</a>
                 <div class="submenu submenu-hut-bui">
                     <div class="submenu-column">
-<%--                        <a--%>
-<%--                                class="nav_item"--%>
-<%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_VacuumCleaner.html"--%>
-<%--                                href="#"--%>
-<%--                        >Tất cả Máy Hút Bụi</a--%>
-<%--                        >--%>
-<%--                        <a class="nav_item" href="search-vacuum-cleaner" >Tất cả Máy Hút Bụi</a>--%>
-                        <a class="nav_item" href="search-category?categoryId=3" >Tất cả Hút Bụi</a>
+                        <%--                        <a--%>
+                        <%--                                class="nav_item"--%>
+                        <%--                                data-src="/web-programming/frontEnd/src/component/product_component/Search_VacuumCleaner.html"--%>
+                        <%--                                href="#"--%>
+                        <%--                        >Tất cả Máy Hút Bụi</a--%>
+                        <%--                        >--%>
+                        <%--                        <a class="nav_item" href="search-vacuum-cleaner" >Tất cả Máy Hút Bụi</a>--%>
+                        <a class="nav_item" href="search-category?categoryId=3">Tất cả Hút Bụi</a>
 
 
-    <a href="#">Máy Hút Bụi Không Dây</a>
+                        <a href="#">Máy Hút Bụi Không Dây</a>
                         <a href="#">Robot Hút Bụi <span class="new">MỚI</span></a>
                         <a href="#">Máy Hút Bụi Dạng Hộp</a>
                         <a href="#">Khám phá Máy Hút Bụi</a>
@@ -102,8 +104,8 @@
                 <a href="#">Thiết Bị Nhà Bếp</a>
                 <div class="submenu submenu-nha-bep">
                     <div class="submenu-column">
-<%--                        <a class="nav_item" href="search-kitchen-equipment" >Tất cả Thiết Bị Nhà Bếp</a>--%>
-                        <a class="nav_item" href="search-category?categoryId=6" >Tất cả Thiết Bị Nhà Bếp</a>
+                        <%--                        <a class="nav_item" href="search-kitchen-equipment" >Tất cả Thiết Bị Nhà Bếp</a>--%>
+                        <a class="nav_item" href="search-category?categoryId=6">Tất cả Thiết Bị Nhà Bếp</a>
                         <a href="#">Lò Vi Sóng <span class="new">MỚI</span></a>
                         <a href="#">Lò Nướng </a>
                         <a href="#">Bếp Từ </a>
@@ -117,8 +119,8 @@
                 <a href="#">Máy Lọc Không Khí</a>
                 <div class="submenu submenu-may-loc">
                     <div class="submenu-column">
-<%--                        <a class="nav_item" href="search-air-purifier" >Máy Lọc Không Khí</a>--%>
-                        <a class="nav_item" href="search-category?categoryId=4" >Máy Lọc Không Khí</a>
+                        <%--                        <a class="nav_item" href="search-air-purifier" >Máy Lọc Không Khí</a>--%>
+                        <a class="nav_item" href="search-category?categoryId=4">Máy Lọc Không Khí</a>
                         <a href="#">Bộ Sưu Tập Máy Lọc Không Khí</a>
                     </div>
                 </div>
@@ -127,8 +129,8 @@
                 <a href="#">Điều Hòa Không Khí</a>
                 <div class="submenu submenu-dieu-hoa">
                     <div class="submenu-column">
-<%--                        <a class="nav_item" href="search-air-conditioner" >Tất cả Máy Điều Hòa</a>--%>
-                        <a class="nav_item" href="search-category?categoryId=5" >Tất cả Máy Điều Hòa</a>
+                        <%--                        <a class="nav_item" href="search-air-conditioner" >Tất cả Máy Điều Hòa</a>--%>
+                        <a class="nav_item" href="search-category?categoryId=5">Tất cả Máy Điều Hòa</a>
 
                         <a href="#">Điều Hòa Treo Tường</a>
                         <a href="#">Điều Hòa Cục Bộ Thương Mại</a>
@@ -138,9 +140,9 @@
             </li>
             <li><a href="#">Phụ kiện</a></li>
             <li>
-<%--                <a href="#">SmartThings</a>--%>
-<%--                <a class="nav_item" href="Search_SmartThings" >SmartThings</a>--%>
-                    <a class="nav_item" href="search-category?categoryId=5" >SmartThings</a>
+                <%--                <a href="#">SmartThings</a>--%>
+                <%--                <a class="nav_item" href="Search_SmartThings" >SmartThings</a>--%>
+                <a class="nav_item" href="search-category?categoryId=5">SmartThings</a>
 
             </li>
             <li>
@@ -175,14 +177,36 @@
             </div>
         </div>
 
-        <div id="search-overlay" class="layer">
-            <div class="search-container">
 
-                <iframe
-                        src="${pageContext.request.contextPath}/home/search.jsp"
-                        frameborder="0"
-                        id="search-iframe"
-                ></iframe>
+
+        <div id="search-overlay" class="layer">
+
+
+            <div class="search-container">
+                <h2 class="search-container-title">Chúng tôi có thể giúp bạn tìm kiếm?</h2>
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="Nhập từ khoá ..."/>
+                    <button class="search-icon" onclick="performSearch()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+
+                <!-- Dropdown gợi ý -->
+                <div class="suggestion-box" id="suggestion-box">
+                    <ul id="suggestion-list"></ul>
+
+
+                    <h3 class="suggestion-title">Gợi ý dành cho bạn</h3>
+                    <div class="product-suggestions">
+
+
+                        <div class="product">
+
+                        </div>
+                    </div>
+                </div>
+
+
                 <div id="search-content"></div>
 
 
@@ -193,14 +217,14 @@
         </div>
 
 
-
     </nav>
 
 </div>
 
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/home/home.js"/>--%>
 
 <script src="${pageContext.request.contextPath}/static/style-page/home/home.js"></script>
+<script src="${pageContext.request.contextPath}/static/style-component/style-home/search.js"></script>
+
 
 </body>
 </html>

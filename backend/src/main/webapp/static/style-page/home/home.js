@@ -55,10 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // Xử lý nút tìm kiếm
-    document.getElementById("search-icon").addEventListener("click", () => {
-        document.getElementById("search-overlay").style.display = "flex";
-    });
+    // // Xử lý nút tìm kiếm
+    // document.getElementById("search-icon").addEventListener("click", () => {
+    //     document.getElementById("search-overlay").style.display = "flex";
+    // });
 
     document.getElementById("close-search-overlay").addEventListener("click", () => {
         document.getElementById("search-overlay").style.display = "none";
@@ -69,17 +69,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const searchOverlay = document.getElementById("search-overlay");
         const closeSearchOverlay = document.getElementById("close-search-overlay");
 
-        // Khi bấm vào biểu tượng tìm kiếm, hiển thị overlay tìm kiếm
-        searchIcon.addEventListener("click", () => {
-            // Gửi yêu cầu AJAX để tải nội dung từ search.jsp
-            fetch("search.jsp")
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("search-content").innerHTML = data;
-                    searchOverlay.style.display = "flex";
-                })
-                .catch(error => console.error("Lỗi khi tải search.jsp:", error));
-        });
+
+        // // Khi bấm vào biểu tượng tìm kiếm, hiển thị overlay tìm kiếm
+        // searchIcon.addEventListener("click", () => {
+        //     // Gửi yêu cầu AJAX để tải nội dung từ search.jsp
+        //
+        //     fetch("search.jsp")
+        //         .then(response => response.text())
+        //          .then(data => {
+        //             document.getElementById("search-content").innerHTML = data;
+        //             searchOverlay.style.display = "flex";
+        //         })
+        //         .catch(error => console.error("Lỗi khi tải search.jsp:", error));
+        // });
 
         // Khi bấm nút đóng, ẩn overlay tìm kiếm
         closeSearchOverlay.addEventListener("click", () => {
@@ -88,14 +90,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+
+
+
+
+
+
+
+
+
     // Xử lý nút "Trang của tôi"
     document.getElementById("my-page-link").addEventListener("click", (event) => {
         event.preventDefault();
         if (!isLoggedIn) {
             alert("Bạn cần đăng nhập trước!");
         } else {
-            // iframe.src = "/web-programming/frontEnd/src/pages/UserProfile.html";
-            // history.pushState({ page: "user-profile" }, "Trang của tôi", "user-profile");
             window.location.href = 'user-profile';
         }
     });
@@ -132,39 +141,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function showSearchOverlay() {
-    // Hiển thị overlay tìm kiếm bằng cách thay đổi style
-    document.getElementById("search-overlay").style.display = "block";
+    document.getElementById("search-overlay").style.display = "flex";
+
+
+
+        fetch("/suggest")
+            .then(response => response.json())
+            .then(products => {
+                const suggestionsContainer = document.querySelector(".product-suggestions");
+                suggestionsContainer.innerHTML = "";
+
+                if (products.length === 0) {
+                    suggestionsContainer.innerHTML = "<p>Không có sản phẩm gợi ý.</p>";
+                    return;
+                }
+
+                products.forEach(product => {
+                    const productItem = document.createElement("div");
+                    productItem.className = "product";
+                    productItem.innerHTML = `
+                        <img src="${product.imageUrl}" alt="${product.name}">
+                        <div class="product-content">
+<!--                            <p class="product-name">${product.name}</p>-->
+                            <a href="product-detail?id=${encodeURIComponent(product.id)}"  class="product-name">
+                                   ${product.name}
+                                   
+                            </a>
+                            <span class="product-price">${formatCurrency(product.price)}</span>
+                        </div>
+                    `;
+                    suggestionsContainer.appendChild(productItem);
+                });
+            })
+            .catch(error => console.error("Lỗi khi lấy danh sách gợi ý sản phẩm:", error));
 }
+
+
 
 // Đóng overlay tìm kiếm khi bấm vào nút đóng
 document.getElementById("close-search-overlay").addEventListener("click", function() {
     document.getElementById("search-overlay").style.display = "none";
 });
 
+function formatCurrency(amount) {
+    return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND"
+    }).format(amount);
+}
 
-// Hàm đọc tham số từ URL
-// function getQueryParam(param) {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     return urlParams.get(param);
-//
-//
-//
-//
-//
-// // Lấy loại sản phẩm từ URL
-// const productType = getQueryParam('product');
-//
-// // Hiển thị nội dung theo loại sản phẩm
-// if (productType) {
-//     const titleElement = document.querySelector('#list_product .product_item > span');
-//     const productMap = {
-//         'tu-lanh': 'Tủ Lạnh Bán Chạy',
-//         'may-giat': 'Máy Giặt Thông Minh',
-//         'may-lanh': 'Máy Lạnh Hiện Đại',
-//         'dung-cu-nha-bep': 'Dụng Cụ Nhà Bếp'
-//     };
-//
-//     // Thay đổi tiêu đề danh sách sản phẩm
-//     titleElement.textContent = productMap[productType] || 'Sản Phẩm Nổi Bật';
-// }
-//
+
