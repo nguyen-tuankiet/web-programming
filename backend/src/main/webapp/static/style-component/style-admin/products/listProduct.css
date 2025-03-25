@@ -392,3 +392,141 @@ tr:hover{
     color: #e74c3c;
     background-color: #fde2e2;
 }
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.entries-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.entries-dropdown label {
+    font-weight: 500;
+}
+
+.entries-dropdown select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 0 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.entries-dropdown select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.export-container {
+    position: relative;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.export-btn:hover {
+    background-color: #2980b9;
+}
+
+.export-btn i {
+    font-size: 12px;
+    color: white;
+}
+
+.export-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 250px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 10px;
+}
+
+.export-container:hover .export-menu {
+    display: block;
+}
+
+.export-menu p {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.export-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    background: none;
+    border: none;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.export-option:hover {
+    background-color: #f5f5f5;
+}
+
+.export-option i {
+    font-size: 16px;
+}
+
+/* Màu sắc cho các icon xuất */
+.fa-copy {
+    color: #3498db; /* Xanh dương */
+}
+
+.fa-print {
+    color: #2ecc71; /* Xanh lá */
+}
+
+.fa-file-excel {
+    color: #2ecc71; /* Xanh lá (màu Excel) */
+}
+
+.fa-file-csv {
+    color: #e74c3c; /* Đỏ */
+}
+
+.fa-file-pdf {
+    color: #e74c3c; /* Đỏ (màu PDF) */
+}
+
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 10px 0;
+}
