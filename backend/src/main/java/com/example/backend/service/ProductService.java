@@ -122,10 +122,14 @@ public class ProductService {
         return productDao.filterProduct(categoryId, optionsId, minPrice, maxPrice);
     }
 
+    public List<Product> suggestProducts( ) {
+        return productDao.suggestProduct();
+    }
+
 
 
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
-        System.out.println(productService.getTop10( ).toString());
+        System.out.println(productService.suggestProducts( ).size());
     }
 }
