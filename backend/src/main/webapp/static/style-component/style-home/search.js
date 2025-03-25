@@ -31,7 +31,7 @@ document.getElementById('search-input').addEventListener('input', () => {
 
     debounceTimeout = setTimeout(() => {
         if (searchInput) {
-            fetch(`products/search?name=${encodeURIComponent(searchInput)}`)
+            fetch(`home/products/search?name=${encodeURIComponent(searchInput)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
@@ -77,16 +77,18 @@ function updateSuggestions(products) {
             productDiv.innerHTML = `
                 <img class="" src="${product.imageUrl}">
                 <div class="product-content"> 
-                    <p class="product-name" >${product.name || 'Sản phẩm chưa có tên'}</p>
+                    <a href="product-detail?id=${encodeURIComponent(product.id)}" class="product-name" >
+                        ${product.name || 'Sản phẩm chưa có tên'}
+                     </a>
                     <span class="product-price" >${price} VND</span>
                 </div>
             `;
 
-            productDiv.addEventListener('click', () => {
-                const url = `${window.location.origin}/backend_war/product-detail?id=${encodeURIComponent(product.id)}`;
-                console.log("Đang mở URL:", url); // Kiểm tra URL xem có đúng không
-                window.open(url, '_blank');
-            });
+            // productDiv.addEventListener('click', () => {
+            //     const url = `${window.location.origin}/backend_war/product-detail?id=${encodeURIComponent(product.id)}`;
+            //     console.log("Đang mở URL:", url); // Kiểm tra URL xem có đúng không
+            //     window.open(url, '_blank');
+            // });
             // Thêm vào danh sách kết quả
             suggestionsContainer.appendChild(productDiv);
         });
