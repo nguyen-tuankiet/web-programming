@@ -121,52 +121,72 @@ body {
 }
 
 /* Export button and menu */
-.header-actions {
+
+.entries-dropdown {
     display: flex;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.entries-dropdown label {
+    font-weight: 500;
+}
+
+.entries-dropdown select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 0 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.entries-dropdown select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
 }
 
 .export-container {
     position: relative;
-    display: inline-block;
 }
 
 .export-btn {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: 1px solid #ced4da;
-    background-color: #fff;
-    color: #495057;
-    font-size: 14px;
+    padding: 8px 15px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: white;
     font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .export-btn:hover {
-    border-color: #0DCAF0;
-    color: #0DCAF0;
+    background-color: #2980b9;
 }
 
 .export-btn i {
     font-size: 12px;
+    color: white;
 }
 
 .export-menu {
     display: none;
     position: absolute;
-    top: calc(100% + 5px);
     right: 0;
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    z-index: 100;
-    overflow: hidden;
-    padding: 8px 0;
+    top: 100%;
+    width: 250px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    padding: 10px;
 }
 
 .export-container:hover .export-menu {
@@ -174,36 +194,57 @@ body {
 }
 
 .export-menu p {
-    margin: 8px 16px;
+    color: #888;
     font-size: 12px;
-    color: #6c757d;
-    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
 }
 
-.export-option, .action-option {
+.export-option {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 16px;
     width: 100%;
-    text-align: left;
-    border: none;
+    padding: 8px 10px;
     background: none;
-    font-size: 14px;
-    color: #495057;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    border: none;
+    text-align: left;
+    transition: background-color 0.3s ease;
 }
 
-.export-option:hover, .action-option:hover {
-    background-color: #f8f9fa;
-    color: #0DCAF0;
+.export-option:hover {
+    background-color: #f5f5f5;
+}
+
+.export-option i {
+    font-size: 16px;
+}
+
+/* Màu sắc cho các icon xuất */
+.fa-copy {
+    color: #3498db; /* Xanh dương */
+}
+
+.fa-print {
+    color: #2ecc71; /* Xanh lá */
+}
+
+.fa-file-excel {
+    color: #2ecc71; /* Xanh lá (màu Excel) */
+}
+
+.fa-file-csv {
+    color: #e74c3c; /* Đỏ */
+}
+
+.fa-file-pdf {
+    color: #e74c3c; /* Đỏ (màu PDF) */
 }
 
 .divider {
     height: 1px;
-    background-color: #e9ecef;
-    margin: 8px 0;
+    background-color: #e0e0e0;
+    margin: 10px 0;
 }
 
 /* Table styles */

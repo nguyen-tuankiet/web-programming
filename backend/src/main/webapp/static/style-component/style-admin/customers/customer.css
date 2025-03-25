@@ -39,37 +39,12 @@ body {
     border: 1px solid #e5e7eb;
     border-radius: 10px;
 }
-.action-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.action-buttons button, .more-options, .search-bar {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 10px 10px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-}
+
 .size-6 {
     width: 20px;
     height: 20px;
     color: #555;
 }
-
-
-.action-buttons button:hover, .more-options:hover {
-    transform: scale(1.1);
-    color: #377DFF;
-}
-.action-buttons .add-customer:hover{
-    color: white;
-}
-
 
 .add-customer {
     background-color: #377DFF;
@@ -100,7 +75,7 @@ body {
     color: #888;
 }
 
-.search-bar svg, .action-buttons svg {
+.search-bar svg {
     flex-shrink: 0;
     width: 20px;
     height: 20px;
@@ -182,12 +157,6 @@ button {
     color: #007bff;
 }
 
-body > div > div.action-buttons > button.import > svg:hover{
-    transform: scale(1.1);
-    color: #007bff;
-
-}
-
 .delete-btn:hover .size-6 {
     color: #dc3545;
 }
@@ -229,3 +198,124 @@ body > div > div.action-buttons > button.import > svg:hover{
     color: #fff;
     border-color: #0DCAF0;
 }
+
+.entries-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.entries-dropdown label {
+    font-weight: 500;
+}
+
+.entries-dropdown select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    margin: 0 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.entries-dropdown select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.export-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background-color: #3498db;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.export-btn:hover {
+    background-color: #2980b9;
+}
+
+.export-btn i {
+    font-size: 12px;
+    color: white;
+}
+
+.export-btn:hover i {
+    color: #3498db;
+}
+
+.export-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 250px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 20;
+    /*margin-top: 8px;*/
+    overflow: hidden;
+}
+
+.export-container:hover .export-menu {
+    display: block;
+}
+
+.export-menu p {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.export-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    background: none;
+    border: none;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.export-option:hover {
+    background-color: #f4f6f9;
+}
+
+.export-option i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 5px 0;
+}
+
+/* Màu sắc icon */
+.fa-copy { color: #3498db; }
+.fa-print { color: #2ecc71; }
+.fa-file-excel { color: #2ecc71; }
+.fa-file-csv { color: #e74c3c; }
+.fa-file-pdf { color: #e74c3c; }
