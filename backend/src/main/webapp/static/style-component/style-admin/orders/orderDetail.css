@@ -9,12 +9,33 @@ body {
     padding: 10px 20px;
 }
 
-
-.content{
-    width: 100%;
-    padding: 30px;
+.container {
+    display: flex;
+    flex-direction: row;
 }
 
+.left {
+    width: 270px;
+}
+
+.center{
+    width: 100%;
+}
+
+.side_bar {
+    width: 270px;
+}
+
+
+.content{
+    margin-top: 60px;
+    padding: 20px;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
 
 
 
