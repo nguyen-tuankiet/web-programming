@@ -1,11 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: win10pro
-  Date: 12/27/2024
-  Time: 12:21 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,81 +34,93 @@
          <!-- Nội dung chính -->
          <div class="content">
              <h1 class="header-title">Khách Hàng</h1>
-             <!-- Bảng bên trái -->
-            <div class="wrap_content">
+             <c:if test="${not empty customer}">
+                 <div class="wrap_content">
 
-                <div class="left-panel">
-                    <div class="profile-card">
-                        <div class ="info">
-                            <img src="https://dashui.codescandy.com/dashuipro/assets/images/avatar/avatar-11.jpg" alt="Jessica Moore" class="profile-pic">
-                            <h3>Nguyễn Tuấn Kiệt</h3>
-                            <p>nguyentuankiet@gmail.com</p>
-                            <p class="phone">012399999</p>
-                        </div>
-                        <hr>
-                       <div class="wrap_info">
-                           <p><strong>Đơn hàng gần nhất:</strong>  <a href="#">#80294</a></p>
-                           <p><strong>Giá trị đơn hàng trung bình:</strong> 574.000 VND </p>
-                           <p><strong>Đăng ký:</strong> 2 tháng trước</p>
-                       </div>
-                    </div>
-                </div>
+                     <div class="left-panel">
+                         <div class="profile-card">
+                             <div class ="info">
+                                 <c:if test="${not empty customer.avatarUrl}">
+                                     <img src="${customer.avatarUrl}" alt="Avatar"
+                                          style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
+                                 </c:if>
 
-                <!-- Bảng bên phải -->
-                <div class="right-panel">
-                    <!-- Phần Đơn hàng -->
-                    <div class="orders">
-                         <table>
-                            <thead>
-                            <tr>
-                                <th>Đơn hàng</th>
-                                <th>Ngày</th>
-                                <th>Tình trạng</th>
-                                <th>Số mặt hàng</th>
-                                <th>Tổng cộng</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><a href="#">#80294</a></td>
-                                <td>Hôm nay lúc 6:10 PM</td>
-                                <td>Chờ xử lý</td>
-                                <td>4</td>
-                                <td>320.000 VND</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">#63736</a></td>
-                                <td>15 Tháng 5, 2019</td>
-                                <td>Hoàn thành</td>
-                                <td>7</td>
-                                <td>2,574.311 VND</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">#63501</a></td>
-                                <td>7 Tháng 1, 2019</td>
-                                <td>Hoàn thành</td>
-                                <td>1</td>
-                                <td>34.000 VND</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">#40278</a></td>
-                                <td>19 Tháng 10, 2018</td>
-                                <td>Hoàn thành</td>
-                                <td>2</td>
-                                <td>704.000 VND</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                 <c:if test="${empty customer.avatarUrl}">
+                                     <img src="${pageContext.request.contextPath}/static/image/default-avatar.png" alt="Avatar"
+                                          style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
+                                 </c:if>
+
+                                 <h3>${customer.fullName}</h3>
+                                 <p>${customer.email}</p>
+                                 <p> ${customer.phone}</p>
+                             </div>
+                             <hr>
+                                 <%--                       <div class="wrap_info">--%>
+                                 <%--                           <p><strong>Đơn hàng gần nhất:</strong>  <a href="#">#80294</a></p>--%>
+                                 <%--                           <p><strong>Giá trị đơn hàng trung bình:</strong> 574.000 VND </p>--%>
+                                 <%--                           <p><strong>Đăng ký:</strong> 2 tháng trước</p>--%>
+                                 <%--                       </div>--%>
+                         </div>
                      </div>
 
-                    <!-- Phần Địa chỉ -->
-                    <div class="addresses">
-                        <h4>Địa chỉ</h4>
-                        <p> Quận 1 Thành phố Hồ Chí Minh</p>
-                        <p> Quận 2  Thành phố Hồ Chí Minh</p>
+                     <!-- Bảng bên phải -->
+                     <div class="right-panel">
+                         <!-- Phần Đơn hàng -->
+                         <div class="orders">
+                             <c:if test="${not empty order}">
+                                 <table>
+                                     <thead>
+                                     <tr>
+                                         <th>Đơn hàng</th>
+                                         <th>Ngày</th>
+                                         <th>Tình trạng</th>
+                                         <th>Thanh toán</th>
+                                         <th>Tổng cộng</th>
+                                     </tr>
+                                     </thead>
+                                     <tbody>
+                                     <c:forEach var="o" items="${order}">
+                                         <tr>
+                                             <td><a href="order-detail?orderId=${o.id}">#${o.id}</a></td>
+                                             <td>${o.createAt}</td>
+                                             <td>${o.orderStatus}</td>
+                                             <td>${o.paymentStatus}</td>
+                                             <td> <fmt:formatNumber value="${o.total}" pattern="#,###"/>  VND</td>
+                                         </tr>
+                                     </c:forEach>
+
+                                     </tbody>
+                                 </table>
+                             </c:if>
+
+                             <c:if test="${empty order}">
+                                 <p>Chưa có đơn hàng.</p>
+                             </c:if>
+
+                         </div>
+
+                         <!-- Phần Địa chỉ -->
+                         <div class="addresses">
+                             <h4>Địa chỉ</h4>
+                             <div class="wrap_info">
+                                 <c:if test="${not empty address}">
+                                     <c:forEach items="${address}" var="a">
+                                         <p> ${a.detail}, ${a.commune} ${a.district} ${a.province} </p>
+                                     </c:forEach>
+                                 </c:if>
+
+                              </div>
+
+
+                         </div>
                      </div>
-                </div>
-            </div>
+                 </div>
+             </c:if>
+
+             <c:if test="${empty customer}">
+                 <h1>Đã có lỗi xảy ra</h1>
+             </c:if>
+
          </div>
 
      </div>
