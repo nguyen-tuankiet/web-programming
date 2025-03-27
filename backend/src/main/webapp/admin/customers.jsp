@@ -72,7 +72,7 @@
                             <tr class="order-row">
                                 <td><input type="checkbox"></td>
                                 <td>
-                                    <a href="customerDetail.jsp" class="name">
+                                    <a href="customer?id=${c.id}" class="name">
                                         <c:if test="${not empty c.avatarUrl}">
                                             <img src="${c.avatarUrl}" alt="Avatar"
                                                  style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
