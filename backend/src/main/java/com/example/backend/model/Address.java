@@ -118,4 +118,20 @@ public class Address {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", province='" + province + '\'' +
+                ", district='" + district + '\'' +
+                ", commune='" + commune + '\'' +
+                ", detail='" + detail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", isDefault=" + isDefault +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }
