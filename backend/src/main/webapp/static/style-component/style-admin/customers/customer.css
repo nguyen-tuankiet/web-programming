@@ -168,6 +168,13 @@ button {
     cursor: pointer;
 }
 
+
+table .name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .size-6 {
     width: 20px;
     height: 20px;
