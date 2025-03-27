@@ -315,8 +315,8 @@
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-user"></i>
 <%--                    <a href="members">Thành Viên</a>--%>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/Member'">
-                        Khách hàng
+                    <button onclick="location.href='${pageContext.request.contextPath}/admin/member'">
+                        Thành viên
                     </button>
                 </div>
             </li>
