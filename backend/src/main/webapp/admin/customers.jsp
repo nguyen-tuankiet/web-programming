@@ -1,13 +1,7 @@
-<%@ page import="com.example.backend.model.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %><%--
-  Created by IntelliJ IDEA.
-  User: win10pro
-  Date: 12/27/2024
-  Time: 12:20 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,32 +64,34 @@
                         <th>Khách Hàng</th>
                         <th>Số Điện Thoại</th>
                         <th>Email</th>
-                        <th>Vị trí</th>
-                    </tr>
+                     </tr>
                     </thead>
                     <tbody>
-                    <%
-                        List<User> users = (List<User>) request.getAttribute("users");
-                        Map<Integer, String> userAddresses = (Map<Integer, String>) request.getAttribute("userAddresses");
-                        for (User user : users) {
-                    %>
-                    <tr class="order-row">
-                        <td><input type="checkbox"></td>
-                        <td>
-                            <img src="<%= user.getAvatarUrl() %>" alt="Avatar"
-                                 style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
-                            <%= user.getFullName() %>
-                        </td>
-                        <td><%= user.getPhone() %>
-                        </td>
-                        <td><%= user.getEmail() %>
-                        </td>
-                        <td><%= userAddresses.getOrDefault(user.getId(), "N/A") %>
-                        </td>
-                    </tr>
-                    <%
-                        }
-                    %>
+                    <c:if test="${not empty customers}">
+                        <c:forEach items="${customers}" var="c">
+                            <tr class="order-row">
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="name">
+                                        <c:if test="${not empty c.avatarUrl}">
+                                            <img src="${c.avatarUrl}" alt="Avatar"
+                                                 style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
+                                        </c:if>
+
+                                        <c:if test="${empty c.avatarUrl}">
+                                            <img src="${pageContext.request.contextPath}/static/image/default-avatar.png" alt="Avatar"
+                                                 style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
+                                        </c:if>
+
+                                            ${c.fullName}
+                                    </div>
+                                </td>
+                                <td> ${c.phone}</td>
+                                <td>${c.email} </td>
+                             </tr>
+                        </c:forEach>
+
+                    </c:if>
                     </tbody>
 
 
@@ -115,12 +111,9 @@
         </div>
 
 
-
     </div>
 
 </div>
-
-
 
 
 <script src="${pageContext.request.contextPath}/static/style-component/style-admin/customers/customer.js"></script>
