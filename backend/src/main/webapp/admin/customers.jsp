@@ -72,7 +72,7 @@
                             <tr class="order-row">
                                 <td><input type="checkbox"></td>
                                 <td>
-                                    <div class="name">
+                                    <a href="customerDetail.jsp" class="name">
                                         <c:if test="${not empty c.avatarUrl}">
                                             <img src="${c.avatarUrl}" alt="Avatar"
                                                  style="width:50px; height:50px; border-radius:50%; margin-right:10px;">
@@ -84,7 +84,7 @@
                                         </c:if>
 
                                             ${c.fullName}
-                                    </div>
+                                    </a>
                                 </td>
                                 <td> ${c.phone}</td>
                                 <td>${c.email} </td>
