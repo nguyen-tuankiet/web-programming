@@ -184,6 +184,7 @@ left {
     font-weight: bold;
     display: inline-block;
     text-align: center;
+    cursor: pointer;
 }
 
 .status.active {
