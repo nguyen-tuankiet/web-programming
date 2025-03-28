@@ -206,6 +206,23 @@ document.querySelectorAll(".status-toggle").forEach(statusEl => {
 
             if (iconEl) iconEl.className = "fa-solid fa-trash";
         }
+        const categoryId = statusEl.getAttribute("data-id");
+
+        fetch(`/admin/api/categories/${categoryId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ isActive: !isActive })
+        }).then(res => res.json())
+            .then(data => {
+                if (!data || data.status !== "success") {
+                    alert("Cập nhật trạng thái thất bại!");
+                }
+            })
+            .catch(err => {
+                console.error("Lỗi khi cập nhật trạng thái:", err);
+            });
     });
 });
 document.querySelectorAll(".delete-icon").forEach(icon => {
