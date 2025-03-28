@@ -7,11 +7,13 @@ public class CategoryWithStock {
     private Integer id;
     private String name;
     private Integer totalStock;
+    Boolean isActive;
 
-    public CategoryWithStock(@ColumnName("id") @Nullable Integer id, @ColumnName("name") @Nullable String name, @ColumnName("totalStock") @Nullable Integer totalStock) {
+    public CategoryWithStock(@ColumnName("id") @Nullable Integer id, @ColumnName("name") @Nullable String name, @ColumnName("totalStock") @Nullable Integer totalStock,@ColumnName("isActive") @Nullable Boolean isActive) {
         this.id = id;
         this.name = name;
         this.totalStock = totalStock;
+        this.isActive = isActive;
     }
 
     public Integer getId() {
@@ -36,6 +38,14 @@ public class CategoryWithStock {
 
     public void setTotalStock(Integer totalStock) {
         this.totalStock = totalStock;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     @Override
