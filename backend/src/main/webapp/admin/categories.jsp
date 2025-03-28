@@ -50,6 +50,15 @@
             <table class="product-table">
                 <thead>
                 <tr>
+                    <th data-sort="string" onclick="sortTable(0)">
+                        <div class="header-content">
+                            <span class="header-text">ID</span>
+                            <span class="sort-arrows">
+                        <span class="sort-arrow asc">▲</span>
+                        <span class="sort-arrow desc">▼</span>
+                    </span>
+                        </div>
+                    </th>
                     <th data-sort="string" onclick="sortTable(1)">
                         <div class="header-content">
                             <span class="header-text">Tên Danh Mục</span>
@@ -92,6 +101,7 @@
                 <c:if test="${not empty categoriesWithStock}">
                     <c:forEach items="${categoriesWithStock}" var="category">
                         <tr>
+                            <td>${category.id}</td>
                             <td>
                                 <div class="product">
                                     <p>${category.name}</p>
@@ -99,9 +109,9 @@
                             </td>
                             <td>${category.totalStock}</td>
                             <td>
-                                <span class="status ${category.totalStock == 0 ? 'deactive' : 'active'} status-toggle" data-id="${category.id}">
-                                        ${category.totalStock == 0 ? 'Inactive' : 'Active'}
-                                </span>
+                                <div class="status ${category.isActive ? 'active' : 'deactive'} status-toggle" data-id="${category.id}">
+                                        ${category.isActive ? 'Active' : 'Inactive'}
+                                </div>
                             </td>
 
                             <td>
