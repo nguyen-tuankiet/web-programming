@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+
+
         // Cập nhật bảng
         tableBody.innerHTML = "";
         sortedRows.forEach(row => tableBody.appendChild(row));
@@ -173,5 +175,43 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Có lỗi xảy ra khi thêm danh mục!");
             console.error(error);
         }
+    });
+});
+
+
+//Sự kiện nút delete chỉnh trạng thái
+document.querySelectorAll(".status-toggle").forEach(statusEl => {
+    statusEl.addEventListener("click", () => {
+        const row = statusEl.closest("tr");
+        const iconEl = row.querySelector(".delete-icon i");
+
+        const isActive = statusEl.classList.contains("active");
+
+        if (isActive) {
+            // Đổi sang Inactive
+            statusEl.classList.remove("active");
+            statusEl.classList.add("deactive");
+            statusEl.textContent = "Inactive";
+            statusEl.style.color = "#e74c3c";
+            statusEl.style.backgroundColor = "#fde2e2";
+
+            if (iconEl) iconEl.className = "fa-solid fa-eye-slash";
+        } else {
+            // Đổi về Active
+            statusEl.classList.remove("deactive");
+            statusEl.classList.add("active");
+            statusEl.textContent = "Active";
+            statusEl.style.color = "#2ecc71";
+            statusEl.style.backgroundColor = "#e9f7ef";
+
+            if (iconEl) iconEl.className = "fa-solid fa-trash";
+        }
+    });
+});
+document.querySelectorAll(".delete-icon").forEach(icon => {
+    icon.addEventListener("click", () => {
+        const row = icon.closest("tr");
+        const statusEl = row.querySelector(".status-toggle");
+        statusEl.click(); // Giả lập click vào trạng thái
     });
 });
