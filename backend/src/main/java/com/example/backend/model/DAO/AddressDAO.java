@@ -23,8 +23,22 @@ public interface AddressDAO {
             " WHERE id = :addressId;")
     Address getAddressById(@Bind("addressId") Integer addressId);
 
-    @SqlUpdate("INSERT INTO address (userId, province, district, commune, detail, phone, name, isDefault, type) " +
-            "VALUES (:userId, :province, :district, :commune, :detail, :phone, :name, :isDefault, :type)")
+
+
+    @SqlQuery(value = "SELECT *" +
+            " FROM address" +
+            " WHERE userId = :userId and isDefault =1;")
+    Address getAddressDefaultByUserId(@Bind("userId") Integer userId);
+
+
+    @SqlUpdate("UPDATE address " +
+            "SET isDefault = :defaultStatus " +
+            "WHERE id = :id; ")
+    Boolean updateDefaultById(@Bind("id") Integer id, @Bind("defaultStatus") boolean defaultStatus);
+
+
+    @SqlUpdate("INSERT INTO address (userId, province, district, commune, detail, phone, name, isDefault, type, status) " +
+            "VALUES (:userId, :province, :district, :commune, :detail, :phone, :name, :isDefault, :type, :status)")
     @GetGeneratedKeys("id")
     int addAddress(@Bind("userId") Integer userId,
                    @Bind("province") String province,
@@ -34,7 +48,9 @@ public interface AddressDAO {
                    @Bind("phone") String phone,
                    @Bind("name") String name,
                    @Bind("isDefault") Boolean isDefault,
-                   @Bind("type") String type);
+                   @Bind("type") String type,
+                    @Bind("status") String status);
+
 
 
 

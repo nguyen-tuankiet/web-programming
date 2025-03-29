@@ -23,6 +23,10 @@ public class AddressSevice {
         return addressDAO.getAddressById(id);
     }
 
+    public Address findDefautlByUserId(Integer id) {
+        return addressDAO.getAddressDefaultByUserId(id);
+    }
+
     public int addAddress(Address address) {
         // Đảm bảo isDefault mặc định là false nếu không được chỉ định
         if (address.getIsDefault() == null) {
@@ -37,8 +41,13 @@ public class AddressSevice {
                 address.getPhone(),
                 address.getName(),
                 address.getIsDefault(),
-                address.getType()
+                address.getType(),
+                address.getStatus()
         );
+    }
+
+    public Boolean updateDefautlById(Integer id, boolean defaultStatus) {
+        return addressDAO.updateDefaultById(id, defaultStatus);
     }
 
 
