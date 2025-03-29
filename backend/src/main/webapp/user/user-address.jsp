@@ -8,7 +8,7 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style-user_profile/Address.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-user_profile/Address.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -31,38 +31,50 @@
                 <i class="fa-solid fa-plus"></i>
                 <a href="#">Thêm </a>
             </div>
+            <div class="overlay"></div>
             <div id="addAddressFormContainer" style="display: none;">
+                <span class="close-icon">&times;</span>
+
                 <h2>Thêm Địa Chỉ</h2>
-                <form method="POST" action="AddAddressController">
+                <form method="POST" action="add-address">
+
                     <label for="province">Tỉnh/Thành phố:</label>
-                    <input type="text" id="province" name="province" placeholder="Nhập tỉnh/thành phố" required/>
+                    <select id="province"></select>
 
                     <label for="district">Quận/Huyện:</label>
-                    <input type="text" id="district" name="district" placeholder="Nhập quận/huyện" required/>
+                    <select id="district"></select>
 
-                    <label for="commune">Phường/Xã:</label>
-                    <input type="text" id="commune" name="commune" placeholder="Nhập phường/xã" required/>
+                    <label for="commune">Xã/Phường:</label>
+                    <select id="commune"></select>
 
-                    <label for="detail">Chi tiết:</label>
-                    <input type="text" id="detail" name="detail" placeholder="Nhập địa chỉ chi tiết" required/>
+                    <label for="detail">Địa chỉ chi tiết:</label>
+                    <input type="text" id="detail" placeholder="Nhập địa chỉ chi tiết">
+
+
+                    <label for="name">Tên người nhận:</label>
+                    <input type="text" id="name" placeholder="Nhập tên người nhận">
 
                     <label for="phone">Số điện thoại:</label>
-                    <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" required/>
+                    <input type="text" id="phone" placeholder="Nhập số điện thoại" maxlength="10">
 
-                    <label for="name">Họ tên:</label>
-                    <input type="text" id="name" name="name" placeholder="Nhập họ tên" required/>
 
-                    <label>Loại địa chỉ:</label>
-                    <input type="radio" id="home" name="type" value="Home" checked/>
-                    <label for="home">Nhà</label>
-                    <input type="radio" id="office" name="type" value="Office"/>
-                    <label for="office">Văn phòng</label>
-                    <!-- Hidden field to pass userId -->
-                    <input type="hidden" name="userId" value="${userId}"/>
-                    <label>
-                        <button type="submit">Lưu</button>
-                        <button type="reset">Hủy</button>
-                    </label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="addressType" value="Home" checked> Nhà riêng
+                        </label>
+                        <label>
+                            <input type="radio" name="addressType" value="Office"> Văn phòng
+                        </label>
+                    </div>
+
+
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="default">
+                        <label for="default" class="slider"></label>
+                        <span class="toggle-text">Mặc định</span>
+                    </div>
+
+                    <button class="submit-btn" onclick="submitForm()">Xác nhận</button>
 
                 </form>
 
@@ -123,5 +135,10 @@
 </div>
 
 
+
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/style-component/style-user_profile/Address.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
 </html>
