@@ -15,12 +15,11 @@ public class CategoryService {
     }
 
     public void updateCategoryStatus(Integer id, Boolean isActive) {
-        categoryDAO.updateCategoryStatus(id, isActive);
+
+//        System.out.println("Updating DB: id = " + id + ", isActive = " + isActive);
+        categoryDAO.updateCategoryStatus(id, isActive ? 1 : 0);
     }
 
-//    public void addCategory(Category category) {
-//        categoryDAO.addCategory(category.getName());
-//    }
 
     public List<Category> getAllCategories() {
         return categoryDAO.getAllCategories();

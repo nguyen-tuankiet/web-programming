@@ -29,13 +29,6 @@ public class CategoryController extends HttpServlet {
 
         try {
             if (pathInfo == null || pathInfo.equals("/")) {
-                // Lấy danh sách tất cả danh mục
-//                List<Category> categories = categoryService.getAllCategories();
-//                ResponseWrapper<List<Category>> responseWrapper = new ResponseWrapper<>(
-//                        200, "success", "Fetched categories successfully", categories);
-//                writeResponse(response, responseWrapper);
-                // Lấy danh sách tất cả danh mục kèm totalStock và isActive
-
                 List<CategoryWithStock> categories = categoryService.getCategoriesWithStock();
                 ResponseWrapper<List<CategoryWithStock>> responseWrapper = new ResponseWrapper<>(
                         200, "success", "Fetched categories with stock successfully", categories);
@@ -116,6 +109,10 @@ public class CategoryController extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//        System.out.println("Received PUT request in CategoryController");
+
+
         try {
             String pathInfo = request.getPathInfo();
             if (pathInfo == null || pathInfo.equals("/")) {

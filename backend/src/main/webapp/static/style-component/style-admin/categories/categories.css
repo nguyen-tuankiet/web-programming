@@ -187,15 +187,26 @@ left {
     cursor: pointer;
 }
 
+/*.status.active {*/
+/*    color: #2ecc71;*/
+/*    background-color: #e9f7ef;*/
+/*}*/
+
+/*.status.deactive {*/
+/*    color: #e74c3c;*/
+/*    background-color: #fde2e2;*/
+/*}*/
+
 .status.active {
-    color: #2ecc71;
-    background-color: #e9f7ef;
+    color: #2ecc71 !important;
+    background-color: #e9f7ef !important;
 }
 
 .status.deactive {
-    color: #e74c3c;
-    background-color: #fde2e2;
+    color: #e74c3c !important;
+    background-color: #fde2e2 !important;
 }
+
 
 .action-icons {
     display: flex;
