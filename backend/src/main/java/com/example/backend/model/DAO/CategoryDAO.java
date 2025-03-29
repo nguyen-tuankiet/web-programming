@@ -31,18 +31,31 @@ public interface CategoryDAO {
 
     @SqlUpdate("DELETE FROM categories WHERE id = :id")
     void deleteCategory(@Bind("id") Integer id);
+//
+//    @SqlUpdate("UPDATE categories SET isActive = :isActive WHERE id = :id")
+//    void updateCategoryStatus(@Bind("id") Integer id, @Bind("isActive") Boolean isActive);
 
     @SqlUpdate("UPDATE categories SET isActive = :isActive WHERE id = :id")
-    void updateCategoryStatus(@Bind("id") Integer id, @Bind("isActive") Boolean isActive);
+    void updateCategoryStatus(@Bind("id") Integer id, @Bind("isActive") int isActive);
 
-    @SqlQuery("""
-    SELECT c.id, c.name, c.isActive, COUNT(p.id) AS totalStock
+
+//    @SqlQuery("""
+//    SELECT c.id, c.name, c.isActive, COUNT(p.id) AS totalStock
+//    FROM categories c
+//    LEFT JOIN products p ON p.categoryId = c.id
+//    GROUP BY c.id, c.name, c.isActive
+//""")
+@SqlQuery("""
+    SELECT c.id,
+           c.name,
+           CASE WHEN c.isActive = 1 THEN TRUE ELSE FALSE END AS isActive,
+           COUNT(p.id) AS totalStock
     FROM categories c
     LEFT JOIN products p ON p.categoryId = c.id
     GROUP BY c.id, c.name, c.isActive
 """)
-    @RegisterConstructorMapper(CategoryWithStock.class)
-    List<CategoryWithStock> getCategoriesWithStock();
+@RegisterConstructorMapper(CategoryWithStock.class)
+List<CategoryWithStock> getCategoriesWithStock();
 
 
 }
