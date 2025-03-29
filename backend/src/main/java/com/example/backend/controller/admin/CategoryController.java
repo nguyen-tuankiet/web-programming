@@ -2,6 +2,7 @@ package com.example.backend.controller.admin;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Category;
+import com.example.backend.model.CategoryWithStock;
 import com.example.backend.service.CategoryService;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -28,10 +29,9 @@ public class CategoryController extends HttpServlet {
 
         try {
             if (pathInfo == null || pathInfo.equals("/")) {
-                // Lấy danh sách tất cả danh mục
-                List<Category> categories = categoryService.getAllCategories();
-                ResponseWrapper<List<Category>> responseWrapper = new ResponseWrapper<>(
-                        200, "success", "Fetched categories successfully", categories);
+                List<CategoryWithStock> categories = categoryService.getCategoriesWithStock();
+                ResponseWrapper<List<CategoryWithStock>> responseWrapper = new ResponseWrapper<>(
+                        200, "success", "Fetched categories with stock successfully", categories);
                 writeResponse(response, responseWrapper);
             } else {
                 // Lấy danh mục theo ID
@@ -81,13 +81,15 @@ public class CategoryController extends HttpServlet {
             // Lấy giá trị từ JSON
             String name = jsonData.get("name");
 
+
+
             // Kiểm tra giá trị của name
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Name is required");
             }
 
             // Thêm category mới
-            Category newCategory = categoryService.createCategory(name);
+            Category newCategory = categoryService.createCategory(name, true);
 
             // Phản hồi thành công
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -107,6 +109,10 @@ public class CategoryController extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+//        System.out.println("Received PUT request in CategoryController");
+
+
         try {
             String pathInfo = request.getPathInfo();
             if (pathInfo == null || pathInfo.equals("/")) {
@@ -135,6 +141,21 @@ public class CategoryController extends HttpServlet {
             Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
 
             String name = jsonData.get("name");
+
+            // Cập nhật trạng thái isActive nếu được truyền
+            if (jsonData.containsKey("isActive")) {
+                boolean isActive = Boolean.parseBoolean(jsonData.get("isActive"));
+                categoryService.updateCategoryStatus(id, isActive);
+
+                // Trả về category sau cập nhật
+                Category updatedCategory = categoryService.getCategoryById(id);
+                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                        200, "success", "Category status updated successfully", updatedCategory);
+                writeResponse(response, responseWrapper);
+                return; // Không thực hiện phần cập nhật tên nữa nếu chỉ cập nhật trạng thái
+            }
+
+
 
             if (name == null || name.isEmpty()) {
                 throw new IllegalArgumentException("Name is required");

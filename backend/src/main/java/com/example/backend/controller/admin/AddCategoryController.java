@@ -49,7 +49,7 @@ public class AddCategoryController extends HttpServlet {
             }
 
             // Thêm danh mục
-            categoryManager.addCategory(new Category(null, categoryName));
+            categoryManager.addCategory(new Category(null, categoryName,true));
 
             // Phản hồi thành công
             response.setStatus(HttpServletResponse.SC_OK);
