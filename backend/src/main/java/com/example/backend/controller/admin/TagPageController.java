@@ -2,6 +2,7 @@ package com.example.backend.controller.admin;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Tag;
+import com.example.backend.model.TagWithCount;
 import com.example.backend.service.TagService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +18,8 @@ public class TagPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Tag> tags = tagService.getAllTags();
+//        List<Tag> tags = tagService.getAllTags();
+        List<TagWithCount> tags = tagService.getTagsWithProductCount();
         request.setAttribute("tags", tags);
         request.getRequestDispatcher("/admin/tags.jsp").forward(request, response);
     }

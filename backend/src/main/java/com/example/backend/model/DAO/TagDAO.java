@@ -1,6 +1,7 @@
 package com.example.backend.model.DAO;
 
 import com.example.backend.model.Tag;
+import com.example.backend.model.TagWithCount;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
@@ -27,4 +28,15 @@ public interface TagDAO {
 
     @SqlUpdate("DELETE FROM tags WHERE id = :id")
     void deleteTag(@Bind("id") int id);
+    @SqlQuery("""
+        SELECT 
+            t.id,
+            t.name,
+            COUNT(pt.productId) AS totalProducts
+        FROM tags t
+        LEFT JOIN product_tag pt ON t.id = pt.tagId
+        GROUP BY t.id, t.name
+    """)
+    @RegisterConstructorMapper(TagWithCount.class)
+    List<TagWithCount> getTagsWithProductCount();
 }

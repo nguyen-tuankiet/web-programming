@@ -72,6 +72,16 @@
                             </span>
                         </div>
                     </th>
+                    <th onclick="sortTable(2)">
+                        <div class="header-content">
+                            <span class="header-text">Tổng Sản Phẩm</span>
+                            <span class="sort-arrows">
+                                <span class="sort-arrow asc">▲</span>
+                                <span class="sort-arrow desc">▼</span>
+                            </span>
+                        </div>
+                    </th>
+<%--                    <th>Tổng Sản Phẩm</th>--%>
                     <th>Thao Tác</th>
                 </tr>
                 </thead>
@@ -90,6 +100,7 @@
                                 <p>${tag.name}</p>
                             </div>
                         </td>
+                        <td>${tag.totalProducts}</td>
                         <td>
                             <div class="action-icons">
                                 <span class="icon delete-icon" data-id="${tag.id}">
