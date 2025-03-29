@@ -10,6 +10,9 @@
           href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
     <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.js"
             defer></script>
+    <script>
+        const contextPath = "${pageContext.request.contextPath}";
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -101,27 +104,30 @@
                 <c:if test="${not empty categoriesWithStock}">
                     <c:forEach items="${categoriesWithStock}" var="category">
                         <tr>
-                            <td>${category.id}</td>
-                            <td>
+<%--                            <td>${category.id}</td>--%>
+<%--    <td>${category.id} -- isActive: ${category.isActive}</td>--%>
+    <td>${category.id} -- isActive: ${category.isActive == true}</td>
+
+
+    <td>
                                 <div class="product">
                                     <p>${category.name}</p>
                                 </div>
                             </td>
                             <td>${category.totalStock}</td>
                             <td>
-                                <div class="status ${category.isActive ? 'active' : 'deactive'} status-toggle" data-id="${category.id}">
-                                        ${category.isActive ? 'Active' : 'Inactive'}
-                                </div>
+    <div class="status ${category.isActive ? 'active' : 'deactive'} status-toggle" data-id="${category.id}">
+            ${category.isActive ? 'Hoạt động' : 'Không hoạt động'}
+    </div>
                             </td>
-
                             <td>
                                 <div class="action-icons">
                                     <span class="icon delete-icon">
-                                        <i class="fa-solid fa-trash" style="padding: 5px;"></i>
+                                        <i class="fa-solid ${category.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
                                     </span>
-
                                 </div>
                             </td>
+
                         </tr>
                     </c:forEach>
                 </c:if>

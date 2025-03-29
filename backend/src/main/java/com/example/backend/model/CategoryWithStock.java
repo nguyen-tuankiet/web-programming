@@ -7,7 +7,7 @@ public class CategoryWithStock {
     private Integer id;
     private String name;
     private Integer totalStock;
-    Boolean isActive;
+    private Boolean isActive;
 
     public CategoryWithStock(@ColumnName("id") @Nullable Integer id, @ColumnName("name") @Nullable String name, @ColumnName("totalStock") @Nullable Integer totalStock,@ColumnName("isActive") @Nullable Boolean isActive) {
         this.id = id;
@@ -54,6 +54,7 @@ public class CategoryWithStock {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", totalStock=" + totalStock +
+                ", isActive=" + isActive +
                 '}';
     }
 }
