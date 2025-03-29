@@ -3,6 +3,8 @@ package com.example.backend.service;
 import com.example.backend.model.DAO.TagDAO;
 import com.example.backend.model.Tag;
 import org.jdbi.v3.core.Jdbi;
+import com.example.backend.model.TagWithCount;
+
 
 import java.util.List;
 
@@ -33,4 +35,8 @@ public class TagService {
     public void deleteTag(int id) {
         tagDAO.deleteTag(id);
     }
+    public List<TagWithCount> getTagsWithProductCount() {
+        return tagDAO.getTagsWithProductCount();
+    }
+
 }
