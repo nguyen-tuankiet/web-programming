@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Category;
+import com.example.backend.model.CategoryWithStock;
 import com.example.backend.model.DAO.CategoryDAO;
 import org.jdbi.v3.core.Jdbi;
 
@@ -13,18 +14,21 @@ public class CategoryService {
         this.categoryDAO = jdbi.onDemand(CategoryDAO.class);
     }
 
+    public void updateCategoryStatus(Integer id, Boolean isActive) {
 
-//    public void addCategory(Category category) {
-//        categoryDAO.addCategory(category.getName());
-//    }
+//        System.out.println("Updating DB: id = " + id + ", isActive = " + isActive);
+        categoryDAO.updateCategoryStatus(id, isActive ? 1 : 0);
+    }
+
 
     public List<Category> getAllCategories() {
         return categoryDAO.getAllCategories();
     }
 
-//    public Category getCategoryById(Integer id) {
-//        return categoryDAO.getCategoryById(id);
-//    }
+
+    public List<CategoryWithStock> getCategoriesWithStock() {
+        return categoryDAO.getCategoriesWithStock();
+    }
 
     public Category getCategoryById(Integer id) {
         Category category = categoryDAO.getCategoryById(id);
@@ -34,8 +38,8 @@ public class CategoryService {
         return category;
     }
 
-    public Category createCategory(String name) {
-        int id = categoryDAO.createCategory(name);
+    public Category createCategory(String name, Boolean isActive ) {
+        int id = categoryDAO.createCategory(name, isActive);
         return categoryDAO.getCategoryById(id);
     }
 
