@@ -32,22 +32,24 @@ public class CustomerListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> users = userService.getAllUsers();
+        List<User> customers = userService.getAllUsers();
         Map<Integer, String> userAddresses = new HashMap<>();
 
-        for (User user : users) {
-            Address address = addressDAO.getAddressByUserId(user.getId()).stream().findFirst().orElse(null);
-            userAddresses.put(user.getId(), address != null ? address.getProvince() : "N/A");
+        for (User c : customers) {
+            Address address = addressDAO.getAddressByUserId(c.getId()).stream().findFirst().orElse(null);
+            userAddresses.put(c.getId(), address != null ? address.getProvince() : "N/A");
 
-            if (user.getAvatarId() != null) {
-                String avatarUrl = userService.getAvatarUrlById(user.getAvatarId());
-                user.setAvatarUrl(avatarUrl); // Set avatar URL to User object
-            } else {
-                user.setAvatarUrl("default-avatar-url.jpg"); // Default avatar URL
+            if (c.getAvatarId() != null) {
+                String avatarUrl = userService.getAvatarUrlById(c.getAvatarId());
+                c.setAvatarUrl(avatarUrl); // Set avatar URL to User object
             }
+//            else {
+//                user.setAvatarUrl( request.getContextPath() + "/assets/images/default-avatar.png");
+//                // Default avatar URL
+//            }
         }
 
-        request.setAttribute("users", users);
+        request.setAttribute("customers", customers);
         request.setAttribute("userAddresses", userAddresses);
 
 
