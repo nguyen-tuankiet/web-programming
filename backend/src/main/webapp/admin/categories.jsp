@@ -6,15 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Category Management</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories.js" defer></script>
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.js"
+            defer></script>
+    <script>
+        const contextPath = "${pageContext.request.contextPath}";
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
 
 <div class="container">
-    <div class ="left">
+    <div class="left">
         <div class="side_bar">
             <jsp:include page="SideBar.jsp"/>
         </div>
@@ -32,36 +37,31 @@
 
                 <div id="add-category-box" class="hidden">
                     <h3>Thêm Danh Mục</h3>
-                    <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên danh mục" class="input-field" required />
+                    <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên danh mục"
+                           class="input-field" required/>
                     <div id="error-message" class="error hidden">Tên danh mục không được để trống</div>
                     <div class="action-buttons">
                         <button class="add-btn add-cate-btn" id="add-category-btn">Thêm</button>
                         <button class="discard-btn" id="discard-category-btn">Hủy</button>
                     </div>
                 </div>
+
                 <button class="add-product-btn">+ Thêm</button>
             </div>
 
-            <div class="row">
-                <div class="entries-dropdown">
-                    <label for="entries">Hiển thị</label>
-                    <select id="entries" name="entries">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    mục
-                </div>
-
-            </div>
 
             <table class="product-table">
                 <thead>
                 <tr>
-                    <th><label>
-                        <input type="checkbox">
-                    </label></th>
+                    <th data-sort="string" onclick="sortTable(0)">
+                        <div class="header-content">
+                            <span class="header-text">ID</span>
+                            <span class="sort-arrows">
+                        <span class="sort-arrow asc">▲</span>
+                        <span class="sort-arrow desc">▼</span>
+                    </span>
+                        </div>
+                    </th>
                     <th data-sort="string" onclick="sortTable(1)">
                         <div class="header-content">
                             <span class="header-text">Tên Danh Mục</span>
@@ -80,6 +80,16 @@
                     </span>
                         </div>
                     </th>
+                    <th data-sort="string" onclick="sortTable(3)">
+                        <div class="header-content">
+                            <span class="header-text">Trạng Thái</span>
+                            <span class="sort-arrows">
+                                <span class="sort-arrow asc">▲</span>
+                                <span class="sort-arrow desc">▼</span>
+                            </span>
+                        </div>
+                    </th>
+
                     <th>Thao Tác</th>
                 </tr>
                 </thead>
@@ -94,33 +104,30 @@
                 <c:if test="${not empty categoriesWithStock}">
                     <c:forEach items="${categoriesWithStock}" var="category">
                         <tr>
-                            <td>
-                                <label><input type="checkbox" class="checkbox"></label>
-                            </td>
-                            <td>
+<%--                            <td>${category.id}</td>--%>
+<%--    <td>${category.id} -- isActive: ${category.isActive}</td>--%>
+    <td>${category.id} -- isActive: ${category.isActive == true}</td>
+
+
+    <td>
                                 <div class="product">
                                     <p>${category.name}</p>
                                 </div>
                             </td>
                             <td>${category.totalStock}</td>
                             <td>
+    <div class="status ${category.isActive ? 'active' : 'deactive'} status-toggle" data-id="${category.id}">
+            ${category.isActive ? 'Hoạt động' : 'Không hoạt động'}
+    </div>
+                            </td>
+                            <td>
                                 <div class="action-icons">
-                                    <div class="dropdown">
-                                        <button onclick="toggleDropdown(this)">
-                                            <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;"></i>
-                                            <i class="fa-solid fa-chevron-down" style="padding: 5px;"></i>
-                                        </button>
-                                        <div class="dropdown-content">
-
-                                        <span class="icon edit-icon">
-                                            <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
-                                            Sửa
-                                        </span>
-
-                                        </div>
-                                    </div>
+                                    <span class="icon delete-icon">
+                                        <i class="fa-solid ${category.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
+                                    </span>
                                 </div>
                             </td>
+
                         </tr>
                     </c:forEach>
                 </c:if>
@@ -136,15 +143,10 @@
         </div>
 
 
-
     </div>
 
 
 </div>
-
-
-
-
 
 
 </body>

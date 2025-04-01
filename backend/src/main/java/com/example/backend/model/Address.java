@@ -14,7 +14,7 @@ public class Address {
     String name;
     Boolean isDefault;
     String type;
-
+    String status;
 
     public Address(@ColumnName("id") Integer id,
                    @ColumnName("userId") @Nullable Integer userId,
@@ -25,7 +25,12 @@ public class Address {
                    @ColumnName("phone") @Nullable String phone,
                    @ColumnName("name") @Nullable String name,
                    @ColumnName("isDefault")  @Nullable Boolean isDefault,
-                   @ColumnName("type")  @Nullable String type) {
+                   @ColumnName("type")  @Nullable String type,
+                   @ColumnName("status")  @Nullable String status
+
+    )
+
+    {
         this.id = id;
         this.userId = userId;
         this.province = province;
@@ -36,6 +41,10 @@ public class Address {
         this.name = name;
         this.isDefault = isDefault;
         this.type = type;
+        if (status==null) {
+            this.status = "ACTIVE";
+        }
+
     }
 
 
@@ -117,5 +126,38 @@ public class Address {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Boolean getDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(Boolean aDefault) {
+        isDefault = aDefault;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", province='" + province + '\'' +
+                ", district='" + district + '\'' +
+                ", commune='" + commune + '\'' +
+                ", detail='" + detail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", isDefault=" + isDefault +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

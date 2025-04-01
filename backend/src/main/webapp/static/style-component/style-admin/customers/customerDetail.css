@@ -1,4 +1,13 @@
 /* General Styles */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,52 +16,54 @@ body {
     color: #333;
 }
 
+
 .container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    /*background: #fff;*/
-    border-radius: 8px;
-    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+    height: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
-/* Header */
-.header {
+.left {
+    width: 270px;
+}
+
+.center{
+    width: 100%;
+}
+
+.side_bar {
+    width: 270px;
+}
+
+
+.content{
+    margin-top: 60px;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+
+
+.header-title {
+    font-size: 24px;
     margin-bottom: 20px;
 }
 
-.header h1 {
-    font-size: 24px;
-    margin: 0;
-}
-
-.actions .btn {
-    padding: 8px 16px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-}
-
-.btn.edit {
-    background: white;
-    border: 1px solid #007BFF;
-    color: #007BFF;
-}
-
-.btn.delete {
-    background: #bbbbbb;
-    color: black;
-}
-
-/* Main Content */
-.content {
+.wrap_content{
     display: flex;
-    gap: 20px;
+    flex-direction: row;
+    margin: 0 90px;
+    gap: 90px;
 }
+
+
 
 /* Left Panel */
 .left-panel {
@@ -61,8 +72,9 @@ body {
 
 .profile-card {
     background: #ffffff;
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     border-radius: 2px;
+    height: 100%;
     box-shadow: 0 1px 3px #00000026;
 }
 .info{
@@ -93,20 +105,15 @@ body > div > div.content > div.right-panel > div.orders > p{
     margin: 20px 0;
 }
 
+.wrap_info{
+    line-height: 30px;
+}
+
 /* Right Panel */
 .right-panel {
     width: 70%;
 }
 
-.notes textarea {
-    width: 97.5%;
-    height: 100px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 2px #00000026;
-}
 
 /* Orders */
 .orders{
@@ -147,16 +154,9 @@ body > div > div.content > div.right-panel > div.orders > h4{
     background: #FFFFFF;
     border-radius: 2px;
     padding: 10px;
+    margin-top: 20px;
 }
 .addresses h4{
     font-size: 20px;
     padding-left: 10px;
-}
-.addresses button.new-address {
-    background: #246CE8;
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
