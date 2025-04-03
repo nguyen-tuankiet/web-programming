@@ -6,13 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Category Management</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/brand/brands.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/brand/brands.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
-
 
 
 
@@ -31,13 +29,9 @@
 
 
         <div class="content">
-
-
-
-
             <div class="toolbar">
                 <div id="add-category-box" class="hidden">
-                    <h3>Thêm Danh Mục</h3>
+                    <h3>Thêm Nhãn Hàng</h3>
                     <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên nhà sản xuất"
                            class="input-field brand-input-field " required/>
                     <div id="error-message" class="error hidden">Tên nhà sản xuất không được để trống</div>
@@ -50,30 +44,18 @@
                 <button class="add-product-btn">+ Thêm</button>
             </div>
 
-
-
-
-
-            <div class="row">
-                <div class="entries-dropdown">
-                    <label for="entries">Hiển thị</label>
-                    <select id="entries" name="entries">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                    mục
-                </div>
-
-            </div>
-
             <table class="product-table">
                 <thead>
                 <tr>
-                    <th><label>
-                        <input type="checkbox">
-                    </label></th>
+                    <th onclick="sortTable(0)">
+                        <div class="header-content">
+                            <span class="header-text">ID</span>
+                            <span class="sort-arrows">
+                                <span class="sort-arrow asc">▲</span>
+                                <span class="sort-arrow desc">▼</span>
+                            </span>
+                        </div>
+                    </th>
                     <th data-sort="string" onclick="sortTable(1)">
                         <div class="header-content">
                             <span class="header-text">Tên nhà sản xuất</span>
@@ -81,6 +63,15 @@
                         <span class="sort-arrow asc">▲</span>
                         <span class="sort-arrow desc">▼</span>
                     </span>
+                        </div>
+                    </th>
+                    <th data-sort="string" onclick="sortTable(2)">
+                        <div class="header-content">
+                            <span class="header-text">Trạng thái</span>
+                            <span class="sort-arrows">
+                                        <span class="sort-arrow asc">▲</span>
+                                        <span class="sort-arrow desc">▼</span>
+                                    </span>
                         </div>
                     </th>
 
@@ -107,23 +98,20 @@
                                 </div>
                             </td>
                             <td>
+                                <span class="status brand-status-toggle ${b.isActive ? 'active' : 'deactive'}"
+                                      data-id="${b.id}">
+                                        ${b.isActive ? 'Hoạt động' : 'Không hoạt động'}
+                                </span>
+                            </td>
+                            <td>
                                 <div class="action-icons">
-                                    <div class="dropdown">
-                                        <button onclick="toggleDropdown(this)">
-                                            <i class="fa-solid fa-pen-to-square icon-xs" style="padding: 5px;"></i>
-                                            <i class="fa-solid fa-chevron-down" style="padding: 5px;"></i>
-                                        </button>
-                                        <div class="dropdown-content">
-
-                                        <span class="icon edit-icon">
-                                            <i class="fa-solid fa-pencil-alt" style="padding: 5px;"></i>
-                                            Sửa
-                                        </span>
-
-                                        </div>
-                                    </div>
+                                <span class="icon delete-icon" data-id="${tag.id}">
+                                    <i class="fa-solid fa-trash" style="padding: 5px;"></i>
+                                </span>
                                 </div>
                             </td>
+
+
                         </tr>
                     </c:forEach>
                 </c:if>
