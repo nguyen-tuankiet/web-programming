@@ -52,6 +52,23 @@
                 </select>
                 mục
             </div>
+            <div class="export-container">
+                <button class="export-btn">Xuất <i class="fas fa-chevron-down"></i></button>
+                <div class="export-menu">
+                    <div class="options">
+                        <p>OPTIONS</p>
+                        <button class="export-option"><i class="fas fa-copy"></i> Copy</button>
+                        <button class="export-option"><i class="fas fa-print"></i> Print</button>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="download-options">
+                        <p>DOWNLOAD OPTIONS</p>
+                        <button class="export-option"><i class="fas fa-file-excel"></i> Excel</button>
+                        <button class="export-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                        <button class="export-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <table class="product-table">
