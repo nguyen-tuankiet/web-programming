@@ -112,7 +112,7 @@ left {
 }
 
 .product-table th, .product-table td {
-     text-align: left;
+    text-align: left;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
 }
