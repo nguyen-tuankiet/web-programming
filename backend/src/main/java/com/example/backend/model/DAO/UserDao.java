@@ -29,8 +29,8 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user WHERE email = :email")
     User getUserByEmail(@Bind("email") String email);
 
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, salt) " +
-            "VALUES (:fullName, :displayName, :email, :password, :salt)")
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt) " +
+            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt)")
     @GetGeneratedKeys("id")
     String createUser(@Bind("fullName") String fullName,
                       @Bind("displayName") String displayName,
