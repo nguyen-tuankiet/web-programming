@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addCategoryBox.classList.add("hidden");
     });
 
-    // ==== Thêm danh mục ====
+    // ==== Thêm nhà sản xuất ====
     const addCateBtn = document.querySelector(".add-cate-btn");
     const inputField = document.querySelector(".input-field");
 
@@ -132,38 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(error);
         }
     });
-
-    // ==== Cập nhật trạng thái danh mục (toggle) ====
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".category-status-toggle").forEach(statusEl => {
-            statusEl.addEventListener("click", () => {
-                const categoryId = statusEl.dataset.id;
-                const isActive = statusEl.classList.contains("active");
-
-                fetch(`${contextPath}/admin/api/categories/${categoryId}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ isActive: !isActive })
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data && data.status === "success") {
-                            statusEl.classList.toggle("active", !isActive);
-                            statusEl.classList.toggle("deactive", isActive);
-                            statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
-                        } else {
-                            alert("Cập nhật trạng thái thất bại!");
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Lỗi khi cập nhật trạng thái:", err);
-                    });
-            });
-        });
-    });
-
 });
 
 

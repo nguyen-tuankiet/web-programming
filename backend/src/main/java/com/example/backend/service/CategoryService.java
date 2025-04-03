@@ -14,9 +14,7 @@ public class CategoryService {
         this.categoryDAO = jdbi.onDemand(CategoryDAO.class);
     }
 
-    public void updateCategoryStatus(Integer id, Boolean isActive) {
-
-//        System.out.println("Updating DB: id = " + id + ", isActive = " + isActive);
+    public void updateCategoryStatus(Integer id, boolean isActive) {
         categoryDAO.updateCategoryStatus(id, isActive ? 1 : 0);
     }
 

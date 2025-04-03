@@ -107,26 +107,84 @@ public class CategoryController extends HttpServlet {
     }
 
 
+//    @Override
+//    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//
+////        System.out.println("Received PUT request in CategoryController");
+//
+//
+//        try {
+//            String pathInfo = request.getPathInfo();
+//            if (pathInfo == null || pathInfo.equals("/")) {
+//                throw new IllegalArgumentException("Category ID is required");
+//            }
+//
+//            String[] pathParts = pathInfo.split("/");
+//            if (pathParts.length != 2) {
+//                throw new IllegalArgumentException("Invalid request");
+//            }
+//
+//            Integer id = Integer.parseInt(pathParts[1]);
+//
+//            // Đọc JSON từ body request
+//            StringBuilder jsonBuilder = new StringBuilder();
+//            String line;
+//            try (BufferedReader reader = request.getReader()) {
+//                while ((line = reader.readLine()) != null) {
+//                    jsonBuilder.append(line);
+//                }
+//            }
+//            String jsonString = jsonBuilder.toString();
+//
+//            // Parse JSON để lấy giá trị "name"
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
+//
+//            String name = jsonData.get("name");
+//
+//            // Cập nhật trạng thái isActive nếu được truyền
+//            if (jsonData.containsKey("isActive")) {
+//                boolean isActive = Boolean.parseBoolean(jsonData.get("isActive"));
+//                categoryService.updateCategoryStatus(id, isActive);
+//
+//                // Trả về category sau cập nhật
+//                Category updatedCategory = categoryService.getCategoryById(id);
+//                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+//                        200, "success", "Category status updated successfully", updatedCategory);
+//                writeResponse(response, responseWrapper);
+//                return; // Không thực hiện phần cập nhật tên nữa nếu chỉ cập nhật trạng thái
+//            }
+//
+//
+//
+//            if (name == null || name.isEmpty()) {
+//                throw new IllegalArgumentException("Name is required");
+//            }
+//
+//            // Cập nhật category
+//            categoryService.updateCategory(id, name);
+//
+//            // Truy vấn lại để lấy dữ liệu category đã cập nhật
+//            Category updatedCategory = categoryService.getCategoryById(id);
+//
+//            // Phản hồi thành công
+//            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+//                    200, "success", "Category updated successfully", updatedCategory);
+//            writeResponse(response, responseWrapper);
+//        } catch (IllegalArgumentException e) {
+//            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+//                    400, "error", e.getMessage(), null);
+//            writeResponse(response, responseWrapper);
+//        } catch (Exception e) {
+//            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+//                    500, "error", "Internal server error: " + e.getMessage(), null);
+//            writeResponse(response, responseWrapper);
+//        }
+//    }
+
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//        System.out.println("Received PUT request in CategoryController");
-
-
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            String pathInfo = request.getPathInfo();
-            if (pathInfo == null || pathInfo.equals("/")) {
-                throw new IllegalArgumentException("Category ID is required");
-            }
-
-            String[] pathParts = pathInfo.split("/");
-            if (pathParts.length != 2) {
-                throw new IllegalArgumentException("Invalid request");
-            }
-
-            Integer id = Integer.parseInt(pathParts[1]);
-
-            // Đọc JSON từ body request
             StringBuilder jsonBuilder = new StringBuilder();
             String line;
             try (BufferedReader reader = request.getReader()) {
@@ -134,54 +192,24 @@ public class CategoryController extends HttpServlet {
                     jsonBuilder.append(line);
                 }
             }
-            String jsonString = jsonBuilder.toString();
+            String json = jsonBuilder.toString();
 
-            // Parse JSON để lấy giá trị "name"
             ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
+            Map<String, Object> requestBody = objectMapper.readValue(json, new TypeReference<>() {});
 
-            String name = jsonData.get("name");
+            Integer id = (Integer) requestBody.get("id");
+            Boolean isActive = (Boolean) requestBody.get("isActive");
 
-            // Cập nhật trạng thái isActive nếu được truyền
-            if (jsonData.containsKey("isActive")) {
-                boolean isActive = Boolean.parseBoolean(jsonData.get("isActive"));
-                categoryService.updateCategoryStatus(id, isActive);
+            categoryService.updateCategoryStatus(id, isActive != null && isActive);
 
-                // Trả về category sau cập nhật
-                Category updatedCategory = categoryService.getCategoryById(id);
-                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                        200, "success", "Category status updated successfully", updatedCategory);
-                writeResponse(response, responseWrapper);
-                return; // Không thực hiện phần cập nhật tên nữa nếu chỉ cập nhật trạng thái
-            }
-
-
-
-            if (name == null || name.isEmpty()) {
-                throw new IllegalArgumentException("Name is required");
-            }
-
-            // Cập nhật category
-            categoryService.updateCategory(id, name);
-
-            // Truy vấn lại để lấy dữ liệu category đã cập nhật
-            Category updatedCategory = categoryService.getCategoryById(id);
-
-            // Phản hồi thành công
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    200, "success", "Category updated successfully", updatedCategory);
-            writeResponse(response, responseWrapper);
-        } catch (IllegalArgumentException e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    400, "error", e.getMessage(), null);
-            writeResponse(response, responseWrapper);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"success\": true}");
         } catch (Exception e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    500, "error", "Internal server error: " + e.getMessage(), null);
-            writeResponse(response, responseWrapper);
+            response.setStatus(500);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"success\": false, \"message\": \"" + e.getMessage() + "\"}");
         }
     }
-
 
 
     @Override
