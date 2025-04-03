@@ -29,4 +29,9 @@ public interface BrandDAO {
 
     @SqlUpdate("DELETE FROM brand WHERE id = :id")
     void deleteBrand(@Bind("id") Integer id);
+
+
+    @SqlUpdate("UPDATE brand SET isActive = :isActive WHERE id = :id")
+    void updateBrandStatus(@Bind("id") Integer id, @Bind("isActive") boolean isActive);
+
 }
