@@ -72,7 +72,7 @@ a{
 }
 
 
-.infor{
+#side_bar .infor{
     width: 100%;
     min-height: 70px;
     font-weight: 500;
