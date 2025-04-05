@@ -109,7 +109,7 @@
                             <span><%= address.getDetail() %></span>
                         </div>
                         <div class="location">
-                            <span><%= address.getDistrict() %>, <%= address.getProvince() %></span>
+                            <span><%= address.getCommune() %>, <%= address.getDistrict() %>, <%= address.getProvince() %></span>
                         </div>
                     </div>
                 </div>
