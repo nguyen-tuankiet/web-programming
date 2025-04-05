@@ -3,6 +3,8 @@ package com.example.backend.Connection;
 import com.example.backend.config.ConfigLoader;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.sqlobject.SqlObjectPlugin;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 public class DBConnection {
 
@@ -17,8 +19,27 @@ public class DBConnection {
             String username = ConfigLoader.get("db.username");
             String password = ConfigLoader.get("db.password");
 
-            jdbi = Jdbi.create(url, username, password);
+
+            HikariConfig config = new HikariConfig();
+            config.setJdbcUrl(url);
+            config.setUsername(username);
+            config.setPassword(password);
+            config.setMaximumPoolSize(10);
+            config.setMinimumIdle(2);
+            config.setIdleTimeout(30000);
+            config.setMaxLifetime(1800000);
+            config.setConnectionTimeout(30000);
+
+            HikariDataSource dataSource = new HikariDataSource(config);
+
+
+
+//            jdbi = Jdbi.create(url, username, password);
+            jdbi = Jdbi.create(dataSource);
             jdbi.installPlugin(new SqlObjectPlugin());
+
+
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
