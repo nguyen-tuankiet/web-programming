@@ -13,8 +13,8 @@
     <meta charset="UTF-8">
     <title>Tag Management</title>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.js"
+          href="${pageContext.request.contextPath}/static/style-component/style-admin/tags/tags.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/tags/tags.js"
             defer></script>
     <script>
         const contextPath = "${pageContext.request.contextPath}";
@@ -81,6 +81,15 @@
                             </span>
                         </div>
                     </th>
+                    <th onclick="sortTable(3)">
+                        <div class="header-content">
+                            <span class="header-text">Trạng thái</span>
+                            <span class="sort-arrows">
+                                <span class="sort-arrow asc">▲</span>
+                                <span class="sort-arrow desc">▼</span>
+                            </span>
+                        </div>
+                    </th>
 <%--                    <th>Tổng Sản Phẩm</th>--%>
                     <th>Thao Tác</th>
                 </tr>
@@ -102,12 +111,16 @@
                         </td>
                         <td>${tag.totalProducts}</td>
                         <td>
-                            <div class="action-icons">
-                                <span class="icon delete-icon" data-id="${tag.id}">
-                                    <i class="fa-solid fa-trash" style="padding: 5px;"></i>
-                                </span>
+                            <div class="status tag-status-toggle ${tag.isActive ? 'active' : 'deactive'}" data-id="${tag.id}">
+                                    ${tag.isActive ? 'Hoạt động' : 'Không hoạt động'}
                             </div>
                         </td>
+                        <td>
+                            <span class="icon toggle-icon" data-id="${tag.id}">
+                                <i class="fa-solid ${tag.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
+                            </span>
+                        </td>
+
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -123,50 +136,8 @@
     </div>
 </div>
 
-<script>
-    document.getElementById("show-add-tag-box").onclick = () => {
-        document.getElementById("add-category-box").classList.remove("hidden");
-    };
+<script>const contextPath = "${pageContext.request.contextPath}";</script>
 
-    document.getElementById("discard-tag-btn").onclick = () => {
-        document.getElementById("add-category-box").classList.add("hidden");
-        document.getElementById("tag-name").value = '';
-    };
-
-    document.getElementById("add-tag-btn").onclick = async () => {
-        const name = document.getElementById("tag-name").value.trim();
-        if (!name) {
-            document.getElementById("tag-error-message").classList.remove("hidden");
-            return;
-        }
-        try {
-            const response = await fetch(contextPath + "/admin/api/tag", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name })
-            });
-            const result = await response.json();
-            if (result.status === "success") {
-                location.reload();
-            } else {
-                alert("Thêm thất bại: " + result.message);
-            }
-        } catch (err) {
-            alert("Lỗi hệ thống: " + err.message);
-        }
-    };
-
-    // Xóa tag
-    document.querySelectorAll(".delete-icon").forEach(el => {
-        el.onclick = async () => {
-            const id = el.getAttribute("data-id");
-            if (confirm("Bạn có chắc muốn xóa tag này?")) {
-                await fetch(contextPath + "/admin/api/tag/" + id, { method: "DELETE" });
-                location.reload();
-            }
-        };
-    });
-</script>
 
 </body>
 </html>

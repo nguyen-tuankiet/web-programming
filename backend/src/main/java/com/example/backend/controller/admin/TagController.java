@@ -58,18 +58,33 @@ public class TagController extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             int id = Integer.parseInt(request.getPathInfo().split("/")[1]);
-            Map<String, String> data = parseJson(request);
-            String name = data.get("name");
 
-            if (name == null || name.isEmpty()) throw new IllegalArgumentException("Name is required");
+            StringBuilder sb = new StringBuilder();
+            String line;
+            try (BufferedReader reader = request.getReader()) {
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            }
 
-            tagService.updateTag(id, name);
-            Tag updated = tagService.getTagById(id);
-            writeResponse(response, new ResponseWrapper<>(200, "success", "Tag updated", updated));
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> data = objectMapper.readValue(sb.toString(), new TypeReference<>() {});
+
+            if (data.containsKey("isActive")) {
+                boolean isActive = (Boolean) data.get("isActive");
+                tagService.updateTagStatus(id, isActive);
+                writeResponse(response, new ResponseWrapper<>(200, "success", "Status updated", null));
+            } else {
+                String name = (String) data.get("name");
+                tagService.updateTag(id, name);
+                Tag updated = tagService.getTagById(id);
+                writeResponse(response, new ResponseWrapper<>(200, "success", "Tag updated", updated));
+            }
         } catch (Exception e) {
             writeResponse(response, new ResponseWrapper<>(400, "error", e.getMessage(), null));
         }
     }
+
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
