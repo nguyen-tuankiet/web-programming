@@ -72,7 +72,7 @@ public class AddressSevice {
 //                ,"0299993222", "Name", false, "HOME", "ACTIVE"
 //                );
 //        addressSevice.addAddress(address);
-        System.out.println(addressSevice.findByUserId(44));
+        System.out.println(addressSevice.findByUserId(42));
     }
 
 
