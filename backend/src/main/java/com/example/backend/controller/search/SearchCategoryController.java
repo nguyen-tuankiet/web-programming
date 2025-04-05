@@ -37,10 +37,13 @@ public class SearchCategoryController extends HttpServlet {
         }
         int categoryId = Integer.parseInt(param);
 
-
+        log.info( "Start: " + String.valueOf(System.currentTimeMillis()));
         List<Product> products = productService.getProductsByCategory(categoryId);
         List<Product> topProducts = productService.getTopProductsByCategory(categoryId,3);
         List<Variant> variants = variantService.getVariantsByCategory(categoryId);
+
+        log.info( "End 1: " + String.valueOf(System.currentTimeMillis()));
+
 
         for (Variant v : variants) {
             List<VariantValue> variantValues = variantValueService.getVariantValuesByVariantId(v.getId());
@@ -48,6 +51,9 @@ public class SearchCategoryController extends HttpServlet {
             v.setVariantValues(variantValues);
 
         }
+
+        log.info( "End 2: " + String.valueOf(System.currentTimeMillis()));
+
 
         request.setAttribute("variants", variants);
         request.setAttribute("categoryId", categoryId);
