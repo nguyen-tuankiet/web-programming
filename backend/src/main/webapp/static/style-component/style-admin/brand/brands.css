@@ -9,13 +9,11 @@ body {
 
 }
 
-
 .container{
     display: flex;
     flex-direction: row;
 }
-
-.side_bar{
+left {
     width: 270px;
 }
 
@@ -23,16 +21,21 @@ body {
     width: 100%;
 }
 
+.side_bar {
+    width: 270px;
+}
+
 
 .content {
-    width: 100%;
-    background-color: #ffffff;
     margin-top: 60px;
     padding: 20px;
+    width: 100%;
+    background-color: #ffffff;
     border: 1px solid #e5e7eb;
-
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 }
+
 
 .toolbar {
     display: flex;
@@ -69,8 +72,15 @@ body {
     background-color: #e0e0e0;
 }
 
+/*.row {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between; !* Tạo khoảng cách giữa các phần tử *!*/
+/*    gap: 10px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
 
-.entries-dropdown {
+.entries-dropdown, .search-bar {
     width: 50%;
 }
 
@@ -102,7 +112,6 @@ body {
 }
 
 .product-table th, .product-table td {
-    padding: 12px;
     text-align: left;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
@@ -112,9 +121,11 @@ body {
     background-color: #f7f8fa;
     cursor: pointer;
 }
-
+.product-table td {
+    /*background: #0DCAF0;*/
+}
 .header-content {
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 
@@ -141,10 +152,9 @@ body {
 
 .product {
     display: flex;
-    max-width: 240px;
+
     align-items: center; /* Align image and text vertically centered */
     text-align: left;
-    height: 104px;
     margin-top: 20px;
 }
 
@@ -174,6 +184,7 @@ body {
     font-weight: bold;
     display: inline-block;
     text-align: center;
+    cursor: pointer;
 }
 
 .status.active {
@@ -185,6 +196,7 @@ body {
     color: #e74c3c;
     background-color: #fde2e2;
 }
+
 
 .action-icons {
     display: flex;
@@ -258,39 +270,57 @@ td .checkbox input {
     cursor: pointer;
 }
 
-/* CSS cho dropdown */
+/* Styling cho dropdown */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Ẩn nội dung dropdown mặc định */
-.dropdown .dropdown-content {
+.dropdown button {
+    display: flex;
+    align-items: center;
+    color: #7f7f7f;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.dropdown button svg {
+    margin-left: 4px;
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
-    background-color: white;
-    min-width: 95px;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 111px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
-/* Hiển thị dropdown khi hover vào nút */
-.dropdown:hover .dropdown-content {
-    display: block;
+.dropdown-content .icon {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #7f7f7f;
+    cursor: pointer;
 }
 
-/* Cải tiến giao diện cho các item trong dropdown */
-.dropdown-content .icon {
-    padding: 10px;
-    cursor: pointer;
-    display: block;
-    transition: background-color 0.3s;
+.dropdown-content .icon svg {
+    margin-right: 8px;
 }
 
 .dropdown-content .icon:hover {
     background-color: #f1f1f1;
 }
-
 tr:hover{
     cursor: pointer;
     background-color: #F1F5F9;
@@ -312,11 +342,11 @@ tr:hover{
     width: 300px;
 }
 
-/*#add-category-box h3 {*/
-/*    margin-top: 0;*/
-/*    font-size: 18px;*/
-/*    color: #333;*/
-/*}*/
+#add-category-box h3 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
 
 .input-field {
     width: 100%;
@@ -333,9 +363,9 @@ tr:hover{
 }
 
 .add-btn {
-    background-color: #6c5ce7;
-    color: white;
-    border: none;
+    background-color: white;
+    color: #0a7cff;
+    border: 1px solid #007bff;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
@@ -343,11 +373,11 @@ tr:hover{
 }
 
 .add-btn:hover {
-    background-color: #5b49c3;
+    background-color: #69c0fd;
 }
 
 .discard-btn {
-    background-color: #e74c3c;
+    background-color: #7e7e7e;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -357,176 +387,21 @@ tr:hover{
 }
 
 .discard-btn:hover {
-    background-color: #c0392b;
+    background-color: #878686;
 }
 
 .hidden {
     display: none;
 }
 
-/*#overlay {*/
-/*    display: none; !* Initially hidden *!*/
-/*    position: fixed;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    background-color: rgba(0, 0, 0, 0.5); !* Semi-transparent background *!*/
-/*    z-index: 9998; !* Slightly lower than the Add Category box *!*/
-/*}*/
-.status {
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: bold;
-    display: inline-block;
-    text-align: center;
-}
-
-.status.active {
-    color: #2ecc71;
-    background-color: #e9f7ef;
-}
-
-.status.deactive {
-    color: #e74c3c;
-    background-color: #fde2e2;
-}
-.header-actions {
-    display: flex;
-    gap: 12px;
-}
-
-.row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.entries-dropdown {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #333;
-}
-
-.entries-dropdown label {
-    font-weight: 500;
-}
-
-.entries-dropdown select {
-    padding: 6px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-    margin: 0 8px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-}
-
-.entries-dropdown select:focus {
-    outline: none;
-    border-color: #4a90e2;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-}
-
-.export-container {
-    position: relative;
-}
-
-.export-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 15px;
-    background-color: #3498db;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.export-btn:hover {
-    background-color: #2980b9;
-}
-
-.export-btn i {
-    font-size: 12px;
-    color: white;
-}
-
-.export-menu {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    width: 250px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    padding: 10px;
-}
-
-.export-container:hover .export-menu {
-    display: block;
-}
-
-.export-menu p {
-    color: #888;
-    font-size: 12px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-}
-
-.export-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+#overlay {
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 8px 10px;
-    background: none;
-    border: none;
-    text-align: left;
-    transition: background-color 0.3s ease;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 9998; /* Slightly lower than the Add Category box */
 }
 
-.export-option:hover {
-    background-color: #f5f5f5;
-}
-
-.export-option i {
-    font-size: 16px;
-}
-
-/* Màu sắc cho các icon xuất */
-.fa-copy {
-    color: #3498db; /* Xanh dương */
-}
-
-.fa-print {
-    color: #2ecc71; /* Xanh lá */
-}
-
-.fa-file-excel {
-    color: #2ecc71; /* Xanh lá (màu Excel) */
-}
-
-.fa-file-csv {
-    color: #e74c3c; /* Đỏ */
-}
-
-.fa-file-pdf {
-    color: #e74c3c; /* Đỏ (màu PDF) */
-}
-
-.divider {
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 10px 0;
-}

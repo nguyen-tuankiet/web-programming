@@ -30,7 +30,7 @@
       <h1>Tạo tài khoản</h1>
       <div class="social-container">
         <a href="https://www.facebook.com/?locale=vi_VN" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://accounts.google.com/" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="${pageContext.request.contextPath}/register-google" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="https://www.linkedin.com/" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
       <span>hoặc sử dụng email của bạn để đăng ký</span>
@@ -83,7 +83,7 @@
       <h1>Đăng nhập</h1>
       <div class="social-container">
         <a href="https://www.facebook.com/?locale=vi_VN" class="social"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://accounts.google.com/" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="${pageContext.request.contextPath}/login-google" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="https://www.linkedin.com/" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
       <span>hoặc sử dụng tài khoản của bạn</span>

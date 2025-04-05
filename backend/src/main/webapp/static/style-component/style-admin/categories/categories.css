@@ -125,7 +125,7 @@ left {
     /*background: #0DCAF0;*/
 }
 .header-content {
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 
@@ -187,24 +187,14 @@ left {
     cursor: pointer;
 }
 
-/*.status.active {*/
-/*    color: #2ecc71;*/
-/*    background-color: #e9f7ef;*/
-/*}*/
-
-/*.status.deactive {*/
-/*    color: #e74c3c;*/
-/*    background-color: #fde2e2;*/
-/*}*/
-
 .status.active {
-    color: #2ecc71 !important;
-    background-color: #e9f7ef !important;
+    color: #2ecc71;
+    background-color: #e9f7ef;
 }
 
 .status.deactive {
-    color: #e74c3c !important;
-    background-color: #fde2e2 !important;
+    color: #e74c3c;
+    background-color: #fde2e2;
 }
 
 
