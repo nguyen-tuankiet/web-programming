@@ -104,8 +104,7 @@
                 <c:if test="${not empty categoriesWithStock}">
                     <c:forEach items="${categoriesWithStock}" var="category">
                         <tr>
-<%--                            <td>${category.id}</td>--%>
-    <td>${category.id} - ${category.isActive}</td>
+                            <td>${category.id}</td>
 
     <td>
                                 <div class="product">

@@ -13,8 +13,8 @@
     <meta charset="UTF-8">
     <title>Tag Management</title>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.js"
+          href="${pageContext.request.contextPath}/static/style-component/style-admin/tags/tags.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/tags/tags.js"
             defer></script>
     <script>
         const contextPath = "${pageContext.request.contextPath}";

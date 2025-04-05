@@ -32,6 +32,11 @@ public class TagService {
         tagDAO.updateTag(id, name);
     }
 
+    public void updateTagStatus(int id, boolean isActive) {
+        tagDAO.updateTagStatus(id, isActive);
+    }
+
+
     public void deleteTag(int id) {
         tagDAO.deleteTag(id);
     }

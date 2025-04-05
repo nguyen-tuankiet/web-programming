@@ -26,6 +26,9 @@ public interface TagDAO {
     @SqlUpdate("UPDATE tags SET name = :name WHERE id = :id")
     void updateTag(@Bind("id") int id, @Bind("name") String name);
 
+    @SqlUpdate("UPDATE tags SET isActive = :isActive WHERE id = :id")
+    void updateTagStatus(@Bind("id") int id, @Bind("isActive") boolean isActive);
+
     @SqlUpdate("DELETE FROM tags WHERE id = :id")
     void deleteTag(@Bind("id") int id);
     @SqlQuery("""
