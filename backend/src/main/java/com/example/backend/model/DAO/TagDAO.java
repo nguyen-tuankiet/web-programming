@@ -26,17 +26,21 @@ public interface TagDAO {
     @SqlUpdate("UPDATE tags SET name = :name WHERE id = :id")
     void updateTag(@Bind("id") int id, @Bind("name") String name);
 
+    @SqlUpdate("UPDATE tags SET isActive = :isActive WHERE id = :id")
+    void updateTagStatus(@Bind("id") int id, @Bind("isActive") boolean isActive);
+
     @SqlUpdate("DELETE FROM tags WHERE id = :id")
     void deleteTag(@Bind("id") int id);
     @SqlQuery("""
-        SELECT 
-            t.id,
-            t.name,
-            COUNT(pt.productId) AS totalProducts
-        FROM tags t
-        LEFT JOIN product_tag pt ON t.id = pt.tagId
-        GROUP BY t.id, t.name
-    """)
+    SELECT 
+        t.id,
+        t.name,
+        t.isActive,
+        COUNT(pt.productId) AS totalProducts
+    FROM tags t
+    LEFT JOIN product_tag pt ON t.id = pt.tagId
+    GROUP BY t.id, t.name, t.isActive
+""")
     @RegisterConstructorMapper(TagWithCount.class)
     List<TagWithCount> getTagsWithProductCount();
 }
