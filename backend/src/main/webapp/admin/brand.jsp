@@ -105,9 +105,15 @@
                             </td>
                             <td>
                                 <div class="action-icons">
-                                <span class="icon delete-icon" data-id="${tag.id}">
+                                <span class="icon delete-icon">
                                     <i class="fa-solid fa-trash" style="padding: 5px;"></i>
+                                    <i class="fa-solid ${ba.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
                                 </span>
+                                </div>
+                                <div class="action-icons">
+                                    <span class="icon delete-icon">
+                                        <i class="fa-solid ${category.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
+                                    </span>
                                 </div>
                             </td>
 
