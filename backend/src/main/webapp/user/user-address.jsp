@@ -38,24 +38,24 @@
                 <h2>Thêm Địa Chỉ</h2>
                 <form method="POST" action="add-address">
 
-                    <label for="province">Tỉnh/Thành phố:</label>
-                    <select id="province"></select>
+                    <label for="province" >Tỉnh/Thành phố:<span style="color: red;">*</span></label>
+                    <select id="province" required></select>
 
-                    <label for="district">Quận/Huyện:</label>
-                    <select id="district"></select>
+                    <label for="district">Quận/Huyện:<span style="color: red;">*</span></label>
+                    <select id="district" required></select>
 
-                    <label for="commune">Xã/Phường:</label>
-                    <select id="commune"></select>
+                    <label for="commune">Xã/Phường: <span style="color: red;">*</span></label>
+                    <select id="commune" required></select>
 
-                    <label for="detail">Địa chỉ chi tiết:</label>
-                    <input type="text" id="detail" placeholder="Nhập địa chỉ chi tiết">
+                    <label for="detail" >Địa chỉ chi tiết:<span style="color: red;">*</span></label>
+                    <input type="text" id="detail" placeholder="Nhập địa chỉ chi tiết" required>
 
 
-                    <label for="name">Tên người nhận:</label>
-                    <input type="text" id="name" placeholder="Nhập tên người nhận">
+                    <label for="name">Tên người nhận:<span style="color: red;">*</span></label>
+                    <input type="text" id="name" placeholder="Nhập tên người nhận" required>
 
-                    <label for="phone">Số điện thoại:</label>
-                    <input type="text" id="phone" placeholder="Nhập số điện thoại" maxlength="10">
+                    <label for="phone">Số điện thoại:<span style="color: red;">*</span></label>
+                    <input type="text" id="phone" placeholder="Nhập số điện thoại" maxlength="10" required>
 
 
                     <div class="radio-group">
@@ -74,7 +74,7 @@
                         <span class="toggle-text">Mặc định</span>
                     </div>
 
-                    <button class="submit-btn" onclick="submitForm()">Xác nhận</button>
+                    <button class="submit-btn" >Xác nhận</button>
 
                 </form>
 
