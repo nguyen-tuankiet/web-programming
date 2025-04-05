@@ -10,9 +10,6 @@
           href="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.css">
     <script src="${pageContext.request.contextPath}/static/style-component/style-admin/categories/categories.js"
             defer></script>
-    <script>
-        const contextPath = "${pageContext.request.contextPath}";
-    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -118,13 +115,14 @@
                                         ${category.isActive ? 'Hoạt động' : 'Không hoạt động'}
                                 </div>
                             </td>
-                            <td>
+                            <td >
                                 <div class="action-icons">
-                                    <span class="icon delete-icon">
-                                        <i class="fa-solid ${category.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
-                                    </span>
+                                        <span class="icon toggle-icon" data-id="${category.id}" data-active="${category.isActive}">
+                                            <i class="fa-solid ${category.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
+                                        </span>
                                 </div>
                             </td>
+
 
                         </tr>
                     </c:forEach>
@@ -145,7 +143,8 @@
 
 
 </div>
-
-
 </body>
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+</script>
 </html>

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentSortOrder = 'asc';
 
     function sortTable(columnIndex) {
-        const tableBody = document.getElementById("product-table-body");
+        const tableBody = document.getElementById("tag-table-body");
         const rows = Array.from(tableBody.rows);
         const header = document.querySelectorAll("th")[columnIndex];
         const columnType = header.getAttribute("data-sort");
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageButtons = document.querySelectorAll(".page-number");
     const prevButton = document.querySelector(".prev-btn");
     const nextButton = document.querySelector(".next-btn");
-    const tableBody = document.getElementById("product-table-body");
+    const tableBody = document.getElementById("tag-table-body");
     const rowsPerPage = 10;
     const rows = Array.from(tableBody.rows);
     const totalPages = Math.ceil(rows.length / rowsPerPage);
@@ -83,114 +83,42 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    renderTable(1); // Hiển thị trang đầu tiên
+    renderTable(1);
 
-    // ==== Hiển thị/Ẩn form thêm ====
-    const addProductBtn = document.querySelector(".add-product-btn");
-    const addCategoryBox = document.getElementById("add-category-box");
-    const discardBtn = document.querySelector(".discard-btn");
+    // ==== Toggle trạng thái Tag ====
+    document.querySelectorAll(".toggle-icon").forEach(icon => {
+        icon.addEventListener("click", () => {
+            const tagId = icon.dataset.id;
+            const row = icon.closest("tr");
+            const statusEl = row.querySelector(".tag-status-toggle");
 
-    addProductBtn.addEventListener("click", () => {
-        addCategoryBox.classList.toggle("hidden");
-    });
+            const isActive = statusEl.classList.contains("active");
 
-    discardBtn.addEventListener("click", () => {
-        addCategoryBox.classList.add("hidden");
-    });
+            fetch(`${contextPath}/admin/api/tag/${tagId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ isActive: !isActive })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        // Toggle class
+                        statusEl.classList.toggle("active", !isActive);
+                        statusEl.classList.toggle("deactive", isActive);
+                        statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
 
-    // ==== Thêm danh mục ====
-    const addCateBtn = document.querySelector(".add-cate-btn");
-    const inputField = document.querySelector(".input-field");
-
-    addCateBtn.addEventListener("click", async () => {
-        const categoryName = inputField.value.trim();
-
-        if (!categoryName) {
-            alert("Vui lòng nhập tên danh mục!");
-            return;
-        }
-
-        try {
-            const response = await fetch('add-category', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name: categoryName }),
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                alert("Danh mục được thêm thành công!");
-                inputField.value = "";
-                location.reload();
-            } else {
-                alert(`Lỗi: ${result.message}`);
-            }
-        } catch (error) {
-            alert("Có lỗi xảy ra khi thêm danh mục!");
-            console.error(error);
-        }
-    });
-
-    // ==== Cập nhật trạng thái danh mục (toggle) ====
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".category-status-toggle").forEach(statusEl => {
-            statusEl.addEventListener("click", () => {
-                const categoryId = statusEl.dataset.id;
-                const isActive = statusEl.classList.contains("active");
-
-                fetch(`${contextPath}/admin/api/categories/${categoryId}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ isActive: !isActive })
+                        // Thay đổi biểu tượng icon
+                        const iconEl = icon.querySelector("i");
+                        iconEl.className = `fa-solid ${!isActive ? 'fa-trash' : 'fa-eye-slash'}`;
+                    } else {
+                        alert("Cập nhật trạng thái thất bại!");
+                    }
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data && data.status === "success") {
-                            statusEl.classList.toggle("active", !isActive);
-                            statusEl.classList.toggle("deactive", isActive);
-                            statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
-                        } else {
-                            alert("Cập nhật trạng thái thất bại!");
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Lỗi khi cập nhật trạng thái:", err);
-                    });
-            });
+                .catch(err => {
+                    console.error("Lỗi khi cập nhật trạng thái icon:", err);
+                });
         });
     });
 
-});
 
-
-
-// ==== Cập nhật trạng thái brand (toggle) ====
-document.querySelectorAll(".brand-status-toggle").forEach(statusEl => {
-    statusEl.addEventListener("click", () => {
-        const brandId = statusEl.dataset.id;
-        const isActive = statusEl.classList.contains("active");
-
-        fetch("/admin/brand", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: brandId, isActive: !isActive })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    statusEl.classList.toggle("active", !isActive);
-                    statusEl.classList.toggle("deactive", isActive);
-                    statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
-                } else {
-                    alert("Cập nhật trạng thái thất bại!");
-                }
-            })
-            .catch(err => {
-                console.error("Lỗi khi cập nhật trạng thái brand:", err);
-            });
-    });
 });

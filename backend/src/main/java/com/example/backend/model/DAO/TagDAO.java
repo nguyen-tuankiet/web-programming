@@ -32,14 +32,15 @@ public interface TagDAO {
     @SqlUpdate("DELETE FROM tags WHERE id = :id")
     void deleteTag(@Bind("id") int id);
     @SqlQuery("""
-        SELECT 
-            t.id,
-            t.name,
-            COUNT(pt.productId) AS totalProducts
-        FROM tags t
-        LEFT JOIN product_tag pt ON t.id = pt.tagId
-        GROUP BY t.id, t.name
-    """)
+    SELECT 
+        t.id,
+        t.name,
+        t.isActive,
+        COUNT(pt.productId) AS totalProducts
+    FROM tags t
+    LEFT JOIN product_tag pt ON t.id = pt.tagId
+    GROUP BY t.id, t.name, t.isActive
+""")
     @RegisterConstructorMapper(TagWithCount.class)
     List<TagWithCount> getTagsWithProductCount();
 }
