@@ -28,6 +28,11 @@ public class BrandService {
         return brandDAO.getBrandById(id);
     }
 
+    public void toggleBrandStatus(Integer id, boolean isActive) {
+        brandDAO.updateBrandStatus(id, isActive);
+    }
+
+
     public void updateBrand(Integer id, String name) {
         brandDAO.updateBrand(id, name);
     }

@@ -105,9 +105,7 @@
                     <c:forEach items="${categoriesWithStock}" var="category">
                         <tr>
 <%--                            <td>${category.id}</td>--%>
-<%--    <td>${category.id} -- isActive: ${category.isActive}</td>--%>
-    <td>${category.id} -- isActive: ${category.isActive == true}</td>
-
+    <td>${category.id} - ${category.isActive}</td>
 
     <td>
                                 <div class="product">
@@ -116,9 +114,10 @@
                             </td>
                             <td>${category.totalStock}</td>
                             <td>
-    <div class="status ${category.isActive ? 'active' : 'deactive'} status-toggle" data-id="${category.id}">
-            ${category.isActive ? 'Hoạt động' : 'Không hoạt động'}
-    </div>
+                                <div class="status category-status-toggle ${category.isActive ? 'active' : 'deactive'}"
+                                     data-id="${category.id}">
+                                        ${category.isActive ? 'Hoạt động' : 'Không hoạt động'}
+                                </div>
                             </td>
                             <td>
                                 <div class="action-icons">

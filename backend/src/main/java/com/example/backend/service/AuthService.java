@@ -16,7 +16,11 @@ public class AuthService {
         this.userDAO = jdbi.onDemand(UserDao.class);
     }
 
-    public boolean register(String fullName, String displayName, String email, String password) {
+    public User getUserByEmail(String email) {
+        return userDAO.getUserByEmail(email);
+    }
+
+    public boolean register(String firstName, String displayName, String email, String password) {
         if (userDAO.getUserByEmail(email) != null) {
             return false; // Email đã tồn tại
         }
@@ -28,19 +32,34 @@ public class AuthService {
         String hashedPassword = HashUtils.hashWithSalt(password, salt);
 
         // Tạo user mới và lưu thông tin
-        String userId = userDAO.createUser(fullName, displayName, email, hashedPassword, salt);
+        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt);
         return userId != null;
     }
 
+    public boolean registerWithGoogle(String firstName, String displayName, String email, String password) {
+        if (userDAO.getUserByEmail(email) != null) {
+            return false; // Email đã tồn tại
+        }
+
+        // Tạo salt ngẫu nhiên
+        String salt = HashUtils.generateSalt();
+
+        // Mã hóa mật khẩu với salt
+        String hashedPassword = HashUtils.hashWithSalt(password, salt);
+
+        // Tạo user mới và lưu thông tin
+        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt);
+        return userId != null;
+    }
 
     public User login(String email, String password) {
-        User user = userDAO.getUserByEmail(email);
+        User user = userDAO.getUserByEmail(email.trim());
         if (user != null) {
             String storedSalt = user.getSalt(); // Lấy salt từ cơ sở dữ liệu
             String storedHashedPassword = user.getPassword();
 
-            // Mã hóa mật khẩu nhập vào với salt
-            String hashedPassword = HashUtils.hashWithSalt(password, storedSalt);
+            // Mã hóa mật khẩu nhập vào với salt, sau khi đã loại bỏ khoảng trắng
+            String hashedPassword = HashUtils.hashWithSalt(password.trim(), storedSalt);
 
             if (hashedPassword.equals(storedHashedPassword)) {
                 return user; // Mật khẩu đúng
@@ -48,7 +67,6 @@ public class AuthService {
         }
         return null; // Mật khẩu không đúng hoặc user không tồn tại
     }
-
 
     public boolean changePassword(Integer userId, String oldPassword, String newPassword, boolean verifyOldPassword) {
         User user = userDAO.getPasswordByUserId(userId);
@@ -73,10 +91,6 @@ public class AuthService {
         return userDAO.updatePassword(userId, hashedNewPassword, newSalt) > 0;
     }
 
-    public User getUserByEmail(String email) {
-        return userDAO.getUserByEmail(email);
-    }
-
     public User getUserById(Integer userId) {
         return userDAO.getUserById(userId);
     }
@@ -89,7 +103,6 @@ public class AuthService {
         }
         return false;
     }
-
 
     public void activateUserAccount(HttpServletRequest request, String sessionId) {
         HttpSession session = request.getSession(false);
@@ -105,13 +118,10 @@ public class AuthService {
         }
     }
 
-
-
     public void saveSessionId(HttpServletRequest request, String email, String sessionId) {
         HttpSession session = request.getSession();
         session.setAttribute("sessionId", sessionId);
         session.setAttribute("email", email);  // Lưu email vào session nếu cần thiết
     }
-
 }
 
