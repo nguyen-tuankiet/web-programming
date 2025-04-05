@@ -54,14 +54,15 @@ $(document).ready(function () {
 
     // Khi chọn tỉnh -> Load huyện
     $("#province").on("change", function () {
-        let provinceID = $(this).val();
+        let provinceId = $(this).val();
         let provinceName = $("#province option:selected").text();
-        $("#province").attr("data-name", provinceName);
+        $(this).attr("data-name", provinceName);
+        $(this).attr("data-id", provinceId);
+
 
         $("#district").empty().append(new Option("Chọn huyện", ""));
-        $("#commune").empty().append(new Option("Chọn xã", ""));
 
-        if (provinceID) {
+        if (provinceId) {
             fetch(`https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district`, {
                 method: "POST",
                 headers: {
@@ -70,7 +71,7 @@ $(document).ready(function () {
 
                 },
                 body: JSON.stringify({
-                    province_id: parseInt(provinceID),
+                    province_id: parseInt(provinceId),
                 })
 
             })
@@ -85,14 +86,14 @@ $(document).ready(function () {
 
     // Khi chọn huyện -> Load xã
     $("#district").on("change", function () {
-        let districtID = $(this).val();
+        let districtId = $(this).val();
         let districtName = $("#district option:selected").text();
-        $("#district").attr("data-name", districtName);
+        $(this).attr("data-name", districtName);
+        $(this).attr("data-id", districtId);
 
         $("#commune").empty().append(new Option("Chọn xã", ""));
 
-        console.log(districtID)
-        if (districtID) {
+        if (districtId ) {
             fetch(`https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id`,{
                 method: "POST",
                 headers: {
@@ -100,7 +101,7 @@ $(document).ready(function () {
                     "token": "676e7671-116a-11f0-95d0-0a92b8726859",
                 },
                 body: JSON.stringify({
-                    district_id: parseInt( districtID)
+                    district_id: parseInt( districtId )
                 })
             })
                 .then(response => response.json())
@@ -114,9 +115,12 @@ $(document).ready(function () {
 
     // Khi chọn xã -> Lưu tên xã
     $("#commune").on("change", function () {
+        let communeId = $(this).val();
         let communeName = $("#commune option:selected").text();
-        $("#commune").attr("data-name", communeName);
+        $(this).attr("data-name", communeName);
+        $(this).attr("data-id", communeId);
     });
+
 
 
 // Kiểm tra số điện thoại
@@ -134,14 +138,23 @@ document.querySelector("form").addEventListener("submit", function(event) {
     let formData = {
         userId: userId,
         province: document.getElementById("province").getAttribute("data-name"),
+        provinceId: $("#province").attr("data-id"),
+
         district: document.getElementById("district").getAttribute("data-name"),
+        districtId: $("#district").attr("data-id"),
+
         commune: document.getElementById("commune").getAttribute("data-name"),
+        communeId:  $("#commune").attr("data-id"),
+
         detail: document.getElementById("detail").value,
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
         type: document.querySelector('input[name="addressType"]:checked').value,
         isDefault: document.getElementById("default").checked
     };
+
+    console.log(formData);
+
 
     fetch("/add-address", {
         method: "POST",

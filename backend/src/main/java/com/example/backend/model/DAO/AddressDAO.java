@@ -3,6 +3,7 @@ package com.example.backend.model.DAO;
 import com.example.backend.model.Address;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.customizer.BindBean;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
@@ -37,23 +38,9 @@ public interface AddressDAO {
     Boolean updateDefaultById(@Bind("id") Integer id, @Bind("defaultStatus") boolean defaultStatus);
 
 
-    @SqlUpdate("INSERT INTO address (userId, province, district, commune, detail, phone, name, isDefault, type, status) " +
-            "VALUES (:userId, :province, :district, :commune, :detail, :phone, :name, :isDefault, :type, :status)")
-    @GetGeneratedKeys("id")
-    int addAddress(@Bind("userId") Integer userId,
-                   @Bind("province") String province,
-                   @Bind("district") String district,
-                   @Bind("commune") String commune,
-                   @Bind("detail") String detail,
-                   @Bind("phone") String phone,
-                   @Bind("name") String name,
-                   @Bind("isDefault") Boolean isDefault,
-                   @Bind("type") String type,
-                    @Bind("status") String status);
 
 
-
-
-
-
+    @SqlUpdate("INSERT INTO address (userId, province, provinceId, district, districtId, commune, communeId, detail, phone, name, isDefault, type, status) " +
+            "VALUES (:userId, :province, :provinceId, :district, :districtId , :commune, :communeId, :detail, :phone, :name, :isDefault, :type, :status)")
+    int addAddress(    @BindBean Address address);
 }

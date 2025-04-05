@@ -4,9 +4,11 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Address;
 import com.example.backend.model.DAO.AddressDAO;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 
 import java.util.List;
 
+@RegisterBeanMapper(Address.class)
 public class AddressSevice {
     AddressDAO addressDAO;
 
@@ -27,24 +29,36 @@ public class AddressSevice {
         return addressDAO.getAddressDefaultByUserId(id);
     }
 
+//    public int addAddress(Address address) {
+//        // Đảm bảo isDefault mặc định là false nếu không được chỉ định
+//        if (address.getIsDefault() == null) {
+//            address.setIsDefault(false);
+//        }
+//        return addressDAO.addAddress(
+//                address.getUserId(),
+//                address.getProvince(),
+//                address.getDistrict(),
+//                address.getCommune(),
+//                address.getDetail(),
+//                address.getPhone(),
+//                address.getName(),
+//                address.getIsDefault(),
+//                address.getType(),
+//                address.getStatus()
+//        );
+//    }
+
+
+
     public int addAddress(Address address) {
         // Đảm bảo isDefault mặc định là false nếu không được chỉ định
         if (address.getIsDefault() == null) {
             address.setIsDefault(false);
         }
-        return addressDAO.addAddress(
-                address.getUserId(),
-                address.getProvince(),
-                address.getDistrict(),
-                address.getCommune(),
-                address.getDetail(),
-                address.getPhone(),
-                address.getName(),
-                address.getIsDefault(),
-                address.getType(),
-                address.getStatus()
-        );
+        return addressDAO.addAddress(address);
     }
+
+
 
     public Boolean updateDefautlById(Integer id, boolean defaultStatus) {
         return addressDAO.updateDefaultById(id, defaultStatus);
@@ -53,7 +67,12 @@ public class AddressSevice {
 
     public static void main(String[] args) {
         AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());
-        System.out.println(addressSevice.findById(1));
+//        Address address = new Address(null, 42, "HCM", 202, "ThuDuc"
+//                , 203, "LinhTrung", 204, "detail"
+//                ,"0299993222", "Name", false, "HOME", "ACTIVE"
+//                );
+//        addressSevice.addAddress(address);
+        System.out.println(addressSevice.findByUserId(44));
     }
 
 
