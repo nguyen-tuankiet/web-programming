@@ -155,8 +155,36 @@
 
             <div class="right-column">
 
+                <div class="section dimension-section">
+                    <h2>Kích thước</h2>
+
+                    <div class="wrap_dimension">
+                        <div class="dimension-item">
+                            <label for="height">Chiều cao<span class="required">*</span></label>
+                            <input id="height" placeholder="cm" required>
+                        </div>
+
+                        <div class="dimension-item">
+                            <label for="length">Chiều dài<span class="required">*</span></label>
+                            <input id="length" placeholder="cm" required>
+                        </div>
+
+                        <div class="dimension-item">
+                            <label for="width">Chiều rộng<span class="required">*</span></label>
+                            <input id="width" placeholder="cm" required>
+                        </div>
+
+                        <div class="dimension-item">
+                            <label for="weight">Khối lượng <span class="required">*</span></label>
+                            <input id="weight" placeholder="kg" required>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <div class="section organization-section">
-                    <h2>Tổ chức</h2>
+                    <h2>Khác</h2>
                     <label for="vendor">Nhà cung cấp <span class="required">*</span> </label>
                     <select id="vendor"  data-url="<%= request.getContextPath() %>categories">
                         <option value="winter">Chọn nhà cung cấp</option>
