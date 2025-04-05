@@ -7,8 +7,11 @@ public class Address {
     Integer id;
     Integer userId;
     String province;
+    Integer provinceId;
     String district;
+    Integer districtId;
     String commune;
+    Integer communeId;
     String detail;
     String phone;
     String name;
@@ -19,8 +22,11 @@ public class Address {
     public Address(@ColumnName("id") Integer id,
                    @ColumnName("userId") @Nullable Integer userId,
                    @ColumnName("province") @Nullable String province,
+                   @ColumnName("provinceId") @Nullable Integer provinceId,
                    @ColumnName("district") @Nullable String district,
+                   @ColumnName("districtId") @Nullable Integer districtId,
                    @ColumnName("commune") @Nullable String commune,
+                   @ColumnName("communeId") @Nullable Integer communeId,
                    @ColumnName("detail") @Nullable String detail,
                    @ColumnName("phone") @Nullable String phone,
                    @ColumnName("name") @Nullable String name,
@@ -34,8 +40,11 @@ public class Address {
         this.id = id;
         this.userId = userId;
         this.province = province;
+        this.provinceId = provinceId;
         this.district = district;
+        this.districtId = districtId;
         this.commune = commune;
+        this.communeId = communeId;
         this.detail = detail;
         this.phone = phone;
         this.name = name;
@@ -44,6 +53,7 @@ public class Address {
         if (status==null) {
             this.status = "ACTIVE";
         }
+        else this.status = status;
 
     }
 
@@ -142,6 +152,30 @@ public class Address {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Integer provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public Integer getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(Integer districtId) {
+        this.districtId = districtId;
+    }
+
+    public Integer getCommuneId() {
+        return communeId;
+    }
+
+    public void setCommuneId(Integer communeId) {
+        this.communeId = communeId;
     }
 
     @Override

@@ -40,8 +40,11 @@ public class AddAddressController extends HttpServlet {
 
             Integer userId = jsonObject.has("userId") ? jsonObject.getInt("userId") : null;
             String province = jsonObject.has("province") ? jsonObject.getString("province") : null;
+            Integer provinceId = jsonObject.has("provinceId") ? jsonObject.getInt("provinceId") : null;
             String district = jsonObject.has("district") ? jsonObject.getString("district") : null;
+            Integer districtId = jsonObject.has("districtId") ? jsonObject.getInt("districtId") : null;
             String commune = jsonObject.has("commune") ? jsonObject.getString("commune") : null;
+            Integer communeId = jsonObject.has("communeId") ? jsonObject.getInt("communeId") : null;
             String detail = jsonObject.has("detail") ? jsonObject.getString("detail") : null;
             String phone = jsonObject.has("phone") ? jsonObject.getString("phone") : null;
             String name = jsonObject.has("name") ? jsonObject.getString("name") : null;
@@ -49,7 +52,7 @@ public class AddAddressController extends HttpServlet {
             String type = jsonObject.has("type") ? jsonObject.getString("type") : null;
 
 
-            Address newAddress = new Address(null, userId, province, district, commune, detail, phone, name, isDefault, type, null);
+            Address newAddress = new Address(null, userId, province, provinceId, district, districtId, commune,communeId, detail, phone, name, isDefault, type, null);
             if (isDefault) {
                Address defautl = addressService.findDefautlByUserId(userId);
                if (defautl != null) {
