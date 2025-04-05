@@ -413,6 +413,37 @@ textarea:focus {
     transform: translateX(20px);
 }
 
+
+.dimension-section{
+
+}
+
+
+
+.wrap_dimension {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.dimension-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.dimension-item label {
+    margin-bottom: 5px;
+}
+
+.dimension-item input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+
+
 .save {
     padding-left: 380px;
 }
