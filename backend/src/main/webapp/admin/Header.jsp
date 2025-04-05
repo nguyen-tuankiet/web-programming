@@ -152,7 +152,7 @@
                         class="nav_item"
                         href="profile">Trang của tôi</a
                 >
-                <a href="/backend_war/login">Đăng xuất</a>
+                <a href="${pageContext.request.contextPath}/login">Đăng xuất</a>
             </div>
         </div>
     </div>
