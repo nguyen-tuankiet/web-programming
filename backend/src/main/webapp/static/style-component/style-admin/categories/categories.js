@@ -134,63 +134,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==== Cập nhật trạng thái danh mục (toggle) ====
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".category-status-toggle").forEach(statusEl => {
-            statusEl.addEventListener("click", () => {
-                const categoryId = statusEl.dataset.id;
-                const isActive = statusEl.classList.contains("active");
+    document.querySelectorAll(".toggle-icon").forEach(icon => {
+        icon.addEventListener("click", () => {
+            const categoryId = icon.dataset.id;
+            const isActive = icon.dataset.active === 'true';
 
-                fetch(`${contextPath}/admin/api/categories/${categoryId}`, {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ isActive: !isActive })
+            fetch(`${contextPath}/admin/api/categories/${categoryId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ isActive: !isActive })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        const row = icon.closest("tr");
+                        const statusEl = row.querySelector(".category-status-toggle");
+
+                        // Cập nhật trạng thái chữ và class
+                        statusEl.classList.toggle("active", !isActive);
+                        statusEl.classList.toggle("deactive", isActive);
+                        statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
+
+                        // Cập nhật biểu tượng
+                        const iconEl = icon.querySelector("i");
+                        iconEl.className = `fa-solid ${!isActive ? 'fa-trash' : 'fa-eye-slash'}`;
+
+                        // Cập nhật thuộc tính data-active
+                        icon.dataset.active = (!isActive).toString();
+                    } else {
+                        alert("Cập nhật trạng thái thất bại!");
+                    }
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data && data.status === "success") {
-                            statusEl.classList.toggle("active", !isActive);
-                            statusEl.classList.toggle("deactive", isActive);
-                            statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
-                        } else {
-                            alert("Cập nhật trạng thái thất bại!");
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Lỗi khi cập nhật trạng thái:", err);
-                    });
-            });
+                .catch(err => {
+                    console.error("Lỗi khi cập nhật trạng thái category:", err);
+                });
         });
     });
 
+
 });
 
-
-
-// ==== Cập nhật trạng thái brand (toggle) ====
-document.querySelectorAll(".brand-status-toggle").forEach(statusEl => {
-    statusEl.addEventListener("click", () => {
-        const brandId = statusEl.dataset.id;
-        const isActive = statusEl.classList.contains("active");
-
-        fetch("/admin/brand", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: brandId, isActive: !isActive })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    statusEl.classList.toggle("active", !isActive);
-                    statusEl.classList.toggle("deactive", isActive);
-                    statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
-                } else {
-                    alert("Cập nhật trạng thái thất bại!");
-                }
-            })
-            .catch(err => {
-                console.error("Lỗi khi cập nhật trạng thái brand:", err);
-            });
-    });
-});

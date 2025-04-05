@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category Management</title>
+    <title>Brand Management</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/brand/brands.css">
     <script src="${pageContext.request.contextPath}/static/style-component/style-admin/brand/brands.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -104,12 +104,6 @@
                                 </span>
                             </td>
                             <td>
-                                <div class="action-icons">
-                                <span class="icon delete-icon">
-                                    <i class="fa-solid fa-trash" style="padding: 5px;"></i>
-                                    <i class="fa-solid ${ba.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
-                                </span>
-                                </div>
                                 <div class="action-icons">
                                     <span class="icon delete-icon">
                                         <i class="fa-solid ${category.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
