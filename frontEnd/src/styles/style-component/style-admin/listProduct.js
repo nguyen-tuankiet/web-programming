@@ -71,14 +71,34 @@ window.onclick = function (event) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    const pageButtons = document.querySelectorAll(".page-number");
+    const entriesDropdown = document.getElementById("entries");
+    const productTableBody = document.getElementById("product-table-body");
+    const paginationContainer = document.querySelector(".pagination");
     const prevButton = document.querySelector(".prev-btn");
     const nextButton = document.querySelector(".next-btn");
+    const addProductBtn = document.querySelector('.add-product-btn');
+    const exportBtn = document.getElementById('exportBtn');
 
+    let allRows = Array.from(productTableBody.rows);
+    let currentPage = 1;
+    let entriesPerPage = parseInt(entriesDropdown.value, 10);
+
+    // Export to Excel functionality
+    exportBtn.addEventListener('click', function() {
+        // Create a form to submit the export request
+        const form = document.createElement('form');
+        form.method = 'GET';
+        form.action = '/admin/export-products';
+        
+        // Append the form to the body and submit it
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    });
+
+    const pageButtons = document.querySelectorAll(".page-number");
     const page1Products = document.getElementById("product-table-body");
     const page2Products = document.getElementById("product-table-body-page2");
-
-    let currentPage = 1;
 
     function showPage(page) {
         // Hiển thị đúng các sản phẩm của trang
