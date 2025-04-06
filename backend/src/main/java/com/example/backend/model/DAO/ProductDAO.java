@@ -72,6 +72,7 @@ public interface ProductDAO {
 
     @SqlQuery(value =
             "SELECT p.id as id, p.name as name, p.description as description, " +
+                    " p.height as height , p.length as length , p.width as width , p.weight as weight, "+
                     "         p.isActive as isActive, " +
                     "       p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
                     "        p.primaryImage as primaryImage, " +

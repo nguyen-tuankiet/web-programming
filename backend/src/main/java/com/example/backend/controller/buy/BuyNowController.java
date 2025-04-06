@@ -8,12 +8,16 @@ import com.example.backend.service.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "BuyNowController", value = "/buy-now")
 public class BuyNowController extends HttpServlet {
+    private static final Logger log = LoggerFactory.getLogger(BuyNowController.class);
     ProductService productService = new ProductService(DBConnection.getJdbi());
     OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
     OrderDetailService orderDetailService = new OrderDetailService(DBConnection.getJdbi());
@@ -37,8 +41,8 @@ public class BuyNowController extends HttpServlet {
         }
         ProductCart productCart = new ProductCart(product);
 
-        List<ProductCart> productList = new ArrayList<>();
-        productList.add(productCart);
+         List<ProductCart> productList = new ArrayList<>();
+            productList.add(productCart);
 
         List<Address> addressList = new ArrayList<>();
         List<Card> cardList = new ArrayList<>();
