@@ -74,6 +74,9 @@
                      data-stock="${p.stock}"
                      data-id="${p.productId}"  data-option-id="${p.optionId}"
                      data-quantity="${p.quantity}" data-price="${p.price}"
+
+                     data-height = "${p.height}" data-length = "${p.length}"
+                     data-width = "${p.width}" data-weight = "${p.weight}"
                 >
 
                 <div class="image">

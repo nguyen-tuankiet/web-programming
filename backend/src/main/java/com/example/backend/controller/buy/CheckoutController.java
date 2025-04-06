@@ -102,7 +102,11 @@ public class CheckoutController extends HttpServlet {
         JSONObject jsonObject = new JSONObject(stringBuilder.toString());
         String address = jsonObject.getString("address_id");
         String card = jsonObject.getString("card");
+        Integer ship_cost = jsonObject.getInt("ship_cost");
         JSONArray products = jsonObject.getJSONArray("products");
+
+
+
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
 
