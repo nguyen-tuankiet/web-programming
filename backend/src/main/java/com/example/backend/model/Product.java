@@ -289,6 +289,10 @@ public class Product {
                 ", optionId=" + optionId +
                 ", categoryName='" + categoryName + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", height=" + height +
+                ", length=" + length +
+                ", width=" + width +
+                ", weight=" + weight +
                 '}';
     }
 }
