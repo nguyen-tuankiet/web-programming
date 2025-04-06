@@ -23,7 +23,6 @@ function buyNow(productId, optionId) {
         return;
     }
     else {
-
         window.location.href = `buy-now?productId=${productId}&optionId=${optionId}`;
     }
 

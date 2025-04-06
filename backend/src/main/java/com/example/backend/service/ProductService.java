@@ -136,6 +136,10 @@ public class ProductService {
 
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
-        System.out.println(productService.suggestProducts( ).size());
+//        System.out.println(productService.suggestProducts( ).size());
+        System.out.println(productService.getProductByIdAndOptionId(211, 85
+        ));
+
     }
+
 }
