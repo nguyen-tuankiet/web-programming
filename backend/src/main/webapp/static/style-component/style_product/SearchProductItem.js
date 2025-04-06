@@ -30,14 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
 // });
 
 
-const isLoggedIn = localStorage.getItem("isLoggedIn");
-document.getElementById("buy-now-btn").addEventListener("click", (event) => {
-    const mainIframe = window.top.document.querySelector('#body iframe');
-    event.preventDefault();
-    if (!isLoggedIn) {
-        alert("Bạn cần đăng nhập trước!");
-    } else {
-        mainIframe.src = '/web-programming/frontEnd/src/component/Checkout/checkout.html';
-        history.pushState({ page: "user-checkout" }, "Thanh toán", "/checkout");
-    }
-});
+// const isLoggedIn = localStorage.getItem("isLoggedIn");
+// document.getElementById("buy-now-btn").addEventListener("click", (event) => {
+//     const mainIframe = window.top.document.querySelector('#body iframe');
+//     event.preventDefault();
+//     if (!isLoggedIn) {
+//         alert("Bạn cần đăng nhập trước!");
+//     } else {
+//         mainIframe.src = '/web-programming/frontEnd/src/component/Checkout/checkout.html';
+//         history.pushState({ page: "user-checkout" }, "Thanh toán", "/checkout");
+//     }
+// });
