@@ -300,6 +300,11 @@
                     <span id="VAT" class="value">0 VND</span>
                 </div>
 
+                <div class="ship item_price">
+                    <span>Phí vận chuyển</span>
+                    <span id="ship_cost" class="value">0 VND</span>
+                </div>
+
             </div>
 
 
@@ -308,7 +313,7 @@
                     <span>Tổng cộng</span>
                     <span id="total">0 VND</span>
                 </div>
-                <span class="note">Đẫ bao gồm thuế GTGT</span>
+                <span class="note">Đã bao gồm thuế GTGT</span>
             </div>
 
 

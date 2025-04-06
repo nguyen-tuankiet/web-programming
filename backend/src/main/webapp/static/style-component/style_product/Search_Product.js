@@ -22,26 +22,11 @@ function buyNow(productId, optionId) {
         alert("Bạn cần đăng nhập trước khi mua hàng!");
         return;
     }
+    else {
 
-    // Gọi API BuyNowController
-    fetch("buy-now", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: `productId=${productId}&optionId=${optionId}&sessionId=${sessionId}`
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            window.location.href = "checkout.jsp";
-        } else {
-            alert(data.message || "Có lỗi xảy ra khi xử lý đơn hàng");
-        }
-    })
-    .catch(error => {
-        console.log(error);
-        alert("Có lỗi xảy ra. Vui lòng thử lại sau!");
-    });
+        window.location.href = `buy-now?productId=${productId}&optionId=${optionId}`;
+    }
+
+
 }
 
