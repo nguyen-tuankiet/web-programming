@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/brand/brands.css">
     <script src="${pageContext.request.contextPath}/static/style-component/style-admin/brand/brands.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        const contextPath = "${pageContext.request.contextPath}";
+    </script>
 </head>
 <body>
 
@@ -43,7 +46,7 @@
 
                 <button class="add-product-btn">+ Thêm</button>
             </div>
-
+            <div class="table-wrapper">
             <table class="product-table">
                 <thead>
                 <tr>
@@ -90,7 +93,7 @@
                     <c:forEach items="${brands}" var="b">
                         <tr>
                             <td>
-                                <label><input type="checkbox" class="checkbox"></label>
+                                    ${b.id}
                             </td>
                             <td>
                                 <div class="product">
@@ -98,18 +101,18 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="status brand-status-toggle ${b.isActive ? 'active' : 'deactive'}"
-                                      data-id="${b.id}">
-                                        ${b.isActive ? 'Hoạt động' : 'Không hoạt động'}
-                                </span>
+    <span class="status brand-status-toggle ${b.isActive ? 'active' : 'deactive'}">
+            ${b.isActive ? 'Hoạt động' : 'Không hoạt động'}
+    </span>
                             </td>
                             <td>
                                 <div class="action-icons">
-                                    <span class="icon delete-icon">
-                                        <i class="fa-solid ${category.isActive ? 'fa-trash' : 'fa-eye-slash'}" style="padding: 5px;"></i>
-                                    </span>
+        <span class="icon toggle-icon" data-id="${b.id}" data-active="${b.isActive}">
+            <i class="fa-solid ${b.isActive ? 'fa-trash' : 'fa-eye-slash'}"></i>
+        </span>
                                 </div>
                             </td>
+
 
 
                         </tr>
@@ -117,6 +120,7 @@
                 </c:if>
                 </tbody>
             </table>
+            </div>
 
             <div class="pagination">
                 <button class="prev-btn">Trước</button>
@@ -130,48 +134,7 @@
 
     </div>
 
-
-
-
-<script>
-
-    //     Add brand
-    const addBrandBtn = document.querySelector(".add-brand-btn");
-    const brand_input_field = document.querySelector(".brand-input-field");
-
-    addBrandBtn.addEventListener("click", async () => {
-        const brandName = brand_input_field.value.trim();
-
-        if (!brandName) {
-            alert("Vui lòng nhập tên danh mục!");
-            return;
-        }
-
-        try {
-            const response = await fetch('add-brand', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name: brandName }),
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                alert("Thêm thành công!");
-                inputField.value = ""; // Reset input field
-            } else {
-                alert(`Lỗi: ${result.message}`);
-            }
-        } catch (error) {
-            alert("Có lỗi xảy ra khi thêm  !");
-            console.error(error);
-        }
-    });
-
-
-
-</script>
 </div>
 </body>
+<script>const contextPath = "${pageContext.request.contextPath}";</script>
 </html>
