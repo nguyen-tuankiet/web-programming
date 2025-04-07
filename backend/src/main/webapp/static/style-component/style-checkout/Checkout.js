@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let cost= 0;
+    let fee= 0;
 
     window.onload = async function () {
 
@@ -10,7 +10,7 @@ $(document).ready(function () {
         let total = $('#total')
         let VAT = $('#VAT')
         let before_tax = $('#before_tax')
-        let ship_cost = $('#ship_cost')
+        let ship_fee = $('#ship_fee')
 
 
         //for shipping
@@ -49,10 +49,10 @@ $(document).ready(function () {
 
         console.log("Ship items: ", items);
         console.    log("Address : ", address);
-        cost = await getShipCost(items, address);
-        console.log("cost: ", cost);
+        fee = await getShipFee(items, address);
+        console.log("ship_fee: ",  fee);
 
-        totalPrice += cost;
+        totalPrice +=  fee;
 
 
         const checkout_tax = totalPrice * 10 / 100;
@@ -65,7 +65,7 @@ $(document).ready(function () {
         total.text(Intl.NumberFormat('vi-VN').format(totalPrice) + ' VND');
         VAT.text(Intl.NumberFormat('vi-VN').format(checkout_tax) + ' VND');
         before_tax.text(Intl.NumberFormat('vi-VN').format(checkout_before_tax) + ' VND');
-        ship_cost.text(Intl.NumberFormat('vi-VN').format(cost) + ' VND');
+        ship_fee.text(Intl.NumberFormat('vi-VN').format(fee) + ' VND');
     }
 
 
@@ -98,7 +98,7 @@ $(document).ready(function () {
         console.log("product_item: ",product_item);
         console.log("payment method: " ,card);
         console.log("address_id: ", address_id);
-        console.log("ship_cost: ", cost);
+        console.log("ship_fee", fee);
 
 
 
@@ -106,7 +106,7 @@ $(document).ready(function () {
             address_id: address_id,
             card: card,
             products: products,
-            ship_cost: cost,
+            ship_fee: fee,
 
         }
 
@@ -140,11 +140,11 @@ $(document).ready(function () {
 })
 
 
-async function getShipCost(items, address) {
+async function getShipFee(items, address) {
     const payload = {
         service_type_id: 5,
         to_district_id: parseInt(address.districtId),
-        to_ward_code: String(<address className="communeId"></address>),
+        to_ward_code: String(address.communeId),
         weight: 1,
         items: items,
     };

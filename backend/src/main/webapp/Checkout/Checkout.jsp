@@ -317,7 +317,7 @@
 
                 <div class="ship item_price">
                     <span>Phí vận chuyển</span>
-                    <span id="ship_cost" class="value">0 VND</span>
+                    <span id="ship_fee" class="value">0 VND</span>
                 </div>
 
             </div>
