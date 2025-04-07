@@ -41,8 +41,15 @@ $(document).ready(function () {
 
         })
 
+
+        address = {
+            districtId: $('#address').data('district-id'),
+            communeId: $('#address').data('commune-id'),
+        }
+
         console.log("Ship items: ", items);
-         cost = await getShipCost(items);
+        console.    log("Address : ", address);
+        cost = await getShipCost(items, address);
         console.log("cost: ", cost);
 
         totalPrice += cost;
@@ -133,11 +140,11 @@ $(document).ready(function () {
 })
 
 
-async function getShipCost(items) {
+async function getShipCost(items, address) {
     const payload = {
         service_type_id: 5,
-        to_district_id: 1820,
-        to_ward_code: "030712",
+        to_district_id: parseInt(address.districtId),
+        to_ward_code: String(<address className="communeId"></address>),
         weight: 1,
         items: items,
     };
