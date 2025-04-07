@@ -50,7 +50,7 @@
 
                 <button class="add-product-btn" id="show-add-tag-box">+ Thêm</button>
             </div>
-
+            <div class="table-wrapper">
             <table class="product-table">
                 <thead>
                 <tr>
@@ -125,7 +125,7 @@
                 </c:forEach>
                 </tbody>
             </table>
-
+            </div>
             <div class="pagination">
                 <button class="prev-btn">Trước</button>
                 <button class="page-number active">1</button>

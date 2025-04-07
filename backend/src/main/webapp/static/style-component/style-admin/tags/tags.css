@@ -405,3 +405,30 @@ tr:hover{
     z-index: 9998; /* Slightly lower than the Add Category box */
 }
 
+
+.table-wrapper {
+    background-color: #ffffff; /* Nền trắng */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* đổ bóng nhẹ */
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #333333; /* Màu chữ đậm cho dễ đọc trên nền trắng */
+}
+
+.product-table th {
+    background-color: #f8f9fa; /* Header màu sáng */
+    color: #333333;
+    padding: 12px;
+}
+
+.product-table td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
