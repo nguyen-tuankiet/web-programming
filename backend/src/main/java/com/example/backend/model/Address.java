@@ -184,8 +184,11 @@ public class Address {
                 "id=" + id +
                 ", userId=" + userId +
                 ", province='" + province + '\'' +
+                ", provinceId=" + provinceId +
                 ", district='" + district + '\'' +
+                ", districtId=" + districtId +
                 ", commune='" + commune + '\'' +
+                ", communeId=" + communeId +
                 ", detail='" + detail + '\'' +
                 ", phone='" + phone + '\'' +
                 ", name='" + name + '\'' +

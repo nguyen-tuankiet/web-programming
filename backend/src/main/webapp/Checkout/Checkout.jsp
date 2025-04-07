@@ -141,7 +141,7 @@
 
             <div class="address">
                 <div class="address_title row ">
-                    <span class="">Địa Nhận hàng</span>
+                    <span class="">Địa chỉ Nhận hàng</span>
 
                 </div>
 
@@ -152,7 +152,13 @@
                         <c:forEach items="${addressList}" var="address">
 
                             <c:if test="${address.isDefault == true }">
-                                <div id="address" class="item_header row mid_align" data-address-id="${address.id}">
+                                <div id="address" class="item_header row mid_align"
+                                     data-address-id="${address.id}"
+                                     data-province-id="${address.provinceId}"
+                                     data-district-id="${address.districtId}"
+                                     data-commune-id="${address.communeId}"
+
+                                >
 
                                     <span class="name">${address.name}</span>
                                     <div class="rec_vertical"></div>
@@ -176,7 +182,13 @@
                             <c:forEach items="${addressList}" var="address">
 
                                 <c:if test="${found == false}">
-                                    <div id="address" class="item_header row mid_align" data-address-id="${address.id}">
+                                    <div id="address" class="item_header row mid_align"
+                                         data-address-id="${address.id}"
+`                                        data-province-id="${address.provinceId}"
+                                         data-district-id="${address.districtId}"
+                                         data-commune-id="${address.communeId}"
+
+                                    >
 
                                         <span class="name">${address.name}</span>
                                         <div class="rec_vertical"></div>
