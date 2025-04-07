@@ -29,6 +29,58 @@ $(document).ready(function () {
     })
     // set default cho 2 nut nay
     buy_now.attr('href', 'buy-now?productId=' + product_id + '&optionId=' + firstOption.attr('data-option-id'));
+    
+    // Thêm kiểm tra đăng nhập cho nút mua ngay
+    buy_now.on('click', function(e) {
+        e.preventDefault();
+        const sessionId = sessionStorage.getItem("sessionId");
+        if (!sessionId) {
+            alert("Bạn cần đăng nhập trước khi mua hàng!");
+            return;
+        }
+
+        // Kiểm tra sessionId có hợp lệ không
+        fetch("check-session", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `sessionId=${sessionId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.valid) {
+                // Gọi API BuyNowController
+                fetch("buy-now", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `productId=${product_id}&optionId=${firstOption.attr('data-option-id')}&sessionId=${sessionId}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = "checkout";
+                    } else {
+                        alert(data.message || "Có lỗi xảy ra khi xử lý đơn hàng");
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert("Có lỗi xảy ra. Vui lòng thử lại sau!");
+                });
+            } else {
+                alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
+                sessionStorage.removeItem("sessionId");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            alert("Có lỗi xảy ra. Vui lòng thử lại sau!");
+        });
+    });
+
     add_to_cart.on('click', function (e) {
         e.preventDefault();
         addToCart(product_id, firstOption.attr('data-option-id'));

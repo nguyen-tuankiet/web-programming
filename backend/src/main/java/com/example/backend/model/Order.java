@@ -25,6 +25,15 @@ public class Order {
     String productImage;
     String userName;
 
+//    Vận chuyển
+    Integer shippingFee;
+    String shippingId;
+
+
+
+//    Review
+    Boolean isReviewed;
+
 
     @JdbiConstructor
     public Order(@ColumnName("id") @Nullable Integer id,
@@ -40,7 +49,14 @@ public class Order {
                  @ColumnName("total") @Nullable Integer total,
                  @ColumnName("productName") @Nullable String productName,
                  @ColumnName("productImage") @Nullable String productImage,
-                 @ColumnName("userName") @Nullable String userName
+                 @ColumnName("userName") @Nullable String userName,
+
+
+                 @ColumnName("shippingFee") @Nullable Integer shippingFee,
+                 @ColumnName("shippingId") @Nullable String shippingId,
+
+
+                 @ColumnName("isReviewed") @Nullable Boolean isReviewed
 
     ){
         this.id = id;
@@ -56,6 +72,10 @@ public class Order {
         this.productName = productName;
         this.productImage = productImage;
         this.userName = userName;
+        this.shippingFee = shippingFee;
+        this.shippingId = shippingId;
+        this.isReviewed = false;
+
     }
 
 
@@ -168,6 +188,38 @@ public class Order {
         this.userName = userName;
     }
 
+    public Boolean getCOD() {
+        return isCOD;
+    }
+
+    public void setCOD(Boolean COD) {
+        isCOD = COD;
+    }
+
+    public Integer getShippingFee() {
+        return shippingFee;
+    }
+
+    public void setShippingFee(Integer shippingFee) {
+        this.shippingFee = shippingFee;
+    }
+
+    public String getShippingId() {
+        return shippingId;
+    }
+
+    public void setShippingId(String shippingId) {
+        this.shippingId = shippingId;
+    }
+
+    public Boolean getReviewed() {
+        return isReviewed;
+    }
+
+    public void setReviewed(Boolean reviewed) {
+        isReviewed = reviewed;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -183,6 +235,10 @@ public class Order {
                 ", total=" + total +
                 ", productName='" + productName + '\'' +
                 ", productImage='" + productImage + '\'' +
+                ", userName='" + userName + '\'' +
+                ", shippingFee=" + shippingFee +
+                ", shippingId='" + shippingId + '\'' +
+                ", isReviewed=" + isReviewed +
                 '}';
     }
 }

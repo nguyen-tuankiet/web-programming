@@ -78,20 +78,6 @@
                                 </div>
 
 
-<%--                                <c:choose>--%>
-<%--                                    <c:when test="${not empty p.stock and p.stock > 0}">--%>
-<%--                                        <div class="status">--%>
-<%--                                            <span class="status_type">Còn hàng</span>--%>
-<%--                                        </div>--%>
-<%--                                    </c:when>--%>
-
-<%--                                    <c:otherwise>--%>
-<%--                                        <div class="status">--%>
-<%--                                            <span class="status_type">Đang về hàng</span>--%>
-<%--                                        </div>--%>
-<%--                                    </c:otherwise>--%>
-<%--                                </c:choose>--%>
-
 
                                 <div class="status">
                                     <span class="status_type">Còn hàng</span>
@@ -171,7 +157,7 @@
 
 
                     <button type="submit" id="pay">
-                        Thanh Toán
+                        Tiếp tục
                     </button>
 
                     <div class="term_condition">

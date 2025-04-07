@@ -72,6 +72,7 @@ public interface ProductDAO {
 
     @SqlQuery(value =
             "SELECT p.id as id, p.name as name, p.description as description, " +
+                    " p.height as height , p.length as length , p.width as width , p.weight as weight, "+
                     "         p.isActive as isActive, " +
                     "       p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
                     "        p.primaryImage as primaryImage, " +
@@ -110,8 +111,8 @@ public interface ProductDAO {
 
 
 
-    @SqlUpdate("INSERT INTO products (name,description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage, sku) "
-            + "VALUES (:name, :description,COALESCE(:isActive, 1), :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL), :sku)")
+    @SqlUpdate("INSERT INTO products (name,description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage, sku, height,length, width, weight ) "
+            + "VALUES (:name, :description,COALESCE(:isActive, 1), :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL), :sku,:height, :length, :width, :weight )")
     @GetGeneratedKeys
     int addProduct(@Bind("name") String name,
                    @Bind("description") String description,
@@ -119,7 +120,12 @@ public interface ProductDAO {
                    @Bind("categoryId") Integer categoryId,
                    @Bind("brandId") Integer brandId,
                    @Bind("primaryImage") Integer primaryImage,
-                   @Bind("sku") String sku);
+                   @Bind("sku") String sku,
+                   @Bind("height") Integer height,
+                   @Bind("length") Integer length,
+                   @Bind("width") Integer width,
+                   @Bind("weight") Integer weight
+    );
     @SqlQuery("""
                SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
                FROM products p

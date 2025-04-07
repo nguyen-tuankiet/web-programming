@@ -24,8 +24,16 @@ public class Product {
     String categoryName;
     String imageUrl;
 
+    Integer height;
+    Integer length;
+    Integer width;
+    Integer weight;
 
-    @ConstructorProperties({"id", "name", "sku", "description", "isActive", "categoryId", "brandId", "noOfViews", "noOfSold", "primaryImage", "imageUrl", "price", "optionId", "stock", "categoryName"})
+
+    @ConstructorProperties({"id", "name", "sku", "description", "isActive", "categoryId", "brandId"
+            , "noOfViews", "noOfSold", "primaryImage", "imageUrl", "price", "optionId", "stock", "categoryName"
+            , "height", "length", "width", "weight"
+    })
     public Product(
             @ColumnName("id") Integer id,
             @ColumnName("name") @Nullable String name,
@@ -41,7 +49,12 @@ public class Product {
             @ColumnName("price") @Nullable Integer price,
             @ColumnName("optionId") @Nullable Integer optionId,
             @ColumnName("stock") @Nullable Integer stock,
-            @ColumnName("categoryName") @Nullable String categoryName
+            @ColumnName("categoryName") @Nullable String categoryName,
+            @ColumnName("height") @Nullable Integer height,
+            @ColumnName("length") @Nullable Integer length,
+            @ColumnName("width") @Nullable Integer width,
+            @ColumnName("weight") @Nullable Integer weight
+
     ) {
         this.id = id;
         this.name = name;
@@ -58,6 +71,47 @@ public class Product {
         this.stock = stock;
         this.imageUrl = imageUrl;
         this.categoryName = categoryName;
+        this.height = height;
+        this.length = length;
+        this.width = width;
+        this.weight = weight;
+    }
+
+
+    public Product(
+            Integer id,
+            @Nullable String name,
+            @Nullable String sku,
+            @Nullable String description,
+            @Nullable Boolean isActive,
+            @Nullable Integer categoryId,
+            @Nullable Integer brandId,
+            @Nullable Integer noOfViews,
+            @Nullable Integer noOfSold,
+            @Nullable Integer primaryImage,
+            @Nullable String imageUrl,
+            @Nullable Integer price,
+            @Nullable Integer optionId,
+            @Nullable Integer stock,
+            @Nullable String categoryName
+
+    ) {
+        this.id = id;
+        this.name = name;
+        this.sku = sku;
+        this.description = description;
+        this.isActive = isActive;
+        this.categoryId = categoryId;
+        this.brandId = brandId;
+        this.noOfViews = noOfViews;
+        this.noOfSold = noOfSold;
+        this.primaryImage = primaryImage;
+        this.price = price;
+        this.optionId = optionId;
+        this.stock = stock;
+        this.imageUrl = imageUrl;
+        this.categoryName = categoryName;
+
     }
 
 
@@ -185,6 +239,38 @@ public class Product {
     }
 
 
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -203,6 +289,10 @@ public class Product {
                 ", optionId=" + optionId +
                 ", categoryName='" + categoryName + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", height=" + height +
+                ", length=" + length +
+                ", width=" + width +
+                ", weight=" + weight +
                 '}';
     }
 }

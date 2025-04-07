@@ -74,6 +74,9 @@
                      data-stock="${p.stock}"
                      data-id="${p.productId}"  data-option-id="${p.optionId}"
                      data-quantity="${p.quantity}" data-price="${p.price}"
+
+                     data-height = "${p.height}" data-length = "${p.length}"
+                     data-width = "${p.width}" data-weight = "${p.weight}"
                 >
 
                 <div class="image">
@@ -138,7 +141,7 @@
 
             <div class="address">
                 <div class="address_title row ">
-                    <span class="">Địa Nhận hàng</span>
+                    <span class="">Địa chỉ Nhận hàng</span>
 
                 </div>
 
@@ -149,7 +152,13 @@
                         <c:forEach items="${addressList}" var="address">
 
                             <c:if test="${address.isDefault == true }">
-                                <div id="address" class="item_header row mid_align" data-address-id="${address.id}">
+                                <div id="address" class="item_header row mid_align"
+                                     data-address-id="${address.id}"
+                                     data-province-id="${address.provinceId}"
+                                     data-district-id="${address.districtId}"
+                                     data-commune-id="${address.communeId}"
+
+                                >
 
                                     <span class="name">${address.name}</span>
                                     <div class="rec_vertical"></div>
@@ -173,7 +182,13 @@
                             <c:forEach items="${addressList}" var="address">
 
                                 <c:if test="${found == false}">
-                                    <div id="address" class="item_header row mid_align" data-address-id="${address.id}">
+                                    <div id="address" class="item_header row mid_align"
+                                         data-address-id="${address.id}"
+`                                        data-province-id="${address.provinceId}"
+                                         data-district-id="${address.districtId}"
+                                         data-commune-id="${address.communeId}"
+
+                                    >
 
                                         <span class="name">${address.name}</span>
                                         <div class="rec_vertical"></div>
@@ -300,6 +315,11 @@
                     <span id="VAT" class="value">0 VND</span>
                 </div>
 
+                <div class="ship item_price">
+                    <span>Phí vận chuyển</span>
+                    <span id="ship_fee" class="value">0 VND</span>
+                </div>
+
             </div>
 
 
@@ -308,7 +328,7 @@
                     <span>Tổng cộng</span>
                     <span id="total">0 VND</span>
                 </div>
-                <span class="note">Đẫ bao gồm thuế GTGT</span>
+                <span class="note">Đã bao gồm thuế GTGT</span>
             </div>
 
 
