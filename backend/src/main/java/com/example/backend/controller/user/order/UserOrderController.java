@@ -28,7 +28,14 @@ public class UserOrderController extends HttpServlet {
         try {
 
             orders = orderSerivce.getOrdersByUserId(userId);
+            int savings = orders.stream().mapToInt(Order::getTotal).sum();
+            int roundedSavings = Math.round(savings / 1_000_000f);
+
+
+            request.setAttribute("count", orders.size());
             request.setAttribute("orders", orders);
+            request.setAttribute("savings", roundedSavings);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
