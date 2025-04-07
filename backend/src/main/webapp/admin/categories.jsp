@@ -46,7 +46,7 @@
                 <button class="add-product-btn">+ Thêm</button>
             </div>
 
-
+            <div class="table-wrapper">
             <table class="product-table">
                 <thead>
                 <tr>
@@ -129,7 +129,7 @@
                 </c:if>
                 </tbody>
             </table>
-
+            </div>
             <div class="pagination">
                 <button class="prev-btn">Trước</button>
                 <button class="page-number active">1</button>
