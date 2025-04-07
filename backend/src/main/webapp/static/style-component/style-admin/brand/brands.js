@@ -137,28 +137,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ==== Cập nhật trạng thái brand (toggle) ====
-document.querySelectorAll(".brand-status-toggle").forEach(statusEl => {
-    statusEl.addEventListener("click", () => {
-        const brandId = statusEl.dataset.id;
-        const isActive = statusEl.classList.contains("active");
+document.querySelectorAll(".toggle-icon").forEach(icon => {
+    icon.addEventListener("click", () => {
+        const brandId = icon.dataset.id;
+        const isActive = icon.dataset.active === "true";
 
-        fetch("/admin/brand", {
+        fetch(`${contextPath}/admin/api/brand/${brandId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: brandId, isActive: !isActive })
         })
             .then(res => res.json())
             .then(data => {
-                if (data.success) {
+                if (data.status === "success" || data.success === true) {
+                    // Cập nhật DOM
+                    const row = icon.closest("tr");
+                    const statusEl = row.querySelector(".brand-status-toggle");
+
                     statusEl.classList.toggle("active", !isActive);
                     statusEl.classList.toggle("deactive", isActive);
                     statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
+
+                    icon.dataset.active = (!isActive).toString();
+                    icon.querySelector("i").className = `fa-solid ${!isActive ? 'fa-trash' : 'fa-eye-slash'}`;
                 } else {
                     alert("Cập nhật trạng thái thất bại!");
                 }
             })
             .catch(err => {
-                console.error("Lỗi khi cập nhật trạng thái brand:", err);
+                console.error("Lỗi kết nối toggle trạng thái:", err);
+                alert("Lỗi kết nối!");
             });
     });
 });
+
+
+

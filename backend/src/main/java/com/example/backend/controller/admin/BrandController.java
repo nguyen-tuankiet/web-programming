@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "BrandController", urlPatterns = {"/admin/api/brand/*"})
 public class BrandController extends HttpServlet {
@@ -106,57 +107,51 @@ public class BrandController extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String pathInfo = request.getPathInfo();
-            if (pathInfo == null || pathInfo.equals("/")) {
-                throw new IllegalArgumentException("Category ID is required");
-            }
+        String pathInfo = request.getPathInfo();
+        if (pathInfo == null || pathInfo.equals("/")) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": \"error\", \"message\": \"ID is required\"}");
+            return;
+        }
 
-            String[] pathParts = pathInfo.split("/");
-            if (pathParts.length != 2) {
-                throw new IllegalArgumentException("Invalid request");
-            }
+        String[] pathParts = pathInfo.split("/");
+        if (pathParts.length != 2) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": \"error\", \"message\": \"Invalid path\"}");
+            return;
+        }
 
-            Integer id = Integer.parseInt(pathParts[1]);
+        Integer id = Integer.parseInt(pathParts[1]);
 
-            // Đọc JSON từ body request
-            StringBuilder jsonBuilder = new StringBuilder();
-            String line;
-            try (BufferedReader reader = request.getReader()) {
-                while ((line = reader.readLine()) != null) {
-                    jsonBuilder.append(line);
-                }
-            }
-            String jsonString = jsonBuilder.toString();
+        // Đọc body
+        BufferedReader reader = request.getReader();
+        String json = reader.lines().collect(Collectors.joining());
 
-            // Parse JSON để lấy giá trị "name"
-            ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> jsonData = objectMapper.readValue(json, new TypeReference<>() {});
 
-            String name = jsonData.get("name");
+        // Nếu có key "isActive" thì cập nhật trạng thái
+        if (jsonData.containsKey("isActive")) {
+            boolean isActive = (Boolean) jsonData.get("isActive");
+            brandService.toggleBrandStatus(id, isActive);
 
-            if (name == null || name.isEmpty()) {
-                throw new IllegalArgumentException("Name is required");
-            }
+            response.setContentType("application/json");
+            response.getWriter().write("{\"status\": \"success\"}");
+            return;
+        }
 
-            // Cập nhật category
+        // Nếu có key "name" thì cập nhật tên
+        if (jsonData.containsKey("name")) {
+            String name = (String) jsonData.get("name");
             brandService.updateBrand(id, name);
+            Brand updatedBrand = brandService.getBrandById(id);
 
-            // Truy vấn lại để lấy dữ liệu category đã cập nhật
-            Brand updatedCategory = brandService.getBrandById(id);
-
-            // Phản hồi thành công
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    200, "success", "Category updated successfully", updatedCategory);
-            writeResponse(response, responseWrapper);
-        } catch (IllegalArgumentException e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    400, "error", e.getMessage(), null);
-            writeResponse(response, responseWrapper);
-        } catch (Exception e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    500, "error", "Internal server error: " + e.getMessage(), null);
-            writeResponse(response, responseWrapper);
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(200, "success", "Updated brand", updatedBrand);
+            response.setContentType("application/json");
+            response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+        } else {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            response.getWriter().write("{\"status\": \"error\", \"message\": \"Missing data\"}");
         }
     }
 
