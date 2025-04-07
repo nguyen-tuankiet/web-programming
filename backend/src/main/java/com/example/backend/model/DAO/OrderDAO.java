@@ -14,9 +14,9 @@ import java.util.List;
 @RegisterConstructorMapper(Order.class)
 public interface OrderDAO {
 
-    @SqlUpdate(value = "INSERT INTO orders(createAt, paymentStatus, orderStatus, userId, addressId, cardId, isCOD)" +
+    @SqlUpdate(value = "INSERT INTO orders(createAt, paymentStatus, orderStatus, userId, addressId, cardId, isCOD, shippingFee)" +
             "VALUE (" +
-            "  :createAt , :paymentStatus, :orderStatus , :userId, :addressId, :cardId, :isCOD" +
+            "  :createAt , :paymentStatus, :orderStatus , :userId, :addressId, :cardId, :isCOD, :shippingFee" +
             " )")
 
     @GetGeneratedKeys
@@ -27,7 +27,8 @@ public interface OrderDAO {
             @Bind("userId") Integer userId,
             @Bind("addressId") Integer addressId,
             @Bind("cardId") Integer cardId,
-            @Bind("isCOD") Boolean isCOD
+            @Bind("isCOD") Boolean isCOD,
+            @Bind("shippingFee") Integer shippingFee
     );
 
 

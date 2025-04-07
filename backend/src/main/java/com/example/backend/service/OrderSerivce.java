@@ -26,7 +26,8 @@ public class OrderSerivce {
                 order.getUserId(),
                 order.getAddressId(),
                 order.getCardId(),
-                order.getIsCOD()
+                order.getIsCOD(),
+                order.getShippingFee()
         );
     }
 
