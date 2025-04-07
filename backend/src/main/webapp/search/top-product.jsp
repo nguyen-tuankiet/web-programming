@@ -49,7 +49,7 @@
 
 
     <div class="operation col">
-        <button id="buy_now"><a href="javascript:void(0)">Mua ngay</a></button>
+        <button id="buy_now" onclick="checkLoginAndBuy(event)">Mua ngay</button>
         <button class="btn add">Thêm vào giỏ hàng</button>
     </div>
     <div id="cart-notification" class="notification hidden">
@@ -59,6 +59,37 @@
 
 
 </div>
+<script>
+function checkLoginAndBuy(event) {
+    event.preventDefault();
+    const sessionId = sessionStorage.getItem("sessionId");
+    if (!sessionId) {
+        alert("Bạn cần đăng nhập trước khi mua hàng!");
+        return;
+    }
+
+    // Gọi API BuyNowController
+    fetch("buy-now", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `productId=${product.id}&optionId=${product.optionId}&sessionId=${sessionId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            window.location.href = "checkout.jsp";
+        } else {
+            alert(data.message || "Có lỗi xảy ra khi xử lý đơn hàng");
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        alert("Có lỗi xảy ra. Vui lòng thử lại sau!");
+    });
+}
+</script>
 <script src="${pageContext.request.contextPath}/static/style-component/style_product/TopProduct.js"></script>
 
 

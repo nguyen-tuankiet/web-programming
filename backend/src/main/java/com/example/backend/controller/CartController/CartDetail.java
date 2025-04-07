@@ -24,6 +24,8 @@ public class CartDetail extends HttpServlet {
             session.setAttribute("cart", cart);
         }
         List<ProductCart> productCarts = cart.getProducts();
+
+
         request.setAttribute("productCarts", productCarts);
 
         request.getRequestDispatcher("cart/cart.jsp").forward(request, response);

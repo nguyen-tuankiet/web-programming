@@ -102,7 +102,11 @@ public class CheckoutController extends HttpServlet {
         JSONObject jsonObject = new JSONObject(stringBuilder.toString());
         String address = jsonObject.getString("address_id");
         String card = jsonObject.getString("card");
+        Integer shipping_fee = jsonObject.getInt("ship_fee");
         JSONArray products = jsonObject.getJSONArray("products");
+
+
+
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
 
@@ -110,6 +114,7 @@ public class CheckoutController extends HttpServlet {
         order.setCreateAt(LocalDate.now());
         order.setPaymentStatus("PAID");
         order.setOrderStatus("DELIVERY");
+        order.setShippingFee(shipping_fee);
         order.setUserId(userId);
         try {
             order.setAddressId(Integer.parseInt(address));

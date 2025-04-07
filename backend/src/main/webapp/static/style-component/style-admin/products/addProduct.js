@@ -669,9 +669,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const price = document.getElementById("price").value.trim();
         const stock = document.getElementById("total").value.trim();
         const tags = document.getElementById("tags").value.trim();
+
+        // Lấy kích thước cân năng
+        const height = document.getElementById("height").value.trim();
+        const length = document.getElementById("length").value.trim();
+        const width = document.getElementById("width").value.trim();
+        const weight = document.getElementById("weight").value.trim();
+
+
         const imageUpload = fileInput.files;
 
-        if (!productName || !category || !price || !stock || imageUpload.length === 0 || !brand) {
+        if (!productName || !category || !price || !stock
+            || imageUpload.length === 0 || !brand
+            || height === 0 || length === 0 || width === 0 || weight === 0
+        ) {
             return null;
         }
 
@@ -684,6 +695,10 @@ document.addEventListener("DOMContentLoaded", () => {
             price,
             stock,
             tags,
+            height,
+            length,
+            width,
+            weight,
             imageUpload
         };
     }
@@ -713,9 +728,16 @@ document.addEventListener("DOMContentLoaded", () => {
             stock: parseInt(formData.stock),
             brandId: formData.brand,
             tags: formData.tags.split(",").map(tag => tag.trim()),
+            height: parseInt(formData.height),
+            length: parseInt(formData.length),
+            width: parseInt(formData.width),
+            weight: parseInt(formData.weight),
+
             isActive: true,
             primaryImage: uploadData.data[0].id,
         };
+
+        console.log(productData);
 
         const response = await fetch("products", {
             method: "POST",

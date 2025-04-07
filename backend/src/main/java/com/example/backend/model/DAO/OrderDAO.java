@@ -14,9 +14,9 @@ import java.util.List;
 @RegisterConstructorMapper(Order.class)
 public interface OrderDAO {
 
-    @SqlUpdate(value = "INSERT INTO orders(createAt, paymentStatus, orderStatus, userId, addressId, cardId, isCOD)" +
+    @SqlUpdate(value = "INSERT INTO orders(createAt, paymentStatus, orderStatus, userId, addressId, cardId, isCOD, shippingFee)" +
             "VALUE (" +
-            "  :createAt , :paymentStatus, :orderStatus , :userId, :addressId, :cardId, :isCOD" +
+            "  :createAt , :paymentStatus, :orderStatus , :userId, :addressId, :cardId, :isCOD, :shippingFee" +
             " )")
 
     @GetGeneratedKeys
@@ -27,15 +27,16 @@ public interface OrderDAO {
             @Bind("userId") Integer userId,
             @Bind("addressId") Integer addressId,
             @Bind("cardId") Integer cardId,
-            @Bind("isCOD") Boolean isCOD
+            @Bind("isCOD") Boolean isCOD,
+            @Bind("shippingFee") Integer shippingFee
     );
 
 
 
     @SqlQuery(value ="select\n" +
             "    o.id , o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
-            "    sum(od.quantity) as quantity, sum(od.total) as total,\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD,  o.shippingFee as  shippingFee, " +
+            "    sum(od.quantity) as quantity, (sum(od.total)+  o.shippingFee) as total,\n" +
             "    min(p.name) as productName,\n" +
             "    i.url as productImage\n" +
             "from orders as o inner join order_detail as od\n" +
@@ -47,7 +48,7 @@ public interface OrderDAO {
             "where o.userId = :userId\n" +
             "group by\n" +
             "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD, o.shippingFee " +
             "order by o.createAt desc  ;"
 
     )
@@ -56,14 +57,15 @@ public interface OrderDAO {
 
     @SqlQuery(value = "select\n" +
             "    o.id as id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD," +
             "    sum(od.total) as total\n" +
             "from orders as o inner join order_detail as od\n" +
             "                            on o.id = od.orderId\n" +
             "where o.userId = :userId and o.id = :orderId\n" +
             "group by\n" +
             "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD\n")
+            "    o.userId, o.addressId, o.cardId, o.isCOD" +
+            " order by o.createAt DESC ")
         Order getOrderByIdAndUserId(@Bind("orderId") Integer orderId, @Bind("userId") Integer userId);
 
 

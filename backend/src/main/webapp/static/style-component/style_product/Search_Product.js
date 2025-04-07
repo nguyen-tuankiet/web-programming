@@ -17,23 +17,15 @@ function addToCart(productId, optionId) {
 
 
 function buyNow(productId, optionId) {
-    window.location.href = `buy-now?productId=${productId}&optionId=${optionId}`;
+    const sessionId = sessionStorage.getItem("sessionId");
+    if (!sessionId) {
+        alert("Bạn cần đăng nhập trước khi mua hàng!");
+        return;
+    }
+    else {
+        window.location.href = `buy-now?productId=${productId}&optionId=${optionId}`;
+    }
 
-
-    // fetch(`buy-now?productId=${productId}&optionId=${optionId}`, {
-    //     method: "POST",
-    //     headers: {  "Content-Type": "application/x-www-form-urlencoded"},
-    //     // body: `productId=${productId}&optionId=${optionId}`
-    // })
-    //     .then(response => response.json())
-    // .then(data => {
-    //     console.log(data);
-    //     if (data.ok){
-    //         window.location.href = `buy-now?productId=${productId}&optionId=${optionId}`;
-    //     }
-    //     // window.location.href= "cart";
-    //
-    //
-    // }).catch(error => console.log(error));
 
 }
+

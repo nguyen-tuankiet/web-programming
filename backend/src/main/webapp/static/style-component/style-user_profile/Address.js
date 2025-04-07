@@ -33,33 +33,52 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 $(document).ready(function () {
-    $("#province, #district, #commune").select2({ width: '100%' });
+    $("#province, #district, #commune").select({ width: '100%' });
 
-    // Load danh sách tỉnh
-    fetch("https://provinces.open-api.vn/api/?depth=1")
+    fetch("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "token": "676e7671-116a-11f0-95d0-0a92b8726859"
+        }
+    })
         .then(response => response.json())
         .then(data => {
             $("#province").append(new Option("Chọn tỉnh", ""));
-            data.forEach(province => {
-                $("#province").append(new Option(province.name, province.code));
+            data.data.forEach(province => {
+                $("#province").append(new Option(province.ProvinceName, province.ProvinceID));
             });
-        });
+        })
+        .catch(error => console.error("Lỗi khi gọi API:", error));
+
 
     // Khi chọn tỉnh -> Load huyện
     $("#province").on("change", function () {
-        let provinceID = $(this).val();
+        let provinceId = $(this).val();
         let provinceName = $("#province option:selected").text();
-        $("#province").attr("data-name", provinceName);
+        $(this).attr("data-name", provinceName);
+        $(this).attr("data-id", provinceId);
+
 
         $("#district").empty().append(new Option("Chọn huyện", ""));
-        $("#commune").empty().append(new Option("Chọn xã", ""));
 
-        if (provinceID) {
-            fetch(`https://provinces.open-api.vn/api/p/${provinceID}?depth=2`)
+        if (provinceId) {
+            fetch(`https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "token": "676e7671-116a-11f0-95d0-0a92b8726859",
+
+                },
+                body: JSON.stringify({
+                    province_id: parseInt(provinceId),
+                })
+
+            })
                 .then(response => response.json())
                 .then(data => {
-                    data.districts.forEach(district => {
-                        $("#district").append(new Option(district.name, district.code));
+                    data.data.forEach(district => {
+                        $("#district").append(new Option(district.DistrictName, district.DistrictID));
                     });
                 });
         }
@@ -67,18 +86,28 @@ $(document).ready(function () {
 
     // Khi chọn huyện -> Load xã
     $("#district").on("change", function () {
-        let districtID = $(this).val();
+        let districtId = $(this).val();
         let districtName = $("#district option:selected").text();
-        $("#district").attr("data-name", districtName);
+        $(this).attr("data-name", districtName);
+        $(this).attr("data-id", districtId);
 
         $("#commune").empty().append(new Option("Chọn xã", ""));
 
-        if (districtID) {
-            fetch(`https://provinces.open-api.vn/api/d/${districtID}?depth=2`)
+        if (districtId ) {
+            fetch(`https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "token": "676e7671-116a-11f0-95d0-0a92b8726859",
+                },
+                body: JSON.stringify({
+                    district_id: parseInt( districtId )
+                })
+            })
                 .then(response => response.json())
                 .then(data => {
-                    data.wards.forEach(commune => {
-                        $("#commune").append(new Option(commune.name, commune.code));
+                    data.data.forEach(commune => {
+                        $("#commune").append(new Option(commune.WardName, commune.WardCode));
                     });
                 });
         }
@@ -86,9 +115,12 @@ $(document).ready(function () {
 
     // Khi chọn xã -> Lưu tên xã
     $("#commune").on("change", function () {
+        let communeId = $(this).val();
         let communeName = $("#commune option:selected").text();
-        $("#commune").attr("data-name", communeName);
+        $(this).attr("data-name", communeName);
+        $(this).attr("data-id", communeId);
     });
+
 
 
 // Kiểm tra số điện thoại
@@ -106,14 +138,23 @@ document.querySelector("form").addEventListener("submit", function(event) {
     let formData = {
         userId: userId,
         province: document.getElementById("province").getAttribute("data-name"),
+        provinceId: $("#province").attr("data-id"),
+
         district: document.getElementById("district").getAttribute("data-name"),
+        districtId: $("#district").attr("data-id"),
+
         commune: document.getElementById("commune").getAttribute("data-name"),
+        communeId:  $("#commune").attr("data-id"),
+
         detail: document.getElementById("detail").value,
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
         type: document.querySelector('input[name="addressType"]:checked').value,
         isDefault: document.getElementById("default").checked
     };
+
+    console.log(formData);
+
 
     fetch("/add-address", {
         method: "POST",

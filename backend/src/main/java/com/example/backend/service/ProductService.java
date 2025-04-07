@@ -61,8 +61,14 @@ public class ProductService {
         String generatedSku = "HKS-" + System.currentTimeMillis();
         product.setSku(generatedSku);
 
-        int productId = productDao.addProduct(product.getName(), product.getDescription(),
-                product.getActive(), product.getCategoryId(), product.getBrandId(), product.getPrimaryImage(), product.getSku());
+        int productId = productDao.addProduct(
+                product.getName(), product.getDescription(),
+                product.getActive(), product.getCategoryId(),
+                product.getBrandId(), product.getPrimaryImage(), product.getSku(),
+                product.getHeight(), product.getLength(), product.getWidth(), product.getWeight()
+
+        );
+
 
         if (productId > 0) {
             product.setId(productId);
@@ -130,6 +136,10 @@ public class ProductService {
 
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());
-        System.out.println(productService.suggestProducts( ).size());
+//        System.out.println(productService.suggestProducts( ).size());
+        System.out.println(productService.getProductByIdAndOptionId(211, 85
+        ));
+
     }
+
 }
