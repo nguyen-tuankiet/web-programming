@@ -65,7 +65,6 @@
         Mật khẩu xác nhận không khớp với mật khẩu.
       </div>
 
-
       <div class="infield terms">
         <input type="checkbox" id="terms-checkbox" required />
         <label for="terms-checkbox">
@@ -128,9 +127,5 @@
 <main>
   <script src="${pageContext.request.contextPath}/static/style-page/auth/auth.js"></script>
 </main>
-
-<% if (request.getAttribute("errorMessage") != null) { %>
-<p style="color: red;"><%= request.getAttribute("errorMessage") %></p>
-<% } %>
 </body>
 </html>
