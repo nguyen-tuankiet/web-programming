@@ -618,6 +618,8 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `avatarId` int(11) DEFAULT NULL,
+  `status` enum('PENDING','ACTIVE','BANNED','DEACTIVE') NOT NULL DEFAULT 'PENDING',
+  `confirmationToken` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `user_fk1` (`avatarId`),
@@ -628,27 +630,27 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (1, 'Nguyen Thi Bao', 'Bao Nguyen', '1995-08-11', 'Female', '0911223345', 'bao.nguyen@example.com', 'password103', 28);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (2, 'Tran Quang Hieu', 'Hieu Tran', '1993-04-20', 'Male', '0922334456', 'hieu.tran@example.com', 'password104', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (3, 'Le Thi Mai Lan', 'Mai Lan Le', '1992-07-12', 'Female', '0933445567', 'mailan.le@example.com', 'password105', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (4, 'Pham Quoc Duy', 'Duy Pham', '1991-11-14', 'Male', '0944556678', 'duy.pham@example.com', 'password106', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (5, 'Nguyen Thi Thanh', 'Thanh Nguyen', '1990-02-08', 'Female', '0955667789', 'thanh.nguyen@example.com', 'password107', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (6, 'Vu Minh Tuan', 'Tuan Vu', '1989-06-25', 'Male', '0966778890', 'tuan.vu@example.com', 'password108', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (7, 'Nguyen Minh Tu', 'Tu Nguyen', '1994-09-01', 'Male', '0977889901', 'tu.nguyen@example.com', 'password109', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (8, 'Do Thi Lan', 'Lan Do', '1995-03-15', 'Female', '0988990012', 'lan.do@example.com', 'password110', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (9, 'Hoang Minh Tien', 'Tien Hoang', '1993-12-04', 'Male', '0999001123', 'tien.hoang@example.com', 'password111', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (10, 'Pham Thi Kim', 'Kim Pham', '1987-01-18', 'Female', '0911223345', 'kim.pham@example.com', 'password112', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (11, 'Le Minh Bao', 'Bao Le', '1996-07-23', 'Male', '0922334456', 'bao.le@example.com', 'password113', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (12, 'Truong Thi Thu', 'Thu Truong', '1988-05-10', 'Female', '0933445567', 'thu.truong@example.com', 'password114', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (13, 'Nguyen Thi Hoa', 'Hoa Nguyen', '1990-04-05', 'Female', '0944556678', 'hoa.nguyen@example.com', 'password115', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (14, 'Mai Thi Lan', 'Lan Mai', '1992-08-14', 'Female', '0955667789', 'lan.mai@example.com', 'password116', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (15, 'Bui Minh Tuan', 'Tuan Bui', '1994-06-11', 'Male', '0966778890', 'tuan.bui@example.com', 'password117', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (16, 'Nguyen Thi Tieu', 'Tieu Nguyen', '1993-10-29', 'Female', '0977889901', 'tieu.nguyen@example.com', 'password118', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (17, 'Le Quang Hieu', 'Hieu Le', '1991-03-19', 'Male', '0988990012', 'hieu.le@example.com', 'password119', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (18, 'Pham Thi Mai', 'Mai Pham', '1987-07-30', 'Female', '0999001123', 'mai.pham@example.com', 'password120', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (19, 'Trinh Minh Nam', 'Nam Trinh', '1992-11-05', 'Male', '0911223345', 'nam.trinh@example.com', 'password121', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (20, 'Ho Thi Thu', 'Thu Ho', '1993-02-14', 'Female', '0922334456', 'thu.ho@example.com', 'password122', NULL);
-INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`) VALUES (21, 'Tuan Kiet', 'Kiet Cute', '2004-10-10', 'other', '9999999', 'kiet@gmai.com', 'newPassword', 1);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (1, 'Nguyen Thi Bao', 'Bao Nguyen', '1995-08-11', 'Female', '0911223345', 'bao.nguyen@example.com', 'password103', 28, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (2, 'Tran Quang Hieu', 'Hieu Tran', '1993-04-20', 'Male', '0922334456', 'hieu.tran@example.com', 'password104', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (3, 'Le Thi Mai Lan', 'Mai Lan Le', '1992-07-12', 'Female', '0933445567', 'mailan.le@example.com', 'password105', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (4, 'Pham Quoc Duy', 'Duy Pham', '1991-11-14', 'Male', '0944556678', 'duy.pham@example.com', 'password106', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (5, 'Nguyen Thi Thanh', 'Thanh Nguyen', '1990-02-08', 'Female', '0955667789', 'thanh.nguyen@example.com', 'password107', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (6, 'Vu Minh Tuan', 'Tuan Vu', '1989-06-25', 'Male', '0966778890', 'tuan.vu@example.com', 'password108', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (7, 'Nguyen Minh Tu', 'Tu Nguyen', '1994-09-01', 'Male', '0977889901', 'tu.nguyen@example.com', 'password109', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (8, 'Do Thi Lan', 'Lan Do', '1995-03-15', 'Female', '0988990012', 'lan.do@example.com', 'password110', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (9, 'Hoang Minh Tien', 'Tien Hoang', '1993-12-04', 'Male', '0999001123', 'tien.hoang@example.com', 'password111', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (10, 'Pham Thi Kim', 'Kim Pham', '1987-01-18', 'Female', '0911223345', 'kim.pham@example.com', 'password112', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (11, 'Le Minh Bao', 'Bao Le', '1996-07-23', 'Male', '0922334456', 'bao.le@example.com', 'password113', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (12, 'Truong Thi Thu', 'Thu Truong', '1988-05-10', 'Female', '0933445567', 'thu.truong@example.com', 'password114', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (13, 'Nguyen Thi Hoa', 'Hoa Nguyen', '1990-04-05', 'Female', '0944556678', 'hoa.nguyen@example.com', 'password115', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (14, 'Mai Thi Lan', 'Lan Mai', '1992-08-14', 'Female', '0955667789', 'lan.mai@example.com', 'password116', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (15, 'Bui Minh Tuan', 'Tuan Bui', '1994-06-11', 'Male', '0966778890', 'tuan.bui@example.com', 'password117', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (16, 'Nguyen Thi Tieu', 'Tieu Nguyen', '1993-10-29', 'Female', '0977889901', 'tieu.nguyen@example.com', 'password118', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (17, 'Le Quang Hieu', 'Hieu Le', '1991-03-19', 'Male', '0988990012', 'hieu.le@example.com', 'password119', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (18, 'Pham Thi Mai', 'Mai Pham', '1987-07-30', 'Female', '0999001123', 'mai.pham@example.com', 'password120', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (19, 'Trinh Minh Nam', 'Nam Trinh', '1992-11-05', 'Male', '0911223345', 'nam.trinh@example.com', 'password121', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (20, 'Ho Thi Thu', 'Thu Ho', '1993-02-14', 'Female', '0922334456', 'thu.ho@example.com', 'password122', NULL, 'ACTIVE', NULL);
+INSERT INTO `user` (`id`, `fullName`, `displayName`, `birth`, `gender`, `phone`, `email`, `password`, `avatarId`, `status`, `confirmationToken`) VALUES (21, 'Tuan Kiet', 'Kiet Cute', '2004-10-10', 'other', '9999999', 'kiet@gmai.com', 'newPassword', 1, 'ACTIVE', NULL);
 COMMIT;
 
 -- ----------------------------
