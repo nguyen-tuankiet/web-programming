@@ -76,6 +76,13 @@ public class BannerController extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> jsonData = objectMapper.readValue(json, new TypeReference<>() {});
 
+        if (jsonData.containsKey("isActive")) {
+            boolean isActive = (Boolean) jsonData.get("isActive");
+            bannerService.toggleBannerStatus(id, isActive);
+            response.getWriter().write("{\"status\": \"success\"}");
+            return;
+        }
+
         bannerService.updateBanner(
                 id,
                 (String) jsonData.get("status"),

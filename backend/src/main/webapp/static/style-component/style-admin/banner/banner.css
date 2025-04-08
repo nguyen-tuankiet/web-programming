@@ -474,3 +474,24 @@ tr:hover{
 .hidden {
     display: none;
 }
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    gap: 5px;
+}
+
+.pagination button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    background-color: #0a7cff;
+    color: white;
+    font-weight: bold;
+}
