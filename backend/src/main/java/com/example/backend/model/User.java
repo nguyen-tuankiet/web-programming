@@ -20,6 +20,8 @@ public class User {
     String role;
     String salt;
     String avatarUrl;
+    String status;
+    String confirmationToken;
 
     @JdbiConstructor
     public User(@ColumnName("id") Integer id,
@@ -33,7 +35,9 @@ public class User {
                 @ColumnName("avatarId") @Nullable Integer avatarId,
                 @ColumnName("role") @Nullable String role,
                 @ColumnName("salt")  @Nullable String salt,
-                @ColumnName("avatarUrl") @Nullable String avatarUrl )
+                @ColumnName("avatarUrl") @Nullable String avatarUrl,
+                @ColumnName("status") @Nullable String status,
+                @ColumnName("confirmationToken") @Nullable String confirmationToken)
 
     {
         this.id = id;
@@ -48,8 +52,9 @@ public class User {
         this.role = role;
         this.salt = salt;
         this.avatarUrl = avatarUrl;
+        this.status = status;
+        this.confirmationToken = confirmationToken;
     }
-
 
     public User() {
     }
@@ -146,6 +151,22 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -161,6 +182,8 @@ public class User {
                 ", role='" + role + '\'' +
                 ", salt='" + salt + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
+                ", status='" + status + '\'' +
+                ", confirmationToken='" + confirmationToken + '\'' +
                 '}';
     }
 }

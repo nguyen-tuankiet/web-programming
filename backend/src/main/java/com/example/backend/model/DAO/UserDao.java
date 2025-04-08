@@ -9,6 +9,7 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @RegisterConstructorMapper(User.class)
 public interface UserDao {
@@ -17,27 +18,33 @@ public interface UserDao {
     List<User> getAllUsers();
 
     @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
-            "        i.url as avatarUrl\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken\n" +
             "from user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
             "where u.id  = :id")
     User getUserById(@Bind("id") Integer id);
 
-
-
-
     @SqlQuery("SELECT * FROM user WHERE email = :email")
     User getUserByEmail(@Bind("email") String email);
 
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt) " +
-            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt)")
+    @SqlQuery("SELECT * FROM user WHERE confirmationToken = :token")
+    User getUserByConfirmationToken(@Bind("token") String token);
+
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt, status, confirmationToken) " +
+            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt, 'PENDING', :confirmationToken)")
     @GetGeneratedKeys("id")
     String createUser(@Bind("fullName") String fullName,
                       @Bind("displayName") String displayName,
                       @Bind("email") String email,
                       @Bind("password") String password,
-                      @Bind("salt") String salt);
+                      @Bind("salt") String salt,
+                      @Bind("confirmationToken") String confirmationToken);
 
+    @SqlUpdate("UPDATE user SET status = :status WHERE id = :id")
+    void updateUserStatus(@Bind("id") Integer id, @Bind("status") String status);
+
+    @SqlUpdate("UPDATE user SET status = :status WHERE confirmationToken = :token")
+    void updateUserStatusByToken(@Bind("token") String token, @Bind("status") String status);
 
     @SqlUpdate("UPDATE user SET fullname = :fullname, email = :email, password = :password WHERE id = :id")
     void updateUser(@Bind("id") Integer id,
@@ -51,19 +58,16 @@ public interface UserDao {
     @SqlUpdate("UPDATE user SET password = :password, salt = :salt WHERE id = :id")
     int updatePassword(@Bind("id") Integer id, @Bind("password") String password, @Bind("salt") String salt);
 
-
     @SqlQuery("SELECT * FROM user WHERE id = :id")
     User getPasswordByUserId(@Bind("id") Integer userId);
 
     @SqlQuery("SELECT url FROM image WHERE id = :avatarId")
     String getAvatarUrlById(@Bind("avatarId") Integer avatarId);
 
-
     @SqlUpdate(value ="UPDATE user\n" +
             "SET avatarId = :avatarId " +
             "where id = :userId")
     Boolean updateAvatar(@Bind("userId") Integer userId, @Bind("avatarId") Integer avatarId);
-
 
     @SqlUpdate(value = "UPDATE user\n" +
             "SET\n" +
@@ -82,7 +86,5 @@ public interface UserDao {
             @Bind("gender") String gender,
             @Bind("phone") String phone,
             @Bind("email") String email
-
     );
-
 }

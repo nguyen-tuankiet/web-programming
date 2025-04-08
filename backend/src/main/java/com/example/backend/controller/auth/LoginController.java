@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.jdbi.v3.core.Jdbi;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,11 +54,12 @@ public class LoginController extends HttpServlet {
 
             // Xử lý đăng nhập
             User user = authService.login(email, password);
+
             if (user != null) {
                 // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
-                session.setAttribute("role", user.getRole()); // Lưu thông tin role (nếu có)
+                session.setAttribute("role", user.getRole());
 
                 // Trả về thông tin người dùng
                 Map<String, String> userData = Map.of(
@@ -66,19 +68,23 @@ public class LoginController extends HttpServlet {
                         "displayName", user.getDisplayName(),
                         "email", user.getEmail(),
                         "role", user.getRole(),
+                        "status", user.getStatus(),
                         "sessionId", session.getId()
                 );
-
 
                 ResponseWrapper<Map<String, String>> responseWrapper = new ResponseWrapper<>(
                         200, "success", "Đăng nhập thành công", userData);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
             } else {
-                // Trả về lỗi nếu thông tin đăng nhập không hợp lệ
                 ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                        401, "error", "Email hoặc mật khẩu không chính xác", null);
+                        401, "error", "Có lỗi khi đăng nhập! Vui lòng kiểm tra lại.", null);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
             }
+        } catch (RuntimeException e) {
+            // Xử lý các lỗi liên quan đến trạng thái tài khoản
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                    401, "error", e.getMessage(), null);
+            response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
         } catch (Exception e) {
             // Xử lý lỗi hệ thống
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
@@ -87,10 +93,8 @@ public class LoginController extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/auth/auth.jsp").forward(request, response);
     }
-
 }
