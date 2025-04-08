@@ -70,7 +70,7 @@ public class RegisterController extends HttpServlet {
                 authService.saveSessionId(request, email, sessionId);
 
                 // Gửi email xác nhận
-                emailService.sendConfirmationEmail(email, sessionId);
+//                emailService.sendConfirmationEmail(email, sessionId);
 
                 // Chuẩn bị thông tin người dùng để trả về
                 Map<String, String> userData = Map.of(
