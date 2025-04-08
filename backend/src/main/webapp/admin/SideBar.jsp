@@ -303,18 +303,9 @@
             </li>
 
 
-<%--            <!-- Hồ sơ -->--%>
-<%--            <li class="menu_item">--%>
-<%--                <div class="wrap_menu_item">--%>
-<%--                    <i class="fa-solid fa-user"></i>--%>
-<%--                    <a href="profile">Hồ sơ</a>--%>
-<%--                </div>--%>
-<%--            </li>--%>
-
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-user"></i>
-<%--                    <a href="members">Thành Viên</a>--%>
                     <button onclick="location.href='${pageContext.request.contextPath}/admin/member'">
                         Thành viên
                     </button>
@@ -326,7 +317,6 @@
             <li class="menu_item">
                 <div class="wrap_menu_item">
                         <i class="fa-solid fa-warehouse"></i>
-<%--                        <a href="category">Danh mục</a>--%>
                     <button onclick="location.href='${pageContext.request.contextPath}/admin/category'">
                         Danh mục
                     </button>
@@ -344,15 +334,24 @@
                 </div>
             </li>
 
+            <%--Nhà sản xuất--%>
+            <li class="menu_item">
+                <div class="wrap_menu_item">
+                        <i class="fa-solid fa-warehouse"></i>
+                        <a href="brand">Nhà sản xuất</a>
+                </div>
+            </li>
+            <%--Banner--%>
 
             <li class="menu_item">
                 <div class="wrap_menu_item">
-                    <%--                    <i class="fa-solid fa-gear"></i>--%>
-                        <i class="fa-solid fa-warehouse"></i>
-                        <a href="brand">Nhà sản xuất</a>
-                    <%--                    <span>  Danh mục </span>--%>
+                    <i class="fa-regular fa-image"></i>
+                    <button onclick="location.href='${pageContext.request.contextPath}/admin/banner'">
+                        Quản lý Banner
+                    </button>
                 </div>
             </li>
+
 
             <li class="menu_item">
                 <div class="wrap_menu_item">
