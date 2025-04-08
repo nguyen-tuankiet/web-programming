@@ -33,4 +33,8 @@ public interface BannerDAO {
 
     @SqlUpdate("DELETE FROM banners WHERE id = :id")
     void deleteBanner(@Bind("id") Integer id);
+
+    @SqlUpdate("UPDATE banners SET isActive = :isActive WHERE id = :id")
+    void updateBannerStatus(@Bind("id") Integer id, @Bind("isActive") boolean isActive);
+
 }
