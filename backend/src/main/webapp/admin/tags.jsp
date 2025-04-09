@@ -37,18 +37,37 @@
 
         <div class="content">
             <div class="toolbar">
-                <div id="add-category-box" class="hidden">
-                    <h3>Thêm Tag</h3>
-                    <input type="text" id="tag-name" name="tagName" placeholder="Nhập tên tag"
-                           class="input-field" required/>
-                    <div id="tag-error-message" class="error hidden">Tên tag không được để trống</div>
-                    <div class="action-buttons">
-                        <button class="add-btn" id="add-tag-btn">Thêm</button>
-                        <button class="discard-btn" id="discard-tag-btn">Hủy</button>
-                    </div>
-                </div>
+<%--                <div id="add-category-box" class="hidden">--%>
+<%--                    <h3>Thêm Tag</h3>--%>
+<%--                    <input type="text" id="tag-name" name="tagName" placeholder="Nhập tên tag"--%>
+<%--                           class="input-field" required/>--%>
+<%--                    <div id="tag-error-message" class="error hidden">Tên tag không được để trống</div>--%>
+<%--                    <div class="action-buttons">--%>
+<%--                        <button class="add-btn" id="add-tag-btn">Thêm</button>--%>
+<%--                        <button class="discard-btn" id="discard-tag-btn">Hủy</button>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+                    <div id="add-category-box"
+                         class="hidden"
+                    >
+                        <h3>Thêm Tag</h3>
 
-                <button class="add-product-btn" id="show-add-tag-box">+ Thêm</button>
+                        <input type="text" id="tag-name" name="tagName" placeholder="Nhập tên tag"
+                               class="input-field" required/>
+                        <div id="tag-error-message" class="error hidden">Tên tag không được để trống</div>
+
+                        <select id="tag-status" class="input-field">
+                            <option value="true">Hoạt động</option>
+                            <option value="false">Không hoạt động</option>
+                        </select>
+
+                        <div class="action-buttons">
+                            <button class="add-btn" id="add-tag-btn">Thêm</button>
+                            <button class="discard-btn" id="discard-tag-btn">Hủy</button>
+                        </div>
+                    </div>
+
+    <button class="add-product-btn" id="show-add-tag-box">+ Thêm</button>
             </div>
             <div class="table-wrapper">
             <table class="product-table">

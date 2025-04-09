@@ -29,6 +29,11 @@ public interface TagDAO {
     @SqlUpdate("UPDATE tags SET isActive = :isActive WHERE id = :id")
     void updateTagStatus(@Bind("id") int id, @Bind("isActive") boolean isActive);
 
+    @SqlUpdate("INSERT INTO tags (name, isActive) VALUES (:name, :isActive)")
+    @GetGeneratedKeys
+    int createTag(@Bind("name") String name, @Bind("isActive") boolean isActive);
+
+
     @SqlUpdate("DELETE FROM tags WHERE id = :id")
     void deleteTag(@Bind("id") int id);
     @SqlQuery("""
