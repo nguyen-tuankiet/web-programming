@@ -8,12 +8,15 @@ import jakarta.servlet.http.HttpSession;
 import org.jdbi.v3.core.Jdbi;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 public class AuthService {
     private UserDao userDAO;
+    private EmailService emailService;
 
     public AuthService(Jdbi jdbi) {
         this.userDAO = jdbi.onDemand(UserDao.class);
+        this.emailService = new EmailService();
     }
 
     public User getUserByEmail(String email) {
@@ -31,11 +34,26 @@ public class AuthService {
         // Mã hóa mật khẩu với salt
         String hashedPassword = HashUtils.hashWithSalt(password, salt);
 
-        // Tạo user mới và lưu thông tin
-        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt);
-        return userId != null;
-    }
+        // Tạo confirmation token
+        String confirmationToken = UUID.randomUUID().toString();
 
+        // Tạo user mới và lưu thông tin
+        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken);
+        
+        if (userId != null) {
+            // Gửi email xác nhận
+            String confirmationLink = "http://localhost:8080/backend_war/confirm?token=" + confirmationToken;
+            String emailContent = "Xin chào " + firstName + ",\n\n" +
+                    "Cảm ơn bạn đã đăng ký tài khoản. Vui lòng nhấp vào liên kết sau để xác nhận tài khoản của bạn:\n" +
+                    confirmationLink + "\n\n" +
+                    "Trân trọng,\n" +
+                    "Đội ngũ hỗ trợ";
+            
+            emailService.sendEmail(email, "Xác nhận tài khoản", emailContent);
+            return true;
+        }
+        return false;
+    }
     public boolean registerWithGoogle(String firstName, String displayName, String email, String password) {
         if (userDAO.getUserByEmail(email) != null) {
             return false; // Email đã tồn tại
@@ -46,26 +64,45 @@ public class AuthService {
 
         // Mã hóa mật khẩu với salt
         String hashedPassword = HashUtils.hashWithSalt(password, salt);
-
+        String confirmationToken = UUID.randomUUID().toString();
         // Tạo user mới và lưu thông tin
-        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt);
+        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken);
         return userId != null;
+    }
+
+    public boolean confirmAccount(String token) {
+        User user = userDAO.getUserByConfirmationToken(token);
+        if (user != null && "PENDING".equals(user.getStatus())) {
+            userDAO.updateUserStatusByToken(token, "ACTIVE");
+            return true;
+        }
+        return false;
     }
 
     public User login(String email, String password) {
         User user = userDAO.getUserByEmail(email.trim());
         if (user != null) {
-            String storedSalt = user.getSalt(); // Lấy salt từ cơ sở dữ liệu
+            // Kiểm tra trạng thái tài khoản
+            if ("PENDING".equals(user.getStatus())) {
+                throw new RuntimeException("Tài khoản chưa được xác nhận. Vui lòng kiểm tra email của bạn.");
+            }
+            if ("BANNED".equals(user.getStatus())) {
+                throw new RuntimeException("Tài khoản của bạn đã bị khóa.");
+            }
+            if ("DEACTIVE".equals(user.getStatus())) {
+                throw new RuntimeException("Tài khoản của bạn đã bị vô hiệu hóa.");
+            }
+
+            String storedSalt = user.getSalt();
             String storedHashedPassword = user.getPassword();
 
-            // Mã hóa mật khẩu nhập vào với salt, sau khi đã loại bỏ khoảng trắng
             String hashedPassword = HashUtils.hashWithSalt(password.trim(), storedSalt);
 
             if (hashedPassword.equals(storedHashedPassword)) {
-                return user; // Mật khẩu đúng
+                return user;
             }
         }
-        return null; // Mật khẩu không đúng hoặc user không tồn tại
+        return null;
     }
 
     public boolean changePassword(Integer userId, String oldPassword, String newPassword, boolean verifyOldPassword) {
