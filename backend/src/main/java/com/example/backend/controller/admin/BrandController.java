@@ -28,13 +28,11 @@ public class BrandController extends HttpServlet {
 
         try {
             if (pathInfo == null || pathInfo.equals("/")) {
-                // Lấy danh sách tất cả danh mục
                 List<Brand> brands = brandService.getAllBrands();
                 ResponseWrapper<List<Brand>> responseWrapper = new ResponseWrapper<>(
-                        200, "success", "Fetched categories successfully", brands);
+                        200, "success", "Fetched brands successfully", brands);
                 writeResponse(response, responseWrapper);
             } else {
-                // Lấy danh mục theo ID
                 String[] pathParts = pathInfo.split("/");
                 if (pathParts.length == 2) {
                     Integer id = Integer.parseInt(pathParts[1]);
@@ -64,7 +62,6 @@ public class BrandController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            // Đọc nội dung JSON từ body request
             StringBuilder jsonBuilder = new StringBuilder();
             String line;
             try (BufferedReader reader = request.getReader()) {
@@ -72,38 +69,31 @@ public class BrandController extends HttpServlet {
                     jsonBuilder.append(line);
                 }
             }
-            String jsonString = jsonBuilder.toString();
 
-            // Parse JSON để lấy dữ liệu
             ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, String> jsonData = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {});
+            Map<String, Object> jsonData = objectMapper.readValue(jsonBuilder.toString(), new TypeReference<>() {});
 
-            // Lấy giá trị từ JSON
-            String name = jsonData.get("name");
-
-            // Kiểm tra giá trị của name
-            if (name == null || name.isEmpty()) {
-                throw new IllegalArgumentException("Name is required");
+            String name = (String) jsonData.get("name");
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Tên nhà sản xuất không được để trống");
             }
 
-            // Thêm category mới
-            Brand newCategory = brandService.createBrand(name);
+            boolean isActive = jsonData.get("isActive") != null && (Boolean) jsonData.get("isActive");
 
-            // Phản hồi thành công
+            Brand newBrand = brandService.createBrand(name, isActive);
+
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    201, "success", "Category created successfully", newCategory);
+                    201, "success", "Brand created successfully", newBrand);
             writeResponse(response, responseWrapper);
+
         } catch (IllegalArgumentException e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    400, "error", e.getMessage(), null);
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(400, "error", e.getMessage(), null);
             writeResponse(response, responseWrapper);
         } catch (Exception e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    500, "error", "Internal server error: " + e.getMessage(), null);
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(500, "error", "Internal server error: " + e.getMessage(), null);
             writeResponse(response, responseWrapper);
         }
     }
-
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -122,15 +112,12 @@ public class BrandController extends HttpServlet {
         }
 
         Integer id = Integer.parseInt(pathParts[1]);
-
-        // Đọc body
         BufferedReader reader = request.getReader();
         String json = reader.lines().collect(Collectors.joining());
 
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> jsonData = objectMapper.readValue(json, new TypeReference<>() {});
 
-        // Nếu có key "isActive" thì cập nhật trạng thái
         if (jsonData.containsKey("isActive")) {
             boolean isActive = (Boolean) jsonData.get("isActive");
             brandService.toggleBrandStatus(id, isActive);
@@ -140,7 +127,6 @@ public class BrandController extends HttpServlet {
             return;
         }
 
-        // Nếu có key "name" thì cập nhật tên
         if (jsonData.containsKey("name")) {
             String name = (String) jsonData.get("name");
             brandService.updateBrand(id, name);
@@ -155,14 +141,12 @@ public class BrandController extends HttpServlet {
         }
     }
 
-
-
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String pathInfo = request.getPathInfo();
             if (pathInfo == null || pathInfo.equals("/")) {
-                throw new IllegalArgumentException("Category ID is required");
+                throw new IllegalArgumentException("Brand ID is required");
             }
 
             String[] pathParts = pathInfo.split("/");
@@ -171,32 +155,24 @@ public class BrandController extends HttpServlet {
             }
 
             Integer id = Integer.parseInt(pathParts[1]);
-
-            // Lấy thông tin category trước khi xóa
             Brand brand = brandService.getBrandById(id);
-
             if (brand == null) {
-                throw new IllegalArgumentException("Category not found");
+                throw new IllegalArgumentException("Brand not found");
             }
 
-            // Xóa category
             brandService.deleteBrand(id);
 
-            // Phản hồi thành công với thông tin của category đã xóa
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
                     200, "success", "Brand deleted successfully", brand);
             writeResponse(response, responseWrapper);
         } catch (IllegalArgumentException e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    400, "error", e.getMessage(), null);
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(400, "error", e.getMessage(), null);
             writeResponse(response, responseWrapper);
         } catch (Exception e) {
-            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
-                    500, "error", "Internal server error: " + e.getMessage(), null);
+            ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(500, "error", "Internal server error: " + e.getMessage(), null);
             writeResponse(response, responseWrapper);
         }
     }
-
 
     private void writeResponse(HttpServletResponse response, ResponseWrapper<?> responseWrapper) throws IOException {
         response.setContentType("application/json");
@@ -204,5 +180,4 @@ public class BrandController extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
     }
-
 }

@@ -31,6 +31,11 @@ public interface BrandDAO {
     void deleteBrand(@Bind("id") Integer id);
 
 
+    @SqlUpdate("INSERT INTO brand (name, isActive) VALUES (:name, :isActive)")
+    @GetGeneratedKeys("id")
+    int createBrand(@Bind("name") String name, @Bind("isActive") boolean isActive);
+
+
     @SqlUpdate("UPDATE brand SET isActive = :isActive WHERE id = :id")
     void updateBrandStatus(@Bind("id") Integer id, @Bind("isActive") boolean isActive);
 

@@ -41,18 +41,33 @@ public class TagController extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Map<String, String> data = parseJson(request);
-        String name = data.get("name");
-        if (name == null || name.isEmpty()) {
-            writeResponse(response, new ResponseWrapper<>(400, "error", "Name is required", null));
-            return;
-        }
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        Map<String, String> data = parseJson(request);
+//        String name = data.get("name");
+//        if (name == null || name.isEmpty()) {
+//            writeResponse(response, new ResponseWrapper<>(400, "error", "Name is required", null));
+//            return;
+//        }
+//
+//        Tag tag = tagService.createTag(name);
+//        writeResponse(response, new ResponseWrapper<>(201, "success", "Tag created", tag));
+//    }
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Map<String, String> data = parseJson(request);
+    String name = data.get("name");
+    boolean isActive = Boolean.parseBoolean(data.getOrDefault("isActive", "true")); // mới thêm
 
-        Tag tag = tagService.createTag(name);
-        writeResponse(response, new ResponseWrapper<>(201, "success", "Tag created", tag));
+    if (name == null || name.isEmpty()) {
+        writeResponse(response, new ResponseWrapper<>(400, "error", "Name is required", null));
+        return;
     }
+
+    Tag tag = tagService.createTag(name, isActive); // thêm tham số isActive
+    writeResponse(response, new ResponseWrapper<>(201, "success", "Tag created", tag));
+}
+
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {

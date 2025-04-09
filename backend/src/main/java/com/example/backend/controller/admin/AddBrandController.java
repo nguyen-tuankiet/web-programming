@@ -23,18 +23,22 @@ public class AddBrandController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         StringBuilder jsonString = new StringBuilder();
         String line;
         while ((line = request.getReader().readLine()) != null) {
             jsonString.append(line);
         }
 
-
         JSONObject jsonRequest = new JSONObject(jsonString.toString());
-        String categoryName = jsonRequest.getString("name");
-        String brandName = jsonRequest.getString("brand");
-        brandService.createBrand(brandName);
 
+        String brandName = jsonRequest.getString("brand");
+        boolean isActive = jsonRequest.getBoolean("isActive");
+
+        brandService.createBrand(brandName, isActive);
+
+        // Phản hồi cho client
+        response.setContentType("application/json");
+        response.getWriter().write("{\"status\": \"success\", \"message\": \"Brand added successfully\"}");
     }
+
 }
