@@ -47,16 +47,16 @@ public class UserService {
         );
     }
 
-    public static void main(String[] args) {
-        UserService userService = new UserService(DBConnection.getJdbi());
-        User user =new User(
-                1, "qhung", "qhung",
-                LocalDate.now(), "male","hun@gmad.ee", "232232222", null, null, null, null, null
-
-        );
+//    public static void main(String[] args) {
+//        UserService userService = new UserService(DBConnection.getJdbi());
+//        User user =new User(
+//                1, "qhung", "qhung",
+//                LocalDate.now(), "male","hun@gmad.ee", "232232222", null, null, null, null, null
+//
+//        );
 
 //        System.out.println(userService.updateUser(user));
-        System.out.println(userService.getUserById(112));
-    }
+//        System.out.println(userService.getUserById(112));
+//    }
 
 }
