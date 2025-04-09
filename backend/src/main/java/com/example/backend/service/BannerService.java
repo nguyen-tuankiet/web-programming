@@ -33,6 +33,11 @@ public class BannerService {
         bannerDAO.updateBanner(id, status, imageId, startDate, endDate);
     }
 
+    public void toggleBannerStatus(int id, boolean isActive) {
+        bannerDAO.updateBannerStatus(id, isActive);
+    }
+
+
     public void deleteBanner(int id) {
         bannerDAO.deleteBanner(id);
     }

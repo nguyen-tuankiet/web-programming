@@ -96,80 +96,75 @@ document.addEventListener("DOMContentLoaded", () => {
 
     discardBtn.addEventListener("click", () => {
         addCategoryBox.classList.add("hidden");
+        document.getElementById("category-name").value = "";
+        document.getElementById("brand-status").value = "true";
     });
 
-    // ==== Thêm nhà sản xuất ====
-    const addCateBtn = document.querySelector(".add-cate-btn");
-    const inputField = document.querySelector(".input-field");
+    // ==== Thêm nhà sản xuất (gồm trạng thái) ====
+    const addBtn = document.getElementById("add-category-btn");
+    const nameInput = document.getElementById("category-name");
+    const statusSelect = document.getElementById("brand-status");
 
-    addCateBtn.addEventListener("click", async () => {
-        const categoryName = inputField.value.trim();
+    addBtn.addEventListener("click", async () => {
+        const name = nameInput.value.trim();
+        const isActive = statusSelect.value === "true";
 
-        if (!categoryName) {
-            alert("Vui lòng nhập tên danh mục!");
+        if (!name) {
+            alert("Vui lòng nhập tên nhà sản xuất!");
             return;
         }
 
         try {
-            const response = await fetch('add-category', {
+            const response = await fetch(`${contextPath}/admin/api/brand`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name: categoryName }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, isActive })
             });
 
             const result = await response.json();
             if (response.ok) {
-                alert("Danh mục được thêm thành công!");
-                inputField.value = "";
+                alert("Thêm thành công!");
                 location.reload();
             } else {
-                alert(`Lỗi: ${result.message}`);
+                alert(result.message || "Thêm thất bại.");
             }
-        } catch (error) {
-            alert("Có lỗi xảy ra khi thêm danh mục!");
-            console.error(error);
+        } catch (err) {
+            console.error("Lỗi khi thêm brand:", err);
+            alert("Không thể kết nối đến máy chủ.");
         }
     });
-});
 
+    // ==== Cập nhật trạng thái brand (toggle) ====
+    document.querySelectorAll(".toggle-icon").forEach(icon => {
+        icon.addEventListener("click", () => {
+            const brandId = icon.dataset.id;
+            const isActive = icon.dataset.active === "true";
 
-
-// ==== Cập nhật trạng thái brand (toggle) ====
-document.querySelectorAll(".toggle-icon").forEach(icon => {
-    icon.addEventListener("click", () => {
-        const brandId = icon.dataset.id;
-        const isActive = icon.dataset.active === "true";
-
-        fetch(`${contextPath}/admin/api/brand/${brandId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: brandId, isActive: !isActive })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success" || data.success === true) {
-                    // Cập nhật DOM
-                    const row = icon.closest("tr");
-                    const statusEl = row.querySelector(".brand-status-toggle");
-
-                    statusEl.classList.toggle("active", !isActive);
-                    statusEl.classList.toggle("deactive", isActive);
-                    statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
-
-                    icon.dataset.active = (!isActive).toString();
-                    icon.querySelector("i").className = `fa-solid ${!isActive ? 'fa-trash' : 'fa-eye-slash'}`;
-                } else {
-                    alert("Cập nhật trạng thái thất bại!");
-                }
+            fetch(`${contextPath}/admin/api/brand/${brandId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: brandId, isActive: !isActive })
             })
-            .catch(err => {
-                console.error("Lỗi kết nối toggle trạng thái:", err);
-                alert("Lỗi kết nối!");
-            });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success" || data.success === true) {
+                        const row = icon.closest("tr");
+                        const statusEl = row.querySelector(".brand-status-toggle");
+
+                        statusEl.classList.toggle("active", !isActive);
+                        statusEl.classList.toggle("deactive", isActive);
+                        statusEl.textContent = !isActive ? "Hoạt động" : "Không hoạt động";
+
+                        icon.dataset.active = (!isActive).toString();
+                        icon.querySelector("i").className = `fa-solid ${!isActive ? 'fa-trash' : 'fa-eye-slash'}`;
+                    } else {
+                        alert("Cập nhật trạng thái thất bại!");
+                    }
+                })
+                .catch(err => {
+                    console.error("Lỗi toggle trạng thái:", err);
+                    alert("Lỗi kết nối!");
+                });
+        });
     });
 });
-
-
-
