@@ -23,10 +23,15 @@ public class TagService {
         return tagDAO.getTagById(id);
     }
 
-    public Tag createTag(String name) {
-        int newId = tagDAO.createTag(name);
+//    public Tag createTag(String name) {
+//        int newId = tagDAO.createTag(name);
+//        return tagDAO.getTagById(newId);
+//    }
+    public Tag createTag(String name, boolean isActive) {
+        int newId = tagDAO.createTag(name, isActive);
         return tagDAO.getTagById(newId);
     }
+
 
     public void updateTag(int id, String name) {
         tagDAO.updateTag(id, name);

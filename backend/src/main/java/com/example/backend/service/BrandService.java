@@ -23,8 +23,8 @@ public class BrandService {
         return brandDAO.getBrandById(id);
     }
 
-    public Brand createBrand(String name) {
-        int id = brandDAO.createBrand(name);
+    public Brand createBrand(String name, boolean isActive) {
+        int id = brandDAO.createBrand(name, isActive);
         return brandDAO.getBrandById(id);
     }
 
