@@ -2,14 +2,7 @@ $(document).ready(function () {
 
     const back_btn = $('#back_btn');
     back_btn.on('click', function () {
-
-        const message = {
-            type: 'openUserProfile',
-            src: $(back_btn).attr('data-src'),
-        }
-
-        console.log(message);
-        window.parent.postMessage(message, '*')
+        window.history.back();
     })
 
 
