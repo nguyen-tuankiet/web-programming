@@ -15,7 +15,7 @@ $(document).ready(function () {
         let minPrice = selectedPrice.length ? selectedPrice.data('min') : null;
         let maxPrice = selectedPrice.length ? selectedPrice.data('max') : null;
 
-        fetch(`/product/filter`, {
+        fetch(`product/filter`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

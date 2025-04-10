@@ -15,10 +15,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderHistory.css">
+          href="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderDetail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderHistory.js"></script>
+    <script src="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderDetail.js"></script>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderHistoryItem.css">
 
@@ -42,8 +42,7 @@
         <div class="content">
 
             <div id="order_header" class="row mid_align">
-                <i id="back_btn" class="back_btn fa-solid fa-arrow-left-long"
-                   data-src="../component/user_order/UserOrder.html"></i>
+                <i id="back_btn" class="back_btn fa-solid fa-arrow-left-long"></i>
                 <span class="title">Lịch sử đơn hàng</span>
             </div>
 
@@ -52,21 +51,44 @@
 
                 <div id="order_infor" class=" col">
                     <div class="wrap row">
-                        <div class="order_id" data-order-id="${order.id}" >Mã đơn hàng: <span>${order.id}</span></div>
-
-                        <c:if test="${order.orderStatus =='DELIVERY'}">
-                            <div class="order_status mid_align" style="color: #0a7cff">Đang giao hàng</div>
-                        </c:if>
-
-                        <c:if test="${order.orderStatus =='DELIVERED'}">
-                            <div class="order_status mid_align">Đã giao hàng</div>
-                        </c:if>
+                        <div class="order_id" data-order-id="${order.id}">Mã đơn hàng: <span>${order.id}</span></div>
                     </div>
-                    <!--        <div class="date">22/10/2024</div>-->
+
+                    <div class="status">
+                        <c:choose>
+                            <c:when test="${order.orderStatus == 'PENDING'}">
+                                <span style="color: #FFA500">Chờ xác nhận</span>
+                            </c:when>
+                            <c:when test="${order.orderStatus == 'CONFIRMED'}">
+                                <span style="color: #007bff">Đã xác nhận</span>
+                            </c:when>
+                            <c:when test="${order.orderStatus == 'PROCESSING'}">
+                                <span style="color: #17a2b8">Đang sử lý</span>
+                            </c:when>
+                            <c:when test="${order.orderStatus == 'SHIPPED'}">
+                                <span style="color: #6f42c1">Đang vận chuyển</span>
+                            </c:when>
+                            <c:when test="${order.orderStatus == 'DELIVERED'}">
+                                <span style="color: #28a745">Đã giao hàng</span>
+                            </c:when>
+                            <c:when test="${order.orderStatus == 'CANCELLED'}">
+                                <span style="color: #dc3545 ">Đã hủy</span>
+                            </c:when>
+                            <c:when test="${order.orderStatus == 'RETURNED'}">
+                                <span style="color: #fd7e14">Khách trả lại hàng</span>
+                            </c:when>
+                            <c:when test="${order.orderStatus == 'FAILED'}">
+                                <span style="color: #dc3545">Giao hàng thất bại</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span>Không rõ trạng thái</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
                 </div>
 
 
-                <div id="wrap_order_item"  class=" col">
+                <div id="wrap_order_item" class=" col">
 
 
                     <c:if test="${empty orderDetails}">
@@ -77,7 +99,7 @@
                     <c:if test="${not empty orderDetails}">
                         <c:forEach var="od" items="${orderDetails}">
 
-                            <div    class="order_item mid_align row" data-product-id="${od.productId}">
+                            <div class="order_item mid_align row" data-product-id="${od.productId}">
 
 
                                 <div class="image">
@@ -95,10 +117,7 @@
                                     <div class="quantity">
                                         <span class="color_name">Số lượng: <span>${od.quantity}</span></span>
                                     </div>
-
-
                                 </div>
-
 
                                 <div class="section_price mid_align col  ">
 
@@ -113,6 +132,7 @@
 
 
                             </div>
+
 
                         </c:forEach>
                     </c:if>
@@ -196,12 +216,12 @@
                                 <span>Thông tin khách hàng</span>
                             </div>
 
-                            <div class= "content row">
+                            <div class="content row">
 
                                 <div class="section_left col">
 
 
-                                    <div class= "content_item full_name">
+                                    <div class="content_item full_name">
                                         <i class="fa-regular fa-user"></i>
                                         <span> ${address.name} </span>
                                     </div>
@@ -268,48 +288,32 @@
             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="write-review-section">
                 <h2>Viết đánh giá của bạn</h2>
-                <form id="review-form" method="post" >
+                <form id="review-form" method="post">
                     <div class="input-group">
                         <label for="rating-value"> </label>
                         <div id="user-rating" class="stars">
 
                             <span class="star" data-value="1">
-                                 <i class="fa-solid fa-star" ></i>
-                            </span>
-                                    
-                            <span class="star"  data-value="2">
-                                <i class="fa-solid fa-star" ></i>
-                            </span>
-                                    
-                            <span class="star" data-value="3">
-                                <i class="fa-solid fa-star" ></i>
-                            </span>
-                                    
-                            <span class="star" data-value="4">
-                                <i class="fa-solid fa-star" ></i>
-                            </span>
-                                    
-                            <span class="star"  data-value="5">
-                                <i class="fa-solid fa-star" ></i>
+                                 <i class="fa-solid fa-star"></i>
                             </span>
 
+                            <span class="star" data-value="2">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+
+                            <span class="star" data-value="3">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+
+                            <span class="star" data-value="4">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+
+                            <span class="star" data-value="5">
+                                <i class="fa-solid fa-star"></i>
+                            </span>
 
 
                         </div>
@@ -322,9 +326,9 @@
                                   required></textarea>
                     </div>
 
-                   <div class="send">
-                       <button id="btn_submit">Gửi đánh giá</button>
-                   </div>
+                    <div class="send">
+                        <button id="btn_submit">Gửi đánh giá</button>
+                    </div>
 
 
                 </form>
