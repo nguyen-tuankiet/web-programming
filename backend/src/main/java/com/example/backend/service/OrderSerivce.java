@@ -67,8 +67,8 @@ public class OrderSerivce {
 //
 //        Integer orderId = orderSerivce.addOrder(order);
 //        System.out.println(orderId);
-//        System.out.println(orderSerivce.getOrderByIdAndUserId(39,112));
-//        System.out.println(orderSerivce.getOrdersByUserId(112));
-        System.out.println(orderSerivce.getAllOrders());
+        System.out.println(orderSerivce.getOrderByIdAndUserId( 24,42));
+//        System.out.println(orderSerivce.getOrdersByUserId(42));
+//        System.out.println(orderSerivce.getAllOrders());
     }
 }
