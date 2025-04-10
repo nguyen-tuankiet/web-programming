@@ -75,36 +75,60 @@
             </c:if>
             <c:if test="${not empty orders}">
                 <c:forEach var="o" items="${orders}">
+
                     <div id="order_container" class="mid_align row">
-                         <div class="image">
+                        <div class="image">
                             <img src="${o.productImage}" alt="Hình ảnh sản phẩm"/>
                         </div>
 
-                         <div class="description mid_align col">
-                             <div class="title bold">${o.productName}</div>
+                        <div class="description mid_align col">
+                            <div class="title bold">${o.productName}</div>
 
                             <div class="quantity">
-                                 <span class="color_name">Số lượng: <span>${o.quantity}</span></span>
+                                <span class="color_name">Số lượng: <span>${o.quantity}</span></span>
                             </div>
                             <div class="status">
-                                <c:if  test="${o.orderStatus =='DELIVERY'}">
-                                    <span style="color: #0a7cff">Đang giao hàng</span>
-                                </c:if>
 
-                                <c:if  test="${o.orderStatus =='DELIVERED'}">
-                                    <span >Đã giao hàng</span>
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${o.orderStatus == 'PENDING'}">
+                                        <span style="color: #FFA500">Chờ xác nhận</span>
+                                    </c:when>
+                                    <c:when test="${o.orderStatus == 'CONFIRMED'}">
+                                        <span style="color: #007bff">Đã xác nhận</span>
+                                    </c:when>
+                                    <c:when test="${o.orderStatus == 'PROCESSING'}">
+                                        <span style="color: #17a2b8">Đang sử lý</span>
+                                    </c:when>
+                                    <c:when test="${o.orderStatus == 'SHIPPED'}">
+                                        <span style="color: #6f42c1">Đang vận chuyển</span>
+                                    </c:when>
+                                    <c:when test="${o.orderStatus == 'DELIVERED'}">
+                                        <span style="color: #28a745">Đã giao hàng</span>
+                                    </c:when>
+                                    <c:when test="${o.orderStatus == 'CANCELLED'}">
+                                        <span style="color: #dc3545 ">Đã hủy</span>
+                                    </c:when>
+                                    <c:when test="${o.orderStatus == 'RETURNED'}">
+                                        <span style="color: #fd7e14" >Khách trả lại hàng</span>
+                                    </c:when>
+                                    <c:when test="${o.orderStatus == 'FAILED'}">
+                                        <span style="color: #dc3545" >Giao hàng thất bại</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span>Không rõ trạng thái</span>
+                                    </c:otherwise>
+                                </c:choose>
 
                             </div>
                         </div>
 
-                         <div class="section_price mid_align col">
+                        <div class="section_price mid_align col">
                             <div class="date">
                                 <span>${o.createAt}</span>
                             </div>
                             <div class="wrap_price col">
                                 <span class="title">Tổng thanh toán: </span>
-                                 <span class="price">
+                                <span class="price">
                                     <fmt:formatNumber value="${o.total}" pattern="#,###"/> VND
                                 </span>
 
