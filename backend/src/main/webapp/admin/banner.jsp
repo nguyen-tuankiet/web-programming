@@ -35,9 +35,14 @@
       <div id="add-banner-box" class="hidden">
         <h3>Thêm Banner</h3>
         <input type="text" id="banner-status" class="input-field" placeholder="Tên banner">
-        <input type="text" id="banner-imageId" class="input-field" placeholder="ID hình ảnh">
+<%--        <input type="text" id="banner-imageId" class="input-field" placeholder="ID hình ảnh">--%>
+        <input type="file" id="banner-imageFile" accept="image/png, image/jpeg" class="input-field" required />
         <input type="date" id="banner-startDate" class="input-field">
         <input type="date" id="banner-endDate" class="input-field">
+        <select id="banner-isActive" class="input-field">
+          <option value="true">Hoạt động</option>
+          <option value="false">Không hoạt động</option>
+        </select>
         <div class="action-buttons">
           <button id="submit-banner-btn" class="add-btn">Thêm</button>
           <button id="discard-banner-btn" class="discard-btn">Hủy</button>
