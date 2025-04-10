@@ -24,8 +24,8 @@ public class BannerService {
         return bannerDAO.getBannerById(id);
     }
 
-    public Banner createBanner(String status, String imageId, LocalDate startDate, LocalDate endDate) {
-        int id = bannerDAO.createBanner(status, imageId, startDate, endDate);
+    public Banner createBanner(String status, String imageId, LocalDate startDate, LocalDate endDate, boolean isActive) {
+        int id = bannerDAO.createBanner(status, imageId, startDate, endDate, isActive);
         return getBannerById(id);
     }
 

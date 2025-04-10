@@ -50,22 +50,55 @@ public class BannerController extends HttpServlet {
             }
         }
     }
+//
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        String body = request.getReader().lines().collect(Collectors.joining());
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Map<String, Object> json = objectMapper.readValue(body, new TypeReference<>() {});
+//
+//        String status = (String) json.get("status");
+//        String imageId = (String) json.get("imageId");
+//        LocalDate startDate = LocalDate.parse((String) json.get("startDate"));
+//        LocalDate endDate = LocalDate.parse((String) json.get("endDate"));
+//
+//        Banner banner = bannerService.createBanner(status, imageId, startDate, endDate);
+//        ResponseWrapper<Object> wrapper = new ResponseWrapper<>(201, "success", "Banner created", banner);
+//        writeJson(response, wrapper);
+//    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String body = request.getReader().lines().collect(Collectors.joining());
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> json = objectMapper.readValue(body, new TypeReference<>() {});
+        try {
+            String body = request.getReader().lines().collect(Collectors.joining());
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> json = objectMapper.readValue(body, new TypeReference<>() {});
 
-        String status = (String) json.get("status");
-        String imageId = (String) json.get("imageId");
-        LocalDate startDate = LocalDate.parse((String) json.get("startDate"));
-        LocalDate endDate = LocalDate.parse((String) json.get("endDate"));
+            String status = (String) json.get("status");
 
-        Banner banner = bannerService.createBanner(status, imageId, startDate, endDate);
-        ResponseWrapper<Object> wrapper = new ResponseWrapper<>(201, "success", "Banner created", banner);
-        writeJson(response, wrapper);
+            // ✅ Sửa lỗi ép kiểu tại đây:
+            String imageId = String.valueOf(json.get("imageId"));
+
+            LocalDate startDate = LocalDate.parse((String) json.get("startDate"));
+            LocalDate endDate = LocalDate.parse((String) json.get("endDate"));
+            boolean isActive = json.get("isActive") != null && (Boolean) json.get("isActive");
+
+            Banner banner = bannerService.createBanner(status, imageId, startDate, endDate, isActive);
+
+            ResponseWrapper<Object> wrapper = new ResponseWrapper<>(201, "success", "Banner created", banner);
+            writeJson(response, wrapper);
+
+        } catch (Exception e) {
+            e.printStackTrace(); // in log server
+            response.setStatus(500);
+            writeJson(response, Map.of(
+                    "status", "error",
+                    "message", "Server error: " + e.getMessage()
+            ));
+        }
     }
+
+
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -101,9 +134,16 @@ public class BannerController extends HttpServlet {
         response.getWriter().write("{\"status\": \"success\"}");
     }
 
-    private void writeJson(HttpServletResponse response, Object data) throws IOException {
-        response.setContentType("application/json");
-        ObjectMapper mapper = new ObjectMapper();
-        response.getWriter().write(mapper.writeValueAsString(data));
-    }
+private void writeJson(HttpServletResponse response, Object data) throws IOException {
+    response.setContentType("application/json");
+
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
+
+    // Để Jackson không serialize LocalDate thành timestamp
+    mapper.disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+    response.getWriter().write(mapper.writeValueAsString(data));
+}
+
 }
