@@ -10,13 +10,15 @@ public class Banner {
     LocalDate startDate;
     LocalDate endDate;
     Boolean isActive;
+    String description;
 
     public Banner(@ColumnName("id") Integer id,
                   @ColumnName("status") String status,
                   @ColumnName("imageId") String imageId,
                   @ColumnName("startDate") LocalDate startDate,
                   @ColumnName("endDate") LocalDate endDate,
-                  @ColumnName("isActive") Boolean isActive
+                  @ColumnName("isActive") Boolean isActive,
+                  @ColumnName("description") String description
     ) {
         this.id = id;
         this.status = status;
@@ -24,6 +26,7 @@ public class Banner {
         this.startDate = startDate;
         this.endDate = endDate;
         this.isActive = isActive;
+        this.description = description;
     }
 
     public Integer getId() { return id; }
@@ -32,6 +35,8 @@ public class Banner {
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
     public Boolean getIsActive() { return isActive; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
     public void setId(Integer id) { this.id = id; }
     public void setStatus(String status) { this.status = status; }

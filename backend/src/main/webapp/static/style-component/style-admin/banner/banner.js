@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const startDate = document.getElementById('banner-startDate').value;
             const endDate = document.getElementById('banner-endDate').value;
             const isActive = document.getElementById('banner-isActive').value === 'true';
+            const description = document.getElementById('banner-description').value;
 
             if (!status || !imageFile || !startDate || !endDate) {
                 alert('Vui lòng điền đầy đủ thông tin');
@@ -91,7 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     imageId: uploadedImage.id,
                     startDate,
                     endDate,
-                    isActive
+                    isActive,
+                    description
                 };
 
                 const response = await fetch(`${contextPath}/admin/api/banner`, {
