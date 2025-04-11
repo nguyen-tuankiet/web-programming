@@ -35,8 +35,8 @@
       <div id="add-banner-box" class="hidden">
         <h3>Thêm Banner</h3>
         <input type="text" id="banner-status" class="input-field" placeholder="Tên banner">
-<%--        <input type="text" id="banner-imageId" class="input-field" placeholder="ID hình ảnh">--%>
         <input type="file" id="banner-imageFile" accept="image/png, image/jpeg" class="input-field" required />
+        <textarea id="banner-description" class="input-field" placeholder="Mô tả banner"></textarea>
         <input type="date" id="banner-startDate" class="input-field">
         <input type="date" id="banner-endDate" class="input-field">
         <select id="banner-isActive" class="input-field">
@@ -75,7 +75,7 @@
             </th>
             <th onclick="sortTable(3)">
               <div class="header-content">
-                <span class="header-text">Ngày bắt đầu</span>
+                <span class="header-text">Mô tả</span>
                 <span class="sort-arrows">
                   <span class="sort-arrow asc">▲</span>
                   <span class="sort-arrow desc">▼</span>
@@ -84,7 +84,7 @@
             </th>
             <th onclick="sortTable(4)">
               <div class="header-content">
-                <span class="header-text">Ngày kết thúc</span>
+                <span class="header-text">Ngày bắt đầu</span>
                 <span class="sort-arrows">
                   <span class="sort-arrow asc">▲</span>
                   <span class="sort-arrow desc">▼</span>
@@ -92,6 +92,15 @@
               </div>
             </th>
             <th onclick="sortTable(5)">
+              <div class="header-content">
+                <span class="header-text">Ngày kết thúc</span>
+                <span class="sort-arrows">
+                  <span class="sort-arrow asc">▲</span>
+                  <span class="sort-arrow desc">▼</span>
+                </span>
+              </div>
+            </th>
+            <th onclick="sortTable(6)">
               <div class="header-content">
                 <span class="header-text">Trạng thái</span>
                 <span class="sort-arrows">
@@ -117,6 +126,7 @@
                   <img src="${imageMap[b.imageId]}" alt="Banner" class="banner-image" style="width: 100px; border-radius: 8px;"/>
                 </td>
                 <td>${b.status}</td>
+                <td>${b.description}</td>
                 <td>${b.startDate}</td>
                 <td>${b.endDate}</td>
                 <td>

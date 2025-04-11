@@ -50,22 +50,6 @@ public class BannerController extends HttpServlet {
             }
         }
     }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        String body = request.getReader().lines().collect(Collectors.joining());
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Map<String, Object> json = objectMapper.readValue(body, new TypeReference<>() {});
-//
-//        String status = (String) json.get("status");
-//        String imageId = (String) json.get("imageId");
-//        LocalDate startDate = LocalDate.parse((String) json.get("startDate"));
-//        LocalDate endDate = LocalDate.parse((String) json.get("endDate"));
-//
-//        Banner banner = bannerService.createBanner(status, imageId, startDate, endDate);
-//        ResponseWrapper<Object> wrapper = new ResponseWrapper<>(201, "success", "Banner created", banner);
-//        writeJson(response, wrapper);
-//    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -76,14 +60,15 @@ public class BannerController extends HttpServlet {
 
             String status = (String) json.get("status");
 
-            // ✅ Sửa lỗi ép kiểu tại đây:
+            String description = (String) json.get("description");
+
             String imageId = String.valueOf(json.get("imageId"));
 
             LocalDate startDate = LocalDate.parse((String) json.get("startDate"));
             LocalDate endDate = LocalDate.parse((String) json.get("endDate"));
             boolean isActive = json.get("isActive") != null && (Boolean) json.get("isActive");
 
-            Banner banner = bannerService.createBanner(status, imageId, startDate, endDate, isActive);
+            Banner banner = bannerService.createBanner(status, imageId, startDate, endDate, isActive, description);
 
             ResponseWrapper<Object> wrapper = new ResponseWrapper<>(201, "success", "Banner created", banner);
             writeJson(response, wrapper);
@@ -121,7 +106,8 @@ public class BannerController extends HttpServlet {
                 (String) jsonData.get("status"),
                 (String) jsonData.get("imageId"),
                 LocalDate.parse((String) jsonData.get("startDate")),
-                LocalDate.parse((String) jsonData.get("endDate"))
+                LocalDate.parse((String) jsonData.get("endDate")),
+                (String) jsonData.get("description")
         );
 
         response.getWriter().write("{\"status\": \"success\"}");
