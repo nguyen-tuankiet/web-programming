@@ -302,11 +302,11 @@
 
             </li>
 
-
+            <%-- Thành viên--%>
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-user"></i>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/member'">
+                    <button onclick="location.href='${pageContext.request.contextPath}/admin/team-member'">
                         Thành viên
                     </button>
                 </div>
