@@ -14,6 +14,7 @@
   <title>Team Members</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.js"></script>
   <script>
     const contextPath = "${pageContext.request.contextPath}";
   </script>
@@ -33,7 +34,7 @@
 
     <div class="content">
       <div class="content_header">
-        <h2>Team Members</h2>
+        <h2>Thành viên</h2>
         <button id="invite">
           <i class="fa-solid fa-user-plus"></i>
           Mời
@@ -49,8 +50,9 @@
           <div class="role_list">
             <select id="menu">
               <option value="home">Tất cả vai trò</option>
-              <option value="">Admin</option>
-              <option value="">Staff</option>
+              <option value="">Quản Trị Viên</option>
+              <option value="">Nhân Viên</option>
+              <option value="">Người Dùng</option>
             </select>
           </div>
         </div>
@@ -58,10 +60,10 @@
         <table id="member_table">
           <thead>
           <tr>
-            <th>User</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Join date</th>
+            <th>Người dùng</th>
+            <th>Vai trò</th>
+            <th>Trạng thái</th>
+            <th>Ngày tham gia</th>
             <th></th>
           </tr>
           </thead>
@@ -82,40 +84,79 @@
               </td>
 
               <td class="role">
-                <select class="role_list" disabled>
-                  <option ${m.role == 'Admin' ? 'selected' : ''}>Admin</option>
-                  <option ${m.role == 'Staff' ? 'selected' : ''}>Staff</option>
+                <select class="role_list">
+                  <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị Viên</option>
+                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Nhân Viên</option>
+                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Người Dùng</option>
                 </select>
               </td>
 
-              <td>
-                  <form action="${pageContext.request.contextPath}/admin/team-member/update-status" method="post">
-                  <input type="hidden" name="memberId" value="${m.id}">
-                  <select name="status" onchange="this.form.submit()"
-                          class="status ${m.status.name().toLowerCase()}"
-                  >
-                      <option value="PENDING"  ${m.status.name() == 'PENDING' ? 'selected' : ''}>Pending</option>
-                      <option value="ACTIVE"   ${m.status.name() == 'ACTIVE' ? 'selected' : ''}>Active</option>
-                      <option value="BANNED"   ${m.status.name() == 'BANNED' ? 'selected' : ''}>Banned</option>
-                      <option value="DEACTIVE" ${m.status.name() == 'DEACTIVE' ? 'selected' : ''}>Deactive</option>
 
-                  </select>
-                </form>
+              <td>
+                      <span class="status_label ${m.status.name().toLowerCase()}">
+                        <c:choose>
+                          <c:when test="${m.status.name() eq 'ACTIVE'}">Hoạt động</c:when>
+                          <c:when test="${m.status.name() eq 'PENDING'}">ĐANG CHỜ XỬ LÝ</c:when>
+                          <c:when test="${m.status.name() eq 'BANNED'}">CẤM</c:when>
+                          <c:when test="${m.status.name() eq 'DEACTIVE'}">VÔ HIỆU HÓA</c:when>
+                          <c:otherwise>Unknown</c:otherwise>
+                        </c:choose>
+                      </span>
               </td>
 
               <td>2025/2/1</td>
 
               <td class="more_action">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <i class="fa-solid fa-gear" onclick="toggleMoreActionMenu(this)"></i>
+                <div class="more_action_menu hidden">
+                  <form action="${pageContext.request.contextPath}/admin/team-member/update-status" method="post">
+                    <input type="hidden" name="memberId" value="${m.id}">
+                    <input type="hidden" name="status" value="DEACTIVE">
+                    <button type="submit" class="btn_deactivate">Vô hiệu hóa</button>
+                  </form>
+                </div>
               </td>
+
             </tr>
           </c:forEach>
           </tbody>
         </table>
       </div>
     </div>
+    <!-- Phần Modal (popup) cho Invite -->
+    <div id="inviteModal" class="modal hidden">
+      <div class="modal_content">
+        <span class="close_btn">&times;</span>
+        <h2>Mời thành viên mới</h2>
+        <form id="inviteForm">
+          <!-- Các trường form -->
+          <div class="form_group">
+            <label for="inviteEmail">Địa chỉ Email</label>
+            <input type="email" id="inviteEmail" name="email" placeholder="email"
+                   required>
+          </div>
+          <div class="form_group">
+            <label for="inviteName">Tên (tùy chọn)</label>
+            <input type="text" id="inviteName" name="name" placeholder="Tên">
+          </div>
+          <div class="form_group">
+            <label for="inviteRole">Vai trò</label>
+            <select id="inviteRole" name="role">
+              <option value="Admin">Quản Trị Viên</option>
+              <option value="Staff">Nhân Viên</option>
+              <option value="Guest">Người dùng</option>
+            </select>
+          </div>
+          <div class="form_action">
+            <button type="button" id="cancelInvite" class="btn_cancel">Hủy</button>
+            <button type="submit" class="btn_submit">Gửi lời mời</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
+<script src="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.js"></script>
 </body>
 </html>
 

@@ -160,6 +160,7 @@ html, body{
 
 
 #member_table tbody td{
+    padding: 15px;
     border-bottom: 2px solid #ddd;
     /* box-shadow: 0px 3px 0px 0px #dbdbdb45; */
     padding-left: 5px;;
@@ -202,7 +203,7 @@ html, body{
 }
 
 .role .role_list{
-    width: 150px;
+    width: 130px;
     height: 35px;
     font-size: 16px;
     border: 1px solid #e4e4e499;
@@ -237,4 +238,190 @@ html, body{
 
 .more_action{
     cursor: pointer;
+}
+
+.more_action {
+    position: relative; /* Để định vị popup con tuyệt đối so với td */
+}
+
+/* Popup menu */
+.more_action_menu {
+    position: absolute;
+    top: 25px; /* chỉnh tuỳ ý */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    min-width: 115px;
+    z-index: 999;
+}
+.hidden {
+    display: none;
+}
+
+/* Nút Deactivate trong popup */
+.btn_deactivate {
+    background-color: #ffefef;
+    border: 1px solid #ffcccc;
+    border-radius: 4px;
+    color: #e00;
+    cursor: pointer;
+    padding: 5px 8px;
+    width: 100%;
+    text-align: left;
+}
+.btn_deactivate:hover {
+    background-color: #ffe0e0;
+}
+
+/* Màu Pending */
+.status.deactive {
+    background-color: #fef9c3;
+    color: #92400e;
+    border-radius: 4px;
+    padding: 3px 6px;
+}
+
+/* Cài đặt chung cho status_label */
+.status_label {
+    display: inline-block;       /* cho phép hiển thị inline, có thể áp dụng padding, margin */
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-transform: uppercase;   /* chuyển chữ thành in hoa */
+}
+
+/* Cài đặt riêng cho từng trạng thái */
+.status_label.active {
+    background-color: #e9f7ef;
+    color: #2ecc71;
+    border-radius: 4px;
+    padding: 6px;
+}
+.status_label.pending {
+    background-color: #fce7f3;
+    color: #c026d3;
+    border-radius: 4px;
+    padding: 6px;
+}
+.status_label.banned {
+    background-color: #fde2e2;
+    color: #e74c3c;
+    border-radius: 4px;
+    padding: 6px;
+}
+.status_label.deactive {
+    background-color: #fef9c3;
+    color: #da8c5c;
+    border-radius: 4px;
+    padding: 6px;
+}
+.status_label.unknown {
+    background-color: #d1d5db;
+    color: #1f2937;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+
+/* Nút Invite */
+.btn_invite {
+    padding: 8px 14px;
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn_invite:hover {
+    background-color: #1e4fbf;
+}
+
+/* Modal: Overlay toàn màn hình */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* Modal content: Hộp chứa nội dung popup */
+.modal_content {
+    background-color: #fff;
+    padding: 20px 24px;
+    border-radius: 6px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Nút đóng của modal */
+.close_btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Form các nhóm */
+.form_group {
+    margin-bottom: 16px;
+}
+.form_group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+.form_group input[type="text"],
+.form_group input[type="email"],
+.form_group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Phần hành động của form (Cancel, Submit) */
+.form_action {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.btn_cancel {
+    background-color: #e5e7eb;
+    color: #111827;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+.btn_cancel:hover {
+    background-color: #cbd5e1;
+}
+.btn_submit {
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+.btn_submit:hover {
+    background-color: #1e4fbf;
+}
+.modal.hidden {
+    display: none !important;
+}
+
+.modal_content h2{
+    padding-bottom: 10px;
 }
