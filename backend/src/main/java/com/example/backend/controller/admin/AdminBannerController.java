@@ -25,7 +25,6 @@ public class AdminBannerController extends HttpServlet {
         // Lấy danh sách banner
         List<Banner> banners = bannerService.getAllBanners();
 
-        // Map để lưu imageId -> url
         Map<String, String> imageMap = new HashMap<>();
         for (Banner b : banners) {
             try {
