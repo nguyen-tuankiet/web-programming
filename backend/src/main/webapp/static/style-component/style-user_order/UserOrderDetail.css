@@ -184,10 +184,15 @@ i {
     color: #0a7cff;
 }
 
-.item_status.cancelled {
+
+.item_status.failed {
     color: red;
     opacity: 1;
     font-weight: bold;
+}
+
+.item_status.failed i {
+    color: red;
 }
 
 

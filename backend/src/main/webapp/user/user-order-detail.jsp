@@ -185,24 +185,26 @@
 
                         <div class="item_status section4 col
                             <c:choose>
-                                <c:when test='${order.orderStatus == "CANCELLED"}'>cancelled</c:when>
+                                <c:when test='${statusStep < 0}'>failed</c:when>
+                                <c:when test='${statusStep == 99}'>failed</c:when>
                                 <c:when test='${statusStep >= 4}'>active</c:when>
+
+
                             </c:choose>">
                             <i class="fa-solid fa-box-open"></i>
 
 
                             <span>
-                            <c:choose>
-                                <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
-                                <c:when test="${order.orderStatus == 'RETURNED'}">Đã trả hàng</c:when>
-                                <c:when test="${order.orderStatus == 'FAILED'}">Giao hàng không thành công</c:when>
-                                <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
-                                <c:otherwise>Đã nhận được hàng</c:otherwise>
-                            </c:choose>
-                        </span>
+                                <c:choose>
+                                    <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
+                                    <c:when test="${order.orderStatus == 'RETURNED'}">Đã trả hàng</c:when>
+                                    <c:when test="${order.orderStatus == 'FAILED'}">Giao hàng không thành công</c:when>
+                                    <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
+                                    <c:otherwise>Đã nhận được hàng</c:otherwise>
+                                </c:choose>
+                            </span>
                             <span class="status_date">22/10/2024</span>
                         </div>
-
 
 
                     </div>
