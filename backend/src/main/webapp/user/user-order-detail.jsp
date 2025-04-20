@@ -218,15 +218,17 @@
 
 
                             <div class="content_item">
-                                <span class="desc">Giá sản phẩm</span>
-                                <span id="product_price" class="value">0 VND</span>
+                                <span class="desc">Tổng giá trị</span>
+                                <span id="product_price" class="value">
+                                    <fmt:formatNumber value="${order.total}" pattern="#,###"/> VND
+                                </span>
                             </div>
 
 
-                            <div class="content_item">
-                                <span class="desc">Thuế GTGT ( 10% )</span>
-                                <span id="VAT" class="value">0 VND</span>
-                            </div>
+<%--                            <div class="content_item">--%>
+<%--                                <span class="desc">Thuế GTGT ( 10% )</span>--%>
+<%--                                <span id="VAT" class="value">0 VND</span>--%>
+<%--                            </div>--%>
 
                             <div class="content_item">
                                 <span class="desc">Phí vận chuyển</span>
@@ -239,9 +241,9 @@
                             <div class="rec_horizontal"></div>
 
                             <div class="content_item">
-                                <span class="desc">Đã thanh toán:</span>
+                                <span class="desc">Tổng thanh toán:</span>
                                 <span id="total_charge" class="value">
-                                     <fmt:formatNumber value="${order.total}" pattern="#,###"/> VND
+                                     <fmt:formatNumber value="${order.total + order.shippingFee}" pattern="#,###"/> VND
                                 </span>
                             </div>
 
@@ -305,15 +307,27 @@
 
                                         <c:if test="${ not empty card}">
                                             <span>${card.type} : **** ${card.last4}</span>
-                                            <span>Thời hạn: ${card.duration}.</span>
                                         </c:if>
-
 
                                         <c:if test="${COD == true }">
                                             <span>Thanh toán khi nhận hàng</span>
-
                                         </c:if>
 
+                                    </div>
+
+
+                                    <div class="title">
+                                        <span>Trạng thái thanh toán:</span>
+                                    </div>
+                                    <div class="content col">
+
+                                        <c:if test="${order.paymentStatus =='PENDING'}">
+                                            <span>Chưa thanh toán</span>
+                                        </c:if>
+
+                                        <c:if test="${order.paymentStatus =='PAID'}">
+                                            <span>Đã thanh toán</span>
+                                        </c:if>
 
                                     </div>
 

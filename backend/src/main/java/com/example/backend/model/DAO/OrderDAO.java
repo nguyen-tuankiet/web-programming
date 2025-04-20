@@ -1,6 +1,7 @@
 package com.example.backend.model.DAO;
 
 import com.example.backend.contant.OrderStatus;
+import com.example.backend.contant.PaymentStatus;
 import com.example.backend.model.Order;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
@@ -23,7 +24,7 @@ public interface OrderDAO {
     @GetGeneratedKeys
     Integer createOrder(
             @Bind("createAt")LocalDate createAt,
-            @Bind("paymentStatus") String paymentStatus,
+            @Bind("paymentStatus") PaymentStatus paymentStatus,
             @Bind("orderStatus") OrderStatus orderStatus,
             @Bind("userId") Integer userId,
             @Bind("addressId") Integer addressId,
