@@ -120,7 +120,7 @@
                                     </td>
 
                                     <td class="order-total">
-                                        <fmt:formatNumber value="${o.total}" pattern="#,###"/> VND
+                                        <fmt:formatNumber value="${o.total + o.shippingFee}" pattern="#,###"/> VND
                                     </td>
 
                                     <td>

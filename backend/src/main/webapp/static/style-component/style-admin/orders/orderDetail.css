@@ -98,9 +98,22 @@ body > div > div.order-summary-container > div.order-info > table > thead > tr{
     text-align: center;
 }
 
-.step.completed .label {
+
+.step.completed div{
+    background-color: #5c67f2;
+}
+ .step.completed span  {
     color: #5c67f2;
 }
+
+
+.step.failed div {
+    background-color: #ff5a3c;
+}
+.step.failed span  {
+    color: #ff5a3c;
+}
+
 
 .line {
     flex-grow: 1;
@@ -139,7 +152,7 @@ h3 {
 }
 
 .order-info {
-    flex: 5;
+    flex: 3;
 }
 
 .products-table {
