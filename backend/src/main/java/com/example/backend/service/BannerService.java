@@ -24,13 +24,13 @@ public class BannerService {
         return bannerDAO.getBannerById(id);
     }
 
-    public Banner createBanner(String status, String imageId, LocalDate startDate, LocalDate endDate) {
-        int id = bannerDAO.createBanner(status, imageId, startDate, endDate);
+    public Banner createBanner(String status, String imageId, LocalDate startDate, LocalDate endDate, boolean isActive, String description) {
+        int id = bannerDAO.createBanner(status, imageId, startDate, endDate, isActive, description);
         return getBannerById(id);
     }
 
-    public void updateBanner(int id, String status, String imageId, LocalDate startDate, LocalDate endDate) {
-        bannerDAO.updateBanner(id, status, imageId, startDate, endDate);
+    public void updateBanner(int id, String status, String imageId, LocalDate startDate, LocalDate endDate, String description) {
+        bannerDAO.updateBanner(id, status, imageId, startDate, endDate, description);
     }
 
     public void toggleBannerStatus(int id, boolean isActive) {
