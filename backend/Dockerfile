@@ -9,7 +9,7 @@ EXPOSE 8080
 #Bước 1: Copy source code từ máy thật sang máy ảo CentOS
 #1. Máy ảo CentOS phải caài sẵn:
 #
-#sudo yum install -y openssh-server
+#sudo yum install -y openssh-serverls
 #sudo systemctl enable sshd --now
 
 
