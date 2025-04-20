@@ -54,8 +54,7 @@
                         </div>
 
 
-                        <!--            <label class="form-label me-2 mb-0">Trạng Thái</label>-->
-                        <select class="status-select">
+                         <select class="status-select">
                             <option>Mặc Định</option>
                             <option>Đã Gửi</option>
                             <option>Đang Xử Lý</option>
@@ -96,7 +95,7 @@
                             <th>Thanh Toán</th>
                             <th>Tổng Tiền</th>
                             <th>Trạng Thái</th>
-                            <th>Hoạt Động</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -125,14 +124,52 @@
                                     </td>
 
                                     <td>
-                                        <c:if test="${o.orderStatus == 'DELIVERED'}">
-                                            <span class="status order-status-shipped">Đã Gửi</span>
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${o.orderStatus == 'PENDING'}">
+                                                <span class="status order-status-pending">Chờ xác nhận</span>
+                                            </c:when>
 
-                                        <c:if test="${o.orderStatus == 'DELIVERY'}">
-                                            <span class="status order-status-shipped"
-                                                  style="color: #000;">Đang Gửi</span>
-                                        </c:if>
+                                            <c:when test="${o.orderStatus == 'CONFIRMED'}">
+                                                <span class="status order-status-pending">Đã xác nhận</span>
+                                            </c:when>
+
+                                            <c:when test="${o.orderStatus == 'PROCESSING'}">
+                                                <span class="status order-status-in-progress">Đang đóng gói</span>
+                                            </c:when>
+
+                                            <c:when test="${o.orderStatus == 'SHIPPED'}">
+                                                <span class="status order-status-shipped">Đang giao hàng</span>
+                                            </c:when>
+
+                                            <c:when test="${o.orderStatus == 'DELIVERED'}">
+                                                <span class="status order-status-delivered">Đã giao hàng</span>
+                                            </c:when>
+
+                                            <c:when test="${o.orderStatus == 'CANCELLED'}">
+                                                <span class="status order-status-failed">Đã huỷ</span>
+                                            </c:when>
+
+                                            <c:when test="${o.orderStatus == 'RETURNED'}">
+                                                <span class="status order-status-failed">Trả hàng</span>
+                                            </c:when>
+
+                                            <c:when test="${o.orderStatus == 'FAILED'}">
+                                                <span class="status order-status-failed">Giao hàng thất bại</span>
+                                            </c:when>
+
+
+                                        </c:choose>
+
+
+
+<%--                                        <c:if test="${o.orderStatus == 'DELIVERED'}">--%>
+<%--                                            <span class="status order-status-shipped">Đã Gửi</span>--%>
+<%--                                        </c:if>--%>
+
+<%--                                        <c:if test="${o.orderStatus == 'SHIPPED'}">--%>
+<%--                                            <span class="status order-status-shipped"--%>
+<%--                                                  style="color: #000;">Đang Gửi</span>--%>
+<%--                                        </c:if>--%>
 
 
                                     </td>
