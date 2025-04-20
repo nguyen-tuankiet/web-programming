@@ -15,10 +15,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderDetail.css">
+          href="${pageContext.request.contextPath}/static/style-component/style-user_order/UserOrderDetail.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderDetail.js"></script>
+    <script src="${pageContext.request.contextPath}/static/style-component/style-user_order/UserOrderDetail.js"></script>
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/style-component/style-user_order/OrderHistoryItem.css">
 
@@ -51,10 +51,13 @@
 
                 <div id="order_infor" class=" col">
                     <div class="wrap row">
-                        <div class="order_id" data-order-id="${order.id}">Mã đơn hàng: <span>${order.id}</span></div>
+                        <div class="order_id" data-order-id="${order.id}">
+                            Mã đơn hàng: <span>#${order.id}</span>
+                        </div>
                     </div>
 
-                    <div class="status">
+                    <div class="order_status">
+                        Trạng thái:
                         <c:choose>
                             <c:when test="${order.orderStatus == 'PENDING'}">
                                 <span style="color: #FFA500">Chờ xác nhận</span>
@@ -140,24 +143,38 @@
 
                     <div id="status_detail" class=" row">
 
-                        <div class="item_status section1 col">
+                        <c:set var="statusStep">
+                            <c:choose>
+                                <c:when test="${order.orderStatus == 'PENDING'}">1</c:when>
+                                <c:when test="${order.orderStatus == 'CONFIRMED'}">2</c:when>
+                                <c:when test="${order.orderStatus == 'PROCESSING'}">2</c:when>
+                                <c:when test="${order.orderStatus == 'SHIPPED'}">3</c:when>
+                                <c:when test="${order.orderStatus == 'DELIVERED'}">4</c:when>
+                                <c:when test="${order.orderStatus == 'CANCELLED'}">-1</c:when>
+                                <c:when test="${order.orderStatus == 'RETURNED'}">99</c:when>
+                                <c:when test="${order.orderStatus == 'FAILED'}">99</c:when>
+
+                            </c:choose>
+                        </c:set>
+
+                        <div class="item_status section1 col ${statusStep >= 1 ? 'active' : ''}">
                             <i class="fa-solid fa-box-archive"></i>
-                            <span>Đặt hàng thành công </span>
+                            <span>Đặt hàng thành công</span>
                             <span class="status_date">19/10/2024</span>
                         </div>
 
                         <div class="line"></div>
 
-                        <div class="item_status section2 col">
-                            <i class="fa-solid fa-truck-arrow-right"></i>
-                            <span>Đã xác nhận đơn</span>
+
+                        <div class="item_status section1 col ${statusStep >= 2 ? 'active' : ''}">
+                            <i class="fa-solid fa-box-archive"></i>
+                            <span>Chuẩn bị hàng</span>
                             <span class="status_date">19/10/2024</span>
                         </div>
 
-
                         <div class="line"></div>
 
-                        <div class="item_status section3 col">
+                        <div class="item_status section3 col ${statusStep >= 3 ? 'active' : ''}">
                             <i class="fa-solid fa-truck-fast"></i>
                             <span>Đang vận chuyển</span>
                             <span class="status_date">20/10/2024</span>
@@ -165,14 +182,30 @@
 
                         <div class="line"></div>
 
-                        <div class="item_status section4 col">
+
+                        <div class="item_status section4 col
+                            <c:choose>
+                                <c:when test='${order.orderStatus == "CANCELLED"}'>cancelled</c:when>
+                                <c:when test='${statusStep >= 4}'>active</c:when>
+                            </c:choose>">
                             <i class="fa-solid fa-box-open"></i>
-                            <span>Đã nhận được hàng</span>
+
+
+                            <span>
+                            <c:choose>
+                                <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
+                                <c:when test="${order.orderStatus == 'RETURNED'}">Đã trả hàng</c:when>
+                                <c:when test="${order.orderStatus == 'FAILED'}">Giao hàng không thành công</c:when>
+                                <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
+                                <c:otherwise>Đã nhận được hàng</c:otherwise>
+                            </c:choose>
+                        </span>
                             <span class="status_date">22/10/2024</span>
                         </div>
+
+
+
                     </div>
-
-
                     <div id="payment_infor" class="col">
 
                         <div class="title">
@@ -191,6 +224,14 @@
                             <div class="content_item">
                                 <span class="desc">Thuế GTGT ( 10% )</span>
                                 <span id="VAT" class="value">0 VND</span>
+                            </div>
+
+                            <div class="content_item">
+                                <span class="desc">Phí vận chuyển</span>
+                                <span id="shipping_fee" class="value">
+                                        <fmt:formatNumber value="${order.shippingFee}" pattern="#,###"/> VND
+                                </span>
+
                             </div>
 
                             <div class="rec_horizontal"></div>
