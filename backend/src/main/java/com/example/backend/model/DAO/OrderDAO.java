@@ -87,25 +87,20 @@ public interface OrderDAO {
 
 
 
-    @SqlQuery(value = "select\n" +
-            "    o.id, o.createAt, o.paymentStatus,\n" +
-            "    o.orderStatus, o.userId, o.addressId,\n" +
-            "    o.cardId, o.isCOD,\n" +
-            "    u.fullName as userName ,\n" +
-            "    sum(od.total) as total\n" +
+    @SqlQuery(value ="select \n" +
+            "\to.id, o.createAt, o.paymentStatus, o.orderStatus, \n" +
+            "  u.fullName as userName ,\n" +
+            "  sum(od.total +  o.shippingFee ) as total\n" +
             "from orders as o\n" +
-            "    inner join order_detail as od\n" +
-            "        on o.id = od.orderId\n" +
-            "    inner join user as u\n" +
-            "        on u.id = o.userId\n" +
+            "     inner join order_detail as od\n" +
+            "           on o.id = od.orderId\n" +
+            "     inner join user as u\n" +
+            "           on u.id = o.userId\n" +
             "group by\n" +
-            "    o.id, o.createAt, o.paymentStatus,\n" +
-            "    o.orderStatus, o.userId, o.addressId,\n" +
-            "    o.cardId, o.isCOD,\n" +
-            "    u.fullName\n" +
-            "order by o.createAt desc    ;\n" +
-            "\n" +
-            "\n")
+            "   o.id, o.createAt, o.paymentStatus,\n" +
+            "   o.orderStatus,\n" +
+            "   u.fullName \n" +
+            "order by o.createAt desc")
 
     List<Order> getAllOrders();
 
