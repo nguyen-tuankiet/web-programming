@@ -173,3 +173,72 @@ document.querySelector('form').addEventListener('submit', function(event) {
         event.preventDefault(); // Ngừng gửi form nếu không hợp lệ
     }
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.querySelector('.sign-in-container form');
+    const rememberCheckbox = document.getElementById('remember-checkbox');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const signInButton = document.getElementById('signInButton');
+
+    checkSavedCredentials();
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (rememberCheckbox.checked) {
+            saveCredentials(email, password);
+        } else {
+            clearSavedCredentials();
+        }
+        login(email, password);
+    });
+
+    function saveCredentials(email, password) {
+        const encodedPassword = btoa(password);
+        localStorage.setItem('remembered_email', email);
+        localStorage.setItem('remembered_password', encodedPassword);
+        localStorage.setItem('remember_me', 'true');
+    }
+
+    function clearSavedCredentials() {
+        localStorage.removeItem('remembered_email');
+        localStorage.removeItem('remembered_password');
+        localStorage.removeItem('remember_me');
+    }
+
+    function checkSavedCredentials() {
+        const rememberedEmail = localStorage.getItem('remembered_email');
+        const rememberedPassword = localStorage.getItem('remembered_password');
+        const rememberMe = localStorage.getItem('remember_me');
+
+        if (rememberMe === 'true' && rememberedEmail && rememberedPassword) {
+            emailInput.value = rememberedEmail;
+            // Decode the password
+            passwordInput.value = atob(rememberedPassword);
+            rememberCheckbox.checked = true;
+        }
+    }
+
+    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+    togglePasswordButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-toggle');
+            const passwordInput = document.querySelector(targetId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+        });
+    });
+});
