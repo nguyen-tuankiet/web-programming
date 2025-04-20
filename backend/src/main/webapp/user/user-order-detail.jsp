@@ -194,6 +194,9 @@
                             <span>
                             <c:choose>
                                 <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
+                                <c:when test="${order.orderStatus == 'RETURNED'}">Đã trả hàng</c:when>
+                                <c:when test="${order.orderStatus == 'FAILED'}">Giao hàng không thành công</c:when>
+                                <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
                                 <c:otherwise>Đã nhận được hàng</c:otherwise>
                             </c:choose>
                         </span>
@@ -201,37 +204,6 @@
                         </div>
 
 
-                            <%--                        <div class="item_status section1 col">--%>
-                            <%--                            <i class="fa-solid fa-box-archive"></i>--%>
-                            <%--                            <span>Đặt hàng thành công </span>--%>
-                            <%--                            <span class="status_date">19/10/2024</span>--%>
-                            <%--                        </div>--%>
-
-                            <%--                        <div class="line"></div>--%>
-
-                            <%--                        <div class="item_status section2 col">--%>
-                            <%--                            <i class="fa-solid fa-truck-arrow-right"></i>--%>
-                            <%--                            <span>Đã xác nhận đơn</span>--%>
-                            <%--                            <span class="status_date">19/10/2024</span>--%>
-                            <%--                        </div>--%>
-
-
-                            <%--                        <div class="line"></div>--%>
-
-                            <%--                        <div class="item_status section3 col">--%>
-                            <%--                            <i class="fa-solid fa-truck-fast"></i>--%>
-                            <%--                            <span>Đang vận chuyển</span>--%>
-                            <%--                            <span class="status_date">20/10/2024</span>--%>
-                            <%--                        </div>--%>
-
-                            <%--                        <div class="line"></div>--%>
-
-                            <%--                        <div class="item_status section4 col">--%>
-                            <%--                            <i class="fa-solid fa-box-open"></i>--%>
-                            <%--                            <span>Đã nhận được hàng</span>--%>
-                            <%--                            <span class="status_date">22/10/2024</span>--%>
-                            <%--                        </div>--%>
-                            <%--                    </div>--%>
 
                     </div>
                     <div id="payment_infor" class="col">
