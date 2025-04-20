@@ -137,14 +137,24 @@ h3 {
     border-radius: 5px;
 }
 
-.status-paid {
-    background-color: #198754;
-    color: white;
+.payment-status-paid {
+    background-color: #24ad002e;
+    color: #24ad00;
     font-weight: bold;
     padding: 3px 5px;
     border-radius: 8px;
     font-size: 12px;
 }
+.payment-status-pending {
+    background-color: #3535352e;
+    color: #000000;
+    font-weight: bold;
+    padding: 3px 5px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+
 
 .order-summary-container {
     display: flex;

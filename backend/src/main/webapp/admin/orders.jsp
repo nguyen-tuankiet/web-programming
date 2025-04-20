@@ -115,7 +115,11 @@
 
                                     <td>
                                         <c:if test="${o.paymentStatus == 'PAID'}">
-                                            <span class="status status-paid">Đã Thanh Toán</span>
+                                            <span class="status payment-status-paid">Đã Thanh Toán</span>
+                                        </c:if>
+
+                                        <c:if test="${o.paymentStatus == 'PENDING'}">
+                                            <span class="status payment-status-pending">Chưa Thanh Toán</span>
                                         </c:if>
                                     </td>
 

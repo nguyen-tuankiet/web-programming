@@ -2,6 +2,7 @@ package com.example.backend.controller.buy;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.contant.OrderStatus;
+import com.example.backend.contant.PaymentStatus;
 import com.example.backend.model.Address;
 import com.example.backend.model.Card;
 import com.example.backend.model.DAO.cart.Cart;
@@ -113,7 +114,7 @@ public class CheckoutController extends HttpServlet {
 
         Order order = new Order();
         order.setCreateAt(LocalDate.now());
-        order.setPaymentStatus("PAID");
+//        order.setPaymentStatus("PAID");
         order.setOrderStatus(OrderStatus.PENDING);
         order.setShippingFee(shipping_fee);
         order.setUserId(userId);
@@ -121,11 +122,12 @@ public class CheckoutController extends HttpServlet {
             order.setAddressId(Integer.parseInt(address));
             if (card.equals("COD")) {
                 order.setIsCOD(true);
+                order.setPaymentStatus(PaymentStatus.PENDING);
             }
             else{
                 order.setCardId(Integer.parseInt(card));
                 order.setIsCOD(false);
-
+                order.setPaymentStatus(PaymentStatus.PAID);
             }
         }catch (Exception e) {
             e.printStackTrace();

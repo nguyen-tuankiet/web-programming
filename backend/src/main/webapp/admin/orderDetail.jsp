@@ -194,7 +194,11 @@
                                     <h3>Chi Tiết Thanh Toán</h3>
                                     <p>Trạng thái thanh toán:
                                         <c:if test="${order.paymentStatus =='PAID'}">
-                                            <span class="status-paid">Đã Thanh Toán</span>
+                                            <span class="payment-status-paid    ">Đã Thanh Toán</span>
+                                        </c:if>
+
+                                        <c:if test="${order.paymentStatus =='PENDING'}">
+                                            <span class="payment-status-pending">Chưa Thanh Toán</span>
                                         </c:if>
                                     </p>
 
