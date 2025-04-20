@@ -323,34 +323,42 @@ td {
 }
 
 .status-paid {
-    background-color: rgba(25, 135, 84, 0.1);
-    color: #198754;
+    background-color: #24ad002e;
+    color: #24ad00;
 }
 
-.status-refunded {
+.order-status-pending {
     background-color: rgba(71, 85, 105, 0.1);
     color: #475569;
 }
 
-.status-cancel {
+
+.order-status-refunded {
+    background-color: rgba(71, 85, 105, 0.1);
+    color: #475569;
+}
+
+.order-status-failed {
     background-color: rgba(220, 53, 69, 0.1);
     color: #dc3545;
 }
 
 .order-status-shipped {
-    background-color: rgba(13, 202, 240, 0.1);
-    color: #0DCAF0;
+    background-color: rgb(148 237 255 / 23%);
+    color: #00a1c1;
 }
 
 .order-status-in-progress {
-    background-color: rgba(255, 193, 7, 0.1);
-    color: #FFC107;
+    background-color: rgb(243 217 136 / 42%);
+    color: #dea600;
 }
 
 .order-status-delivered {
-    background-color: rgba(25, 147, 162, 0.1);
-    color: #1993A2;
+    background-color: #24ad002e;
+    color: #24ad00;
 }
+
+
 
 /* Action menu */
 .actions {
