@@ -12,8 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đặt lại mật khẩu</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/Style_forgot%20password/forgot%20password.css">
-    <script src="${pageContext.request.contextPath}/static/style-component/Style_forgot%20password/forgot%20password.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/Style-forgot-password/forgot_password.css">
+    <script src="${pageContext.request.contextPath}/static/style-component/Style-forgot-password/forgot_password.js"></script>
 
 </head>
 <body>
@@ -56,6 +56,7 @@
             <input type="text" maxlength="1" id="otp4" oninput="moveToNext(this, 'otp5')">
             <input type="text" maxlength="1" id="otp5">
         </div>
+        <div id="otpErrorMessage" class="error-message" style="display: none;"></div>
         <p class="timer-text">Vui lòng chờ <span id="timer">60</span> giây để gửi lại.</p>
         <button onclick="confirmOTP()">Tiếp theo</button>
     </div>
