@@ -100,13 +100,13 @@ i {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     padding: 10px 0;
 
 }
 
 #order_infor .order_id {
-    font-size: 14px;
+    /*font-size: 20px;*/
+    /*font-weight: bold;*/
 }
 
 #order_infor .order_id span {
@@ -115,17 +115,21 @@ i {
 }
 
 
-#order_infor .order_status {
+#order_infor .order_status  span{
     justify-content: center;
     width: 120px;
-    margin-left: 20px;
+    margin-left: 10px;
     border-radius: 5px;
     background-color: #EFF8F1;
     font-size: 14px;
+    font-weight: 400;
     color: #007B55;
     border: 1px solid #cfcfcf;
+    padding: 5px 15px;
 
 }
+
+
 
 #order_infor .date {
     font-size: 14px;
@@ -153,7 +157,7 @@ i {
     display: flex;
     justify-content: space-evenly;
     padding: 20px 0;
-    color: #007B55;
+    /*color: #007B55;*/
 }
 
 #status_detail > span {
@@ -164,11 +168,33 @@ i {
     width: 100px;
 }
 
+
+.item_status {
+    color: #ccc;
+    opacity: 0.6;
+}
+
+.item_status.active {
+    color: #0a7cff;
+    opacity: 1;
+    font-weight: bold;
+}
+
+.item_status.active i {
+    color: #0a7cff;
+}
+
+.item_status.cancelled {
+    color: red;
+    opacity: 1;
+    font-weight: bold;
+}
+
+
 #status_detail i {
     font-size: 30px;
     display: flex;
     justify-content: center;
-    color: #007B55;
 }
 
 #status_detail span {
@@ -187,7 +213,7 @@ i {
     margin-top: 25px;
     width: 150px;
     height: 1px;
-    border: 1px dashed #007B55;
+    border: 1px dashed #666666;
 }
 
 
@@ -258,7 +284,7 @@ i {
 }
 
 .section_right .title {
-    font-size: 14px;
+    font-size: 18px;
     color: #000000;
 }
 
