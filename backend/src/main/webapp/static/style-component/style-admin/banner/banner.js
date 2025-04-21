@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append('file', file);
 
         try {
-            const response = await fetch(`${contextPath}/admin/uploadImage`, {
+            const response = await fetch(`${contextPath}/api/uploadImage`, {
                 method: 'POST',
                 body: formData
             });
