@@ -56,7 +56,9 @@ public interface ProductDAO {
             "       ops.id         as optionId,\n" +
             "       ops.price      as price,\n" +
             "       ops.stock      as stock,\n" +
-            "       img.url        as imageUrl\n" +
+            "       img.url        as imageUrl, \n" +
+            " p.height as height , p.length as length , p.width as width , p.weight as weight "+
+
             "FROM products as p\n" +
             "         INNER JOIN categories as cate on cate.id = p.categoryId\n" +
             "         INNER JOIN `options` as ops on ops.productId = p.id\n" +
