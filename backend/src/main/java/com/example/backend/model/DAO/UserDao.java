@@ -18,7 +18,7 @@ public interface UserDao {
     List<User> getAllUsers();
 
     @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
-            "        i.url as avatarUrl, u.status, u.confirmationToken\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken, u.role, u.password, u.salt, u.facebookId\n" +
             "from user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
             "where u.id  = :id")
@@ -30,15 +30,16 @@ public interface UserDao {
     @SqlQuery("SELECT * FROM user WHERE confirmationToken = :token")
     User getUserByConfirmationToken(@Bind("token") String token);
 
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt, status, confirmationToken) " +
-            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt, 'PENDING', :confirmationToken)")
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt, 'PENDING', :confirmationToken, :facebookId)")
     @GetGeneratedKeys("id")
     String createUser(@Bind("fullName") String fullName,
                       @Bind("displayName") String displayName,
                       @Bind("email") String email,
                       @Bind("password") String password,
                       @Bind("salt") String salt,
-                      @Bind("confirmationToken") String confirmationToken);
+                      @Bind("confirmationToken") String confirmationToken,
+                      @Bind("facebookId") String facebookId);
 
     @SqlUpdate("UPDATE user SET status = :status WHERE id = :id")
     void updateUserStatus(@Bind("id") Integer id, @Bind("status") String status);

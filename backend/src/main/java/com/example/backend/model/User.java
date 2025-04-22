@@ -22,6 +22,7 @@ public class User {
     String avatarUrl;
     String status;
     String confirmationToken;
+    String facebookId;
 
     @JdbiConstructor
     public User(@ColumnName("id") Integer id,
@@ -37,7 +38,9 @@ public class User {
                 @ColumnName("salt")  @Nullable String salt,
                 @ColumnName("avatarUrl") @Nullable String avatarUrl,
                 @ColumnName("status") @Nullable String status,
-                @ColumnName("confirmationToken") @Nullable String confirmationToken)
+                @ColumnName("confirmationToken") @Nullable String confirmationToken,
+                @ColumnName("facebookId") @Nullable String facebookId
+    )
 
     {
         this.id = id;
@@ -54,6 +57,7 @@ public class User {
         this.avatarUrl = avatarUrl;
         this.status = status;
         this.confirmationToken = confirmationToken;
+        this.facebookId = facebookId;
     }
 
     public User() {
@@ -167,6 +171,14 @@ public class User {
         this.confirmationToken = confirmationToken;
     }
 
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -184,6 +196,7 @@ public class User {
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", status='" + status + '\'' +
                 ", confirmationToken='" + confirmationToken + '\'' +
+                ", facebookId='" + facebookId + '\'' +
                 '}';
     }
 }
