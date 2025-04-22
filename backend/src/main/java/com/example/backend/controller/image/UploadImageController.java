@@ -26,7 +26,7 @@ import java.util.Properties;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/admin/uploadImage")
+@WebServlet("/api/uploadImage")
 @MultipartConfig
 public class UploadImageController extends HttpServlet {
     private ImageService imageService;
