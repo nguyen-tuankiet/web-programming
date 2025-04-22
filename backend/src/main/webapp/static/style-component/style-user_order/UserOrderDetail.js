@@ -6,28 +6,7 @@ $(document).ready(function () {
     })
 
 
-    const price = $('#product_price');
-    const VAT = $('#VAT');
-    const total_charge = $('#total_charge');
-    const shipping_fee = $('#shipping_fee');
 
-    const total_charge_value = parseInt(total_charge.text().replaceAll('.', '').replaceAll('VND', ''));
-    const shipping_fee_value = parseInt(shipping_fee.text().replaceAll('.', '').replaceAll('VND', ''));
-
-
-    const newVat = total_charge_value * 10 / 100;
-    const newPrice = total_charge_value - newVat;
-
-    // newTotal = total + shipping fee
-    const newTotal = total_charge_value + shipping_fee_value;
-
-    price.text(Intl.NumberFormat('vi-VN').format(newPrice) + ' VND');
-    VAT.text(Intl.NumberFormat('vi-VN').format(newVat) + ' VND');
-    total_charge.text(Intl.NumberFormat('vi-VN').format(newTotal) + ' VND');
-
-    console.log(total_charge_value)
-    console.log(newVat)
-    console.log(newPrice)
 
 
 //     Review
