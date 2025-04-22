@@ -703,12 +703,13 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 
-
+    const contextPath = window.location.pathname.split('/')[1] === '' ? '' : '/' + window.location.pathname.split('/')[1];
     // Hàm upload ảnh
     async function uploadImages(files) {
         const formData = new FormData();
         Array.from(files).forEach(file => formData.append("file", file));
-        const uploadResponse = await fetch("uploadImage", { method: "POST", body: formData });
+        const uploadResponse = await fetch(`${contextPath}/api/uploadImage`,
+            { method: "POST", body: formData });
         const uploadData = await uploadResponse.json();
 
         if (uploadData.statusCode !== 200 || !uploadData.data || !uploadData.data.length) {

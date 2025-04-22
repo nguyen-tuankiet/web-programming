@@ -14,9 +14,10 @@ $(document).ready(function () {
 
             const formData = new FormData();
             formData.append("file", file);
-            fetch(`admin/uploadImage`, {
+            fetch(`api/uploadImage`, {
                 method: "POST",
                 body: formData,
+                credentials: 'include',
             })
             .then(
                 response => response.json()
