@@ -13,6 +13,7 @@ import java.util.UUID;
 public class AuthService {
     private UserDao userDAO;
     private EmailService emailService;
+    String facebookId = null;
 
     public AuthService(Jdbi jdbi) {
         this.userDAO = jdbi.onDemand(UserDao.class);
@@ -38,7 +39,7 @@ public class AuthService {
         String confirmationToken = UUID.randomUUID().toString();
 
         // Tạo user mới và lưu thông tin
-        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken);
+        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
         
         if (userId != null) {
             // Gửi email xác nhận
@@ -66,7 +67,7 @@ public class AuthService {
         String hashedPassword = HashUtils.hashWithSalt(password, salt);
         String confirmationToken = UUID.randomUUID().toString();
         // Tạo user mới và lưu thông tin
-        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken);
+        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
         return userId != null;
     }
 
