@@ -341,7 +341,18 @@
                         <a href="brand">Nhà sản xuất</a>
                 </div>
             </li>
-            <%--Banner--%>
+
+<%--            MananageRole--%>
+
+
+            <li class="menu_item">
+                <div class="wrap_menu_item">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <a href="${pageContext.request.contextPath}/admin/manage-role">Quản lý Vai Trò</a>
+                </div>
+            </li>
+
+        <%--Banner--%>
 
             <li class="menu_item">
                 <div class="wrap_menu_item">
