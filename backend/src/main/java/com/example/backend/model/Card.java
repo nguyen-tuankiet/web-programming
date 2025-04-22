@@ -82,7 +82,7 @@ public class Card {
         return isDefault;
     }
 
-    public void seIstDefault(Boolean aDefault) {
+    public void setDefault(Boolean aDefault) {
         isDefault = aDefault;
     }
 }

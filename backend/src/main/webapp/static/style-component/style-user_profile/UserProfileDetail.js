@@ -48,47 +48,6 @@ $(document).ready(function () {
 
 
 
-    // $('.update_btn').click(function() {
-    //     var field = $(this).data('field');
-    //     var currentValue = $('#' + field).text().trim();
-    //
-    //
-    //     console.log(field);
-    //     console.log(currentValue);
-    //
-    //     var inputField = $('<input>', {
-    //         type: 'text',
-    //         id: field + '-input',
-    //         value: currentValue,
-    //         class: 'update-input'
-    //     });
-    //
-    //     $('#' + field).replaceWith(inputField);
-    //     inputField.focus();
-    //
-    //
-    //     inputField.on('blur', function() {
-    //         var newValue = inputField.val().trim();
-    //         if (newValue !== currentValue) {
-    //              var newSpan = $('<span>', {
-    //                 id: field,
-    //                 class: 'item_text',
-    //                 text: newValue
-    //             });
-    //
-    //             inputField.replaceWith(newSpan);
-    //         } else {
-    //              var currentSpan = $('<span>', {
-    //                 id: field,
-    //                 class: 'item_text',
-    //                 text: currentValue
-    //             });
-    //
-    //             inputField.replaceWith(currentSpan);
-    //         }
-    //     });
-    // });
-
 
     $('.update_btn').click(function() {
         var field = $(this).data('field');

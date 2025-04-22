@@ -98,9 +98,22 @@ body > div > div.order-summary-container > div.order-info > table > thead > tr{
     text-align: center;
 }
 
-.step.completed .label {
+
+.step.completed div{
+    background-color: #5c67f2;
+}
+ .step.completed span  {
     color: #5c67f2;
 }
+
+
+.step.failed div {
+    background-color: #ff5a3c;
+}
+.step.failed span  {
+    color: #ff5a3c;
+}
+
 
 .line {
     flex-grow: 1;
@@ -124,14 +137,24 @@ h3 {
     border-radius: 5px;
 }
 
-.status-paid {
-    background-color: #198754;
-    color: white;
+.payment-status-paid {
+    background-color: #24ad002e;
+    color: #24ad00;
     font-weight: bold;
     padding: 3px 5px;
     border-radius: 8px;
     font-size: 12px;
 }
+.payment-status-pending {
+    background-color: #3535352e;
+    color: #000000;
+    font-weight: bold;
+    padding: 3px 5px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+
 
 .order-summary-container {
     display: flex;
@@ -139,7 +162,7 @@ h3 {
 }
 
 .order-info {
-    flex: 5;
+    flex: 3;
 }
 
 .products-table {
