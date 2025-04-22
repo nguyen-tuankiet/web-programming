@@ -45,37 +45,78 @@
 
                     <div class="order-header">
                         <div class="order-progress">
-                            <div class="step completed">
-                                <div class="circle active"></div>
-                                <span class="label active">Đơn Hàng Đã Đặt</span>
+
+                            <c:set var="statusStep">
+                                <c:choose>
+                                    <c:when test="${order.orderStatus == 'PENDING'}">1</c:when>
+                                    <c:when test="${order.orderStatus == 'CONFIRMED'}">2</c:when>
+                                    <c:when test="${order.orderStatus == 'PROCESSING'}">2</c:when>
+                                    <c:when test="${order.orderStatus == 'SHIPPED'}">3</c:when>
+                                    <c:when test="${order.orderStatus == 'DELIVERED'}">4</c:when>
+                                    <c:when test="${order.orderStatus == 'CANCELLED'}">-1</c:when>
+                                    <c:when test="${order.orderStatus == 'RETURNED'}">99</c:when>
+                                    <c:when test="${order.orderStatus == 'FAILED'}">99</c:when>
+
+                                </c:choose>
+                            </c:set>
+
+
+
+                            <div class="step ${statusStep >= 1 ? 'completed' : ''}">
+                                <div class="circle"></div>
+                                <span class="label">Đặt hàng thành công</span>
                             </div>
-                            <div class="line active"></div>
-                            <div class="step completed">
-                                <div class="circle active"></div>
-                                <span class="label active">Đã Đóng Gói</span>
+                            <div class="line    "></div>
+
+
+                            <div class="step ${statusStep >= 2 ? 'completed' : ''} ">
+                                <div class="circle "></div>
+                                <span class="label">Chuẩn bị hàng</span>
                             </div>
-                            <div class="line active "></div>
-                            <div class="step completed">
-                                <div class="circle active "></div>
-                                <span class="label active">Đã Giao Hàng</span>
+                            <div class="line  "></div>
+
+                            <div class="step ${statusStep >= 3 ? 'completed' : ''} ">
+                                <div class="circle "></div>
+                                <span class="label">Đang vận chuyển</span>
                             </div>
-                            <div class="line active"></div>
-                            <div class="step completed">
-                                <div class="circle active"></div>
-                                <span class="label active">Đã Giao Thành Công</span>
+                            <div class="line  "></div>
+
+
+                            <div class="step
+                                <c:choose>
+                                    <c:when test='${statusStep < 0}'>failed </c:when>
+                                    <c:when test='${statusStep == 99}'>failed</c:when>
+                                    <c:when test='${statusStep == 4}'>completed</c:when>
+                                </c:choose>"
+                            >
+
+                                <div class="circle "></div>
+                                <span class="label">
+                                     <c:choose>
+                                         <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
+                                         <c:when test="${order.orderStatus == 'RETURNED'}">Đã trả hàng</c:when>
+                                         <c:when test="${order.orderStatus == 'FAILED'}">Giao hàng không thành công</c:when>
+                                         <c:when test="${order.orderStatus == 'CANCELLED'}">Đơn hàng đã bị hủy</c:when>
+                                         <c:otherwise>Đã nhận được hàng</c:otherwise>
+                                     </c:choose>
+                                </span>
                             </div>
+
+
+
+
+
+
+
+
                         </div>
                     </div>
 
                     <div class="order-summary-container">
 
                         <div class="order-info">
-                            <h3>Mã Đơn Hàng: ${order.id}</h3>
-                            <p>Ngày Đặt Hàng: ${order.createAt}
-                                <c:if test="${order.paymentStatus =='PAID'}">
-                                    <span class="status-paid">Đã Thanh Toán</span>
-                                </c:if>
-                            </p>
+                            <h3>Mã đơn hàng: ${order.id}</h3>
+                            <p>Ngày đặt hàng: ${order.createAt}  </p>
 
                             <table class="products-table">
                                 <thead>
@@ -131,14 +172,16 @@
 
                                 <h3>Tóm Tắt Đơn Hàng</h3>
                                 <p> Tổng giá trị:
-                                    <span id="before_tax">0</span>
+                                    <span id="before_tax"><fmt:formatNumber value="${order.total}" pattern="#,###"/> VND</span>
                                 </p>
-                                <p>Thuế VAT 10% (đã bao gồm):
-                                    <span id="VAT">0</span>
+
+                                <p> Phí vận chuyển:
+                                    <span ><fmt:formatNumber value="${order.shippingFee}" pattern="#,###"/> VND</span>
                                 </p>
+
                                 <p class="total-amount">Tổng Số Tiền:
-                                    <span id="total_charge" data-total="${order.total}">
-                                    <fmt:formatNumber value="${order.total}" pattern="#,###"/> VND
+                                    <span id="total_charge" data-total="${order.total }">
+                                    <fmt:formatNumber value="${order.total  + order.shippingFee}" pattern="#,###"/> VND
                                 </span>
                                 </p>
 
@@ -149,7 +192,15 @@
                             <c:if test="${not empty user}">
                                 <div class="payment">
                                     <h3>Chi Tiết Thanh Toán</h3>
-                                    <p>Giao Dịch: <span> #DU4444TO10000</span></p>
+                                    <p>Trạng thái thanh toán:
+                                        <c:if test="${order.paymentStatus =='PAID'}">
+                                            <span class="payment-status-paid    ">Đã Thanh Toán</span>
+                                        </c:if>
+
+                                        <c:if test="${order.paymentStatus =='PENDING'}">
+                                            <span class="payment-status-pending">Chưa Thanh Toán</span>
+                                        </c:if>
+                                    </p>
 
                                     <p>Phương Thức Thanh Toán:
                                         <c:if test="${order.isCOD == false}">

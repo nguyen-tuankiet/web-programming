@@ -54,7 +54,7 @@
         </c:if>
 
         <c:if   test="${empty user.avatarUrl}">
-            <img id="avatar" src="${pageContext.request.contextPath}/static/image/medium%20(1).png" height="500" width="500"/>
+            <img id="avatar" src="${pageContext.request.contextPath}/static/image/default-avatar.png" height="500" width="500"/>
         </c:if>
 
 

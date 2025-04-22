@@ -322,9 +322,13 @@ td {
     min-width: 100px;
 }
 
-.status-paid {
+.payment-status-paid {
     background-color: #24ad002e;
     color: #24ad00;
+}
+.payment-status-pending {
+    background-color: #3535352e;
+    color: #000000;
 }
 
 .order-status-pending {

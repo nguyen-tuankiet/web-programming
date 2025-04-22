@@ -1,6 +1,7 @@
 package com.example.backend.model;
 
 import com.example.backend.contant.OrderStatus;
+import com.example.backend.contant.PaymentStatus;
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
@@ -11,7 +12,7 @@ import java.util.Date;
 public class Order {
     Integer id;
     LocalDate createAt;
-    String paymentStatus;
+    PaymentStatus paymentStatus;
     OrderStatus orderStatus;
     Integer userId;
     Integer cardId;
@@ -39,7 +40,7 @@ public class Order {
     @JdbiConstructor
     public Order(@ColumnName("id") @Nullable Integer id,
                  @ColumnName("createAt") @Nullable LocalDate createAt,
-                 @ColumnName("paymentStatus") @Nullable String paymentStatus,
+                 @ColumnName("paymentStatus") @Nullable PaymentStatus paymentStatus,
                  @ColumnName("orderStatus") @Nullable OrderStatus orderStatus,
                  @ColumnName("userId") @Nullable Integer userId,
                  @ColumnName("cardId") @Nullable Integer cardId,
@@ -102,11 +103,11 @@ public class Order {
         this.createAt = createAt;
     }
 
-    public String getPaymentStatus() {
+    public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 

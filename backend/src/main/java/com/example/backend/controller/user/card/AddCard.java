@@ -62,10 +62,10 @@ public class AddCard extends HttpServlet {
         card.setType("Visa");
         card.setUserId(userId);
         if (primaryCard) {
-            card.seIstDefault(true);
+            card.setDefault(true);
         }
         else {
-            card.seIstDefault(false);
+            card.setDefault(false);
         }
         card.setLast4(last4);
 

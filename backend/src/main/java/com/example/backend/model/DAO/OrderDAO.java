@@ -1,6 +1,7 @@
 package com.example.backend.model.DAO;
 
 import com.example.backend.contant.OrderStatus;
+import com.example.backend.contant.PaymentStatus;
 import com.example.backend.model.Order;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
@@ -23,7 +24,7 @@ public interface OrderDAO {
     @GetGeneratedKeys
     Integer createOrder(
             @Bind("createAt")LocalDate createAt,
-            @Bind("paymentStatus") String paymentStatus,
+            @Bind("paymentStatus") PaymentStatus paymentStatus,
             @Bind("orderStatus") OrderStatus orderStatus,
             @Bind("userId") Integer userId,
             @Bind("addressId") Integer addressId,
@@ -72,7 +73,7 @@ public interface OrderDAO {
 
     @SqlQuery(value = "select\n" +
             "    o.id as id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD,\n" +
+            "    o.userId, o.addressId, o.cardId, o.isCOD,  o.shippingFee as  shippingFee,\n" +
             "    sum(od.total) as total\n" +
             "from orders as o inner join order_detail as od\n" +
             "                            on o.id = od.orderId\n" +
@@ -89,8 +90,8 @@ public interface OrderDAO {
 
     @SqlQuery(value ="select \n" +
             "\to.id, o.createAt, o.paymentStatus, o.orderStatus, \n" +
-            "  u.fullName as userName ,\n" +
-            "  sum(od.total +  o.shippingFee ) as total\n" +
+            "  u.fullName as userName , o.shippingFee as  shippingFee,\n" +
+            "  sum(od.total) as total\n" +
             "from orders as o\n" +
             "     inner join order_detail as od\n" +
             "           on o.id = od.orderId\n" +
