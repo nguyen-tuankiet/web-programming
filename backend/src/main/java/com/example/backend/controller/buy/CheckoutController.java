@@ -1,18 +1,22 @@
 package com.example.backend.controller.buy;
 
+import com.cloudinary.api.exceptions.BadRequest;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.contant.OrderStatus;
 import com.example.backend.contant.PaymentStatus;
-import com.example.backend.model.Address;
-import com.example.backend.model.Card;
+import com.example.backend.controller.GHNApiCaller;
+import com.example.backend.model.*;
 import com.example.backend.model.DAO.cart.Cart;
 import com.example.backend.model.DAO.cart.ProductCart;
-import com.example.backend.model.Order;
-import com.example.backend.model.OrderDetail;
+import com.example.backend.model.request.GHNCreateOrderRequest;
+import com.example.backend.model.request.GHNItem;
 import com.example.backend.service.*;
+import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.math3.analysis.function.Add;
+import org.apache.http.HttpStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -30,6 +34,11 @@ public class CheckoutController extends HttpServlet {
     CardService cardService = new CardService(DBConnection.getJdbi());
     AddressSevice addressService = new AddressSevice(DBConnection.getJdbi());
     ProductService productService = new ProductService(DBConnection.getJdbi());
+    UserService userService = new UserService(DBConnection.getJdbi());
+
+    int codAmount =0;
+    StringBuilder content = new StringBuilder();
+    List<GHNItem>items = new ArrayList<>();
 
 
     @Override
@@ -90,41 +99,46 @@ public class CheckoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         BufferedReader reader = request.getReader();
         Boolean flag = false;
-
         while ((line = reader.readLine()) != null) {
             stringBuilder.append(line);
-
         }
 
         JSONObject jsonObject = new JSONObject(stringBuilder.toString());
-        String address = jsonObject.getString("address_id");
+        String addressId = jsonObject.getString("address_id");
         String card = jsonObject.getString("card");
-        Integer shipping_fee = jsonObject.getInt("ship_fee");
+        int shipping_fee = jsonObject.getInt("ship_fee");
+        codAmount+=shipping_fee;
         JSONArray products = jsonObject.getJSONArray("products");
 
-
-
+        // User
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
+        User user = userService.getUserById(userId);
+        if (user == null) throw new RuntimeException("User not found");
 
+        // Address
+        Address address = addressService.findById(Integer.parseInt(addressId));
+        if ((address == null) || !(address.getUserId().equals(userId)))
+            throw new RuntimeException("Address not found");
+
+
+
+        // Order
         Order order = new Order();
         order.setCreateAt(LocalDate.now());
-//        order.setPaymentStatus("PAID");
         order.setOrderStatus(OrderStatus.PENDING);
         order.setShippingFee(shipping_fee);
         order.setUserId(userId);
+        order.setAddressId(Integer.parseInt(addressId));
         try {
-            order.setAddressId(Integer.parseInt(address));
             if (card.equals("COD")) {
                 order.setIsCOD(true);
                 order.setPaymentStatus(PaymentStatus.PENDING);
-            }
-            else{
+            }else{
                 order.setCardId(Integer.parseInt(card));
                 order.setIsCOD(false);
                 order.setPaymentStatus(PaymentStatus.PAID);
@@ -133,20 +147,33 @@ public class CheckoutController extends HttpServlet {
             e.printStackTrace();
         }
 
-        Integer orderid = orderSerivce.addOrder(order);
 
-        if (orderid != null) {
-            Integer oderid  = orderid;
+        // Create order
+        Integer orderId = orderSerivce.addOrder(order);
+        if (orderId != null) {
             for (int i = 0; i < products.length(); i++) {
                 JSONObject product = products.getJSONObject(i);
 
                 int productId = product.getInt("id");
+                int optionId = product.getInt("optionId");
+                Product p = productService.getProductByIdAndOptionId(productId, optionId);
+
+                if (p == null) throw new RuntimeException("Product not found");
+                if (p.getStock() <=0) throw new RuntimeException("Product sold out");
+
                 int quantity = product.getInt("quantity");
                 int total = product.getInt("total");
-                int optionId = product.getInt("optionId");
+
+
+                // Prepare data
+                codAmount+=total;
+                content.append(p.getName()).append("\n");
+                GHNItem item = new GHNItem(p, quantity);
+                items.add(item);
+
 
                 OrderDetail od= new OrderDetail();
-                od.setOrderId(oderid);
+                od.setOrderId(orderId);
                 od.setProductId(productId);
                 od.setQuantity(quantity);
                 od.setTotal(total);
@@ -161,21 +188,35 @@ public class CheckoutController extends HttpServlet {
             }
         }
 
+
+        // Call GHN API
+        if (codAmount > 50000000) throw new RuntimeException("Cod amount exceeds 50000000");
+        GHNCreateOrderRequest GHNRequest= new GHNCreateOrderRequest(
+                address, user, "Ten san pham", card.equals("COD") ? codAmount: 0, items);
+        String GHNResponse = GHNCreateOrder(GHNRequest);
+
+        // TODO: Lấy shipping id update cho order
+
+
+
        if (flag){
-
-
            JSONObject jsonResponse = new JSONObject();
            jsonResponse.put("success", true);
            response.getWriter().write(jsonResponse.toString());
        }else {
-  
-
            JSONObject jsonResponse = new JSONObject();
            jsonResponse.put("success", false);
-
            response.getWriter().write(jsonResponse.toString());
        }
-
-
     }
+
+    private String GHNCreateOrder( GHNCreateOrderRequest GHNCreateOrderRequest ) throws IOException {
+        GHNApiCaller apiCaller = new GHNApiCaller();
+        Gson gson = new Gson();
+        String json = gson.toJson(GHNCreateOrderRequest);
+        String response =  apiCaller.createOrder(json);
+
+        return response;
+    }
+
 }
