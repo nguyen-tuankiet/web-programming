@@ -5,6 +5,7 @@ import com.example.backend.model.Card;
 import com.example.backend.model.DAO.CardDAO;
 import org.jdbi.v3.core.Jdbi;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CardService {
@@ -35,7 +36,15 @@ public class CardService {
 
     public static void main(String[] args) {
         CardService cardService = new CardService(DBConnection.getJdbi());
-        System.out.println(cardService.getCartByUserId(1));
+        Card card = new Card();
+        card.setUserId(53);
+        card.setLast4(4444);
+        card.setDuration(LocalDate.of(2027,1,1));
+        card.setType("visa");
+        card.setDefault(true);
+
+        System.out.println(cardService.addCard(card));
+//        System.out.println(cardService.getCartByUserId(1));
 //        System.out.println(cardService.getCardById(1));
 //        System.out.println(cardService.getCardById(1));
 //        System.out.println(cardService.getCardById(1));
