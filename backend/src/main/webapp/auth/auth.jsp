@@ -21,6 +21,24 @@
   <%--          crossorigin="anonymous"--%>
   <%--          referrerpolicy="no-referrer"--%>
   <%--  />--%>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1247041000404508',
+        xfbml      : true,
+        version    : 'v22.0'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 </head>
 <body>
 <div class="container" id="container">
@@ -29,7 +47,7 @@
     <form action="#">
       <h1>Tạo tài khoản</h1>
       <div class="social-container">
-        <a href="https://www.facebook.com/?locale=vi_VN" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" onclick="handleFacebookAuth('register')" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="${pageContext.request.contextPath}/register-google" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="https://www.linkedin.com/" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
@@ -81,7 +99,7 @@
     <form action="#">
       <h1>Đăng nhập</h1>
       <div class="social-container">
-        <a href="https://www.facebook.com/?locale=vi_VN" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" onclick="handleFacebookAuth('login')" class="social"><i class="fab fa-facebook-f"></i></a>
         <a href="${pageContext.request.contextPath}/login-google" class="social"><i class="fab fa-google-plus-g"></i></a>
         <a href="https://www.linkedin.com/" class="social"><i class="fab fa-linkedin-in"></i></a>
       </div>
@@ -126,6 +144,12 @@
 
 <main>
   <script src="${pageContext.request.contextPath}/static/style-page/auth/auth.js"></script>
+  <script>
+    function handleFacebookAuth(mode) {
+        // Chuyển hướng trực tiếp đến servlet
+        window.location.href = '${pageContext.request.contextPath}/login-facebook?mode=' + mode;
+    }
+  </script>
 </main>
 </body>
 </html>
