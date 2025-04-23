@@ -116,7 +116,7 @@
                 <div class="manage mid_align col">
                     <button class="update_btn">Thay đổi</button>
                     <% if (!address.getIsDefault()) { %>
-                    <button class="set_default_btn">Đặt làm mặc định</button>
+                    <button class="set_default_btn" onclick= "setDefault('<%= address.getId() %>')" >Đặt làm mặc định</button>
                     <button onclick= "deleteAddress('<%= address.getId() %>')" class="delete_btn" >Xóa</button>
 
                     <% } else { %>

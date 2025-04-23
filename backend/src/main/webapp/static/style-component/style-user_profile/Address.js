@@ -177,7 +177,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
 
 
 function deleteAddress ( addressId) {
-    fetch('delete-address', {
+    fetch('address/delete', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -187,16 +187,31 @@ function deleteAddress ( addressId) {
     .then(data => {
         if (data.status === "success") {
             alert("Xóa thành công");
-            const $addressItem = $(`.address_item[data-id='${addressId}']`)
-            if ($addressItem.length) {
-                $addressItem.remove();
-            }
-            else {
-                location.reload();
-            }
+            location.reload();
         }else {
             alert("Đã xảy ra lỗi, vui lòng thử lại.")
         }
     })
+
+}
+
+
+
+function setDefault ( addressId) {
+    fetch('address/default', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"addressId": addressId})
+    }).then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("Thay đổi thành công");
+                location.reload();
+            }else {
+                alert("Đã xảy ra lỗi, vui lòng thử lại.")
+            }
+        })
 
 }

@@ -9,11 +9,11 @@ import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import java.util.List;
 
 @RegisterBeanMapper(Address.class)
-public class AddressSevice {
+public class AddressService {
     AddressDAO addressDAO;
 
 
-    public AddressSevice(Jdbi jdbi) {
+    public AddressService(Jdbi jdbi) {
         this.addressDAO = jdbi.onDemand(AddressDAO.class);
     }
 
@@ -46,13 +46,13 @@ public class AddressSevice {
     }
 
     public static void main(String[] args) {
-        AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());
+        AddressService addressService = new AddressService(DBConnection.getJdbi());
 //        Address address = new Address(null, 42, "HCM", 202, "ThuDuc"
 //                , 203, "LinhTrung", 204, "detail"
 //                ,"0299993222", "Name", false, "HOME", "ACTIVE"
 //                );
 //        addressSevice.addAddress(address);
-        System.out.println(addressSevice.findByUserId(42));
+        System.out.println(addressService.findByUserId(42));
     }
 
 

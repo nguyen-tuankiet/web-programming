@@ -1,6 +1,5 @@
 package com.example.backend.controller.buy;
 
-import com.cloudinary.api.exceptions.BadRequest;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.contant.OrderStatus;
 import com.example.backend.contant.PaymentStatus;
@@ -19,8 +18,6 @@ import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.apache.commons.math3.analysis.function.Add;
-import org.apache.http.HttpStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -36,7 +33,7 @@ public class CheckoutController extends HttpServlet {
     OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
     OrderDetailService orderDetailService = new OrderDetailService(DBConnection.getJdbi());
     CardService cardService = new CardService(DBConnection.getJdbi());
-    AddressSevice addressService = new AddressSevice(DBConnection.getJdbi());
+    AddressService addressService = new AddressService(DBConnection.getJdbi());
     ProductService productService = new ProductService(DBConnection.getJdbi());
     UserService userService = new UserService(DBConnection.getJdbi());
 
