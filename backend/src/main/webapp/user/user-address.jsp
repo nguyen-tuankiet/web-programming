@@ -66,14 +66,6 @@
                             <input type="radio" name="addressType" value="Office"> Văn phòng
                         </label>
                     </div>
-
-
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="default">
-                        <label for="default" class="slider"></label>
-                        <span class="toggle-text">Mặc định</span>
-                    </div>
-
                     <button class="submit-btn" >Xác nhận</button>
 
                 </form>
@@ -121,11 +113,8 @@
 
                     <% } else { %>
                         <div class="default">Mặc định</div>
-<%--                    <button class="set_default_btn disabled" disabled>Đặt làm mặc định</button>--%>
-<%--                    <button onclick= "deleteAddress('<%= address.getId() %>')" class="delete_btn disabled" >Xóa</button>--%>
 
                     <% } %>
-<%--                    <button onclick= "deleteAddress('<%= address.getId() %>')" class="delete_btn" >Xóa</button>--%>
                 </div>
             </div>
             <%
