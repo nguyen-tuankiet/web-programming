@@ -87,6 +87,7 @@
                             <div class="quantity">
                                 <span class="color_name">Số lượng: <span>${o.quantity}</span></span>
                             </div>
+
                             <div class="status">
 
                                 <c:choose>
@@ -137,7 +138,10 @@
                                 <a href="user-order-detail?orderId=${o.id}">
                                     <button class="btn_detail">Xem chi tiết</button>
                                 </a>
-                                <button class="btn_support">Hỗ trợ</button>
+                                <button  class="cancel_btn
+                                        <c:if test="${o.orderStatus != 'PENDING' && o.orderStatus != 'CONFIRMED'}">disabled </c:if> "
+                                >Hủy đơn</button>
+
                             </div>
                         </div>
                     </div>

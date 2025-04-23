@@ -1,6 +1,5 @@
 package com.example.backend.controller.buy;
 
-import com.cloudinary.api.exceptions.BadRequest;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.contant.OrderStatus;
 import com.example.backend.contant.PaymentStatus;
@@ -10,13 +9,15 @@ import com.example.backend.model.DAO.cart.Cart;
 import com.example.backend.model.DAO.cart.ProductCart;
 import com.example.backend.model.request.GHNCreateOrderRequest;
 import com.example.backend.model.request.GHNItem;
+import com.example.backend.model.response.APIResponse;
+import com.example.backend.model.response.CreateOrderResponse;
 import com.example.backend.service.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.apache.commons.math3.analysis.function.Add;
-import org.apache.http.HttpStatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,11 +33,11 @@ public class CheckoutController extends HttpServlet {
     OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
     OrderDetailService orderDetailService = new OrderDetailService(DBConnection.getJdbi());
     CardService cardService = new CardService(DBConnection.getJdbi());
-    AddressSevice addressService = new AddressSevice(DBConnection.getJdbi());
+    AddressService addressService = new AddressService(DBConnection.getJdbi());
     ProductService productService = new ProductService(DBConnection.getJdbi());
     UserService userService = new UserService(DBConnection.getJdbi());
 
-    int codAmount =0;
+    int codAmount;
     StringBuilder content = new StringBuilder();
     List<GHNItem>items = new ArrayList<>();
 
@@ -111,7 +112,7 @@ public class CheckoutController extends HttpServlet {
         String addressId = jsonObject.getString("address_id");
         String card = jsonObject.getString("card");
         int shipping_fee = jsonObject.getInt("ship_fee");
-        codAmount+=shipping_fee;
+        codAmount   =shipping_fee;
         JSONArray products = jsonObject.getJSONArray("products");
 
         // User
@@ -150,7 +151,9 @@ public class CheckoutController extends HttpServlet {
 
         // Create order
         Integer orderId = orderSerivce.addOrder(order);
+
         if (orderId != null) {
+            order.setId(orderId);
             for (int i = 0; i < products.length(); i++) {
                 JSONObject product = products.getJSONObject(i);
 
@@ -193,9 +196,19 @@ public class CheckoutController extends HttpServlet {
         if (codAmount > 50000000) throw new RuntimeException("Cod amount exceeds 50000000");
         GHNCreateOrderRequest GHNRequest= new GHNCreateOrderRequest(
                 address, user, "Ten san pham", card.equals("COD") ? codAmount: 0, items);
-        String GHNResponse = GHNCreateOrder(GHNRequest);
 
-        // TODO: Lấy shipping id update cho order
+        String GHNResponse = GHNCreateOrder(GHNRequest);
+        ObjectMapper mapper = new ObjectMapper();
+        APIResponse<CreateOrderResponse> apiResponse = mapper.readValue(GHNResponse,  new TypeReference<APIResponse<CreateOrderResponse>>() {});
+
+        if (apiResponse.getCode() == 200) {
+            orderSerivce.updateShippingId(order.getId(), apiResponse.getData().getOrder_code());
+        }
+
+        if (apiResponse.getCode() != 200) {
+            orderSerivce.updateStatus(order.getId(), OrderStatus.ODER_CREATE_ERROR);
+        }
+
 
 
 

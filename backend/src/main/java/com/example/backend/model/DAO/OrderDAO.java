@@ -106,4 +106,19 @@ public interface OrderDAO {
     List<Order> getAllOrders();
 
 
+
+    @SqlUpdate("UPDATE orders " +
+            "SET orderStatus = :orderStatus "+
+            "WHERE id = :orderId ")
+
+    void updateOrderStatus(@Bind("orderId") Integer orderId, @Bind("orderStatus") OrderStatus orderStatus);
+
+
+    @SqlUpdate("UPDATE orders " +
+            "SET shippingId = :shippingId "+
+            "WHERE id = :orderId ")
+
+    void updateOrderShippingId(@Bind("orderId") Integer orderId, @Bind("shippingId") String shippingId);
+
+
 }

@@ -17,17 +17,18 @@
 </head>
 <body>
 <div id="side_bar" class="container  col">
-    <div class=" infor row mid_align  ">
-        <div class="profile_avatar">
-            <img src="${pageContext.request.contextPath}/static/image/medium%20(1).png" height="500" width="500"/>
-        </div>
-        <div class="name">
-            <span>User</span>
-        </div>
 
-    </div>
+<%--    <div class=" infor row mid_align  ">--%>
+<%--        <div class="profile_avatar">--%>
+<%--            <img src="${pageContext.request.contextPath}/static/image/medium%20(1).png" height="500" width="500"/>--%>
+<%--        </div>--%>
+<%--        <div class="name">--%>
+<%--            <span>User</span>--%>
+<%--        </div>--%>
 
-    <div class="rec_horizontal"></div>
+<%--    </div>--%>
+
+<%--    <div class="rec_horizontal"></div>--%>
 
     <div class=" wrap_item  col">
 
