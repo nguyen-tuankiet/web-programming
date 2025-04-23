@@ -2,8 +2,7 @@ package com.example.backend.controller.user.address;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Address;
-import com.example.backend.service.AddressSevice;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.backend.service.AddressService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,13 +14,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "AddAddressController", value = "/add-address")
 public class AddAddressController extends HttpServlet {
 
     private static final Logger log = LoggerFactory.getLogger(AddAddressController.class);
-    AddressSevice addressService = new AddressSevice(DBConnection.getJdbi());
+    AddressService addressService = new AddressService(DBConnection.getJdbi());
 
 
     @Override protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { }
@@ -53,17 +51,15 @@ public class AddAddressController extends HttpServlet {
 
 
             Address newAddress = new Address(null, userId, province, provinceId, district, districtId, commune,communeId, detail, phone, name, isDefault, type, null);
-            if (isDefault) {
-               Address defautl = addressService.findDefautlByUserId(userId);
-               if (defautl != null) {
-                   defautl.setIsDefault(false);
-                   addressService.updateDefautlById(defautl.getId(), false);
-               }
+            Address addressDefault = addressService.findDefautlByUserId(userId);
 
+            if (addressDefault == null) {
+                newAddress.setDefault(true);
             }
-
-            log.info("New address : {}", newAddress);
-
+            else if (isDefault) {
+                   addressDefault.setIsDefault(false);
+                   addressService.updateDefautlById(addressDefault.getId(), false);
+            }
 
             int resultId = addressService.addAddress(newAddress);
 

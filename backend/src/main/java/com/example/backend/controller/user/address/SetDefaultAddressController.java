@@ -14,9 +14,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-@WebServlet(name = "DeleteAddressController", value = "/address/delete")
-public class DeleteAddressController extends HttpServlet {
+@WebServlet(name = "SetDefaultAddressController", value = "/address/default")
+public class SetDefaultAddressController extends HttpServlet {
     AddressService addressService = new AddressService(DBConnection.getJdbi());
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,13 +49,22 @@ public class DeleteAddressController extends HttpServlet {
             throw new RuntimeException("Address not found");
         }
 
-        boolean success=  addressService.updateStatus(addressId, "DELETED");
+
+
+        Address addressDefault = addressService.findDefautlByUserId(userId);
+        if (addressDefault != null) {
+            addressDefault.setIsDefault(false);
+            addressService.updateDefautlById(addressDefault.getId(), false);
+        }
+
+        boolean success=  addressService.updateDefautlById(address.getId(), true);
+
         if (success) {
-            response.getWriter().write("{\"status\":\"success\", \"message\":\"Address deleted\"}");
+            response.getWriter().write("{\"status\":\"success\", \"message\":\"Address updated successfully\"}");
         }
         else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().write("{\"status\":\"error\", \"message\":\"Delete failed\"}");
+            response.getWriter().write("{\"status\":\"error\", \"message\":\"Update failed\"}");
 
         }
 
