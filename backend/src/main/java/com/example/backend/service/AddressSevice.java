@@ -29,27 +29,6 @@ public class AddressSevice {
         return addressDAO.getAddressDefaultByUserId(id);
     }
 
-//    public int addAddress(Address address) {
-//        // Đảm bảo isDefault mặc định là false nếu không được chỉ định
-//        if (address.getIsDefault() == null) {
-//            address.setIsDefault(false);
-//        }
-//        return addressDAO.addAddress(
-//                address.getUserId(),
-//                address.getProvince(),
-//                address.getDistrict(),
-//                address.getCommune(),
-//                address.getDetail(),
-//                address.getPhone(),
-//                address.getName(),
-//                address.getIsDefault(),
-//                address.getType(),
-//                address.getStatus()
-//        );
-//    }
-
-
-
     public int addAddress(Address address) {
         // Đảm bảo isDefault mặc định là false nếu không được chỉ định
         if (address.getIsDefault() == null) {
@@ -58,12 +37,13 @@ public class AddressSevice {
         return addressDAO.addAddress(address);
     }
 
-
-
     public Boolean updateDefautlById(Integer id, boolean defaultStatus) {
         return addressDAO.updateDefaultById(id, defaultStatus);
     }
 
+    public Boolean updateStatus(Integer id, String status) {
+        return addressDAO.updateStatus(id, status);
+    }
 
     public static void main(String[] args) {
         AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());

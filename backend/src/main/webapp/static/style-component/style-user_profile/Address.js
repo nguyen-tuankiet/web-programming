@@ -174,3 +174,29 @@ document.querySelector("form").addEventListener("submit", function(event) {
         })
         .catch(error => console.error("Lỗi:", error));
 });
+
+
+function deleteAddress ( addressId) {
+    fetch('delete-address', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"addressId": addressId})
+    }).then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Xóa thành công");
+            const $addressItem = $(`.address_item[data-id='${addressId}']`)
+            if ($addressItem.length) {
+                $addressItem.remove();
+            }
+            else {
+                location.reload();
+            }
+        }else {
+            alert("Đã xảy ra lỗi, vui lòng thử lại.")
+        }
+    })
+
+}
