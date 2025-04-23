@@ -1,5 +1,4 @@
 package com.example.backend.controller.user.address;
-
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Address;
 import com.example.backend.service.AddressService;
@@ -19,12 +18,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@WebServlet(name = "AddAddressController", value = "/add-address")
-public class AddAddressController extends HttpServlet {
-    private static final Logger log = LoggerFactory.getLogger(AddAddressController.class);
+@WebServlet(name = "UpdateAddressController", value = "/address/update")
+public class UpdateAddressController  extends HttpServlet {
     AddressService addressService = new AddressService(DBConnection.getJdbi());
 
 
+//    TODO: Chưa làm xong
     @Override protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +36,7 @@ public class AddAddressController extends HttpServlet {
         if (userId == null) {
             throw new RuntimeException("User not logged in");
         }
+
         try {
             StringBuilder jsonBuffer = new StringBuilder();
             BufferedReader reader = request.getReader();
@@ -44,17 +44,24 @@ public class AddAddressController extends HttpServlet {
             while ((line = reader.readLine()) != null) {
                 jsonBuffer.append(line);
             }
+
             String jsonData = jsonBuffer.toString();
             ObjectMapper mapper = new ObjectMapper();
-
             Address newAddress = mapper.readValue(jsonData, Address.class);
+
+
+
             Address addressDefault = addressService.findDefautlByUserId(userId);
 
             if (addressDefault == null) {
                 newAddress.setDefault(true);
             }
-            int resultId = addressService.addAddress(newAddress);
+            else if (newAddress.getDefault()) {
+                addressDefault.setIsDefault(false);
+                addressService.updateDefautlById(addressDefault.getId(), false);
+            }
 
+            int resultId = addressService.addAddress(newAddress);
 
 
 
@@ -66,18 +73,16 @@ public class AddAddressController extends HttpServlet {
                 jsonResponse.put("message", "Thêm địa chỉ thành công!");
                 String jsonAddress = mapper.writeValueAsString(newAddress);
                 jsonResponse.put("address", new JSONObject(jsonAddress));
-                response.getWriter().write(jsonResponse.toString());
 
-             } else {
+                response.getWriter().write(jsonResponse.toString());
+            } else {
                 response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 response.getWriter().write("{\"status\":\"error\", \"message\":\"Thêm địa chỉ thất bại.\"}");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            log.error(e.getMessage());
             response.getWriter().println("Lỗi khi thêm địa chỉ.");
         }
     }
-
 
 }

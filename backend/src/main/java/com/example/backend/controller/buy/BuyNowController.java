@@ -22,7 +22,7 @@ public class BuyNowController extends HttpServlet {
     OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
     OrderDetailService orderDetailService = new OrderDetailService(DBConnection.getJdbi());
     CardService cardService = new CardService(DBConnection.getJdbi());
-    AddressSevice addressService = new AddressSevice(DBConnection.getJdbi());
+    AddressService addressService = new AddressService(DBConnection.getJdbi());
 
 
 
