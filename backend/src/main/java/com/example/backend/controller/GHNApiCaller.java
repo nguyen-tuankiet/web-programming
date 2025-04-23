@@ -30,7 +30,6 @@ public class GHNApiCaller {
         conn.setRequestProperty("Token", token);
 
         String curl = buildCurlCommand(uri.toString(), payload);
-        System.out.println(conn.getRequestMethod());
         System.out.println("==> CURL Preview:\n" + curl + "\n");
 
 
@@ -48,13 +47,9 @@ public class GHNApiCaller {
         int status = conn.getResponseCode();
         InputStream responseStream = (status < HttpURLConnection.HTTP_BAD_REQUEST)
                 ? conn.getInputStream() : conn.getErrorStream();
-
-
         BufferedReader br = new BufferedReader(new InputStreamReader(responseStream, StandardCharsets.UTF_8));
         StringBuilder response = new StringBuilder();
         String line;
-
-        // TODO: Xem nó trả cái gì ra ngay đây ??
         while ((line = br.readLine()) != null) {
             response.append(line.trim());
         }
