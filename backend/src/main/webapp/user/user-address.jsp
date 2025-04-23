@@ -89,7 +89,7 @@
                 if (user != null && addresses != null) {
                     for (Address address : addresses) {
             %>
-            <div class="address_item row">
+            <div  class="address_item row" data-id ="<%= address.getId() %>" >
                 <div class="icon mid_align">
                     <i class="fa-solid <%= address.getType().equals("house") ? "fa-house" : "fa-building" %>"></i>
                 </div>
@@ -100,7 +100,6 @@
                         <div class="rec_vertical"></div>
                         <span class="phone"><%= address.getPhone() %></span>
                         <% if (address.getIsDefault()) { %>
-                        <div class="default">Mặc định</div>
                         <% } %>
                     </div>
 
@@ -118,10 +117,15 @@
                     <button class="update_btn">Thay đổi</button>
                     <% if (!address.getIsDefault()) { %>
                     <button class="set_default_btn">Đặt làm mặc định</button>
+                    <button onclick= "deleteAddress('<%= address.getId() %>')" class="delete_btn" >Xóa</button>
+
                     <% } else { %>
-                    <button class="set_default_btn disabled" disabled>Đặt làm mặc định</button>
+                        <div class="default">Mặc định</div>
+<%--                    <button class="set_default_btn disabled" disabled>Đặt làm mặc định</button>--%>
+<%--                    <button onclick= "deleteAddress('<%= address.getId() %>')" class="delete_btn disabled" >Xóa</button>--%>
+
                     <% } %>
-                    <button class="delete_btn">Xóa</button>
+<%--                    <button onclick= "deleteAddress('<%= address.getId() %>')" class="delete_btn" >Xóa</button>--%>
                 </div>
             </div>
             <%
