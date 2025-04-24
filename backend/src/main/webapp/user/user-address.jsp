@@ -66,14 +66,6 @@
                             <input type="radio" name="addressType" value="Office"> Văn phòng
                         </label>
                     </div>
-
-
-                    <div class="toggle-switch">
-                        <input type="checkbox" id="default">
-                        <label for="default" class="slider"></label>
-                        <span class="toggle-text">Mặc định</span>
-                    </div>
-
                     <button class="submit-btn" >Xác nhận</button>
 
                 </form>
@@ -89,7 +81,7 @@
                 if (user != null && addresses != null) {
                     for (Address address : addresses) {
             %>
-            <div class="address_item row">
+            <div  class="address_item row" data-id ="<%= address.getId() %>" >
                 <div class="icon mid_align">
                     <i class="fa-solid <%= address.getType().equals("house") ? "fa-house" : "fa-building" %>"></i>
                 </div>
@@ -100,7 +92,6 @@
                         <div class="rec_vertical"></div>
                         <span class="phone"><%= address.getPhone() %></span>
                         <% if (address.getIsDefault()) { %>
-                        <div class="default">Mặc định</div>
                         <% } %>
                     </div>
 
@@ -117,11 +108,13 @@
                 <div class="manage mid_align col">
                     <button class="update_btn">Thay đổi</button>
                     <% if (!address.getIsDefault()) { %>
-                    <button class="set_default_btn">Đặt làm mặc định</button>
+                    <button class="set_default_btn" onclick= "setDefault('<%= address.getId() %>')" >Đặt làm mặc định</button>
+                    <button onclick= "deleteAddress('<%= address.getId() %>')" class="delete_btn" >Xóa</button>
+
                     <% } else { %>
-                    <button class="set_default_btn disabled" disabled>Đặt làm mặc định</button>
+                        <div class="default">Mặc định</div>
+
                     <% } %>
-                    <button class="delete_btn">Xóa</button>
                 </div>
             </div>
             <%

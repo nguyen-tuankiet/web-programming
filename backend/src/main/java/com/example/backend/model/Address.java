@@ -1,8 +1,11 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Address {
     Integer id;
     Integer userId;
@@ -17,8 +20,9 @@ public class Address {
     String name;
     Boolean isDefault;
     String type;
-    String status;
+    String status = "ACTIVE";
 
+    @JdbiConstructor
     public Address(@ColumnName("id") Integer id,
                    @ColumnName("userId") @Nullable Integer userId,
                    @ColumnName("province") @Nullable String province,
@@ -55,6 +59,9 @@ public class Address {
         }
         else this.status = status;
 
+    }
+
+    public Address() {
     }
 
 

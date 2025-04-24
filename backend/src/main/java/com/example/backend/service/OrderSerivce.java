@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.contant.OrderStatus;
 import com.example.backend.model.DAO.OrderDAO;
 import com.example.backend.model.Order;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
@@ -51,6 +52,13 @@ public class OrderSerivce {
     }
 
 
+    public void updateStatus(Integer orderId, OrderStatus orderStatus) {
+        orderDAO.updateOrderStatus(orderId, orderStatus);
+    }
+
+    public void updateShippingId(Integer orderId, String shippingId) {
+        orderDAO.updateOrderShippingId(orderId, shippingId);
+    }
 
 
     public static void main(String[] args) {

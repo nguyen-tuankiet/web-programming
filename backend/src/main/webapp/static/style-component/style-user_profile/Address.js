@@ -1,7 +1,8 @@
 
 const addBtn = document.querySelector(".add_btn");
+const addressList = document.querySelectorAll(".address_item");
 const formContainer = document.getElementById("addAddressFormContainer");
- const overlay = document.querySelector(".overlay");
+const overlay = document.querySelector(".overlay");
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -9,20 +10,37 @@ document.addEventListener("DOMContentLoaded", function () {
     // Hiển thị form thêm địa chỉ và overlay
     addBtn.addEventListener("click", function () {
         formContainer.style.display = "block";
-        overlay.style.display = "block"; // Hiển thị lớp phủ mờ
+        overlay.style.display = "block";
     });
-
-
-    // Ẩn popup nếu bấm ra ngoài overlay
+        // Ẩn popup nếu bấm ra ngoài overlay
     overlay.addEventListener("click", function () {
         console.log("overlay");
         formContainer.style.display = "none";
         overlay.style.display = "none";
     });
+
+
+    addressList.forEach((address) => {
+        const update_btn = address.querySelector(".update_btn");
+        if (update_btn) {
+            update_btn.addEventListener("click", () => {
+                formContainer.style.display = "block";
+
+
+                overlay.style.display = "block";
+            })
+        }
+
+    })
+
+
+
+
+
 });
 
 
-
+// Add event to close btn
 document.addEventListener("DOMContentLoaded", function () {
     const formContainer = document.getElementById("addAddressFormContainer");
     const closeIcon = document.querySelector(".close-icon");
@@ -32,6 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.style.display = "none";
     });
 });
+
+
 $(document).ready(function () {
     $("#province, #district, #commune").select({ width: '100%' });
 
@@ -132,6 +152,8 @@ $("#phone").on("input", function () {
 
 
 
+
+// Add address
 document.querySelector("form").addEventListener("submit", function(event) {
     event.preventDefault(); // Chặn chuyển trang
     let userId = sessionStorage.getItem("userId");
@@ -150,7 +172,8 @@ document.querySelector("form").addEventListener("submit", function(event) {
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
         type: document.querySelector('input[name="addressType"]:checked').value,
-        isDefault: document.getElementById("default").checked
+        // isDefault: document.getElementById("default").checked
+        isDefault: false
     };
 
     console.log(formData);
@@ -174,3 +197,44 @@ document.querySelector("form").addEventListener("submit", function(event) {
         })
         .catch(error => console.error("Lỗi:", error));
 });
+
+
+function deleteAddress ( addressId) {
+    fetch('address/delete', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"addressId": addressId})
+    }).then(response => response.json())
+    .then(data => {
+        if (data.status === "success") {
+            alert("Xóa thành công");
+            location.reload();
+        }else {
+            alert("Đã xảy ra lỗi, vui lòng thử lại.")
+        }
+    })
+
+}
+
+
+
+function setDefault ( addressId) {
+    fetch('address/default', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"addressId": addressId})
+    }).then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("Thay đổi thành công");
+                location.reload();
+            }else {
+                alert("Đã xảy ra lỗi, vui lòng thử lại.")
+            }
+        })
+
+}
