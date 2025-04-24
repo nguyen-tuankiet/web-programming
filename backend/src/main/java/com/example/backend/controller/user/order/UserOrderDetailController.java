@@ -17,7 +17,7 @@ public class UserOrderDetailController extends HttpServlet {
     OrderSerivce orderSerivce = new OrderSerivce(DBConnection.getJdbi());
     UserService userService = new UserService(DBConnection.getJdbi());
     CardService cardService = new CardService(DBConnection.getJdbi());
-    AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());
+    AddressService addressService = new AddressService(DBConnection.getJdbi());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +44,7 @@ public class UserOrderDetailController extends HttpServlet {
            }
 
 
-           Address address = addressSevice.findById(order.getAddressId());
+           Address address = addressService.findById(order.getAddressId());
            if (address != null) {
                request.setAttribute("address", address);
            }

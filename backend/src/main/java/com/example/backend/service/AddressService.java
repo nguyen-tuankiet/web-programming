@@ -9,11 +9,11 @@ import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import java.util.List;
 
 @RegisterBeanMapper(Address.class)
-public class AddressSevice {
+public class AddressService {
     AddressDAO addressDAO;
 
 
-    public AddressSevice(Jdbi jdbi) {
+    public AddressService(Jdbi jdbi) {
         this.addressDAO = jdbi.onDemand(AddressDAO.class);
     }
 
@@ -29,27 +29,6 @@ public class AddressSevice {
         return addressDAO.getAddressDefaultByUserId(id);
     }
 
-//    public int addAddress(Address address) {
-//        // Đảm bảo isDefault mặc định là false nếu không được chỉ định
-//        if (address.getIsDefault() == null) {
-//            address.setIsDefault(false);
-//        }
-//        return addressDAO.addAddress(
-//                address.getUserId(),
-//                address.getProvince(),
-//                address.getDistrict(),
-//                address.getCommune(),
-//                address.getDetail(),
-//                address.getPhone(),
-//                address.getName(),
-//                address.getIsDefault(),
-//                address.getType(),
-//                address.getStatus()
-//        );
-//    }
-
-
-
     public int addAddress(Address address) {
         // Đảm bảo isDefault mặc định là false nếu không được chỉ định
         if (address.getIsDefault() == null) {
@@ -58,21 +37,22 @@ public class AddressSevice {
         return addressDAO.addAddress(address);
     }
 
-
-
     public Boolean updateDefautlById(Integer id, boolean defaultStatus) {
         return addressDAO.updateDefaultById(id, defaultStatus);
     }
 
+    public Boolean updateStatus(Integer id, String status) {
+        return addressDAO.updateStatus(id, status);
+    }
 
     public static void main(String[] args) {
-        AddressSevice addressSevice = new AddressSevice(DBConnection.getJdbi());
+        AddressService addressService = new AddressService(DBConnection.getJdbi());
 //        Address address = new Address(null, 42, "HCM", 202, "ThuDuc"
 //                , 203, "LinhTrung", 204, "detail"
 //                ,"0299993222", "Name", false, "HOME", "ACTIVE"
 //                );
 //        addressSevice.addAddress(address);
-        System.out.println(addressSevice.findByUserId(42));
+        System.out.println(addressService.findByUserId(42));
     }
 
 

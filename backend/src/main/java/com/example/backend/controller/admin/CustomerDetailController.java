@@ -4,7 +4,7 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Address;
 import com.example.backend.model.Order;
 import com.example.backend.model.User;
-import com.example.backend.service.AddressSevice;
+import com.example.backend.service.AddressService;
 import com.example.backend.service.OrderSerivce;
 import com.example.backend.service.UserService;
 import jakarta.servlet.ServletException;
@@ -22,7 +22,7 @@ import java.util.List;
 public class CustomerDetailController extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(CustomerDetailController.class);
     private final UserService userService = new UserService(DBConnection.getJdbi());
-    private final AddressSevice addressService = new AddressSevice(DBConnection.getJdbi());
+    private final AddressService addressService = new AddressService(DBConnection.getJdbi());
     private final OrderSerivce orderService = new OrderSerivce(DBConnection.getJdbi());
 
     @Override
