@@ -60,6 +60,14 @@ public interface OptionDAO {
     List<Options> getVariantByOptionId(@BindList("optionIds") List<Integer> optionIds);
 
 
-
+    @SqlUpdate("""
+            UPDATE options 
+            SET price = :price,
+                stock = :stock
+            WHERE id = :id
+            """)
+    boolean updateOption(@Bind("id") Integer id,
+                        @Bind("price") Integer price,
+                        @Bind("stock") Integer stock);
 
 }

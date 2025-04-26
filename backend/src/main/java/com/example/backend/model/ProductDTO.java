@@ -19,6 +19,11 @@ public class ProductDTO {
     private String categoryName;
     private String imageUrl;
     private List<OptionVariant> variants;  // Danh sách các variant
+    Integer height;
+    Integer length;
+    Integer width;
+    Integer weight;
+
 
     public ProductDTO(Product product, List<OptionVariant> variants) {
         this.id = product.getId();
@@ -37,6 +42,10 @@ public class ProductDTO {
         this.stock = product.getStock();
         this.categoryName = product.getCategoryName();
         this.variants = variants;
+        this.height = product.getHeight();
+        this.length = product.getLength();
+        this.width = product.getWidth();
+        this.weight = product.getWeight();
     }
 
     public Integer getId() {
@@ -165,5 +174,37 @@ public class ProductDTO {
 
     public void setVariants(List<OptionVariant> variants) {
         this.variants = variants;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }
