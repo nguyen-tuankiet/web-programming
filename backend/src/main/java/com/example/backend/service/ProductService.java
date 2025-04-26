@@ -132,7 +132,13 @@ public class ProductService {
         return productDao.suggestProduct();
     }
 
-
+    public boolean updateProduct(Integer id, String name, String description, String sku,
+                               Integer categoryId, Integer brandId, Integer primaryImage,
+                               Integer height, Integer length, Integer width, Integer weight) {
+        return jdbi.withExtension(ProductDAO.class, dao -> 
+            dao.updateProduct(id, name, description, sku, categoryId, brandId, primaryImage,
+                            height, length, width, weight));
+    }
 
     public static void main(String[] args) {
         ProductService productService = new ProductService(DBConnection.getJdbi());

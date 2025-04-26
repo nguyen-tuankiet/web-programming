@@ -116,6 +116,28 @@ document.getElementById('fileInput').addEventListener('change', function (event)
     }, 0);
 });
 
+async function uploadImages(files) {
+    const formData = new FormData();
+    Array.from(files).forEach(file => formData.append("file", file));
+    // Lấy context path động
+    const pathParts = window.location.pathname.split('/');
+    const contextPath = pathParts[1] ? '/' + pathParts[1] : '';
+    const apiUrl = contextPath + '/api/uploadImage';
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: formData
+    });
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+
+    const uploadData = await response.json();
+    if (uploadData.statusCode !== 200 || !uploadData.data || !uploadData.data.length) {
+        throw new Error("Không thể upload ảnh.");
+    }
+    return uploadData;
+}
 
 function showPreview(images, startIndex = 0) {
     const previewModal = document.createElement('div');
@@ -439,13 +461,19 @@ async function loadVariantsForSelect(selectId, categoryId = null) {
         const variantSelect = document.getElementById(selectId);
         if (!variantSelect) return;
 
-        variantSelect.innerHTML = '<option>Đang tải...</option>';
         const url = categoryId ? `api/variants?categoryId=${categoryId}` : `api/variants`;
         const response = await fetch(url);
         const data = await response.json();
 
         if (data.statusCode === 200) {
-            variantSelect.innerHTML = '<option value="">Chọn biến thể</option>';
+            // Giữ lại option đầu tiên nếu có
+            const firstOption = variantSelect.firstChild;
+            variantSelect.innerHTML = '';
+            if (firstOption) {
+                variantSelect.appendChild(firstOption);
+            }
+
+            // Thêm các variants khác
             data.data.forEach(variant => {
                 const option = document.createElement("option");
                 option.value = variant.id;
@@ -525,41 +553,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Xử lý sự kiện lưu thông tin sản phẩm
-    saveButton.addEventListener("click", async (event) => {
-        event.preventDefault();
-        const formData = gatherFormData();
-        if (!formData) return alert("Vui lòng điền đầy đủ các trường bắt buộc!");
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
 
-        try {
-            // 1. Upload ảnh sản phẩm
-            const uploadData = await uploadImages(fileInput.files);
-            if (!uploadData || !uploadData.data || uploadData.data.length === 0) {
-                throw new Error("Lỗi khi tải ảnh lên.");
+    // Clone nút để xóa mọi event cũ
+    const newSaveButton = saveButton.cloneNode(true);
+    saveButton.parentNode.replaceChild(newSaveButton, saveButton);
+
+    if (productId) {
+        // Gán sự kiện edit
+        newSaveButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            saveEditedProduct(productId);
+        });
+        fetchProductDetails(productId);
+    } else {
+        // Gán sự kiện add
+        newSaveButton.addEventListener('click', async function (event) {
+            event.preventDefault();
+            const formData = gatherFormData();
+            if (!formData) return alert("Vui lòng điền đầy đủ các trường bắt buộc!");
+            try {
+                // 1. Upload ảnh sản phẩm
+                const uploadData = await uploadImages(fileInput.files);
+                if (!uploadData || !uploadData.data || uploadData.data.length === 0) {
+                    throw new Error("Lỗi khi tải ảnh lên.");
+                }
+                // 2. Tạo sản phẩm
+                const productData = await createProduct(formData, uploadData);
+                if (!productData || !productData.id) {
+                    throw new Error("Lỗi khi tạo sản phẩm.");
+                }
+                // 3. Gán ảnh bổ sung
+                await assignAdditionalImages(uploadData, productData.id);
+                // 4. Thêm các tùy chọn sản phẩm
+                const addOptionsSuccess = await addProductOptions(productData.id);
+                if (!addOptionsSuccess) {
+                    throw new Error("Lỗi khi thêm tùy chọn sản phẩm.");
+                }
+                // Nếu tất cả API đều thành công
+                alert("Thêm sản phẩm và tùy chọn thành công!");
+                window.location.href = "list-product";
+            } catch (error) {
+                // console.error("Lỗi:", error);
+                // alert(`Đã xảy ra lỗi: ${error.message}`);
             }
-
-            // 2. Tạo sản phẩm
-            const productData = await createProduct(formData, uploadData);
-            if (!productData || !productData.id) {
-                throw new Error("Lỗi khi tạo sản phẩm.");
-            }
-
-            // 3. Gán ảnh bổ sung
-            await assignAdditionalImages(uploadData, productData.id);
-
-            // 4. Thêm các tùy chọn sản phẩm
-            const addOptionsSuccess = await addProductOptions(productData.id);
-            if (!addOptionsSuccess) {
-                throw new Error("Lỗi khi thêm tùy chọn sản phẩm.");
-            }
-
-            // Nếu tất cả API đều thành công
-            alert("Thêm sản phẩm và tùy chọn thành công!");
-            window.location.href = "list-product";
-        } catch (error) {
-            console.error("Lỗi:", error);
-            alert(`Đã xảy ra lỗi: ${error.message}`);
-        }
-    });
+        });
+    }
 
     // Hàm tải variants theo category
     async function loadVariantsByCategory(categoryId) {
@@ -708,18 +748,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const contextPath = window.location.pathname.split('/')[1] === '' ? '' : '/' + window.location.pathname.split('/')[1];
     // Hàm upload ảnh
-    async function uploadImages(files) {
-        const formData = new FormData();
-        Array.from(files).forEach(file => formData.append("file", file));
-        const uploadResponse = await fetch(`${contextPath}/api/uploadImage`,
-            { method: "POST", body: formData });
-        const uploadData = await uploadResponse.json();
 
-        if (uploadData.statusCode !== 200 || !uploadData.data || !uploadData.data.length) {
-            throw new Error("Không thể upload ảnh.");
-        }
-        return uploadData;
-    }
 
     // Hàm tạo sản phẩm
     async function createProduct(formData, uploadData) {
@@ -859,59 +888,280 @@ function fetchProductDetails(productId) {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.statusCode === 200 && data.data) {
-                const product = data.data;
+    .then(response => response.json())
+    .then(data => {
+        if (data.statusCode === 200 && data.data) {
+            const product = data.data;
 
-                // Điền thông tin sản phẩm vào các input
-                document.getElementById('productName').value = product.name;
-                document.getElementById('sku').value = product.sku;
-                document.getElementById('categoryDropdown').value = product.categoryId;
-                document.getElementById('description').value = product.description;
-                document.getElementById('previewImage').src = product.imageUrl;
-                document.getElementById('price').value = product.price;
-                document.getElementById('total').value = product.stock;
-                document.getElementById('vendor').value = product.brandId || '';
-                document.getElementById('tags').value = product.tags || '';
-                document.getElementById('optionsContainer1').value = product.optionId;
+            // Điền thông tin sản phẩm vào các input
+            document.getElementById('productName').value = product.name;
+            document.getElementById('sku').value = product.sku;
+            document.getElementById('categoryDropdown').value = product.categoryId;
+            document.getElementById('description').value = product.description;
 
-                // Điền các variants vào dropdown
-                const variantSelect = document.getElementById('variant-select');
-                const variantValueSelect = document.getElementById('variant-value-select');
+            // Cập nhật hình ảnh và lưu imageId
+            const previewImage = document.getElementById('previewImage');
+            previewImage.src = product.imageUrl;
+            previewImage.setAttribute('data-image-id', product.primaryImage);
 
-                // Đảm bảo dropdown variant và variant-value được reset trước khi thêm mới
-                variantSelect.innerHTML = '<option value="">Chọn danh mục</option>'; // Reset dropdown
-                variantValueSelect.innerHTML = '<option value="">Chọn giá trị</option>'; // Reset dropdown
+            document.getElementById('vendor').value = product.brandId || '';
+            document.getElementById('tags').value = product.tags || '';
+            
+            // Điền thông tin kích thước và cân nặng
+            document.getElementById('height').value = product.height || '';
+            document.getElementById('length').value = product.length || '';
+            document.getElementById('width').value = product.width || '';
+            document.getElementById('weight').value = product.weight || '';
 
-                // Thêm các variants vào dropdown variant-select
-                if (product.variants && product.variants.length > 0) {
-                    product.variants.forEach(variant => {
-                        let variantOption = document.createElement("option");
-                        variantOption.value = variant.variantName;
-                        variantOption.textContent = `Biến thể ${variant.variantName}`;
-                        variantSelect.appendChild(variantOption);
+            // Xử lý variants
+            if (product.variants && product.variants.length > 0) {
+                const variantGroup = document.querySelector('.variant-group');
+                if (variantGroup) {
+                    // Lưu optionId vào variant group
+                    variantGroup.setAttribute('data-option-id', product.optionId);
 
-                        // Nếu có variantValueId, chọn mặc định cho variant-value-select
-                        if (variant.variantValueName) {
-                            let variantValueOption = document.createElement("option");
-                            variantValueOption.value = variant.variantValueName;
-                            variantValueOption.textContent = `Giá trị ${variant.variantValueName}`;
-                            variantValueSelect.appendChild(variantValueOption);
-                        }
+                    // Tạo container cho variants
+                    const variantContainer = document.createElement('div');
+                    variantContainer.className = 'variant-container';
+                    variantContainer.style.marginBottom = '20px';
+
+                    // Tạo row cho giá và số lượng
+                    const row = document.createElement('div');
+                    row.className = 'row';
+                    row.style.marginBottom = '15px';
+
+                    // Tạo column cho giá
+                    const priceCol = document.createElement('div');
+                    priceCol.className = 'col-md-6';
+                    const priceDiv = document.createElement('div');
+                    priceDiv.className = 'form-group';
+                    const priceLabel = document.createElement('label');
+                    priceLabel.textContent = 'Giá';
+                    priceLabel.style.display = 'block';
+                    priceLabel.style.marginBottom = '5px';
+                    const priceInput = document.createElement('input');
+                    priceInput.type = 'number';
+                    priceInput.id = 'price';
+                    priceInput.className = 'form-control';
+                    priceInput.value = product.price;
+                    priceInput.style.width = '100%';
+                    priceInput.style.padding = '8px';
+                    priceInput.style.border = '1px solid #ddd';
+                    priceInput.style.borderRadius = '4px';
+                    priceDiv.appendChild(priceLabel);
+                    priceDiv.appendChild(priceInput);
+                    priceCol.appendChild(priceDiv);
+
+                    // Tạo column cho số lượng
+                    const stockCol = document.createElement('div');
+                    stockCol.className = 'col-md-6';
+                    const stockDiv = document.createElement('div');
+                    stockDiv.className = 'form-group';
+                    const stockLabel = document.createElement('label');
+                    stockLabel.textContent = 'Số lượng';
+                    stockLabel.style.display = 'block';
+                    stockLabel.style.marginBottom = '5px';
+                    const stockInput = document.createElement('input');
+                    stockInput.type = 'number';
+                    stockInput.id = 'total';
+                    stockInput.className = 'form-control';
+                    stockInput.value = product.stock;
+                    stockInput.style.width = '100%';
+                    stockInput.style.padding = '8px';
+                    stockInput.style.border = '1px solid #ddd';
+                    stockInput.style.borderRadius = '4px';
+                    stockDiv.appendChild(stockLabel);
+                    stockDiv.appendChild(stockInput);
+                    stockCol.appendChild(stockDiv);
+
+                    // Thêm columns vào row
+                    row.appendChild(priceCol);
+                    row.appendChild(stockCol);
+                    variantContainer.appendChild(row);
+
+                    // Xóa tất cả nội dung cũ của variant group
+                    variantGroup.innerHTML = '';
+                    
+                    // Thêm container giá và số lượng vào variant group
+                    variantGroup.appendChild(variantContainer);
+
+                    // Tạo container cho options
+                    const optionsContainer = document.createElement('div');
+                    optionsContainer.className = 'options-container';
+                    variantGroup.appendChild(optionsContainer);
+
+                    // Thêm các variants
+                    product.variants.forEach((variant, index) => {
+                        const optionGroup = document.createElement('div');
+                        optionGroup.className = 'option-group';
+                        optionGroup.style.display = 'flex';
+                        optionGroup.style.gap = '10px';
+                        optionGroup.style.marginBottom = '10px';
+                        optionGroup.style.alignItems = 'center';
+                        
+                        // Tạo select cho variant
+                        const variantSelect = document.createElement('select');
+                        variantSelect.className = 'option-select form-control';
+                        variantSelect.id = `variant-select-${index}`;
+                        variantSelect.style.flex = '1';
+                        
+                        // Thêm option mặc định cho variant
+                        const defaultOption = document.createElement('option');
+                        defaultOption.value = variant.variantId;
+                        defaultOption.textContent = variant.variantName;
+                        variantSelect.appendChild(defaultOption);
+                        
+                        // Tạo select cho variant value
+                        const variantValueSelect = document.createElement('select');
+                        variantValueSelect.className = 'option-select form-control';
+                        variantValueSelect.id = `variant-value-select-${index}`;
+                        variantValueSelect.style.flex = '1';
+
+                        // Thêm option mặc định cho variant value
+                        const defaultValueOption = document.createElement('option');
+                        defaultValueOption.value = variant.variantValueId;
+                        defaultValueOption.textContent = variant.variantValueName;
+                        variantValueSelect.appendChild(defaultValueOption);
+
+                        // Thêm nút xóa
+                        const removeButton = document.createElement('button');
+                        removeButton.className = 'remove-option-button btn btn-link';
+                        removeButton.textContent = '×';
+                        removeButton.style.color = '#dc3545';
+                        removeButton.style.fontSize = '20px';
+                        removeButton.style.padding = '0 8px';
+                        removeButton.style.border = 'none';
+                        removeButton.style.background = 'none';
+                        removeButton.onclick = function() { removeOptionGroup(this); };
+
+                        // Thêm các elements vào option group
+                        optionGroup.appendChild(variantSelect);
+                        optionGroup.appendChild(variantValueSelect);
+                        optionGroup.appendChild(removeButton);
+
+                        // Thêm option group vào container
+                        optionsContainer.appendChild(optionGroup);
+
+                        // Load danh sách variants và values
+                        loadVariantsForSelect(variantSelect.id, product.categoryId).then(() => {
+                            variantSelect.value = variant.variantId;
+                            // Load variant values và chọn giá trị
+                            fetchVariantValues(variant.variantId, variantValueSelect.id).then(() => {
+                                variantValueSelect.value = variant.variantValueId;
+                            });
+                        });
                     });
-
-                    // Chọn mặc định cho variant và variant value từ response
-                    variantSelect.value = product.variants[0].variantId;
-                    variantValueSelect.value = product.variants[0].variantValueId;
                 }
+            }
 
+            // Cập nhật sự kiện cho nút Save
+            const saveButton = document.getElementById('saveButton');
+            if (saveButton) {
+                saveButton.onclick = function(e) {
+                    e.preventDefault();
+                    saveEditedProduct(product.id);
+                };
+            }
+        } else {
+            alert('Không tìm thấy thông tin sản phẩm.');
+        }
+    })
+    .catch(error => {
+        console.error('Có lỗi xảy ra khi gọi API:', error);
+        alert('Có lỗi xảy ra khi lấy thông tin sản phẩm.');
+    });
+}
+
+function saveEditedProduct(productId) {
+    // Thu thập dữ liệu từ form
+    const fileInput = document.getElementById('fileInput');
+    const files = fileInput.files;
+    const previewImage = document.getElementById('previewImage');
+    const currentImageId = previewImage.getAttribute('data-image-id');
+
+    console.log('Starting to save product with ID:', productId);
+    console.log('Files to upload:', files);
+    console.log('Current image ID:', currentImageId);
+
+    // Tạo promise để xử lý upload hình ảnh
+    const uploadImagePromise = files.length > 0 
+        ? uploadImages(files)
+        : Promise.resolve({ data: null });
+
+    // Xử lý upload hình và cập nhật sản phẩm
+    uploadImagePromise
+        .then(imageData => {
+            console.log('Image upload response:', imageData);
+
+            const productData = {
+                id: productId,
+                name: document.getElementById('productName').value,
+                sku: document.getElementById('sku').value,
+                description: document.getElementById('description').value,
+                categoryId: parseInt(document.getElementById('categoryDropdown').value),
+                brandId: parseInt(document.getElementById('vendor').value),
+                height: parseInt(document.getElementById('height').value),
+                length: parseInt(document.getElementById('length').value),
+                width: parseInt(document.getElementById('width').value),
+                weight: parseInt(document.getElementById('weight').value),
+                primaryImage: imageData.data ? imageData.data[0].id : null,
+                options: []
+            };
+
+            // Thu thập dữ liệu từ variant group
+            const variantGroup = document.querySelector('.variant-group');
+            if (variantGroup) {
+                const optionData = {
+                    id: variantGroup.getAttribute('data-option-id'),
+                    price: parseInt(variantGroup.querySelector('input[id="price"]')?.value || '0'),
+                    stock: parseInt(variantGroup.querySelector('input[id="total"]')?.value || '0'),
+                    variants: []
+                };
+
+                // Thu thập dữ liệu từ các option groups
+                const optionGroups = variantGroup.querySelectorAll('.option-group');
+                optionGroups.forEach(group => {
+                    const variantSelect = group.querySelector('select:first-child');
+                    const variantValueSelect = group.querySelector('select:last-child');
+
+                    if (variantSelect && variantValueSelect) {
+                        optionData.variants.push({
+                            variantId: parseInt(variantSelect.value || '0'),
+                            variantValueId: parseInt(variantValueSelect.value || '0')
+                        });
+                    }
+                });
+
+                if (optionData.variants.length > 0) {
+                    productData.options.push(optionData);
+                    console.log('Option data:', optionData);
+                }
+            }
+
+            // Gửi request cập nhật sản phẩm
+            return fetch('/backend_war/admin/editProduct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productData)
+            });
+        })
+        .then(response => {
+            console.log('Update response status:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Update response data:', data);
+            if (data.statusCode === 200) {
+                alert('Cập nhật sản phẩm thành công!');
+                window.location.href = 'list-product';
             } else {
-                alert('Không tìm thấy thông tin sản phẩm.');
+                alert('Có lỗi xảy ra: ' + data.message);
             }
         })
         .catch(error => {
-            console.error('Có lỗi xảy ra khi gọi API:', error);
-            alert('Có lỗi xảy ra khi lấy thông tin sản phẩm.');
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi cập nhật sản phẩm');
         });
 }
