@@ -210,7 +210,11 @@ public interface ProductDAO {
            v.id as variantId,
            vv.id as variantValueId,
            vv.value as variantValueName,
-           v.name as variantName 
+           v.name as variantName,
+           p.height as height,
+           p.length as length,
+           p.width as width,
+           p.weight as weight
     FROM products as p 
         INNER JOIN categories as cate on cate.id = p.categoryId 
         INNER JOIN `options` as ops on ops.productId = p.id 
@@ -358,5 +362,31 @@ public interface ProductDAO {
             "                         LIMIT 3")
 
     public List<Product> suggestProduct();
+
+    @SqlUpdate("""
+            UPDATE products 
+            SET name = :name,
+                description = :description,
+                sku = :sku,
+                categoryId = :categoryId,
+                brandId = :brandId,
+                primaryImage = COALESCE(:primaryImage, primaryImage),
+                height = :height,
+                length = :length,
+                width = :width,
+                weight = :weight
+            WHERE id = :id
+            """)
+    boolean updateProduct(@Bind("id") Integer id,
+                        @Bind("name") String name,
+                        @Bind("description") String description,
+                        @Bind("sku") String sku,
+                        @Bind("categoryId") Integer categoryId,
+                        @Bind("brandId") Integer brandId,
+                        @Bind("primaryImage") Integer primaryImage,
+                        @Bind("height") Integer height,
+                        @Bind("length") Integer length,
+                        @Bind("width") Integer width,
+                        @Bind("weight") Integer weight);
 
 }

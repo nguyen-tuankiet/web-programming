@@ -95,3 +95,53 @@ document.querySelectorAll('.order-row').forEach(row => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const exportBtn = document.getElementById("exportBtn");
+    console.log("Export button:", exportBtn);
+
+    if (exportBtn) {
+        exportBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            console.log("Export button clicked");
+            console.log("pageContextPath:", pageContextPath);
+
+            try {
+                if (!pageContextPath) {
+                    throw new Error("pageContextPath is not defined");
+                }
+
+                const exportUrl = `${pageContextPath}/admin/export-products`;
+                console.log("Export URL:", exportUrl);
+
+                // Thêm loading state
+                this.disabled = true;
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xuất...';
+
+                // Tạo một form tạm thời để submit
+                const form = document.createElement('form');
+                form.method = 'GET';
+                form.action = exportUrl;
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.innerHTML = originalText;
+                }, 2000);
+
+            } catch (error) {
+                console.error("Export error:", error);
+                alert("Có lỗi xảy ra khi xuất file Excel: " + error.message);
+
+                // Reset button
+                this.disabled = false;
+                this.innerHTML = '<i class="fas fa-file-excel"></i> Xuất Excel';
+            }
+        });
+    } else {
+        console.error("Export button not found");
+    }
+});
