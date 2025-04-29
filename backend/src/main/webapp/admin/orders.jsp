@@ -63,21 +63,10 @@
                         <div class="header-actions">
 
                             <div class="export-container">
-                                <button class="export-btn">Xuất <i class="fas fa-chevron-down"></i></button>
-                                <div class="export-menu">
-                                    <div class="options">
-                                        <p>OPTIONS</p>
-                                        <button class="export-option"><i class="fas fa-copy"></i> Copy</button>
-                                        <button class="export-option"><i class="fas fa-print"></i> Print</button>
-                                    </div>
-                                    <div class="divider"></div>
-                                    <div class="download-options">
-                                        <p>DOWNLOAD OPTIONS</p>
-                                        <button class="export-option"><i class="fas fa-file-excel"></i> Excel</button>
-                                        <button class="export-option"><i class="fas fa-file-csv"></i> .CSV</button>
-                                        <button class="export-option"><i class="fas fa-file-pdf"></i> PDF</button>
-                                    </div>
-                                </div>
+                                <button type="button" id="exportBtn" class="export-btn">
+                                    <i class="fas fa-file-excel"></i>
+                                    Xuất Excel
+                                </button>
                             </div>
 
                         </div>
@@ -176,31 +165,6 @@
 <%--                                        </c:if>--%>
 
 
-                                    </td>
-
-                                    <td class="actions">
-                                        <button class="actions-btn">⋮</button>
-                                        <div class="actions-menu">
-                                            <div class="options">
-                                                <p>OPTIONS</p>
-                                                <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
-                                                <button class="action-option"><i class="fas fa-print"></i> Print
-                                                </button>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <div class="download-options">
-                                                <p>DOWNLOAD OPTIONS</p>
-                                                <button class="action-option"><i class="fas fa-file-excel"></i> Excel
-                                                </button>
-                                                <button class="action-option"><i class="fas fa-file-csv"></i> .CSV
-                                                </button>
-                                                <button class="action-option"><i class="fas fa-file-pdf"></i> PDF
-                                                </button>
-                                            </div>
-                                            <div class="divider"></div>
-                                            <button class="action-option"><i class="fas fa-trash-alt"></i> Delete
-                                            </button>
-                                        </div>
                                     </td>
                                 </tr>
 
