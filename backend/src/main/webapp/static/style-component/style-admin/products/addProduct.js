@@ -426,8 +426,11 @@ function addOptionGroup(containerId) {
     // Thêm vào container
     container.appendChild(optionGroup);
 
-    // Tải danh sách variants cho select mới
-    loadVariantsForSelect(newVariantSelectId);
+    // Lấy categoryId từ dropdown
+    const categoryId = document.getElementById('categoryDropdown').value;
+    
+    // Tải danh sách variants cho select mới với categoryId
+    loadVariantsForSelect(newVariantSelectId, categoryId);
 }
 
 // Hàm để tải variants cho một select cụ thể
