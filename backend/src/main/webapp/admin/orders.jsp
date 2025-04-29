@@ -63,10 +63,10 @@
                         <div class="header-actions">
 
                             <div class="export-container">
-                                <button type="button" id="exportBtn" class="export-btn">
+                                <a href="orders?action=export" class="export-btn">
                                     <i class="fas fa-file-excel"></i>
                                     Xuất Excel
-                                </button>
+                                </a>
                             </div>
 
                         </div>
