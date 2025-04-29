@@ -13,41 +13,20 @@ import java.io.IOException;
 public class UserDetailController extends HttpServlet {
     UserService userService = new UserService(DBConnection.getJdbi());
 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        
-        // Debug session attributes
-        System.out.println("Session ID: " + session.getId());
-        System.out.println("IsLoggedIn: " + session.getAttribute("isLoggedIn"));
-        System.out.println("UserRole: " + session.getAttribute("userRole"));
-        System.out.println("UserId from session: " + session.getAttribute("userId"));
+       HttpSession session = request.getSession();
+       Integer userId = (Integer) session.getAttribute("userId");
 
-        // Kiểm tra đăng nhập
-        Boolean isLoggedIn = (Boolean) session.getAttribute("isLoggedIn");
-        if (isLoggedIn == null || !isLoggedIn) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-
-        // Lấy userId từ session
-        Integer userId = (Integer) session.getAttribute("userId");
-        System.out.println("Attempting to get user details for userId: " + userId);
-
+       User user= null;
         if (userId != null) {
-            User user = userService.getUserById(userId);
-            if (user != null) {
-                System.out.println("Found user: " + user.toString());
-                request.setAttribute("user", user);
-            } else {
-                System.out.println("No user found for ID: " + userId);
-            }
-        } else {
-            System.out.println("UserId is null in session");
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+           user = userService.getUserById(userId);
+           request.setAttribute("user", user);
+
+            System.out.println(user.toString());
+       }
 
         request.getRequestDispatcher("user/user-profile.jsp").forward(request, response);
     }
