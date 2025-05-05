@@ -206,7 +206,7 @@ public class CheckoutController extends HttpServlet {
         }
 
         if (apiResponse.getCode() != 200) {
-            orderSerivce.updateStatus(order.getId(), OrderStatus.ODER_CREATE_ERROR);
+            orderSerivce.updateStatus(order.getId(), OrderStatus.ORDER_CREATE_ERROR);
         }
 
 
