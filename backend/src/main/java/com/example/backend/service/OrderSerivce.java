@@ -56,6 +56,11 @@ public class OrderSerivce {
         orderDAO.updateOrderStatus(orderId, orderStatus);
     }
 
+
+    public boolean updateStatusByShippingId(String shippingId, OrderStatus orderStatus) {
+            return orderDAO.updateOrderStatusByShippingId(shippingId, orderStatus);
+        }
+
     public void updateShippingId(Integer orderId, String shippingId) {
         orderDAO.updateOrderShippingId(orderId, shippingId);
     }
