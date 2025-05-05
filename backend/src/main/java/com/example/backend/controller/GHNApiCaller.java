@@ -17,6 +17,7 @@ public class GHNApiCaller {
     private final String baseUrl = ConfigLoader.get("ghn.url");
 
     private final String createOrderUrl ="shipping-order/create";
+    private final String cancelOrderUrl ="switch-status/cancel";
 
 
     public  String createOrder(String payload) throws IOException {
@@ -41,6 +42,28 @@ public class GHNApiCaller {
 
     }
 
+
+
+    public  String cancelOrder(String payload) throws IOException {
+        URI uri = URI.create(baseUrl + cancelOrderUrl);
+        HttpsURLConnection conn = (HttpsURLConnection) uri.toURL().openConnection();
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("ShopId", shopId);
+        conn.setRequestProperty("Token", token);
+
+        String curl = buildCurlCommand(uri.toString(), payload);
+        System.out.println("==> CURL Preview:\n" + curl + "\n");
+
+        try( OutputStream os = conn.getOutputStream()){
+            byte[] data = payload.getBytes(StandardCharsets.UTF_8);
+            os.write(data);
+        }
+
+        return getResponse(conn);
+
+    }
 
 
     private String getResponse(HttpURLConnection conn) throws IOException {
