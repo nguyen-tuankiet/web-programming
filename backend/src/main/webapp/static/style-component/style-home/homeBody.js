@@ -30,3 +30,26 @@ function showImage(imageId) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const productShowcases = document.querySelectorAll('.product-showcase');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+
+            // Add active class to current link
+            this.classList.add('active');
+
+            // Hide all product showcases
+            productShowcases.forEach(showcase => {
+                showcase.classList.remove('active');
+            });
+
+            // Show current product showcase
+            const targetId = this.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+});

@@ -43,17 +43,17 @@
     <div class="product-item">
       <img src="${pageContext.request.contextPath}/static/image/pc-1440x810bic.jpg" alt="The Frame">
       <h3>Nhà Bếp</h3>
-      <a href="Search_KitchenEquipment" class="buy-button">Tìm hiểu thêm</a>
+      <a href="search-category?categoryId=1" class="buy-button">Tìm hiểu thêm</a>
     </div>
     <div class="product-item">
       <img src="${pageContext.request.contextPath}/static/image/pc-achomepage.jpg" alt="WindFree Wall-Mount">
       <h3>Phòng Ngủ</h3>
-      <a href="Search_AirConditioner" class="buy-button">Tìm hiểu thêm</a>
+      <a href="search-category?categoryId=5" class="buy-button">Tìm hiểu thêm</a>
     </div>
     <div class="product-item">
       <img src="https://images.samsung.com/is/image/samsung/assets/vn/home/2024/PC_1440x810HA.jpg?$1440_810_JPG$" alt="Tủ Lạnh Bespoke">
       <h3>Phòng Khách</h3>
-      <a href="search-refrigerator" class="buy-button">Tìm hiểu thêm</a>
+      <a href="search-category?categoryId=3" class="buy-button">Tìm hiểu thêm</a>
     </div>
   </div>
 </section>
@@ -128,36 +128,139 @@
 </div>
 
 
-<section class="body">
-  <h2>Sản phẩm nổi bật</h2>
-</section>
+<%--<section class="body">--%>
+<%--  <h2>Sản phẩm nổi bật</h2>--%>
+<%--</section>--%>
 <section class="body">
   <div class="content">
 
-    <div class="navbar-light">
-      <a onclick="showImage('image1')" data-text="Bespoke Đẹp Đi Đừng Đợi!">Tủ Lạnh BESPOKE</a>
-      <a onclick="showImage('image2')" data-text="Dẫn Đầu Kỷ Nguyên Bếp Thông Minh">Thiết Bị Bếp</a>
-      <a onclick="showImage('image3')" data-text="Sạch Thông Minh, Giặt Hoàn Hảo">Máy Giặt BESPOKE AI</a>
-      <a onclick="showImage('image4')" data-text="Lạnh Tức Thì, Không Gió Buốt">Điều Hòa Không Khí</a>
-    </div>
+    <div class="container2">
+      <header>
+        <div class="text">Gia Dụng</div>
+        <nav>
+          <a data-target="refrigerator" class="nav-link active">Tủ lạnh Bespoke AI</a>
+          <a data-target="washer" class="nav-link">Máy giặt sấy Bespoke AI</a>
+          <a data-target="robot" class="nav-link">Robot hút bụi Bespoke AI</a>
+          <a data-target="airconditioner" class="nav-link">Điều hòa Bespoke AI WindFree™</a>
+        </nav>
+      </header>
+
+      <div id="refrigerator" class="product-showcase active">
+        <div class="product-image">
+          <img src="https://image-bluetech.s3.amazonaws.com/images/ae2b189c-689f-4e97-bb73-cde4f9b07065-5ksewt8a.png" alt="Tủ lạnh Bespoke AI">
+        </div>
+        <h2 class="product-title">Tủ lạnh Bespoke AI</h2>
+        <p class="product-description">Chuyên gia tươi ngon, dẫn đầu thiết kế</p>
+        <a href="search-category?categoryId=1" class="buy-button">Mua ngay</a>
+      </div>
+
+      <div id="washer" class="product-showcase">
+        <div class="product-image">
+          <img src="https://image-bluetech.s3.amazonaws.com/images/5c0df88e-6c95-4057-bb0c-15591b3b848b-9xldzpxd.png" alt="Máy giặt sấy Bespoke AI">
+        </div>
+        <h2 class="product-title">Máy giặt sấy Bespoke AI</h2>
+        <p class="product-description">Giặt thông minh, sạch hoàn hảo</p>
+        <a href="search-category?categoryId=2" class="buy-button">Mua ngay</a>
+      </div>
 
 
-    <div class="image-container">
-      <img id="image1" src="${pageContext.request.contextPath}/static/image/pc-1440x810-t4ref.jpg" alt="Tủ Lạnh BESPOKE" class="active">
-      <img id="image2" src=" ${pageContext.request.contextPath}/static/image/pc-1440x810bic.jpg" alt="Thiết Bị Bếp">
-      <img id="image3" src="${pageContext.request.contextPath}/static/image/pc-1440x810wm%20(1).jpg" alt="Máy Giặt BESPOKE AI">
-      <img id="image4" src="${pageContext.request.contextPath}/static/image/pc-achomepage.jpg" alt="Điều Hòa Không Khí">
+      <div id="robot" class="product-showcase">
+        <div class="product-image">
+          <img src="https://image-bluetech.s3.amazonaws.com/images/371012e7-f09f-4dc4-bab2-3217ea5a3b0a-25l7whti.png" alt="Robot hút bụi Bespoke AI">
+        </div>
+        <h2 class="product-title">Robot hút bụi Bespoke AI</h2>
+        <p class="product-description">Dẫn đầu công nghệ Hút lau giặt sấy AI</p>
+        <a href="search-category?categoryId=3" class="buy-button">Mua ngay</a>
+      </div>
 
-      <div class="text-overlay">
-        <h1 id="product-description">Bespoke Đẹp Đi Đừng Đợi!</h1>
-        <a href="search-refrigerator" class="link">Tìm hiểu thêm</a>
-        <!--                <a href="../../component/Checkout/Checkout.html" class="link">Mua ngay</a>-->
+      <div id="airconditioner" class="product-showcase">
+        <div class="product-image">
+          <img src="https://image-bluetech.s3.amazonaws.com/images/1cfce4d4-e7e6-4331-b73d-5d194d1cb0e0-sfa34u1p.png" alt="Điều hòa Bespoke AI WindFree™">
+        </div>
+        <h2 class="product-title">Điều hòa Bespoke AI WindFree™</h2>
+        <p class="product-description">Làm mát tối ưu, tiết kiệm năng lượng</p>
+        <a href="search-category?categoryId=5" class="buy-button">Mua ngay</a>
       </div>
     </div>
+
   </div>
 </section>
 
+<section class="product-slider">
+  <div class="slider-container">
+    <h2 class="slider-title">Gợi ý dành cho bạn</h2>
 
+    <div class="slider-wrapper">
+      <button class="slider-arrow slider-prev" id="prev-btn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <div class="slider-track" id="slider-track">
+        <!-- Product 1 -->
+        <div class="slider-item">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="Galaxy Buds3">
+            </div>
+            <h3 class="product-name">Galaxy Buds3</h3>
+            <p class="product-price-discount">chiết khấu 400.000 VND (giá gốc 3.990.000 VND)</p>
+            <p class="product-price">3.590.000 VND</p>
+            <button class="buy-now">Mua ngay</button>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="slider-item">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="Galaxy Tab A9 (Wi-Fi)">
+            </div>
+            <h3 class="product-name">Galaxy Tab A9 (Wi-Fi)</h3>
+            <p class="product-price-discount">chiết khấu 999.700 VND (giá gốc 3.989.700 VND)</p>
+            <p class="product-price">2.990.000 VND</p>
+            <button class="buy-now">Mua ngay</button>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="slider-item">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="Galaxy Fit3">
+            </div>
+            <h3 class="product-name">Galaxy Fit3</h3>
+            <p class="product-price-discount">chiết khấu 200.000 VND (giá gốc 1.390.000 VND)</p>
+            <p class="product-price">1.190.000 VND</p>
+            <button class="buy-now">Mua ngay</button>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="slider-item">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="24 inch Màn Hình Viền Mỏng S4 S40GD Full HD">
+            </div>
+            <h3 class="product-name">24 inch Màn Hình Viền Mỏng S4 S40GD Full HD</h3>
+            <p class="product-price-discount">chiết khấu 1.009.000 VND (giá gốc 4.036.000 VND)</p>
+            <p class="product-price">3.027.000 VND</p>
+            <button class="buy-now">Mua ngay</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="slider-arrow slider-next" id="next-btn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <div class="slider-dots" id="slider-dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+    </div>
+  </div>
+</section>
 
 <footer>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-home/footer.css">
