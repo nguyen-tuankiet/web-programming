@@ -117,6 +117,16 @@ public interface OrderDAO {
 
 
     @SqlUpdate("UPDATE orders " +
+            "SET orderStatus = :orderStatus "+
+            "WHERE shippingId = :shippingId ")
+
+    boolean updateOrderStatusByShippingId(@Bind("shippingId") String shippingId, @Bind("orderStatus") OrderStatus orderStatus);
+
+
+
+
+
+    @SqlUpdate("UPDATE orders " +
             "SET shippingId = :shippingId "+
             "WHERE id = :orderId ")
 
