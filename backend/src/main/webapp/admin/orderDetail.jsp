@@ -62,8 +62,7 @@
 
 
 
-                            <div class="step ${statusStep >= 1 ? 'completed' : ''}">
-                                <div class="circle"></div>
+git                                 <div class="circle"></div>
                                 <span class="label">Đặt hàng thành công</span>
                             </div>
                             <div class="line    "></div>

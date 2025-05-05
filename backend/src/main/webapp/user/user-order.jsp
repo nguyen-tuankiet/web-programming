@@ -116,7 +116,7 @@
                                         <span style="color: #dc3545" >Giao hàng thất bại</span>
                                     </c:when>
                                     <c:otherwise>
-                                        <span>Không rõ trạng thái</span>
+                                        <span>Đang cập nhật </span>
                                     </c:otherwise>
                                 </c:choose>
 
@@ -138,7 +138,9 @@
                                 <a href="user-order-detail?orderId=${o.id}">
                                     <button class="btn_detail">Xem chi tiết</button>
                                 </a>
-                                <button  class="cancel_btn
+                                <button
+                                        onclick="cancelOrder(${o.id})"
+                                        class="cancel_btn
                                         <c:if test="${o.orderStatus != 'PENDING' && o.orderStatus != 'CONFIRMED'}">disabled </c:if> "
                                 >Hủy đơn</button>
 
