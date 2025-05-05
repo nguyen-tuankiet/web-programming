@@ -59,7 +59,8 @@ public interface OrderDAO {
 
     @SqlQuery(value = "select\n" +
             "    o.id as id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD,  o.shippingFee as  shippingFee, " +
+            "    o.userId, o.addressId, o.cardId, o.isCOD,  o.shippingFee as  shippingFee,\n " +
+            " o.shippingId as shippingId , " +
             "    sum(od.total) as total\n" +
             "from orders as o inner join order_detail as od\n" +
             "                            on o.id = od.orderId\n" +
@@ -74,6 +75,7 @@ public interface OrderDAO {
     @SqlQuery(value = "select\n" +
             "    o.id as id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
             "    o.userId, o.addressId, o.cardId, o.isCOD,  o.shippingFee as  shippingFee,\n" +
+            "     o.shippingId as shippingId ," +
             "    sum(od.total) as total\n" +
             "from orders as o inner join order_detail as od\n" +
             "                            on o.id = od.orderId\n" +
