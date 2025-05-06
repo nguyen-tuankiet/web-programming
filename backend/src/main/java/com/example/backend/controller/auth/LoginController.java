@@ -5,6 +5,8 @@ import com.example.backend.service.AuthService;
 import com.example.backend.model.User;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,14 +15,44 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.jdbi.v3.core.Jdbi;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
+    private static final String SECRET_KEY = "6LcUii8rAAAAAF_aZ0Dppv4Mkkg7Z7jKFeRKyNvC";
+
+    private boolean verifyRecaptcha(String token) {
+        try {
+            URL url = new URL("https://www.google.com/recaptcha/api/siteverify");
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+
+            String postData = "secret=" + SECRET_KEY + "&response=" + token;
+            conn.getOutputStream().write(postData.getBytes(StandardCharsets.UTF_8));
+
+            try (InputStream input = conn.getInputStream();
+                 InputStreamReader reader = new InputStreamReader(input, StandardCharsets.UTF_8);
+                 JsonReader jsonReader = new JsonReader(reader)) {
+
+                JsonObject jsonObject = com.google.gson.JsonParser.parseReader(jsonReader).getAsJsonObject();
+                return jsonObject.get("success").getAsBoolean();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,12 +74,22 @@ public class LoginController extends HttpServlet {
             // Parse JSON để lấy dữ liệu
             Map<String, String> jsonData = objectMapper.readValue(jsonString, Map.class);
             String email = jsonData.get("email");
+//            String recaptchaToken = request.getParameter("g-recaptcha-response");
             String password = jsonData.get("password");
+            String recaptchaToken = jsonData.get("recaptcha");
 
             // Kiểm tra thông tin đầu vào
             if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
                 ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
                         400, "error", "Email và mật khẩu không được để trống", null);
+                response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+                return;
+            }
+
+            //  Kiểm tra reCAPTCHA
+            if (recaptchaToken == null || !verifyRecaptcha(recaptchaToken)) {
+                ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
+                        400, "error", "Xác thực reCAPTCHA không thành công.", null);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
                 return;
             }
