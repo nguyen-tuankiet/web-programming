@@ -7,6 +7,7 @@ import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,10 +17,7 @@ import jakarta.servlet.http.HttpSession;
 import org.jdbi.v3.core.Jdbi;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
@@ -28,7 +26,10 @@ import java.util.Map;
 public class LoginController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
-    private static final String SECRET_KEY = "6LcUii8rAAAAAF_aZ0Dppv4Mkkg7Z7jKFeRKyNvC";
+    private static final Dotenv dotenv = Dotenv.configure()
+            .load();
+
+    private static final String SECRET_KEY = dotenv.get("RECAPTCHA_SECRET_KEY");
 
     private boolean verifyRecaptcha(String token) {
         try {
