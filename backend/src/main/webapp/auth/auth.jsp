@@ -14,7 +14,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Web Programming</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/auth/auth.css">
-  <script src="${pageContext.request.contextPath}/static/style-component/style-auth/auth-captcha.js"></script>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="https://www.google.com/recaptcha/api.js?hl=vi" async defer></script>
   <link
@@ -150,6 +149,7 @@
 </div>
 
 <main>
+  <script src="${pageContext.request.contextPath}/static/style-component/style-auth/auth-captcha.js"></script>
   <script src="${pageContext.request.contextPath}/static/style-page/auth/auth.js"></script>
   <script>
     function handleFacebookAuth(mode) {
