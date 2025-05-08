@@ -37,10 +37,7 @@ public class Address {
                    @ColumnName("isDefault")  @Nullable Boolean isDefault,
                    @ColumnName("type")  @Nullable String type,
                    @ColumnName("status")  @Nullable String status
-
-    )
-
-    {
+    ){
         this.id = id;
         this.userId = userId;
         this.province = province;
