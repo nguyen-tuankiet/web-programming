@@ -83,8 +83,10 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
+                credentials: "include",
                 email,
                 password,
+                recaptcha: recaptchaResponse
             }),
         });
 
@@ -184,19 +186,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const signInButton = document.getElementById('signInButton');
 
     checkSavedCredentials();
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const email = emailInput.value.trim();
-        const password = passwordInput.value;
-
-        if (rememberCheckbox.checked) {
-            saveCredentials(email, password);
-        } else {
-            clearSavedCredentials();
-        }
-        login(email, password);
-    });
+    // loginForm.addEventListener('submit', function(e) {
+    //     e.preventDefault();
+    //
+    //     const email = emailInput.value.trim();
+    //     const password = passwordInput.value;
+    //
+    //     if (rememberCheckbox.checked) {
+    //         saveCredentials(email, password);
+    //     } else {
+    //         clearSavedCredentials();
+    //     }
+    //     // login(email, password, recaptchaResponse);
+    //     const recaptchaResponse = grecaptcha.getResponse();
+    //     if (!recaptchaResponse) {
+    //         alert("Vui lòng xác nhận bạn không phải là robot.");
+    //         return;
+    //     }
+    //
+    //     login(email, password, recaptchaResponse);
+    // });
 
     function saveCredentials(email, password) {
         const encodedPassword = btoa(password);
