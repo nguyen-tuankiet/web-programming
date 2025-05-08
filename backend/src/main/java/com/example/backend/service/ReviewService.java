@@ -16,16 +16,10 @@ public class ReviewService {
     }
 
     public boolean isOrderDelivered(int orderId, int userId) {
-        OrderStatus orderStatus = jdbi.withHandle(handle ->
-                handle.createQuery("SELECT orderStatus FROM orders WHERE id = :orderId AND userId = :userId")
-                        .bind("orderId", orderId)
-                        .bind("userId", userId)
-                        .mapTo(OrderStatus.class)
-                        .findOne()
-                        .orElse(null)
-        );
+        OrderStatus orderStatus = reivewDAO.getOrderStatus(orderId, userId);
         return orderStatus != null && orderStatus == OrderStatus.DELIVERED;
     }
+
 
     public Boolean addReview(Review review) {
         int existing = reivewDAO.countExistingReview(

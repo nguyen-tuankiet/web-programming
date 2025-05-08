@@ -14,6 +14,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Web Programming</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-page/auth/auth.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?hl=vi" async defer></script>
   <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -120,7 +122,11 @@
         </div>
         <a href="${pageContext.request.contextPath}/forgot-password" class="forgot">Quên mật khẩu?</a>
       </div>
-      <button type="submit" id="signInButton">Đăng nhập</button>
+      <!-- reCAPTCHA -->
+<%--      <div id="recaptcha-login"></div>--%>
+      <div class="g-recaptcha" data-sitekey="6LcUii8rAAAAAK7YE7ccXsJEnsaSPQlAKQpvUu25"></div>
+      <button type="submit" id="signInButton"
+      >Đăng nhập</button>
     </form>
   </div>
 
@@ -143,6 +149,7 @@
 </div>
 
 <main>
+  <script src="${pageContext.request.contextPath}/static/style-component/style-auth/auth-captcha.js"></script>
   <script src="${pageContext.request.contextPath}/static/style-page/auth/auth.js"></script>
   <script>
     function handleFacebookAuth(mode) {
@@ -151,5 +158,8 @@
     }
   </script>
 </main>
+<script>
+  const contextPath = '${pageContext.request.contextPath}';
+</script>
 </body>
 </html>
