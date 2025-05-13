@@ -33,7 +33,6 @@
       <p class="subtitle">Tạo và quản lý các vai trò với quyền tuỳ chỉnh</p>
 
       <div class="content_header">
-        <h3>Danh sách vai trò</h3>
         <button class="btn_add_role" id="addRoleBtn">
           <i class="fa-solid fa-plus"></i> Thêm vai trò
         </button>
@@ -45,32 +44,32 @@
           <th>Tên vai trò</th>
           <th>Thành viên</th>
           <th>Quyền</th>
-          <th>Ngày tạo</th>
-          <th>Hành động</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td><strong>Quản Trị Viên</strong><br><small>Toàn quyền hệ thống</small></td>
-          <td>0 thành viên</td>
-          <td>Không có quyền</td>
-          <td>18/03/2025</td>
-          <td><i class="fa-solid fa-pen action_icon"></i></td>
-        </tr>
-        <tr>
-          <td><strong>Người Dùng</strong><br><small>Chỉnh sửa nội dung</small></td>
-          <td>0 thành viên</td>
-          <td>Không có quyền</td>
-          <td>18/03/2025</td>
-          <td><i class="fa-solid fa-pen action_icon"></i></td>
-        </tr>
-        <tr>
-          <td><strong>Nhân Viên</strong><br><small>Chỉnh sửa nội dung</small></td>
-          <td>0 thành viên</td>
-          <td>Không có quyền</td>
-          <td>18/03/2025</td>
-          <td><i class="fa-solid fa-pen action_icon"></i></td>
-        </tr>
+        <c:if test="${not empty roles}">
+
+          <c:forEach items="${roles}" var="role">
+            <tr>
+              <td><strong>${role.name}</strong><br><small>${role.description}</small></td>
+              <td>0 thành viên</td>
+              <td>Không có quyền</td>
+              <td>
+                <c:choose>
+                  <c:when test="${role.roleType != 'CUSTOM'}">
+                    <i class="fa-solid fa-pen action_icon disable"></i>
+                  </c:when>
+                  <c:otherwise>
+                    <i class="fa-solid fa-pen action_icon"></i>
+                  </c:otherwise>
+                </c:choose>
+              </td>
+            </tr>
+          </c:forEach>
+        </c:if>
+
+
         </tbody>
       </table>
     </div>
@@ -91,7 +90,6 @@
           </div>
           <div class="form_group">
             <label>Phân quyền</label>
-            <p>Chọn quyền hạn cho vai trò này:</p>
             <div>
               <label><input type="checkbox"> Đọc <small>Có thể xem nội dung</small></label><br>
               <label><input type="checkbox"> Ghi <small>Có thể tạo và chỉnh sửa nội dung</small></label><br>
