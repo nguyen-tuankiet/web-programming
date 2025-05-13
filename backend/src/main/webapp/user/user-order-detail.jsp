@@ -344,52 +344,33 @@
                 </div>
             </div>
 
-
-            <div class="write-review-section">
-                <h2>Viết đánh giá của bạn</h2>
-                <form id="review-form" method="post">
-                    <div class="input-group">
-                        <label for="rating-value"> </label>
-                        <div id="user-rating" class="stars">
-
-                            <span class="star" data-value="1">
-                                 <i class="fa-solid fa-star"></i>
-                            </span>
-
-                            <span class="star" data-value="2">
-                                <i class="fa-solid fa-star"></i>
-                            </span>
-
-                            <span class="star" data-value="3">
-                                <i class="fa-solid fa-star"></i>
-                            </span>
-
-                            <span class="star" data-value="4">
-                                <i class="fa-solid fa-star"></i>
-                            </span>
-
-                            <span class="star" data-value="5">
-                                <i class="fa-solid fa-star"></i>
-                            </span>
-
-
+            <c:if test="${order.orderStatus == 'DELIVERED'}">
+                <div class="write-review-section" id="review-section">
+                    <h2>Viết đánh giá của bạn</h2>
+                    <form id="review-form" method="post">
+                        <div class="input-group">
+                            <label for="rating-value"> </label>
+                            <div id="user-rating" class="stars">
+                                <span class="star" data-value="1"><i class="fa-solid fa-star"></i></span>
+                                <span class="star" data-value="2"><i class="fa-solid fa-star"></i></span>
+                                <span class="star" data-value="3"><i class="fa-solid fa-star"></i></span>
+                                <span class="star" data-value="4"><i class="fa-solid fa-star"></i></span>
+                                <span class="star" data-value="5"><i class="fa-solid fa-star"></i></span>
+                            </div>
+                            <input type="hidden" id="rating-value" name="rating" value="0">
                         </div>
-                        <input type="hidden" id="rating-value" name="rating" value="0">
-                    </div>
 
-                    <div class="input-group">
-                        <label for="review-text">Viết đánh giá:</label>
-                        <textarea id="review-text" name="review" rows="4" placeholder="Chia sẻ suy nghĩ của bạn"
-                                  required></textarea>
-                    </div>
+                        <div class="input-group">
+                            <label for="review-text">Viết đánh giá:</label>
+                            <textarea id="review-text" name="review" rows="4" placeholder="Chia sẻ suy nghĩ của bạn" required></textarea>
+                        </div>
 
-                    <div class="send">
-                        <button id="btn_submit">Gửi đánh giá</button>
-                    </div>
-
-
-                </form>
-            </div>
+                        <div class="send">
+                            <button id="btn_submit">Gửi đánh giá</button>
+                        </div>
+                    </form>
+                </div>
+            </c:if>
 
         </div>
     </c:if>
