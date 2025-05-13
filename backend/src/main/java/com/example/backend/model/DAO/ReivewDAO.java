@@ -1,10 +1,12 @@
 package com.example.backend.model.DAO;
 
 
+import com.example.backend.contant.OrderStatus;
 import com.example.backend.model.Review;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 @RegisterConstructorMapper(Review.class)
@@ -21,5 +23,19 @@ public interface ReivewDAO {
                       @Bind("description") String description
 
                       );
+
+    @SqlUpdate("UPDATE order_detail SET isReviewed = 1 WHERE orderId = :orderId AND productId = :productId")
+    void updateIsReviewed(@Bind("orderId") int orderId,
+                          @Bind("productId") int productId);
+
+
+    @SqlQuery("SELECT orderStatus FROM orders WHERE id = :orderId AND userId = :userId")
+    OrderStatus getOrderStatus(@Bind("orderId") int orderId, @Bind("userId") int userId);
+
+
+    @SqlQuery("SELECT COUNT(*) FROM review WHERE userId = :userId AND orderId = :orderId AND productId = :productId")
+    int countExistingReview(@Bind("userId") int userId,
+                            @Bind("orderId") int orderId,
+                            @Bind("productId") int productId);
 
 }

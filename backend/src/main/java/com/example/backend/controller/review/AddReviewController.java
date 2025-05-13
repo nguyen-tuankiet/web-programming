@@ -31,23 +31,43 @@ public class AddReviewController extends HttpServlet {
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         BufferedReader reader = request.getReader();
-        Boolean flag = true;
-        HttpSession session = request.getSession();
-
-        Integer user_id = (Integer) session.getAttribute("userId");
-
+        boolean flag = true;
 
         while ((line = reader.readLine()) != null) {
             stringBuilder.append(line);
-
         }
 
         JSONObject jsonObject = new JSONObject(stringBuilder.toString());
 
-        Integer order_id = (Integer) jsonObject.get("order_id");
-        Integer rating = (Integer) jsonObject.getInt("rating");
-        String description = (String) jsonObject.get("description");
+        HttpSession session = request.getSession();
+        Integer user_id = (Integer) session.getAttribute("userId");
 
+        if (user_id == null) {
+            if (jsonObject.has("user_id")) {
+                user_id = jsonObject.getInt("user_id");
+            } else {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                JSONObject errorJson = new JSONObject();
+                errorJson.put("status", "error");
+                errorJson.put("message", "Chưa đăng nhập và không có user_id trong request.");
+                response.getWriter().write(errorJson.toString());
+                return;
+            }
+        }
+
+        Integer order_id = jsonObject.getInt("order_id");
+        Integer rating = jsonObject.getInt("rating");
+        String description = jsonObject.getString("description");
+        JSONArray productIds = jsonObject.getJSONArray("productIds");
+
+        if (!reviewService.isOrderDelivered(order_id, user_id)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            JSONObject errorJson = new JSONObject();
+            errorJson.put("status", "error");
+            errorJson.put("message", "Chỉ có thể đánh giá sau khi đơn hàng đã giao thành công.");
+            response.getWriter().write(errorJson.toString());
+            return;
+        }
 
         Review review = new Review();
         review.setDescription(description);
@@ -55,15 +75,12 @@ public class AddReviewController extends HttpServlet {
         review.setOrderId(order_id);
         review.setUserId(user_id);
 
-        JSONArray productIds = (JSONArray) jsonObject.get("productIds");
-
         for (int i = 0; i < productIds.length(); i++) {
-             Integer id =(Integer) productIds.getInt(i);
-             review.setProductId(id);
-             if (!reviewService.addReview(review)){
-                 flag = false;
-             }
-
+            Integer id = productIds.getInt(i);
+            review.setProductId(id);
+            if (!reviewService.addReview(review)) {
+                flag = false;
+            }
         }
 
         JSONObject responseJson = new JSONObject();
@@ -75,11 +92,8 @@ public class AddReviewController extends HttpServlet {
             responseJson.put("message", "Failed to add all reviews.");
         }
 
-        // Thiết lập kiểu nội dung và trả về phản hồi
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(responseJson.toString());
-
-
     }
 }
