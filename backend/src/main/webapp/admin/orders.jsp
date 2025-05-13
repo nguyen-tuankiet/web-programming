@@ -150,6 +150,16 @@
                                                 <span class="status order-status-failed">Giao hàng thất bại</span>
                                             </c:when>
 
+                                            <c:when test="${o.orderStatus == 'CANCEL_ERROR'}">
+                                                <span class="status order-status-failed">Huỷ đơn hàng thất bại</span>
+                                            </c:when>
+                                            <c:when test="${o.orderStatus == 'ORDER_CREATE_ERROR'}">
+                                                <span class="status order-status-failed">Tạo đơn hàng thất bại</span>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <span class="status order-status-failed">Đang cập nhật</span>
+                                            </c:otherwise>
 
                                         </c:choose>
 
