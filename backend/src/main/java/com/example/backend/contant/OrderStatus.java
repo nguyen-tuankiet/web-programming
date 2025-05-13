@@ -10,6 +10,6 @@ public enum OrderStatus {
     RETURNED,
     FAILED,
     ORDER_CREATE_ERROR,
-    CANCEL_ERROR,
+    CANCEL_ERROR
 
 }
