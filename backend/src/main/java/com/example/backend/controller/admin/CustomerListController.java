@@ -32,10 +32,26 @@ public class CustomerListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> customers = userService.getAllUsers();
+
+        String keyword = request.getParameter("name");
+
+        List<User> allUsers = userService.getAllUsers();
+        List<User> matched = new java.util.ArrayList<>();
+        List<User> others = new java.util.ArrayList<>();
+
+        for (User user : allUsers) {
+            if (user.getFullName() != null && keyword != null && !keyword.isBlank()
+                    && user.getFullName().toLowerCase().contains(keyword.toLowerCase())) {
+                matched.add(user);
+            } else {
+                others.add(user);
+            }
+        }
+
+        matched.addAll(others);
         Map<Integer, String> userAddresses = new HashMap<>();
 
-        for (User c : customers) {
+        for (User c : matched) {
             Address address = addressDAO.getAddressByUserId(c.getId()).stream().findFirst().orElse(null);
             userAddresses.put(c.getId(), address != null ? address.getProvince() : "N/A");
 
@@ -43,14 +59,10 @@ public class CustomerListController extends HttpServlet {
                 String avatarUrl = userService.getAvatarUrlById(c.getAvatarId());
                 c.setAvatarUrl(avatarUrl); // Set avatar URL to User object
             }
-//            else {
-//                user.setAvatarUrl( request.getContextPath() + "/assets/images/default-avatar.png");
-//                // Default avatar URL
-//            }
         }
 
-        request.setAttribute("customers", customers);
         request.setAttribute("userAddresses", userAddresses);
+        request.setAttribute("customers", matched);
 
 
         request.getRequestDispatcher("customers.jsp").forward(request, response);

@@ -52,15 +52,21 @@
 
 
             <div class="table-container">
-                <div class="search-bar">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
-                    </svg>
-                    <input type="text" placeholder="Tìm kiếm">
-                </div>
-                <table>
+
+                    <div class="search-bar">
+                        <form method="get" action="${pageContext.request.contextPath}/admin/customers" style="display: flex; align-items: center; gap: 10px;">
+                            <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                     stroke="currentColor" class="size-6" style="width: 24px; height: 24px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+                                </svg>
+                            </button>
+                            <input type="text" name="name" placeholder="Tìm theo tên" value="${param.name}" />
+                        </form>
+                    </div>
+
+    <table>
                     <thead>
                     <tr>
                         <th><input type="checkbox"></th>
@@ -102,13 +108,14 @@
             </div>
             <div class="footer-container">
                 <nav class="mt-2 mt-md-0">
-                    <ul class="pagination mb-0">
-                        <li class="page-item"><a class="page-link" href="#!" data-action="prev">Quay lại</a></li>
-                        <li class="page-item"><a class="page-link active" href="#!">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#!" data-action="next">Tiếp theo</a></li>
-                    </ul>
+<%--                    <ul class="pagination mb-0">--%>
+<%--                        <li class="page-item"><a class="page-link" href="#!" data-action="prev">Quay lại</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link active" href="#!">1</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#!">2</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#!">3</a></li>--%>
+<%--                        <li class="page-item"><a class="page-link" href="#!" data-action="next">Tiếp theo</a></li>--%>
+<%--                    </ul>--%>
+                        <ul class="pagination mb-0" id="pagination"></ul>
                 </nav>
             </div>
         </div>
