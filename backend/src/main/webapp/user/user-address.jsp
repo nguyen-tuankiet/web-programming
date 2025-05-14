@@ -24,6 +24,16 @@
     </div>
 
     <div class="content">
+        <%
+            String require = request.getParameter("requireAddress");
+            if ("true".equals(require)) {
+        %>
+        <div style="color: red; font-weight: bold; margin: 10px 0;">
+            Vui lòng thêm địa chỉ để tiếp tục thanh toán.
+        </div>
+        <%
+            }
+        %>
 
         <div id="address_header" class="row mid_align">
             <span class="title">Địa Chỉ</span>
