@@ -325,14 +325,14 @@
 
             <!-- Thẻ tag     -->
 
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-tags"></i>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/tag'">
-                        Thẻ (Tag)
-                    </button>
-                </div>
-            </li>
+<%--            <li class="menu_item">--%>
+<%--                <div class="wrap_menu_item">--%>
+<%--                    <i class="fa-solid fa-tags"></i>--%>
+<%--                    <button onclick="location.href='${pageContext.request.contextPath}/admin/tag'">--%>
+<%--                        Thẻ (Tag)--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </li>--%>
 
             <%--Nhà sản xuất--%>
             <li class="menu_item">

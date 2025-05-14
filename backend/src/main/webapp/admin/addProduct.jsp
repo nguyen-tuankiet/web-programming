@@ -190,8 +190,8 @@
                         <option value="winter">Chọn nhà cung cấp</option>
                     </select>
 
-                    <label for="tags">Thẻ</label>
-                    <input type="text" id="tags" placeholder="Nhập thẻ tại đây">
+<%--                    <label for="tags">Thẻ</label>--%>
+<%--                    <input type="text" id="tags" placeholder="Nhập thẻ tại đây">--%>
                 </div>
 
 
