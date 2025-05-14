@@ -711,7 +711,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const description = document.getElementById("description").value.trim();
         const price = document.getElementById("price").value.trim();
         const stock = document.getElementById("total").value.trim();
-        const tags = document.getElementById("tags").value.trim();
+        // const tags = document.getElementById("tags").value.trim();
 
         // Lấy kích thước cân năng
         const height = document.getElementById("height").value.trim();
@@ -737,7 +737,7 @@ document.addEventListener("DOMContentLoaded", () => {
             description,
             price,
             stock,
-            tags,
+            // tags,
             height,
             length,
             width,
@@ -760,7 +760,7 @@ document.addEventListener("DOMContentLoaded", () => {
             price: parseFloat(formData.price),
             stock: parseInt(formData.stock),
             brandId: formData.brand,
-            tags: formData.tags.split(",").map(tag => tag.trim()),
+            // tags: formData.tags.split(",").map(tag => tag.trim()),
             height: parseInt(formData.height),
             length: parseInt(formData.length),
             width: parseInt(formData.width),
@@ -905,7 +905,7 @@ function fetchProductDetails(productId) {
             previewImage.setAttribute('data-image-id', product.primaryImage);
 
             document.getElementById('vendor').value = product.brandId || '';
-            document.getElementById('tags').value = product.tags || '';
+            // document.getElementById('tags').value = product.tags || '';
             
             // Điền thông tin kích thước và cân nặng
             document.getElementById('height').value = product.height || '';
