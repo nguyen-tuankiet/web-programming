@@ -36,6 +36,14 @@
 </head>
 <body>
 
+<c:if test="${empty addressList}">
+    <div class="notice">Bạn chưa có địa chỉ giao hàng. <a href="${pageContext.request.contextPath}/profile/address">Thêm địa chỉ mới</a></div>
+</c:if>
+<c:if test="${empty cardList}">
+    <div class="notice">Bạn chưa có thẻ thanh toán. <a href="${pageContext.request.contextPath}/profile/card">Thêm thẻ mới</a></div>
+</c:if>
+
+
 <div id="header" class="mid_align row">
 
 

@@ -77,6 +77,10 @@ public class CheckoutController extends HttpServlet {
 
 
         addressList = addressService.findByUserId(userId);
+        if (addressList == null || addressList.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/user-address?requireAddress=true");
+            return;
+        }
         cardList = cardService.getCartByUserId(userId);
 
 
