@@ -59,6 +59,7 @@ public class AddRoleController extends HttpServlet {
         jsonResponse.put("success", true);
         response.getWriter().write(jsonResponse.toString());
 
+
     }
 
 }
