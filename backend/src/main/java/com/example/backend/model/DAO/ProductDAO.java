@@ -9,6 +9,7 @@ import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 import com.example.backend.model.Product;
+
 import java.util.List;
 
 
@@ -57,7 +58,7 @@ public interface ProductDAO {
             "       ops.price      as price,\n" +
             "       ops.stock      as stock,\n" +
             "       img.url        as imageUrl, \n" +
-            " p.height as height , p.length as length , p.width as width , p.weight as weight "+
+            " p.height as height , p.length as length , p.width as width , p.weight as weight " +
 
             "FROM products as p\n" +
             "         INNER JOIN categories as cate on cate.id = p.categoryId\n" +
@@ -74,7 +75,7 @@ public interface ProductDAO {
 
     @SqlQuery(value =
             "SELECT p.id as id, p.name as name, p.description as description, " +
-                    " p.height as height , p.length as length , p.width as width , p.weight as weight, "+
+                    " p.height as height , p.length as length , p.width as width , p.weight as weight, " +
                     "         p.isActive as isActive, " +
                     "       p.noOfViews as noOfViews, p.noOfSold as noOfSold, " +
                     "        p.primaryImage as primaryImage, " +
@@ -112,7 +113,6 @@ public interface ProductDAO {
     Integer getPriceForOption(@Bind("optionId") int optionId);
 
 
-
     @SqlUpdate("INSERT INTO products (name,description, isActive, categoryId, brandId, noOfViews, noOfSold, primaryImage, sku, height,length, width, weight ) "
             + "VALUES (:name, :description,COALESCE(:isActive, 1), :categoryId, :brandId, 0, 0, COALESCE(:primaryImage, NULL), :sku,:height, :length, :width, :weight )")
     @GetGeneratedKeys
@@ -128,6 +128,7 @@ public interface ProductDAO {
                    @Bind("width") Integer width,
                    @Bind("weight") Integer weight
     );
+
     @SqlQuery("""
                SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
                FROM products p
@@ -137,7 +138,6 @@ public interface ProductDAO {
             """)
     @RegisterConstructorMapper(Product.class)
     List<Product> searchProducts(@Bind("name") String name);
-
 
 
 //
@@ -156,15 +156,14 @@ public interface ProductDAO {
 
 
     @SqlQuery("""
-        SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
-        FROM products p
-        LEFT JOIN options o ON p.id = o.productId
-        LEFT JOIN image i ON p.primaryImage = i.id
-        WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
-        LIMIT :limit OFFSET :offset
-    """)
+                SELECT p.id AS id, p.name AS name, p.primaryImage AS image, i.url AS imageUrl, o.price AS price
+                FROM products p
+                LEFT JOIN options o ON p.id = o.productId
+                LEFT JOIN image i ON p.primaryImage = i.id
+                WHERE LOWER(p.name) LIKE CONCAT('%', LOWER(:name), '%')
+                LIMIT :limit OFFSET :offset
+            """)
     List<Product> searchProducts(@Bind("name") String name, @Bind("limit") int limit, @Bind("offset") int offset);
-
 
 
     @SqlQuery(value = "SELECT p.id           as id, " +
@@ -193,42 +192,42 @@ public interface ProductDAO {
             "                       and p.isActive = true ) " +
             "order by p.noOfViews desc , p.noOfSold desc " +
             "limit 3")
-    public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit );
+    public List<Product> getTopProductsByCategoryId(@Bind("categoryId") int categoryId, @Bind("limit") Integer limit);
 
 
     @SqlUpdate("UPDATE products SET isActive = false WHERE id = :id")
     boolean deactivateProduct(@Bind("id") int id);
 
     @SqlQuery(value = """
-    SELECT p.id as id, p.name as name, p.description as description,
-           p.sku as sku, p.isActive as isActive, p.brandId as brandId,  
-           p.noOfViews as noOfViews, p.noOfSold as noOfSold,  
-           p.categoryId as categoryId, p.primaryImage as primaryImage,
-           ops.id as optionId, ops.price as price,
-           ops.stock as stock,  
-           img.url as imageUrl,
-           v.id as variantId,
-           vv.id as variantValueId,
-           vv.value as variantValueName,
-           v.name as variantName,
-           p.height as height,
-           p.length as length,
-           p.width as width,
-           p.weight as weight
-    FROM products as p 
-        INNER JOIN categories as cate on cate.id = p.categoryId 
-        INNER JOIN `options` as ops on ops.productId = p.id 
-        INNER JOIN image as img on p.primaryImage = img.id 
-        INNER JOIN option_variant_value as ovv on ops.id = ovv.optionId 
-        INNER JOIN variant_value as vv on ovv.variantValueId = vv.id 
-        INNER JOIN variant as v on vv.variantId = v.id 
-    WHERE p.id = :id 
-      AND ops.price = (
-            SELECT MIN(price) 
-            FROM options as ops 
-            WHERE p.id = ops.productId AND ops.stock > 0
-      );
-""")
+                SELECT p.id as id, p.name as name, p.description as description,
+                       p.sku as sku, p.isActive as isActive, p.brandId as brandId,  
+                       p.noOfViews as noOfViews, p.noOfSold as noOfSold,  
+                       p.categoryId as categoryId, p.primaryImage as primaryImage,
+                       ops.id as optionId, ops.price as price,
+                       ops.stock as stock,  
+                       img.url as imageUrl,
+                       v.id as variantId,
+                       vv.id as variantValueId,
+                       vv.value as variantValueName,
+                       v.name as variantName,
+                       p.height as height,
+                       p.length as length,
+                       p.width as width,
+                       p.weight as weight
+                FROM products as p 
+                    INNER JOIN categories as cate on cate.id = p.categoryId 
+                    INNER JOIN `options` as ops on ops.productId = p.id 
+                    INNER JOIN image as img on p.primaryImage = img.id 
+                    INNER JOIN option_variant_value as ovv on ops.id = ovv.optionId 
+                    INNER JOIN variant_value as vv on ovv.variantValueId = vv.id 
+                    INNER JOIN variant as v on vv.variantId = v.id 
+                WHERE p.id = :id 
+                  AND ops.price = (
+                        SELECT MIN(price) 
+                        FROM options as ops 
+                        WHERE p.id = ops.productId AND ops.stock > 0
+                  );
+            """)
     @RegisterConstructorMapper(Product.class)
     Product editProduct(@Bind("id") int id);
 
@@ -263,20 +262,16 @@ public interface ProductDAO {
     List<OptionVariant> getVariants(@Bind("id") int id);
 
 
-
     @SqlUpdate(value = "update products\n" +
             "set noOfViews = noOfViews +1\n" +
             "where id = :id;")
     Boolean increaseNoOfViews(@Bind("id") int id);
 
 
-    @SqlUpdate(value =  "update products\n" +
+    @SqlUpdate(value = "update products\n" +
             "set noOfSold = noOfSold + :quantity\n" +
             "where id = :id ;\n")
-    Boolean increaseNoOfSold(@Bind("id") int id, @Bind("quantity") Integer quantity );
-
-
-
+    Boolean increaseNoOfSold(@Bind("id") int id, @Bind("quantity") Integer quantity);
 
 
     @SqlQuery(value = "SELECT p.id           as id,\n" +
@@ -307,36 +302,75 @@ public interface ProductDAO {
     List<Product> getTop10();
 
 
-    @SqlQuery("SELECT p.id           as id, \n" +
-            "                              p.name         as name, \n" +
-            "                               p.description  as description, \n" +
-            "                               p.sku          as sku, \n" +
-            "                               p.isActive     as isActive,\n" +
-            "                               p.brandId      as brandId, \n" +
-            "                               p.noOfViews    as noOfViews,\n" +
-            "                               p.noOfSold     as noOfSold, \n" +
-            "                               p.categoryId   as categoryId, \n" +
-            "                               p.primaryImage as primaryImage,  \n" +
-            "                               opt.id         as optionId,\n" +
-            "                               opt.price      as price, \n" +
-            "                               opt.stock      as stock, \n" +
-            "                               img.url        as imageUrl\n" +
-            "            \n" +
-            "            FROM products as p \n" +
-            "            \t\tINNER JOIN options as opt ON p.id = opt.productId\n" +
-            "            \t\tINNER JOIN image as img on img.id = p.primaryImage\n" +
-            "            \t\tINNER JOIN categories as cate on p.categoryId = cate.id\n" +
-            "            \t\tINNER JOIN option_variant_value as ovv ON opt.id = ovv.optionId\n" +
-            "            WHERE ovv.variantValueId IN (<optionsId>)\n" +
-            "            \t\t\t AND cate.id = :categoryId\n" +
-            "                         AND opt.price >= COALESCE(:minPrice, 0)\n" +
-            "                         AND opt.price <= COALESCE(:maxPrice, 999999999)")
+    @SqlQuery(
+            """
+                    SELECT\s
+                            p.id           AS id,
+                            p.name         AS name,
+                            p.description  AS description,
+                            p.sku          AS sku,
+                            p.isActive     AS isActive,
+                            p.brandId      AS brandId,
+                            p.noOfViews    AS noOfViews,
+                            p.noOfSold     AS noOfSold,
+                            p.categoryId   AS categoryId,
+                            p.primaryImage AS primaryImage,
+                            opt.id         AS optionId,
+                            opt.price      AS price,
+                            opt.stock      AS stock,
+                            img.url        AS imageUrl
+                       \s
+                        FROM products AS p
+                            INNER JOIN options AS opt ON p.id = opt.productId
+                            INNER JOIN image AS img ON img.id = p.primaryImage
+                            INNER JOIN categories AS cate ON p.categoryId = cate.id
+                            INNER JOIN option_variant_value AS ovv ON opt.id = ovv.optionId
+                       \s
+                        WHERE\s
+                            ovv.variantValueId IN (<optionsId>)
+                            AND cate.id = :categoryId
+                            AND opt.price >= COALESCE(:minPrice, 0)
+                            AND opt.price <= COALESCE(:maxPrice, 999999999)
+                       \s""")
 
-    public List<Product> filterProduct(@Bind("categoryId") int categoryId, @BindList("optionsId") List<Integer> optionsId,
-                                       @Bind("minPrice") @Nullable Integer minPrice, @Bind("maxPrice") @Nullable Integer maxPrice);
+    public List<Product> filterProduct(
+            @Bind("categoryId") int categoryId,
+            @BindList(value = "optionsId") List<Integer> optionsId,
+            @Bind("minPrice") @Nullable Integer minPrice,
+            @Bind("maxPrice") @Nullable Integer maxPrice);
 
 
+    @SqlQuery("""
+            SELECT
+                    p.id           AS id,
+                    p.name         AS name,
+                    p.description  AS description,
+                    p.sku          AS sku,
+                    p.isActive     AS isActive,
+                    p.brandId      AS brandId,
+                    p.noOfViews    AS noOfViews,
+                    p.noOfSold     AS noOfSold,
+                    p.categoryId   AS categoryId,
+                    p.primaryImage AS primaryImage,
+                    opt.id         AS optionId,
+                    opt.price      AS price,
+                    opt.stock      AS stock,
+                    img.url        AS imageUrl
+                    FROM products AS p
+                    INNER JOIN options AS opt ON p.id = opt.productId
+                    INNER JOIN image AS img ON img.id = p.primaryImage
+                    INNER JOIN categories AS cate ON p.categoryId = cate.id
+                    
+                    WHERE 
+                    cate.id = :categoryId
+                    AND opt.price >= COALESCE(:minPrice, 0)
+                    AND opt.price <= COALESCE(:maxPrice, 999999999)
+    """)
 
+    public List<Product> filterProductByPrice(
+            @Bind("categoryId") int categoryId,
+            @Bind("minPrice") @Nullable Integer minPrice,
+            @Bind("maxPrice") @Nullable Integer maxPrice);
 
 
     @SqlQuery("SELECT p.id           as id, \n" +
@@ -378,15 +412,15 @@ public interface ProductDAO {
             WHERE id = :id
             """)
     boolean updateProduct(@Bind("id") Integer id,
-                        @Bind("name") String name,
-                        @Bind("description") String description,
-                        @Bind("sku") String sku,
-                        @Bind("categoryId") Integer categoryId,
-                        @Bind("brandId") Integer brandId,
-                        @Bind("primaryImage") Integer primaryImage,
-                        @Bind("height") Integer height,
-                        @Bind("length") Integer length,
-                        @Bind("width") Integer width,
-                        @Bind("weight") Integer weight);
+                          @Bind("name") String name,
+                          @Bind("description") String description,
+                          @Bind("sku") String sku,
+                          @Bind("categoryId") Integer categoryId,
+                          @Bind("brandId") Integer brandId,
+                          @Bind("primaryImage") Integer primaryImage,
+                          @Bind("height") Integer height,
+                          @Bind("length") Integer length,
+                          @Bind("width") Integer width,
+                          @Bind("weight") Integer weight);
 
 }

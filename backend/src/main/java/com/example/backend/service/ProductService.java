@@ -128,6 +128,11 @@ public class ProductService {
         return productDao.filterProduct(categoryId, optionsId, minPrice, maxPrice);
     }
 
+    public List<Product> filterProductsByPrice(Integer categoryId,
+                                        Integer minPrice, Integer maxPrice) {
+        return productDao.filterProductByPrice(categoryId, minPrice, maxPrice);
+    }
+
     public List<Product> suggestProducts( ) {
         return productDao.suggestProduct();
     }
