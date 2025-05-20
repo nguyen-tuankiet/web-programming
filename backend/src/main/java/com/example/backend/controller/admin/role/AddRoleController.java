@@ -52,10 +52,12 @@ public class AddRoleController extends HttpServlet {
             RolePermission rolePermission = new RolePermission(null, roleId, permissionId);
             rolePermissions.add(rolePermission);
         }
-
         rolePermissionService.addRolePermission(rolePermissions);
 
-        request.setAttribute("roles", roleService.getAllRoles());
+
+        JSONObject jsonResponse = new JSONObject();
+        jsonResponse.put("success", true);
+        response.getWriter().write(jsonResponse.toString());
 
     }
 
