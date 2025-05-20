@@ -9,7 +9,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ManageRoleController", urlPatterns = {"/admin/manage-role"})
+@WebServlet(name = "GetRoleController", urlPatterns = {"/admin/manage-role"})
 public class GetRoleController extends HttpServlet {
     RoleService roleService = new RoleService(DBConnection.getJdbi());
 
