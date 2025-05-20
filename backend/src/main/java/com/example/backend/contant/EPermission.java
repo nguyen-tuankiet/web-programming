@@ -1,0 +1,28 @@
+package com.example.backend.contant;
+
+public enum EPermission {
+    VIEW_DASHBOARD,
+
+    VIEW_PRODUCTS,
+    EDIT_PRODUCTS,
+    CREATE_PRODUCTS,
+    DELETE_PRODUCTS,
+
+    VIEW_ORDERS,
+    UPDATE_ORDERS_STATUS,
+
+    MANAGE_CONTENT,
+
+    MANAGE_INVENTORY,
+
+    MANAGE_DISCOUNT,
+
+    MANAGE_MEMBER,
+
+    MANAGE_BRAND,
+
+    MANAGE_CATEGORIES,
+
+    VIEW_CUSTOMERS,
+
+}
