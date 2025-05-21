@@ -312,6 +312,12 @@
                 </div>
             </li>
 
+            <li class="menu_item">
+                <div class="wrap_menu_item">
+                    <i class="fas fa-star"></i>
+                    <a href="${pageContext.request.contextPath}/admin/review">Xem Đánh giá </a>
+                </div>
+            </li>
 
             <!-- Danh mục -->
             <li class="menu_item">
