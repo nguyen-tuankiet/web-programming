@@ -1,4 +1,4 @@
-package com.example.backend.controller.admin;
+package com.example.backend.controller.admin.order;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Order;
@@ -7,7 +7,6 @@ import com.example.backend.service.OrderSerivce;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Or;
 
 import java.io.IOException;
 import java.util.List;

@@ -21,7 +21,6 @@ public class InviteService {
     public static void main(String[] args) {
         InviteService inviteService = new InviteService(DBConnection.getJdbi());
         Invite invite = new Invite(null, "hung@gmail.com", "QuocHung", 2, Status.PENDING, 1747807284L, 1747807284L );
-
         System.out.println(inviteService.create(invite));
     }
 }

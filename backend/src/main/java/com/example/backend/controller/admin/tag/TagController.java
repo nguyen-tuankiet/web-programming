@@ -1,4 +1,4 @@
-package com.example.backend.controller.admin;
+package com.example.backend.controller.admin.tag;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.Tag;
@@ -6,7 +6,6 @@ import com.example.backend.service.TagService;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
