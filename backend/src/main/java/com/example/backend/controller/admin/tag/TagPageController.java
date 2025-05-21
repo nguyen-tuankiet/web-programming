@@ -1,7 +1,6 @@
-package com.example.backend.controller.admin;
+package com.example.backend.controller.admin.tag;
 
 import com.example.backend.Connection.DBConnection;
-import com.example.backend.model.Tag;
 import com.example.backend.model.TagWithCount;
 import com.example.backend.service.TagService;
 import jakarta.servlet.ServletException;

@@ -1,8 +1,7 @@
-package com.example.backend.controller.admin;
+package com.example.backend.controller.admin.product;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.DeleteProductService;
-import com.example.backend.service.ProductService;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;

@@ -1,4 +1,4 @@
-package com.example.backend.controller.admin;
+package com.example.backend.controller.admin.brand;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.BrandService;
