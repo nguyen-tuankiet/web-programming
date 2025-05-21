@@ -178,8 +178,9 @@ document.querySelector("form").addEventListener("submit", function(event) {
 
     console.log(formData);
 
-
-    fetch("/add-address", {
+    const form = document.getElementById("addAddressForm");
+    const formAction = form.getAttribute("action");
+    fetch(formAction, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
