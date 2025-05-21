@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet("/register")
-public class RegisterController extends HttpServlet {
+public class  RegisterController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
     private final EmailService emailService = new EmailService();  // Khởi tạo EmailService
