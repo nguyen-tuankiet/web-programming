@@ -81,24 +81,21 @@
         <h3>Thêm vai trò mới</h3>
         <form id="roleForm">
           <div class="form_group">
-            <label>Tên vai trò</label>
-            <input type="text" placeholder="Ví dụ: Kiểm thử Beta">
+            <label>Tên</label>
+            <input type="text" name="name" placeholder="Ví dụ: Kiểm thử Beta">
           </div>
           <div class="form_group">
             <label>Mô tả</label>
-            <textarea placeholder="Mô tả ngắn gọn về vai trò này..."></textarea>
+            <textarea name="description" placeholder="Mô tả ngắn gọn về vai trò này..."></textarea>
           </div>
           <div class="form_group">
-            <label>Phân quyền</label>
+             <c:if test="${not empty permissions}">
             <div>
-              <label><input type="checkbox"> Đọc <small>Có thể xem nội dung</small></label><br>
-              <label><input type="checkbox"> Ghi <small>Có thể tạo và chỉnh sửa nội dung</small></label><br>
-              <label><input type="checkbox"> Xoá <small>Có thể xoá nội dung</small></label><br>
-              <label><input type="checkbox"> Mời <small>Có thể mời thêm thành viên</small></label><br>
-              <label><input type="checkbox"> Quản trị <small>Toàn quyền hệ thống</small></label><br>
-              <label><input type="checkbox"> Sản phẩm <small>Truy cập sản phẩm và tính năng</small></label><br>
-              <label><input type="checkbox"> Góp ý <small>Gửi phản hồi và đề xuất</small></label>
+              <c:forEach  items="${permissions}" var="per">
+                <label><input type="checkbox" class="permission" data-id="${per.id}"> ${per.name} </label><br>
+              </c:forEach>
             </div>
+            </c:if>
           </div>
           <div class="form_action">
             <button type="button" class="btn_cancel" id="cancelAddRole">Huỷ</button>

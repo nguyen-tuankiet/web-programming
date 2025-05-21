@@ -123,7 +123,7 @@ async function uploadImages(files) {
     const pathParts = window.location.pathname.split('/');
     const contextPath = pathParts[1] ? '/' + pathParts[1] : '';
     const apiUrl = contextPath + '/api/uploadImage';
-    const response = await fetch(apiUrl, {
+    const response = await fetch('/api/uploadImage', {
         method: 'POST',
         body: formData
     });
