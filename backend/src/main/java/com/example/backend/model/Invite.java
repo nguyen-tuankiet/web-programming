@@ -1,29 +1,31 @@
 package com.example.backend.model;
 
+import com.example.backend.contant.Status;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
 
 public class Invite {
+    Integer id;
     String email;
     String name;
     int roleId;
-    String token;
-    String status;
+    Status status;
     Long expiresAt;
     Long createdAt;
 
+    @JdbiConstructor
     public Invite(
+            @ColumnName("id") Integer id,
             @ColumnName("email") String email    ,
             @ColumnName("name") String name,
             @ColumnName("roleId") int roleId,
-            @ColumnName("token") String token,
-            @ColumnName("status") String status,
+            @ColumnName("status") Status status,
             @ColumnName("expiresAt") Long expiresAt,
             @ColumnName("createdAt") Long createdAt
     ) {
         this.email = email;
         this.name = name;
         this.roleId = roleId;
-        this.token = token;
         this.status = status;
         this.expiresAt = expiresAt;
         this.createdAt = createdAt;
@@ -54,19 +56,11 @@ public class Invite {
         this.roleId = roleId;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

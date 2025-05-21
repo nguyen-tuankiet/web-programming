@@ -1,8 +1,6 @@
-package com.example.backend.controller.admin;
+package com.example.backend.controller.admin.product;
 
 import com.example.backend.Connection.DBConnection;
-import com.example.backend.model.Options;
-import com.example.backend.model.Product;
 import com.example.backend.model.ProductDTO;
 import com.example.backend.service.ImageService;
 import com.example.backend.service.OptionService;
