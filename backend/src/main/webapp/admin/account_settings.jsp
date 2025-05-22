@@ -27,7 +27,6 @@
     </div>
 
     <div class="right">
-
         <div class="header">
             <jsp:include page="Header.jsp"/>
         </div>
@@ -56,10 +55,10 @@
                             <input type="tel" id="phone" value="+84 912345678"/>
                         </label>
 
-                        <label for="avatar">
+                        <label for="avatar-setting">
                             <span>Ảnh đại diện</span>
-                            <div class="avatar">
-                                <img id="avatar"
+                            <div class="avatar-setting">
+                                <img id="avatar-setting"
                                      src="https://htmlstream.com/front-dashboard/assets/img/160x160/img6.jpg"
                                      alt="Avatar" class="avatar-image">
                                 <input type="file" id="file_avatar" accept="image/*" style="display: none;">
@@ -144,9 +143,9 @@
 
                 <!-- Password Section -->
                 <div class="content password" id="Password">
-                    <div id="header" class="mid_align">
-                        <span>Đổi mật khẩu</span>
-                    </div>
+<%--                    <div id="header" class="mid_align">--%>
+<%--                        <span>Đổi mật khẩu</span>--%>
+<%--                    </div>--%>
 
                     <div id="body" class="mid_align col">
                         <form class="form" action="">

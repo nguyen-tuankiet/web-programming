@@ -138,7 +138,7 @@ body {
 }
 
 /* Avatar styling */
-.avatar {
+.avatar-setting {
     position: relative;
     display: inline-block;
     margin-bottom: 10px;
@@ -606,13 +606,25 @@ body {
     }
 }
 
-.center{
+.center {
     margin-left: 368px;
-    margin-top: 84px;
+    margin-top: 70px; /* Đảm bảo lớn hơn hoặc bằng height của .header */
 }
 
-#avatar{
+#avatar-setting{
     margin-left: 385px;
     justify-content: center;
     width: 100px;
+}
+.header {
+    width: 100%;
+    height: 60px; /* hoặc chiều cao phù hợp với header của bạn */
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
 }
