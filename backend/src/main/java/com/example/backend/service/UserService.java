@@ -25,6 +25,10 @@ public class UserService {
         return userDao.getAllUsers();
     }
 
+    public List<User> getUsersByKeyword(String keyword) {
+        return userDao.getUsersByKeyword(keyword);
+    }
+
     public String getAvatarUrlById(Integer avatarId) {
         return userDao.getAvatarUrlById(avatarId);
     }

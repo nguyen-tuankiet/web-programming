@@ -33,38 +33,21 @@ public class CustomerListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String keyword = request.getParameter("name");
+        String keyword = request.getParameter("name"); // hoặc request.getParameter("keyword");
+        List<User> users = userService.getUsersByKeyword(keyword);
 
-        List<User> allUsers = userService.getAllUsers();
-        List<User> matched = new java.util.ArrayList<>();
-        List<User> others = new java.util.ArrayList<>();
-
-        for (User user : allUsers) {
-            if (user.getFullName() != null && keyword != null && !keyword.isBlank()
-                    && user.getFullName().toLowerCase().contains(keyword.toLowerCase())) {
-                matched.add(user);
-            } else {
-                others.add(user);
-            }
-        }
-
-        matched.addAll(others);
         Map<Integer, String> userAddresses = new HashMap<>();
-
-        for (User c : matched) {
+        for (User c : users) {
             Address address = addressDAO.getAddressByUserId(c.getId()).stream().findFirst().orElse(null);
             userAddresses.put(c.getId(), address != null ? address.getProvince() : "N/A");
-
             if (c.getAvatarId() != null) {
                 String avatarUrl = userService.getAvatarUrlById(c.getAvatarId());
-                c.setAvatarUrl(avatarUrl); // Set avatar URL to User object
+                c.setAvatarUrl(avatarUrl);
             }
         }
 
         request.setAttribute("userAddresses", userAddresses);
-        request.setAttribute("customers", matched);
-
-
+        request.setAttribute("customers", users);
         request.getRequestDispatcher("customers.jsp").forward(request, response);
     }
 
