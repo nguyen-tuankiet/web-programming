@@ -39,10 +39,10 @@ public class CategoryController extends HttpServlet {
                 if (pathParts.length == 2) {
                     Integer id = Integer.parseInt(pathParts[1]);
                     Category category = categoryService.getCategoryById(id);
-                    if (category != null) {
-                        ResponseWrapper<Category> responseWrapper = new ResponseWrapper<>(
-                                200, "success", "Fetched category successfully", category);
-                        writeResponse(response, responseWrapper);
+                    if (category != null ) {
+                            ResponseWrapper<Category> responseWrapper = new ResponseWrapper<>(
+                                    200, "success", "Fetched category successfully", category);
+                            writeResponse(response, responseWrapper);
                     } else {
                         ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
                                 404, "error", "Category not found", null);
