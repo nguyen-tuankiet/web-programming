@@ -38,10 +38,10 @@
                     <input type="text" id="category-name" name="categoryName" placeholder="Nhập tên nhà sản xuất"
                            class="input-field brand-input-field " required/>
                     <div id="error-message" class="error hidden">Tên nhà sản xuất không được để trống</div>
-                    <select id="brand-status" class="input-field">
-                        <option value="true">Hoạt động</option>
-                        <option value="false">Không hoạt động</option>
-                    </select>
+<%--                    <select id="brand-status" class="input-field">--%>
+<%--                        <option value="true">Hoạt động</option>--%>
+<%--                        <option value="false">Không hoạt động</option>--%>
+<%--                    </select>--%>
                     <div class="action-buttons">
                         <button class="add-btn add-brand-btn" id="add-category-btn">Thêm</button>
                         <button class="discard-btn" id="discard-category-btn">Hủy</button>
@@ -128,8 +128,7 @@
 
             <div class="pagination">
                 <button class="prev-btn">Trước</button>
-                <button class="page-number active">1</button>
-                <button class="page-number">2</button>
+                <span class="page-numbers"></span>
                 <button class="next-btn">Tiếp Theo</button>
             </div>
         </div>
