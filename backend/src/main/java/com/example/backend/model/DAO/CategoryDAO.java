@@ -21,9 +21,9 @@ public interface CategoryDAO {
     @SqlQuery("SELECT * FROM categories WHERE id = :id")
     Category getCategoryById(@Bind("id") Integer id);
 
-    @SqlUpdate("INSERT INTO categories (name, isActive) VALUES (:name, :isActive)")
+    @SqlUpdate("INSERT INTO categories (name, isActive) VALUES (:name, COALESCE(:isActive, 1))")
     @GetGeneratedKeys("id")
-    int createCategory(@Bind("name") String name, @Bind("isActive") boolean isActive);
+    int createCategory(@Bind("name") String name, @Bind("isActive") Boolean isActive);
 
 
     @SqlUpdate("UPDATE categories SET name = :name WHERE id = :id")
