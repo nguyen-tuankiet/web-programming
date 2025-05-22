@@ -13,7 +13,7 @@ import java.util.List;
 
 @RegisterConstructorMapper(Brand.class)
 public interface BrandDAO {
-    @SqlQuery("SELECT * FROM brand")
+    @SqlQuery("SELECT * FROM brand WHERE isActive = 1")
     List<Brand> getAllBrand();
 
     @SqlQuery("SELECT * FROM brand WHERE id = :id")

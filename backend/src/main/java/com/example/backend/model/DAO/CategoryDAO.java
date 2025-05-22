@@ -15,7 +15,7 @@ public interface CategoryDAO {
 
 
 
-    @SqlQuery("SELECT * FROM categories")
+    @SqlQuery("SELECT * FROM categories WHERE isActive = 1")
     List<Category> getAllCategories();
 
     @SqlQuery("SELECT * FROM categories WHERE id = :id")
@@ -52,6 +52,7 @@ public interface CategoryDAO {
            COUNT(p.id) AS totalStock
     FROM categories c
     LEFT JOIN products p ON p.categoryId = c.id
+    WHERE c.isActive = 1
     GROUP BY c.id, c.name, c.isActive
 """)
 @RegisterConstructorMapper(CategoryWithStock.class)
