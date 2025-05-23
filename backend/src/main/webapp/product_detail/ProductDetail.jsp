@@ -125,6 +125,10 @@
                 </a>
             </div>
 
+            <div id="cart-notification" class="notification hidden">
+                <i class="fa fa-check-circle"></i>
+                <span>Thêm vào giỏ hàng thành công</span>
+            </div>
 
         </div>
     </div>
@@ -188,10 +192,10 @@
             "Làm lạnh nhanh" cho đồ uống.
         </p>
         <ul>
-            <li>*Chế độ “Làm mát”: Thanh kéo ở “Min”, nhiệt độ 3°C.</li>
-            <li>*Chế độ “Thịt & Cá”: Thanh kéo ở “Max”, nhiệt độ 3°C.</li>
-            <li>*Chế độ “Đông mềm”: Thanh kéo ở “Max”, nhiệt độ 1°C.</li>
-            <li>*Chế độ “Làm lạnh nhanh”: Thanh kéo ở “Max”, nhấn “Power Cool”.</li>
+            <li>*Chế độ "Làm mát": Thanh kéo ở "Min", nhiệt độ 3°C.</li>
+            <li>*Chế độ "Thịt & Cá": Thanh kéo ở "Max", nhiệt độ 3°C.</li>
+            <li>*Chế độ "Đông mềm": Thanh kéo ở "Max", nhiệt độ 1°C.</li>
+            <li>*Chế độ "Làm lạnh nhanh": Thanh kéo ở "Max", nhấn "Power Cool".</li>
         </ul>
     </div>
     <div class="feature-benefit__video">
