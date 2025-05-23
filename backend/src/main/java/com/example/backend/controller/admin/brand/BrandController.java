@@ -78,9 +78,7 @@ public class BrandController extends HttpServlet {
                 throw new IllegalArgumentException("Tên nhà sản xuất không được để trống");
             }
 
-            boolean isActive = jsonData.get("isActive") != null && (Boolean) jsonData.get("isActive");
-
-            Brand newBrand = brandService.createBrand(name, isActive);
+            Brand newBrand = brandService.createBrand(name, true);
 
             ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
                     201, "success", "Brand created successfully", newBrand);
