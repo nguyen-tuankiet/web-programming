@@ -76,13 +76,13 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-
+                alert("Invitation sent!");
+                inviteModal.classList.add("hidden");
             })
 
 
 
-        alert("Invitation sent!");
-        inviteModal.classList.add("hidden");
+
     });
 });
 
