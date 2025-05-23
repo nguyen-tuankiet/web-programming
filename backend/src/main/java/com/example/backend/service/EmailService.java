@@ -1,8 +1,10 @@
 package com.example.backend.service;
+
 import org.jdbi.v3.core.Jdbi;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+
 import java.util.Properties;
 import java.io.IOException;
 import java.io.InputStream;
@@ -146,8 +148,55 @@ public class EmailService {
         }
     }
 
-//    public static void main(String[] args) {
-//        EmailService emailService = new EmailService();
+
+    public  void sendInviteEmail(String toEmail,String name, String roleName, String url) {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", SMTP_HOST);
+        props.put("mail.smtp.port", SMTP_PORT);
+
+        Session session = Session.getInstance(props, new jakarta.mail.Authenticator() {
+            @Override
+            protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new jakarta.mail.PasswordAuthentication(USERNAME, PASSWORD);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(USERNAME));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            message.setSubject("Thư mời tham gia cộng tác từ đội ngũ cửa hàng");
+
+
+            String content = "Xin chào " +name + ",\n\n" +
+                    "Bạn vừa được mời gia nhập đội ngũ quản lý trên nền tảng của chúng tôi.\n\n" +
+
+                    "Thông tin lời mời:\n" +
+                    "- Email: " + toEmail + "\n" +
+                    "- Vị trí: " + roleName + "\n\n" +
+                    "Vui lòng nhấn vào liên kết dưới đây để chấp nhận lời mời và bắt đầu quản lý shop:\n" +
+                    url + "\n\n" +
+                    "Lưu ý: Lời mời sẽ hết hạn sau 24 giờ.\n\n" +
+                    "Trân trọng,\n" +
+                    "Đội ngũ hỗ trợ";
+
+
+            message.setText(content);
+
+            Transport.send(message);
+            System.out.println("Email xác nhận đã được gửi đến " + toEmail);
+        } catch (MessagingException e) {
+            System.err.println("Lỗi khi gửi email: " + e.getMessage());
+            throw new RuntimeException("Không thể gửi email xác nhận", e);
+        }
+    }
+
+
+        public static void main(String[] args) {
+        EmailService emailService = new EmailService();
 //        emailService.sendEmailWithOTP("22130136@st.hcmuaf.edu.vn", "12345");
-//    }
+         emailService.sendInviteEmail("tranquochung0404@gmail.com", "Quốc Hưng","Admin", "https://www.google.com");
+    }
 }
