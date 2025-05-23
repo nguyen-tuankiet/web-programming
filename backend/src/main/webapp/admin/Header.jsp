@@ -23,7 +23,7 @@
             right: 0;
             top: 0;
             position: fixed;
-            z-index: 1000;
+            z-index: 998;
              left: 270px;
             box-shadow: 0 -10px 0 -5px rgba(0, 0, 0, 0.2), 0 3px 6px -2px rgba(0, 0, 0, 0.1);
         }

@@ -121,7 +121,7 @@
                         <input type="text" id="name" name="name" required><br>
 
                         <label for="card-number">Số thẻ:</label>
-                        <input type="number" id="card-number" name="cardNumber" required><br>
+                        <input type="text" id="card-number" name="cardNumber" required><br>
 
                         <label for="expiry">Ngày hết hạn:</label>
                         <input type="text" id="expiry" name="expiry" placeholder="MM/YYYY" required><br>

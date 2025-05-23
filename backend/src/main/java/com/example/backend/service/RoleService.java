@@ -34,6 +34,6 @@ public class RoleService {
 
         Role  role = new Role(null, ERole.CUSTOM, "test2 ", "", true);
 
-        System.out.println(roleService.addRole(role));
+        System.out.println(roleService.getAllRoles());
     }
 }

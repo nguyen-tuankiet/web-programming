@@ -104,6 +104,10 @@ public class CheckoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+
+
         StringBuilder stringBuilder = new StringBuilder();
         String line;
         BufferedReader reader = request.getReader();
@@ -120,7 +124,6 @@ public class CheckoutController extends HttpServlet {
         JSONArray products = jsonObject.getJSONArray("products");
 
         // User
-        HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
         User user = userService.getUserById(userId);
         if (user == null) throw new RuntimeException("User not found");
@@ -188,6 +191,7 @@ public class CheckoutController extends HttpServlet {
 
                 flag= orderDetailService.addOrderDetail(od);
                 if (flag){
+                    cart.delete(productId);
                     productService.increaseNoOfSold(productId, quantity);
                 }
 

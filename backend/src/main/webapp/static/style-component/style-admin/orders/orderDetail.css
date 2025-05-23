@@ -61,16 +61,17 @@ body > div > div.order-summary-container > div.order-info > table > thead > tr{
 }
 .order-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-bottom: 20px;
 }
 
 .order-progress {
     display: flex;
-    top: 10px;
     width: 100%;
-    max-width: 800px;
+    justify-content: center;
+    padding: 30px 100px;
+
 }
 
 .step {

@@ -1,20 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const gearIcons = document.querySelectorAll(".more_action i.fa-gear");
-    gearIcons.forEach(function(icon) {
-        icon.addEventListener("click", function(event) {
-            event.stopPropagation();
-            toggleMoreActionMenu(this);
-        });
-    });
-
-    // Đóng tất cả popup khi click ngoài
-    document.addEventListener("click", function() {
-        const menus = document.querySelectorAll(".more_action_menu");
-        menus.forEach(function(menu) {
-            menu.classList.add("hidden");
-        });
-    });
-});
 
 function toggleMoreActionMenu(icon) {
     // Tìm đối tượng menu trong cùng thẻ cha
@@ -32,6 +15,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.querySelector(".close_btn");
     const cancelInvite = document.getElementById("cancelInvite");
     const inviteForm = document.getElementById("inviteForm");
+    const gearIcons = document.querySelectorAll(".more_action i.fa-gear");
+    const menus = document.querySelectorAll(".more_action_menu");
+
+
+
+    menus.forEach(function(menu) {
+        menu.classList.add("hidden");
+    });
+
+    gearIcons.forEach(function(icon) {
+        icon.addEventListener("click", function(event) {
+            event.stopPropagation();
+            toggleMoreActionMenu(this);
+        });
+    });
 
     inviteBtn.addEventListener("click", function () {
         inviteModal.classList.remove("hidden");
@@ -46,10 +44,45 @@ document.addEventListener("DOMContentLoaded", function () {
         inviteModal.classList.add("hidden");
     });
 
+
+
+
+
     inviteForm.addEventListener("submit", function (e) {
         e.preventDefault();
-        alert("Invitation sent!");
-        inviteModal.classList.add("hidden");
+
+        const email = document.getElementById("inviteEmail").value.trim();
+        const name = document.getElementById("inviteName").value.trim();
+        const roleSelect = document.getElementById("inviteRole");
+        const roleId = roleSelect.value;
+        const roleName = roleSelect.options[roleSelect.selectedIndex].text;
+        payload= {
+            email: email,
+            name: name,
+            roleId: roleId,
+            roleName: roleName,
+        }
+
+        console.log(payload)
+
+        fetch("member/invite", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify(payload),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                alert("Invitation sent!");
+                inviteModal.classList.add("hidden");
+            })
+
+
+
+
     });
 });
 

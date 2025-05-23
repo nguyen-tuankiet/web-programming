@@ -76,8 +76,7 @@ public interface UserDao {
             "    displayName = :displayName,\n" +
             "    birth = :birth, " +
             "    gender = :gender,\n" +
-            "    phone = :phone," +
-            "    email = :email " +
+            "    phone = :phone, " +
             "where id = :userId")
     Boolean updateUser(
             @Bind("userId") Integer userId,
@@ -85,7 +84,6 @@ public interface UserDao {
             @Bind("displayName") String displayName,
             @Bind("birth") LocalDate birth,
             @Bind("gender") String gender,
-            @Bind("phone") String phone,
-            @Bind("email") String email
+            @Bind("phone") String phone
     );
 }
