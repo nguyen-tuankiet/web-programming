@@ -14,7 +14,6 @@
   <title>Team Members</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script src="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.js"></script>
   <script>
     const contextPath = "${pageContext.request.contextPath}";
   </script>
@@ -136,15 +135,19 @@
                    required>
           </div>
           <div class="form_group">
-            <label for="inviteName">Tên (tùy chọn)</label>
-            <input type="text" id="inviteName" name="name" placeholder="Tên">
+            <label for="inviteName">Tên</label>
+            <input type="text" id="inviteName" name="name" placeholder="Tên" required>
           </div>
           <div class="form_group">
             <label for="inviteRole">Vai trò</label>
             <select id="inviteRole" name="role">
-              <option value="Admin">Quản Trị Viên</option>
-              <option value="Staff">Nhân Viên</option>
-              <option value="Guest">Người dùng</option>
+
+              <c:if test="${not empty (roles)}">
+                <c:forEach items="${roles}" var="role">
+                  <option value="${role.id}">${role.name}</option>
+                </c:forEach>
+              </c:if>
+
             </select>
           </div>
           <div class="form_action">
