@@ -82,6 +82,6 @@ public class OrderSerivce {
 //        System.out.println(orderId);
 //        System.out.println(orderSerivce.getOrderByIdAndUserId( 24,42));
 //        System.out.println(orderSerivce.getOrdersByUserId(42));
-        System.out.println(orderSerivce.getAllOrders());
+        System.out.println(orderSerivce.getOrdersByUserId(23 ));
     }
 }
