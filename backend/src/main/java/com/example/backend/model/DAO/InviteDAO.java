@@ -2,8 +2,10 @@ package com.example.backend.model.DAO;
 
 import com.example.backend.model.Invite;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
- import org.jdbi.v3.sqlobject.customizer.BindBean;
- import org.jdbi.v3.sqlobject.statement.SqlUpdate;
+import org.jdbi.v3.sqlobject.customizer.Bind;
+import org.jdbi.v3.sqlobject.customizer.BindBean;
+import org.jdbi.v3.sqlobject.statement.SqlQuery;
+import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 @RegisterConstructorMapper(Invite.class)
 public interface InviteDAO {
@@ -14,4 +16,12 @@ public interface InviteDAO {
             """)
     Integer addInvite(@BindBean Invite invite);
 
+
+
+    @SqlQuery("""
+            SELECT *
+            from invite
+            where id = :id and email = :email
+            """)
+    public Invite getInviteByIdAndEmail(@Bind("id") Integer id, @Bind("email") String email);
 }
