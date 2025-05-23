@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     // Get the avatar container
-    const avatarContainer = document.querySelector('.avatar');
+    const avatarContainer = document.querySelector('.avatar-setting');
     const avatarImage = document.querySelector('.avatar-image');
     const fileInput = document.getElementById('file_avatar');
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Style the upload icon
         uploadIcon.style.position = 'absolute';
         uploadIcon.style.top = '50%';
-        uploadIcon.style.left = '50%';
+        uploadIcon.style.right = '2%';
         uploadIcon.style.transform = 'translate(-50%, -50%)';
         uploadIcon.style.backgroundColor = 'rgba(0, 0, 0, 0.3)'; // Lighter background
         uploadIcon.style.color = 'rgba(255, 255, 255, 0.9)'; // Slightly lighter icon

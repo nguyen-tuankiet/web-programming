@@ -37,14 +37,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==== Phân trang ====
-    const pageButtons = document.querySelectorAll(".page-number");
     const prevButton = document.querySelector(".prev-btn");
     const nextButton = document.querySelector(".next-btn");
+    const pageNumbersContainer = document.querySelector(".page-numbers");
     const tableBody = document.getElementById("product-table-body");
     const rowsPerPage = 10;
     const rows = Array.from(tableBody.rows);
-    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    let totalPages = Math.ceil(rows.length / rowsPerPage);
     let currentPage = 1;
+
+    function renderPageNumbers() {
+        pageNumbersContainer.innerHTML = "";
+        totalPages = Math.ceil(rows.length / rowsPerPage);
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement("button");
+            btn.className = "page-number" + (i === currentPage ? " active" : "");
+            btn.textContent = i;
+            btn.addEventListener("click", () => {
+                currentPage = i;
+                renderTable(currentPage);
+            });
+            pageNumbersContainer.appendChild(btn);
+        }
+    }
 
     function renderTable(page) {
         const start = (page - 1) * rowsPerPage;
@@ -54,20 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
             row.style.display = index >= start && index < end ? "table-row" : "none";
         });
 
-        pageButtons.forEach((btn, index) => {
-            btn.classList.toggle("active", index + 1 === page);
-        });
+        renderPageNumbers();
 
         prevButton.disabled = page === 1;
         nextButton.disabled = page === totalPages;
     }
-
-    pageButtons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-            currentPage = index + 1;
-            renderTable(currentPage);
-        });
-    });
 
     prevButton.addEventListener("click", () => {
         if (currentPage > 1) {
@@ -103,11 +109,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==== Thêm nhà sản xuất (gồm trạng thái) ====
     const addBtn = document.getElementById("add-category-btn");
     const nameInput = document.getElementById("category-name");
-    const statusSelect = document.getElementById("brand-status");
 
     addBtn.addEventListener("click", async () => {
         const name = nameInput.value.trim();
-        const isActive = statusSelect.value === "true";
 
         if (!name) {
             alert("Vui lòng nhập tên nhà sản xuất!");
@@ -118,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch(`${contextPath}/admin/api/brand`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, isActive })
+                body: JSON.stringify({ name })
             });
 
             const result = await response.json();

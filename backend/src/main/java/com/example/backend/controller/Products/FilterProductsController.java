@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "filterProduct", value = "/product/filter")
 
@@ -36,7 +37,12 @@ public class FilterProductsController extends HttpServlet {
             Map<String , Object> jsonMap = mapper.readValue(request.getReader(), Map.class);
 
             int categoryId = Integer.parseInt(jsonMap.get("categoryId").toString());
-            List<Integer> options = (List<Integer>) jsonMap.get("optionsId");
+
+            List<Integer> options = ((List<?>) jsonMap.getOrDefault("optionsId", new ArrayList<>()))
+                    .stream()
+                    .map(obj -> Integer.parseInt(obj.toString()))
+                    .collect(Collectors.toList());
+
             Integer maxPrice = (Integer) jsonMap.get("maxPrice");
             Integer minPrice = (Integer) jsonMap.get("minPrice");
 
@@ -45,10 +51,15 @@ public class FilterProductsController extends HttpServlet {
             log.info("maxPrice: " + maxPrice);
             log.info("minPrice: " + minPrice);
 
+            List<Product> products = new ArrayList<>();
+            if (options.isEmpty()) {
+                products  = productService.filterProductsByPrice(categoryId,  minPrice, maxPrice);
 
-            List<Product> products = productService.filterProducts(categoryId, options,  minPrice, maxPrice);
+            }
+            else {
+                products = productService.filterProducts(categoryId, options,  minPrice, maxPrice);
 
-
+            }
             log.info("Products List: " + products);
 
 

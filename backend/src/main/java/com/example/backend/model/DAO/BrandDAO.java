@@ -1,4 +1,4 @@
-package com.example.backend.model.DAO;
+    package com.example.backend.model.DAO;
 
 
 import com.example.backend.model.Brand;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RegisterConstructorMapper(Brand.class)
 public interface BrandDAO {
-    @SqlQuery("SELECT * FROM brand")
+    @SqlQuery("SELECT * FROM brand WHERE isActive = 1")
     List<Brand> getAllBrand();
 
     @SqlQuery("SELECT * FROM brand WHERE id = :id")
@@ -31,9 +31,9 @@ public interface BrandDAO {
     void deleteBrand(@Bind("id") Integer id);
 
 
-    @SqlUpdate("INSERT INTO brand (name, isActive) VALUES (:name, :isActive)")
+    @SqlUpdate("INSERT INTO brand (name, isActive) VALUES (:name, COALESCE(:isActive, 1))")
     @GetGeneratedKeys("id")
-    int createBrand(@Bind("name") String name, @Bind("isActive") boolean isActive);
+    int createBrand(@Bind("name") String name, @Bind("isActive") Boolean isActive);
 
 
     @SqlUpdate("UPDATE brand SET isActive = :isActive WHERE id = :id")
