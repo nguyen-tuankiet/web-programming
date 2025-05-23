@@ -3,6 +3,7 @@ package com.example.backend.controller.admin.member;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.contant.Status;
 import com.example.backend.model.Invite;
+import com.example.backend.service.EmailService;
 import com.example.backend.service.InviteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,10 +16,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.Duration;
 
-//@WebServlet(name = "InviteMemberController", value = "/admin/member/invite")
-@WebServlet(name = "InviteMemberController", value = "/member/invite")
+@WebServlet(name = "InviteMemberController", value = "/admin/member/invite")
 public class InviteMemberController  extends HttpServlet {
-
+    EmailService emailService = new EmailService();
     InviteService inviteService = new InviteService(DBConnection.getJdbi());
 
     @Override
@@ -37,6 +37,7 @@ public class InviteMemberController  extends HttpServlet {
         JSONObject jsonRequest= new JSONObject(stringBuilder.toString());
         String email = jsonRequest.getString("email");
         String name = jsonRequest.getString("name");
+        String roleName = jsonRequest.getString("roleName");
         int roleId = Integer.parseInt(jsonRequest.getString("roleId"));
 
         if (email == null || name == null || roleId == 0){
@@ -49,9 +50,12 @@ public class InviteMemberController  extends HttpServlet {
                 System.currentTimeMillis());
 
         Integer inviteId = inviteService.create(invite);
+
+        emailService.sendInviteEmail(email, name, roleName, "url.com");
+
+
         if (inviteId != null) {
             jsonResponse.put("success", true);
-
             ObjectMapper mapper = new ObjectMapper();
             String inviteJson = mapper.writeValueAsString(invite);
             jsonResponse.put("data", new JSONObject(inviteJson));
