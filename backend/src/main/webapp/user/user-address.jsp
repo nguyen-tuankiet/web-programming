@@ -46,7 +46,7 @@
                 <span class="close-icon">&times;</span>
 
                 <h2>Thêm Địa Chỉ</h2>
-                <form method="POST" action="add-address">
+                <form id="addAddressForm" action="${pageContext.request.contextPath}/add-address" method="post">
 
                     <label for="province" >Tỉnh/Thành phố:<span style="color: red;">*</span></label>
                     <select id="province" required></select>
