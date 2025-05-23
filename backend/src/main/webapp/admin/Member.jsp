@@ -48,10 +48,10 @@
           </div>
           <div class="role_list">
             <select id="menu">
-              <option value="home">Tất cả vai trò</option>
-              <option value="">Quản Trị Viên</option>
-              <option value="">Nhân Viên</option>
-              <option value="">Người Dùng</option>
+              <option value="home">Trạng thái</option>
+              <option value="">Đang hoạt động</option>
+              <option value="">Chờ xác nhận</option>
+              <option value="">....</option>
             </select>
           </div>
         </div>
