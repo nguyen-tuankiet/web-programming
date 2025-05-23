@@ -35,23 +35,34 @@ public interface OrderDAO {
 
 
 
-    @SqlQuery(value ="select\n" +
-            "    o.id , o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD,  o.shippingFee as  shippingFee, " +
-            "    sum(od.quantity) as quantity, (sum(od.total)+  o.shippingFee) as total,\n" +
-            "    min(p.name) as productName,\n" +
-            "    i.url as productImage\n" +
-            "from orders as o inner join order_detail as od\n" +
-            "        on o.id = od.orderId\n" +
-            "    inner join products as p\n" +
-            "        on p.id = od.productId\n" +
-            "    inner join image as i\n" +
-            "        on  i.id = p.primaryImage\n" +
-            "where o.userId = :userId\n" +
-            "group by\n" +
-            "    o.id, o.createAt, o.paymentStatus, o.orderStatus,\n" +
-            "    o.userId, o.addressId, o.cardId, o.isCOD, o.shippingFee " +
-            "order by o.createAt desc  ;"
+    @SqlQuery(value = """
+            SELECT
+                o.id,
+                o.createAt,
+                o.paymentStatus,
+                o.orderStatus,
+                o.userId,
+                o.addressId,
+                o.cardId,
+                o.isCOD,
+                o.shippingFee,
+                SUM(od.quantity) AS quantity,
+                (SUM(od.total) + o.shippingFee) AS total,
+                MIN(p.name) AS productName,
+                i.url AS productImage
+            FROM
+                orders o
+                    INNER JOIN order_detail od ON o.id = od.orderId
+                    INNER JOIN products p ON p.id = od.productId
+                    INNER JOIN image i ON i.id = p.primaryImage
+            WHERE
+                o.userId = :userId
+            GROUP BY
+                o.id, o.createAt, o.paymentStatus, o.orderStatus,
+                o.userId, o.addressId, o.cardId, o.isCOD, o.shippingFee, i.url
+            ORDER BY
+                o.createAt DESC;
+"""
 
     )
     List<Order> getOrdersByUserId(@Bind("userId") Integer userId);
