@@ -21,6 +21,12 @@ public class UserService {
         return user;
     }
 
+    public User getUserByEmail(String email) {
+            User user = userDao.getUserByEmail(email);
+            return user;
+        }
+
+
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
