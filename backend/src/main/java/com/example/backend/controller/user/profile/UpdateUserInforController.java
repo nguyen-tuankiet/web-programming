@@ -4,9 +4,11 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,8 +49,8 @@ public class UpdateUserInforController extends HttpServlet {
         user.setFullName(requestData.get("fullName").toString());
         user.setDisplayName(requestData.get("displayName").toString());
         user.setGender(requestData.get("gender").toString());
-        user.setBirth(LocalDate.parse(requestData.get("birth").toString()));
-        user.setEmail(requestData.get("email").toString());
+//        user.setBirth(LocalDate.parse(requestData.get("birth").toString()));
+//        user.setEmail(requestData.get("email").toString());
         user.setPhone(requestData.get("phone").toString());
 
         Boolean success = userService.updateUser(user);
@@ -56,18 +58,20 @@ public class UpdateUserInforController extends HttpServlet {
 
 
 
-        Map<String, Object> responseBody = new HashMap<>();
+        JSONObject jsonResponse = new JSONObject();
+
         if (success){
             response.setStatus(HttpServletResponse.SC_OK);
-            responseBody.put("status", "success");
-            responseBody.put("message", "User updated successfully!");
+            jsonResponse.put("success", true);
+            jsonResponse.put("message", "User updated successfully!");
         }
         else {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            responseBody.put("status", "failed");
-            responseBody.put("message", "Update user failed!");
+            jsonResponse.put("success", false);
+            jsonResponse.put("message", "Update user failed!");
         }
 
-        objectMapper.writeValue(response.getWriter(), responseBody);
+        response.setContentType("application/json");
+        response.getWriter().write(jsonResponse.toString());
     }
 }

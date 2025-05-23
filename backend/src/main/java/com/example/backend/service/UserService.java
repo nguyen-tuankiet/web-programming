@@ -42,8 +42,7 @@ public class UserService {
                 user.getDisplayName(),
                 user.getBirth(),
                 user.getGender(),
-                user.getPhone(),
-                user.getEmail()
+                user.getPhone()
         );
     }
 

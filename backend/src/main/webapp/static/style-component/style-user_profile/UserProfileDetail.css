@@ -94,7 +94,7 @@ body{
 
 .form_infor {
     width: 100%;
-    height: 30%;
+    height: auto;
 }
 
 .form_infor .avatar{
@@ -259,10 +259,22 @@ body{
     font-size: 20px;
 }
 
+.contact_item #phone, .contact_item #email{
+    width: 70%;
+    text-align: left;
+}
+
+#phone:focus {
+    background-color: white;  /* hoặc background-color: white; */
+    box-shadow: none;           /* nếu trình duyệt thêm bóng */
+}
+
 
 .contact_item .item_text{
     padding: 0px 10px;
     color:#4E4E52;
+    font-size: 16px;
+    border: none;
 }
 
 
