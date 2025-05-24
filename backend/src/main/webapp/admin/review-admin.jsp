@@ -78,10 +78,6 @@
                         </select>
                     </div>
 
-                    <div class="filter-group">
-                        <button class="btn btn-outline">Lọc ▼</button>
-                        <button class="btn btn-outline">Sắp xếp ▼</button>
-                    </div>
                 </div>
 
                 <div class="reviews-table">
@@ -129,7 +125,6 @@
                 </div>
 
                 <div class="pagination">
-                    <div class="page-info">Hiển thị 1-5 của 247 đánh giá</div>
                     <div class="page-buttons">
                         <button class="page-btn">«</button>
                         <button class="page-btn active">1</button>
