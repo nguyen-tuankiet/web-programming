@@ -113,12 +113,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Tự động tải slide đầu tiên và cập nhật trạng thái
-document.addEventListener("DOMContentLoaded", function () {
-    showSlide(0); // Hiển thị slide đầu tiên
-    updateDots(); // Cập nhật trạng thái chấm điều hướng
-});
-
-
-
-
