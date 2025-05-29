@@ -284,22 +284,20 @@ public interface ProductDAO {
             "       p.categoryId   as categoryId,\n" +
             "       p.primaryImage as primaryImage,\n" +
             "       img.url        as imageUrl,\n" +
-            "       sum(ops.stock) as stock\n" +
-            "\n" +
+            "       ops.id         as optionId,\n" +
+            "       ops.price      as price,\n" +
+            "       ops.stock      as stock\n" +
             "FROM products as p\n" +
-            "          INNER JOIN `options` as ops on ops.productId = p.id\n" +
+            "         INNER JOIN `options` as ops on ops.productId = p.id\n" +
             "         inner join image as img on p.primaryImage = img.id\n" +
-            "\n" +
             "where p.isActive = true\n" +
-            "group by p.id, p.name, p.description,\n" +
-            "         p.sku, p.isActive, p.brandId,\n" +
-            "         p.noOfViews, p.noOfSold, p.categoryId,\n" +
-            "         p.primaryImage, img.url\n" +
-            "\n" +
-            "order by p.noOfSold desc , p.noOfViews desc\n" +
-            "\n" +
-            "limit 10;\n")
-    List<Product> getTop10();
+            "  and ops.price = (SELECT MIN(price)\n" +
+            "                   FROM options as ops\n" +
+            "                   WHERE p.id = ops.productId\n" +
+            "                     and ops.stock > 0)\n" +
+            "order by p.noOfSold desc, p.noOfViews desc\n" +
+            "limit 12")
+    List<Product> getTopProducts();
 
 
     @SqlQuery(
