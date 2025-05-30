@@ -79,4 +79,17 @@ public class Invite {
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Invite{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", roleId=" + roleId +
+                ", status=" + status +
+                ", expiresAt=" + expiresAt +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

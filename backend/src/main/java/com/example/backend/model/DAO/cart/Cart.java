@@ -40,8 +40,8 @@ public class Cart {
 
 
 
-    public boolean delete(Product product) {
-        return data.containsKey(product.getId());
+    public void delete(Integer productId) {
+        data.remove(productId);
     }
 
 
