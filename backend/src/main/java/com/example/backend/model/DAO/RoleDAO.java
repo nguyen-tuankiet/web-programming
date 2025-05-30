@@ -13,7 +13,7 @@ public interface RoleDAO {
     @SqlQuery(value = """
             SELECT *
             from role
-            where isActive= 1
+            where isActive= 1 and id != 1
             """)
     List<Role> getRoles();
 

@@ -83,17 +83,17 @@
             <div class="gender_radio mid_align">
                 <label>
                     <input type="radio" name="gender" value="male"
-                           <c:if test="${user.gender == 'Male'}">checked</c:if>>
+                           <c:if test="${user.gender == 'male'}">checked</c:if>>
                     Nam
                 </label>
                 <label>
                     <input type="radio" name="gender" value="female"
-                           <c:if test="${user.gender == 'Female'}">checked</c:if>>
+                           <c:if test="${user.gender == 'female'}">checked</c:if>>
                     Nữ
                 </label>
                 <label>
                     <input type="radio" name="gender" value="other"
-                           <c:if test="${user.gender == 'Other'}">checked</c:if>>
+                           <c:if test="${user.gender == 'other'}">checked</c:if>>
                     Khác
                 </label>
             </div>
@@ -104,52 +104,97 @@
 
         </div>
 
-        <div class="personal_infor">
-            <div class="birth row">
-                <div class="birth_title">
-                    <span>Ngày sinh : </span>
-                </div>
+<%--        <div class="personal_infor">--%>
+<%--            <div class="birth row">--%>
+<%--                <div class="birth_title">--%>
+<%--                    <span>Ngày sinh : </span>--%>
+<%--                </div>--%>
 
 
 
-                <c:set var="birthDay" value="${user.birth.dayOfMonth}" />
-                <c:set var="birthMonth" value="${user.birth.monthValue}" />
-                <c:set var="birthYear" value="${user.birth.year}" />
+<%--                <c:set var="birthDay" value="${user.birth.dayOfMonth}" />--%>
+<%--                <c:set var="birthMonth" value="${user.birth.monthValue}" />--%>
+<%--                <c:set var="birthYear" value="${user.birth.year}" />--%>
 
 
 
-                <div class="birth_form mid_align">
-                    <div class="col">
-                        <select id="day">
-                            <option value="" disabled selected>Ngày</option>
-                            <c:forEach var="i" begin="1" end="31">
-                                <option value="${i}" <c:if test="${i == birthDay}">selected</c:if>>${i}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
+<%--                <div class="birth_form mid_align">--%>
+<%--                    <div class="col">--%>
+<%--                        <select id="day">--%>
+<%--                            <option value="" disabled selected>Ngày</option>--%>
+<%--                            <c:forEach var="i" begin="1" end="31">--%>
+<%--                                <option value="${i}" <c:if test="${i == birthDay}">selected</c:if>>${i}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
 
-                    <div class="col">
-                        <select id="month">
-                            <option value="" disabled selected>Tháng</option>
-                            <c:forEach var="i" begin="1" end="12">
-                                <option value="${i}" <c:if test="${i == birthMonth}">selected</c:if>>${i}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
+<%--                    <div class="col">--%>
+<%--                        <select id="month">--%>
+<%--                            <option value="" disabled selected>Tháng</option>--%>
+<%--                            <c:forEach var="i" begin="1" end="12">--%>
+<%--                                <option value="${i}" <c:if test="${i == birthMonth}">selected</c:if>>${i}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
 
-                    <div class="col">
-                        <select id="year">
-                            <option value="" disabled selected>Năm</option>
-                            <c:forEach var="i" begin="1900" end="2025">
-                                <option value="${i}" <c:if test="${i == birthYear}">selected</c:if>>${i}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
+<%--                    <div class="col">--%>
+<%--                        <select id="year">--%>
+<%--                            <option value="" disabled selected>Năm</option>--%>
+<%--                            <c:forEach var="i" begin="1900" end="2025">--%>
+<%--                                <option value="${i}" <c:if test="${i == birthYear}">selected</c:if>>${i}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-            </div>
+<%--            </div>--%>
 
-        </div>
+<%--        </div><div class="personal_infor">--%>
+<%--            <div class="birth row">--%>
+<%--                <div class="birth_title">--%>
+<%--                    <span>Ngày sinh : </span>--%>
+<%--                </div>--%>
+
+
+
+<%--                <c:set var="birthDay" value="${user.birth.dayOfMonth}" />--%>
+<%--                <c:set var="birthMonth" value="${user.birth.monthValue}" />--%>
+<%--                <c:set var="birthYear" value="${user.birth.year}" />--%>
+
+
+
+<%--                <div class="birth_form mid_align">--%>
+<%--                    <div class="col">--%>
+<%--                        <select id="day">--%>
+<%--                            <option value="" disabled selected>Ngày</option>--%>
+<%--                            <c:forEach var="i" begin="1" end="31">--%>
+<%--                                <option value="${i}" <c:if test="${i == birthDay}">selected</c:if>>${i}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+
+<%--                    <div class="col">--%>
+<%--                        <select id="month">--%>
+<%--                            <option value="" disabled selected>Tháng</option>--%>
+<%--                            <c:forEach var="i" begin="1" end="12">--%>
+<%--                                <option value="${i}" <c:if test="${i == birthMonth}">selected</c:if>>${i}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+
+<%--                    <div class="col">--%>
+<%--                        <select id="year">--%>
+<%--                            <option value="" disabled selected>Năm</option>--%>
+<%--                            <c:forEach var="i" begin="1900" end="2025">--%>
+<%--                                <option value="${i}" <c:if test="${i == birthYear}">selected</c:if>>${i}</option>--%>
+<%--                            </c:forEach>--%>
+<%--                        </select>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+
+<%--            </div>--%>
+
+<%--        </div>--%>
 
         <div class="mid_align bottom">
             <button id="save" class="save_btn">
@@ -170,22 +215,18 @@
                 <div class="contact_item row mid_align">
                     <i class="fa-solid fa-phone"></i>
 
-                        <span id="phone" class="item_text"  >
-                             <c:if test="${not empty user.phone}">
-                                ${user.phone}
-                             </c:if>
-                        </span>
+                     <input id="phone" class="item_text" placeholder="Vui lòng cập nhật số điện thoại." value="${user.phone}"/>
 
-                    <button type="button" class="update_btn" data-field="phone" >Cập nhật</button>
                 </div>
 
                 <div class="contact_item row mid_align">
                     <i class="fa-regular fa-envelope"></i>
+
                     <c:if test="${not empty user.email}">
-                        <span id="email" class="item_text">${user.email} </span>
+                        <span id="email" class="item_text"> ${user.email}</span>
                     </c:if>
 
-                    <button type="button" class="update_btn"  data-field="email" >Cập nhật</button>
+
                 </div>
 
 
