@@ -135,19 +135,11 @@ public class User {
         this.avatarId = avatarId;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getSalt() {
+    public String getSalt() { // Getter cho salt
         return salt;
     }
 
-    public void setSalt(String salt) {
+    public void setSalt(String salt) { // Setter cho salt
         this.salt = salt;
     }
     public String getAvatarUrl() {
@@ -181,6 +173,14 @@ public class User {
         this.facebookId = facebookId;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -193,7 +193,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", avatarId=" + avatarId +
-                ", role=" + role +
+                ", role='" + role + '\'' +
                 ", salt='" + salt + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", status='" + status + '\'' +

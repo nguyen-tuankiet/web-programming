@@ -100,14 +100,29 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                 console.log("User ID:", data.data.id);
                 console.log("Role:", data.data.role);
 
-                // Lưu vào sessionStorage
+                // Lưu vào sessionStorage - Handle role object
                 sessionStorage.setItem("sessionId", data.data.sessionId);
                 sessionStorage.setItem("userId", data.data.id);
-                sessionStorage.setItem("role", data.data.role);
 
-                if (data.data.role === "ADMIN") {
+                // Handle role as object - store roleType for comparison
+                let roleType = '';
+                if (data.data.role && typeof data.data.role === 'object') {
+                    roleType = data.data.role.roleType;
+                    sessionStorage.setItem("role", JSON.stringify(data.data.role)); // Store full role object
+                    sessionStorage.setItem("roleType", roleType); // Store roleType for easy access
+                } else if (typeof data.data.role === 'string') {
+                    // Fallback for backward compatibility
+                    roleType = data.data.role;
+                    sessionStorage.setItem("role", data.data.role);
+                    sessionStorage.setItem("roleType", roleType);
+                }
+
+                console.log("Role Type:", roleType);
+
+                // Route based on role type
+                if (roleType !== "USER") {
                     window.location.href = "admin/dashboard";
-                } else {
+                }  else {
                     window.location.href = "home";
                 }
             } else {
@@ -176,8 +191,6 @@ document.querySelector('form').addEventListener('submit', function(event) {
     }
 });
 
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.querySelector('.sign-in-container form');
     const rememberCheckbox = document.getElementById('remember-checkbox');
@@ -186,26 +199,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const signInButton = document.getElementById('signInButton');
 
     checkSavedCredentials();
-    // loginForm.addEventListener('submit', function(e) {
-    //     e.preventDefault();
-    //
-    //     const email = emailInput.value.trim();
-    //     const password = passwordInput.value;
-    //
-    //     if (rememberCheckbox.checked) {
-    //         saveCredentials(email, password);
-    //     } else {
-    //         clearSavedCredentials();
-    //     }
-    //     // login(email, password, recaptchaResponse);
-    //     const recaptchaResponse = grecaptcha.getResponse();
-    //     if (!recaptchaResponse) {
-    //         alert("Vui lòng xác nhận bạn không phải là robot.");
-    //         return;
-    //     }
-    //
-    //     login(email, password, recaptchaResponse);
-    // });
 
     function saveCredentials(email, password) {
         const encodedPassword = btoa(password);
@@ -250,4 +243,46 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Helper function to get role type from session storage
+    window.getUserRoleType = function() {
+        const roleType = sessionStorage.getItem('roleType');
+        if (roleType) {
+            return roleType;
+        }
+
+        // Fallback: try to parse role object
+        const roleObj = sessionStorage.getItem('role');
+        if (roleObj) {
+            try {
+                const parsed = JSON.parse(roleObj);
+                return parsed.roleType || roleObj; // Return roleType or the string itself
+            } catch (e) {
+                return roleObj; // Return as string if parsing fails
+            }
+        }
+
+        return null;
+    };
+
+    // Helper function to check if user has specific role
+    window.hasRole = function(requiredRole) {
+        const userRoleType = getUserRoleType();
+        return userRoleType === requiredRole;
+    };
+
+    // Helper function to check if user is admin (any admin role)
+    window.isAdmin = function() {
+        const userRoleType = getUserRoleType();
+        const adminRoles = [
+            'SUPPER_ADMIN',
+            'PRODUCT_MANAGER',
+            'ORDER_MANAGER',
+            'CUSTOMER_SUPPORT',
+            'CONTENT_EDITOR',
+            'INVENTORY_MANAGER',
+            'MARKET_SPECIALIST'
+        ];
+        return adminRoles.includes(userRoleType);
+    };
 });
