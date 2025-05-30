@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.confirmation-container {
+    width: 300px;
+    height: 400px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.confirmation-container h1 {
+    font-size: 26px;
+    color: rgb(51, 51, 51);
+    margin-bottom: 20%;
+    position: relative;
+    z-index: 1;
+}
+
+.confirmation-container p {
+    font-size: 14px;
+    color: #777777;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+    padding-top: 20%;
+}
+
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #4ce151;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: relative;
+    overflow: visible;
+    animation: circle-pulse 2s infinite ease-in-out;
+    z-index: 1;
+}
+
+.checkmark {
+    font-size: 40px;
+    color: #ffffff;
+    animation: checkmark-pulse 2s infinite ease-in-out;
+}
+
+.sunshine {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(153, 255, 149, 0.97) 30%, rgba(255, 252, 0, 0) 60%);
+    animation: sunshines 2s infinite;
+    z-index: -1;
+}
+
+#retryButton {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #4ce151;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 2;
+}
+
+#retryButton:hover {
+    background-color: #5ef165;
+}
+
+@keyframes checkmark-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes sunshines {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes circle-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 25px rgba(76, 175, 80, 0.7);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+    }
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.4;
+    animation: float 6s infinite ease-in-out;
+    z-index: 0;
+}
+
+.circle {
+    border-radius: 50%;
+    background-color: #28ef34;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 10px solid #61d345;
+}
+
+.cross {
+    background-color: #6c9562;
+    clip-path: polygon(25% 0%, 75% 0%, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0% 75%, 0% 25%, 25% 25%);
+}
+
+.small {
+    width: 5px;
+    height: 5px;
+}
+
+.medium {
+    width: 8px;
+    height: 8px;
+}
+
+.large {
+    width: 12px;
+    height: 12px;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

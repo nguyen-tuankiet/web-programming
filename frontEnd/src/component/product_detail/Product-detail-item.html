@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Carousel</title>
+  <link rel="stylesheet" href="../../styles/style-component/product-detail/Product-detail-item.css">
+  <script src="../../styles/style-component/product-detail/Product-detail-item.js"></script>
+</head>
+<body>
+
+<!-- Carousel Container -->
+<div class="carousel-container">
+  <!-- Main Image Display -->
+  <img id="mainImage" src="../../../resource/image/img-detail/image1.jpg" alt="Carousel Image" class="carousel-image">
+  <!-- Navigation Arrows -->
+  <div class="nav-arrow left" onclick="prevImage()">&#10094;</div>
+  <div class="nav-arrow right" onclick="nextImage()">&#10095;</div>
+
+  <!-- Thumbnails -->
+  <div class="thumbnails">
+
+    <img src="../../../resource/image/img-detail/image1.jpg" alt="Thumbnail 1" class="thumbnail active" onclick="showImage(0)">
+    <img src="../../../resource/image/img-detail/image2.jpg" alt="Thumbnail 2" class="thumbnail" onclick="showImage(1)">
+    <img src="../../../resource/image/img-detail/image3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="showImage(2)">
+    <img src="../../../resource/image/img-detail/image4.jpg" alt="Thumbnail 4" class="thumbnail" onclick="showImage(3)">
+    <img src="../../../resource/image/img-detail/image5.jpg" alt="Thumbnail 5" class="thumbnail" onclick="showImage(4)">
+    <img src="../../../resource/image/img-detail/image6.jpg" alt="Thumbnail 6" class="thumbnail" onclick="showImage(5)">
+    <img src="../../../resource/image/img-detail/image7.jpg" alt="Thumbnail 7" class="thumbnail" onclick="showImage(6)">
+  </div>
+</div>
+
+</body>
+</html>

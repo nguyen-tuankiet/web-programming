@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đơn Hàng</title>
+    <link rel="stylesheet" href="../../styles/style-component/style-admin/orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="row">
+        <h1 class="header-title">Đơn Hàng</h1>
+</div>
+
+<div class="container">
+    <div class="header-container">
+        <div class="row">
+            <div class="search-bar">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+                <input type="text" placeholder="Tìm kiếm">
+            </div>
+
+
+<!--            <label class="form-label me-2 mb-0">Trạng Thái</label>-->
+            <select class="status-select">
+                <option>Mặc Định</option>
+                <option>Đã Gửi</option>
+                <option>Đang Xử Lý</option>
+                <option>Đã Giao</option>
+            </select>
+            <div class="header-actions">
+
+                <div class="export-container">
+                    <button class="export-btn">Xuất <i class="fas fa-chevron-down"></i></button>
+                    <div class="export-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="export-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="export-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="export-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="export-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="export-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th><input type="checkbox"></th>
+                <th>Mã Đơn Hàng</th>
+                <th>Tên Khách Hàng</th>
+                <th>Ngày</th>
+                <th>Thanh Toán</th>
+                <th>Tổng Tiền</th>
+                <th>Trạng Thái </th>
+                <th>Hoạt Động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="order-row" data-url="../admin_components/orderDetail.html">
+                <td><input type="checkbox"></td>
+                <td><a href="../admin_components/orderDetail.html" class="order-id">#DU00017</a></td>
+                <td class="order-name">Nguyễn Tuấn Kiệt</td>
+                <td class="order-date">3/10/2024 20:02</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">200.000 VND</td>
+                <td><span class="status order-status-shipped">Đã Gửi</span></td>
+
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00016</a></td>
+                <td class="order-name">Trần Quốc Hưng</td>
+                <td class="order-date">5/9/2024 18:06</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">220.000 VND</td>
+                <td><span class="status order-status-in-progress">Đang Xử Lý</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00015</a></td>
+                <td class="order-name">Phan Văn Sỹ</td>
+                <td class="order-date">3/8/2024 15:02</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">300.000 VND</td>
+                <td><span class="status order-status-shipped">Đã Gửi</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00014</a></td>
+                <td class="order-name">Lê Thị Mai</td>
+                <td class="order-date">20/7/2024 11:45</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">100.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00013</a></td>
+                <td class="order-name">Đặng Thị Phương</td>
+                <td class="order-date">12/7/2024 16:30</td>
+                <td><span class="status status-refunded">Đã Hoàn Tiền</span></td>
+                <td class="order-total">400.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00012</a></td>
+                <td class="order-name">Phạm Hồng Sơn</td>
+                <td class="order-date">30/6/2024 10:20</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">500.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00011</a></td>
+                <td class="order-name">Nguyễn Văn Bảo</td>
+                <td class="order-date">25/6/2024 18:30</td>
+                <td><span class="status status-cancel">Đã Hủy</span></td>
+                <td class="order-total">270.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00010</a></td>
+                <td class="order-name">Nguyễn Thị Thảo</td>
+                <td class="order-date">13/6/2024 14:50</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">980.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00009</a></td>
+                <td class="order-name">Trần Minh Hoàng</td>
+                <td class="order-date">8/6/2024 11:10</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">820.000 VND</td>
+                <td><span class="status order-status-shipped">Đã Gửi</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00008</a></td>
+                <td class="order-name">Vũ Đức Hạnh</td>
+                <td class="order-date">2/6/2024 09:15</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">560.000 VND</td>
+                <td><span class="status order-status-in-progress">Đang Xử Lý</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00018</a></td>
+                <td class="order-name">Nguyễn Minh Anh</td>
+                <td class="order-date">1/10/2024 08:30</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">150.000 VND</td>
+                <td><span class="status order-status-shipped">Đã Gửi</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00019</a></td>
+                <td class="order-name">Lê Quốc Bình</td>
+                <td class="order-date">30/9/2024 12:10</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">340.000 VND</td>
+                <td><span class="status order-status-in-progress">Đang Xử Lý</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00020</a></td>
+                <td class="order-name">Phạm Hoàng Nam</td>
+                <td class="order-date">28/9/2024 14:25</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">290.000 VND</td>
+                <td><span class="status order-status-shipped">Đã Gửi</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00021</a></td>
+                <td class="order-name">Nguyễn Thị Hằng</td>
+                <td class="order-date">25/9/2024 09:45</td>
+                <td><span class="status status-cancel">Đã Hủy</span></td>
+                <td class="order-total">400.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00022</a></td>
+                <td class="order-name">Trần Đình Khôi</td>
+                <td class="order-date">20/9/2024 17:30</td>
+                <td><span class="status status-refunded">Đã Hoàn Tiền</span></td>
+                <td class="order-total">220.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00023</a></td>
+                <td class="order-name">Vũ Hoàng Lan</td>
+                <td class="order-date">18/9/2024 11:20</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">600.000 VND</td>
+                <td><span class="status order-status-shipped">Đã Gửi</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00024</a></td>
+                <td class="order-name">Hoàng Văn Dũng</td>
+                <td class="order-date">15/9/2024 15:05</td>
+                <td><span class="status status-cancel">Đã Hủy</span></td>
+                <td class="order-total">530.000 VND</td>
+                <td><span class="status order-status-in-progress">Đang Xử Lý</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00025</a></td>
+                <td class="order-name">Phan Thị Tuyết</td>
+                <td class="order-date">10/9/2024 08:10</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">450.000 VND</td>
+                <td><span class="status order-status-delivered">Đã Giao</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00026</a></td>
+                <td class="order-name">Đỗ Thanh Tùng</td>
+                <td class="order-date">5/9/2024 10:50</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">370.000 VND</td>
+                <td><span class="status order-status-shipped">Đã Gửi</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td><a href="#" class="order-id">#DU00027</a></td>
+                <td class="order-name">Nguyễn Nhật Linh</td>
+                <td class="order-date">1/9/2024 13:15</td>
+                <td><span class="status status-paid">Đã Thanh Toán</span></td>
+                <td class="order-total">250.000 VND</td>
+                <td><span class="status order-status-in-progress">Đang Xử Lý</span></td>
+                <td class="actions">
+                    <button class="actions-btn">⋮</button>
+                    <div class="actions-menu">
+                        <div class="options">
+                            <p>OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-option"><i class="fas fa-print"></i> Print</button>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="download-options">
+                            <p>DOWNLOAD OPTIONS</p>
+                            <button class="action-option"><i class="fas fa-file-excel"></i> Excel</button>
+                            <button class="action-option"><i class="fas fa-file-csv"></i> .CSV</button>
+                            <button class="action-option"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="action-option"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="footer-container">
+        <nav class="mt-2 mt-md-0">
+            <ul class="pagination mb-0">
+                <li class="page-item"><a class="page-link" href="#!" data-action="prev">Quay lại</a></li>
+                <li class="page-item"><a class="page-link active" href="#!">1</a></li>
+                <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                <li class="page-item"><a class="page-link" href="#!" data-action="next">Tiếp theo</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+</body>
+<script src="../../styles/style-component/style-admin/order.js"></script>
+</html>
