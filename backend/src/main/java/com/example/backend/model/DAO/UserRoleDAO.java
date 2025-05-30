@@ -18,7 +18,7 @@ public interface UserRoleDAO {
     @SqlUpdate(value = """
             UPDATE user_role
             set roleId = :roleId
-            where userId= :userid;
+            where userId= :userId;
             """)
     Boolean updateUserRole(@Bind("userId") Integer userId, @Bind("roleId") Integer roleId);
 }

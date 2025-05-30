@@ -10,161 +10,189 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>Team Members</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script>
-    const contextPath = "${pageContext.request.contextPath}";
-  </script>
+    <meta charset="UTF-8">
+    <title>Team Members</title>
+    <link rel="stylesheet"
+          href="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        const contextPath = "${pageContext.request.contextPath}";
+    </script>
 </head>
 <body>
 <div class="container">
-  <div class="left">
-    <div class="side_bar">
-      <jsp:include page="SideBar.jsp"/>
-    </div>
-  </div>
-
-  <div class="center">
-    <div class="wrap_header">
-      <jsp:include page="Header.jsp"/>
+    <div class="left">
+        <div class="side_bar">
+            <jsp:include page="SideBar.jsp"/>
+        </div>
     </div>
 
-    <div class="content">
-      <div class="content_header">
-        <h2>Thành viên</h2>
-        <button id="invite">
-          <i class="fa-solid fa-user-plus"></i>
-          Mời
-        </button>
-      </div>
-
-      <div class="member_list">
-        <div class="operation">
-          <div class="search">
-            <input type="search" id="serch_member" placeholder="Tìm kiếm">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </div>
-          <div class="role_list">
-            <select id="menu">
-              <option value="home">Trạng thái</option>
-              <option value="">Đang hoạt động</option>
-              <option value="">Chờ xác nhận</option>
-              <option value="">....</option>
-            </select>
-          </div>
+    <div class="center">
+        <div class="wrap_header">
+            <jsp:include page="Header.jsp"/>
         </div>
 
-        <table id="member_table">
-          <thead>
-          <tr>
-            <th>Người dùng</th>
-            <th>Vai trò</th>
-            <th>Trạng thái</th>
-            <th>Ngày tham gia</th>
-            <th></th>
-          </tr>
-          </thead>
+        <div class="content">
+            <div class="content_header">
+                <h2>Thành viên</h2>
+                <button id="invite">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Mời
+                </button>
+            </div>
 
-          <tbody>
-          <c:if test="${empty teamMembers}">
-            <tr><td colspan="5">Không có thành viên nào</td></tr>
-          </c:if>
-
-          <c:forEach items="${teamMembers}" var="m">
-            <tr>
-              <td class="user">
-                <c:if test="${not empty m.avatarUrl}">
-                  <img class="avatar" src="${m.avatarUrl}" alt="Avatar"/>
-                </c:if>
-
-                <c:if test="${empty m.avatarUrl}">
-                  <img class="avatar" src="${pageContext.request.contextPath}/static/image/default-avatar.png" alt="Avatar"/>
-                </c:if>
-
-                <div class="infor">
-                  <p class="name">${m.fullName}</p>
-                  <p class="mail">${m.email}</p>
+            <div class="member_list">
+                <div class="operation">
+                    <div class="search">
+                        <input type="search" id="serch_member" placeholder="Tìm kiếm">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="role_list">
+                        <select id="menu">
+                            <option value="home">Trạng thái</option>
+                            <option value="">Đang hoạt động</option>
+                            <option value="">Chờ xác nhận</option>
+                            <option value="">....</option>
+                        </select>
+                    </div>
                 </div>
-              </td>
 
-              <td class="role">
-                <select class="role_list">
-                  <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị Viên</option>
-                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Nhân Viên</option>
-                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Người Dùng</option>
-                </select>
-              </td>
+                <table id="member_table">
+                    <thead>
+                    <tr>
+                        <th>Người dùng</th>
+                        <th>Vai trò</th>
+                        <th>Trạng thái</th>
+                        <th>Ngày tham gia</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <c:if test="${empty teamMembers}">
+                        <tr>
+                            <td colspan="5">Không có thành viên nào</td>
+                        </tr>
+                    </c:if>
+
+                    <c:forEach items="${teamMembers}" var="m">
+                        <tr>
+                            <td class="user">
+                                <c:if test="${not empty m.avatarUrl}">
+                                    <img class="avatar" src="${m.avatarUrl}" alt="Avatar"/>
+                                </c:if>
+
+                                <c:if test="${empty m.avatarUrl}">
+                                    <img class="avatar"
+                                         src="${pageContext.request.contextPath}/static/image/default-avatar.png"
+                                         alt="Avatar"/>
+                                </c:if>
+
+                                <div class="infor">
+                                    <p class="name">${m.fullName}</p>
+                                    <p class="mail">${m.email}</p>
+                                </div>
+                            </td>
+
+                            <td class="role">
+                                <select class="role_list">
+                                        <%--                  <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị Viên</option>--%>
+                                        <%--                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Nhân Viên</option>--%>
+                                        <%--                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Người Dùng</option>--%>
+                                    <c:forEach var="r" items="${roles}">
+
+                                      <option value="${r.roleType}" selected>${r.roleType} ${r.name} ${m.role}</option>
 
 
-              <td>
+<%--                                      <c:choose>--%>
+<%--                                            <c:when test="${r.roleType == m.role}">--%>
+<%--                                                &lt;%&ndash;&ndash;%&gt;--%>
+<%--                                                <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị--%>
+<%--                                                    Viên--%>
+<%--                                                </option>--%>
+<%--                                            </c:when>--%>
+
+<%--                                          --%>
+<%--                                            <c:otherwise>--%>
+<%--&lt;%&ndash;                                                <option value="${r.roleType}">${r.name}</option>&ndash;%&gt;--%>
+<%--                                            </c:otherwise>--%>
+<%--                                        </c:choose>--%>
+
+
+                                    </c:forEach>
+
+                                </select>
+                            </td>
+
+
+                            <td>
                       <span class="status_label ${m.status.name().toLowerCase()}">
                         <c:choose>
-                          <c:when test="${m.status.name() eq 'ACTIVE'}">Hoạt động</c:when>
-                          <c:when test="${m.status.name() eq 'PENDING'}">ĐANG CHỜ XỬ LÝ</c:when>
-                          <c:when test="${m.status.name() eq 'BANNED'}">CẤM</c:when>
-                          <c:when test="${m.status.name() eq 'DEACTIVE'}">VÔ HIỆU HÓA</c:when>
-                          <c:otherwise>Unknown</c:otherwise>
+                            <c:when test="${m.status.name() eq 'ACTIVE'}">Hoạt động</c:when>
+                            <c:when test="${m.status.name() eq 'PENDING'}">ĐANG CHỜ XỬ LÝ</c:when>
+                            <c:when test="${m.status.name() eq 'BANNED'}">CẤM</c:when>
+                            <c:when test="${m.status.name() eq 'DEACTIVE'}">VÔ HIỆU HÓA</c:when>
+                            <c:otherwise>Unknown</c:otherwise>
                         </c:choose>
                       </span>
-              </td>
+                            </td>
 
-              <td>2025/2/1</td>
+                            <td>2025/2/1</td>
 
-              <td class="more_action">
-                <i class="fa-solid fa-gear" onclick="toggleMoreActionMenu(this)"></i>
-                <div class="more_action_menu hidden">
-                  <form action="${pageContext.request.contextPath}/admin/team-member/update-status" method="post">
-                    <input type="hidden" name="memberId" value="${m.id}">
-                    <input type="hidden" name="status" value="DEACTIVE">
-                    <button type="submit" class="btn_deactivate">Vô hiệu hóa</button>
-                  </form>
-                </div>
-              </td>
+                            <td class="more_action">
+                                <i class="fa-solid fa-gear" onclick="toggleMoreActionMenu(this)"></i>
+                                <div class="more_action_menu hidden">
+                                    <form action="${pageContext.request.contextPath}/admin/team-member/update-status"
+                                          method="post">
+                                        <input type="hidden" name="memberId" value="${m.id}">
+                                        <input type="hidden" name="status" value="DEACTIVE">
+                                        <button type="submit" class="btn_deactivate">Vô hiệu hóa</button>
+                                    </form>
+                                </div>
+                            </td>
 
-            </tr>
-          </c:forEach>
-          </tbody>
-        </table>
-      </div>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Phần Modal (popup) cho Invite -->
+        <div id="inviteModal" class="modal hidden">
+            <div class="modal_content">
+                <span class="close_btn">&times;</span>
+                <h2>Mời thành viên mới</h2>
+                <form id="inviteForm">
+                    <!-- Các trường form -->
+                    <div class="form_group">
+                        <label for="inviteEmail">Địa chỉ Email</label>
+                        <input type="email" id="inviteEmail" name="email" placeholder="email"
+                               required>
+                    </div>
+                    <div class="form_group">
+                        <label for="inviteName">Tên</label>
+                        <input type="text" id="inviteName" name="name" placeholder="Tên" required>
+                    </div>
+                    <div class="form_group">
+                        <label for="inviteRole">Vai trò</label>
+                        <select id="inviteRole" name="role">
+
+                            <c:if test="${not empty (roles)}">
+                                <c:forEach items="${roles}" var="role">
+                                    <option value="${role.id}">${role.name}</option>
+                                </c:forEach>
+                            </c:if>
+
+                        </select>
+                    </div>
+                    <div class="form_action">
+                        <button type="button" id="cancelInvite" class="btn_cancel">Hủy</button>
+                        <button type="submit" class="btn_submit">Gửi lời mời</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <!-- Phần Modal (popup) cho Invite -->
-    <div id="inviteModal" class="modal hidden">
-      <div class="modal_content">
-        <span class="close_btn">&times;</span>
-        <h2>Mời thành viên mới</h2>
-        <form id="inviteForm">
-          <!-- Các trường form -->
-          <div class="form_group">
-            <label for="inviteEmail">Địa chỉ Email</label>
-            <input type="email" id="inviteEmail" name="email" placeholder="email"
-                   required>
-          </div>
-          <div class="form_group">
-            <label for="inviteName">Tên</label>
-            <input type="text" id="inviteName" name="name" placeholder="Tên" required>
-          </div>
-          <div class="form_group">
-            <label for="inviteRole">Vai trò</label>
-            <select id="inviteRole" name="role">
-
-              <c:if test="${not empty (roles)}">
-                <c:forEach items="${roles}" var="role">
-                  <option value="${role.id}">${role.name}</option>
-                </c:forEach>
-              </c:if>
-
-            </select>
-          </div>
-          <div class="form_action">
-            <button type="button" id="cancelInvite" class="btn_cancel">Hủy</button>
-            <button type="submit" class="btn_submit">Gửi lời mời</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
 <script src="${pageContext.request.contextPath}/static/style-component/style-admin/members/Members.js"></script>
 </body>

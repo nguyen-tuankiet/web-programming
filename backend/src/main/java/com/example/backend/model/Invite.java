@@ -23,6 +23,7 @@ public class Invite {
             @ColumnName("expiresAt") Long expiresAt,
             @ColumnName("createdAt") Long createdAt
     ) {
+        this.id = id;
         this.email = email;
         this.name = name;
         this.roleId = roleId;
@@ -78,6 +79,14 @@ public class Invite {
 
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

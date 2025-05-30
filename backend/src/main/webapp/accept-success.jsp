@@ -62,11 +62,11 @@
 </head>
 <body>
 <div class="container">
-    <img src="../static/image/success.jpg" alt="Success">
+    <img src="static/image/success.jpg" alt="Success">
     <h2>Chào mừng bạn đã tham gia!</h2>
     <p>Lời mời của bạn đã được xác nhận thành công.</p>
     <p>Hãy quay lại trang đăng nhập để bắt đầu sử dụng hệ thống.</p>
-    <a href="/login" class="btn">Quay về trang đăng nhập</a>
+    <a href="login" class="btn">Quay về trang đăng nhập</a>
 </div>
 </body>
 </html>
