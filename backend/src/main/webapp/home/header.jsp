@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.backend.model.DAO.cart.Cart" %>
+<% Cart cart = (Cart) session.getAttribute("cart");
+   int initialCartCount = (cart != null) ? cart.getProducts().size() : 0;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +19,18 @@
     <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-home/search.css">--%>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        const initialCartCount = <%= ((com.example.backend.model.DAO.cart.Cart) session.getAttribute("cart") != null) ? ((com.example.backend.model.DAO.cart.Cart) session.getAttribute("cart")).getProducts().size() : 0 %>;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Gọi hàm updateCartCount từ home.js (đảm bảo home.js được load trước script này)
+            if (typeof updateCartCount === 'function') {
+                 updateCartCount(initialCartCount);
+            } else {
+                 console.error("Hàm updateCartCount chưa được định nghĩa.");
+            }
+        });
+    </script>
 </head>
 <body>
 
@@ -166,6 +182,7 @@
 
             <a class="nav_item icon"
                href="cart" id="cart-link"><i class="fas fa-shopping-cart"></i>
+<%--            <span class="cart-count" id="cart-count">0</span>--%>
             </a>
 
             <div class="icon user-login" target="_top">

@@ -190,4 +190,23 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
+function updateCartCount(count) {
+    const cartLink = document.getElementById('cart-link');
+    if (!cartLink) return;
+
+    // Remove existing count badge if any
+    const existingBadge = cartLink.querySelector('.cart-count-badge');
+    if (existingBadge) {
+        existingBadge.remove();
+    }
+
+    // Add new count badge if count > 0
+    if (count > 0) {
+        const badge = document.createElement('span');
+        badge.className = 'cart-count-badge';
+        badge.textContent = count;
+        cartLink.appendChild(badge);
+    }
+}
+
 
