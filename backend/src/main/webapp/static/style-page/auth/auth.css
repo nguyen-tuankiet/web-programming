@@ -38,7 +38,6 @@ body {
 .form-container {
     position: absolute;
     width: 60%;
-    height: 100%;
     padding: 0 40px;
     display: flex;
     align-items: center;
@@ -456,4 +455,7 @@ a.forgot:hover {
     color: red;
     font-size: 1.2em;
     margin-left: 5px;
+}
+.g-recaptcha{
+    padding-bottom: 10px;
 }

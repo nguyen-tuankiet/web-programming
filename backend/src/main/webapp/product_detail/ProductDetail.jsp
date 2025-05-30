@@ -125,6 +125,10 @@
                 </a>
             </div>
 
+            <div id="cart-notification" class="notification hidden">
+                <i class="fa fa-check-circle"></i>
+                <span>Thêm vào giỏ hàng thành công</span>
+            </div>
 
         </div>
     </div>
@@ -188,10 +192,10 @@
             "Làm lạnh nhanh" cho đồ uống.
         </p>
         <ul>
-            <li>*Chế độ “Làm mát”: Thanh kéo ở “Min”, nhiệt độ 3°C.</li>
-            <li>*Chế độ “Thịt & Cá”: Thanh kéo ở “Max”, nhiệt độ 3°C.</li>
-            <li>*Chế độ “Đông mềm”: Thanh kéo ở “Max”, nhiệt độ 1°C.</li>
-            <li>*Chế độ “Làm lạnh nhanh”: Thanh kéo ở “Max”, nhấn “Power Cool”.</li>
+            <li>*Chế độ "Làm mát": Thanh kéo ở "Min", nhiệt độ 3°C.</li>
+            <li>*Chế độ "Thịt & Cá": Thanh kéo ở "Max", nhiệt độ 3°C.</li>
+            <li>*Chế độ "Đông mềm": Thanh kéo ở "Max", nhiệt độ 1°C.</li>
+            <li>*Chế độ "Làm lạnh nhanh": Thanh kéo ở "Max", nhấn "Power Cool".</li>
         </ul>
     </div>
     <div class="feature-benefit__video">
@@ -550,6 +554,97 @@
 
 
 
+<script>
+    var images = [
+        <c:forEach var="img" items="${images}" varStatus="loop">
+            "${img}"<c:if test="${!loop.last}">,</c:if>
+        </c:forEach>
+    ];
+</script>
+
+<!-- Lightbox Modal -->
+<div id="lightbox-modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
+    <button id="lightbox-prev" style="position:absolute;left:30px;top:50%;transform:translateY(-50%);font-size:40px;background:none;border:none;color:#fff;cursor:pointer;">&#10094;</button>
+    <img id="lightbox-img" src="" style="max-width:80vw; max-height:80vh; background:#fff; border-radius:16px; display:block; margin:auto;">
+    <button id="lightbox-next" style="position:absolute;right:30px;top:50%;transform:translateY(-50%);font-size:40px;background:none;border:none;color:#fff;cursor:pointer;">&#10095;</button>
+</div>
+
 <script src="${pageContext.request.contextPath}/static/style-component/product-detail/Product-detail.js"></script>
+<script>
+// Carousel và lightbox cho ảnh sản phẩm
+
+document.addEventListener("DOMContentLoaded", function () {
+    let currentIndex = 0;
+    let lightboxIndex = 0;
+
+    function showSlide(index) {
+        currentIndex = index;
+        document.getElementById('mainImage').src = images[currentIndex];
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        showSlide(currentIndex);
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        showSlide(currentIndex);
+    }
+
+    // Gắn sự kiện cho mũi tên
+    document.querySelector('.nav-arrow.left').onclick = prevImage;
+    document.querySelector('.nav-arrow.right').onclick = nextImage;
+
+    // Gắn sự kiện cho thumbnail
+    document.querySelectorAll('.thumbnails img').forEach((img, idx) => {
+        img.style.cursor = 'pointer';
+        img.onclick = function() {
+            showSlide(idx);
+        };
+    });
+
+    // Hiển thị slide đầu tiên
+    showSlide(0);
+
+    // Lightbox cho ảnh chính
+    document.getElementById('mainImage').style.cursor = 'pointer';
+    document.getElementById('mainImage').onclick = function() {
+        lightboxIndex = currentIndex;
+        document.getElementById('lightbox-img').src = images[lightboxIndex];
+        document.getElementById('lightbox-modal').style.display = 'flex';
+    };
+
+    // Lightbox cho thumbnail (double click để xem lớn)
+    document.querySelectorAll('.thumbnails img').forEach(function(img, idx) {
+        img.addEventListener('dblclick', function() {
+            lightboxIndex = idx;
+            document.getElementById('lightbox-img').src = images[lightboxIndex];
+            document.getElementById('lightbox-modal').style.display = 'flex';
+        });
+    });
+
+    // Chuyển ảnh trong lightbox
+    document.getElementById('lightbox-prev').onclick = function(e) {
+        e.stopPropagation();
+        lightboxIndex = (lightboxIndex - 1 + images.length) % images.length;
+        document.getElementById('lightbox-img').src = images[lightboxIndex];
+    };
+    document.getElementById('lightbox-next').onclick = function(e) {
+        e.stopPropagation();
+        lightboxIndex = (lightboxIndex + 1) % images.length;
+        document.getElementById('lightbox-img').src = images[lightboxIndex];
+    };
+});
+
+// Đóng popup khi click ra ngoài ảnh
+if (document.getElementById('lightbox-modal')) {
+    document.getElementById('lightbox-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.style.display = 'none';
+        }
+    });
+}
+</script>
 </body>
 </html>

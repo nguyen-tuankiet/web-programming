@@ -8,6 +8,7 @@ import com.example.backend.service.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,6 +69,44 @@ public class BuyNowController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
+        try {
+            String productId = request.getParameter("productId");
+            String optionId = request.getParameter("optionId");
+
+            if (productId == null || optionId == null) {
+                JSONObject errorResponse = new JSONObject();
+                errorResponse.put("success", false);
+                errorResponse.put("message", "Missing required parameters");
+                response.getWriter().write(errorResponse.toString());
+                return;
+            }
+
+            Product product = productService.getProductByIdAndOptionId(
+                Integer.parseInt(productId),
+                Integer.parseInt(optionId)
+            );
+
+            if (product == null) {
+                JSONObject errorResponse = new JSONObject();
+                errorResponse.put("success", false);
+                errorResponse.put("message", "Product not found");
+                response.getWriter().write(errorResponse.toString());
+                return;
+            }
+
+            JSONObject successResponse = new JSONObject();
+            successResponse.put("success", true);
+            successResponse.put("message", "Product found");
+            response.getWriter().write(successResponse.toString());
+
+        } catch (Exception e) {
+            JSONObject errorResponse = new JSONObject();
+            errorResponse.put("success", false);
+            errorResponse.put("message", "An error occurred: " + e.getMessage());
+            response.getWriter().write(errorResponse.toString());
+        }
     }
 }

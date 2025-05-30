@@ -38,30 +38,22 @@ $(document).ready(function () {
             alert("Bạn cần đăng nhập trước khi mua hàng!");
             return;
         }
+        // Lấy đúng productId và optionId từ DOM
+        const product_id = product.attr('data-id');
+        const selectedOption = $('.option-item.selected');
+        const option_id = selectedOption.attr('data-option-id');
 
-        // Kiểm tra sessionId có hợp lệ không
-        fetch("check-session", {
+        fetch("buy-now", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: `sessionId=${sessionId}`
+            body: `productId=${product_id}&optionId=${option_id}`
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.valid) {
-                // Gọi API BuyNowController
-                fetch("buy-now", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: `productId=${product_id}&optionId=${firstOption.attr('data-option-id')}&sessionId=${sessionId}`
-                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = "checkout";
+                        window.location.href = `buy-now?productId=${product_id}&optionId=${option_id}`;
                     } else {
                         alert(data.message || "Có lỗi xảy ra khi xử lý đơn hàng");
                     }
@@ -70,15 +62,6 @@ $(document).ready(function () {
                     console.log(error);
                     alert("Có lỗi xảy ra. Vui lòng thử lại sau!");
                 });
-            } else {
-                alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!");
-                sessionStorage.removeItem("sessionId");
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            alert("Có lỗi xảy ra. Vui lòng thử lại sau!");
-        });
     });
 
     add_to_cart.on('click', function (e) {
