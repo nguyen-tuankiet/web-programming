@@ -76,6 +76,12 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+    const recaptchaResponse = grecaptcha.getResponse();
+    if (!recaptchaResponse) {
+        alert("Vui lòng xác nhận bạn không phải là robot.");
+        return;
+    }
+
     try {
         const response = await fetch("login", {
             method: "POST",
@@ -105,9 +111,10 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                 sessionStorage.setItem("userId", data.data.id);
                 sessionStorage.setItem("role", data.data.role);
 
-                if (data.data.role === "SUPPER_ADMIN") {
+                if (data.data.role !== "USER") {
                     window.location.href = "admin/dashboard";
-                } else {
+                }
+                else {
                     window.location.href = "home";
                 }
             } else {
