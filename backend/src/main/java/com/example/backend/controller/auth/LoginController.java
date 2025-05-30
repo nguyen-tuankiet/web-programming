@@ -101,39 +101,21 @@ public class LoginController extends HttpServlet {
                 // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
+                // Lưu role name thay vì role object để tương thích với session
+                session.setAttribute("role", user.getRole() != null ? user.getRole().getRoleType() : "USER");
 
-                // FIX: Ensure we store only strings in session
-                String roleTypeString = "USER"; // Default value
-                if (user.getRole() != null && user.getRole().getRoleType() != null) {
-                    roleTypeString = user.getRole().getRoleType().name();
-                }
+                // Trả về thông tin người dùng
+                Map<String, String> userData = Map.of(
+                        "id", String.valueOf(user.getId()),
+                        "fullName", user.getFullName(),
+                        "displayName", user.getDisplayName(),
+                        "email", user.getEmail(),
+                        "role", user.getRole() != null ? user.getRole().getRoleType().toString() : "USER",
+                        "status", user.getStatus(),
+                        "sessionId", session.getId()
+                );
 
-                // Clear any existing role attributes first
-                session.removeAttribute("role");
-                session.removeAttribute("roleType");
-
-                // Store as simple strings
-                session.setAttribute("role", roleTypeString);
-                session.setAttribute("roleType", roleTypeString);
-
-                System.out.println("DEBUG: Storing role in session: " + roleTypeString);
-                System.out.println("DEBUG: Session role after setting: " + session.getAttribute("role"));
-
-                // Create userData map with proper type handling
-                Map<String, Object> userData = new HashMap<>();
-                userData.put("id", String.valueOf(user.getId()));
-                userData.put("fullName", user.getFullName());
-                userData.put("displayName", user.getDisplayName());
-                userData.put("email", user.getEmail());
-                userData.put("status", user.getStatus());
-                userData.put("sessionId", session.getId());
-
-                // FIX: Create role object structure to match frontend expectations
-                Map<String, String> roleObj = new HashMap<>();
-                roleObj.put("roleType", roleTypeString);
-                userData.put("role", roleObj);
-
-                ResponseWrapper<Map<String, Object>> responseWrapper = new ResponseWrapper<>(
+                ResponseWrapper<Map<String, String>> responseWrapper = new ResponseWrapper<>(
                         200, "success", "Đăng nhập thành công", userData);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
             } else {
