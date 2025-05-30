@@ -63,7 +63,7 @@
 </head>
 <body>
 <div class="container">
-  <img src="../static/image/warning.jpg" class="img-fluid" alt=" image">
+  <img src="static/image/warning.jpg" class="img-fluid" alt=" image">
   <h1>Lời mời đã hết hạn</h1>
   <p>Rất tiếc, lời mời bạn nhận được đã không còn hiệu lực.</p>
   <p>Vui lòng liên hệ với đội ngũ của chúng tôi tại <a href="mailto:support@yourcompany.com">support@yourcompany.com</a> để được hỗ trợ thêm.</p>
