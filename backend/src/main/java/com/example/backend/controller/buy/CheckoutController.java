@@ -217,17 +217,6 @@ public class CheckoutController extends HttpServlet {
 
 
        if (flag){
-           // Xóa sản phẩm đã đặt hàng khỏi giỏ hàng
-           Cart cart = (Cart) session.getAttribute("cart");
-           if (cart != null) {
-               for (int i = 0; i < products.length(); i++) {
-                   JSONObject product = products.getJSONObject(i);
-                   int productId = product.getInt("id");
-                   cart.getData().remove(productId);
-               }
-               session.setAttribute("cart", cart);
-           }
-           
            JSONObject jsonResponse = new JSONObject();
            jsonResponse.put("success", true);
            response.getWriter().write(jsonResponse.toString());
