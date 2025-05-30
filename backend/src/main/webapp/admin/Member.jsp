@@ -75,7 +75,14 @@
           <c:forEach items="${teamMembers}" var="m">
             <tr>
               <td class="user">
-                <img class="avatar" src="${m.avatarUrl}" alt="avt">
+                <c:if test="${not empty m.avatarUrl}">
+                  <img class="avatar" src="${m.avatarUrl}" alt="Avatar"/>
+                </c:if>
+
+                <c:if test="${empty m.avatarUrl}">
+                  <img class="avatar" src="${pageContext.request.contextPath}/static/image/default-avatar.png" alt="Avatar"/>
+                </c:if>
+
                 <div class="infor">
                   <p class="name">${m.fullName}</p>
                   <p class="mail">${m.email}</p>
