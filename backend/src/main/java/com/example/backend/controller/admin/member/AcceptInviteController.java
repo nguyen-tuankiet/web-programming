@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "AcceptInviteController", value = "/invite/accept")
+@WebServlet(name = "AcceptInviteController", value = "/invite")
 public class AcceptInviteController extends HttpServlet {
     private final InviteService inviteService = new InviteService(DBConnection.getJdbi());
     private final UserService userService = new UserService(DBConnection.getJdbi());
@@ -26,35 +26,38 @@ public class AcceptInviteController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect("other/expired-invite.jsp");
 
 
         String idString = request.getParameter("id");
         String email = request.getParameter("email");
         if (idString == null || email == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
+            return;
         }
-        assert idString != null;
+
         Integer roleId = Integer.parseInt(idString);
         Invite invite = inviteService.getInviteByIdAndEmail(roleId, email);
-
         if (invite == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
+            return;
         }
-        assert invite != null;
         if (invite.getExpiresAt() < System.currentTimeMillis()) {
-            response.sendRedirect("/other/expired-invite.jsp");
+            response.sendRedirect("other/expired-invite.jsp");
+            return;
         }
 
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
+            return;
         }
 
         Boolean isSuccess= inviteService.updateInviteStatus(roleId, Status.ACTIVE);
         if (isSuccess) {
-            assert user != null;
             if ( userRoleService.updateUserRole(user.getId(), roleId)){
-                response.sendRedirect("/other/accept-success.jsp");
+                response.sendRedirect("other/accept-success.jsp");
+                return;
             }
 
         }
