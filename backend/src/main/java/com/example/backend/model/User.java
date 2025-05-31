@@ -17,7 +17,7 @@ public class User {
     String phone;
     String password;
     Integer avatarId;
-    String role;
+    Role role;
     String salt;
     String avatarUrl;
     String status;
@@ -34,7 +34,7 @@ public class User {
                 @ColumnName("phone") @Nullable  String phone,
                 @ColumnName("password") @Nullable String password,
                 @ColumnName("avatarId") @Nullable Integer avatarId,
-                @ColumnName("role") @Nullable String role,
+                @ColumnName("role") @Nullable Role role,
                 @ColumnName("salt")  @Nullable String salt,
                 @ColumnName("avatarUrl") @Nullable String avatarUrl,
                 @ColumnName("status") @Nullable String status,
@@ -134,18 +134,20 @@ public class User {
     public void setAvatarId(Integer avatarId) {
         this.avatarId = avatarId;
     }
-    public String getRole() {
+
+    public Role getRole() {
         return role;
     }
-    public void setRole(String role) {
+
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    public String getSalt() { // Getter cho salt
+    public String getSalt() {
         return salt;
     }
 
-    public void setSalt(String salt) { // Setter cho salt
+    public void setSalt(String salt) {
         this.salt = salt;
     }
     public String getAvatarUrl() {
@@ -191,7 +193,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 ", avatarId=" + avatarId +
-                ", role='" + role + '\'' +
+                ", role=" + role +
                 ", salt='" + salt + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", status='" + status + '\'' +

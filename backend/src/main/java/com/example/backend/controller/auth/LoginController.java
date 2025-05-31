@@ -75,7 +75,6 @@ public class LoginController extends HttpServlet {
             // Parse JSON để lấy dữ liệu
             Map<String, String> jsonData = objectMapper.readValue(jsonString, Map.class);
             String email = jsonData.get("email");
-//            String recaptchaToken = request.getParameter("g-recaptcha-response");
             String password = jsonData.get("password");
             String recaptchaToken = jsonData.get("recaptcha");
 
@@ -102,7 +101,8 @@ public class LoginController extends HttpServlet {
                 // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
-                session.setAttribute("role", user.getRole());
+                // Lưu role name thay vì role object để tương thích với session
+                session.setAttribute("role", user.getRole() != null ? user.getRole().getName() : "USER");
 
                 // Trả về thông tin người dùng
                 Map<String, String> userData = Map.of(
@@ -110,7 +110,7 @@ public class LoginController extends HttpServlet {
                         "fullName", user.getFullName(),
                         "displayName", user.getDisplayName(),
                         "email", user.getEmail(),
-                        "role", user.getRole(),
+                        "role", user.getRole() != null ? user.getRole().getName() : "USER", // Sử dụng role name
                         "status", user.getStatus(),
                         "sessionId", session.getId()
                 );

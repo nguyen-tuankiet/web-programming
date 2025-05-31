@@ -119,7 +119,7 @@ public class ProductService {
 
 
     public List<Product> getTop10(){
-        return productDao.getTop10();
+        return productDao.getTopProducts();
     }
 
 

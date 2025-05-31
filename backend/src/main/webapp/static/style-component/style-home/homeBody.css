@@ -480,8 +480,9 @@ header {
 }
 
 .slider-item {
-    min-width: calc(33.333% - 14px);
     flex: 0 0 auto;
+    /* Calculate flex-basis to fit 3 items with 20px gap, ensuring they fit */
+    flex-basis: calc(calc(100% - 40px) / 3 - 0.1px); 
 }
 
 .product-card {
@@ -524,6 +525,9 @@ header {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .product-price-discount {
@@ -605,12 +609,6 @@ header {
 
 .dot.active {
     background-color: #000;
-}
-
-@media (max-width: 992px) {
-    .slider-item {
-        min-width: calc(50% - 10px);
-    }
 }
 
 @media (max-width: 768px) {
