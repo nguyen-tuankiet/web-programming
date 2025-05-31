@@ -17,7 +17,7 @@ public class User {
     String phone;
     String password;
     Integer avatarId;
-    String role;
+    Role role;
     String salt;
     String avatarUrl;
     String status;
@@ -34,7 +34,7 @@ public class User {
                 @ColumnName("phone") @Nullable  String phone,
                 @ColumnName("password") @Nullable String password,
                 @ColumnName("avatarId") @Nullable Integer avatarId,
-                @ColumnName("role") @Nullable String role,
+                @ColumnName("role") @Nullable Role role,
                 @ColumnName("salt")  @Nullable String salt,
                 @ColumnName("avatarUrl") @Nullable String avatarUrl,
                 @ColumnName("status") @Nullable String status,
@@ -134,12 +134,6 @@ public class User {
     public void setAvatarId(Integer avatarId) {
         this.avatarId = avatarId;
     }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getSalt() { // Getter cho salt
         return salt;
@@ -177,6 +171,14 @@ public class User {
 
     public void setFacebookId(String facebookId) {
         this.facebookId = facebookId;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

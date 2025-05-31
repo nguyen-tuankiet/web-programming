@@ -1,7 +1,10 @@
 package com.example.backend.model.DAO;
 
+import com.example.backend.model.Mapper.UserWithRoleMapper;
 import com.example.backend.model.User;
+import com.example.backend.model.Role;
 import org.jdbi.v3.sqlobject.config.RegisterConstructorMapper;
+import org.jdbi.v3.sqlobject.config.RegisterRowMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
@@ -9,29 +12,46 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @RegisterConstructorMapper(User.class)
+@RegisterConstructorMapper(Role.class)
 public interface UserDao {
 
     @SqlQuery("SELECT * FROM user")
     List<User> getAllUsers();
 
     @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
-            "        i.url as avatarUrl, u.status, u.confirmationToken, u.role, u.password, u.salt, u.facebookId\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId,\n" +
+            "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
             "from user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
+            "    left join role as r on u.roleId = r.id\n" +
             "where u.id  = :id")
     User getUserById(@Bind("id") Integer id);
 
-    @SqlQuery("SELECT * FROM user WHERE email = :email")
+    @SqlQuery("SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone, " +
+            "u.password, u.salt, u.avatarId, u.status, u.confirmationToken, u.facebookId, " +
+            "i.url as avatarUrl, " +
+            "r.id as role_id, r.roleType as role_roleType, r.name as role_name, " +
+            "r.description as role_description, r.isActive as role_isActive " +
+            "FROM user as u " +
+            "LEFT JOIN image as i ON u.avatarId = i.id " +
+            "LEFT JOIN role as r ON u.roleId = r.id " +
+            "WHERE u.email = :email")
+    @RegisterRowMapper(UserWithRoleMapper.class)
     User getUserByEmail(@Bind("email") String email);
 
-    @SqlQuery("SELECT * FROM user WHERE confirmationToken = :token")
+    @SqlQuery(value = "SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId,\n" +
+            "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
+            "FROM user as u\n" +
+            "    left join image as i on u.avatarId = i.id\n" +
+            "    left join role as r on u.roleId = r.id\n" +
+            "WHERE u.confirmationToken = :token")
     User getUserByConfirmationToken(@Bind("token") String token);
 
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt, status, confirmationToken, facebookId) " +
-            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt, 'PENDING', :confirmationToken, :facebookId)")
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, roleId, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, (SELECT id FROM role WHERE roleType = 'USER' LIMIT 1), :salt, 'PENDING', :confirmationToken, :facebookId)")
     @GetGeneratedKeys("id")
     String createUser(@Bind("fullName") String fullName,
                       @Bind("displayName") String displayName,
@@ -59,7 +79,13 @@ public interface UserDao {
     @SqlUpdate("UPDATE user SET password = :password, salt = :salt WHERE id = :id")
     int updatePassword(@Bind("id") Integer id, @Bind("password") String password, @Bind("salt") String salt);
 
-    @SqlQuery("SELECT * FROM user WHERE id = :id")
+    @SqlQuery(value = "SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId,\n" +
+            "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
+            "FROM user as u\n" +
+            "    left join image as i on u.avatarId = i.id\n" +
+            "    left join role as r on u.roleId = r.id\n" +
+            "WHERE u.id = :id")
     User getPasswordByUserId(@Bind("id") Integer userId);
 
     @SqlQuery("SELECT url FROM image WHERE id = :avatarId")
@@ -76,7 +102,7 @@ public interface UserDao {
             "    displayName = :displayName,\n" +
             "    birth = :birth, " +
             "    gender = :gender,\n" +
-            "    phone = :phone, " +
+            "    phone = :phone " +
             "where id = :userId")
     Boolean updateUser(
             @Bind("userId") Integer userId,
@@ -86,4 +112,16 @@ public interface UserDao {
             @Bind("gender") String gender,
             @Bind("phone") String phone
     );
+
+    // Helper method to get default user role
+    @SqlQuery("SELECT id, roleType, name, description, isActive FROM role WHERE roleType = 'USER' LIMIT 1")
+    Role getDefaultUserRole();
+
+    // Helper method to get role by name
+    @SqlQuery("SELECT id, roleType, name, description, isActive FROM role WHERE name = :name")
+    Role getRoleByName(@Bind("name") String name);
+
+    // Helper method to get role by type
+    @SqlQuery("SELECT id, roleType, name, description, isActive FROM role WHERE roleType = :roleType")
+    Role getRoleByType(@Bind("roleType") String roleType);
 }
