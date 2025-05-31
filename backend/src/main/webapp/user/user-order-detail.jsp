@@ -132,7 +132,42 @@
                                      </span>
                                     </div>
                                 </div>
-
+                                <c:set var="productReview" value="${reviewMap[od.productId]}" />
+                                <div class="review-section" style="width:100%;margin-top:8px;">
+                                    <c:choose>
+                                        <c:when test="${not empty productReview}">
+                                            <!-- Hiển thị số sao và nội dung review -->
+                                            <div class="user-rating stars">
+                                                <c:forEach begin="1" end="5" var="i">
+                                                    <span class="star">
+                                                        <i class="fa-solid fa-star"
+                                                           style="color:${i <= productReview.rating ? 'gold' : 'gray'}"></i>
+                                                    </span>
+                                                </c:forEach>
+                                            </div>
+                                            <div class="review-text" style="margin-top:6px;font-style:italic;color:#555;">
+                                                    ${productReview.description}
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <!-- Hiển thị form đánh giá nếu chưa đánh giá -->
+                                            <c:if test="${order.orderStatus == 'DELIVERED'}">
+                                                <form class="review-form" method="post">
+                                                    <div class="user-rating stars">
+                                                        <span class="star" data-value="1"><i class="fa-solid fa-star"></i></span>
+                                                        <span class="star" data-value="2"><i class="fa-solid fa-star"></i></span>
+                                                        <span class="star" data-value="3"><i class="fa-solid fa-star"></i></span>
+                                                        <span class="star" data-value="4"><i class="fa-solid fa-star"></i></span>
+                                                        <span class="star" data-value="5"><i class="fa-solid fa-star"></i></span>
+                                                        <input type="hidden" name="rating" value="0" />
+                                                    </div>
+                                                    <textarea class="review-text" name="review" rows="3" placeholder="Chia sẻ suy nghĩ của bạn"></textarea>
+                                                    <button type="submit" class="btn_submit">Gửi đánh giá</button>
+                                                </form>
+                                            </c:if>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
 
                             </div>
 
@@ -344,7 +379,7 @@
                 </div>
             </div>
 
-            <c:if test="${order.orderStatus == 'DELIVERED'}">
+            <c:if test="${order.orderStatus == 'DELIVERED'  && !allReviewed}">
                 <div class="write-review-section" id="review-section">
                     <h2>Viết đánh giá của bạn</h2>
                     <form id="review-form" method="post">

@@ -20,6 +20,10 @@ public class ReviewService {
         return orderStatus != null && orderStatus == OrderStatus.DELIVERED;
     }
 
+    public Review getReview(int userId, int orderId, int productId) {
+        return reivewDAO.getReview(userId, orderId, productId);
+    }
+
 
     public Boolean addReview(Review review) {
         int existing = reivewDAO.countExistingReview(
