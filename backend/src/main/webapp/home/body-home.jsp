@@ -1,4 +1,3 @@
-
 <%--
   Created by IntelliJ IDEA.
   User: mr.hung
@@ -7,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 
 <head>
   <meta charset="UTF-8">
@@ -22,7 +20,6 @@
   <jsp:include page="banner.jsp"/>
 </div>
 
-
 <section class="body">
   <h2>Ngôi nhà thông minh, cuộc sống tiện nghi</h2>
   <p>
@@ -33,13 +30,9 @@
     <img src="${pageContext.request.contextPath}/static/image/dien_gia_dung_5cc56fdc21.png" alt="SmartThings Setup">
   </div>
 </section>
+
 <section class="product-showcase">
   <div class="product-grid">
-    <!--        <div class="product-item">-->
-    <!--            <img src="../../../resource/image/pc-1440x810-t4ref.jpg" alt="Galaxy S23+">-->
-    <!--            <h3>Tủ Lạnh Bespoke</h3>-->
-    <!--            <a href="#" class="buy-button">Mua ngay</a>-->
-    <!--        </div>-->
     <div class="product-item">
       <img src="${pageContext.request.contextPath}/static/image/pc-1440x810bic.jpg" alt="The Frame">
       <h3>Nhà Bếp</h3>
@@ -58,15 +51,12 @@
   </div>
 </section>
 
-
 <section class="body">
   <h2>Tính năng nổi bật</h2>
 </section>
 
 <div class="container1">
-
   <div class="feature-item">
-
     <video controls class="item-video">
       <source src="https://images.samsung.com/is/content/samsung/assets/vn/air-conditioners/windfree/windfree-2024-whitedisplay/black/2024-windfree-n05-1-comfort-cooling-pc.mp4" type="video/mp4">
       Trình duyệt của bạn không hỗ trợ thẻ video.
@@ -84,19 +74,18 @@
       <h2 class="feature-title">Dụng cụ nhà bếp hiện đại</h2>
       <div class="feature-text">Tận hưởng trải nghiệm làm sạch dụng cụ nấu nướng, bát đĩa với hiệu quả sạch vượt trội, loại bỏ 99.999% * vi khuẩn gây hại, đảm bảo các vật dụng được vệ sinh tối đa và an toàn khi sử dụng, mà không tốn thời gian và công sức.
       </div>
-
     </div>
   </div>
 
   <div class="feature-item">
     <img src="https://images.samsung.com/is/image/samsung/assets/vn/may-loc-khong-khi/feature-04.jpg" alt="Item5">
     <div class="feature-content">
-      <h2>Cảm biến Laser
-        và màn hình hiển thị</h2>
+      <h2>Cảm biến Laser và màn hình hiển thị</h2>
       <div class="feature-text">Cảm biến Laser PM phát hiện chính xác các chất ô nhiễm và bụi siêu mịn nhỏ hơn 1.0㎛ có trong không khí. Màn hình hiển thị chính xác mức độ ô nhiễm không khí ở mức PM1.0/PM2.5/PM10. Máy còn trang bị đèn 4 màu báo hiệu chất lượng không khí.
       </div>
     </div>
   </div>
+
   <div class="feature-item">
     <img src="https://images.samsung.com/is/image/samsung/assets/vn/washers-and-dryers/bespoke-ai-sustainability/AI-Control-PC-570x304.jpg?$570_N_JPG$" alt="Item3">
     <div class="feature-content">
@@ -115,8 +104,6 @@
     </div>
   </div>
 
-
-
   <div class="feature-item">
     <img src="https://images.samsung.com/is/image/samsung/assets/vn/refrigerators/new/ref_open_min.gif?$568_N_GIF$" alt="Item6">
     <div class="feature-content">
@@ -127,13 +114,8 @@
   </div>
 </div>
 
-
-<%--<section class="body">--%>
-<%--  <h2>Sản phẩm nổi bật</h2>--%>
-<%--</section>--%>
 <section class="body">
   <div class="content">
-
     <div class="container2">
       <header>
         <div class="text">Gia Dụng</div>
@@ -163,7 +145,6 @@
         <a href="search-category?categoryId=2" class="buy-button">Mua ngay</a>
       </div>
 
-
       <div id="robot" class="product-showcase">
         <div class="product-image">
           <img src="https://image-bluetech.s3.amazonaws.com/images/371012e7-f09f-4dc4-bab2-3217ea5a3b0a-25l7whti.png" alt="Robot hút bụi Bespoke AI">
@@ -182,7 +163,6 @@
         <a href="search-category?categoryId=5" class="buy-button">Mua ngay</a>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -196,57 +176,7 @@
       </button>
 
       <div class="slider-track" id="slider-track">
-        <!-- Product 1 -->
-        <div class="slider-item">
-          <div class="product-card">
-            <div class="product-image">
-              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="Galaxy Buds3">
-            </div>
-            <h3 class="product-name">Galaxy Buds3</h3>
-            <p class="product-price-discount">chiết khấu 400.000 VND (giá gốc 3.990.000 VND)</p>
-            <p class="product-price">3.590.000 VND</p>
-            <button class="buy-now">Mua ngay</button>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="slider-item">
-          <div class="product-card">
-            <div class="product-image">
-              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="Galaxy Tab A9 (Wi-Fi)">
-            </div>
-            <h3 class="product-name">Galaxy Tab A9 (Wi-Fi)</h3>
-            <p class="product-price-discount">chiết khấu 999.700 VND (giá gốc 3.989.700 VND)</p>
-            <p class="product-price">2.990.000 VND</p>
-            <button class="buy-now">Mua ngay</button>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="slider-item">
-          <div class="product-card">
-            <div class="product-image">
-              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="Galaxy Fit3">
-            </div>
-            <h3 class="product-name">Galaxy Fit3</h3>
-            <p class="product-price-discount">chiết khấu 200.000 VND (giá gốc 1.390.000 VND)</p>
-            <p class="product-price">1.190.000 VND</p>
-            <button class="buy-now">Mua ngay</button>
-          </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="slider-item">
-          <div class="product-card">
-            <div class="product-image">
-              <img src="https://images.samsung.com/is/image/samsung/p6pim/vn/rt38cg6584b1sv/gallery/vn-top-mount-freezer-smartthings-ai-energy-mode-455269-rt38cg6584b1sv-thumb-536331766?$216_216_PNG$" alt="24 inch Màn Hình Viền Mỏng S4 S40GD Full HD">
-            </div>
-            <h3 class="product-name">24 inch Màn Hình Viền Mỏng S4 S40GD Full HD</h3>
-            <p class="product-price-discount">chiết khấu 1.009.000 VND (giá gốc 4.036.000 VND)</p>
-            <p class="product-price">3.027.000 VND</p>
-            <button class="buy-now">Mua ngay</button>
-          </div>
-        </div>
+        <!-- Products will be loaded dynamically -->
       </div>
 
       <button class="slider-arrow slider-next" id="next-btn">
@@ -255,12 +185,12 @@
     </div>
 
     <div class="slider-dots" id="slider-dots">
-      <span class="dot active" data-index="0"></span>
-      <span class="dot" data-index="1"></span>
-      <span class="dot" data-index="2"></span>
+      <!-- Dots will be generated dynamically -->
     </div>
   </div>
 </section>
+
+
 
 <footer>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-home/footer.css">
@@ -354,6 +284,121 @@
   </div>
 </footer>
 
-<script src="${pageContext.request.contextPath}/static/style-component/style-home/homeBody.js"></script>
-</body>
+<script src="${pageContext.request.contextPath}/static/style-component/style-home/homeBody.js" defer></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Fetch top products
+    fetch('api/top-products')
+            .then(response => response.json())
+            .then(products => {
+              const sliderTrack = document.getElementById('slider-track');
+              const sliderDots = document.getElementById('slider-dots');
 
+              // Clear existing content
+              sliderTrack.innerHTML = '';
+              sliderDots.innerHTML = '';
+
+              // Calculate number of pages (3 products per page)
+              const productsPerPage = 3;
+              const numPages = Math.ceil(products.length / productsPerPage);
+
+              console.log('Total products:', products.length);
+              console.log('Products per page:', productsPerPage);
+              console.log('Number of pages:', numPages);
+
+              // Create product cards
+              products.forEach((product, index) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'slider-item';
+                productCard.innerHTML = `
+                    <div class="product-card">
+                        <div class="product-image" onclick="window.location.href='product-detail?id=\${product.id}'" style="cursor: pointer;">
+                            <img src="\${product.imageUrl}" alt="\${product.name}">
+                        </div>
+                        <h3 class="product-name" onclick="window.location.href='product-detail?id=\${product.id}'" style="cursor: pointer;">\${product.name}</h3>
+                        <p class="product-price">\${product.price.toLocaleString('vi-VN')} VND</p>
+                        <button class="buy-now" onclick="window.location.href='product-detail?id=\${product.id}'">Mua ngay</button>
+                    </div>
+                `;
+                sliderTrack.appendChild(productCard);
+              });
+
+              // Create dots
+              for (let i = 0; i < numPages; i++) {
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.setAttribute('data-index', i);
+                sliderDots.appendChild(dot);
+              }
+
+              // Initialize slider
+              let currentPage = 0;
+              const items = document.querySelectorAll('.slider-item');
+              const dots = document.querySelectorAll('.dot');
+
+              console.log('Total slider items created:', items.length);
+
+              // FIXED: Correct updateSlider function
+              function updateSlider() {
+                console.log('Current page:', currentPage);
+
+                // Calculate the translate value for the entire track
+                // Move the entire track to show the current page
+                const translateValue = -currentPage * 100; // Move left by 100% per page
+
+                // Apply transform to the slider track, not individual items
+                sliderTrack.style.transform = `translateX(${translateValue}%)`;
+
+                // Alternative method: Hide/show items based on current page
+                items.forEach((item, index) => {
+                  const startIndex = currentPage * productsPerPage;
+                  const endIndex = startIndex + productsPerPage;
+
+                  if (index >= startIndex && index < endIndex) {
+                    item.style.display = 'block';
+                    item.style.opacity = '1';
+                  } else {
+                    item.style.display = 'none';
+                    item.style.opacity = '0';
+                  }
+                });
+
+                // Update dots
+                dots.forEach((dot, index) => {
+                  dot.classList.toggle('active', index === currentPage);
+                });
+              }
+
+              // Add click handlers for dots
+              dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                  console.log('Dot clicked:', index);
+                  currentPage = index;
+                  updateSlider();
+                });
+              });
+
+              // Add click handlers for arrows
+              document.getElementById('prev-btn').addEventListener('click', () => {
+                if (currentPage > 0) {
+                  console.log('Previous button clicked');
+                  currentPage--;
+                  updateSlider();
+                }
+              });
+
+              document.getElementById('next-btn').addEventListener('click', () => {
+                if (currentPage < numPages - 1) {
+                  console.log('Next button clicked');
+                  currentPage++;
+                  updateSlider();
+                }
+              });
+
+              // Initial setup
+              updateSlider();
+            })
+            .catch(error => console.error('Error loading products:', error));
+  });
+</script>
+</body>
