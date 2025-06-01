@@ -8,9 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "UserOrderDetailController", value = "/user-order-detail")
 public class UserOrderDetailController extends HttpServlet {
@@ -20,7 +18,6 @@ public class UserOrderDetailController extends HttpServlet {
     UserService userService = new UserService(DBConnection.getJdbi());
     CardService cardService = new CardService(DBConnection.getJdbi());
     AddressService addressService = new AddressService(DBConnection.getJdbi());
-    ReviewService reviewService = new ReviewService(DBConnection.getJdbi());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,24 +52,13 @@ public class UserOrderDetailController extends HttpServlet {
            request.setAttribute("COD", order.getIsCOD());
        }
 
-        List<OrderDetail> orderDetails = null;
-        if (order != null && order.getId() != null) {
-            orderDetails = orderDetailService.getOrderDetailByOrderId(orderId);
+        if (order.getId() != null) {
+            List<OrderDetail> orderDetails = orderDetailService.getOrderDetailByOrderId(orderId);
             request.setAttribute("orderDetails", orderDetails);
         }
 
-        Map<Integer, Review> reviewMap = new HashMap<>();
-        boolean allReviewed = true;
-        if (orderDetails != null) {
-            for (OrderDetail od : orderDetails) {
-                Review review = reviewService.getReview(userId, orderId, od.getProductId());
-                if (review != null) {
-                    reviewMap.put(od.getProductId(), review);
-                }
-            }
-        }
-        request.setAttribute("reviewMap", reviewMap);
-        request.setAttribute("allReviewed", allReviewed);
+
+
 
 
         request.getRequestDispatcher("user/user-order-detail.jsp").forward(request, response);

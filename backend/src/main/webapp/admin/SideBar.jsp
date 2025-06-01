@@ -73,7 +73,7 @@
 
         a {
             text-decoration: none;
-            color: #4b5563; /* Dark text color for links */
+            color: #111827; /* Dark text color for links */
         }
 
         .bold {

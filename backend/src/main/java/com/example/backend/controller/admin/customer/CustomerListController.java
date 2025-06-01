@@ -32,22 +32,27 @@ public class CustomerListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String keyword = request.getParameter("name"); // hoặc request.getParameter("keyword");
-        List<User> users = userService.getUsersByKeyword(keyword);
-
+        List<User> customers = userService.getAllUsers();
         Map<Integer, String> userAddresses = new HashMap<>();
-        for (User c : users) {
+
+        for (User c : customers) {
             Address address = addressDAO.getAddressByUserId(c.getId()).stream().findFirst().orElse(null);
             userAddresses.put(c.getId(), address != null ? address.getProvince() : "N/A");
+
             if (c.getAvatarId() != null) {
                 String avatarUrl = userService.getAvatarUrlById(c.getAvatarId());
-                c.setAvatarUrl(avatarUrl);
+                c.setAvatarUrl(avatarUrl); // Set avatar URL to User object
             }
+//            else {
+//                user.setAvatarUrl( request.getContextPath() + "/assets/images/default-avatar.png");
+//                // Default avatar URL
+//            }
         }
 
+        request.setAttribute("customers", customers);
         request.setAttribute("userAddresses", userAddresses);
-        request.setAttribute("customers", users);
+
+
         request.getRequestDispatcher("customers.jsp").forward(request, response);
     }
 

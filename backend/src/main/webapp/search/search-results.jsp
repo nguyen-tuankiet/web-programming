@@ -26,7 +26,7 @@
                 <c:forEach var="product" items="${products}">
                     <div class="search_body">
                         <div class="wrap_img">
-                            <img src="${product.imageUrl}" alt="${product.name}" />
+                            <img src="${pageContext.request.contextPath}/${product.imageUrl}" alt="${product.name}" />
                         </div>
                         <div class="infor col">
                             <div class="product-title">

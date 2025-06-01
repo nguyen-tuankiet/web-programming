@@ -33,13 +33,6 @@ public interface ReivewDAO {
     OrderStatus getOrderStatus(@Bind("orderId") int orderId, @Bind("userId") int userId);
 
 
-
-    @SqlQuery("SELECT * FROM review WHERE userId = :userId AND orderId = :orderId AND productId = :productId LIMIT 1")
-    Review getReview(@Bind("userId") int userId,
-                     @Bind("orderId") int orderId,
-                     @Bind("productId") int productId);
-
-
     @SqlQuery("SELECT COUNT(*) FROM review WHERE userId = :userId AND orderId = :orderId AND productId = :productId")
     int countExistingReview(@Bind("userId") int userId,
                             @Bind("orderId") int orderId,

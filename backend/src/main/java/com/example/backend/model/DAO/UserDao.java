@@ -14,18 +14,8 @@ import java.util.UUID;
 @RegisterConstructorMapper(User.class)
 public interface UserDao {
 
-//    @SqlQuery("SELECT * FROM user")
-//    List<User> getAllUsers();
-
-    @SqlQuery("""
-    SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,
-           i.url AS avatarUrl,
-           u.status, u.confirmationToken, u.role, u.password, u.salt, u.facebookId
-    FROM user u
-    LEFT JOIN image i ON u.avatarId = i.id
-""")
+    @SqlQuery("SELECT * FROM user")
     List<User> getAllUsers();
-
 
     @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
             "        i.url as avatarUrl, u.status, u.confirmationToken, u.role, u.password, u.salt, u.facebookId\n" +
@@ -39,17 +29,6 @@ public interface UserDao {
 
     @SqlQuery("SELECT * FROM user WHERE confirmationToken = :token")
     User getUserByConfirmationToken(@Bind("token") String token);
-
-    @SqlQuery("""
-    SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,
-           i.url AS avatarUrl,
-           u.status, u.confirmationToken, u.role, u.password, u.salt, u.facebookId
-    FROM user u
-    LEFT JOIN image i ON u.avatarId = i.id
-    WHERE (:keyword IS NULL OR :keyword = '' OR LOWER(u.fullName) LIKE CONCAT('%', LOWER(:keyword), '%'))
-""")
-    List<User> getUsersByKeyword(@Bind("keyword") String keyword);
-
 
     @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt, status, confirmationToken, facebookId) " +
             "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt, 'PENDING', :confirmationToken, :facebookId)")
