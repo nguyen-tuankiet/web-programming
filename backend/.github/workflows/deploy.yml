@@ -10,6 +10,7 @@ on:
 env:
   IMAGE_NAME: tqhung/modern-home:0.1
 
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
