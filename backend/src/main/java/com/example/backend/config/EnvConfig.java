@@ -12,13 +12,13 @@ public class EnvConfig {
         try {
             // Load .env file
             dotenv = Dotenv.configure()
-                    .directory(".")
+//                    .directory(".")
                     .ignoreIfMalformed()
                     .ignoreIfMissing()
                     .load();
 
             // Copy all environment variables to our map
-            dotenv.entries().forEach(entry -> 
+            dotenv.entries().forEach(entry ->
                 envVariables.put(entry.getKey(), entry.getValue())
             );
         } catch (Exception e) {
