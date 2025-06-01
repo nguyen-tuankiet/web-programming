@@ -21,6 +21,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.HashMap;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -53,7 +54,6 @@ public class LoginController extends HttpServlet {
             return false;
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -102,7 +102,7 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
                 // Lưu role name thay vì role object để tương thích với session
-                session.setAttribute("role", user.getRole() != null ? user.getRole().getName() : "USER");
+                session.setAttribute("role", user.getRole().getRoleType() );
 
                 // Trả về thông tin người dùng
                 Map<String, String> userData = Map.of(
@@ -110,7 +110,7 @@ public class LoginController extends HttpServlet {
                         "fullName", user.getFullName(),
                         "displayName", user.getDisplayName(),
                         "email", user.getEmail(),
-                        "role", user.getRole() != null ? user.getRole().getName() : "USER", // Sử dụng role name
+                        "role",user.getRole().getRoleType().toString() ,
                         "status", user.getStatus(),
                         "sessionId", session.getId()
                 );

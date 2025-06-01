@@ -1,6 +1,7 @@
 package com.example.backend.controller.auth;
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.contant.ERole;
 import com.example.backend.model.User;
 import com.example.backend.service.AuthService;
 import jakarta.servlet.Filter;
@@ -31,7 +32,7 @@ public class AdminAuthorizationFilter implements Filter {
 
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
-        String role = (String) session.getAttribute("role");
+        ERole role = (ERole) session.getAttribute("role");
 
         // Kiểm tra xem userId có tồn tại trong session hay không
         if (userId == null) {
@@ -42,7 +43,7 @@ public class AdminAuthorizationFilter implements Filter {
         // Lấy thông tin người dùng từ cơ sở dữ liệu dựa trên userId từ session
         User user = authService.getUserById(userId);
 
-        if (user == null || !"ADMIN".equalsIgnoreCase(role)) {
+        if (user == null || role == ERole.USER) {
             session.invalidate();
             redirectToLoginWithMessage(request, response, "Bạn không có quyền truy cập vào trang này.");
             return;
