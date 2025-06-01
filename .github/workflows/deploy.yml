@@ -48,7 +48,7 @@ jobs:
             docker stop modern-home || true &&
             docker rm modern-home || true &&
           
-            docker run -d --name modern-home -p 80:8000 \
+            docker run -d --name modern-home -p 8000:8080 \
               -e GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }} \
               -e GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }} \
               -e FACEBOOK_APP_ID=${{ secrets.FACEBOOK_APP_ID }} \
