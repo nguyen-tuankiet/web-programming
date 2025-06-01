@@ -65,7 +65,7 @@ public class EmailService {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
             message.setSubject("Mã OTP xác thực");
 
-            String emailContent = "<h3>Kiet da gui ma OTP cho ban. Ma OTP cua ban la: " + otp + "</h3>"
+            String emailContent = "<h3>Modern Home da gui ma OTP cho ban. Ma OTP cua ban la: " + otp + "</h3>"
                     + "<p>Vui lòng không chia sẻ mã OTP này voi bat ki ai.</p>";
             message.setContent(emailContent, "text/html");
 
