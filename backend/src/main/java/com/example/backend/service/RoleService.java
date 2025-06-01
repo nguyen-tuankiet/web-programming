@@ -25,15 +25,9 @@ public class RoleService {
 
 
 
-
-
-
-
     public static void main(String[] args) {
         RoleService roleService = new RoleService(DBConnection.getJdbi());
-
         Role  role = new Role(null, ERole.CUSTOM, "test2 ", "", true);
-
         System.out.println(roleService.getAllRoles());
     }
 }

@@ -57,7 +57,6 @@ public class AdminAuthorizationFilter implements Filter {
         request.getSession().setAttribute("errorMessage", message);
         response.sendRedirect(request.getContextPath() + "/login");
     }
-
     @Override
     public void destroy() {}
 }

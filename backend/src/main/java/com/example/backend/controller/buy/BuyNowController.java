@@ -71,11 +71,11 @@ public class BuyNowController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+
         try {
             String productId = request.getParameter("productId");
             String optionId = request.getParameter("optionId");
-            
+
             if (productId == null || optionId == null) {
                 JSONObject errorResponse = new JSONObject();
                 errorResponse.put("success", false);
@@ -101,7 +101,7 @@ public class BuyNowController extends HttpServlet {
             successResponse.put("success", true);
             successResponse.put("message", "Product found");
             response.getWriter().write(successResponse.toString());
-            
+
         } catch (Exception e) {
             JSONObject errorResponse = new JSONObject();
             errorResponse.put("success", false);

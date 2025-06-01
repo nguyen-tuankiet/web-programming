@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(name = "AcceptInviteController", value = "/invite/accept")
+@WebServlet(name = "AcceptInviteController", value = "/accept-invite")
 public class AcceptInviteController extends HttpServlet {
     private final InviteService inviteService = new InviteService(DBConnection.getJdbi());
     private final UserService userService = new UserService(DBConnection.getJdbi());
@@ -31,30 +31,35 @@ public class AcceptInviteController extends HttpServlet {
         String idString = request.getParameter("id");
         String email = request.getParameter("email");
         if (idString == null || email == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
+            return;
         }
-        assert idString != null;
-        Integer roleId = Integer.parseInt(idString);
-        Invite invite = inviteService.getInviteByIdAndEmail(roleId, email);
 
+        Integer inviteId = Integer.parseInt(idString);
+        Invite invite = inviteService.getInviteByIdAndEmail(inviteId, email);
         if (invite == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
+            return;
         }
-        assert invite != null;
         if (invite.getExpiresAt() < System.currentTimeMillis()) {
-            response.sendRedirect("/other/expired-invite.jsp");
+            response.sendRedirect("expired-invite.jsp");
+            return;
         }
 
         User user = userService.getUserByEmail(email);
         if (user == null) {
-            response.sendRedirect("/login");
+            response.sendRedirect("login");
+            return;
         }
 
-        Boolean isSuccess= inviteService.updateInviteStatus(roleId, Status.ACTIVE);
+        Boolean isSuccess= inviteService.updateInviteStatus(invite.getId() , Status.ACCEPTED);
+
+
+
         if (isSuccess) {
-            assert user != null;
-            if ( userRoleService.updateUserRole(user.getId(), roleId)){
-                response.sendRedirect("/other/accept-success.jsp");
+            if ( userRoleService.updateUserRole(user.getId(), invite.getRoleId() )){
+                response.sendRedirect("accept-success.jsp");
+                return;
             }
 
         }
