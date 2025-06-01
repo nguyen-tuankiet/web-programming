@@ -17,7 +17,14 @@ import java.util.List;
 @RegisterConstructorMapper(Role.class)
 public interface UserDao {
 
-    @SqlQuery("SELECT * FROM user")
+
+    @SqlQuery("SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone, " +
+            "u.password, u.avatarId, u.salt, i.url as avatarUrl, u.status, u.confirmationToken, u.facebookId, " +
+            "r.id as 'role.id', r.roleType as 'role.roleType', r.name as 'role.name', " +
+            "r.description as 'role.description', r.isActive as 'role.isActive' " +
+            "FROM user u " +
+            "LEFT JOIN image i ON u.avatarId = i.id " +
+            "LEFT JOIN role r ON u.roleId = r.id")
     List<User> getAllUsers();
 
     @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
@@ -50,8 +57,21 @@ public interface UserDao {
             "WHERE u.confirmationToken = :token")
     User getUserByConfirmationToken(@Bind("token") String token);
 
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, roleId, salt, status, confirmationToken, facebookId) " +
-            "VALUES (:fullName, :displayName, :email, :password, (SELECT id FROM role WHERE roleType = 'USER' LIMIT 1), :salt, 'PENDING', :confirmationToken, :facebookId)")
+
+
+    @SqlQuery("""
+    SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,
+           i.url AS avatarUrl,
+           u.status, u.confirmationToken, u.role, u.password, u.salt, u.facebookId
+    FROM user u
+    LEFT JOIN image i ON u.avatarId = i.id
+    WHERE (:keyword IS NULL OR :keyword = '' OR LOWER(u.fullName) LIKE CONCAT('%', LOWER(:keyword), '%'))
+""")
+    List<User> getUsersByKeyword(@Bind("keyword") String keyword);
+
+
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt, 'PENDING', :confirmationToken, :facebookId)")
     @GetGeneratedKeys("id")
     String createUser(@Bind("fullName") String fullName,
                       @Bind("displayName") String displayName,

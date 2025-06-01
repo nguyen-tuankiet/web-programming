@@ -6,7 +6,6 @@
   <meta charset="UTF-8">
   <title>Quản lý Banner</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/banner/banner.css">
-  <script src="${pageContext.request.contextPath}/static/style-component/style-admin/banner/banner.js" defer></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script>
     const contextPath = "${pageContext.request.contextPath}";
@@ -32,17 +31,23 @@
       </div>
 
       <!-- Form thêm banner -->
+      <div id="overlay" class="hidden"></div>
       <div id="add-banner-box" class="hidden">
         <h3>Thêm Banner</h3>
         <input type="text" id="banner-status" class="input-field" placeholder="Tên banner">
-        <input type="file" id="banner-imageFile" accept="image/png, image/jpeg" class="input-field" required />
-        <textarea id="banner-description" class="input-field" placeholder="Mô tả banner"></textarea>
+        <div class="form-group">
+          <label for="banner-imageFile" class="custom-file-label">
+            <i class="fa-solid fa-upload"></i> Chọn ảnh banner
+          </label>
+          <input type="file" id="banner-imageFile" accept="image/png, image/jpeg" class="input-field" required style="display:none" />
+          <div id="image-preview-wrapper" style="display:none; margin-top: 10px;">
+            <img id="banner-image-preview" class="preview-image" src="" alt="Ảnh preview" style="max-width:120px; border-radius:8px; cursor:pointer;" />
+          </div>
+        </div>
+        <textarea id="banner-description" class="input-field" placeholder="Mô tả banner" maxlength="50"></textarea>
+        <span id="desc-count" style="font-size:12px;color:#888;"></span>
         <input type="date" id="banner-startDate" class="input-field">
         <input type="date" id="banner-endDate" class="input-field">
-        <select id="banner-isActive" class="input-field">
-          <option value="true">Hoạt động</option>
-          <option value="false">Không hoạt động</option>
-        </select>
         <div class="action-buttons">
           <button id="submit-banner-btn" class="add-btn">Thêm</button>
           <button id="discard-banner-btn" class="discard-btn">Hủy</button>
@@ -115,7 +120,7 @@
           <tbody id="banner-table-body">
           <c:if test="${empty banners}">
             <tr>
-              <td colspan="7">Không có banner nào được tìm thấy.</td>
+              <td colspan="8">Không có banner nào được tìm thấy.</td>
             </tr>
           </c:if>
           <c:if test="${not empty banners}">
@@ -150,9 +155,14 @@
         </table>
       </div>
 
-      <!-- Phân trang sẽ được JS chèn tại đây -->
     </div>
+    <script src="${pageContext.request.contextPath}/static/style-component/style-admin/banner/banner.js" defer></script>
   </div>
+</div>
+
+<div id="modal-image-viewer" class="modal-image-viewer" style="display:none;">
+  <span class="close-modal" id="close-modal-image">&times;</span>
+  <img id="modal-preview-image" src="" alt="Xem ảnh lớn" />
 </div>
 
 </body>

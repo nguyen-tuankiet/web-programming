@@ -58,7 +58,7 @@ public class InviteMemberController  extends HttpServlet {
 
         assert email != null;
         String encodedEmail = URLEncoder.encode(email, StandardCharsets.UTF_8);
-        String url = host + "/invite/accept?id=" + inviteId+"&email="+encodedEmail;
+        String url = host + "/accept-invite?id=" + inviteId+"&email="+encodedEmail;
         emailService.sendInviteEmail(email, name, roleName, url);
 
 
@@ -70,7 +70,7 @@ public class InviteMemberController  extends HttpServlet {
 
         }
 
-        // TODO: Nếu chưa có tài khoản => tạo tài khoản phải set role rồi gởi mk kèm theo email confirm
+        // TODO: Nếu chưa có tài khoản => tạo tài khoản, phải set sẵn role USER rồi gởi mk kèm theo email confirm
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
