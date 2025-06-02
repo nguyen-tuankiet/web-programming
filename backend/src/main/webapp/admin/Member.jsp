@@ -76,7 +76,6 @@
                     </c:if>
 
                     <c:forEach items="${members}" var="m">
-                        <p>${m}</p>
                         <tr>
                             <td class="user">
                                 <c:if test="${not empty m.avatarUrl}">
@@ -100,21 +99,20 @@
                                     <select class="role_list">
 
 
-                                        <option value="${m.email}" selected>${m.email} </option>
 
-    <%--                                    <c:if test="${not empty roles}">--%>
-    <%--                                        <c:forEach var="r" items="${roles}">--%>
-    <%--                                            <c:choose>--%>
-    <%--                                                <c:when test="${m.role.roleType == r.roleType} ">--%>
-    <%--                                                    <option value="${r.roleType}" selected>${r.name} </option>--%>
-    <%--                                                </c:when>--%>
+                                        <c:if test="${not empty roles}">
+                                            <c:forEach var="r" items="${roles}">
+                                                <c:choose>
+                                                    <c:when test="${m.role.roleType == r.roleType} ">
+                                                        <option value="${r.roleType}" selected>${r.name} </option>
+                                                    </c:when>
 
-    <%--                                                <c:otherwise>--%>
-    <%--                                                    <option value="${r.roleType}">${r.name} </option>--%>
-    <%--                                                </c:otherwise>--%>
-    <%--                                            </c:choose>--%>
-    <%--                                        </c:forEach>--%>
-    <%--                                    </c:if>--%>
+                                                    <c:otherwise>
+                                                        <option value="${r.roleType}">${r.name} </option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </c:if>
 
                                     </select>
                                 </label>
@@ -135,15 +133,15 @@
                             <td>2025/2/1</td>
 
                             <td class="more_action">
-<%--                                <i class="fa-solid fa-gear" onclick="toggleMoreActionMenu(this)"></i>--%>
-<%--                                <div class="more_action_menu hidden">--%>
-<%--                                    <form action="${pageContext.request.contextPath}/admin/team-member/update-status"--%>
-<%--                                          method="post">--%>
-<%--                                        <input type="hidden" name="memberId" value="${m.id}">--%>
-<%--                                        <input type="hidden" name="status" value="DEACTIVE">--%>
-<%--                                        <button type="submit" class="btn_deactivate">Vô hiệu hóa</button>--%>
-<%--                                    </form>--%>
-<%--                                </div>--%>
+                                <i class="fa-solid fa-gear" onclick="toggleMoreActionMenu(this)"></i>
+                                <div class="more_action_menu hidden">
+                                    <form action="${pageContext.request.contextPath}/admin/team-member/update-status"
+                                          method="post">
+                                        <input type="hidden" name="memberId" value="${m.id}">
+                                        <input type="hidden" name="status" value="DEACTIVE">
+                                        <button type="submit" class="btn_deactivate">Vô hiệu hóa</button>
+                                    </form>
+                                </div>
                             </td>
 
                         </tr>
