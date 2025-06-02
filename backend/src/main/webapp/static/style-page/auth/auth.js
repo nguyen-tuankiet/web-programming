@@ -98,15 +98,14 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
 
         if (response.ok) {
             const data = await response.json();
-            console.log("Dữ liệu trả về từ server:", data);  // Kiểm tra dữ liệu trả về
-
+            console.log("Dữ liệu trả về từ server:", data);
 
             if (data && data.data) {
                 console.log("Session ID:", data.data.sessionId);
                 console.log("User ID:", data.data.id);
                 console.log("Role Type:", data.data.roleType);
                 console.log("Role ID:", data.data.roleId);
-
+                console.log("Permissions:", data.data.permissions);
 
                 // Lưu vào sessionStorage
                 sessionStorage.setItem("sessionId", data.data.sessionId);
@@ -114,10 +113,12 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                 sessionStorage.setItem("roleType", data.data.roleType);
                 sessionStorage.setItem("roleId", data.data.roleId);
 
+                // Lưu permissions dưới dạng JSON string
+                sessionStorage.setItem("permissions", JSON.stringify(data.data.permissions));
+
                 if (data.data.roleType !== "USER") {
                     window.location.href = "admin/dashboard";
-                }
-                else {
+                } else {
                     window.location.href = "home";
                 }
             } else {
@@ -132,6 +133,17 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
         alert("Đã xảy ra lỗi! Vui lòng thử lại.");
     }
 });
+
+// Helper function to check if user has specific permission
+function hasPermission(permissionType) {
+    const permissions = JSON.parse(sessionStorage.getItem("permissions") || "[]");
+    return permissions.includes(permissionType);
+}
+
+// Helper function to get all user permissions
+function getUserPermissions() {
+    return JSON.parse(sessionStorage.getItem("permissions") || "[]");
+}
 
 
 // Hàm kiểm tra mật khẩu
