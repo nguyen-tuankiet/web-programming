@@ -77,7 +77,6 @@ public interface UserDao {
 
 
     @SqlQuery("""
-
             SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,   \s
              u.password, u.salt, u.avatarId, u.status, u.confirmationToken, u.facebookId,   \s
              i.url as avatarUrl,   \s
@@ -87,9 +86,10 @@ public interface UserDao {
              LEFT JOIN image as i ON u.avatarId = i.id   \s
              LEFT JOIN user_role as ur ON u.id = ur.userId   \s
              LEFT JOIN role as r ON ur.roleId = r.id   \s
-             where r.roleType  != "USER"
-
+      
+            where r.roleType  != "USER"
     """)
+    @RegisterRowMapper(UserWithRoleMapper.class)
     List<User> getMembers();
 
 

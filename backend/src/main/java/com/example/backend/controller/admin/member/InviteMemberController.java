@@ -23,7 +23,8 @@ import java.time.Duration;
 public class InviteMemberController  extends HttpServlet {
     EmailService emailService = new EmailService();
     InviteService inviteService = new InviteService(DBConnection.getJdbi());
-    private final String host = ConfigLoader.get("host.dev");
+//    private final String host = ConfigLoader.get("host.dev");
+    private final String host = ConfigLoader.get("host.product");
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
