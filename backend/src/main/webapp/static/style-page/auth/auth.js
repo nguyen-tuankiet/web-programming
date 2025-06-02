@@ -116,9 +116,14 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
                 // Lưu permissions dưới dạng JSON string
                 sessionStorage.setItem("permissions", JSON.stringify(data.data.permissions));
 
-                if (data.data.roleType !== "USER") {
+                if(data.data.status === "BANNED"){
+                    // alert("test" + data.data.status)
+                    window.location.href = "home"
+                }
+                if (data.data.roleType !== "USER" && data.data.status === "ACTIVE" ) {
                     window.location.href = "admin/dashboard";
-                } else {
+                }
+                else {
                     window.location.href = "home";
                 }
             } else {

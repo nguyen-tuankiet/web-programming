@@ -43,7 +43,7 @@ public class AdminAuthorizationFilter implements Filter {
         // Lấy thông tin người dùng từ cơ sở dữ liệu dựa trên userId từ session
         User user = authService.getUserById(userId);
 
-        if (user == null || role == ERole.USER) {
+        if (user == null || role == ERole.USER || user.getStatus().equals("BANNED")) {
             session.invalidate();
             redirectToLoginWithMessage(request, response, "Bạn không có quyền truy cập vào trang này.");
             return;
