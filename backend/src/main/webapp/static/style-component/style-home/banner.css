@@ -26,6 +26,37 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 8px;
+    transition: opacity 0.5s ease-in-out;
+}
+#home_banner {
+    height: 600px;
+}
+
+@media screen and (max-width: 768px) {
+    .banner-content {
+        max-width: 90%;
+        padding: 20px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .banner-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .banner-content p {
+        font-size: 14px;
+    }
+
+    .pause-play-btn {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .indicator {
+        bottom: 70px;
+    }
 }
 
 .banner-slide.active {

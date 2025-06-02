@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class Banner {
     Integer id;
-    String status;
+    String title;
     String imageId;
     LocalDate startDate;
     LocalDate endDate;
@@ -13,7 +13,7 @@ public class Banner {
     String description;
 
     public Banner(@ColumnName("id") Integer id,
-                  @ColumnName("status") String status,
+                  @ColumnName("title") String title,
                   @ColumnName("imageId") String imageId,
                   @ColumnName("startDate") LocalDate startDate,
                   @ColumnName("endDate") LocalDate endDate,
@@ -21,7 +21,7 @@ public class Banner {
                   @ColumnName("description") String description
     ) {
         this.id = id;
-        this.status = status;
+        this.title = title;
         this.imageId = imageId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -30,7 +30,7 @@ public class Banner {
     }
 
     public Integer getId() { return id; }
-    public String getStatus() { return status; }
+    public String getTitle() { return title; }
     public String getImageId() { return imageId; }
     public LocalDate getStartDate() { return startDate; }
     public LocalDate getEndDate() { return endDate; }
@@ -39,7 +39,7 @@ public class Banner {
     public void setDescription(String description) { this.description = description; }
 
     public void setId(Integer id) { this.id = id; }
-    public void setStatus(String status) { this.status = status; }
+    public void setTitle(String title) { this.title = title; }
     public void setImageId(String imageId) { this.imageId = imageId; }
     public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
     public void setEndDate(LocalDate endDate) { this.endDate = endDate; }

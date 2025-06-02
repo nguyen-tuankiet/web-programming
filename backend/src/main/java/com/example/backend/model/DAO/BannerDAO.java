@@ -17,10 +17,10 @@ public interface BannerDAO {
     @SqlQuery("SELECT * FROM banners WHERE id = :id")
     Banner getBannerById(@Bind("id") Integer id);
 
-    @SqlUpdate("INSERT INTO banners (status, imageId, startDate, endDate, isActive, description) " +
-            "VALUES (:status, :imageId, :startDate, :endDate, :isActive, :description)")
+    @SqlUpdate("INSERT INTO banners (title, imageId, startDate, endDate, isActive, description) " +
+            "VALUES (:title, :imageId, :startDate, :endDate, :isActive, :description)")
     @GetGeneratedKeys("id")
-    int createBanner(@Bind("status") String status,
+    int createBanner(@Bind("title") String title,
                      @Bind("imageId") String imageId,
                      @Bind("startDate") LocalDate startDate,
                      @Bind("endDate") LocalDate endDate,
@@ -28,9 +28,9 @@ public interface BannerDAO {
                      @Bind("description") String description);
 
 
-    @SqlUpdate("UPDATE banners SET status = :status, imageId = :imageId, startDate = :startDate, endDate = :endDate, description = :description WHERE id = :id")
+    @SqlUpdate("UPDATE banners SET title = :title, imageId = :imageId, startDate = :startDate, endDate = :endDate, description = :description WHERE id = :id")
     void updateBanner(@Bind("id") Integer id,
-                      @Bind("status") String status,
+                      @Bind("title") String title,
                       @Bind("imageId") String imageId,
                       @Bind("startDate") LocalDate startDate,
                       @Bind("endDate") LocalDate endDate,
@@ -41,6 +41,6 @@ public interface BannerDAO {
     void deleteBanner(@Bind("id") Integer id);
 
     @SqlUpdate("UPDATE banners SET isActive = :isActive WHERE id = :id")
-    void updateBannerStatus(@Bind("id") Integer id, @Bind("isActive") boolean isActive);
+    void updateBannerTitle(@Bind("id") Integer id, @Bind("isActive") boolean isActive);
 
 }
