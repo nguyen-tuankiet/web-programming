@@ -45,9 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-
-
-
     inviteForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -84,5 +81,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     });
+
+
+
+
+    const roleSelects = document.querySelectorAll(".role_list");
+
+    roleSelects.forEach(select => {
+        let currentRole = select.getAttribute("data-role-current");
+        const member = select.closest("tr");
+        console.log(member);
+
+
+        if (member) {
+            const memberId = member.getAttribute("data-member-id");
+            console.log(memberId);
+
+
+            select.addEventListener("change", function (event) {
+                const newRole = event.target.value;
+
+                if (newRole !== currentRole) {
+                    const confirmChange = confirm("Bạn có chắc chắn muốn đổi vai trò?");
+                    if (!confirmChange) {
+                        event.target.value = currentRole;
+                    } else {
+                        const roleId = event.target.selectedOptions[0].dataset.roleId;
+                        const request = {
+                            "memberId": memberId,
+                            "roleId": roleId
+                        }
+
+                        fetch("/admin/member/change-role", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(request),
+                        }).then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                if (data && data.success) {
+                                    currentRole = newRole;
+                                    select.setAttribute("data-role-current", newRole);
+                                    alert("Success!");
+                                }
+                            })
+
+
+                    }
+                }
+            });
+        }
+    });
+
+
+
+
+
+
 });
 

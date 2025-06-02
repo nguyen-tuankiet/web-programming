@@ -76,8 +76,8 @@
                     </c:if>
 
                     <c:forEach items="${members}" var="m">
-                        <tr>
-                            <td class="user">
+                        <tr data-member-id="${m.id}">
+                            <td class="user" >
                                 <c:if test="${not empty m.avatarUrl}">
                                     <img class="avatar" src="${m.avatarUrl}" alt="Avatar"/>
                                 </c:if>
@@ -96,19 +96,22 @@
 
                             <td class="role">
                                 <label>
-                                    <select class="role_list">
-
+                                    <select class="role_list" data-role-current="${m.role.roleType}">
 
 
                                         <c:if test="${not empty roles}">
                                             <c:forEach var="r" items="${roles}">
+
                                                 <c:choose>
-                                                    <c:when test="${m.role.roleType == r.roleType} ">
-                                                        <option value="${r.roleType}" selected>${r.name} </option>
+                                                    <c:when test="${m.role.roleType.equals(r.roleType)}">
+                                                        <option value="${r.roleType}"  data-role-id="${r.id}" selected>
+                                                                ${r.name}
+                                                        </option>
+
                                                     </c:when>
 
                                                     <c:otherwise>
-                                                        <option value="${r.roleType}">${r.name} </option>
+                                                        <option value="${r.roleType}" data-role-id="${r.id}"> ${r.name} </option>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </c:forEach>
