@@ -28,12 +28,8 @@ import java.util.HashMap;
 public class LoginController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
-//    private static final Dotenv dotenv = Dotenv.configure()
-//            .load();
-//
-//    private static final String SECRET_KEY = dotenv.get("RECAPTCHA_SECRET_KEY");
 
-    private static final String SECRET_KEY = System.getenv("RECAPTCHA_SECRET_KEY");
+    private static final String SECRET_KEY =  EnvConfig.get("RECAPTCHA_SECRET_KEY");
 
     private boolean verifyRecaptcha(String token) {
         try {
