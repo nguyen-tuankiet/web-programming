@@ -16,9 +16,9 @@
 </head>
 <body>
 
-<div id="banner">
-  <jsp:include page="banner.jsp"/>
-</div>
+<%--<div id="banner">--%>
+<%--  <jsp:include page="banner.jsp"/>--%>
+<%--</div>--%>
 
 <section class="body">
   <h2>Ngôi nhà thông minh, cuộc sống tiện nghi</h2>

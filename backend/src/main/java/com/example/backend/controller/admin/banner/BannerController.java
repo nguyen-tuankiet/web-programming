@@ -58,7 +58,7 @@ public class BannerController extends HttpServlet {
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> json = objectMapper.readValue(body, new TypeReference<>() {});
 
-            String status = (String) json.get("status");
+            String title = (String) json.get("title");
 
             String description = (String) json.get("description");
 
@@ -68,7 +68,7 @@ public class BannerController extends HttpServlet {
             LocalDate endDate = LocalDate.parse((String) json.get("endDate"));
             boolean isActive = json.get("isActive") != null && (Boolean) json.get("isActive");
 
-            Banner banner = bannerService.createBanner(status, imageId, startDate, endDate, isActive, description);
+            Banner banner = bannerService.createBanner(title, imageId, startDate, endDate, isActive, description);
 
             ResponseWrapper<Object> wrapper = new ResponseWrapper<>(201, "success", "Banner created", banner);
             writeJson(response, wrapper);
@@ -103,7 +103,7 @@ public class BannerController extends HttpServlet {
 
         bannerService.updateBanner(
                 id,
-                (String) jsonData.get("status"),
+                (String) jsonData.get("title"),
                 (String) jsonData.get("imageId"),
                 LocalDate.parse((String) jsonData.get("startDate")),
                 LocalDate.parse((String) jsonData.get("endDate")),
