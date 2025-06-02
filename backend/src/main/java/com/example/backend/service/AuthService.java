@@ -155,9 +155,9 @@ public class AuthService {
             if ("PENDING".equals(user.getStatus())) {
                 throw new RuntimeException("Tài khoản chưa được xác nhận. Vui lòng kiểm tra email của bạn.");
             }
-            if ("BANNED".equals(user.getStatus())) {
-                throw new RuntimeException("Tài khoản của bạn đã bị khóa.");
-            }
+//            if ("BANNED".equals(user.getStatus())) {
+//                throw new RuntimeException("Tài khoản của bạn đã bị khóa.");
+//            }
             if ("DEACTIVE".equals(user.getStatus())) {
                 throw new RuntimeException("Tài khoản của bạn đã bị vô hiệu hóa.");
             }
