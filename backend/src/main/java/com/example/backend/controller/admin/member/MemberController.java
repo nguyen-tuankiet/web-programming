@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "TeamMemberListController", urlPatterns = {"/admin/team-member"})
@@ -25,9 +26,10 @@ public class MemberController extends HttpServlet {
             throws ServletException, IOException {
 
         List<User> members = userService.getMembers();
-        List<>
+        List<Role> roles = roleService.getAllRoles();
 
         request.setAttribute("members", members);
+        request.setAttribute("roles", roles);
 
         request.getRequestDispatcher("/admin/Member.jsp").forward(request, response);
 

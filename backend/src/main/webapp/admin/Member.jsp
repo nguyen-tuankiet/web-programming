@@ -76,6 +76,7 @@
                     </c:if>
 
                     <c:forEach items="${members}" var="m">
+                        <p>${m}</p>
                         <tr>
                             <td class="user">
                                 <c:if test="${not empty m.avatarUrl}">
@@ -95,48 +96,66 @@
                             </td>
 
                             <td class="role">
-                                <select class="role_list">
+                                <label>
+                                    <select class="role_list">
 
-                                    <c:forEach var="r" items="${roles}">
-                                      <option value="${r.roleType}" selected>${r.roleType} ${r.name} ${m.role}</option>
-                                    </c:forEach>
 
-                                </select>
+                                        <option value="${m.email}" selected>${m.email} </option>
+
+    <%--                                    <c:if test="${not empty roles}">--%>
+    <%--                                        <c:forEach var="r" items="${roles}">--%>
+    <%--                                            <c:choose>--%>
+    <%--                                                <c:when test="${m.role.roleType == r.roleType} ">--%>
+    <%--                                                    <option value="${r.roleType}" selected>${r.name} </option>--%>
+    <%--                                                </c:when>--%>
+
+    <%--                                                <c:otherwise>--%>
+    <%--                                                    <option value="${r.roleType}">${r.name} </option>--%>
+    <%--                                                </c:otherwise>--%>
+    <%--                                            </c:choose>--%>
+    <%--                                        </c:forEach>--%>
+    <%--                                    </c:if>--%>
+
+                                    </select>
+                                </label>
                             </td>
 
 
                             <td>
-                      <span class="status_label ${m.status.name().toLowerCase()}">
-                        <c:choose>
-                            <c:when test="${m.status.name() eq 'ACTIVE'}">Hoạt động</c:when>
-                            <c:when test="${m.status.name() eq 'PENDING'}">ĐANG CHỜ XỬ LÝ</c:when>
-                            <c:when test="${m.status.name() eq 'BANNED'}">CẤM</c:when>
-                            <c:when test="${m.status.name() eq 'DEACTIVE'}">VÔ HIỆU HÓA</c:when>
-                            <c:otherwise>Unknown</c:otherwise>
-                        </c:choose>
-                      </span>
+                              <span class="status_label ${m.status.toLowerCase()}">
+                                <c:choose>
+                                    <c:when test="${m.status eq 'ACTIVE'}">Đang hoạt động</c:when>
+                                    <c:when test="${m.status eq 'PENDING'}">Chờ xác nhận</c:when>
+                                    <c:when test="${m.status eq 'INACTIVE'}">VÔ HIỆU HÓA</c:when>
+                                    <c:otherwise>Unknown</c:otherwise>
+                                </c:choose>
+                              </span>
                             </td>
 
                             <td>2025/2/1</td>
 
                             <td class="more_action">
-                                <i class="fa-solid fa-gear" onclick="toggleMoreActionMenu(this)"></i>
-                                <div class="more_action_menu hidden">
-                                    <form action="${pageContext.request.contextPath}/admin/team-member/update-status"
-                                          method="post">
-                                        <input type="hidden" name="memberId" value="${m.id}">
-                                        <input type="hidden" name="status" value="DEACTIVE">
-                                        <button type="submit" class="btn_deactivate">Vô hiệu hóa</button>
-                                    </form>
-                                </div>
+<%--                                <i class="fa-solid fa-gear" onclick="toggleMoreActionMenu(this)"></i>--%>
+<%--                                <div class="more_action_menu hidden">--%>
+<%--                                    <form action="${pageContext.request.contextPath}/admin/team-member/update-status"--%>
+<%--                                          method="post">--%>
+<%--                                        <input type="hidden" name="memberId" value="${m.id}">--%>
+<%--                                        <input type="hidden" name="status" value="DEACTIVE">--%>
+<%--                                        <button type="submit" class="btn_deactivate">Vô hiệu hóa</button>--%>
+<%--                                    </form>--%>
+<%--                                </div>--%>
                             </td>
 
                         </tr>
                     </c:forEach>
+
+
                     </tbody>
                 </table>
             </div>
         </div>
+
+
         <!-- Phần Modal (popup) cho Invite -->
         <div id="inviteModal" class="modal hidden">
             <div class="modal_content">
