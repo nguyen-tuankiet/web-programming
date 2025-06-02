@@ -244,8 +244,6 @@
 <body>
 <div id="body" class="row">
     <c:set var="roleType" value="${sessionScope.roleType}" />
-    <h1>${roleType}</h1>
-
 
     <nav id="sidebar" class="col">
 
@@ -254,13 +252,19 @@
         </div>
 
         <ul>
-            <!-- Bảng điều khiển -->
+
             <li class="menu_item ">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-house"></i>
                     <a href="dashboard">Tổng quan</a>
                 </div>
             </li>
+
+            <c:if test="${roleType == 'ORDER_MANAGER' || roleType == 'PRODUCT_MANAGER'}">
+
+
+            </c:if>
+
 
 
             <li class="menu_item">

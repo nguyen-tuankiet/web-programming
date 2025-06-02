@@ -25,4 +25,5 @@ public enum EPermission {
 
     VIEW_CUSTOMERS,
 
+    CUSTOMERS
 }
