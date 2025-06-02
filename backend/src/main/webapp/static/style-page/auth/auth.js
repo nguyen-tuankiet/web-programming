@@ -12,7 +12,7 @@ loginButton.addEventListener("click", () => {
 });
 
 // Hiển thị/Ẩn mật khẩu
-togglePasswords.forEach((togglePassword) => {
+togglePasswords.forEach((togglePassword) => {togglePasswords
     togglePassword.addEventListener("click", function () {
         const passwordInput = document.querySelector(
             this.getAttribute("data-toggle")
@@ -208,26 +208,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const signInButton = document.getElementById('signInButton');
 
     checkSavedCredentials();
-    // loginForm.addEventListener('submit', function(e) {
-    //     e.preventDefault();
-    //
-    //     const email = emailInput.value.trim();
-    //     const password = passwordInput.value;
-    //
-    //     if (rememberCheckbox.checked) {
-    //         saveCredentials(email, password);
-    //     } else {
-    //         clearSavedCredentials();
-    //     }
-    //     // login(email, password, recaptchaResponse);
-    //     const recaptchaResponse = grecaptcha.getResponse();
-    //     if (!recaptchaResponse) {
-    //         alert("Vui lòng xác nhận bạn không phải là robot.");
-    //         return;
-    //     }
-    //
-    //     login(email, password, recaptchaResponse);
-    // });
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (rememberCheckbox.checked) {
+            saveCredentials(email, password);
+        } else {
+            clearSavedCredentials();
+        }
+        // login(email, password, recaptchaResponse);
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+            alert("Vui lòng xác nhận bạn không phải là robot.");
+            return;
+        }
+
+        login(email, password, recaptchaResponse);
+    });
 
     function saveCredentials(email, password) {
         const encodedPassword = btoa(password);
@@ -255,21 +255,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
-    togglePasswordButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-toggle');
-            const passwordInput = document.querySelector(targetId);
-
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                this.classList.remove('fa-eye');
-                this.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                this.classList.remove('fa-eye-slash');
-                this.classList.add('fa-eye');
-            }
-        });
-    });
 });
