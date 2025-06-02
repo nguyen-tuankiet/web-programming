@@ -28,12 +28,7 @@ import java.util.HashMap;
 public class LoginController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
-//    private static final Dotenv dotenv = Dotenv.configure()
-//            .load();
-//
-//    private static final String SECRET_KEY = dotenv.get("RECAPTCHA_SECRET_KEY");
-
-    private static final String SECRET_KEY = System.getenv("RECAPTCHA_SECRET_KEY");
+    private static final String SECRET_KEY =  EnvConfig.get("RECAPTCHA_SECRET_KEY");
 
     private boolean verifyRecaptcha(String token) {
         try {
@@ -105,7 +100,8 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
                 // Lưu role name thay vì role object để tương thích với session
-                session.setAttribute("role", user.getRole().getRoleType() );
+                session.setAttribute("roleType", user.getRole().getRoleType());
+                session.setAttribute("roleId", user.getRole().getId());
 
                 // Trả về thông tin người dùng
                 Map<String, String> userData = Map.of(
@@ -113,7 +109,8 @@ public class LoginController extends HttpServlet {
                         "fullName", user.getFullName(),
                         "displayName", user.getDisplayName(),
                         "email", user.getEmail(),
-                        "role",user.getRole().getRoleType().toString() ,
+                        "roleType",user.getRole().getRoleType().toString(),
+                        "roleId", String.valueOf(user.getRole().getId()),
                         "status", user.getStatus(),
                         "sessionId", session.getId()
                 );

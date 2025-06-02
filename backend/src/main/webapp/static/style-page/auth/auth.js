@@ -104,14 +104,17 @@ document.querySelector(".sign-in-container form").addEventListener("submit", asy
             if (data && data.data) {
                 console.log("Session ID:", data.data.sessionId);
                 console.log("User ID:", data.data.id);
-                console.log("Role:", data.data.role);
+                console.log("Role Type:", data.data.roleType);
+                console.log("Role ID:", data.data.roleId);
+
 
                 // Lưu vào sessionStorage
                 sessionStorage.setItem("sessionId", data.data.sessionId);
                 sessionStorage.setItem("userId", data.data.id);
-                sessionStorage.setItem("role", data.data.role);
+                sessionStorage.setItem("roleType", data.data.roleType);
+                sessionStorage.setItem("roleId", data.data.roleId);
 
-                if (data.data.role !== "USER") {
+                if (data.data.roleType !== "USER") {
                     window.location.href = "admin/dashboard";
                 }
                 else {
