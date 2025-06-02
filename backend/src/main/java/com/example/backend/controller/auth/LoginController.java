@@ -28,7 +28,6 @@ import java.util.HashMap;
 public class LoginController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
-
     private static final String SECRET_KEY =  EnvConfig.get("RECAPTCHA_SECRET_KEY");
 
     private boolean verifyRecaptcha(String token) {
