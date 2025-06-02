@@ -69,13 +69,13 @@
                     </thead>
 
                     <tbody>
-                    <c:if test="${empty teamMembers}">
+                    <c:if test="${empty members}">
                         <tr>
                             <td colspan="5">Không có thành viên nào</td>
                         </tr>
                     </c:if>
 
-                    <c:forEach items="${teamMembers}" var="m">
+                    <c:forEach items="${members}" var="m">
                         <tr>
                             <td class="user">
                                 <c:if test="${not empty m.avatarUrl}">
@@ -95,46 +95,39 @@
                             </td>
 
                             <td class="role">
-                                <select class="role_list">
-                                        <%--                  <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị Viên</option>--%>
-                                        <%--                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Nhân Viên</option>--%>
-                                        <%--                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Người Dùng</option>--%>
-                                    <c:forEach var="r" items="${roles}">
-
-                                      <option value="${r.roleType}" selected>${r.roleType} ${r.name} ${m.role}</option>
+                                <label>
+                                    <select class="role_list">
 
 
-<%--                                      <c:choose>--%>
-<%--                                            <c:when test="${r.roleType == m.role}">--%>
-<%--                                                &lt;%&ndash;&ndash;%&gt;--%>
-<%--                                                <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị--%>
-<%--                                                    Viên--%>
-<%--                                                </option>--%>
-<%--                                            </c:when>--%>
 
-<%--                                          --%>
-<%--                                            <c:otherwise>--%>
-<%--&lt;%&ndash;                                                <option value="${r.roleType}">${r.name}</option>&ndash;%&gt;--%>
-<%--                                            </c:otherwise>--%>
-<%--                                        </c:choose>--%>
+                                        <c:if test="${not empty roles}">
+                                            <c:forEach var="r" items="${roles}">
+                                                <c:choose>
+                                                    <c:when test="${m.role.roleType == r.roleType} ">
+                                                        <option value="${r.roleType}" selected>${r.name} </option>
+                                                    </c:when>
 
+                                                    <c:otherwise>
+                                                        <option value="${r.roleType}">${r.name} </option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </c:if>
 
-                                    </c:forEach>
-
-                                </select>
+                                    </select>
+                                </label>
                             </td>
 
 
                             <td>
-                      <span class="status_label ${m.status.name().toLowerCase()}">
-                        <c:choose>
-                            <c:when test="${m.status.name() eq 'ACTIVE'}">Hoạt động</c:when>
-                            <c:when test="${m.status.name() eq 'PENDING'}">ĐANG CHỜ XỬ LÝ</c:when>
-                            <c:when test="${m.status.name() eq 'BANNED'}">CẤM</c:when>
-                            <c:when test="${m.status.name() eq 'DEACTIVE'}">VÔ HIỆU HÓA</c:when>
-                            <c:otherwise>Unknown</c:otherwise>
-                        </c:choose>
-                      </span>
+                              <span class="status_label ${m.status.toLowerCase()}">
+                                <c:choose>
+                                    <c:when test="${m.status eq 'ACTIVE'}">Đang hoạt động</c:when>
+                                    <c:when test="${m.status eq 'PENDING'}">Chờ xác nhận</c:when>
+                                    <c:when test="${m.status eq 'INACTIVE'}">VÔ HIỆU HÓA</c:when>
+                                    <c:otherwise>Unknown</c:otherwise>
+                                </c:choose>
+                              </span>
                             </td>
 
                             <td>2025/2/1</td>
@@ -153,10 +146,14 @@
 
                         </tr>
                     </c:forEach>
+
+
                     </tbody>
                 </table>
             </div>
         </div>
+
+
         <!-- Phần Modal (popup) cho Invite -->
         <div id="inviteModal" class="modal hidden">
             <div class="modal_content">

@@ -95,7 +95,19 @@
                                             ${c.fullName}
                                     </a>
                                 </td>
-                                <td> ${c.phone}</td>
+
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${not empty c.phone }">
+                                            ${c.phone}
+                                        </c:when>
+                                        <c:otherwise>
+                                            Chưa cập nhật
+                                        </c:otherwise>
+                                    </c:choose>
+
+
+                                </td>
                                 <td>${c.email} </td>
                              </tr>
                         </c:forEach>
