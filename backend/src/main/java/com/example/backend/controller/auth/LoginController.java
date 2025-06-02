@@ -4,6 +4,7 @@ import com.example.backend.Connection.DBConnection;
 import com.example.backend.config.EnvConfig;
 import com.example.backend.service.AuthService;
 import com.example.backend.model.User;
+import com.example.backend.model.Permission;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
@@ -23,6 +24,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
@@ -96,26 +99,33 @@ public class LoginController extends HttpServlet {
             User user = authService.login(email, password);
 
             if (user != null) {
+                // Lấy danh sách permissions cho role của user
+                List<Permission> permissions = authService.getPermissionsByRoleId(user.getRole().getId());
+                List<String> permissionTypes = permissions.stream()
+                        .map(permission -> permission.getType().toString())
+                        .collect(Collectors.toList());
+
                 // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
                 // Lưu role name thay vì role object để tương thích với session
                 session.setAttribute("roleType", user.getRole().getRoleType());
                 session.setAttribute("roleId", user.getRole().getId());
+                session.setAttribute("permissions", permissionTypes);
 
-                // Trả về thông tin người dùng
-                Map<String, String> userData = Map.of(
-                        "id", String.valueOf(user.getId()),
-                        "fullName", user.getFullName(),
-                        "displayName", user.getDisplayName(),
-                        "email", user.getEmail(),
-                        "roleType",user.getRole().getRoleType().toString(),
-                        "roleId", String.valueOf(user.getRole().getId()),
-                        "status", user.getStatus(),
-                        "sessionId", session.getId()
-                );
+                // Trả về thông tin người dùng kèm permissions
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("id", String.valueOf(user.getId()));
+                userData.put("fullName", user.getFullName());
+                userData.put("displayName", user.getDisplayName());
+                userData.put("email", user.getEmail());
+                userData.put("roleType", user.getRole().getRoleType().toString());
+                userData.put("roleId", String.valueOf(user.getRole().getId()));
+                userData.put("status", user.getStatus());
+                userData.put("sessionId", session.getId());
+                userData.put("permissions", permissionTypes);
 
-                ResponseWrapper<Map<String, String>> responseWrapper = new ResponseWrapper<>(
+                ResponseWrapper<Map<String, Object>> responseWrapper = new ResponseWrapper<>(
                         200, "success", "Đăng nhập thành công", userData);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
             } else {
