@@ -70,8 +70,9 @@ public interface UserDao {
     List<User> getUsersByKeyword(@Bind("keyword") String keyword);
 
 
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, role, salt, status, confirmationToken, facebookId) " +
-            "VALUES (:fullName, :displayName, :email, :password, 'USER', :salt, 'PENDING', :confirmationToken, :facebookId)")
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, roleId, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, " +
+            "(SELECT id FROM role WHERE roleType = 'USER' LIMIT 1), :salt, 'PENDING', :confirmationToken, :facebookId)")
     @GetGeneratedKeys("id")
     String createUser(@Bind("fullName") String fullName,
                       @Bind("displayName") String displayName,
@@ -80,6 +81,18 @@ public interface UserDao {
                       @Bind("salt") String salt,
                       @Bind("confirmationToken") String confirmationToken,
                       @Bind("facebookId") String facebookId);
+
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, roleId, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, :roleId, :salt, 'PENDING', :confirmationToken, :facebookId)")
+    @GetGeneratedKeys("id")
+    String createUserWithRole(@Bind("fullName") String fullName,
+                              @Bind("displayName") String displayName,
+                              @Bind("email") String email,
+                              @Bind("password") String password,
+                              @Bind("roleId") Integer roleId,
+                              @Bind("salt") String salt,
+                              @Bind("confirmationToken") String confirmationToken,
+                              @Bind("facebookId") String facebookId);
 
     @SqlUpdate("UPDATE user SET status = :status WHERE id = :id")
     void updateUserStatus(@Bind("id") Integer id, @Bind("status") String status);
@@ -92,6 +105,9 @@ public interface UserDao {
                     @Bind("fullname") String fullname,
                     @Bind("email") String email,
                     @Bind("password") String password);
+
+    @SqlUpdate("UPDATE user SET roleId = :roleId WHERE id = :id")
+    void updateUserRole(@Bind("id") Integer id, @Bind("roleId") Integer roleId);
 
     @SqlUpdate("DELETE FROM user WHERE id = :id")
     void deleteUser(@Bind("id") Integer id);

@@ -15,7 +15,7 @@ public class FacebookLoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private final String FACEBOOK_APP_ID = EnvConfig.get("FACEBOOK_APP_ID");
-    private final String REDIRECT_URI = "http://localhost:8080/backend_war/facebook-callback";
+    private final String REDIRECT_URI = "http://modernhome.property/facebook-callback";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
