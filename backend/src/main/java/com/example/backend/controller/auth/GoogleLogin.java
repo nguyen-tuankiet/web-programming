@@ -1,5 +1,6 @@
 package com.example.backend.controller.auth;
 
+import com.example.backend.config.ConfigLoader;
 import com.example.backend.config.EnvConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,14 +15,15 @@ import java.util.UUID;
 public class GoogleLogin extends HttpServlet {
     String clientId = EnvConfig.get("GOOGLE_CLIENT_ID");
     String clientSecret = EnvConfig.get("GOOGLE_CLIENT_SECRET");
-    private static final String REDIRECT_URI = "http://modernhome.property/google-callback";
+    private String redirectUri;
     private static final String SCOPE = "email profile";
     private static final String AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 
     @Override
     public void init() throws ServletException {
         try {
-
+            String hostProduct = ConfigLoader.get("host.product");
+            this.redirectUri = hostProduct + "/google-callback";
             if (clientId == null || clientId.trim().isEmpty()) {
                 throw new ServletException("Google Client ID is not configured properly");
             }
@@ -47,7 +49,7 @@ public class GoogleLogin extends HttpServlet {
             // Build the Google OAuth URL
             String authUrl = AUTH_ENDPOINT +
                     "?client_id=" + java.net.URLEncoder.encode(clientId, "UTF-8") +
-                    "&redirect_uri=" + java.net.URLEncoder.encode(REDIRECT_URI, "UTF-8") +
+                    "&redirect_uri=" + java.net.URLEncoder.encode(redirectUri, "UTF-8") +
                     "&response_type=code" +
                     "&scope=" + java.net.URLEncoder.encode(SCOPE, "UTF-8") +
                     "&state=" + state +
