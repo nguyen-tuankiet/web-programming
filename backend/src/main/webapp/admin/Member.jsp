@@ -69,13 +69,13 @@
                     </thead>
 
                     <tbody>
-                    <c:if test="${empty teamMembers}">
+                    <c:if test="${empty members}">
                         <tr>
                             <td colspan="5">Không có thành viên nào</td>
                         </tr>
                     </c:if>
 
-                    <c:forEach items="${teamMembers}" var="m">
+                    <c:forEach items="${members}" var="m">
                         <tr>
                             <td class="user">
                                 <c:if test="${not empty m.avatarUrl}">
@@ -96,29 +96,9 @@
 
                             <td class="role">
                                 <select class="role_list">
-                                        <%--                  <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị Viên</option>--%>
-                                        <%--                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Nhân Viên</option>--%>
-                                        <%--                  <option value="Staff" ${m.role == 'Staff' ? 'selected' : ''}>Người Dùng</option>--%>
+
                                     <c:forEach var="r" items="${roles}">
-
                                       <option value="${r.roleType}" selected>${r.roleType} ${r.name} ${m.role}</option>
-
-
-<%--                                      <c:choose>--%>
-<%--                                            <c:when test="${r.roleType == m.role}">--%>
-<%--                                                &lt;%&ndash;&ndash;%&gt;--%>
-<%--                                                <option value="Admin" ${m.role == 'Admin' ? 'selected' : ''}>Quản Trị--%>
-<%--                                                    Viên--%>
-<%--                                                </option>--%>
-<%--                                            </c:when>--%>
-
-<%--                                          --%>
-<%--                                            <c:otherwise>--%>
-<%--&lt;%&ndash;                                                <option value="${r.roleType}">${r.name}</option>&ndash;%&gt;--%>
-<%--                                            </c:otherwise>--%>
-<%--                                        </c:choose>--%>
-
-
                                     </c:forEach>
 
                                 </select>

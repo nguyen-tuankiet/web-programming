@@ -70,9 +70,31 @@ public interface UserDao {
     LEFT JOIN image i ON u.avatarId = i.id
     LEFT JOIN user_role ur ON u.id = ur.userId
     LEFT JOIN role r ON ur.roleId = r.id
-    WHERE (:keyword IS NULL OR :keyword = '' OR LOWER(u.fullName) LIKE CONCAT('%', LOWER(:keyword), '%'))
-""")
-    List<User> getUsersByKeyword(@Bind("keyword") String keyword);
+    where r.roleType = "USER"
+    """)
+    List<User> getCustomers();
+
+
+
+    @SqlQuery("""
+
+            SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,   \s
+             u.password, u.salt, u.avatarId, u.status, u.confirmationToken, u.facebookId,   \s
+             i.url as avatarUrl,   \s
+             r.id as role_id, r.roleType as role_roleType, r.name as role_name,   \s
+             r.description as role_description, r.isActive as role_isActive   \s
+             FROM user as u   \s
+             LEFT JOIN image as i ON u.avatarId = i.id   \s
+             LEFT JOIN user_role as ur ON u.id = ur.userId   \s
+             LEFT JOIN role as r ON ur.roleId = r.id   \s
+             where r.roleType  != "USER"
+
+    """)
+    List<User> getMembers();
+
+
+
+
 
     @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, salt, status, confirmationToken, facebookId) " +
             "VALUES (:fullName, :displayName, :email, :password, :salt, 'PENDING', :confirmationToken, :facebookId)")
