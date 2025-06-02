@@ -102,8 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert('Vui lòng điền đầy đủ thông tin');
                 return;
             }
-            if (description.length > 50) {
-                alert('Mô tả chỉ được nhập tối đa 50 ký tự!');
+            if (description.length > 100) {
+                alert('Mô tả chỉ được nhập tối đa 100 ký tự!');
                 return;
             }
             try {
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.textContent = 'Đang tải lên...';
                 const uploadedImage = await uploadImage(imageFile);
                 const bannerData = {
-                    status,
+                    title: status,
                     imageId: uploadedImage.id,
                     startDate,
                     endDate,
