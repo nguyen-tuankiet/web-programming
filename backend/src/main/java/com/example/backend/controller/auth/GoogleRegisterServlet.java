@@ -1,5 +1,6 @@
 package com.example.backend.controller.auth;
 
+import com.example.backend.config.ConfigLoader;
 import com.example.backend.config.EnvConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,13 +16,15 @@ import java.util.UUID;
 public class GoogleRegisterServlet extends HttpServlet {
     String clientId = EnvConfig.get("GOOGLE_CLIENT_ID");
     String clientSecret = EnvConfig.get("GOOGLE_CLIENT_SECRET");
-    private static final String REDIRECT_URI = "http://modernhome.property/google-callback";
+    private String redirectUri;
     private static final String AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
     private static final String SCOPE = "email profile";
 
     @Override
     public void init() throws ServletException {
         try {
+            String hostProduct = ConfigLoader.get("host.product");
+            this.redirectUri = hostProduct + "/google-callback";
             if (clientId == null || clientId.isEmpty()) {
                 throw new ServletException("Google Client ID is not configured properly");
             }
@@ -47,7 +50,7 @@ public class GoogleRegisterServlet extends HttpServlet {
             String url = String.format("%s?client_id=%s&redirect_uri=%s&response_type=code&scope=%s&state=%s&access_type=offline&prompt=consent",
                     AUTH_ENDPOINT,
                     java.net.URLEncoder.encode(clientId, "UTF-8"),
-                    java.net.URLEncoder.encode(REDIRECT_URI, "UTF-8"),
+                    java.net.URLEncoder.encode(redirectUri, "UTF-8"),
                     java.net.URLEncoder.encode(SCOPE, "UTF-8"),
                     state
             );
