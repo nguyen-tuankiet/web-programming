@@ -43,7 +43,7 @@ public class AuthService {
         
         if (userId != null) {
             // Gửi email xác nhận
-            String confirmationLink = "http://localhost:8080/backend_war/confirm?token=" + confirmationToken;
+            String confirmationLink = "http://modernhome.property/confirm?token=" + confirmationToken;
             String emailContent = "Xin chào " + firstName + ",\n\n" +
                     "Cảm ơn bạn đã đăng ký tài khoản. Vui lòng nhấp vào liên kết sau để xác nhận tài khoản của bạn:\n" +
                     confirmationLink + "\n\n" +

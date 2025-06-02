@@ -40,7 +40,7 @@ import java.util.UUID;
 public class GoogleCallbackServlet extends HttpServlet {
     String clientId = EnvConfig.get("GOOGLE_CLIENT_ID");
     String clientSecret = EnvConfig.get("GOOGLE_CLIENT_SECRET");
-    private static final String REDIRECT_URI = "http://localhost:8080/backend_war/google-callback";
+    private static final String REDIRECT_URI = "http://modernhome.property/google-callback";
     private static final String TOKEN_URL = "https://oauth2.googleapis.com/token";
     private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v2/userinfo";
     private AuthService authService;

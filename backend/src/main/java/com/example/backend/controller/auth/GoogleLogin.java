@@ -14,7 +14,7 @@ import java.util.UUID;
 public class GoogleLogin extends HttpServlet {
     String clientId = EnvConfig.get("GOOGLE_CLIENT_ID");
     String clientSecret = EnvConfig.get("GOOGLE_CLIENT_SECRET");
-    private static final String REDIRECT_URI = "http://localhost:8080/backend_war/google-callback";
+    private static final String REDIRECT_URI = "http://modernhome.property/google-callback";
     private static final String SCOPE = "email profile";
     private static final String AUTH_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
 
