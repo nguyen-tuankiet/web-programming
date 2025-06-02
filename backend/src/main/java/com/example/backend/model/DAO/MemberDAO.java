@@ -18,6 +18,8 @@ public interface MemberDAO {
     """)
     List<Member> getAll();
 
+
+
     @SqlUpdate("UPDATE user SET status = :status WHERE id = :id")
     void updateStatus(@Bind("id") int id, @Bind("status") String status);
 

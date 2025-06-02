@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -223,13 +225,15 @@
             color: #2563eb;
             border-radius: 5px;
         }
+
         .logo {
             display: flex;
             align-items: center;
             margin: 0px 12px;
             padding-bottom: 30px;
         }
-         .logo img {
+
+        .logo img {
             object-fit: contain;
             width: 95%;
             height: 80%;
@@ -241,6 +245,8 @@
 
 <body>
 <div id="body" class="row">
+    <c:set var="permissions" value="${sessionScope.permissions}"/>
+
     <nav id="sidebar" class="col">
 
         <div class="logo">
@@ -248,13 +254,16 @@
         </div>
 
         <ul>
-            <!-- Bảng điều khiển -->
-            <li class="menu_item ">
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-house"></i>
-                    <a href="dashboard">Tổng quan</a>
-                </div>
-            </li>
+            <c:if test="${permissions != null or
+             (permissions.contains('VIEW_DASHBOARD'))}">
+                <li class="menu_item ">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-house"></i>
+                        <a href="dashboard">Tổng quan</a>
+                    </div>
+                </li>
+
+            </c:if>
 
 
             <li class="menu_item">
@@ -265,135 +274,165 @@
                 </div>
 
                 <ul class="submenu">
-                    <li class="submenu_item">
-                        <button onclick="location.href='${pageContext.request.contextPath}/admin/list-product'">
-                            Danh sách sản phẩm
-                        </button>
-                    </li>
-                    <li class="submenu_item">
-                        <button onclick="location.href='${pageContext.request.contextPath}/admin/add-product'">
-                            Thêm sản phẩm
-                        </button>
-                    </li>
+
+                    <c:if test="${permissions != null and
+                        (permissions.contains('VIEW_PRODUCTS'))}">
+                        <li class="submenu_item">
+                            <button onclick="location.href='${pageContext.request.contextPath}/admin/list-product'">
+                                Danh sách sản phẩm
+                            </button>
+                        </li>
+                    </c:if>
+
+
+                    <c:if test="${permissions != null and
+                        (permissions.contains('CREATE_PRODUCTS'))}">
+                        <li class="submenu_item">
+                            <button onclick="location.href='${pageContext.request.contextPath}/admin/add-product'">
+                                Thêm sản phẩm
+                            </button>
+                        </li>
+                    </c:if>
+
+
                 </ul>
             </li>
 
             <!-- Đơn hàng -->
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-cart-shopping"></i>
-<%--                    <a href="orders">Đơn hàng</a>--%>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/orders'">
-                        Đơn hàng
-                    </button>
-                </div>
 
-            </li>
 
-            <!-- Khách hàng -->
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-users"></i>
-<%--                    <a href="customers">Khách hàng</a>--%>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/customers'">
-                        Khách hàng
-                    </button>
-                </div>
+            <c:if test="${permissions != null and
+                        (permissions.contains('VIEW_ORDERS') or
+                        permissions.contains('UPDATE_ORDERS_STATUS')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/orders'">
+                            Đơn hàng
+                        </button>
+                    </div>
 
-            </li>
+                </li>
+            </c:if>
 
-            <%-- Thành viên--%>
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-user"></i>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/team-member'">
-                        Thành viên
-                    </button>
-                </div>
-            </li>
 
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fas fa-star"></i>
-                    <a href="${pageContext.request.contextPath}/admin/review">Xem Đánh giá </a>
-                </div>
-            </li>
+            <c:if test="${permissions != null and
+                        (permissions.contains('VIEW_CUSTOMERS')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-users"></i>
+                            <%--                    <a href="customers">Khách hàng</a>--%>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/customers'">
+                            Khách hàng
+                        </button>
+                    </div>
 
-            <!-- Danh mục -->
-            <li class="menu_item">
-                <div class="wrap_menu_item">
+                </li>
+            </c:if>
+
+
+            <c:if test="${permissions != null and
+                        (permissions.contains('MANAGE_MEMBER')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-user"></i>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/team-member'">
+                            Thành viên
+                        </button>
+                    </div>
+                </li>
+            </c:if>
+
+
+            <c:if test="${permissions != null and
+                        (permissions.contains('MANAGE_REVIEW') or
+                         permissions.contains('VIEW_REVIEW')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-star"></i>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/review'">
+                            Xem Đánh giá
+                        </button>
+                    </div>
+                </li>
+            </c:if>
+
+
+
+
+            <c:if test="${permissions != null and
+                        (permissions.contains('MANAGE_CATEGORIES') or
+                         permissions.contains('MANAGE_INVENTORY')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
                         <i class="fa-solid fa-warehouse"></i>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/category'">
-                        Danh mục
-                    </button>
-                </div>
-            </li>
-
-            <!-- Thẻ tag     -->
-
-<%--            <li class="menu_item">--%>
-<%--                <div class="wrap_menu_item">--%>
-<%--                    <i class="fa-solid fa-tags"></i>--%>
-<%--                    <button onclick="location.href='${pageContext.request.contextPath}/admin/tag'">--%>
-<%--                        Thẻ (Tag)--%>
-<%--                    </button>--%>
-<%--                </div>--%>
-<%--            </li>--%>
-
-            <%--Nhà sản xuất--%>
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                        <i class="fa-solid fa-warehouse"></i>
-                        <a href="brand">Nhà sản xuất</a>
-                </div>
-            </li>
-
-<%--            MananageRole--%>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/category'">
+                            Danh mục
+                        </button>
+                    </div>
+                </li>
+            </c:if>
 
 
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fa-solid fa-user-shield"></i>
-                    <a href="${pageContext.request.contextPath}/admin/manage-role">Quản lý Vai Trò</a>
-                </div>
-            </li>
 
-        <%--Banner--%>
+            <c:if test="${permissions != null and
+                        (permissions.contains('MANAGE_BRAND') or
+                         permissions.contains('MANAGE_INVENTORY')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-brands fa-microblog"></i>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/category'">
+                            Nhà sản xuất
+                        </button>
+                    </div>
+                </li>
+            </c:if>
 
-            <li class="menu_item">
-                <div class="wrap_menu_item">
-                    <i class="fa-regular fa-image"></i>
-                    <button onclick="location.href='${pageContext.request.contextPath}/admin/banner'">
-                        Quản lý Banner
-                    </button>
-                </div>
-            </li>
+
+
+            <c:if test="${permissions != null and
+                        (permissions.contains('MANAGE_MEMBER')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/manage-role'">
+                            Quản lý Vai Trò
+                        </button>
+                    </div>
+                </li>
+            </c:if>
+
+
+
+            <c:if test="${permissions != null and
+                        (permissions.contains('MANAGE_BANNER')
+                        )}">
+                <li class="menu_item">
+                    <div class="wrap_menu_item">
+                        <i class="fa-solid fa-image"></i>
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/banner'">
+                            Quản lý Banner
+                        </button>
+                    </div>
+                </li>
+            </c:if>
+
+
+
 
 
             <li class="menu_item">
                 <div class="wrap_menu_item">
                     <i class="fa-solid fa-gear"></i>
                     <a href="account_settings.jsp"> Cài đặt</a>
-<%--                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>--%>
                 </div>
-<%--                <ul class="submenu">--%>
-<%--                    <li class="submenu_item">--%>
-<%--                        <a href="">Hồ sơ</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="submenu_item">--%>
-<%--                        <a href="">Quên mật khẩu</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="submenu_item">--%>
-<%--                        <a href="">Thông báo</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="submenu_item">--%>
-<%--                        <a href="">Kết nối</a>--%>
-<%--                    </li>--%>
-<%--                    <li class="submenu_item">--%>
-<%--                        <a href="">Hủy tài khoản</a>--%>
-<%--                    </li>--%>
-
-<%--                </ul>--%>
             </li>
         </ul>
     </nav>

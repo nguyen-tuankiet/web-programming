@@ -5,107 +5,108 @@ let isPlaying = true;
 document.addEventListener("DOMContentLoaded", function () {
     showSlide(slideIndex);
     startAutoSlide();
+
+    document.getElementById("pausePlayBtn").addEventListener("click", function () {
+        if (isPlaying) {
+            stopAutoSlide();
+        } else {
+            startAutoSlide();
+        }
+    });
+
+    document.querySelector(".prev-btn").addEventListener("click", function () {
+        changeSlide(-1);
+    });
+
+    document.querySelector(".next-btn").addEventListener("click", function () {
+        changeSlide(1);
+    });
+
+    const progressLoaders = document.querySelectorAll('.progress-loader');
+    progressLoaders.forEach((loader, index) => {
+        const title = loader.getAttribute('data-title');
+        const tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.textContent = title || `Slide ${index + 1}`;
+        loader.appendChild(tooltip);
+
+        loader.addEventListener('mouseover', function (event) {
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${event.offsetX}px`;
+            tooltip.style.top = `-30px`;
+        });
+
+        loader.addEventListener('mouseout', function () {
+            tooltip.style.display = 'none';
+        });
+
+        loader.addEventListener('click', function () {
+            stopAutoSlide();
+            slideIndex = index;
+            showSlide(slideIndex);
+            startAutoSlide();
+        });
+    });
 });
 
 function showSlide(index) {
-    const slides = document.getElementsByClassName("banner-slide");
+    const slides = document.querySelectorAll(".banner-slide");
     const progressBars = document.querySelectorAll(".progress-loader .progress");
+
+    if (slides.length === 0) return;
 
     if (index >= slides.length) slideIndex = 0;
     if (index < 0) slideIndex = slides.length - 1;
 
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-        progressBars[i].style.animation = "none"; // Stop all animations
-        progressBars[i].style.width = "0"; // Reset width to 0 when slide changes
-    }
+    slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        slide.style.display = "none";
 
+        if (progressBars[i]) {
+            progressBars[i].style.animation = "none";
+            progressBars[i].style.width = "0";
+        }
+    });
+
+    slides[slideIndex].classList.add("active");
     slides[slideIndex].style.display = "flex";
 
-    // Start the progress animation for the active slide
-    progressBars[slideIndex].style.animation = "loading 3s linear forwards"; // Change to forwards
+    if (progressBars[slideIndex]) {
+        progressBars[slideIndex].style.animation = "loading 3s linear forwards";
+    }
 }
+
 function startAutoSlide() {
-    slideInterval = setInterval(function () {
+    slideInterval = setInterval(() => {
         slideIndex++;
         showSlide(slideIndex);
     }, 3000);
     isPlaying = true;
-    updateProgressBars(); // Start progress animation when resuming
-    document.getElementById("pausePlayBtn").innerHTML = '<i class="fas fa-pause"></i>'; // Update icon to pause
+    updateProgressBars();
+    document.getElementById("pausePlayBtn").innerHTML = '<i class="fas fa-pause"></i>';
 }
 
 function stopAutoSlide() {
     clearInterval(slideInterval);
-    document.getElementById("pausePlayBtn").innerHTML = '<i class="fas fa-play"></i>'; // Change icon to play
     isPlaying = false;
+    document.getElementById("pausePlayBtn").innerHTML = '<i class="fas fa-play"></i>';
 
-    // Keep the progress width at its current state
     const progressBars = document.querySelectorAll(".progress-loader .progress");
-    for (let i = 0; i < progressBars.length; i++) {
-        progressBars[i].style.animation = "none"; // Stop the animation
-        // Optionally, keep the current width by not resetting it
-    }
+    progressBars.forEach(bar => {
+        bar.style.animation = "none";
+    });
 }
-
 
 function updateProgressBars() {
     const progressBars = document.querySelectorAll(".progress-loader .progress");
-    progressBars[slideIndex].style.animation = "loading 3s linear forwards"; // Resume animation
+    if (progressBars[slideIndex]) {
+        progressBars[slideIndex].style.animation = "loading 3s linear forwards";
+    }
 }
 
-document.getElementById("pausePlayBtn").addEventListener("click", function () {
-    if (isPlaying) {
-        stopAutoSlide();
-    } else {
-        startAutoSlide();
-    }
-});
-
-function plusSlides(n) {
+function changeSlide(n) {
     stopAutoSlide();
     slideIndex += n;
     showSlide(slideIndex);
     startAutoSlide();
 }
-
-function changeSlide(n) {
-    clearInterval(slideInterval);
-    slideIndex += n;
-    showSlide(slideIndex);
-    startAutoSlide();
-}
-
-document.querySelector(".prev-btn").addEventListener("click", function () {
-    changeSlide(-1);
-});
-document.querySelector(".next-btn").addEventListener("click", function () {
-    changeSlide(1);
-});
-const progressLoaders = document.querySelectorAll('.progress-loader');
-
-progressLoaders.forEach((loader, index) => {
-    const title = loader.getAttribute('data-title');
-
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    tooltip.textContent = title;
-    loader.appendChild(tooltip);
-
-    loader.addEventListener('mouseover', function(event) {
-        tooltip.style.display = 'block';
-        tooltip.style.left = `${event.offsetX}px`;
-        tooltip.style.top = `-30px`;
-    });
-
-    loader.addEventListener('mouseout', function() {
-        tooltip.style.display = 'none';
-    });
-
-    loader.addEventListener('click', function() {
-        stopAutoSlide();
-        slideIndex = index;
-        showSlide(slideIndex);
-        startAutoSlide();
-    });
-});
