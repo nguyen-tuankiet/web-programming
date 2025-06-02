@@ -199,6 +199,6 @@ public class User {
                 ", status='" + status + '\'' +
                 ", confirmationToken='" + confirmationToken + '\'' +
                 ", facebookId='" + facebookId + '\'' +
-                '}';
+                "} \n";
     }
 }

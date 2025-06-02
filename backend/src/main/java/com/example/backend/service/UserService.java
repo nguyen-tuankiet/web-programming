@@ -31,8 +31,12 @@ public class UserService {
         return userDao.getAllUsers();
     }
 
-    public List<User> getUsersByKeyword(String keyword) {
-        return userDao.getUsersByKeyword(keyword);
+    public List<User> getCustomers() {
+        return userDao.getCustomers();
+    }
+
+    public List<User> getMembers() {
+        return userDao.getMembers();
     }
 
     public String getAvatarUrlById(Integer avatarId) {
@@ -56,16 +60,19 @@ public class UserService {
         );
     }
 
-//    public static void main(String[] args) {
-//        UserService userService = new UserService(DBConnection.getJdbi());
+    public static void main(String[] args) {
+        UserService userService = new UserService(DBConnection.getJdbi());
 //        User user =new User(
 //                1, "qhung", "qhung",
 //                LocalDate.now(), "male","hun@gmad.ee", "232232222", null, null, null, null, null
 //
 //        );
-
+//
 //        System.out.println(userService.updateUser(user));
 //        System.out.println(userService.getUserById(112));
-//    }
+
+//        System.out.println(userService.getMembers());
+        System.out.println(userService.getUserByEmail("admin@gmail.com"));
+    }
 
 }
