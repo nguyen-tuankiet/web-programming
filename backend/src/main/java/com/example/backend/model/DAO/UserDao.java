@@ -74,7 +74,6 @@ public interface UserDao {
 """)
     List<User> getUsersByKeyword(@Bind("keyword") String keyword);
 
-    // Tạo user mới không có roleId trong bảng user
     @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, salt, status, confirmationToken, facebookId) " +
             "VALUES (:fullName, :displayName, :email, :password, :salt, 'PENDING', :confirmationToken, :facebookId)")
     @GetGeneratedKeys("id")
@@ -85,6 +84,18 @@ public interface UserDao {
                        @Bind("salt") String salt,
                        @Bind("confirmationToken") String confirmationToken,
                        @Bind("facebookId") String facebookId);
+
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, roleId, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, :roleId, :salt, 'PENDING', :confirmationToken, :facebookId)")
+    @GetGeneratedKeys("id")
+    String createUserWithRole(@Bind("fullName") String fullName,
+                              @Bind("displayName") String displayName,
+                              @Bind("email") String email,
+                              @Bind("password") String password,
+                              @Bind("roleId") Integer roleId,
+                              @Bind("salt") String salt,
+                              @Bind("confirmationToken") String confirmationToken,
+                              @Bind("facebookId") String facebookId);
 
     @SqlUpdate("UPDATE user SET status = :status WHERE id = :id")
     void updateUserStatus(@Bind("id") Integer id, @Bind("status") String status);
@@ -97,6 +108,9 @@ public interface UserDao {
                     @Bind("fullname") String fullname,
                     @Bind("email") String email,
                     @Bind("password") String password);
+
+    @SqlUpdate("UPDATE user SET roleId = :roleId WHERE id = :id")
+    void updateUserRole(@Bind("id") Integer id, @Bind("roleId") Integer roleId);
 
     @SqlUpdate("DELETE FROM user WHERE id = :id")
     void deleteUser(@Bind("id") Integer id);
