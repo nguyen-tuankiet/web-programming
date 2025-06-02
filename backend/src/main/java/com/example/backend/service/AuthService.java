@@ -1,7 +1,10 @@
 package com.example.backend.service;
 
+
+import com.example.backend.model.DAO.PermissionDAO;
 import com.example.backend.model.DAO.UserDao;
 import com.example.backend.model.DAO.UserRoleDAO;
+import com.example.backend.model.Permission;
 import com.example.backend.model.User;
 import com.example.backend.model.Role;
 import com.example.backend.util.HashUtils;
@@ -10,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import org.jdbi.v3.core.Jdbi;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.UUID;
 
 public class AuthService {
@@ -17,10 +21,13 @@ public class AuthService {
     private UserRoleDAO userRoleDAO;
     private EmailService emailService;
     String facebookId = null;
+    private PermissionDAO permissionDAO;
+
 
     public AuthService(Jdbi jdbi) {
         this.userDAO = jdbi.onDemand(UserDao.class);
         this.userRoleDAO = jdbi.onDemand(UserRoleDAO.class);
+        this.permissionDAO = jdbi.onDemand(PermissionDAO.class);
         this.emailService = new EmailService();
     }
 
@@ -222,5 +229,9 @@ public class AuthService {
         HttpSession session = request.getSession();
         session.setAttribute("sessionId", sessionId);
         session.setAttribute("email", email);  // Lưu email vào session nếu cần thiết
+    }
+
+    public List<Permission> getPermissionsByRoleId(Integer roleId) {
+        return permissionDAO.getPermissionsByRoleId(roleId);
     }
 }
