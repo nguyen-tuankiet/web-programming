@@ -1,7 +1,9 @@
 package com.example.backend.service;
 
 import com.example.backend.model.DAO.UserDao;
+import com.example.backend.model.DAO.UserRoleDAO;
 import com.example.backend.model.User;
+import com.example.backend.model.Role;
 import com.example.backend.util.HashUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,11 +14,13 @@ import java.util.UUID;
 
 public class AuthService {
     private UserDao userDAO;
+    private UserRoleDAO userRoleDAO;
     private EmailService emailService;
     String facebookId = null;
 
     public AuthService(Jdbi jdbi) {
         this.userDAO = jdbi.onDemand(UserDao.class);
+        this.userRoleDAO = jdbi.onDemand(UserRoleDAO.class);
         this.emailService = new EmailService();
     }
 
@@ -39,9 +43,16 @@ public class AuthService {
         String confirmationToken = UUID.randomUUID().toString();
 
         // Tạo user mới và lưu thông tin
-        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
-        
+        Integer userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
+
         if (userId != null) {
+            // Lấy role mặc định cho user (USER role)
+            Role defaultRole = userDAO.getDefaultUserRole();
+            if (defaultRole != null) {
+                // Thêm role vào bảng user_role
+                userRoleDAO.addUserRole(userId, defaultRole.getId());
+            }
+
             // Gửi email xác nhận
             String confirmationLink = "http://modernhome.property/confirm?token=" + confirmationToken;
             String emailContent = "Xin chào " + firstName + ",\n\n" +
@@ -49,12 +60,13 @@ public class AuthService {
                     confirmationLink + "\n\n" +
                     "Trân trọng,\n" +
                     "Đội ngũ hỗ trợ";
-            
+
             emailService.sendEmail(email, "Xác nhận tài khoản", emailContent);
             return true;
         }
         return false;
     }
+
     public boolean registerWithGoogle(String firstName, String displayName, String email, String password) {
         if (userDAO.getUserByEmail(email) != null) {
             return false; // Email đã tồn tại
@@ -66,9 +78,55 @@ public class AuthService {
         // Mã hóa mật khẩu với salt
         String hashedPassword = HashUtils.hashWithSalt(password, salt);
         String confirmationToken = UUID.randomUUID().toString();
+
         // Tạo user mới và lưu thông tin
-        String userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
-        return userId != null;
+        Integer userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
+
+        if (userId != null) {
+            // Lấy role mặc định cho user (USER role)
+            Role defaultRole = userDAO.getDefaultUserRole();
+            if (defaultRole != null) {
+                // Thêm role vào bảng user_role
+                userRoleDAO.addUserRole(userId, defaultRole.getId());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean registerWithRole(String firstName, String displayName, String email, String password, Integer roleId) {
+        if (userDAO.getUserByEmail(email) != null) {
+            return false; // Email đã tồn tại
+        }
+
+        // Tạo salt ngẫu nhiên
+        String salt = HashUtils.generateSalt();
+
+        // Mã hóa mật khẩu với salt
+        String hashedPassword = HashUtils.hashWithSalt(password, salt);
+
+        // Tạo confirmation token
+        String confirmationToken = UUID.randomUUID().toString();
+
+        // Tạo user mới và lưu thông tin
+        Integer userId = userDAO.createUser(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
+
+        if (userId != null) {
+            // Thêm role được chỉ định vào bảng user_role
+            userRoleDAO.addUserRole(userId, roleId);
+
+            // Gửi email xác nhận
+            String confirmationLink = "http://modernhome.property/confirm?token=" + confirmationToken;
+            String emailContent = "Xin chào " + firstName + ",\n\n" +
+                    "Cảm ơn bạn đã đăng ký tài khoản. Vui lòng nhấp vào liên kết sau để xác nhận tài khoản của bạn:\n" +
+                    confirmationLink + "\n\n" +
+                    "Trân trọng,\n" +
+                    "Đội ngũ hỗ trợ";
+
+            emailService.sendEmail(email, "Xác nhận tài khoản", emailContent);
+            return true;
+        }
+        return false;
     }
 
     public boolean confirmAccount(String token) {
@@ -133,6 +191,10 @@ public class AuthService {
         return userDAO.getUserById(userId);
     }
 
+    public boolean changeUserRole(Integer userId, Integer newRoleId) {
+        return userRoleDAO.updateUserRole(userId, newRoleId);
+    }
+
     public boolean verifySession(HttpServletRequest request, String sessionId) {
         HttpSession session = request.getSession(false);  // Lấy session hiện tại, nếu không có thì trả về null
         if (session != null) {
@@ -162,4 +224,3 @@ public class AuthService {
         session.setAttribute("email", email);  // Lưu email vào session nếu cần thiết
     }
 }
-

@@ -17,14 +17,14 @@ import java.util.List;
 @RegisterConstructorMapper(Role.class)
 public interface UserDao {
 
-
     @SqlQuery("SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone, " +
             "u.password, u.avatarId, u.salt, i.url as avatarUrl, u.status, u.confirmationToken, u.facebookId, " +
             "r.id as 'role.id', r.roleType as 'role.roleType', r.name as 'role.name', " +
             "r.description as 'role.description', r.isActive as 'role.isActive' " +
             "FROM user u " +
             "LEFT JOIN image i ON u.avatarId = i.id " +
-            "LEFT JOIN role r ON u.roleId = r.id")
+            "LEFT JOIN user_role ur ON u.id = ur.userId " +
+            "LEFT JOIN role r ON ur.roleId = r.id")
     List<User> getAllUsers();
 
     @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
@@ -32,7 +32,8 @@ public interface UserDao {
             "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
             "from user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
-            "    left join role as r on u.roleId = r.id\n" +
+            "    left join user_role as ur on u.id = ur.userId\n" +
+            "    left join role as r on ur.roleId = r.id\n" +
             "where u.id  = :id")
     User getUserById(@Bind("id") Integer id);
 
@@ -43,7 +44,8 @@ public interface UserDao {
             "r.description as role_description, r.isActive as role_isActive " +
             "FROM user as u " +
             "LEFT JOIN image as i ON u.avatarId = i.id " +
-            "LEFT JOIN role as r ON u.roleId = r.id " +
+            "LEFT JOIN user_role as ur ON u.id = ur.userId " +
+            "LEFT JOIN role as r ON ur.roleId = r.id " +
             "WHERE u.email = :email")
     @RegisterRowMapper(UserWithRoleMapper.class)
     User getUserByEmail(@Bind("email") String email);
@@ -53,34 +55,35 @@ public interface UserDao {
             "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
             "FROM user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
-            "    left join role as r on u.roleId = r.id\n" +
+            "    left join user_role as ur on u.id = ur.userId\n" +
+            "    left join role as r on ur.roleId = r.id\n" +
             "WHERE u.confirmationToken = :token")
     User getUserByConfirmationToken(@Bind("token") String token);
-
-
 
     @SqlQuery("""
     SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,
            i.url AS avatarUrl,
-           u.status, u.confirmationToken, u.role, u.password, u.salt, u.facebookId
+           u.status, u.confirmationToken, u.password, u.salt, u.facebookId,
+           r.id as role_id, r.roleType as role_roleType, r.name as role_name, 
+           r.description as role_description, r.isActive as role_isActive
     FROM user u
     LEFT JOIN image i ON u.avatarId = i.id
+    LEFT JOIN user_role ur ON u.id = ur.userId
+    LEFT JOIN role r ON ur.roleId = r.id
     WHERE (:keyword IS NULL OR :keyword = '' OR LOWER(u.fullName) LIKE CONCAT('%', LOWER(:keyword), '%'))
 """)
     List<User> getUsersByKeyword(@Bind("keyword") String keyword);
 
-
-    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, roleId, salt, status, confirmationToken, facebookId) " +
-            "VALUES (:fullName, :displayName, :email, :password, " +
-            "(SELECT id FROM role WHERE roleType = 'USER' LIMIT 1), :salt, 'PENDING', :confirmationToken, :facebookId)")
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, :salt, 'PENDING', :confirmationToken, :facebookId)")
     @GetGeneratedKeys("id")
-    String createUser(@Bind("fullName") String fullName,
-                      @Bind("displayName") String displayName,
-                      @Bind("email") String email,
-                      @Bind("password") String password,
-                      @Bind("salt") String salt,
-                      @Bind("confirmationToken") String confirmationToken,
-                      @Bind("facebookId") String facebookId);
+    Integer createUser(@Bind("fullName") String fullName,
+                       @Bind("displayName") String displayName,
+                       @Bind("email") String email,
+                       @Bind("password") String password,
+                       @Bind("salt") String salt,
+                       @Bind("confirmationToken") String confirmationToken,
+                       @Bind("facebookId") String facebookId);
 
     @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, roleId, salt, status, confirmationToken, facebookId) " +
             "VALUES (:fullName, :displayName, :email, :password, :roleId, :salt, 'PENDING', :confirmationToken, :facebookId)")
@@ -120,7 +123,8 @@ public interface UserDao {
             "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
             "FROM user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
-            "    left join role as r on u.roleId = r.id\n" +
+            "    left join user_role as ur on u.id = ur.userId\n" +
+            "    left join role as r on ur.roleId = r.id\n" +
             "WHERE u.id = :id")
     User getPasswordByUserId(@Bind("id") Integer userId);
 
