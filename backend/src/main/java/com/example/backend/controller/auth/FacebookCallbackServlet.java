@@ -91,7 +91,7 @@ public class FacebookCallbackServlet extends HttpServlet {
                     String confirmationToken = UUID.randomUUID().toString();
                     String randomPassword = UUID.randomUUID().toString();
                     String salt = UUID.randomUUID().toString();
-                    String userId = dao.createUser(
+                    String userId = String.valueOf(dao.createUser(
                             name,
                             name,
                             email,
@@ -99,7 +99,7 @@ public class FacebookCallbackServlet extends HttpServlet {
                             salt,
                             confirmationToken,
                             facebookId
-                    );
+                    ));
                     dao.updateUserStatus(Integer.parseInt(userId), "ACTIVE");
                     User newUser = dao.getUserById(Integer.parseInt(userId));
                     System.out.println("New user created - ID: " + userId + ", Role: " + newUser.getRole() + 
