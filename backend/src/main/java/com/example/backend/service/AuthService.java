@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 
+import com.example.backend.config.ConfigLoader;
 import com.example.backend.model.DAO.PermissionDAO;
 import com.example.backend.model.DAO.UserDao;
 import com.example.backend.model.DAO.UserRoleDAO;
@@ -61,7 +62,9 @@ public class AuthService {
             }
 
             // Gửi email xác nhận
-            String confirmationLink = "http://modernhome.property/confirm?token=" + confirmationToken;
+            String hostProduct = ConfigLoader.get("host.product");
+
+            String confirmationLink = hostProduct + "/confirm?token=" + confirmationToken;
             String emailContent = "Xin chào " + firstName + ",\n\n" +
                     "Cảm ơn bạn đã đăng ký tài khoản. Vui lòng nhấp vào liên kết sau để xác nhận tài khoản của bạn:\n" +
                     confirmationLink + "\n\n" +
@@ -233,5 +236,36 @@ public class AuthService {
 
     public List<Permission> getPermissionsByRoleId(Integer roleId) {
         return permissionDAO.getPermissionsByRoleId(roleId);
+    }
+
+    public boolean registerWithGoogleActive(String firstName, String displayName, String email, String password) {
+        if (userDAO.getUserByEmail(email) != null) {
+            return false; // Email đã tồn tại
+        }
+
+        // Tạo salt ngẫu nhiên
+        String salt = HashUtils.generateSalt();
+
+        // Mã hóa mật khẩu với salt
+        String hashedPassword = HashUtils.hashWithSalt(password, salt);
+        String confirmationToken = UUID.randomUUID().toString();
+
+        // Tạo user mới với status ACTIVE ngay lập tức cho Google OAuth
+        Integer userId = userDAO.createUserWithActiveStatus(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
+
+        if (userId != null) {
+            // Lấy role mặc định cho user (USER role)
+            Role defaultRole = userDAO.getDefaultUserRole();
+            if (defaultRole != null) {
+                // Thêm role vào bảng user_role
+                userRoleDAO.addUserRole(userId, defaultRole.getId());
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public void activateUserAccount(Integer userId) {
+        userDAO.updateUserStatus(userId, "ACTIVE");
     }
 }

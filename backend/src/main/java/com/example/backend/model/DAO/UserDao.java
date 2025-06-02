@@ -186,4 +186,15 @@ public interface UserDao {
     // Helper method to get role by type
     @SqlQuery("SELECT id, roleType, name, description, isActive FROM role WHERE roleType = :roleType")
     Role getRoleByType(@Bind("roleType") String roleType);
+
+    @SqlUpdate("INSERT INTO user (fullName, displayName, email, password, salt, status, confirmationToken, facebookId) " +
+            "VALUES (:fullName, :displayName, :email, :password, :salt, 'ACTIVE', :confirmationToken, :facebookId)")
+    @GetGeneratedKeys("id")
+    Integer createUserWithActiveStatus(@Bind("fullName") String fullName,
+                                       @Bind("displayName") String displayName,
+                                       @Bind("email") String email,
+                                       @Bind("password") String password,
+                                       @Bind("salt") String salt,
+                                       @Bind("confirmationToken") String confirmationToken,
+                                       @Bind("facebookId") String facebookId);
 }
