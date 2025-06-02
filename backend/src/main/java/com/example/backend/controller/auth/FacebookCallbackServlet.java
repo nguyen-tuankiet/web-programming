@@ -1,9 +1,14 @@
 package com.example.backend.controller.auth;
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.config.ConfigLoader;
 import com.example.backend.config.EnvConfig;
 import com.example.backend.model.DAO.UserDao;
+import com.example.backend.model.DAO.UserRoleDAO;
+import com.example.backend.model.Permission;
+import com.example.backend.model.Role;
 import com.example.backend.model.User;
+import com.example.backend.service.AuthService;
 import com.example.backend.util.FacebookUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +20,9 @@ import org.jdbi.v3.core.Jdbi;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @WebServlet("/facebook-callback")
 public class FacebookCallbackServlet extends HttpServlet {
@@ -23,14 +30,19 @@ public class FacebookCallbackServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final String FACEBOOK_APP_ID = EnvConfig.get("FACEBOOK_APP_ID");
     private final String FACEBOOK_APP_SECRET = EnvConfig.get("FACEBOOK_APP_SECRET");
-    private final String REDIRECT_URI = "http://modernhome.property/facebook-callback";
-
+//    private final String REDIRECT_URI = "http://localhost:8080/backend_war/facebook-callback";
+    private String redirectUri;
     private Jdbi jdbi;
+    private AuthService authService;
 
     @Override
     public void init() throws ServletException {
+        String hostProduct = ConfigLoader.get("host.product");
+        this.redirectUri = hostProduct + "/facebook-callback";
         super.init();
         jdbi = DBConnection.getJdbi();
+        authService = new AuthService(DBConnection.getJdbi());
+
     }
 
     @Override
@@ -61,7 +73,7 @@ public class FacebookCallbackServlet extends HttpServlet {
             }
 
             String accessToken = FacebookUtil.getAccessToken(
-                    FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, REDIRECT_URI, code);
+                    FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, redirectUri, code);
 
             JSONObject fbUserData = FacebookUtil.getUserData(accessToken);
 
@@ -88,29 +100,16 @@ public class FacebookCallbackServlet extends HttpServlet {
                 }
 
                 if (isRegistration || email != null) {
-                    String confirmationToken = UUID.randomUUID().toString();
                     String randomPassword = UUID.randomUUID().toString();
-                    String salt = UUID.randomUUID().toString();
-                    String userId = String.valueOf(dao.createUser(
-                            name,
-                            name,
-                            email,
-                            randomPassword,
-                            salt,
-                            confirmationToken,
-                            facebookId
-                    ));
-                    dao.updateUserStatus(Integer.parseInt(userId), "ACTIVE");
-                    User newUser = dao.getUserById(Integer.parseInt(userId));
-                    System.out.println("New user created - ID: " + userId + ", Role: " + newUser.getRole() + 
-                                     ", Email: " + newUser.getEmail() + ", FacebookId: " + newUser.getFacebookId());
-                    return newUser;
+                    authService.registerWithFacebookActive(name, name, email, randomPassword,facebookId );
                 }
 
                 return null;
             });
 
-            if (user == null) {
+            User newUser = authService.getUserByEmail(email);
+
+            if (newUser == null) {
                 if (isRegistration) {
                     response.sendRedirect(request.getContextPath() + "/login?error=Không thể tạo tài khoản Facebook. Vui lòng thử lại.");
                 } else {
@@ -119,24 +118,29 @@ public class FacebookCallbackServlet extends HttpServlet {
                 return;
             }
 
-            System.out.println("User before setting session - ID: " + user.getId() + ", Role: " + user.getRole());
+            System.out.println("User before setting session - ID: " + newUser.getId() + ", Role: " + newUser.getRole());
 
-            session.setAttribute("loggedInUser", user);
+            session.setAttribute("loggedInUser", newUser);
             session.setAttribute("isLoggedIn", true);
-            session.setAttribute("userRole", user.getRole());
-            session.setAttribute("userId", user.getId());
+            session.setAttribute("userRole", newUser.getRole());
+            session.setAttribute("userId", newUser.getId());
             session.setMaxInactiveInterval(30 * 60);
 
             System.out.println("Session after setting - UserRole: " + session.getAttribute("userRole"));
             System.out.println("Session after setting - UserId: " + session.getAttribute("userId"));
 
+            List<Permission> permissions = authService.getPermissionsByRoleId(newUser.getRole().getId());
+            List<String> permissionTypes = permissions.stream()
+                    .map(permission -> permission.getType().toString())
+                    .collect(Collectors.toList());
+
             // JavaScript: set sessionStorage và redirect
             String script = "<script>" +
-                    "sessionStorage.setItem('role', '" + user.getRole() + "');" +
+                    "sessionStorage.setItem('roleType', '" + newUser.getRole().getRoleType() + "');" +
                     "sessionStorage.setItem('sessionId', '" + session.getId() + "');" +
-                    "sessionStorage.setItem('userId', '" + user.getId() + "');" +
-                    "console.log('Setting sessionStorage - Role: ' + sessionStorage.getItem('role'));" +
-                    "console.log('Setting sessionStorage - UserId: ' + sessionStorage.getItem('userId'));" +
+                    "sessionStorage.setItem('userId', '" + newUser.getId() + "');" +
+                    "sessionStorage.setItem('roleId', '" + newUser.getRole().getId() + "');" +
+                    "sessionStorage.setItem('permission', '" + permissionTypes + "');" +
                     "if (sessionStorage.getItem('role') === 'ADMIN') {" +
                     "   window.location.href = '" + request.getContextPath() + "/admin/dashboard';" +
                     "} else {" +
