@@ -2,26 +2,26 @@ package com.example.backend.controller.auth;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.config.EnvConfig;
+import com.example.backend.contant.EPermission;
+import com.example.backend.model.Permission;
 import com.example.backend.service.AuthService;
 import com.example.backend.model.User;
-import com.example.backend.model.Permission;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import io.github.cdimascio.dotenv.Dotenv;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.jdbi.v3.core.Jdbi;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -105,6 +105,8 @@ public class LoginController extends HttpServlet {
                         .map(permission -> permission.getType().toString())
                         .collect(Collectors.toList());
 
+
+
                 // Lưu thông tin người dùng vào session
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
@@ -112,6 +114,10 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("roleType", user.getRole().getRoleType());
                 session.setAttribute("roleId", user.getRole().getId());
                 session.setAttribute("permissions", permissionTypes);
+
+
+
+
 
                 // Trả về thông tin người dùng kèm permissions
                 Map<String, Object> userData = new HashMap<>();

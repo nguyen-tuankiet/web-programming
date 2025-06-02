@@ -11,6 +11,9 @@ public enum EPermission {
     VIEW_ORDERS,
     UPDATE_ORDERS_STATUS,
 
+    VIEW_REVIEW,
+    MANAGE_REVIEW,
+
     MANAGE_CONTENT,
 
     MANAGE_INVENTORY,
@@ -20,6 +23,7 @@ public enum EPermission {
     MANAGE_MEMBER,
 
     MANAGE_BRAND,
+    MANAGE_BANNER,
 
     MANAGE_CATEGORIES,
 
