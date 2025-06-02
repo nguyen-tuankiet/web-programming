@@ -1,4 +1,6 @@
 package com.example.backend.controller.auth;
+import com.example.backend.config.ConfigLoader;
+import com.example.backend.model.Permission;
 import com.google.gson.Gson;
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.config.EnvConfig;
@@ -32,15 +34,17 @@ import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @WebServlet("/google-callback")
 public class GoogleCallbackServlet extends HttpServlet {
     String clientId = EnvConfig.get("GOOGLE_CLIENT_ID");
     String clientSecret = EnvConfig.get("GOOGLE_CLIENT_SECRET");
-    private static final String REDIRECT_URI = "http://modernhome.property/google-callback";
+    private String redirectUri;
     private static final String TOKEN_URL = "https://oauth2.googleapis.com/token";
     private static final String USER_INFO_URL = "https://www.googleapis.com/oauth2/v2/userinfo";
     private AuthService authService;
@@ -49,21 +53,16 @@ public class GoogleCallbackServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        try {
-            Properties prop = new Properties();
-            InputStream input = getClass().getClassLoader().getResourceAsStream("application.properties");
-            if (input == null) {
-                throw new ServletException("Unable to find application.properties");
-            }
-            prop.load(input);
-            if (clientId == null || clientSecret == null) {
-                throw new ServletException("Google OAuth credentials not found in application.properties");
-            }
-            authService = new AuthService(DBConnection.getJdbi());
-            emailService = new EmailService();
+        String hostProduct = ConfigLoader.get("host.product");
+        this.redirectUri = hostProduct + "/google-callback";
+        if (clientId == null || clientSecret == null) {
+            throw new ServletException("Google OAuth credentials not found in application.properties");
+        }
+        authService = new AuthService(DBConnection.getJdbi());
+        emailService = new EmailService();
 
-            // Initialize Gson with custom serializer for LocalDate
-            gson = new GsonBuilder()
+        // Initialize Gson with custom serializer for LocalDate
+        gson = new GsonBuilder()
                 .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>) (src, typeOfSrc, context) -> {
                     if (src == null) {
                         return null;
@@ -71,9 +70,6 @@ public class GoogleCallbackServlet extends HttpServlet {
                     return context.serialize(src.format(DateTimeFormatter.ISO_LOCAL_DATE));
                 })
                 .create();
-        } catch (IOException e) {
-            throw new ServletException("Error loading Google OAuth credentials", e);
-        }
     }
 
     private String makePostRequest(String url, String postData) throws IOException {
@@ -155,7 +151,7 @@ public class GoogleCallbackServlet extends HttpServlet {
                     "client_id=%s&client_secret=%s&redirect_uri=%s&code=%s&grant_type=authorization_code",
                     URLEncoder.encode(clientId, "UTF-8"),
                     URLEncoder.encode(clientSecret, "UTF-8"),
-                    URLEncoder.encode(REDIRECT_URI, "UTF-8"),
+                    URLEncoder.encode(redirectUri, "UTF-8"),
                     URLEncoder.encode(code, "UTF-8")
             );
 
@@ -177,14 +173,45 @@ public class GoogleCallbackServlet extends HttpServlet {
                     // Generate a random password for the new user
                     String randomPassword = UUID.randomUUID().toString();
 
-                    // Register new user with Google and the random password
-                    boolean registrationSuccess = authService.registerWithGoogle(name, name, email, randomPassword);
+                    // Register new user with Google and set status to ACTIVE immediately
+                    boolean registrationSuccess = authService.registerWithGoogleActive(name, name, email, randomPassword);
+
                     if (registrationSuccess) {
-                        // Send registration confirmation email with the same password
+                        // Get the newly created user
+                        user = authService.getUserByEmail(email);
+
+                        // Send registration confirmation email with the password
                         EmailService.sendRegistrationEmail(email, randomPassword);
 
-                        // Redirect to login page with success message
-                        response.sendRedirect(request.getContextPath() + "/login?message=Registration successful. Please check your email for login information.");
+                        // Auto login the user after successful registration
+                        if (user != null) {
+                            HttpSession session = request.getSession();
+                            session.setAttribute("user", user);
+                            List<Permission> permissions = authService.getPermissionsByRoleId(user.getRole().getId());
+                            List<String> permissionTypes = permissions.stream()
+                                    .map(permission -> permission.getType().toString())
+                                    .collect(Collectors.toList());
+
+                            // Create a script to store user info in sessionStorage and redirect with success alert
+                            String script = "<script>" +
+                                    "sessionStorage.setItem('roleType', '" + user.getRole().getRoleType() + "');" +
+                                    "sessionStorage.setItem('sessionId', '" + session.getId() + "');" +
+                                    "sessionStorage.setItem('userId', '" + user.getId() + "');" +
+                                    "sessionStorage.setItem('roleId', '" + user.getRole().getId() + "');" +
+                                    "sessionStorage.setItem('permission', '" + permissionTypes + "');" +
+                                    "if (sessionStorage.getItem('roleType') === 'ADMIN') {" +
+                                    "window.location.href = '" + request.getContextPath() + "/admin/dashboard';" +
+                                    "} else {" +
+                                    "alert('Chúc mừng! Bạn đã đăng ký tài khoản thành công');" +
+                                    "window.location.href = '" + request.getContextPath() + "/home?success=Registration and login successful';" +
+                                    "}" +
+                                    "</script>";
+
+                            response.setContentType("text/html");
+                            response.getWriter().write(script);
+                        } else {
+                            response.sendRedirect(request.getContextPath() + "/login?message=Registration successful. Please login.");
+                        }
                     } else {
                         response.sendRedirect(request.getContextPath() + "/login?error=Registration failed");
                     }
@@ -197,17 +224,35 @@ public class GoogleCallbackServlet extends HttpServlet {
                     // User already exists and trying to register
                     response.sendRedirect(request.getContextPath() + "/login?error=Account already exists. Please login.");
                 } else {
-                    // User exists, login
+                    // User exists, check status and login
+                    if ("PENDING".equals(user.getStatus())) {
+                        // Activate the account for Google users
+                        authService.activateUserAccount(user.getId());
+                        // Refresh user data
+                        user = authService.getUserByEmail(email);
+                    }
+
+                    if ("BANNED".equals(user.getStatus())) {
+                        response.sendRedirect(request.getContextPath() + "/login?error=Account is banned.");
+                        return;
+                    }
+
+                    if ("DEACTIVE".equals(user.getStatus())) {
+                        response.sendRedirect(request.getContextPath() + "/login?error=Account is deactivated.");
+                        return;
+                    }
+
+                    // Login successful
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
 
-                    // Create a script to store basic user info in sessionStorage
+                    // Create a script to store basic user info in sessionStorage - FIXED
                     String script = "<script>" +
-                            "sessionStorage.setItem('role', '" + user.getRole() + "');" +
+                            "sessionStorage.setItem('roleType', '" + user.getRole().getRoleType() + "');" +
                             "sessionStorage.setItem('sessionId', '" + session.getId() + "');" +
                             "sessionStorage.setItem('userId', '" + user.getId() + "');" +
-                            "if (sessionStorage.getItem('role') === 'ADMIN') {" +
-                            "window.location.href = '" +"admin/dashboard';" +
+                            "if (sessionStorage.getItem('roleType') === 'ADMIN') {" +
+                            "window.location.href = '" + request.getContextPath() + "/admin/dashboard';" +
                             "} else {" +
                             "window.location.href = '" + request.getContextPath() + "/home?success=Login successful';" +
                             "}" +
