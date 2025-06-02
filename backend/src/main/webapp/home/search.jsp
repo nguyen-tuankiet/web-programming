@@ -43,5 +43,6 @@
 
 
     </div>
+<script> const contextPath = "${pageContext.request.contextPath}"; </script>
  <script src="${pageContext.request.contextPath}/static/style-component/style-home/search.js"></script>
 </body>

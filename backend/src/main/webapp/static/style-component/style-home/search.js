@@ -31,7 +31,7 @@ document.getElementById('search-input').addEventListener('input', () => {
 
     debounceTimeout = setTimeout(() => {
         if (searchInput) {
-            fetch(`home/products/search?name=${encodeURIComponent(searchInput)}`)
+            fetch(`${contextPath}/home/products/search?name=${encodeURIComponent(searchInput)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
@@ -104,8 +104,7 @@ function clearSuggestions() {
 function performSearch() {
     const searchInput = document.getElementById('search-input').value.trim();
     if (searchInput) {
-        const baseURL = window.location.origin + "/backend_war/search-results";
-        const searchURL = `${baseURL}?name=${encodeURIComponent(searchInput)}`;
+        const searchURL = `${contextPath}/search-results?name=${encodeURIComponent(searchInput)}`;
         window.open(searchURL, '_blank');
     } else {
         alert("Vui lòng nhập từ khóa tìm kiếm!");
