@@ -55,6 +55,9 @@ public class GoogleCallbackServlet extends HttpServlet {
     public void init() throws ServletException {
         String hostProduct = ConfigLoader.get("host.product");
         this.redirectUri = hostProduct + "/google-callback";
+//        String hostProduct = ConfigLoader.get("host.dev");
+//        this.redirectUri = hostProduct + "/backend_war/google-callback";
+
         if (clientId == null || clientSecret == null) {
             throw new ServletException("Google OAuth credentials not found in application.properties");
         }
@@ -245,12 +248,17 @@ public class GoogleCallbackServlet extends HttpServlet {
                     // Login successful
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
-
+                    List<Permission> permissions = authService.getPermissionsByRoleId(user.getRole().getId());
+                    List<String> permissionTypes = permissions.stream()
+                            .map(permission -> permission.getType().toString())
+                            .collect(Collectors.toList());
                     // Create a script to store basic user info in sessionStorage - FIXED
                     String script = "<script>" +
                             "sessionStorage.setItem('roleType', '" + user.getRole().getRoleType() + "');" +
                             "sessionStorage.setItem('sessionId', '" + session.getId() + "');" +
                             "sessionStorage.setItem('userId', '" + user.getId() + "');" +
+                            "sessionStorage.setItem('roleId', '" + user.getRole().getId() + "');" +
+                            "sessionStorage.setItem('permission', '" + permissionTypes + "');" +
                             "if (sessionStorage.getItem('roleType') === 'ADMIN') {" +
                             "window.location.href = '" + request.getContextPath() + "/admin/dashboard';" +
                             "} else {" +

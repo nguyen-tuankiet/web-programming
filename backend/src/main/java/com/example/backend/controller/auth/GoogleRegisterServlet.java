@@ -25,6 +25,8 @@ public class GoogleRegisterServlet extends HttpServlet {
         try {
             String hostProduct = ConfigLoader.get("host.product");
             this.redirectUri = hostProduct + "/google-callback";
+//            String hostProduct = ConfigLoader.get("host.dev");
+//            this.redirectUri = hostProduct + "/backend_war/google-callback";
             if (clientId == null || clientId.isEmpty()) {
                 throw new ServletException("Google Client ID is not configured properly");
             }
