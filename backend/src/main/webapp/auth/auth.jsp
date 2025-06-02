@@ -149,7 +149,6 @@
 </div>
 
 <main>
-  <script src="${pageContext.request.contextPath}/static/style-component/style-auth/auth-captcha.js"></script>
   <script src="${pageContext.request.contextPath}/static/style-page/auth/auth.js"></script>
   <script>
     function handleFacebookAuth(mode) {
