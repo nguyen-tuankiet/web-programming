@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.jdbi.v3.core.Jdbi;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.UUID;
 
@@ -155,9 +154,9 @@ public class AuthService {
             if ("PENDING".equals(user.getStatus())) {
                 throw new RuntimeException("Tài khoản chưa được xác nhận. Vui lòng kiểm tra email của bạn.");
             }
-            if ("BANNED".equals(user.getStatus())) {
-                throw new RuntimeException("Tài khoản của bạn đã bị khóa.");
-            }
+//            if ("BANNED".equals(user.getStatus())) {
+//                throw new RuntimeException("Tài khoản của bạn đã bị khóa.");
+//            }
             if ("DEACTIVE".equals(user.getStatus())) {
                 throw new RuntimeException("Tài khoản của bạn đã bị vô hiệu hóa.");
             }
@@ -267,5 +266,33 @@ public class AuthService {
 
     public void activateUserAccount(Integer userId) {
         userDAO.updateUserStatus(userId, "ACTIVE");
+    }
+
+
+    public boolean registerWithFacebookActive(String firstName, String displayName, String email, String password, String facebookId) {
+        if (userDAO.getUserByEmail(email) != null) {
+            return false; // Email đã tồn tại
+        }
+
+        // Tạo salt ngẫu nhiên
+        String salt = HashUtils.generateSalt();
+
+        // Mã hóa mật khẩu với salt
+        String hashedPassword = HashUtils.hashWithSalt(password, salt);
+        String confirmationToken = UUID.randomUUID().toString();
+
+        // Tạo user mới với status ACTIVE ngay lập tức cho Google OAuth
+        Integer userId = userDAO.createUserWithActiveStatus(firstName, displayName, email, hashedPassword, salt, confirmationToken, facebookId);
+
+        if (userId != null) {
+            // Lấy role mặc định cho user (USER role)
+            Role defaultRole = userDAO.getDefaultUserRole();
+            if (defaultRole != null) {
+                // Thêm role vào bảng user_role
+                userRoleDAO.addUserRole(userId, defaultRole.getId());
+            }
+            return true;
+        }
+        return false;
     }
 }

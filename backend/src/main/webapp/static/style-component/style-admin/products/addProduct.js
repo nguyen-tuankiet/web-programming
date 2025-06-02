@@ -1161,10 +1161,10 @@ function saveEditedProduct(productId) {
             }
 
             // Log dữ liệu sản phẩm trước khi gửi
-            console.log('Final product data to submit:', productData);
+            console.log('Final product data to submit:', productData);F
 
             // Gửi request cập nhật sản phẩm
-            return fetch('/backend_war/admin/editProduct', {
+            return fetch('editProduct', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

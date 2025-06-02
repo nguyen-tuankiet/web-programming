@@ -1,5 +1,8 @@
 package com.example.backend.controller.auth;
+import com.example.backend.Connection.DBConnection;
+import com.example.backend.config.ConfigLoader;
 import com.example.backend.config.EnvConfig;
+import com.example.backend.service.AuthService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +18,15 @@ public class FacebookLoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private final String FACEBOOK_APP_ID = EnvConfig.get("FACEBOOK_APP_ID");
-    private final String REDIRECT_URI = "http://modernhome.property/facebook-callback";
+//    private final String REDIRECT_URI = "http://localhost:8080/backend_war/facebook-callback";
+    private String redirectUri;
+
+    @Override
+    public void init() throws ServletException {
+        String hostProduct = ConfigLoader.get("host.product");
+        this.redirectUri = hostProduct + "/facebook-callback";
+        super.init();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,7 +59,7 @@ public class FacebookLoginServlet extends HttpServlet {
 
         String authUrl = "https://www.facebook.com/v18.0/dialog/oauth" +
                 "?client_id=" + FACEBOOK_APP_ID +
-                "&redirect_uri=" + REDIRECT_URI +
+                "&redirect_uri=" + redirectUri +
                 "&state=" + state +
                 "&scope=email,public_profile";
 
