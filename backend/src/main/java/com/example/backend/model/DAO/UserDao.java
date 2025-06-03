@@ -18,7 +18,7 @@ import java.util.List;
 public interface UserDao {
 
     @SqlQuery("SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone, " +
-            "u.password, u.avatarId, u.salt, i.url as avatarUrl, u.status, u.confirmationToken, u.facebookId, " +
+            "u.password, u.avatarId, u.salt, i.url as avatarUrl, u.status, u.confirmationToken, u.facebookId,  u.needRefresh , " +
             "r.id as 'role.id', r.roleType as 'role.roleType', r.name as 'role.name', " +
             "r.description as 'role.description', r.isActive as 'role.isActive' " +
             "FROM user u " +
@@ -28,7 +28,7 @@ public interface UserDao {
     List<User> getAllUsers();
 
     @SqlQuery(value = "select u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
-            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId,\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId,  u.needRefresh ,\n" +
             "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
             "from user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
@@ -38,7 +38,7 @@ public interface UserDao {
     User getUserById(@Bind("id") Integer id);
 
     @SqlQuery("SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone, " +
-            "u.password, u.salt, u.avatarId, u.status, u.confirmationToken, u.facebookId, " +
+            "u.password, u.salt, u.avatarId, u.status, u.confirmationToken, u.facebookId, u.needRefresh ," +
             "i.url as avatarUrl, " +
             "r.id as role_id, r.roleType as role_roleType, r.name as role_name, " +
             "r.description as role_description, r.isActive as role_isActive " +
@@ -51,7 +51,7 @@ public interface UserDao {
     User getUserByEmail(@Bind("email") String email);
 
     @SqlQuery(value = "SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
-            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId,\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId , u.needRefresh , \n" +
             "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
             "FROM user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
@@ -78,7 +78,7 @@ public interface UserDao {
 
     @SqlQuery("""
             SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,   \s
-             u.password, u.salt, u.avatarId, u.status, u.confirmationToken, u.facebookId,   \s
+             u.password, u.salt, u.avatarId, u.status, u.confirmationToken, u.facebookId , u.needRefresh ,   \s
              i.url as avatarUrl,   \s
              r.id as role_id, r.roleType as role_roleType, r.name as role_name,   \s
              r.description as role_description, r.isActive as role_isActive   \s
@@ -141,7 +141,7 @@ public interface UserDao {
     int updatePassword(@Bind("id") Integer id, @Bind("password") String password, @Bind("salt") String salt);
 
     @SqlQuery(value = "SELECT u.id, u.fullName, u.displayName, u.birth, u.gender, u.email, u.phone,\n" +
-            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId,\n" +
+            "        i.url as avatarUrl, u.status, u.confirmationToken, u.password, u.salt, u.facebookId, u.needRefresh , \n" +
             "        r.id as role_id, r.roleType as role_roleType, r.name as role_name, r.description as role_description, r.isActive as role_isActive\n" +
             "FROM user as u\n" +
             "    left join image as i on u.avatarId = i.id\n" +
