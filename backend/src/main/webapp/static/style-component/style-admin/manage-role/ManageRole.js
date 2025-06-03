@@ -33,13 +33,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         fetch(`role`, {
             method: "POST",
-            body: JSON.stringify(payload)
-        }).then(res => res.json(
-        ))
+            body: JSON.stringify(payload),
+            redirect: "manual"
+        }).then(res => {
+            console.log("Status:", res.status);
+            if (res.status === 0) {
+                alert("Your session may have expired. Redirecting...");
+                window.location.href = "login"
+                return Promise.reject("Session expired");
+            }
+
+            return res.json();
+        })
         .then(data => {
             console.log(data);
             if (data.success) {
-                alert("Successfully added!");
+                alert("Role added!");
                 location.reload();
             }
             else{
@@ -48,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 
 
-        alert("Role added!");
+
         modal.classList.add("hidden");
     });
 });

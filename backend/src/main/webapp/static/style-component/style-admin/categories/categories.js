@@ -117,18 +117,27 @@ document.addEventListener("DOMContentLoaded", () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ name: categoryName }),
+                redirect: "manual"
+            }).then(res => {
+                console.log("Status:", res.status);
+                if (res.status === 0) {
+                    alert("Your session may have expired. Redirecting...");
+                    window.location.href = "login"
+                    return Promise.reject("Session expired");
+                }
+
+                return res.json();
+            }).then(data => {
+                console.log(data);
+                if (data && data.success) {
+                    currentRole = newRole;
+                    select.setAttribute("data-role-current", newRole);
+                    alert("Success!");
+                }
             });
 
-            const result = await response.json();
-            if (response.ok) {
-                alert("Danh mục được thêm thành công!");
-                inputField.value = "";
-                location.reload();
-            } else {
-                alert(`Lỗi: ${result.message}`);
-            }
+
         } catch (error) {
-            alert("Có lỗi xảy ra khi thêm danh mục!");
             console.error(error);
         }
     });
