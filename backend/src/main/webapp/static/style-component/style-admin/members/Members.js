@@ -69,8 +69,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
             },
             body: JSON.stringify(payload),
+            redirect: "manual"
         })
-            .then(res => res.json())
+            .then(res => {
+                console.log("Status:", res.status);
+                if (res.status === 0) {
+                    alert("Your session may have expired. Redirecting...");
+                    window.location.href = "login"
+                    return;
+                }
+
+                return res.json();
+            })
             .then(data => {
                 console.log(data);
                 alert("Invitation sent!");
