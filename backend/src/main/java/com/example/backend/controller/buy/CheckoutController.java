@@ -190,7 +190,7 @@ public class CheckoutController extends HttpServlet {
                 od.setOptionId(optionId);
 
                 flag= orderDetailService.addOrderDetail(od);
-                if (flag){
+                if (flag && cart != null) {
                     cart.delete(productId);
                     productService.increaseNoOfSold(productId, quantity);
                 }
