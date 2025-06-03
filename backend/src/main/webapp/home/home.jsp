@@ -2,7 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <head>
-    <title>Header Menu with Submenu</title>
+    <title>Modern Home</title>
+    <link rel="icon" type="image/png" href="${pageContext.request.contextPath}/static/image/logo_web.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-home/banner.css">
     <style>
