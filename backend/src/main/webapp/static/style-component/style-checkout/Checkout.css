@@ -446,3 +446,77 @@ a{
     border-radius: 5px;
     margin: 10px 0;
 }
+
+
+#choose-address-popup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+}
+
+#choose-address-popup .address-popup-content {
+    background: #fff;
+    margin: 80px auto;
+    max-width: 400px;
+    padding: 24px 24px 18px 24px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 10px 40px 0 rgba(0,0,0,0.12);
+    min-width: 300px;
+}
+
+#close-address-popup {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    color: #999;
+    transition: color .2s;
+}
+
+#close-address-popup:hover {
+    color: #0170F0;
+}
+
+#address-list-popup {
+    margin-top: 14px;
+}
+
+.popup-address-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.popup-address-item:last-child {
+    border-bottom: none;
+}
+
+.popup-address-item b {
+    font-weight: 600;
+    color: #0170F0;
+}
+
+.select-address-btn {
+    background: #0170F0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: background .2s;
+}
+
+.select-address-btn:hover {
+    background: #014a96;
+}

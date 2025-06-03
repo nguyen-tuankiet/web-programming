@@ -193,6 +193,36 @@ public class EmailService {
         }
     }
 
+    public void sendAccountCreationEmailPlain(String toEmail, String userName, String roleName, String temporaryPassword, String loginUrl) {
+        String subject = "Tài khoản của bạn đã được tạo - Mời tham gia hệ thống";
+
+        String emailContent = String.format("""
+                Xin chào %s,
+                
+                Tài khoản của bạn đã được tạo thành công trong hệ thống với vai trò: %s
+                
+                THÔNG TIN ĐĂNG NHẬP:
+                - Email: %s
+                - Mật khẩu tạm thời: %s
+                
+                CÁC BƯỚC TIẾP THEO:
+                1. Đăng nhập vào hệ thống tại: %s
+                2. Xác nhận tài khoản của bạn qua email xác nhận (nếu có)
+                3. Đổi mật khẩu sau khi đăng nhập lần đầu
+                
+                ⚠️ LÚU Ý QUAN TRỌNG:
+                - Mật khẩu này chỉ là tạm thời
+                - Vui lòng đổi mật khẩu ngay sau khi đăng nhập để bảo mật tài khoản
+                - Không chia sẻ thông tin đăng nhập với người khác
+                
+                Nếu bạn cần hỗ trợ, vui lòng liên hệ với đội ngũ quản trị.
+                
+                Trân trọng,
+                Đội ngũ hỗ trợ
+                """, userName, roleName, toEmail, temporaryPassword, loginUrl);
+
+        sendEmail(toEmail, subject, emailContent);
+    }
 
         public static void main(String[] args) {
         EmailService emailService = new EmailService();
