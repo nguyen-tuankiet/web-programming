@@ -3,6 +3,7 @@ package com.example.backend.controller.admin.member;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.service.UserRoleService;
+import com.example.backend.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ import java.io.IOException;
 public class ChangeMemberRoleController extends HttpServlet {
 
     private final UserRoleService userRoleService = new UserRoleService(DBConnection.getJdbi());
+    private final UserService userService = new UserService(DBConnection.getJdbi());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -39,6 +41,7 @@ public class ChangeMemberRoleController extends HttpServlet {
 
         Boolean isSuccess = userRoleService.updateUserRole(memberId, roleId);
         if (isSuccess) {
+            userService.updateNeedRefresh(memberId, true);
             jsonResponse.put("success", true);
         }
         else {

@@ -60,6 +60,12 @@ public class UserService {
         );
     }
 
+
+
+    public Boolean updateNeedRefresh (Integer userId, Boolean needRefresh ) {
+        return userDao.updateNeedRefresh(userId, needRefresh);
+    }
+
     public static void main(String[] args) {
         UserService userService = new UserService(DBConnection.getJdbi());
 //        User user =new User(
@@ -73,7 +79,12 @@ public class UserService {
 
 //        System.out.println(userService.getMembers());
 //        System.out.println(userService.getCustomers());
-        System.out.println(userService.getUserByEmail("admin@gmail.com"));
+//        System.out.println(userService.getUserByEmail("admin@gmail.com"));
+        System.out.println(userService.updateNeedRefresh(39,false));
+
+
+
     }
+
 
 }

@@ -6,6 +6,7 @@ import com.example.backend.contant.EPermission;
 import com.example.backend.model.Permission;
 import com.example.backend.service.AuthService;
 import com.example.backend.model.User;
+import com.example.backend.service.UserService;
 import com.example.backend.util.ResponseWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
@@ -32,6 +33,7 @@ public class LoginController extends HttpServlet {
 
     private final AuthService authService = new AuthService(DBConnection.getJdbi());
     private static final String SECRET_KEY =  EnvConfig.get("RECAPTCHA_SECRET_KEY");
+    private final UserService userService = new UserService(DBConnection.getJdbi());
 
     private boolean verifyRecaptcha(String token) {
         try {
@@ -115,8 +117,9 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("roleId", user.getRole().getId());
                 session.setAttribute("permissions", permissionTypes);
 
-
-
+                if (user.getNeedRefresh()){
+                    userService.updateNeedRefresh(user.getId(), false);
+                }
 
 
                 // Trả về thông tin người dùng kèm permissions
@@ -131,9 +134,14 @@ public class LoginController extends HttpServlet {
                 userData.put("sessionId", session.getId());
                 userData.put("permissions", permissionTypes);
 
+
                 ResponseWrapper<Map<String, Object>> responseWrapper = new ResponseWrapper<>(
                         200, "success", "Đăng nhập thành công", userData);
                 response.getWriter().write(objectMapper.writeValueAsString(responseWrapper));
+
+
+
+
             } else {
                 ResponseWrapper<Object> responseWrapper = new ResponseWrapper<>(
                         401, "error", "Có lỗi khi đăng nhập! Vui lòng kiểm tra lại.", null);
