@@ -27,6 +27,7 @@ public class InviteMemberController extends HttpServlet {
     EmailService emailService = new EmailService();
     InviteService inviteService = new InviteService(DBConnection.getJdbi());
     AuthService authService = new AuthService(DBConnection.getJdbi());
+//    private final String host = ConfigLoader.get("host.dev");
     private final String host = ConfigLoader.get("host.product");
 
     @Override

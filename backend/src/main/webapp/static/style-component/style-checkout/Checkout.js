@@ -185,3 +185,96 @@ async function getShipFee(items, address) {
     }
 
 }
+
+// Bổ sung code chọn địa chỉ bằng POST
+$(document).ready(function() {
+    // Sự kiện click 'Thay đổi' gọi showChooseAddressPopup_POST
+    $(document).on('click', '.change', function(e) {
+        e.preventDefault();
+        showChooseAddressPopup_POST();
+    });
+
+    // Đóng popup khi click vào dấu X
+    $(document).on('click', '#close-address-popup', function() {
+        $('#choose-address-popup').hide();
+    });
+});
+
+async function showChooseAddressPopup_POST() {
+    let userId = sessionStorage.getItem("userId");
+    if (!userId) {
+        alert("Không tìm thấy userId!");
+        return;
+    }
+
+    try {
+        const response = await fetch(`/backend_war/address?userId=${encodeURIComponent(userId)}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: null // hoặc body: ""
+        });
+
+        const res = await response.json();
+
+        if (res.success && res.data && res.data.length > 0) {
+            let html = '';
+            res.data.forEach(function(addr) {
+                html += `
+                  <div class="popup-address-item">
+                    <div>
+                        <b>${addr.name}</b> | ${addr.phone}<br>
+                        <span>${addr.detail}, ${addr.commune}, ${addr.district}, ${addr.province}</span>
+                    </div>
+                    <button type="button" class="select-address-btn" 
+                        data-address-id="${addr.id}" 
+                        data-province-id="${addr.provinceId}"
+                        data-district-id="${addr.districtId}"
+                        data-commune-id="${addr.communeId}"
+                        data-name="${addr.name}"
+                        data-phone="${addr.phone}"
+                        data-detail="${addr.detail}"
+                        data-commune="${addr.commune}"
+                        data-district="${addr.district}"
+                        data-province="${addr.province}"
+                    >Chọn</button>
+                  </div>
+                `;
+            });
+            $('#address-list-popup').html(html);
+            $('#choose-address-popup').show();
+        } else {
+            $('#address-list-popup').html('<div>Không có địa chỉ nào.</div>');
+            $('#choose-address-popup').show();
+        }
+    } catch (error) {
+        $('#address-list-popup').html('<div>Lỗi khi tải danh sách địa chỉ!</div>');
+        $('#choose-address-popup').show();
+    }
+}
+
+
+
+
+$(document).on('click', '.select-address-btn', async function() {
+    let $btn = $(this);
+
+    $('#address').attr('data-address-id', $btn.data('address-id'))
+        .attr('data-province-id', $btn.data('province-id'))
+        .attr('data-district-id', $btn.data('district-id'))
+        .attr('data-commune-id', $btn.data('commune-id'));
+
+    $('#address .name').text($btn.data('name'));
+    $('#address .phone').text($btn.data('phone'));
+    $('.address_detail span').text(
+        $btn.data('detail') + ', ' + $btn.data('commune') + ', ' + $btn.data('district') + ', ' + $btn.data('province')
+    );
+
+    $('#choose-address-popup').hide();
+
+    // Gọi lại tính phí ship mới (nếu có hàm này)
+    if (typeof recalcShipFee === 'function') {
+        await recalcShipFee();
+    }
+});

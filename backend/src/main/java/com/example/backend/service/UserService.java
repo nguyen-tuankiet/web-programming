@@ -72,6 +72,7 @@ public class UserService {
 //        System.out.println(userService.getUserById(112));
 
 //        System.out.println(userService.getMembers());
+//        System.out.println(userService.getCustomers());
         System.out.println(userService.getUserByEmail("admin@gmail.com"));
     }
 

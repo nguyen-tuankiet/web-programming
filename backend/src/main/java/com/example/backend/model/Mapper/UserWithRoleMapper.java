@@ -52,7 +52,8 @@ public class UserWithRoleMapper implements RowMapper<User> {
                 rs.getString("avatarUrl"),
                 rs.getString("status"),
                 rs.getString("confirmationToken"),
-                rs.getString("facebookId")
+                rs.getString("facebookId"),
+                rs.getBoolean("needRefresh")
         );
     }
 }

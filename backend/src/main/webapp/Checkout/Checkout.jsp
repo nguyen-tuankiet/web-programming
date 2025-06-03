@@ -16,6 +16,12 @@
     <meta charset="UTF-8">
     <title>Checkout</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        var userId = ${user.id};
+    </script>
+    <script>
+        var userId = ${sessionScope.user.id};
+    </script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-checkout/Checkout.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/sytle-cart/CartItem.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/fontawesome/css/all.css">
@@ -384,6 +390,12 @@
 </div>
 
 </div>
-
+<div id="choose-address-popup">
+    <div class="address-popup-content">
+        <span id="close-address-popup">&times;</span>
+        <h3>Chọn địa chỉ nhận hàng</h3>
+        <div id="address-list-popup"></div>
+    </div>
+</div>
 </body>
 </html>

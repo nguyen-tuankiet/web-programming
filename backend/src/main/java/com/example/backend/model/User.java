@@ -1,5 +1,6 @@
 package com.example.backend.model;
 
+import com.restfb.Body;
 import jakarta.annotation.Nullable;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
 import org.jdbi.v3.core.mapper.reflect.JdbiConstructor;
@@ -23,6 +24,7 @@ public class User {
     String status;
     String confirmationToken;
     String facebookId;
+    Boolean needRefresh;
 
     @JdbiConstructor
     public User(@ColumnName("id") Integer id,
@@ -39,7 +41,9 @@ public class User {
                 @ColumnName("avatarUrl") @Nullable String avatarUrl,
                 @ColumnName("status") @Nullable String status,
                 @ColumnName("confirmationToken") @Nullable String confirmationToken,
-                @ColumnName("facebookId") @Nullable String facebookId
+                @ColumnName("facebookId") @Nullable String facebookId,
+                @ColumnName("needRefresh") @Nullable Boolean needRefresh
+
     )
 
     {
@@ -58,6 +62,7 @@ public class User {
         this.status = status;
         this.confirmationToken = confirmationToken;
         this.facebookId = facebookId;
+        this.needRefresh = needRefresh;
     }
 
     public User() {
@@ -179,6 +184,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Boolean getNeedRefresh() {
+        return needRefresh;
+    }
+
+    public void setNeedRefresh(Boolean needRefresh) {
+        this.needRefresh = needRefresh;
     }
 
     @Override
