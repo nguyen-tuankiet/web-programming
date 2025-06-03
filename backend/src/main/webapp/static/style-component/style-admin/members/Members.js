@@ -1,4 +1,3 @@
-
 function toggleMoreActionMenu(icon) {
     // Tìm đối tượng menu trong cùng thẻ cha
     const container = icon.parentElement;
@@ -19,13 +18,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const menus = document.querySelectorAll(".more_action_menu");
 
 
-
-    menus.forEach(function(menu) {
+    menus.forEach(function (menu) {
         menu.classList.add("hidden");
     });
 
-    gearIcons.forEach(function(icon) {
-        icon.addEventListener("click", function(event) {
+    gearIcons.forEach(function (icon) {
+        icon.addEventListener("click", function (event) {
             event.stopPropagation();
             toggleMoreActionMenu(this);
         });
@@ -53,24 +51,28 @@ document.addEventListener("DOMContentLoaded", function () {
         const roleSelect = document.getElementById("inviteRole");
         const roleId = roleSelect.value;
         const roleName = roleSelect.options[roleSelect.selectedIndex].text;
-        payload= {
-            email: email,
-            name: name,
-            roleId: roleId,
-            roleName: roleName,
+        payload = {
+            email: email, name: name, roleId: roleId, roleName: roleName,
         }
 
         console.log(payload)
 
         fetch("member/invite", {
-            method: "POST",
-            headers: {
+            method: "POST", headers: {
                 "Content-Type": "application/json",
 
-            },
-            body: JSON.stringify(payload),
+            }, body: JSON.stringify(payload), redirect: "manual"
         })
-            .then(res => res.json())
+            .then(res => {
+                console.log("Status:", res.status);
+                if (res.status === 0) {
+                    alert("Your session may have expired. Redirecting...");
+                    window.location.href = "login"
+                    return Promise.reject("Session expired");
+                }
+
+                return res.json();
+            })
             .then(data => {
                 console.log(data);
                 alert("Invitation sent!");
@@ -78,11 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
 
 
-
-
     });
-
-
 
 
     const roleSelects = document.querySelectorAll(".role_list");
@@ -108,17 +106,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else {
                         const roleId = event.target.selectedOptions[0].dataset.roleId;
                         const request = {
-                            "memberId": memberId,
-                            "roleId": roleId
+                            "memberId": memberId, "roleId": roleId
                         }
 
                         fetch("/admin/member/change-role", {
-                            method: "POST",
-                            headers: {
+                            method: "POST", headers: {
                                 "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(request),
-                        }).then(res => res.json())
+                            }, body: JSON.stringify(request),
+                            redirect: "manual"
+
+                        }).then(res => {
+                            console.log("Status:", res.status);
+                            if (res.status === 0) {
+                                alert("Your session may have expired. Redirecting...");
+                                window.location.href = "login"
+                                return Promise.reject("Session expired");
+                            }
+
+                            return res.json();
+                        })
                             .then(data => {
                                 console.log(data);
                                 if (data && data.success) {
@@ -134,10 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     });
-
-
-
-
 
 
 });
