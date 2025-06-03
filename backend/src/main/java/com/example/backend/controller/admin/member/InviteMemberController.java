@@ -2,12 +2,15 @@ package com.example.backend.controller.admin.member;
 
 import com.example.backend.Connection.DBConnection;
 import com.example.backend.config.ConfigLoader;
+import com.example.backend.contant.EPermission;
 import com.example.backend.contant.Status;
 import com.example.backend.model.Invite;
 import com.example.backend.model.User;
 import com.example.backend.service.AuthService;
 import com.example.backend.service.EmailService;
 import com.example.backend.service.InviteService;
+import com.example.backend.util.CustomResponse;
+import com.example.backend.util.ValidationPermissionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,6 +24,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.time.Duration;
+import java.util.List;
 
 @WebServlet(name = "InviteMemberController", value = "/admin/member/invite")
 public class InviteMemberController extends HttpServlet {
@@ -36,6 +40,8 @@ public class InviteMemberController extends HttpServlet {
         String line;
         BufferedReader bufferedReader = request.getReader();
         JSONObject jsonResponse = new JSONObject();
+
+
 
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);

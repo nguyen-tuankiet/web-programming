@@ -2,8 +2,11 @@ package com.example.backend.controller.admin.member;
 
 
 import com.example.backend.Connection.DBConnection;
+import com.example.backend.contant.EPermission;
 import com.example.backend.service.UserRoleService;
 import com.example.backend.service.UserService;
+import com.example.backend.util.CustomResponse;
+import com.example.backend.util.ValidationPermissionUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,6 +16,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "ChangeMemberRoleController", urlPatterns = {"/admin/member/change-role"})
 public class ChangeMemberRoleController extends HttpServlet {
@@ -22,8 +26,6 @@ public class ChangeMemberRoleController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-//        TODO: Check phân quyền - MANAGE_MEMBER
 
         StringBuilder stringBuilder = new StringBuilder();
         String line ;
