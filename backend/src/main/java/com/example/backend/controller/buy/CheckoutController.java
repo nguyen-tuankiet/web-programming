@@ -201,7 +201,10 @@ public class CheckoutController extends HttpServlet {
 
 
         // Call GHN API
-        if (codAmount > 50000000) throw new RuntimeException("Cod amount exceeds 50000000");
+//        if (codAmount > 50000000) throw new RuntimeException("Cod amount exceeds 50000000");
+        if (codAmount > 50000000) {
+            codAmount = 49999999;
+        }
         GHNCreateOrderRequest GHNRequest= new GHNCreateOrderRequest(
                 address, user, "Ten san pham", card.equals("COD") ? codAmount: 0, items);
 
