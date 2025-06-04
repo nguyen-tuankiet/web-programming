@@ -63,12 +63,12 @@ public class FacebookCallbackServlet extends HttpServlet {
             // Kiểm tra state parameter
             if (state == null || !state.equals(sessionState)) {
                 System.out.println("State mismatch - Request: " + state + ", Session: " + sessionState);
-                response.sendRedirect(request.getContextPath() + "/login?error=Invalid state parameter");
+                response.sendRedirect("https://modernhome.property" + "/login?error=Invalid state parameter");
                 return;
             }
 
             if (code == null || code.isEmpty()) {
-                response.sendRedirect(request.getContextPath() + "/login?error=No authorization code received");
+                response.sendRedirect("https://modernhome.property" + "/login?error=No authorization code received");
                 return;
             }
 
@@ -111,9 +111,9 @@ public class FacebookCallbackServlet extends HttpServlet {
 
             if (newUser == null) {
                 if (isRegistration) {
-                    response.sendRedirect(request.getContextPath() + "/login?error=Không thể tạo tài khoản Facebook. Vui lòng thử lại.");
+                    response.sendRedirect("https://modernhome.property" + "/login?error=Không thể tạo tài khoản Facebook. Vui lòng thử lại.");
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/login?error=Tài khoản Facebook này chưa được đăng ký.");
+                    response.sendRedirect("https://modernhome.property" + "/login?error=Tài khoản Facebook này chưa được đăng ký.");
                 }
                 return;
             }
@@ -142,9 +142,10 @@ public class FacebookCallbackServlet extends HttpServlet {
                     "sessionStorage.setItem('roleId', '" + newUser.getRole().getId() + "');" +
                     "sessionStorage.setItem('permission', '" + permissionTypes + "');" +
                     "if (sessionStorage.getItem('role') === 'ADMIN') {" +
-                    "   window.location.href = '" + request.getContextPath() + "/admin/dashboard';" +
+                    "   window.location.href = '" + "https://modernhome.property" + "/admin/dashboard';" +
                     "} else {" +
-                    "   window.location.href = '" + request.getContextPath() + "/home?success=Login successful';" +
+                    "alert('Chúc mừng! Bạn đã đăng ký tài khoản thành công');" +
+                    "   window.location.href = '" + "https://modernhome.property" + "/home?success=Login successful';" +
                     "}" +
                     "</script>";
 
@@ -157,7 +158,7 @@ public class FacebookCallbackServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/login?error=Facebook login failed: " + e.getMessage());
+            response.sendRedirect("https://modernhome.property" + "/login?error=Facebook login failed: " + e.getMessage());
         }
     }
 }
