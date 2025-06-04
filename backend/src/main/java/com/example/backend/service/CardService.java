@@ -37,7 +37,7 @@ public class CardService {
     public static void main(String[] args) {
         CardService cardService = new CardService(DBConnection.getJdbi());
         Card card = new Card();
-        card.setUserId(53);
+        card.setUserId(35);
         card.setLast4(4444);
         card.setDuration(LocalDate.of(2027,1,1));
         card.setType("visa");
