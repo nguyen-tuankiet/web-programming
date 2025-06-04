@@ -387,7 +387,7 @@
                 <li class="menu_item">
                     <div class="wrap_menu_item">
                         <i class="fa-brands fa-microblog"></i>
-                        <button onclick="location.href='${pageContext.request.contextPath}/admin/category'">
+                        <button onclick="location.href='${pageContext.request.contextPath}/admin/brand'">
                             Nhà sản xuất
                         </button>
                     </div>

@@ -201,6 +201,7 @@ $(document).ready(function() {
 });
 
 async function showChooseAddressPopup_POST() {
+    const pageContextPath = "${pageContext.request.contextPath}";
     let userId = sessionStorage.getItem("userId");
     if (!userId) {
         alert("Không tìm thấy userId!");
@@ -208,7 +209,7 @@ async function showChooseAddressPopup_POST() {
     }
 
     try {
-        const response = await fetch(`/backend_war/address?userId=${encodeURIComponent(userId)}`, {
+        const response = await fetch(`address?userId=${encodeURIComponent(userId)}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

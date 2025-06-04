@@ -56,10 +56,10 @@ public class ReviewService {
         ReviewService reviewService = new ReviewService(DBConnection.getJdbi());
         Review review = new Review();
         review.setDescription("Test Review");
-        review.setOrderId(39);
+        review.setOrderId(57);
         review.setRating(5);
-        review.setUserId(111);
-        review.setProductId(1);
+        review.setUserId(39);
+        review.setProductId(44);
 
         System.out.println(reviewService.addReview(review));
     }

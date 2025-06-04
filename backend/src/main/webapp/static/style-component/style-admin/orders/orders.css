@@ -61,7 +61,7 @@ body {
 
 /* Search and filters */
 .header-container {
-    padding: 16px 0;
+    padding: 13px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -231,7 +231,7 @@ body {
 }
 
 .fa-file-excel {
-    color: #2ecc71; /* Xanh lá (màu Excel) */
+    color: #ffffff; /* Xanh lá (màu Excel) */
 }
 
 .fa-file-csv {
@@ -415,7 +415,7 @@ td {
 }
 
 .fa-file-excel:before {
-    color: #198754;
+    color: #ffffff;
 }
 
 .fa-file-csv:before {

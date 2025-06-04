@@ -122,7 +122,7 @@ async function uploadImages(files) {
     // Lấy context path động
     const pathParts = window.location.pathname.split('/');
     const contextPath = pathParts[1] ? '/' + pathParts[1] : '';
-    const apiUrl = contextPath + '/api/uploadImage';
+    const apiUrl = '/api/uploadImage';
     const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData
@@ -1161,7 +1161,7 @@ function saveEditedProduct(productId) {
             }
 
             // Log dữ liệu sản phẩm trước khi gửi
-            console.log('Final product data to submit:', productData);F
+            console.log('Final product data to submit:', productData);
 
             // Gửi request cập nhật sản phẩm
             return fetch('editProduct', {
