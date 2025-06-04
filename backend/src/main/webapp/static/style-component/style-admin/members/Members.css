@@ -49,17 +49,22 @@ html, body{
 }
 
 #invite{
-    background-color: #005BE1 ;
-    color: white;
-    border: 1px solid;
-    height: 40px;
-    width: 100px;
-    border-radius: 5px;
-
+    background-color: white;
+    color: #0a7cff;
+    padding: 8px 15px;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
+.fa-user-plus{
+    color: #0a7cff;
+}
 
-
+#invite:hover{
+    background-color: #5b49c3;
+}
 
 .member_list{
 

@@ -166,7 +166,7 @@
                     <!-- Các trường form -->
                     <div class="form_group">
                         <label for="inviteEmail">Địa chỉ Email</label>
-                        <input type="email" id="inviteEmail" name="email" placeholder="email"
+                        <input type="email" id="inviteEmail" name="email" placeholder="Email"
                                required>
                     </div>
                     <div class="form_group">
