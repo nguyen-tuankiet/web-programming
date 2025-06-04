@@ -44,21 +44,39 @@ public interface OrderDetailDAO {
             "WHERE od.orderId = :orderId")
     OrderDetail getOrderDetailById(@Bind("orderId") Integer orderId);
 
-    @SqlQuery(value ="\n" +
-            "select\n" +
-            "    od.id, od.orderId, od.productId, od.quantity,\n" +
-            "    od.total,\n" +
-            "    p.name as productName,\n" +
-            "    i.url as imageUrl\n" +
-            "from order_detail as od\n" +
-            "    inner join products as p\n" +
-            "        on p.id = od.productId\n" +
-            "    inner join options as ops\n" +
-            "        on od.optionId = ops.id\n" +
-            "    inner join image as i\n" +
-            "        on i.id = p.primaryImage\n" +
-            "\n" +
-            "where od.orderId = :orderId \n"
-    )
-    List<OrderDetail> getOrderDetailByOrderId(@Bind("orderId") Integer orderId );
+//    @SqlQuery(value ="\n" +
+//            "select\n" +
+//            "    od.id, od.orderId, od.productId, od.quantity,\n" +
+//            "    od.total,\n" +
+//            "    p.name as productName,\n" +
+//            "    i.url as imageUrl\n" +
+//            "from order_detail as od\n" +
+//            "    inner join products as p\n" +
+//            "        on p.id = od.productId\n" +
+//            "    inner join options as ops\n" +
+//            "        on od.optionId = ops.id\n" +
+//            "    inner join image as i\n" +
+//            "        on i.id = p.primaryImage\n" +
+//            "\n" +
+//            "where od.orderId = :orderId \n"
+//    )
+//    List<OrderDetail> getOrderDetailByOrderId(@Bind("orderId") Integer orderId );
+// OrderDetailDAO.java
+    @SqlQuery("""
+        SELECT 
+            od.id AS id,
+            od.orderId AS orderId,
+            od.productId AS productId,
+            od.quantity AS quantity,
+            od.total AS total,
+            p.name AS productName,
+            i.url AS imageUrl
+        FROM order_detail od
+            INNER JOIN products p ON p.id = od.productId
+            LEFT JOIN image i ON i.id = p.primaryImage
+        WHERE od.orderId = :orderId
+    """)
+    @RegisterConstructorMapper(OrderDetail.class)
+    List<OrderDetail> getOrderDetailByOrderId(@Bind("orderId") Integer orderId);
+
 }
