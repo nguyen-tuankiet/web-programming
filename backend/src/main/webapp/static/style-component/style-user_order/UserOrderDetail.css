@@ -330,10 +330,28 @@ i {
 }
 
 
-
-#review-text{
-    height: 160px;
-    padding: 10px;
+#review-text,
+.review-text {
+    width: 100%;
+    min-height: 100px;
+    border: 1.5px solid #d1e3f6;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #222;
+    background: #f8fafb;
+    padding: 12px 14px;
+    margin-top: 6px;
+    margin-bottom: 8px;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(10,124,255,0.07);
+}
+#review-text:focus,
+.review-text:focus {
+    border-color: #0a7cff;
+    box-shadow: 0 2px 8px rgba(10,124,255,0.18);
+    background: #fff;
 }
 
 
@@ -355,4 +373,28 @@ i {
 .star.disabled {
     pointer-events: none;
     color: #f3e6b8;
+}
+
+.btn_submit {
+    background: linear-gradient(90deg, #0a7cff 0%, #009e90 100%);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(10,124,255,0.12);
+    transition: background 0.2s, transform 0.1s;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+.btn_submit:hover {
+    background: linear-gradient(90deg, #009e90 0%, #0a7cff 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 24px rgba(10,124,255,0.13);
+}
+.btn_submit:hover {
+    background: linear-gradient(90deg, #009e90 0%, #0a7cff 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 24px rgba(10,124,255,0.13);
 }

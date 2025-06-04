@@ -36,61 +36,6 @@ $(document).ready(function () {
 
 
     const btn_submit = $('#btn_submit');
-    // btn_submit.on('click', function (e) {
-    //     e.preventDefault();
-    //
-    //     const review_text = $('#review-text');
-    //     const order_item= $('.order_item');
-    //     const productIds =[];
-    //
-    //     order_item.each(function () {
-    //         const product_id = $(this).data('product-id');
-    //         productIds.push(product_id);
-    //     })
-    //
-    //
-    //
-    //     const order_id = $('.order_id').data('order-id');
-    //
-    //     const data = {
-    //         productIds: productIds,
-    //         order_id: order_id,
-    //         rating: ratingInput.val(),
-    //         description: review_text.val(),
-    //     };
-    //
-    //     fetch('add-review', {
-    //         method: 'POST',
-    //         body: JSON.stringify(data),
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         }
-    //     }).then(function (response) {
-    //
-    //         if (response.status === 200) {
-    //             stars.each(function () {
-    //                 console.log($(this));
-    //                 $(this).addClass('disabled');
-    //                 $(this).off('click');
-    //                 $(this).find('i').css('color', 'gold');
-    //             })
-    //
-    //             review_text.prop('disabled', true);
-    //             btn_submit.prop('disabled', true);
-    //         }
-    //         return response.json();
-    //
-    //     }) .catch(function (error) {
-    //         console.log(error);
-    //     })
-    //
-    //     console.log(review_text.val());
-    //     console.log('Rating: ', ratingInput.val());
-    //     console.log("productIds: " ,productIds);
-    //     console.log("order_item: " ,order_item);
-    //     console.log("order_id:",order_id);
-    //
-    // })
 
     btn_submit.on('click', function (e) {
         e.preventDefault();
@@ -119,7 +64,7 @@ $(document).ready(function () {
         console.log('Số sản phẩm:', order_item.length);
         console.log('Order ID:', order_id);
 
-        fetch('add-review', {
+        fetch('/add-review', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -151,4 +96,43 @@ $(document).ready(function () {
 
 
 
+});
+
+
+$(document).on('submit', '.review-form', function (e) {
+    e.preventDefault();
+
+    const form = $(this);
+    const productId = form.closest('.order_item').data('product-id');
+    const rating = form.find('input[name="rating"]').val();
+    const description = form.find('textarea[name="review"]').val();
+    const orderId = $('.order_id').data('order-id');
+
+    const data = {
+        productIds: [productId],
+        order_id: orderId,
+        rating: rating,
+        description: description
+    };
+
+    fetch('add-review', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(res => res.json())
+        .then(json => {
+            if (json.status === 'success') {
+                alert('Đánh giá thành công!');
+                location.reload();
+            } else {
+                alert('Lỗi: ' + json.message);
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Lỗi kết nối máy chủ.');
+        });
 });
