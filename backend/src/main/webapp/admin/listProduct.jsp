@@ -10,9 +10,6 @@
     <title>Quản Lý Sản Phẩm</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/style-component/style-admin/products/listProduct.css">
     <script src="${pageContext.request.contextPath}/static/style-component/style-admin/products/listProduct.js"></script>
-    <script>
-        const pageContextPath = "${pageContext.request.contextPath}";
-    </script>
 
 </head>
 <body>
@@ -57,7 +54,8 @@
                     mục
                 </div>
                 <div class="export-container">
-                    <button type="button" id="exportBtn" class="export-btn">
+                    <button type="button" id="exportBtn" class="export-btn"
+                            data-context-path="${pageContext.request.contextPath}">
                         <i class="fas fa-file-excel"></i>
                         Xuất Excel
                     </button>
@@ -210,6 +208,10 @@
     </div>
 
 </div>
+
+<script>
+    const pageContextPath = "${pageContext.request.contextPath}";
+</script>
 
 
 </body>

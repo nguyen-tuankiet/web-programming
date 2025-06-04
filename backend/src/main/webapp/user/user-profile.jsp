@@ -249,12 +249,6 @@
                     <button type="button" class="update_btn">Xóa</button>
                 </div>
 
-                <div class="contact_item row mid_align">
-                    <img src="${pageContext.request.contextPath}/static/image/Zalo.png" alt="">
-                    <span class="item_text ">Zalo</span>
-                    <button type="button" class="update_btn">Xóa</button>
-                </div>
-
 
             </div>
 
