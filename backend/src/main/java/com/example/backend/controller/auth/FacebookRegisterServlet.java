@@ -22,8 +22,8 @@ public class FacebookRegisterServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        String hostProduct = ConfigLoader.get("host.product");
-        this.redirectUri = hostProduct + "/facebook-callback";
+        String hostProduct = ConfigLoader.get("host.dev");
+        this.redirectUri = hostProduct + "/backend_war/facebook-callback";
         super.init();
     }
 
